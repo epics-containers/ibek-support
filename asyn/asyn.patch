@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# patch asyn for compatibility with the container base OS
+
+# Enable TIRPC for ASYN
+sed -i 's:# TIRPC:TIRPC:g' asyn/configure/CONFIG_SITE
+
