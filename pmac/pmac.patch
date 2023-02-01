@@ -18,4 +18,4 @@ BOOST_INCLUDE   = -I/usr/include
 SSH             = /usr
 SSH_LIB         = /usr/lib/x86_64-linux-gnu
 SSH_INCLUDE     = -I/usr/include
-" > ${SUPPORT}/pmac/configure/CONFIG_SITE.linux-x86_64.Common
+" > configure/CONFIG_SITE.linux-x86_64.Common
