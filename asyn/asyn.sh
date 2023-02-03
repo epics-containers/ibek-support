@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# patch asyn for compatibility with the container base OS
+# patch asyn for compatibility with the container base OS Ubuntu
 
 if [[ $TARGET_ARCHITECTURE != "rtems" ]]; then
     # Enable TIRPC for ASYN

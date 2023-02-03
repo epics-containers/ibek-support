@@ -1,0 +1,14 @@
+diff --git a/asApp/src/os/RTEMS/osdNfs.h b/asApp/src/os/RTEMS/osdNfs.h
+index fa5be8e..8ddbc35 100644
+--- a/asApp/src/os/RTEMS/osdNfs.h
++++ b/asApp/src/os/RTEMS/osdNfs.h
+@@ -29,6 +29,9 @@
+ #define NFS_INVALID_PATH     2           /* path on the NFS server is invalid */
+ #define NFS_INVALID_MNTPOINT 3           /* mount point in invalid */
+
++/* routines for NFS operation */
++int nfsMount(char *uidhost, char *path, char *mntpoint);          /* mount the NFS (details) */
++
+ /* routines for NFS operation */
+ int mountFileSystem(char *uidhost, char *addr, char *path, char *mntpoint);   /* mount the NFS */
+ int dismountFileSystem(char *mntpoint);                           /* dismount the NFS */
