@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=http://github.com/epics-containers/ibek/releases/download/0.9/ibek.defs.schema.json
+
+module: psc
+
+defs:
+  - name: psc
+# TODO minimal placeholder
