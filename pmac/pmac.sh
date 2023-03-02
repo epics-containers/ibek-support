@@ -19,3 +19,6 @@ SSH             = /usr
 SSH_LIB         = /usr/lib/x86_64-linux-gnu
 SSH_INCLUDE     = -I/usr/include
 " > configure/CONFIG_SITE.linux-x86_64.Common
+
+# don't build the test directories (they don't compile on RTEMS)
+sed -i '/DIRS += .*unitTests/d' pmacApp/Makefile
