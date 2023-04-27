@@ -43,3 +43,19 @@ defs:
     env_vars:
       - name: "{{ name }}"
         value: "{{ value }}"
+
+  - name: startupCommand
+    args:
+      - type: str
+        name: command
+        description: An arbitrary command in the startup script before iocInit
+    pre_ioc_init:
+      - "{{ command }}"
+
+  - name: postStartupCommand
+    args:
+      - type: str
+        name: command
+        description: An arbitrary command in the startup script after iocInit
+    post_ioc_init:
+      - "{{ command }}"

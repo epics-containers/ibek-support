@@ -2,7 +2,7 @@
 
 For use in all ioc-xxx repositories
 
-epics.ibek.defs.yaml:
+epics.ibek.support.yaml:
 
     This yaml file describes some global definitions that allow things like
     adding  arbitrary commands to the startup script.

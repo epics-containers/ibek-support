@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=http://github.com/epics-containers/ibek/releases/download/0.9/ibek.defs.schema.json
+
+module: timingtemplates
+
+defs:
+  - name: defaultEVR
+    args:
+      - type: id
+        name: device
+        description: The device PV prefix
+
+      - type: int
+        name: card
+        description: The EVR card number
+
+      - type: str
+        name: er
+        description: Event Receiver record suffix
+        default: "SET-ER"
+
+    databases:
+      - file: defaultEVR.template
+        include_args: [device, card, er]
+
+  - name: evr_alive
+    args:
+      - type: object
+        name: defaultEVR
+        description: reference to defaultEVR entry
+
+    databases:
+      - file: evr_alive.template
+        define_args: |
+          device={{ "" }}
+          SYSTEM={{ defaultEVR.device }}
+
+  - name: generalTime
+    args:
+      - type: id
+        name: device
+        description: device name
+
+      - type: str
+        name: gt
+        description: generalTime PV Prefix
+        default: "GT:"
+
+      - type: str
+        name: scan
+        description: scan rate
+        default: "10 second"
+
+    databases:
+      - file: generalTime.template
+        include_args: [device, gt, scan]
