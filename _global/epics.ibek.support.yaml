@@ -49,7 +49,7 @@ defs:
       - type: str
         name: command
         description: An arbitrary command in the startup script before iocInit
-    pre_ioc_init:
+    script:
       - "{{ command }}"
 
   - name: postStartupCommand
@@ -57,5 +57,16 @@ defs:
       - type: str
         name: command
         description: An arbitrary command in the startup script after iocInit
+
     post_ioc_init:
       - "{{ command }}"
+
+  - name: InterruptVectorVME
+    args:
+      - type: id
+        name: name
+        description: A name for an interrupt vector variable
+
+    env_vars:
+      - name: "{{ name }}"
+        value: "{{  __utils__.counter(name, start=192, stop=255) }}"

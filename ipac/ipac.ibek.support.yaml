@@ -5,27 +5,22 @@ module: ipac
 defs:
   - name: Hy8002
     args:
+      - type: id
+        name: name
+        description: "IPAC identifier (suggested: IPAC{{ slot }})"
+
       - type: int
         name: slot
         description: Slot number
+
+      - type: object
+        name: swapint
+        description: Hot swap interrupt vector
 
       - type: int
         name: intLevel
         description: Interrupt level
         default: 2
 
-      # we need a unique interrupt that is shared by all Hy8002 cards (I think)
-      # not sure how to generate this in ibek
-      - type: int
-        name: swapint
-        description: Swap interrupt
-        # JUST FOR TESTING NOT OK to use this value
-        default: 192
-
-      - type: str
-        name: IPACid
-        description: IPAC identifier
-        default: "IPAC{{ slot }}"
-
     script:
-      - '{{ IPACid }} = ipacEXTAddCarrier(&EXTHy8002,, "{{ slot }} {{ intLevel }} {{ swapint }}")'
+      - '{{ name }} = ipacEXTAddCarrier(&EXTHy8002, "{{ slot }} {{ intLevel }} $({{ swapint.name }}")'

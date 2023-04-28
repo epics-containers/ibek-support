@@ -3,5 +3,11 @@
 module: psc
 
 defs:
-  - name: psc
-# TODO minimal placeholder
+  - name: PSC
+    args:
+      - name: carrier
+        type: object
+        description: IPAC carrier name
+
+    script:
+      - pscAddIpModule(IPACid, ipslot, vector, link)
