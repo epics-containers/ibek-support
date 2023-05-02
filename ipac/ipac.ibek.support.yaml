@@ -13,14 +13,14 @@ defs:
         name: slot
         description: Slot number
 
-      - type: object
-        name: swapint
-        description: Hot swap interrupt vector
-
       - type: int
         name: intLevel
         description: Interrupt level
         default: 2
 
     script:
-      - '{{ name }} = ipacEXTAddCarrier(&EXTHy8002, "{{ slot }} {{ intLevel }} $({{ swapint.name }}")'
+      - '# Assign the Carrier Handle for Hy8002 "{{ name }}" in slot {{ slot }}'
+      - epicsEnvSet {{ name }} {{ __utils__.counter("Carriers", start=0) }}
+      - '# ipacAddHy8002 "slot , interrupt_level"'
+      - ipacAddHy8002 "{{ slot }}, {{ intLevel }}"
+      - " "

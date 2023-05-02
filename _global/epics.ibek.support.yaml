@@ -69,4 +69,4 @@ defs:
 
     env_vars:
       - name: "{{ name }}"
-        value: "{{  __utils__.counter(name, start=192, stop=255) }}"
+        value: '{{  __utils__.counter("InteruptVector", start=192, stop=255) }}'

@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=http://github.com/epics-containers/ibek/releases/download/0.9/ibek.defs.schema.json
+
+module: Hy8401ip
+
+defs:
+  - name: Hy8401ip
+    args:
+      - type: id
+        name: name
+        description: "Name for the module"
+
+      - type: object
+        name: carrier
+        description: "Carrier Board Identifier"
+
+      - type: int
+        name: ipslot
+        description: IP Slot
+
+      - type: object
+        name: vector
+        description: Interrupt Vector
+
+      - type: bool
+        name: intEnable
+        description: Interrupt Enable
+        default: false
+
+      - type: bool
+        name: externalClock
+        description: Use External Clock
+        default: false
+
+      - type: int
+        name: clockRate
+        description: Clock Rate
+        default: 15
+
+      - type: bool
+        name: inhibit
+        description: Enable front panel inhibit signal
+        default: false
+
+      - type: int
+        name: sampleSize
+        description: Number of samples for triggered capture
+        default: 0
+
+      - type: str
+        name: cardid
+        description: Card Identifier
+        default: "{{ carrier.slot }}{{ ipslot }}"
+
+    script:
+      - "# Hy8401ipConfigure CardId IPACid IpSlot InterruptVector InterruptEnable AiType ExternalClock ClockRate Inhibit SampleCount SampleSpacing SampleSize"
+      - '# Add Hy8401 IP module "{{ name }}" to carrier "{{ carrier.name }}"'
+      - Hy8401ipConfigure {{ cardid }} $({{ carrier.name }}) {{ ipslot }} $({{ vector.name }}) {{ intEnable | int }} 0 {{ externalClock | int }} {{ clockRate }} {{ inhibit | int }} 1 1 {{ sampleSize }}
