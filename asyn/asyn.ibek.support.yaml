@@ -55,7 +55,8 @@ defs:
         description: Set hardware flow control on
         default: null
     script:
-      - TODO provide Jinja to generate Startup Entries
+      - ASYNSerial Startup ENTRY
+      - TODO provide Jinja to generate ASYN Startup Entries
       - note this is interesting because builder.py has a few if clauses
       - for generating the necessary script
 
