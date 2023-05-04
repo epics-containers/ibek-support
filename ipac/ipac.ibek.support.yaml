@@ -23,4 +23,3 @@ defs:
       - epicsEnvSet {{ name }} {{ __utils__.counter("Carriers", start=0) }}
       - '# ipacAddHy8002 "slot , interrupt_level"'
       - ipacAddHy8002 "{{ slot }}, {{ intLevel }}"
-      - " "
