@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=http://github.com/epics-containers/ibek/releases/download/0.9/ibek.defs.schema.json
+# yaml-language-server: $schema=../../tests/samples/schemas/ibek.defs.schema.json
 
 module: Hy8401ip
 
@@ -15,7 +15,7 @@ defs:
 
       - type: int
         name: ipslot
-        description: IP Slot
+        description: IP Site Number 0=A, 1=B, 2=C, 3=D
 
       - type: object
         name: vector
@@ -52,6 +52,27 @@ defs:
         default: "{{ carrier.slot }}{{ ipslot }}"
 
     script:
-      - "# Hy8401ipConfigure CardId IPACid IpSlot InterruptVector InterruptEnable AiType ExternalClock ClockRate Inhibit SampleCount SampleSpacing SampleSize"
-      - '# Add Hy8401 IP module "{{ name }}" to carrier "{{ carrier.name }}"'
-      - Hy8401ipConfigure {{ cardid }} $({{ carrier.name }}) {{ ipslot }} $({{ vector.name }}) {{ intEnable | int }} 0 {{ externalClock | int }} {{ clockRate }} {{ inhibit | int }} 1 1 {{ sampleSize }}
+      - type: function
+        name: Hy8401ipConfigure
+        header: |
+          #   IpSlot A=0 B=1 C=2 D=3
+          #   ClockRate  0=1Hz  1=2Hz  2=5Hz  3=10Hz 4=20Hz 5=50Hz 6=100Hz7=200Hz 8=500Hz 9=1kHz 10=2kHz11=5kHz 12=10kHz 13=20kHz 14=50kHz 15=100kHz
+        args:
+          CardId: "{{ cardid }}"
+          IPACid: $({{ carrier.name }})
+          IpSlot: "{{ ipslot }}"
+          InterruptVector: $({{ vector.name }})
+          InterruptEnable: "{{ intEnable | int }}"
+          AiType: 0
+          ExternalClock: "{{ externalClock | int }}"
+          ClockRate: "{{ clockRate }}"
+          Inhibit: "{{ inhibit | int }}"
+          SampleCount: 1
+          SampleSpacing: 1
+          SampleSize: "{{ sampleSize }}"
+
+    databases:
+      - file: Hy8401ip.template
+        define_args: |
+          c={{ carrier.slot }}"
+          s={{ ipslot }}"
