@@ -3,14 +3,14 @@
 module: timingTemplates
 
 defs:
-  - name: defaultEVR
+  - name: DefaultEVR
     args:
       - type: id
         name: device
         description: The device PV prefix
 
       - type: object
-        name: EventReceiver
+        name: event_receiver
         description: reference to EventReceiverPMC entry
 
       - type: str
@@ -20,22 +20,22 @@ defs:
 
     databases:
       - file: defaultEVR.template
-        define_args: card = {{ EventReceiver.card_id }}
+        define_args: card = {{ event_receiver.card_id }}
         include_args: [device, er]
 
-  - name: evr_alive
+  - name: EvrAlive
     args:
       - type: object
-        name: defaultEVR
-        description: reference to defaultEVR entry
+        name: default_evr
+        description: reference to DefaultEVR entry
 
     databases:
       - file: evr_alive.template
         define_args: |
           device={{ "" }}
-          SYSTEM={{ defaultEVR.device }}
+          SYSTEM={{ default_evr.device }}
 
-  - name: generalTime
+  - name: GeneralTime
     args:
       - type: id
         name: device

@@ -1,5 +1,9 @@
 # yaml-language-server: $schema=../_global/ibek.defs.schema.json
 
+# TODO - make naming convention compliant
+# Defs Names should be CamelCase
+# args names should be snake_case
+
 module: pmac
 
 defs:

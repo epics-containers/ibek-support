@@ -7,14 +7,14 @@ defs:
     args:
       - type: id
         name: name
-        description: "Name for the module"
+        description: Name to refer to when making a channel
 
       - type: object
         name: carrier
-        description: "Carrier Board Identifier"
+        description: Carrier Board Identifier
 
       - type: int
-        name: ipslot
+        name: ip_slot
         description: IP Site Number 0=A, 1=B, 2=C, 3=D
 
       - type: object
@@ -22,17 +22,17 @@ defs:
         description: Interrupt Vector
 
       - type: bool
-        name: intEnable
+        name: int_enable
         description: Interrupt Enable
         default: false
 
       - type: bool
-        name: externalClock
+        name: external_clock
         description: Use External Clock
         default: false
 
       - type: int
-        name: clockRate
+        name: clock_rate
         description: Clock Rate
         default: 15
 
@@ -42,14 +42,14 @@ defs:
         default: false
 
       - type: int
-        name: sampleSize
+        name: sample_size
         description: Number of samples for triggered capture
         default: 0
 
       - type: str
-        name: cardid
+        name: card_id
         description: Card Identifier
-        default: "{{ carrier.slot }}{{ ipslot }}"
+        default: "{{ carrier.slot }}{{ ip_slot }}"
 
     script:
       - type: function
@@ -58,21 +58,31 @@ defs:
           #   IpSlot A=0 B=1 C=2 D=3
           #   ClockRate  0=1Hz  1=2Hz  2=5Hz  3=10Hz 4=20Hz 5=50Hz 6=100Hz7=200Hz 8=500Hz 9=1kHz 10=2kHz11=5kHz 12=10kHz 13=20kHz 14=50kHz 15=100kHz
         args:
-          CardId: "{{ cardid }}"
+          CardId: "{{ card_id }}"
           IPACid: $({{ carrier.name }})
-          IpSlot: "{{ ipslot }}"
+          IpSlot: "{{ ip_slot }}"
           InterruptVector: $({{ vector.name }})
-          InterruptEnable: "{{ intEnable | int }}"
+          InterruptEnable: "{{ int_enable | int }}"
           AiType: 0
-          ExternalClock: "{{ externalClock | int }}"
-          ClockRate: "{{ clockRate }}"
+          ExternalClock: "{{ external_clock | int }}"
+          ClockRate: "{{ clock_rate }}"
           Inhibit: "{{ inhibit | int }}"
           SampleCount: 1
           SampleSpacing: 1
-          SampleSize: "{{ sampleSize }}"
+          SampleSize: "{{ sample_size }}"
+
+  - name: Hy8401Channel
+    args:
+      - type: object
+        name: card
+        description: 8401 card identifier
+
+      - type: int
+        name: signal
+        description: 8401 signal number (0-7)
 
     databases:
       - file: Hy8401ip.template
         define_args: |
-          c={{ carrier.slot }}"
-          s={{ ipslot }}"
+          c={{ card.card_id }}"
+          s={{ signal }}"

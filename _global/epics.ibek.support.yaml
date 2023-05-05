@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_global/ibek.defs.schema.json
 module: epics
 defs:
-  - name: EPICS_CA_MAX_ARRAY_BYTES
+  - name: EpicsCaMaxArrayBytes
     args:
       - type: int
         name: max_bytes
@@ -11,7 +11,7 @@ defs:
       - name: EPICS_CA_MAX_ARRAY_BYTES
         value: "{{ max_bytes }}"
 
-  - name: EPICS_TS_MIN_WEST
+  - name: EpicsTsMinWest
     args:
       - type: int
         name: minutes_west
@@ -21,7 +21,7 @@ defs:
       - name: EPICS_TS_MIN_WEST
         value: "{{ minutes_west }}"
 
-  - name: dbpf
+  - name: Dbpf
     args:
       - type: str
         name: pv
@@ -32,7 +32,7 @@ defs:
     post_ioc_init:
       - dbpf "{{ pv }}", "{{ value }}"
 
-  - name: epicsEnvSet
+  - name: EpicsEnvSet
     args:
       - type: str
         name: name
@@ -44,7 +44,7 @@ defs:
       - name: "{{ name }}"
         value: "{{ value }}"
 
-  - name: startupCommand
+  - name: StartupCommand
     args:
       - type: str
         name: command
@@ -53,7 +53,7 @@ defs:
     script:
       - "{{ command }}"
 
-  - name: postStartupCommand
+  - name: PostStartupCommand
     args:
       - type: str
         name: command

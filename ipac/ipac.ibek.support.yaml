@@ -14,7 +14,7 @@ defs:
         description: Crate Slot number
 
       - type: int
-        name: intLevel
+        name: int_level
         description: Interrupt level
         default: 2
 
@@ -26,5 +26,5 @@ defs:
           #   The resulting carrier handle is saved in an env variable.
         args:
           # args are combined into a single string - hence the quoting below
-          '"slot, interrupt_level"': '"{{ slot }}, {{ intLevel }}"'
+          '"slot, interrupt_level"': '"{{ slot }}, {{ int_level }}"'
       - epicsEnvSet {{ name }} {{ __utils__.counter("Carriers", start=0) }}

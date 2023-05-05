@@ -19,11 +19,11 @@ defs:
         description: Priority
         default: 100
       - type: bool
-        name: noAutoConnect
+        name: no_auto_connect
         description: Set to stop auto connect
         default:
       - type: bool
-        name: noProcessEos
+        name: no_process_eos
         description: Set to avoid processing end of string
         default: null
       - type: str
@@ -84,11 +84,11 @@ defs:
         description: Priority
         default: 100
       - type: bool
-        name: noAutoConnect
+        name: no_auto_connect
         description: Set to stop auto connect
         default:
       - type: bool
-        name: noProcessEos
+        name: no_process_eos
         description: Set to avoid processing end of string
         default: null
       - type: str

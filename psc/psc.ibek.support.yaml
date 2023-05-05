@@ -3,7 +3,7 @@
 module: psc
 
 defs:
-  - name: PSC
+  - name: Psc
     args:
       - name: carrier
         type: object
