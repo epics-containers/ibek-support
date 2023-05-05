@@ -1,6 +1,8 @@
 # yaml-language-server: $schema=../_global/ibek.defs.schema.json
 
-module: dls_psc_support
+module: psc
+
+# Diamond Light Source Power Supply Controller (PSC) support
 
 defs:
   - name: Psc
