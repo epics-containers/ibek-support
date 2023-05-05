@@ -1,5 +1,6 @@
 # yaml-language-server: $schema=../_global/ibek.defs.schema.json
 module: asyn
+
 defs:
   - name: AsynSerial
     args:
@@ -63,6 +64,7 @@ defs:
   # TODO potentially we could break out the common arguments into another object
   # TODO like AsynPort in builder.py. This would require a change that allows
   # TODO us to embed definition of one object within another
+  # TODO the above change is done - need to revisit this YAML.
   - name: AsynIP
     args:
       - type: str

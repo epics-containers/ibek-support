@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=../_global/ibek.defs.schema.json
 
-module: timingTemplates
+module: TimingTemplates
 
 defs:
   - name: DefaultEVR

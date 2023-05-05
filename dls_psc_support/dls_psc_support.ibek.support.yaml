@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=../_global/ibek.defs.schema.json
 
-module: psc
+module: dls_psc_support
 
 defs:
   - name: Psc
