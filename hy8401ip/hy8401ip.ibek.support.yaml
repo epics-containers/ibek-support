@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../../tests/samples/schemas/ibek.defs.schema.json
+# yaml-language-server: $schema=../_global/ibek.defs.schema.json
 
 module: Hy8401ip
 

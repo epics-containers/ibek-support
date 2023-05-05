@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=http://github.com/epics-containers/ibek/releases/download/0.9/ibek.defs.schema.json
+# yaml-language-server: $schema=../_global/ibek.defs.schema.json
 
 module: ipac
 
@@ -11,7 +11,7 @@ defs:
 
       - type: int
         name: slot
-        description: Slot number
+        description: Crate Slot number
 
       - type: int
         name: intLevel
@@ -19,7 +19,12 @@ defs:
         default: 2
 
     script:
-      - '# Assign the Carrier Handle for Hy8002 "{{ name }}" in slot {{ slot }}'
+      - type: function
+        name: ipacAddHy8002
+        header: |
+          #   Create a new Hy8002 carrier.
+          #   The resulting carrier handle is saved in an env variable.
+        args:
+          # args are combined into a single string - hence the quoting below
+          '"slot, interrupt_level"': '"{{ slot }}, {{ intLevel }}"'
       - epicsEnvSet {{ name }} {{ __utils__.counter("Carriers", start=0) }}
-      - '# ipacAddHy8002 "slot , interrupt_level"'
-      - ipacAddHy8002 "{{ slot }}, {{ intLevel }}"

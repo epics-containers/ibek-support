@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=http://github.com/epics-containers/ibek/releases/download/0.9/ibek.defs.schema.json
+# yaml-language-server: $schema=../_global/ibek.defs.schema.json
 module: epics
 defs:
   - name: EPICS_CA_MAX_ARRAY_BYTES
@@ -49,6 +49,7 @@ defs:
       - type: str
         name: command
         description: An arbitrary command in the startup script before iocInit
+        default: ""
     script:
       - "{{ command }}"
 
@@ -57,6 +58,7 @@ defs:
       - type: str
         name: command
         description: An arbitrary command in the startup script after iocInit
+        default: ""
 
     post_ioc_init:
       - "{{ command }}"

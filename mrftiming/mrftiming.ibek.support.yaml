@@ -1,11 +1,14 @@
-# yaml-language-server: $schema=http://github.com/epics-containers/ibek/releases/download/0.9/ibek.defs.schema.json
+# yaml-language-server: $schema=../_global/ibek.defs.schema.json
 
 module: mrfTiming
 
 defs:
   - name: EventReceiverPMC
     args:
-      # this needs to match what goes in timingTemplates.defaultEVR
+      - type: id
+        name: name
+        description: A name to reference this EVR
+
       - type: int
         name: card_id
         description: EPICS Card id
@@ -21,7 +24,16 @@ defs:
         default: 10
 
     script:
-      - ErConfigurePMC({{ card_id }}, {{ card_index }})
-      - ErTimeProviderInit({{ priority }})
-      - installLastResortEventProvider()
-      - syncSysClock()
+      - type: function
+        name: ErConfigurePMC
+        header: |
+          #   Initialize a PMC Event Receiver card
+        args:
+          Card_Id: "{{ card_id }}"
+          Card_Index: "{{ card_index }}"
+      - type: once
+        value: |
+          # One time initialization for all event receivers
+          ErTimeProviderInit {{ priority }}
+          installLastResortEventProvider
+          syncSysClock

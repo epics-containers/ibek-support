@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=http://github.com/epics-containers/ibek/releases/download/0.9/ibek.defs.schema.json
+# yaml-language-server: $schema=../_global/ibek.defs.schema.json
 
 module: timingTemplates
 
@@ -9,9 +9,9 @@ defs:
         name: device
         description: The device PV prefix
 
-      - type: int
-        name: card
-        description: The EVR card number
+      - type: object
+        name: EventReceiver
+        description: reference to EventReceiverPMC entry
 
       - type: str
         name: er
@@ -20,7 +20,8 @@ defs:
 
     databases:
       - file: defaultEVR.template
-        include_args: [device, card, er]
+        define_args: card = {{ EventReceiver.card_id }}
+        include_args: [device, er]
 
   - name: evr_alive
     args:
@@ -53,27 +54,3 @@ defs:
     databases:
       - file: generalTime.template
         include_args: [device, gt, scan]
-
-  - name: EventReceiverPMC
-    args:
-      # TODO this needs to match what goes in defaultEVR
-      # should we connect these two objects?
-      - type: int
-        name: card_id
-        description: EPICS Card id
-
-      - type: int
-        name: card_index
-        description: PMC slot number
-        default: 0
-
-      - type: int
-        name: priority
-        description: Time provider priority
-        default: 10
-
-    script:
-      - ErConfigurePMC({{ card_id }}, {{ card_index }})
-      - ErTimeProviderInit({{ priority }})
-      - installLastResortEventProvider()
-      - syncSysClock()
