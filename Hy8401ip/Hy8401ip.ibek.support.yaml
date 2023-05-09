@@ -14,7 +14,7 @@ defs:
         description: Carrier Board Identifier
 
       - type: int
-        name: ip_slot
+        name: ip_site_number
         description: IP Site Number 0=A, 1=B, 2=C, 3=D
 
       - type: object
@@ -49,18 +49,18 @@ defs:
       - type: str
         name: card_id
         description: Card Identifier
-        default: "{{ carrier.slot }}{{ ip_slot }}"
+        default: "{{ carrier.slot }}{{ ip_site_number }}"
 
     script:
       - type: function
         name: Hy8401ipConfigure
         header: |
-          #   IpSlot A=0 B=1 C=2 D=3
+          #   IpSlot 0=A 1=B 2=C 3=D
           #   ClockRate  0=1Hz  1=2Hz  2=5Hz  3=10Hz 4=20Hz 5=50Hz 6=100Hz7=200Hz 8=500Hz 9=1kHz 10=2kHz11=5kHz 12=10kHz 13=20kHz 14=50kHz 15=100kHz
         args:
           CardId: "{{ card_id }}"
           IPACid: $({{ carrier.name }})
-          IpSlot: "{{ ip_slot }}"
+          IpSiteNumber: "{{ ip_site_number }}"
           InterruptVector: $({{ vector.name }})
           InterruptEnable: "{{ int_enable | int }}"
           AiType: 0
