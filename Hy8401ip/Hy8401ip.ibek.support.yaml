@@ -4,6 +4,7 @@ module: Hy8401ip
 
 defs:
   - name: Hy8401ip
+    description: Adds a Hy8401ip ip module to an IPAC carrier
     args:
       - type: id
         name: name
@@ -72,6 +73,7 @@ defs:
           SampleSize: "{{ sample_size }}"
 
   - name: Hy8401Channel
+    description: Declares a channel for an Hy8401ip
     args:
       - type: object
         name: card

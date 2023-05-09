@@ -4,6 +4,7 @@ module: TimingTemplates
 
 defs:
   - name: DefaultEVR
+    description: define a default Event Receiver configuration
     args:
       - type: id
         name: device
@@ -24,6 +25,7 @@ defs:
         include_args: [device, er]
 
   - name: EvrAlive
+    description: Add a PV to monitor the Event Receiver
     args:
       - type: object
         name: default_evr
@@ -36,6 +38,7 @@ defs:
           SYSTEM={{ default_evr.device }}
 
   - name: GeneralTime
+    description: Add a PV to monitor the General Time
     args:
       - type: id
         name: device

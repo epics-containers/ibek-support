@@ -6,6 +6,7 @@ module: psc
 
 defs:
   - name: Psc
+    description: Add PSC IP modules to a carrier card
     args:
       - name: carrier
         type: object

@@ -4,6 +4,7 @@ module: devIocStats
 
 defs:
   - name: IocAdminSoft
+    description: adds IOC statistics PVs to an IOC
     args:
       - type: str
         name: ioc

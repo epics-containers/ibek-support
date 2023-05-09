@@ -8,6 +8,9 @@ module: pmac
 
 defs:
   - name: PmacAsynSSHPort
+    description: |
+      Add a Power PMAC asyn port to the IOC
+      This port uses SSH to connect to the Power PMAC
     args:
       - type: id
         name: name
@@ -46,6 +49,9 @@ defs:
       - drvAsynPowerPMACPortConfigure("{{name}}", "{{IP}}", "{{USERNAME}}", "{{PASSWORD}}", "{{PRIORITY}}", "{{NOAUTOCONNECT}}", "{{NOEOS}}")
 
   - name: PmacAsynIPPort
+    description: |
+      Add a Turbo PMAC asyn port to the IOC
+      This port uses TCP to connect to the PMAC
     args:
       - type: id
         name: name
@@ -64,6 +70,7 @@ defs:
       - pmacAsynIPConfigure({{ name }}, {{ IP }}:{{ PORT }})
 
   - name: Geobrick
+    description: Add a geobrick to the IOC
     args:
       - type: id
         name: name
@@ -146,6 +153,7 @@ defs:
           - P
 
   - name: DlsPmacAsynMotor
+    description: Add a motor to a motor controller
     args:
       # IMPORTANT: all non-defaulted args must come first
 
@@ -455,6 +463,7 @@ defs:
           ]
 
   - name: DlsCsPmacAsynMotor
+    description: add a DLS Coordinate system motor
     args:
       - type: str
         name: name
@@ -760,6 +769,7 @@ defs:
           ]
 
   - name: pmacDisableLimitsCheck
+    description: disable the limits check on an axis
     args:
       - type: object
         name: Controller
@@ -773,6 +783,7 @@ defs:
       - pmacDisableLimitsCheck({{ Controller.name }}, {{ Axis }}, 0)
 
   - name: autohome
+    description: setup auto home groups
     args:
       - type: object
         name: Controller
@@ -832,6 +843,7 @@ defs:
           [P, PLC, GRP1, GRP2, GRP3, GRP4, GRP5, GRP6, GRP7, GRP8, GRP9]
 
   - name: CS
+    description: Create a coordinate system
     args:
       - type: id
         name: name

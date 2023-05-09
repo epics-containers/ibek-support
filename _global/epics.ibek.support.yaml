@@ -2,6 +2,7 @@
 module: epics
 defs:
   - name: EpicsCaMaxArrayBytes
+    description: Set the maximum size in bytes for sending arrays over channel access
     args:
       - type: int
         name: max_bytes
@@ -12,16 +13,18 @@ defs:
         value: "{{ max_bytes }}"
 
   - name: EpicsTsMinWest
+    description: Set the relative time zone minutes West relative to GMT (+/-720)
     args:
       - type: int
         name: minutes_west
-        description: Set relative time zone minutes West relative to GMT (+/-720)
+        description: relative time zone minutes
         default: 0
     env_vars:
       - name: EPICS_TS_MIN_WEST
         value: "{{ minutes_west }}"
 
   - name: Dbpf
+    description: Set a PV value after iocInit
     args:
       - type: str
         name: pv
@@ -33,6 +36,7 @@ defs:
       - dbpf "{{ pv }}", "{{ value }}"
 
   - name: EpicsEnvSet
+    description: Set an environment variable in the ioc Shell
     args:
       - type: str
         name: name
@@ -45,25 +49,28 @@ defs:
         value: "{{ value }}"
 
   - name: StartupCommand
+    description: Adds an arbitrary command in the startup script before iocInit
     args:
       - type: str
         name: command
-        description: An arbitrary command in the startup script before iocInit
+        description: command string
         default: ""
     script:
       - "{{ command }}"
 
   - name: PostStartupCommand
+    description: Adds an arbitrary command in the startup script after iocInit
     args:
       - type: str
         name: command
-        description: An arbitrary command in the startup script after iocInit
+        description: command string
         default: ""
 
     post_ioc_init:
       - "{{ command }}"
 
   - name: InterruptVectorVME
+    description: Reserve a VME interrupt vector
     args:
       - type: id
         name: name

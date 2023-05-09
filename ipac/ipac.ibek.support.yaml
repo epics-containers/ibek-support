@@ -4,6 +4,7 @@ module: ipac
 
 defs:
   - name: Hy8002
+    description: adds a Hy8002 carrier card to the IOC
     args:
       - type: id
         name: name

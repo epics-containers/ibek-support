@@ -4,6 +4,7 @@ module: mrfTiming
 
 defs:
   - name: EventReceiverPMC
+    description: Add an Event Receiver PMC card to the IOC
     args:
       - type: id
         name: name

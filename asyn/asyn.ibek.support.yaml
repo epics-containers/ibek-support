@@ -3,6 +3,7 @@ module: asyn
 
 defs:
   - name: AsynSerial
+    description: defines a serial port asyn device
     args:
       - type: str
         name: port
@@ -66,6 +67,7 @@ defs:
   # TODO us to embed definition of one object within another
   # TODO the above change is done - need to revisit this YAML.
   - name: AsynIP
+    description: defines an asyn device for IP communication
     args:
       - type: str
         name: port
