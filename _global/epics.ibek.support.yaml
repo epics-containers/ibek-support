@@ -69,6 +69,11 @@ defs:
         name: name
         description: A name for an interrupt vector variable
 
+      - type: int
+        name: count
+        description: The number of interrupt vectors to reserve
+        default: 1
+
     env_vars:
       - name: "{{ name }}"
-        value: '{{  __utils__.counter("InteruptVector", start=192, stop=255) }}'
+        value: '{{  __utils__.counter("InterruptVector", start=192, stop=255, inc=count) }}'

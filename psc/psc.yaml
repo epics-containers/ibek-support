@@ -11,5 +11,29 @@ defs:
         type: object
         description: IPAC carrier name
 
+      - name: ip_site_number
+        type: int
+        description: Site on the carrier for this IP Module (0=A, 1=B, 2=C, 3=D)
+
+      - name: interrupt_vector
+        type: object
+        description: Interrupt Vector reserved with epics.InterruptVectorVME, count=3
+
+      - name: links
+        type: int
+        description: TODO - Alex what is this for?
+        default: 2
+
+    # TODO future ibek will support this:
+    # validate:
+    #   - assert: interrupt_vector.count == 3
+    #     message: Interrupt_vector must be reserved with epics.InterruptVectorVME, count=3
+
     script:
-      - pscAddIpModule(IPACid, ipslot, vector, link)
+      - type: function
+        name: pscAddIpModule
+        args:
+          CarrierId: $({{ carrier.name }})
+          IpSiteNumber: "{{ ip_site_number }}"
+          Vector: "$({{ interrupt_vector.name }})"
+          Links: "{{ links }}"
