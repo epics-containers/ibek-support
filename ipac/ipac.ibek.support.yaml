@@ -19,6 +19,11 @@ defs:
         description: Interrupt level
         default: 2
 
+    values:
+      - name: card_id
+        value: '{{ __utils__.counter("Carriers", start=0) }}'
+        description: Carrier Card Identifier
+
     script:
       - type: function
         name: ipacAddHy8002
@@ -28,4 +33,4 @@ defs:
         args:
           # args are combined into a single string - hence the quoting below
           '"slot, interrupt_level"': '"{{ slot }}, {{ int_level }}"'
-      - epicsEnvSet {{ name }} {{ __utils__.counter("Carriers", start=0) }}
+      - epicsEnvSet {{ name }} {{ card_id }}

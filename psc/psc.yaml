@@ -4,10 +4,17 @@ module: psc
 
 # Diamond Light Source Power Supply Controller (PSC) support
 
+# TODO add these and the DBTemplate psc.template
+# device, c, s, link, i_abserr, abserr, relerr, controlerr, startsw-evnt, syncsw-evnt, hyscycle-dly, hyscydir, hyscmask, hyslock, hysimin, hysimax, oninitcycle, vdclink_adel, vload_adel, icharge_adel
+
 defs:
   - name: Psc
     description: Add PSC IP modules to a carrier card
     args:
+      - type: id
+        name: device
+        description: Device Name, channel name until the last colon, up to 16 chars
+
       - name: carrier
         type: object
         description: IPAC carrier name
@@ -22,7 +29,7 @@ defs:
 
       - name: links
         type: int
-        description: TODO - Alex what is this for?
+        description: TODO - Alex what is this for? ( in call to pscAddIpModule() )
         default: 2
 
     # TODO future ibek will support this:
@@ -38,3 +45,12 @@ defs:
           IpSiteNumber: "{{ ip_site_number }}"
           Vector: "$({{ interrupt_vector.name }})"
           Links: "{{ links }}"
+
+    databases:
+      - file: pmacController.template
+        define_args: |
+
+          c={{carrier.slot}}
+          PORT={{name}}
+        include_args:
+          [P, idlePoll, movingPoll, TIMEOUT, CSG0, CSG1, CSG2, CSG3, CSG4]
