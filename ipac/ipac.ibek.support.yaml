@@ -8,7 +8,7 @@ defs:
     args:
       - type: id
         name: name
-        description: "IPAC identifier (suggested: IPAC{{ slot }})"
+        description: "IPAC identifier (suggested: IPAC<slot>)"
 
       - type: int
         name: slot
@@ -29,7 +29,7 @@ defs:
         name: ipacAddHy8002
         header: |
           #   Create a new Hy8002 carrier.
-          #   The resulting carrier handle is saved in an env variable.
+          #   The resulting carrier handle (card id) is saved in an env variable.
         args:
           # args are combined into a single string - hence the quoting below
           '"slot, interrupt_level"': '"{{ slot }}, {{ int_level }}"'
