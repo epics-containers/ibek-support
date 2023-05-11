@@ -1,0 +1,140 @@
+# yaml-language-server: $schema=../_global/ibek.defs.schema.json
+
+module: psc
+
+# Diamond Light Source Power Supply Controller (PSC) support
+
+defs:
+  - name: PscIpModule
+    description: Add a PSC IP module to a carrier card
+    args:
+      - type: id
+        name: device
+        description: Device Name, channel name until the last colon, up to 16 chars
+
+      - name: carrier
+        type: object
+        description: IPAC carrier name
+
+      - name: ip_site_number
+        type: int
+        description: Site on the carrier for this IP Module (0=A, 1=B, 2=C, 3=D)
+
+      - name: interrupt_vector
+        type: object
+        description: Interrupt Vector reserved with epics.InterruptVectorVME, count=3
+
+      # TODO future ibek will support this:
+      # validate:
+      #   - assert: interrupt_vector.count == 3
+      #     message: Interrupt_vector must be reserved with epics.InterruptVectorVME, count=3
+
+      - name: link
+        type: int
+        description: Link number on this IP module (0 or 1)
+        default: 0
+
+    script:
+      - type: function
+        name: pscAddIpModule
+        args:
+          CarrierId: $({{ carrier.name }})
+          IpSiteNumber: "{{ ip_site_number }}"
+          Vector: "$({{ interrupt_vector.name }})"
+          Links: "{{ links }}"
+
+  - name: PscTemplate
+    description: Database records for a single PSC channel (1-2 per IP module)
+    args:
+      - name: i_abserr
+        type: int
+        description: todo
+        default: 0
+      - name: abserr
+        type: int
+        description: todo
+        default: 0
+      - name: relerr
+        type: int
+        description: todo
+        default: 0
+      - name: controlerr
+        type: int
+        description: todo
+        default: 0
+      - name: startsw_evnt
+        type: int
+        description: todo
+        default: 0
+      - name: syncsw_evnt
+        type: int
+        description: todo
+        default: 0
+      - name: hyscycle_dly
+        type: int
+        description: todo
+        default: 0
+      - name: hyscydir
+        type: int
+        description: todo
+        default: 0
+      - name: hyscmask
+        type: int
+        description: todo
+        default: 0
+      - name: hyslock
+        type: int
+        description: todo
+        default: 0
+      - name: hysimin
+        type: int
+        description: todo
+        default: 0
+      - name: hysimax
+        type: int
+        description: todo
+        default: 0
+      - name: oninitcycle
+        type: int
+        description: todo
+        default: 0
+      - name: vdclink_adel
+        type: int
+        description: todo
+        default: 0
+      - name: vload_adel
+        type: int
+        description: todo
+        default: 0
+      - name: icharge_adel
+        type: int
+        description: todo
+        default: 0
+
+    databases:
+      - file: pmc.template
+        define_args: |
+          c={{carrier.slot}}
+          s={{ip_site_number}}
+          startsw-evnt={{ startsw_evnt }}
+          syncsw-evnt={{ syncsw_evnt }}
+          hyscycle-dly={{ hyscycle_dly }}
+        # above required args with _ instead of - to make legal python names
+        include_args:
+          [
+            link,
+            device,
+            i_abserr,
+            abserr,
+            relerr,
+            controlerr,
+            hyscydir,
+            hyscmask,
+            hyslock,
+            hysimin,
+            hysimax,
+            oninitcycle,
+            vdclink_adel,
+            vload_adel,
+            icharge_adel,
+          ]
