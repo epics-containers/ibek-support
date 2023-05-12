@@ -454,6 +454,26 @@
                 "type": "boolean",
                 "default": true
               },
+              "priority": {
+                "type": "integer",
+                "description": "Time provider priority",
+                "default": 10
+              },
+              "type": {
+                "type": "string",
+                "const": "mrfTiming.EventReceiverInit",
+                "default": "mrfTiming.EventReceiverInit"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "entity_enabled": {
+                "type": "boolean",
+                "default": true
+              },
               "name": {
                 "type": "string",
                 "description": "A name to reference this EVR",
@@ -467,11 +487,6 @@
                 "type": "integer",
                 "description": "PMC slot number",
                 "default": 0
-              },
-              "priority": {
-                "type": "integer",
-                "description": "Time provider priority",
-                "default": 10
               },
               "type": {
                 "type": "string",
