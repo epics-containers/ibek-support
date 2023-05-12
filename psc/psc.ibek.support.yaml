@@ -136,7 +136,7 @@ defs:
       - file: pmc.template
         define_args: |
           c={{ ip_module.carrier.card_id }}
-          s={{ip_module.ip_site_number}}
+          s={{ ip_module.ip_site_number }}
           startsw-evnt={{ startsw_evnt }}
           syncsw-evnt={{ syncsw_evnt }}
           hyscycle-dly={{ hyscycle_dly }}
