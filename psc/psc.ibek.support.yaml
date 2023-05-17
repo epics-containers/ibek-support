@@ -159,3 +159,42 @@ defs:
             vload_adel,
             icharge_adel,
           ]
+
+  - name: pscHy8401Channel-BS
+    description: Declares a channel for an Hy8401ip
+    args:
+      - type: object
+        name: card
+        description: 8401 card identifier
+
+      - type: object
+        name: psc_template
+        description: The PSC template instance
+
+      - type: int
+        name: channel
+        description: 8401 channel number (0-7)
+
+      - type: str
+        name: name
+        description: Suffix for PV name for this channel
+
+      - type: float
+        name: cal_m
+        description: Calibrated current multiplier
+
+      - type: float
+        name: cal_c
+        description: Calibrated current constant
+
+      - type: float
+        name: adel
+        description: Archive deadband for calibrated current
+
+    databases:
+      - file: pscHy8401-BS.template
+        define_args: |
+          device={{ psc_template.device }}
+          card={{ card.card_id }}
+          ch={{ channel }}
+        include_args: [name, cal_m, cal_c, adel]
