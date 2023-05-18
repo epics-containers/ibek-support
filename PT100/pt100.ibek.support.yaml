@@ -1,0 +1,79 @@
+# yaml-language-server: $schema=../_global/ibek.defs.schema.json
+
+module: PT100
+
+defs:
+  - name: PT100
+    description: PT100 Temperature sensor database template
+    args:
+      - type: str
+        name: PT
+        description: Process Variable prefix
+
+      - type: str
+        name: ADC_REF_CHAN
+        description: adc reference channel PV
+
+      - type: str
+        name: ADC_CHAN
+        description: ADC channel PV
+
+      - type: float
+        name: deadband
+        description: hysteresis value for monitor updates in Deg.C
+
+      - type: float
+        name: hihi
+        description: hihi alarm
+
+      - type: float
+        name: hi
+        description: hi alarm
+
+      - type: float
+        name: lo
+        description: lo alarm
+
+      - type: float
+        name: lolo
+        description: lolo alarm
+
+      - type: float
+        name: scan
+        description: scan period in seconds
+        # TODO: Validation - must be a valid value from menuScan.dbd
+        # But note that users could be overriding that dbd file for custom values?
+        default: 1
+
+      - type: int
+        name: prec
+        description: record display precision
+        default: 0
+
+      - type: float
+        name: hopr
+        description: high operating range
+        default: 100
+
+      - type: float
+        name: lopr
+        description: low operating range
+        default: 0
+
+    databases:
+      - file: pt100.template
+        include_args:
+          [
+            PT,
+            ADC_REF_CHAN,
+            ADC_CHAN,
+            deadband,
+            hihi,
+            hi,
+            lo,
+            lolo,
+            scan,
+            prec,
+            hopr,
+            lopr,
+          ]
