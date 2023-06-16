@@ -1,9 +1,16 @@
-# yaml-language-server: $schema=http://github.com/epics-containers/ibek/releases/download/0.9/ibek.defs.schema.json
+# yaml-language-server: $schema=../_global/ibek.defs.schema.json
+
+# TODO - make naming convention compliant
+# Defs Names should be CamelCase
+# args names should be snake_case
 
 module: pmac
 
 defs:
   - name: PmacAsynSSHPort
+    description: |
+      Add a Power PMAC asyn port to the IOC
+      This port uses SSH to connect to the Power PMAC
     args:
       - type: id
         name: name
@@ -42,6 +49,9 @@ defs:
       - drvAsynPowerPMACPortConfigure("{{name}}", "{{IP}}", "{{USERNAME}}", "{{PASSWORD}}", "{{PRIORITY}}", "{{NOAUTOCONNECT}}", "{{NOEOS}}")
 
   - name: PmacAsynIPPort
+    description: |
+      Add a Turbo PMAC asyn port to the IOC
+      This port uses TCP to connect to the PMAC
     args:
       - type: id
         name: name
@@ -60,6 +70,7 @@ defs:
       - pmacAsynIPConfigure({{ name }}, {{ IP }}:{{ PORT }})
 
   - name: Geobrick
+    description: Add a geobrick to the IOC
     args:
       - type: id
         name: name
@@ -142,6 +153,7 @@ defs:
           - P
 
   - name: DlsPmacAsynMotor
+    description: Add a motor to a motor controller
     args:
       # IMPORTANT: all non-defaulted args must come first
 
@@ -182,6 +194,7 @@ defs:
 
       - type: int
         name: PREC
+
         description: Display Precision
         default: 3
 
@@ -343,7 +356,7 @@ defs:
         default: 1
 
       - type: float
-        name: FEHEIGH
+        name: FEHIGH
         description: HIGH limit for following error
         default: 0
 
@@ -391,6 +404,11 @@ defs:
         name: ALLOW_HOMED_SET
         description: Set to a blank to allow this axis to have its homed
         default: "#"
+
+      - type: str
+        name: RLINK
+        description: not sure what this is
+        default: ""
 
     databases:
       - file: dls_pmac_asyn_motor.template
@@ -451,6 +469,7 @@ defs:
           ]
 
   - name: DlsCsPmacAsynMotor
+    description: add a DLS Coordinate system motor
     args:
       - type: str
         name: name
@@ -756,6 +775,7 @@ defs:
           ]
 
   - name: pmacDisableLimitsCheck
+    description: disable the limits check on an axis
     args:
       - type: object
         name: Controller
@@ -769,6 +789,7 @@ defs:
       - pmacDisableLimitsCheck({{ Controller.name }}, {{ Axis }}, 0)
 
   - name: autohome
+    description: setup auto home groups
     args:
       - type: object
         name: Controller
@@ -828,6 +849,7 @@ defs:
           [P, PLC, GRP1, GRP2, GRP3, GRP4, GRP5, GRP6, GRP7, GRP8, GRP9]
 
   - name: CS
+    description: Create a coordinate system
     args:
       - type: id
         name: name

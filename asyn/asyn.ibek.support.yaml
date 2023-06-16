@@ -1,7 +1,9 @@
-# yaml-language-server: $schema=http://github.com/epics-containers/ibek/releases/download/0.9/ibek.defs.schema.json
+# yaml-language-server: $schema=../_global/ibek.defs.schema.json
 module: asyn
+
 defs:
   - name: AsynSerial
+    description: defines a serial port asyn device
     args:
       - type: str
         name: port
@@ -19,11 +21,11 @@ defs:
         description: Priority
         default: 100
       - type: bool
-        name: noAutoConnect
+        name: no_auto_connect
         description: Set to stop auto connect
         default:
       - type: bool
-        name: noProcessEos
+        name: no_process_eos
         description: Set to avoid processing end of string
         default: null
       - type: str
@@ -63,7 +65,9 @@ defs:
   # TODO potentially we could break out the common arguments into another object
   # TODO like AsynPort in builder.py. This would require a change that allows
   # TODO us to embed definition of one object within another
+  # TODO the above change is done - need to revisit this YAML.
   - name: AsynIP
+    description: defines an asyn device for IP communication
     args:
       - type: str
         name: port
@@ -84,11 +88,11 @@ defs:
         description: Priority
         default: 100
       - type: bool
-        name: noAutoConnect
+        name: no_auto_connect
         description: Set to stop auto connect
         default:
       - type: bool
-        name: noProcessEos
+        name: no_process_eos
         description: Set to avoid processing end of string
         default: null
       - type: str

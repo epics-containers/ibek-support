@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../_global/ibek.defs.schema.json
+
+module: devIocStats
+
+defs:
+  - name: IocAdminSoft
+    description: adds IOC statistics PVs to an IOC
+    args:
+      - type: str
+        name: ioc
+        description: Device Prefix for this IOC
+
+    databases:
+      - file: iocAdminSoft.db
+        define_args: |
+          IOC={{ ioc }}

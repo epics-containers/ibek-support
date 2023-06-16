@@ -1,13 +1,200 @@
-# yaml-language-server: $schema=http://github.com/epics-containers/ibek/releases/download/0.9/ibek.defs.schema.json
+# yaml-language-server: $schema=../_global/ibek.defs.schema.json
 
 module: psc
 
+# Diamond Light Source Power Supply Controller (PSC) support
+
 defs:
-  - name: PSC
+  - name: PscIpModule
+    description: Add a PSC IP module to a carrier card
     args:
+      - name: name
+        type: id
+        description: A name this IP module
+
       - name: carrier
         type: object
         description: IPAC carrier name
 
+      - name: ip_site_number
+        type: int
+        description: Site on the carrier for this IP Module (0=A, 1=B, 2=C, 3=D)
+
+      # To use this object you must first reserve 3 IRQs with epics.InterruptVectorVME
+      - name: interrupt_vector
+        type: object
+        description: Interrupt Vector reserved with epics.InterruptVectorVME, count=3
+
+      # TODO future ibek will support this:
+      # validate:
+      #   - assert: interrupt_vector.count == 3
+      #     message: Interrupt_vector must be reserved with epics.InterruptVectorVME, count=3
+
+      - name: link
+        type: int
+        description: Link number on this IP module (0 or 1)
+        default: 0
+
     script:
-      - pscAddIpModule(IPACid, ipslot, vector, link)
+      - type: function
+        name: pscAddIpModule
+        args:
+          CarrierId: $({{ carrier.name }})
+          IpSiteNumber: "{{ ip_site_number }}"
+          Vector: "$({{ interrupt_vector.name }})"
+          Links: "{{ links }}"
+
+  # TODO this was coded by hand but could have been auto-generated from the
+  # psc.template file.
+  - name: PscTemplate
+    description: Database records for a single PSC channel (1-2 per IP module)
+    args:
+      - type: id
+        name: device
+        description: Device Name, PV Suffix
+      - type: object
+        name: ip_module
+        description: PscIpModule object
+      - name: link
+        type: int
+        description: Link number on this IP module (0 or 1)
+      - name: i_abserr
+        type: float
+        description: Absolute error limit (TODO what is i_abserr vs abserr ?)
+        default: 0.0005
+      - name: abserr
+        type: float
+        description: Absolute error limit [0..1]
+        default: 0.0005
+      - name: relerr
+        type: float
+        description: Relative error limit [0..1]
+        default: 0.0002
+      - name: controlerr
+        type: float
+        description: Control Error
+        default: 0.0005
+      - name: startsw_evnt
+        type: int
+        description: Event to start Soft ramps (ignore)
+        default: 53
+      - name: syncsw_evnt
+        type: int
+        description: Event to synchronise Soft ramps (ignore)
+        default: 54
+      - name: hyscycle_dly
+        type: int
+        description: |
+          Seconds to wait in hysteresis cycle: time of PS between min and max value
+        default: 3
+      - name: hyscydir
+        type: int
+        description: |
+          Direction of hysteresis cycle:
+          approaching set point from above (-) or below (+) at the end of the cycle
+        default: 0
+      - name: hyscmask
+        type: int
+        description: |
+          Defines the number of hysteresis cycles to run (for values >1 (3, 7, ...)
+          the seq delay has to be specified in an extra template)
+        default: 3
+      - name: hyslock
+        type: int
+        description: |
+          The value "locked" will force the PS to do a full cycle,
+          whenever the value I-SET is changed in the wrong direction (against HYCDIR)
+        default: 0
+      - name: hysimin
+        type: int
+        description: Minimum value for hysteresis cycle
+        default: -3
+      - name: hysimax
+        type: int
+        description: Maximum value for hysteresis cycle
+        default: 3
+      - name: oninitcycle
+        type: bool
+        description: |
+          Flag to determine if power supply should do a hysteresis cycle
+          when it is switched ON
+        default: false
+      - name: vdclink_adel
+        type: float
+        description: UNKNOWN
+        default: 0.3
+      - name: vload_adel
+        type: float
+        description: UNKNOWN
+        default: 0.3
+      - name: icharge_adel
+        type: float
+        description: UNKNOWN
+        default: 0.0005
+
+    databases:
+      - file: pmc.template
+        define_args: |
+          c={{ ip_module.carrier.card_id }}
+          s={{ ip_module.ip_site_number }}
+          startsw-evnt={{ startsw_evnt }}
+          syncsw-evnt={{ syncsw_evnt }}
+          hyscycle-dly={{ hyscycle_dly }}
+        # above required args with _ instead of - to make legal python names
+        include_args:
+          [
+            link,
+            device,
+            i_abserr,
+            abserr,
+            relerr,
+            controlerr,
+            hyscydir,
+            hyscmask,
+            hyslock,
+            hysimin,
+            hysimax,
+            oninitcycle,
+            vdclink_adel,
+            vload_adel,
+            icharge_adel,
+          ]
+
+  - name: pscHy8401Channel-BS
+    description: Declares a channel for an Hy8401ip
+    args:
+      - type: object
+        name: card
+        description: 8401 card identifier
+
+      - type: object
+        name: psc_template
+        description: The PSC template instance
+
+      - type: int
+        name: channel
+        description: 8401 channel number (0-7)
+
+      - type: str
+        name: name
+        description: Suffix for PV name for this channel
+
+      - type: float
+        name: cal_m
+        description: Calibrated current multiplier
+
+      - type: float
+        name: cal_c
+        description: Calibrated current constant
+
+      - type: float
+        name: adel
+        description: Archive deadband for calibrated current
+
+    databases:
+      - file: pscHy8401-BS.template
+        define_args: |
+          device={{ psc_template.device }}
+          card={{ card.card_id }}
+          ch={{ channel }}
+        include_args: [name, cal_m, cal_c, adel]
