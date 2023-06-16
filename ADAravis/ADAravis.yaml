@@ -1,0 +1,74 @@
+# yaml-language-server: $schema=../_global/ibek.defs.schema.json
+
+module: Hy8401ip
+
+defs:
+  - name: ADAravis
+    description: Defines an ADAravis camera (requires associated ADGenicam instance)
+    args:
+      - type: id
+        name: PORT
+        description: Port Name for teh camera
+
+      - type: str
+        name: P
+        description: The PV prefix
+
+      - type: str
+        name: R
+        description: The PV suffix
+
+      - type: str
+        name: ID
+        description: |
+          Cam ip address, hostname, MAC address, or ID <manufacturer>-<serial>,
+          (e.g. Prosilica-02-2166A-06844)
+
+      - type: str
+        name: PV_ALIAS
+        description: |
+          TODO this need to look into the purpose of this in builder.py
+          determine its function and see if we can do the equivalent in ibek
+        default: ""
+
+      - type: int
+        name: BUFFERS
+        description: Max NDArray buffers to be created for plugin callbacks
+        default: 50
+
+      - type: int
+        name: MEMORY
+        description: |
+          Max memory to allocate, should be maxw*maxh*nbuffer
+          for driver and all attached plugins or -1 for unlimited
+        default: -1
+
+    script:
+      - type: function
+        name: aravisConfig
+        args:
+          AsynPortName: "{{ PORT }}"
+          IpAddressOrName: "{{ ID }}"
+          MaxMemory: "{{ MEMORY }}"
+          Priority: 0
+          StackSize: 1
+
+    databases:
+      - file: aravisCamera.template
+        include_args: [P, R, PORT, TIMEOUT, CHANNEL]
+
+  - name: MantaG235B
+    description: Defines a Manta G-235B camera instance
+    args:
+      - type: object
+        name: camera
+        description: Name to refer to when making a channel
+
+    databases:
+      - file: AVT_Manta_G235B.template
+        define_args: |
+          P={{ camera.P }}
+          R={{ camera.R }}
+          PORT={{ camera.PORT }}
+          TIMEOUT=1
+          ADDR=0
