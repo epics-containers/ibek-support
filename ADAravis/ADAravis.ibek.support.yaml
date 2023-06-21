@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=../_global/ibek.defs.schema.json
 
-module: Hy8401ip
+module: ADAravis
 
 defs:
   - name: ADAravis
@@ -24,13 +24,6 @@ defs:
           Cam ip address, hostname, MAC address, or ID <manufacturer>-<serial>,
           (e.g. Prosilica-02-2166A-06844)
 
-      - type: str
-        name: PV_ALIAS
-        description: |
-          TODO this need to look into the purpose of this in builder.py
-          determine its function and see if we can do the equivalent in ibek
-        default: ""
-
       - type: int
         name: BUFFERS
         description: Max NDArray buffers to be created for plugin callbacks
@@ -42,6 +35,18 @@ defs:
           Max memory to allocate, should be maxw*maxh*nbuffer
           for driver and all attached plugins or -1 for unlimited
         default: -1
+
+      - type: int
+        name: TIMEOUT
+        description: timeout for communication with camera
+        default: 1
+
+      - type: str
+        name: PV_ALIAS
+        description: |
+          TODO this need to look into the purpose of this in builder.py
+          determine its function and see if we can do the equivalent in ibek
+        default: ""
 
     script:
       - type: function
@@ -55,14 +60,16 @@ defs:
 
     databases:
       - file: aravisCamera.template
-        include_args: [P, R, PORT, TIMEOUT, CHANNEL]
+        include_args: [P, R, PORT, TIMEOUT]
+        define_args: |
+          CHANNEL=0
 
   - name: MantaG235B
     description: Defines a Manta G-235B camera instance
     args:
       - type: object
         name: camera
-        description: Name to refer to when making a channel
+        description: reference to ADAravis.ADAravis instance
 
     databases:
       - file: AVT_Manta_G235B.template
@@ -70,5 +77,21 @@ defs:
           P={{ camera.P }}
           R={{ camera.R }}
           PORT={{ camera.PORT }}
-          TIMEOUT=1
+          TIMEOUT={{ camera.TIMEOUT }}
+          ADDR=0
+
+  - name: Mako_G234B
+    description: Defines a Mako G-234B camera instance
+    args:
+      - type: object
+        name: camera
+        description: reference to ADAravis.ADAravis instance
+
+    databases:
+      - file: AVT_Mako_G234B.template
+        define_args: |
+          P={{ camera.P }}
+          R={{ camera.R }}
+          PORT={{ camera.PORT }}
+          TIMEOUT={{ camera.TIMEOUT }}
           ADDR=0
