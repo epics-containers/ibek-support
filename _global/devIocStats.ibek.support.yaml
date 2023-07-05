@@ -12,5 +12,5 @@ defs:
 
     databases:
       - file: iocAdminSoft.db
-        define_args: |
-          IOC={{ ioc }}
+        args:
+          IOC: "{{ ioc }}"

@@ -37,11 +37,6 @@
                 "type": "string",
                 "description": "Cam ip address, hostname, MAC address, or ID <manufacturer>-<serial>,\n(e.g. Prosilica-02-2166A-06844)\n"
               },
-              "PV_ALIAS": {
-                "type": "string",
-                "description": "TODO this need to look into the purpose of this in builder.py\ndetermine its function and see if we can do the equivalent in ibek\n",
-                "default": ""
-              },
               "BUFFERS": {
                 "type": "integer",
                 "description": "Max NDArray buffers to be created for plugin callbacks",
@@ -56,6 +51,11 @@
                 "type": "integer",
                 "description": "timeout for communication with camera",
                 "default": 1
+              },
+              "PV_ALIAS": {
+                "type": "string",
+                "description": "TODO this need to look into the purpose of this in builder.py\ndetermine its function and see if we can do the equivalent in ibek\n",
+                "default": ""
               },
               "type": {
                 "type": "string",
@@ -80,7 +80,7 @@
               },
               "camera": {
                 "type": "string",
-                "description": "Name to refer to when making a channel",
+                "description": "reference to ADAravis.ADAravis instance",
                 "vscode_ibek_plugin_type": "type_object"
               },
               "type": {
@@ -103,7 +103,7 @@
               },
               "camera": {
                 "type": "string",
-                "description": "Name to refer to when making a channel",
+                "description": "reference to ADAravis.ADAravis instance",
                 "vscode_ibek_plugin_type": "type_object"
               },
               "type": {

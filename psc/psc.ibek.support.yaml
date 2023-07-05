@@ -134,15 +134,14 @@ defs:
 
     databases:
       - file: pmc.template
-        define_args: |
-          c={{ ip_module.carrier.card_id }}
-          s={{ ip_module.ip_site_number }}
-          startsw-evnt={{ startsw_evnt }}
-          syncsw-evnt={{ syncsw_evnt }}
-          hyscycle-dly={{ hyscycle_dly }}
-        # above required args with _ instead of - to make legal python names
-        include_args:
-          [
+        # below args with _ instead of - to make legal python names
+        args:
+          {
+            c: "{{ ip_module.carrier.card_id }}",
+            s: "{{ ip_module.ip_site_number }}",
+            startsw-evnt: "{{ startsw_evnt }}",
+            syncsw-evnt: "{{ syncsw_evnt }}",
+            hyscycle-dly: "{{ hyscycle_dly }}",
             link,
             device,
             i_abserr,
@@ -158,7 +157,7 @@ defs:
             vdclink_adel,
             vload_adel,
             icharge_adel,
-          ]
+          }
 
   - name: pscHy8401Channel-BS
     description: Declares a channel for an Hy8401ip
@@ -193,8 +192,11 @@ defs:
 
     databases:
       - file: pscHy8401-BS.template
-        define_args: |
-          device={{ psc_template.device }}
-          card={{ card.card_id }}
-          ch={{ channel }}
-        include_args: [name, cal_m, cal_c, adel]
+        args:
+          device: "{{ psc_template.device }}"
+          card: "{{ card.card_id }}"
+          ch: "{{ channel }}"
+          name:
+          cal_m:
+          cal_c:
+          adel:

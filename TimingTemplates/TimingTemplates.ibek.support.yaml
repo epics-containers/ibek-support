@@ -21,8 +21,10 @@ defs:
 
     databases:
       - file: defaultEVR.template
-        define_args: card = {{ event_receiver.card_id }}
-        include_args: [device, er]
+        args:
+          card: "{{ event_receiver.card_id }}"
+          device:
+          er:
 
   - name: EvrAlive
     description: Add a PV to monitor the Event Receiver
@@ -33,9 +35,9 @@ defs:
 
     databases:
       - file: evr_alive.template
-        define_args: |
-          device={{ "" }}
-          SYSTEM={{ default_evr.device }}
+        args:
+          device: '{{ "" }}'
+          SYSTEM: "{{ default_evr.device }}"
 
   - name: GeneralTime
     description: Add a PV to monitor the General Time
@@ -56,4 +58,4 @@ defs:
 
     databases:
       - file: generalTime.template
-        include_args: [device, gt, scan]
+        args: { device, gt, scan }

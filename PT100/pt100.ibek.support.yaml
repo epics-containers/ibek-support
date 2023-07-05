@@ -62,8 +62,8 @@ defs:
 
     databases:
       - file: pt100.template
-        include_args:
-          [
+        args:
+          {
             PT,
             ADC_REF_CHAN,
             ADC_CHAN,
@@ -76,4 +76,4 @@ defs:
             prec,
             hopr,
             lopr,
-          ]
+          }

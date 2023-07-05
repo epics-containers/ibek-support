@@ -82,6 +82,6 @@ defs:
 
     databases:
       - file: Hy8403ip.template
-        define_args: |
-          device={{ device }}
-          card={{ card.card_id }}
+        args:
+          device: "{{ device }}"
+          card: "{{ card.card_id }}"

@@ -60,9 +60,7 @@ defs:
 
     databases:
       - file: aravisCamera.template
-        include_args: [P, R, PORT, TIMEOUT]
-        define_args: |
-          CHANNEL=0
+        args: { P, R, PORT, TIMEOUT, CHANNEL: "0" }
 
   - name: MantaG235B
     description: Defines a Manta G-235B camera instance
@@ -73,12 +71,12 @@ defs:
 
     databases:
       - file: AVT_Manta_G235B.template
-        define_args: |
-          P={{ camera.P }}
-          R={{ camera.R }}
-          PORT={{ camera.PORT }}
-          TIMEOUT={{ camera.TIMEOUT }}
-          ADDR=0
+        args:
+          P: "{{ camera.P }}"
+          R: "{{ camera.R }}"
+          PORT: "{{ camera.PORT }}"
+          TIMEOUT: "{{ camera.TIMEOUT }}"
+          ADDR: "0"
 
   - name: Mako_G234B
     description: Defines a Mako G-234B camera instance
@@ -89,9 +87,9 @@ defs:
 
     databases:
       - file: AVT_Mako_G234B.template
-        define_args: |
-          P={{ camera.P }}
-          R={{ camera.R }}
-          PORT={{ camera.PORT }}
-          TIMEOUT={{ camera.TIMEOUT }}
-          ADDR=0
+        args:
+          P: "{{ camera.P }}"
+          R: "{{ camera.R }}"
+          PORT: "{{ camera.PORT }}"
+          TIMEOUT: "{{ camera.TIMEOUT }}"
+          ADDR: "0"
