@@ -52,33 +52,27 @@ defs:
       - name: "{{ name }}"
         value: "{{ value }}"
 
-  # TODO had to remove these two because we got rid of "script"  and
-  # post_ioc_init but they may still be useful,
-  # in which case we need to restore an equivalent mechanism
-  # probably
-  # pre_init: type: text ...
-  # post_init: type: text ...
+  - name: StartupCommand
+    description: Adds an arbitrary command in the startup script before iocInit
+    args:
+      - type: str
+        name: command
+        description: command string
+        default: ""
+    pre_init:
+      - type: text
+        value: "{{ command }}"
 
-  # - name: StartupCommand
-  #   description: Adds an arbitrary command in the startup script before iocInit
-  #   args:
-  #     - type: str
-  #       name: command
-  #       description: command string
-  #       default: ""
-  #   script:
-  #     - "{{ command }}"
-
-  # - name: PostStartupCommand
-  #   description: Adds an arbitrary command in the startup script after iocInit
-  #   args:
-  #     - type: str
-  #       name: command
-  #       description: command string
-  #       default: ""
-
-  #   post_ioc_init:
-  #     - "{{ command }}"
+  - name: PostStartupCommand
+    description: Adds an arbitrary command in the startup script after iocInit
+    args:
+      - type: str
+        name: command
+        description: command string
+        default: ""
+    post_init:
+      - type: text
+        value: "{{ command }}"
 
   - name: InterruptVectorVME
     description: Reserve a VME interrupt vector
