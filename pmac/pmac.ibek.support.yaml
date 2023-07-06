@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../_global/ibek.defs.schema.json
 module: pmac
 
 defs:
@@ -39,8 +40,17 @@ defs:
         description: No EOS used if set to 1
         default: 0
 
-    script:
-      - drvAsynPowerPMACPortConfigure("{{name}}", "{{IP}}", "{{USERNAME}}", "{{PASSWORD}}", "{{PRIORITY}}", "{{NOAUTOCONNECT}}", "{{NOEOS}}")
+    pre_init:
+      - type: function
+        name: drvAsynPowerPMACPortConfigure
+        args:
+          AsynPortName: "{{name}}"
+          IPAddress: "{{IP}}"
+          Username: "{{USERNAME}}"
+          Password: "{{PASSWORD}}"
+          Priority: "{{PRIORITY}}"
+          NoAutoConnect: "{{NOAUTOCONNECT}}"
+          NoEOS: "{{NOEOS}}"
 
   - name: PmacAsynIPPort
     description: |
@@ -60,8 +70,12 @@ defs:
         description: TCP port for connection
         default: 1025
 
-    script:
-      - pmacAsynIPConfigure({{ name }}, {{ IP }}:{{ PORT }})
+    pre_init:
+      - type: function
+        name: pmacAsynIPConfigure
+        args:
+          AsynPortName: "{{name}}"
+          IPAddress: "{{IP}}:{{PORT}}"
 
   - name: Geobrick
     description: Add a geobrick to the IOC
@@ -130,9 +144,22 @@ defs:
 
     # numAxes must be supplied for geobrick (but builder.py counted the axes created)
     # TODO is counting num_axes is an example of something hard to do in this new approach?
-    script:
-      - pmacCreateController({{name}}, {{PORT.name}}, 0, {{numAxes}}, {{movingPoll}}, {{idlePoll}})
-      - pmacCreateAxes({{name}}, {{numAxes}})
+    pre_init:
+      - type: function
+        name: pmacCreateController
+        args:
+          AsynPortName: "{{name}}"
+          PmacAsynPort: "{{PORT.name}}"
+          Address: 0
+          NumAxes: "{{numAxes}}"
+          MovingPollPeriod: "{{movingPoll}}"
+          IdlePollPeriod: "{{idlePoll}}"
+
+      - type: function
+        name: pmacCreateAxes
+        args:
+          AsynPortName: "{{name}}"
+          NumberOfAxes: "{{numAxes}}"
 
     databases:
       - file: pmacController.template
@@ -780,8 +807,13 @@ defs:
         name: Axis
         description: Axis to have limits disabled
 
-    script:
-      - pmacDisableLimitsCheck({{ Controller.name }}, {{ Axis }}, 0)
+    pre_init:
+      - type: function
+        name: pmacDisableLimitsCheck
+        args:
+          AsynPortName: "{{Controller.name}}"
+          Axis: "{{Axis}}"
+          AllAxes: False
 
   - name: autohome
     description: setup auto home groups
@@ -879,9 +911,20 @@ defs:
         description: PROG number for CS motion
         default: 10
 
-    script:
-      - pmacCreateCS("{{name}}", "{{Controller.name}}", {{CS}}, {{Program}})
-      - pmacCreateCSAxes("{{name}}", {{NAxes}})
+    pre_init:
+      - type: function
+        name: pmacCreateCS
+        args:
+          AsynPortName: "{{name}}"
+          PmacAsynPort: "{{Controller.name}}"
+          CSNumber: "{{CS}}"
+          PLCNumber: "{{Program}}"
+      - type: function
+        name: pmacCreateCSAxes
+        args:
+          AsynPortName: "{{name}}"
+          NumberOfAxes: "{{NAxes}}"
+
     databases:
       - file: pmacCsController.template
         args:

@@ -32,8 +32,12 @@ defs:
       - type: str
         name: value
         description: Value to set
-    post_ioc_init:
-      - dbpf "{{ pv }}", "{{ value }}"
+    post_init:
+      - type: function
+        name: dbpf
+        args:
+          pv: "{{ pv }}"
+          value: "{{ value }}"
 
   - name: EpicsEnvSet
     description: Set an environment variable in the ioc Shell
@@ -48,26 +52,33 @@ defs:
       - name: "{{ name }}"
         value: "{{ value }}"
 
-  - name: StartupCommand
-    description: Adds an arbitrary command in the startup script before iocInit
-    args:
-      - type: str
-        name: command
-        description: command string
-        default: ""
-    script:
-      - "{{ command }}"
+  # TODO had to remove these two because we got rid of "script"  and
+  # post_ioc_init but they may still be useful,
+  # in which case we need to restore an equivalent mechanism
+  # probably
+  # pre_init: type: text ...
+  # post_init: type: text ...
 
-  - name: PostStartupCommand
-    description: Adds an arbitrary command in the startup script after iocInit
-    args:
-      - type: str
-        name: command
-        description: command string
-        default: ""
+  # - name: StartupCommand
+  #   description: Adds an arbitrary command in the startup script before iocInit
+  #   args:
+  #     - type: str
+  #       name: command
+  #       description: command string
+  #       default: ""
+  #   script:
+  #     - "{{ command }}"
 
-    post_ioc_init:
-      - "{{ command }}"
+  # - name: PostStartupCommand
+  #   description: Adds an arbitrary command in the startup script after iocInit
+  #   args:
+  #     - type: str
+  #       name: command
+  #       description: command string
+  #       default: ""
+
+  #   post_ioc_init:
+  #     - "{{ command }}"
 
   - name: InterruptVectorVME
     description: Reserve a VME interrupt vector

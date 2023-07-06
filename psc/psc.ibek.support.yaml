@@ -35,7 +35,7 @@ defs:
         description: Link number on this IP module (0 or 1)
         default: 0
 
-    script:
+    pre_init:
       - type: function
         name: pscAddIpModule
         args:

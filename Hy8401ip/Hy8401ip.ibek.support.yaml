@@ -52,7 +52,7 @@ defs:
         description: Card Identifier
         default: "{{ carrier.slot }}{{ ip_site_number }}"
 
-    script:
+    pre_init:
       - type: function
         name: Hy8401ipConfigure
         header: |

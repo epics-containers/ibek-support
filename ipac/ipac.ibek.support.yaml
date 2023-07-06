@@ -24,7 +24,7 @@ defs:
         value: '{{ __utils__.counter("Carriers", start=0) }}'
         description: Carrier Card Identifier
 
-    script:
+    pre_init:
       - type: function
         name: ipacAddHy8002
         header: |
@@ -33,4 +33,11 @@ defs:
         args:
           # args are combined into a single string - hence the quoting below
           '"slot, interrupt_level"': '"{{ slot }}, {{ int_level }}"'
-      - epicsEnvSet {{ name }} {{ card_id }}
+      - type: function
+        # for each call to ipacAddHy8002 we assign the card ID that we just created
+        # card IDs are assigned sequentially starting from 0 and the card_id
+        # automatically increments to track them.
+        name: epicsEnvSet
+        args:
+          name: "{{ name }}"
+          value: "{{ card_id }}"

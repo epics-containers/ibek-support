@@ -48,7 +48,7 @@ defs:
           determine its function and see if we can do the equivalent in ibek
         default: ""
 
-    script:
+    pre_init:
       - type: function
         name: aravisConfig
         args:

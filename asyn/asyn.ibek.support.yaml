@@ -56,11 +56,13 @@ defs:
         name: crtscts
         description: Set hardware flow control on
         default: null
-    script:
-      - ASYNSerial Startup ENTRY
-      - TODO provide Jinja to generate ASYN Startup Entries
-      - note this is interesting because builder.py has a few if clauses
-      - for generating the necessary script
+    pre_init:
+      - type: comment
+        value: |
+          ASYNSerial Startup ENTRY
+          TODO provide Jinja to generate ASYN Startup Entries
+          note this is interesting because builder.py has a few if clauses
+          for generating the necessary script
 
   # TODO potentially we could break out the common arguments into another object
   # TODO like AsynPort in builder.py. This would require a change that allows
@@ -99,7 +101,10 @@ defs:
         name: simulation
         description: IP port to connect to if in simulation mode
         default: null
-    script:
-      - TODO provide Jinja to generate Startup Entries
-      - note this is interesting because builder.py has a few if clauses
-      - for generating the necessary script
+    pre_init:
+      - type: comment
+        value: |
+          ASYNSerial Startup ENTRY
+          TODO provide Jinja to generate ASYN Startup Entries
+          note this is interesting because builder.py has a few if clauses
+          for generating the necessary script
