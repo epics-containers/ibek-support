@@ -810,6 +810,7 @@ defs:
     pre_init:
       - type: function
         name: pmacDisableLimitsCheck
+        when: last
         args:
           AsynPortName: "{{Controller.name}}"
           Axis: "{{Axis}}"
