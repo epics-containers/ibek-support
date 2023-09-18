@@ -15,7 +15,7 @@ source ${IBEK_SUPPORT}/_global/functions.sh
 
 git_clone_tag ${NAME} ${VERSION}
 
-write_local_files ${NAME}
+add_to_release ${NAME}
 
 ##########################################################################
 ##### put patch commands here if needed ##################################

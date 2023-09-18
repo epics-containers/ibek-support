@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 Provide a basic CLI for managing a set of EPICS support modules
 """
@@ -41,11 +42,13 @@ cli = typer.Typer()
 
 
 @cli.command()
-def fix_release(
+def add_to_release(
     name: str = typer.Argument(..., help="the name of the support module"),
     macro: Optional[str] = typer.Option(None, help="Macro name for the module"),
     path: Optional[Path] = typer.Option(None, help="The path to the support module"),
     remove: Optional[bool] = typer.Option(False, help="remove this dependency"),
+    just_add: Optional[bool] = typer.Option(False, help="just add a macro"),
+
 ):
     """
     prepare the configure RELEASE files to build a support module
@@ -68,7 +71,7 @@ def fix_release(
     RELEASE.write_text(text)
 
     # remove adds a blank path to effectively delete the macro from dependencies
-    if not remove:
+    if not (remove or just_add):
         # bring the global release file into this module with a symlink
         local = path / "configure" / "RELEASE.local"
         local.unlink(missing_ok=True)
