@@ -3,14 +3,24 @@
 ##### boilerplate install script for support modules #####################
 ##########################################################################
 
+# ARGUMENTS:
+#  $1 VERSION to install (must match repo tag)
+
 NAME=asyn
+VERSION=${1}
 
-source /workspace/ibek-support/_global/functions.sh
+IBEK_SUPPORT=$(realpath $(dirname ${0})/..)
+source $IBEK_SUPPORT/_global/functions.sh
 
-git_clone_tag ${NAME} ${1}
+git_clone_tag ${NAME} ${VERSION}
+
+# No need for IPAC unless its already installed
+not_required IPAC
+
+write_local_files ${NAME}
 
 ##########################################################################
-##### put your patch here if needed ######################################
+##### put patch commands here if needed ##################################
 ##########################################################################
 
 if [[ $TARGET_ARCHITECTURE != "rtems" ]]; then
@@ -21,20 +31,13 @@ else
     sed -i '/DIRS += .*test/d' Makefile
 fi
 
-# remove dependency on IPAC support
-echo IPAC= > configure/RELEASE.local
 
 ##########################################################################
-#### end of patches ######################################################
+#### end of patch commands ###############################################
 ##########################################################################
 
-write_local_files ${NAME}
-    # does python support.py fix-release ${NAME}
-    # global.sh --> only does locals too
 
-# compile the support module
-make -C ${SUPPORT}/${NAME} -j $(nproc)
+build_support_module ${NAME}
 
-# link bob files
 create_links ${NAME}
 

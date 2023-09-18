@@ -6,8 +6,7 @@
 # ARGUMENTS:
 #  $1 VERSION to install (must match repo tag)
 
-# get the name of this folder which is the same as name of the support module
-NAME=$(basename $(realpath $(dirname ${0}))
+NAME=autosave
 VERSION=${1}
 
 IBEK_SUPPORT=$(realpath $(dirname ${0})/..)
@@ -19,6 +18,16 @@ write_local_files ${NAME}
 
 ##########################################################################
 ##### put patch commands here if needed ##################################
+##########################################################################
+
+if [[ $TARGET_ARCHITECTURE == "rtems" ]]; then
+    echo "Patching RTEMS autosave"
+    patch -p1 < ${THIS_DIR}/rtems-autosave.patch
+
+    echo >> configure/CONFIG_SITE.Common.linux-x86_64
+    echo "VALID_BUILDS=Host" >> configure/CONFIG_SITE.Common.linux-x86_64
+fi
+
 ##########################################################################
 
 build_support_module ${NAME}
