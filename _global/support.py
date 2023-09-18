@@ -8,7 +8,7 @@ import re
 from pathlib import Path
 from typing import Optional
 from jinja2 import Template
-
+from typing_extensions import Annotated
 import typer
 
 # note requirement for enviroment variable EPICS_BASE
@@ -42,60 +42,61 @@ cli = typer.Typer()
 
 
 @cli.command()
-def add_to_release(
-    name: str = typer.Argument(..., help="the name of the support module"),
-    macro: Optional[str] = typer.Option(None, help="Macro name for the module"),
-    path: Optional[Path] = typer.Option(None, help="The path to the support module"),
-    remove: Optional[bool] = typer.Option(False, help="remove this dependency"),
-    just_add: Optional[bool] = typer.Option(False, help="just add a macro"),
+def add_macro(
+    macro: str = typer.Argument(..., help="macro name to update"),
+    value: str = typer.Argument("", help="value to set for the macro"),
+    file: Annotated[Optional[Path], typer.Option()] = RELEASE,
+    replace: bool = typer.Option(True, help="overwrite previous value"),
+):
+    text = file.read_text()
 
+    find_m = re.compile(f"^({macro}[ \t]*=[ \t]*)(.*)$", flags=re.M)
+    matches = find_m.findall(text)
+    if len(matches) == 0:
+        text += f"{macro}={value}\n"
+    elif replace:
+        text = find_m.sub(r"\1" + str(value), text)
+
+    file.write_text(text)
+
+
+@cli.command()
+def add_module_to_release(
+    name: str = typer.Argument(..., help="the name of the support module"),
+    value: Path = typer.Argument(None, help="The path to the support module"),
+    macro: Optional[str] = typer.Option(None, help="Macro name for the module"),
 ):
     """
     prepare the configure RELEASE files to build a support module
     inside an epics-containers build
     """
     macro = name.upper() if macro is None else macro
-    path = EPICS_ROOT / "support" / name if (path is None) else path
+    value = EPICS_ROOT / "support" / name if (value is None) else value
+
     # add or replace the macro for this module in the global RELEASE file
-    text = RELEASE.read_text()
+    add_macro(macro, value)
 
-    find_m = re.compile(f"^({macro}[ \t]*=[ \t]*)(.*)$", flags=re.M)
-    matches = find_m.findall(text)
-    if len(matches) == 0:
-        path = "" if remove else path
-        text += f"{macro}={path}\n"
-        # dont remove a macro that is already defined
-    elif not remove:
-        text = find_m.sub(r"\1" + str(path), text)
+    # bring the global release file into this module with a symlink
+    local = value / "configure" / "RELEASE.local"
+    local.unlink(missing_ok=True)
+    local.symlink_to(RELEASE)
 
-    RELEASE.write_text(text)
+    # make sure this module uses RELEASE.local
+    verify_release_includes_local(value / "configure")
 
-    # remove adds a blank path to effectively delete the macro from dependencies
-    if not (remove or just_add):
-        # bring the global release file into this module with a symlink
-        local = path / "configure" / "RELEASE.local"
-        local.unlink(missing_ok=True)
-        local.symlink_to(RELEASE)
-
-        # make sure this module uses RELEASE.local
-        verify_release_includes_local(path / "configure")
-
-        do_dependencies()
+    do_dependencies()
 
 
 def verify_release_includes_local(configure_folder: Path):
     """
-    Make sure that a module uses RELEASE.local
+    Make sure that a module uses RELEASE.local.
 
-    a git dirtying patch is required if not.
+    A git-dirtying patch is required if not.
     """
     release = configure_folder / "RELEASE"
-
     text = release.read_text()
 
-    if "RELEASE.local" in text:
-        print(f"OK - {configure_folder}/RELEASE references RELEASE.local")
-    else:
+    if "RELEASE.local" not in text:
         print(f"WARNING: {configure_folder}/RELEASE does not include RELEASE.local")
         text += "# PATCHED BY IBEK-SUPPORT\n-include $(TOP)/configure/RELEASE.local\n"
         release.write_text(text)

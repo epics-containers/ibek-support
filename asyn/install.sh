@@ -16,9 +16,9 @@ source $IBEK_SUPPORT/_global/functions.sh
 git_clone_tag ${NAME} ${VERSION}
 
 # No need for IPAC unless its already installed
-add_to_release IPAC --remove
+support add-macro IPAC --no-replace
 
-add_to_release ${NAME}
+support add-module-to-release ${NAME}
 
 ##########################################################################
 ##### put patch commands here if needed ##################################

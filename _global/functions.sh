@@ -25,21 +25,25 @@ function git_clone_tag {
     cd ${SUPPORT}/${NAME}
 }
 
-# Updates RELEASE.local etc to enable compilation in epics-containers env
-function add_to_release {
+# Call functions in support.py
+function support {
     # Make RELEASE files to point to the correct paths by adding RELEASE.local
-    python ${GLOBALS_DIR}/support.py add-to-release ${@}
+    python ${GLOBALS_DIR}/support.py ${@}
+}
 
+# Global settings for all modules
+function global_fixes {
     # Apply any global patches (try to only add .local files as far as possible)
-    bash ${GLOBALS_DIR}/global.sh
+    bash ${GLOBALS_DIR}/global.sh ${@}
 }
 
 # Compile
 function build_support_module {
     NAME=${1}
+    shift
 
     # compile the support module
-    make -C ${SUPPORT}/${NAME} -j $(nproc)
+    make -C ${SUPPORT}/${NAME} -j $(nproc) ${@}
 }
 
 function create_links {
@@ -52,9 +56,3 @@ function create_links {
     # TODO
 }
 
-function not_required {
-    # ARGS: list of macros for unrequired modules
-
-    # Add the listed macros to the global release file if not already there
-    python ${GLOBALS_DIR}/support.py not-required ${@}
-}

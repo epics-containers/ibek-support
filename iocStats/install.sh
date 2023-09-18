@@ -15,11 +15,13 @@ source ${IBEK_SUPPORT}/_global/functions.sh
 
 git_clone_tag ${NAME} ${VERSION}
 
-add_to_release ${NAME}
+support add-module-to-release ${NAME}
 
 ##########################################################################
 ##### put patch commands here if needed ##################################
 ##########################################################################
+
+global_fixes ${NAME}
 
 build_support_module ${NAME}
 
