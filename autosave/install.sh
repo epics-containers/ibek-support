@@ -6,7 +6,8 @@
 # ARGUMENTS:
 #  $1 VERSION to install (must match repo tag)
 
-NAME=autosave
+# get the name of this folder which is the same as name of the support module
+NAME=$(basename $(dirname ${0}))
 VERSION=${1}
 
 IBEK_SUPPORT=$(realpath $(dirname ${0})/..)
