@@ -27,10 +27,8 @@ function git_clone_tag {
 
 # Updates RELEASE.local etc to enable compilation in epics-containers env
 function write_local_files {
-    NAME=${1}
-
     # Make RELEASE files to point to the correct paths by adding RELEASE.local
-    python ${GLOBALS_DIR}/support.py fix-release ${NAME}
+    python ${GLOBALS_DIR}/support.py fix-release ${@}
 
     # Apply any global patches (try to only add .local files as far as possible)
     bash ${GLOBALS_DIR}/global.sh

@@ -16,7 +16,7 @@ source $IBEK_SUPPORT/_global/functions.sh
 git_clone_tag ${NAME} ${VERSION}
 
 # No need for IPAC unless its already installed
-not_required IPAC
+write_local_files IPAC --remove
 
 write_local_files ${NAME}
 
@@ -24,14 +24,10 @@ write_local_files ${NAME}
 ##### put patch commands here if needed ##################################
 ##########################################################################
 
-if [[ $TARGET_ARCHITECTURE != "rtems" ]]; then
-    # Enable TIRPC for ASYN
-    echo TIRPC=YES > configure/CONFIG_SITE.local
-else
+if [[ $TARGET_ARCHITECTURE == "rtems" ]]; then
     # don't build the test directories (they don't compile on RTEMS)
     sed -i '/DIRS += .*test/d' Makefile
 fi
-
 
 ##########################################################################
 #### end of patch commands ###############################################
