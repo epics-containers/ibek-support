@@ -5,25 +5,22 @@
 
 # ARGUMENTS:
 #  $1 VERSION to install (must match repo tag)
-
-# get the name of this folder which is the same as name of the support module
-NAME=$(basename $(dirname ${0}))
 VERSION=${1}
 
-IBEK_SUPPORT=$(realpath $(dirname ${0})/..)
-source ${IBEK_SUPPORT}/_global/functions.sh
+# get the name of this folder, i.e. the name of the support module
+NAME=$(basename $(dirname ${0}))
 
-git_clone_tag ${NAME} ${VERSION}
-
-support add-module-to-release ${NAME}
+ibek support git-clone ${NAME} ${VERSION}
+ibek support register ${NAME}
+ibek support add-libs ${NAME} busy
+ibek support add-dbds ${NAME} busy.dbd
 
 ##########################################################################
 ##### put patch commands here if needed ##################################
 ##########################################################################
 
-global_fixes ${NAME}
+ibek support compile ${NAME}
+ibek support generate-links ${NAME}
 
-build_support_module ${NAME}
 
-create_links ${NAME}
 

@@ -3,26 +3,25 @@
 ##### boilerplate install script for support modules #####################
 ##########################################################################
 
+
 # ARGUMENTS:
 #  $1 VERSION to install (must match repo tag)
-
-# get the name of this folder which is the same as name of the support module
-NAME=$(basename $(dirname ${0}))
 VERSION=${1}
 
-IBEK_SUPPORT=$(realpath $(dirname ${0})/..)
-source ${IBEK_SUPPORT}/_global/functions.sh
+# get the name of this folder, i.e. the name of the support module
+NAME=$(basename $(dirname ${0}))
 
-git_clone_tag ${NAME} ${VERSION}
-
-# No need for IPAC unless its already installed
-support add-macro IPAC --no-replace
-
-support add-module-to-release ${NAME}
+ibek support git-clone ${NAME} ${VERSION}
+ibek support register ${NAME}
+ibek support add-libs ${NAME} asyn
+ibek support add-dbds ${NAME} asyn.dbd
 
 ##########################################################################
 ##### put patch commands here if needed ##################################
 ##########################################################################
+
+# No need for IPAC unless its already installed
+ibek support add-macro IPAC --no-replace
 
 if [[ $TARGET_ARCHITECTURE != "rtems" ]]; then
     echo "TIRPC=YES" >> configure/CONFIG_SITE.linux-x86_64.Common
@@ -35,9 +34,7 @@ fi
 #### end of patch commands ###############################################
 ##########################################################################
 
-global_fixes ${NAME}
+ibek support compile ${NAME}
+ibek support generate-links ${NAME}
 
-build_support_module ${NAME}
-
-create_links ${NAME}
 
