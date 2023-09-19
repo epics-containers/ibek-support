@@ -7,6 +7,7 @@
 #  $1 VERSION to install (must match repo tag)
 VERSION=${1}
 
+set -xe
 # get the name of this folder, i.e. the name of the support module
 NAME=$(basename $(dirname ${0}))
 

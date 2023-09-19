@@ -8,6 +8,8 @@
 #  $1 VERSION to install (must match repo tag)
 VERSION=${1}
 
+set -xe
+
 # get the name of this folder, i.e. the name of the support module
 NAME=$(basename $(dirname ${0}))
 
@@ -24,10 +26,10 @@ ibek support add-dbds ${NAME} asyn.dbd
 ibek support add-macro IPAC --no-replace
 
 if [[ $TARGET_ARCHITECTURE != "rtems" ]]; then
-    echo "TIRPC=YES" >> configure/CONFIG_SITE.linux-x86_64.Common
+    echo "TIRPC=YES" >> ${SUPPORT}/${NAME}/configure/CONFIG_SITE.linux-x86_64.Common
 else
     # don't build the test directories (they don't compile on RTEMS)
-    sed -i '/DIRS += .*test/d' Makefile
+    sed -i '/DIRS += ${SUPPORT}/${NAME}.*test/d' Makefile
 fi
 
 ##########################################################################

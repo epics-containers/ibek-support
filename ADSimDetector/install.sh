@@ -7,10 +7,11 @@
 #  $1 VERSION to install (must match repo tag)
 VERSION=${1}
 
+set -xe
 # get the name of this folder, i.e. the name of the support module
 NAME=$(basename $(dirname ${0}))
 
-ibek support git-clone ${NAME} ${VERSION}
+ibek support git-clone ${NAME} ${VERSION} --org http://github.com/areaDetector/
 ibek support register ${NAME}
 ibek support add-libs ${NAME} TODO
 ibek support add-dbds ${NAME} TODO.dbd
@@ -55,7 +56,7 @@ CBF_EXTERNAL  = NO
 
 WITH_PVA      = YES
 WITH_BOOST    = YES
-' >> configure/CONFIG_SITE.linux-x86_64.Common
+' >> ${SUPPORT}/${NAME}/configure/CONFIG_SITE.linux-x86_64.Common
 
 ##########################################################################
 #### end of patch commands ###############################################

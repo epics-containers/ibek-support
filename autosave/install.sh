@@ -7,6 +7,10 @@
 #  $1 VERSION to install (must match repo tag)
 VERSION=${1}
 
+set -xe
+
+THIS_DIR=$(dirname ${0})
+
 # get the name of this folder, i.e. the name of the support module
 NAME=$(basename $(dirname ${0}))
 
@@ -23,7 +27,7 @@ if [[ $TARGET_ARCHITECTURE == "rtems" ]]; then
     echo "Patching RTEMS autosave"
     patch -p1 < ${THIS_DIR}/rtems-autosave.patch
 
-    echo >> configure/CONFIG_SITE.Common.linux-x86_64
+    echo >> ${SUPPORT}/${NAME}/configure/CONFIG_SITE.Common.linux-x86_64
     echo "VALID_BUILDS=Host" >> configure/CONFIG_SITE.Common.linux-x86_64
 fi
 
