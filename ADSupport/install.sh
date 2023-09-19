@@ -10,10 +10,9 @@
 # get the name of this folder which is the same as name of the support module
 NAME=$(basename $(dirname ${0}))
 VERSION=${1}
-REPOSITORY=${2}
 
 IBEK_SUPPORT=$(realpath $(dirname ${0})/..)
-source $IBEK_SUPPORT/_global/functions.sh
+source ${IBEK_SUPPORT}/_global/functions.sh
 
 git_clone_tag ${NAME} ${VERSION} https://github.com/areaDetector/
 
