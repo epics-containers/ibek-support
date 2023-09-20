@@ -14,8 +14,9 @@ NAME=$(basename $(dirname ${0}))
 
 ibek support git-clone ${NAME} ${VERSION} --org http://github.com/areaDetector/
 ibek support register ${NAME}
-ibek support add-libs ${NAME} TODO
-ibek support add-dbds ${NAME} TODO.dbd
+ibek support add-libs ${NAME} ntndArrayConverter ADBase NDPlugin
+ibek support add-dbds ${NAME} NDPluginPva.dbd ADSupport.dbd NDPluginSupport.dbd\
+     NDFileHDF5.dbd NDFileJPEG.dbd NDFileTIFF.dbd NDFileNull.dbd NDPosPlugin.dbd
 
 ##########################################################################
 ##### put patch commands here if needed ##################################

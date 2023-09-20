@@ -15,8 +15,8 @@ NAME=$(basename $(dirname ${0}))
 
 ibek support git-clone ${NAME} ${VERSION} --org http://github.com/areaDetector/
 ibek support register ${NAME}
-ibek support add-libs ${NAME} TODO
-ibek support add-dbds ${NAME} TODO.dbd
+ibek support add-libs ${NAME}
+ibek support add-dbds ${NAME}
 
 ##########################################################################
 ##### put patch commands here if needed ##################################
