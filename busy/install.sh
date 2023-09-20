@@ -14,7 +14,7 @@ NAME=$(basename $(dirname ${0}))
 ibek support git-clone ${NAME} ${VERSION}
 ibek support register ${NAME}
 ibek support add-libs ${NAME} busy
-ibek support add-dbds ${NAME} busy.dbd
+ibek support add-dbds ${NAME} busySupport.dbd
 
 ##########################################################################
 ##### put patch commands here if needed ##################################

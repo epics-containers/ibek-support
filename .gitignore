@@ -1,1 +1,4 @@
 .coverage
+
+# these are container runtime copied into the root of ibek-support submodule
+config_*
