@@ -16,8 +16,8 @@ NAME=$(basename $(dirname ${0}))
 
 ibek support git-clone ${NAME} ${VERSION}
 ibek support register ${NAME}
-ibek support add-libs ${NAME} autosave
-ibek support add-dbds ${NAME} asSupport.dbd
+ibek support add-libs autosave
+ibek support add-dbds asSupport.dbd
 
 ##########################################################################
 ##### put patch commands here if needed ##################################

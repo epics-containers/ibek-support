@@ -15,21 +15,21 @@ NAME=$(basename $(dirname ${0}))
 
 ibek support git-clone ${NAME} ${VERSION}
 ibek support register ${NAME}
-ibek support add-libs ${NAME} asyn
-ibek support add-dbds ${NAME} asyn.dbd
+ibek support add-libs asyn
+ibek support add-dbds asyn.dbd
 
 ##########################################################################
 ##### put patch commands here if needed ##################################
 ##########################################################################
 
 # No need for IPAC unless its already installed
-ibek support add-macro IPAC --no-replace
+ibek support add-release-macro IPAC --no-replace
 
-if [[ $TARGET_ARCHITECTURE != "rtems" ]]; then
-    echo "TIRPC=YES" >> ${SUPPORT}/${NAME}/configure/CONFIG_SITE.linux-x86_64.Common
-else
+if [[ $TARGET_ARCHITECTURE == "rtems" ]]; then
     # don't build the test directories (they don't compile on RTEMS)
     sed -i '/DIRS += ${SUPPORT}/${NAME}.*test/d' Makefile
+else
+    ibek support add-config-macro ${NAME} TIRPC YES
 fi
 
 ##########################################################################

@@ -14,8 +14,8 @@ NAME=$(basename $(dirname ${0}))
 
 ibek support git-clone ${NAME} ${VERSION}
 ibek support register ${NAME}
-ibek support add-libs ${NAME} devIocStats
-ibek support add-dbds ${NAME} devIocStats.dbd
+ibek support add-libs devIocStats
+ibek support add-dbds devIocStats.dbd
 
 ##########################################################################
 ##### put patch commands here if needed ##################################
