@@ -5,6 +5,8 @@
 # this script is applied to patch all support modules and is always called
 # by each support module's install.sh script
 
+# TODO this needs updating with the new ibek support command set
+
 # For RTEMS builds, avoid also building for the host architecture
 
 if [[ $TARGET_ARCHITECTURE == "rtems" ]]; then

@@ -1,33 +1,27 @@
 #!/bin/bash
 ##########################################################################
-##### boilerplate install script for support modules #####################
+###### install script for ADSimDetector Module ###########################
 ##########################################################################
 
 # ARGUMENTS:
 #  $1 VERSION to install (must match repo tag)
-#  $CONFIG text to add to configure/CONFIG_SITE.Common.linux-x86_64
 VERSION=${1}
+NAME=ADSimDetector
 
+# log output and abort on failure
 set -xe
-# get the name of this folder, i.e. the name of the support module
-NAME=$(basename $(dirname ${0}))
 
+# get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION} --org http://github.com/areaDetector/
 ibek support register ${NAME}
+
+# declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs simDetector
 ibek support add-dbds simDetectorSupport.dbd
 
-##########################################################################
-##### put patch commands here if needed ##################################
-##########################################################################
-
-ibek support add-to-config-site ${NAME} "${CONFIG}"
-
-##########################################################################
-#### end of patch commands ###############################################
-##########################################################################
-
+# compile the support module
 ibek support compile ${NAME}
+# prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
 ibek support generate-links ${NAME}
 
 

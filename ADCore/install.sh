@@ -1,9 +1,19 @@
 #!/bin/bash
 ##########################################################################
-##### boilerplate install script for support modules #####################
+##### install script for ADCore support module ###########################
 ##########################################################################
 
-apt-get install -y --no-install-recommends \
+# ARGUMENTS:
+#  $1 VERSION to install (must match repo tag)
+VERSION=${1}
+NAME=ADCore
+
+# log output and abort on failure
+set -xe
+
+# install required system dependencies
+HDF=http://ftp.de.debian.org/debian/pool/main/h/hdf5
+ibek support apt-install \
     libaec-dev \
     libblosc-dev \
     libglib2.0-dev \
@@ -13,40 +23,26 @@ apt-get install -y --no-install-recommends \
     libxml2-dev \
     libx11-dev \
     libxext-dev \
-    libz-dev
-(
-    cd /tmp &&
-    wget http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-cpp-103_1.10.4+repack-10_amd64.deb &&
-    wget http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-103_1.10.4+repack-10_amd64.deb &&
-    wget http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-dev_1.10.4+repack-10_amd64.deb &&
-    apt-get -y install  \
-            ./libhdf5-103_1.10.4+repack-10_amd64.deb \
-            ./libhdf5-cpp-103_1.10.4+repack-10_amd64.deb \
-            ./libhdf5-dev_1.10.4+repack-10_amd64.deb
-)
-# ARGUMENTS:
-#  $1 VERSION to install (must match repo tag)
-#  $CONFIG text to add to configure/CONFIG_SITE.Common.linux-x86_64
-VERSION=${1}
+    libz-dev \
+    $HDF/libhdf5-103_1.10.4+repack-10_amd64.deb \
+    $HDF/libhdf5-cpp-103_1.10.4+repack-10_amd64.deb \
+    $HDF/libhdf5-dev_1.10.4+repack-10_amd64.deb
 
-set -xe
-# get the name of this folder, i.e. the name of the support module
-NAME=$(basename $(dirname ${0}))
+# declare packages for installation in the Dockerfile's runtime stage
+ibek support apt-add-runtime libtiff5 libsz2
 
+# get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION} --org http://github.com/areaDetector/
 ibek support register ${NAME}
 
+# declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs ntndArrayConverter ADBase NDPlugin pvAccessCA \
      pvAccessIOC pvAccess
-
 ibek support add-dbds NDPluginPva.dbd ADSupport.dbd NDPluginSupport.dbd \
      NDFileNull.dbd NDPosPlugin.dbd NDFileHDF5.dbd NDFileJPEG.dbd NDFileTIFF.dbd \
      PVAServerRegister.dbd
 
-##########################################################################
-##### put patch commands here if needed ##################################
-##########################################################################
-
+# add any required changes to CONFIG_SITE
 CONFIG='
 AREA_DETECTOR=$(SUPPORT)
 CROSS_COMPILER_TARGET_ARCHS =
@@ -72,14 +68,12 @@ CBF_EXTERNAL  = YES
 WITH_PVA      = YES
 WITH_BOOST    = NO
 '
-
 ibek support add-to-config-site ${NAME} "${CONFIG}"
 
-##########################################################################
-#### end of patch commands ###############################################
-##########################################################################
-
+# compile the support module
 ibek support compile ${NAME}
+
+# prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
 ibek support generate-links ${NAME}
 
 
