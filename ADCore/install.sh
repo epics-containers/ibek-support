@@ -15,13 +15,14 @@ apt-get install -y --no-install-recommends \
     libxext-dev \
     libz-dev
 (
-    cd tmp ;\
-    wget http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-cpp-103_1.10.4+repack-10_amd64.deb ;\
-    wget http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-103_1.10.4+repack-10_amd64.deb ;\
-    wget http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-dev_1.10.4+repack-10_amd64.deb ;\
-    apt-get -y install ./libhdf5-103_1.10.4+repack-10_amd64.deb ;\
-    apt-get -y install ./libhdf5-cpp-103_1.10.4+repack-10_amd64.deb ;\
-    apt-get -y install ./libhdf5-dev_1.10.4+repack-10_amd64.deb
+    cd /tmp &&
+    wget http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-cpp-103_1.10.4+repack-10_amd64.deb &&
+    wget http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-103_1.10.4+repack-10_amd64.deb &&
+    wget http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-dev_1.10.4+repack-10_amd64.deb &&
+    apt-get -y install  \
+            ./libhdf5-103_1.10.4+repack-10_amd64.deb \
+            ./libhdf5-cpp-103_1.10.4+repack-10_amd64.deb \
+            ./libhdf5-dev_1.10.4+repack-10_amd64.deb
 )
 # ARGUMENTS:
 #  $1 VERSION to install (must match repo tag)
