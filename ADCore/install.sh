@@ -13,7 +13,7 @@ set -xe
 
 # install required system dependencies
 HDF=http://ftp.de.debian.org/debian/pool/main/h/hdf5
-ibek support apt-install \
+ibek support apt-install --only=dev \
     libaec-dev \
     libblosc-dev \
     libglib2.0-dev \
@@ -29,7 +29,7 @@ ibek support apt-install \
     $HDF/libhdf5-dev_1.10.4+repack-10_amd64.deb
 
 # declare packages for installation in the Dockerfile's runtime stage
-ibek support apt-add-runtime libtiff5 libsz2
+ibek support apt-install --only=run libtiff5 libsz2
 
 # get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION} --org http://github.com/areaDetector/

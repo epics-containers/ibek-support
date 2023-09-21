@@ -13,7 +13,7 @@ NAME=ADAravis
 set -xe
 
 # install required system dependencies
-ibek support apt-install \
+ibek support apt-install --only=dev \
     libboost-all-dev \
     libxext-dev \
     libglib2.0-dev \
@@ -26,11 +26,11 @@ ibek support apt-install \
     xz-utils
 
 # declare packages for installation in the Dockerfile's runtime stage
-ibek support apt-add-runtime libglib2.0-bin libusb-1.0 libxml2
+ibek support apt-install --only=run libglib2.0-bin libusb-1.0 libxml2
 
 # build aravis library
 (
-     cd /usr/local &&
+    cd /usr/local &&
     git clone -b ARAVIS_0_8_1 --depth 1 https://github.com/AravisProject/aravis &&
     cd aravis &&
     meson build &&
