@@ -7,7 +7,7 @@
 # all.ibek.support.schema.json is a global schema for **ibek.ioc.yaml files
 #    which includes all the support schemas.
 
-THIS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+THIS_DIR="$(realname "$(dirname "$0")"
 
 cd $THIS_DIR
 
