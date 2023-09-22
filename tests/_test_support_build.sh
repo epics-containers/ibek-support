@@ -35,10 +35,10 @@ fi
 
 # decide on container build tool
 if which docker > /dev/null ; then
-    docker=docker
+    export docker=docker
 else
     echo using podman
-    docker=podman
+    export docker=podman
 fi
 
 NEWCACHE=${CACHE}-new
