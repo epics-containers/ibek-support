@@ -14,12 +14,12 @@
 #   CACHE: the directory to use for caching
 #   PLATFORM: the platform to build for (linux/amd64 or linux/arm64)
 
-THIS_FOLDER=$(dirname $(readlink -f $0))
+set -xe
+
+THIS_FOLDER=$(dirname ${0})
 # ibek-support is normally a submodule of the Docker Context so we need to
 # pass the container context as the folder above the ibek-support folder
 CONTEXT=$(realpath ${THIS_FOLDER}/../..)
-
-set -xe
 
 BASE_VERSION="23.9.2"
 
@@ -61,7 +61,7 @@ do_build() {
         --build-arg BASE=${BASE_VERSION}
         --build-arg REGISTRY=ghcr.io/epics-containers
         --target ${TARGET}
-        --layers
+        --load
         -t test_image_only
         -f ${DOCKERFILE}
     "
@@ -100,8 +100,12 @@ for dockerfile in ${THIS_FOLDER}/Dockerfile*; do
     # The above check is sufficient to show that the generic IOC will load and
     # run and that all the necessary runtime libraries are in place.
     #
-    # for more detailed testing add a Verify.xxx script where xxx is the
+    # for more detailed testing add a Verify.xxx.sh script where xxx is the
     # the same as the suffix on the Dockerfile. See Verify.asyn for an example.
+    VERIFY=Verify."${dockerfile#*.}"
+    if [[ -f ${THIS_FOLDER}/${VERIFY} ]] ; then
+        $THIS_FOLDER/${VERIFY} test_me
+    fi
 
     $docker stop -t0 test_me
 
