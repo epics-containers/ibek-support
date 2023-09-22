@@ -1,9 +1,9 @@
 # ibek-support
 
-Holds details of how to build EPICS support modules inside of a
+Holds details of how to build EPICS support modules within
 an epics-containers Generic IOC Dockerfile. Plus details of
-how to use features from each support module at runtime inside of
-and epics-containers IOC instance.
+how to use features from each support module at runtime inside
+an epics-containers IOC instance.
 
 ## Scope
 
