@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo TODO add tests for busy support module
+# TODO add tests for asyn here see adsimdetector example

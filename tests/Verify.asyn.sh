@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "HELLO WORLD"
+# TODO add tests for asyn here see adsimdetector example
