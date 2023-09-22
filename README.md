@@ -1,40 +1,70 @@
-# ibek-defs
-## ibek definition files
+# ibek-support
 
-A central repository to hold the definition and patch files that enable ibek
-to build EPICS support modules inside of a container.
+Holds details of how to build EPICS support modules within
+an epics-containers Generic IOC Dockerfile. Plus details of
+how to use features from each support module at runtime inside
+an epics-containers IOC instance.
+
+## Scope
+
+This project targets
+support modules that are available on github or other public
+repositories. Facilities may choose to have an internal version of this
+repo for support modules that are not public. Private Generic IOCs
+would be free to mix support from both public and private ibek-support.
+
+We expect that commonly used generic IOCs would be published to the
+epics-containers github organisation or other public registry.
+Such generic IOCs would be required to use public ibek-support only.
+
+
+
+## Structure
+
+Each EPICS support module has a folder in this repo. By convention,
+the folder name is the same as the support module github repo name
+(or other repo name).
+
+Each support module folder contains:-
+
+- install.sh:
+  - a script that builds the support module inside of a container.
+  This script is invoked by every Generic IOC build that requires the
+  support module. The script can contain any commands that are required
+  but would usually be a series of calls to `ibek support` functions.
+  For an example see
+  [install.sh](https://github.com/epics-containers/ibek-support/blob/main/asyn/install.sh)
+  for the Asyn support module.
+
+- \<support module name\>.ibek.support.yaml:
+  - a definition file that describes how the support module is used by
+  an IOC instance. This file is read by ibek when building an IOC instance
+  and is used to generate the startup script and database file. For an
+  example see
+  [asyn.ibek.def.yaml](https://github.com/epics-containers/ibek-support/blob/main/asyn/asyn.ibek.support.yaml)
+
+- other:
+  - any other files that are required to build the support module in the
+  environment provided by the epics-base container image.
+  The most straightforward support folders should only require the above two
+  files. But perhaps a patch file might be required to make a support module
+  build inside of a container for example.
+
+
 
 ## How to use
 
 This repository should be included into every epics-containers generic IOC
-as a folder called \<repo root\>/ibek-defs.
+as a submodule of the IOC's git repository. The generic IOC's Dockerfile
+should then copy the ibek-support folder for each support module it
+requires into the container and call its install.sh script.
 
-The best way to achieve this is demonstrated in
-https://github.com/epics-containers/ioc-template.
-This uses a git submodule to pull ibek-defs and lock in the version that
-was last used. This is then copied into the container in a Dockerfile step.
+For an example Dockerfile that demonstrates this see
+[ioc-adsimdetector](https://github.com/epics-containers/ioc-adsimdetector/blob/main/Dockerfile)
 
-## Purpose
+For details of the ibek module support functions
+[ibek's github page](https://github.com/epics-containers/ibek)
 
-TODO: this explanation could do with tidying up and I'm not sure it
-belongs here anyway. perhaps move this to the epics-containers workflow
-documentation and reference from here.
 
-When A generic IOC is building it passes a ibek modules file
-"\<generic ioc name\>.ibek.modules.yaml. This will contain references to
-the support modules that the IOC depends upon and may also include
-a patch script file for each of those support modules.
-
-This repo supports generic IOCs as follows:-
-
-- at IOC build time it provides a patch file script that makes any changes
-  to the support source required to build it in the container. This is
-  most likely involves creating a release/CONFIG_SITE.xxx file.
-
-- at run time it provides a definition file per support module which
-  allows the IOC to specify how it uses that support. This file will be name
-  "\<support module name\>.ibek.def.yaml. The set of definition files are
-  read by ibek in order to interpret the IOC instance yaml file and
-  build an individual IOC's startup script.
 
 
