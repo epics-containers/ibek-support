@@ -4,14 +4,11 @@
 #
 # Note that this is implemented in bash to make it portable between
 # CI frameworks. This approach uses the minimum of GitHub Actions.
-# Also works locally for testing outside of CI (with podman-docker installed)
+# Also works locally for testing outside of CI (with podman or docker installed)
 #
 # INPUTS:
-#   PUSH: if true, push the container image to the registry
-#   TAG: the tag to use for the container image
-#   REGISTRY: the container registry to push to
-#   REPOSITORY: the container repository to push to
-#   CACHE: the directory to use for caching
+#   CACHE: Where to put buildx cache for build cache between CI runs
+#   ARCH: Target architecture linux or rtems currently 
 #   PLATFORM: the platform to build for (linux/amd64 or linux/arm64)
 
 set -xe
