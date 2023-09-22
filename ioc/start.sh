@@ -46,7 +46,7 @@ set -x -e
 
 # environment setup ************************************************************
 
-TOP=$(realpath $(dirname $0))
+export TOP=$(realpath $(dirname $0))
 cd ${TOP}
 CONFIG_DIR=${TOP}/config
 

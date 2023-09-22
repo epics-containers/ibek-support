@@ -21,11 +21,17 @@ THIS_FOLDER=$(dirname ${0})
 # pass the container context as the folder above the ibek-support folder
 CONTEXT=$(realpath ${THIS_FOLDER}/../..)
 
-BASE_VERSION="23.9.2"
+BASE_VERSION="23.9.3"
 
 ARCH=${ARCH:-linux}
 PLATFORM=${PLATFORM:-linux/amd64}
 TAG=${TAG:-latest}
+
+if [[ -z "${1}" ]]; then
+    DOCKERFILES=$(ls ${THIS_FOLDER}/Dockerfile.*)
+else
+    DOCKERFILES=${THIS_FOLDER}/Dockerfile.${1}
+fi
 
 # decide on container build tool
 if which docker > /dev/null ; then
@@ -80,7 +86,7 @@ do_build() {
 
 # build the container images for each Dockerfile in tests folder
 
-for dockerfile in ${THIS_FOLDER}/Dockerfile*; do
+for dockerfile in ${DOCKERFILES}; do
     # make two targets from each Dockerfile
     do_build ${ARCH} developer ${dockerfile}
     do_build ${ARCH} runtime ${dockerfile}
