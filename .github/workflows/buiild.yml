@@ -45,11 +45,6 @@ jobs:
         if: runner.os == 'macos'
         uses: docker-practice/actions-setup-docker@fd7ecdac7caf8e2c541a48c9bcc280aae59a8461
 
-      # Dockerfiles expect the repo to be in a subdirectory as its normally a submodule
-      # and it gets IOC the scripts from that super-module
-      - name: Move IOC
-        run: mv _test_ioc ../ioc
-
       - name: Log in to GitHub Docker Registry
         uses: docker/login-action@v1
         with:
