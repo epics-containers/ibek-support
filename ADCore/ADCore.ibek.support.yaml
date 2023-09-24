@@ -176,8 +176,6 @@ defs:
     name: addr
     description: Asyn address of the parameter (only used if type=PARAM)
     default: 0
-
-  databases: []
   post_init:
   - type: text
     value: |
@@ -399,6 +397,7 @@ defs:
       XSIZE:
       TS_PORT:
       PORT:
+    warning: 'Database Args missing: SCANRATE, TS_PORT'
 
   pre_init:
   - type: text
@@ -484,6 +483,8 @@ defs:
       XSIZE:
       PORT:
       ADDR:
+    warning: 'Database Args missing: XPOS, NAME, YWIDTH, YSIZE, YPOS, O, SHAPE, XSIZE,
+      XCENT, XWIDTH, YCENT'
   - file: $(ADCORE)/db/NDOverlay.template
     args:
       SCANRATE:
@@ -501,6 +502,7 @@ defs:
     value: |
       # NDOverlayConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, NOverlays, maxBuffers, maxMemory, priority, stackSize, maxThreads)
       NDOverlayConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{NOverlays}}, 0, 0, 0, 0, {{MAX_THREADS}})
+    warning: 'function Args missing: NOverlays'
 
 - name: NDFileNetCDF
   description: |-
@@ -1086,6 +1088,7 @@ defs:
       TIMEOUT:
       PORT:
       NAME:
+    warning: 'Database Args missing: NAME'
 
   pre_init:
   - type: text
@@ -1150,6 +1153,7 @@ defs:
       R:
       PORT:
       ATTR_IND:
+    warning: 'Database Args missing: ATTR_IND'
   - file: $(ADCORE)/db/NDAttrPlot.template
     args:
       SCANRATE:
@@ -1170,11 +1174,13 @@ defs:
       N_CACHE:
       PORT:
       AXIS:
+    warning: 'Database Args missing: DATA_IND, AXIS, DATA_ADDR'
 
   pre_init:
   - type: text
     value: |
       NDAttrPlotConfig("{{PORT}}", {{N_ATTRS}}, {{N_CACHE}}, 
+    warning: 'function Args missing: N_ATTRS'
 
 - name: NDFileTIFF
   description: |-
@@ -1449,6 +1455,7 @@ defs:
       TIMEOUT:
       TS_PORT:
       PORT:
+    warning: 'Database Args missing: TS_PORT'
   - file: $(ADCORE)/db/NDAttribute.template
     args:
       SCANRATE:
@@ -1834,6 +1841,7 @@ defs:
       R:
       TIMEOUT:
       PORT:
+    warning: 'Database Args missing: N'
   - file: $(ADCORE)/db/NDGather.template
     args:
       SCANRATE:
@@ -1846,6 +1854,7 @@ defs:
       R:
       TIMEOUT:
       PORT:
+    warning: 'Database Args missing: MAX_PORTS'
 
 - name: NDROIStat
   description: |-

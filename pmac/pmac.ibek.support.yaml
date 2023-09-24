@@ -1,936 +1,2250 @@
-# yaml-language-server: $schema=../_global/ibek.defs.schema.json
+ # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/0.0.13/ibek.support.schema.json
+
 module: pmac
 
 defs:
-  - name: PmacAsynSSHPort
-    description: |
-      Add a Power PMAC asyn port to the IOC
-      This port uses SSH to connect to the Power PMAC
+
+- name: pmacVariableRead
+  description: |-
+    Simple template that reads a variable on a 
+    PMAC or geoBrick via dynamic parameters.
+
+  args:
+  - type: str
+    name: P
+    description: PV prefix
+  - type: str
+    name: Q
+    description: PV suffix
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: VAR
+    description: Variable on PMAC to read from, e.g. P700
+  - type: str
+    name: EGU
+    description: Engineering units
+  - type: str
+    name: VARIABLE_PREC
+    description: Variable Record precision
+  - type: str
+    name: LABEL
+    description: Label for GUI
+  - type: str
+    name: DTYP
+    description: asyn DTYP (e.g., asynFloat64, asynInt32)
+    default: asynFloat64
+  - type: str
+    name: TYPE
+    description: PMAC variable type (D=double, I=integer, H=hex, S=string)
+    default: D
+  - type: str
+    name: SPEED
+    description: Speed to read at (F=motor scan rates, M=medium (2 s), S=slow (5 s))
+    default: M
+  - type: id
+    name: name
+    description: Template argument
+
+  databases:
+  - file: $(PMAC)/db/pmacVariableRead.template
     args:
-      - type: id
-        name: name
-        description: Asyn port name
+      VARIABLE_PREC:
+      name:
+      DTYP:
+      TYPE:
+      EGU:
+      LABEL:
+      Q:
+      P:
+      VAR:
+      SPEED:
+      PORT:
 
-      - type: str
-        name: IP
-        description: IP address of Power pmac
+- name: pmacSetCoordStepsPerUnit
+  description: |-
+    Apply an integer scale factor to an axis on the PMAC
 
-      - type: str
-        name: USERNAME
-        description: Username for login
-        default: root
+  args:
+  - type: int
+    name: CS
+    description: Underlying CS object
+  - type: int
+    name: Axis
+    description: Axis number to apply scale to
+  - type: float
+    name: Scale
+    description: Scale factor the cts will be multiplied by before being passed to
+      motor record
 
-      - type: str
-        name: PASSWORD
-        description: Password for login
-        default: deltatau
+  pre_init:
+  - type: text
+    value: |
+      pmacSetCoordStepsPerUnit("{{Ref}}", {{Axis}}, {{Scale}})
+    warning: 'function Args missing: Ref'
 
-      - type: int
-        name: PRIORITY
-        description: Priority of the port
-        default: 0
+- name: RunPlc
+  description: |-
+    TODO:ADD DESCRIPTION
 
-      - type: int
-        name: NOAUTOCONNECT
-        description: Disables autoconnect if set to 1
-        default: 0
+  args:
+  - type: id
+    name: name
+    description: Object name
+  - type: object
+    name: BRICK
+    description: Geobrick/PMAC
+  - type: int
+    name: PLC
+    description: PLC number
+  - type: str
+    name: DESC
+    description: Description
 
-      - type: int
-        name: NOEOS
-        description: No EOS used if set to 1
-        default: 0
-
-    pre_init:
-      - type: function
-        name: drvAsynPowerPMACPortConfigure
-        args:
-          AsynPortName: "{{name}}"
-          IPAddress: "{{IP}}"
-          Username: "{{USERNAME}}"
-          Password: "{{PASSWORD}}"
-          Priority: "{{PRIORITY}}"
-          NoAutoConnect: "{{NOAUTOCONNECT}}"
-          NoEOS: "{{NOEOS}}"
-
-  - name: PmacAsynIPPort
-    description: |
-      Add a Turbo PMAC asyn port to the IOC
-      This port uses TCP to connect to the PMAC
+  databases:
+  - file: $(PMAC)/db/run_plc.template
     args:
-      - type: id
-        name: name
-        description: Asyn port name
+      P:
+      DESC:
+      PLC:
+      name:
+      PORT:
+    warning: 'Database Args missing: P, PORT'
 
-      - type: str
-        name: IP
-        description: IP address of pmac
+- name: CS_zform
+  description: |-
+    TODO:ADD DESCRIPTION
 
-      - type: int
-        name: PORT
-        description: TCP port for connection
-        default: 1025
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
 
-    pre_init:
-      - type: function
-        name: pmacAsynIPConfigure
-        args:
-          AsynPortName: "{{name}}"
-          IPAddress: "{{IP}}:{{PORT}}"
-
-  - name: Geobrick
-    description: Add a geobrick to the IOC
+  databases:
+  - file: $(PMAC)/db/zform.template
     args:
-      - type: id
-        name: name
-        description: Name to use for the geobrick's asyn port
+      P:
+      name:
+      PORT:
 
-      - type: object
-        name: PORT
-        description: Asyn port name for PmacAsynIPPort to connect to
+- name: CS_3jack_mirror
+  description: |-
+    Supporting template that allows setting of variables for a 
+    3jack mirror CS
 
-      - type: str
-        name: P
-        description: PV Prefix for all pmac db templates
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: COORD
+    description: Co-ordinate system number
+  - type: str
+    name: PREC
+    description: Precision to display variables
+    default: '3'
+  - type: str
+    name: AEGU
+    description: EGU for angular variables
+    default: deg
+  - type: str
+    name: J1PV
+    description: Pv of real Jack1 motor, e.g. $(P):J1
+    default: $(P):J1
+  - type: str
+    name: J2PV
+    description: Pv of real Jack1 motor, e.g. $(P):J2
+    default: $(P):J2
+  - type: str
+    name: J3PV
+    description: Pv of real Jack1 motor, e.g. $(P):J3
+    default: $(P):J3
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
 
-      - type: int
-        name: numAxes
-        description: number of axes to initialize for the controller
-        default: 8
-
-      - type: int
-        name: idlePoll
-        description: Idle Poll Period in ms
-        default: 500
-
-      - type: int
-        name: movingPoll
-        description: Moving Poll Period in ms
-        default: 100
-
-      - type: int
-        name: TIMEOUT
-        description: timeout in seconds for asyn
-        default: 4
-
-      - type: int
-        name: FEEDRATE
-        description: feedrate below which we go into error
-        default: 100
-
-      - type: str
-        name: CSG0
-        description: Name for Coordinate System Group 0
-        default: ""
-
-      - type: str
-        name: CSG1
-        description: Name for Coordinate System Group 1
-        default: ""
-
-      - type: str
-        name: CSG2
-        description: Name for Coordinate System Group 2
-        default: ""
-
-      - type: str
-        name: CSG3
-        description: Name for Coordinate System Group 3
-        default: ""
-
-      - type: str
-        name: CSG4
-        description: Name for Coordinate System Group 3
-        default: ""
-
-    # numAxes must be supplied for geobrick (but builder.py counted the axes created)
-    # TODO is counting num_axes is an example of something hard to do in this new approach?
-    pre_init:
-      - type: function
-        name: pmacCreateController
-        args:
-          AsynPortName: "{{name}}"
-          PmacAsynPort: "{{PORT.name}}"
-          Address: 0
-          NumAxes: "{{numAxes}}"
-          MovingPollPeriod: "{{movingPoll}}"
-          IdlePollPeriod: "{{idlePoll}}"
-
-      - type: function
-        name: pmacCreateAxes
-        args:
-          AsynPortName: "{{name}}"
-          NumberOfAxes: "{{numAxes}}"
-
-    databases:
-      - file: pmacController.template
-        args:
-          NAXES: "{{numAxes}}"
-          PORT: "{{name}}"
-          P:
-          idlePoll:
-          movingPoll:
-          TIMEOUT:
-          CSG0:
-          CSG1:
-          CSG2:
-          CSG3:
-          CSG4:
-      - file: pmacStatus.template
-        args:
-          PORT: "{{name}}"
-          P:
-
-  - name: DlsPmacAsynMotor
-    description: Add a motor to a motor controller
+  databases:
+  - file: $(PMAC)/db/3jack_mirror.template
     args:
-      # IMPORTANT: all non-defaulted args must come first
+      name:
+      J2PV:
+      AEGU:
+      P:
+      PREC:
+      J3PV:
+      COORD:
+      PORT:
+      J1PV:
 
-      - type: str
-        name: name
-        description: Object name and gui association name
+- name: CS_accel_dcm
+  description: |-
+    Supporting template that allows setting of variables for an 
+    accel DCM CS
 
-      - type: object
-        name: Controller
-        description: PMAC Controller to attach to
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: COORD
+    description: Co-ordinate system number
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
 
-      - type: int
-        name: axis
-        description: which axis number this motor drives
-
-      - type: str
-        name: P
-        description: PV prefix name for this motor
-
-      - type: str
-        name: M
-        description: PV motor name for this motor
-
-      - type: str
-        name: DESC
-        description: Description, displayed on EDM screen
-        default: ""
-
-      - type: float
-        name: MRES
-        description: Motor Step Size (EGU)
-        default: 0.0001
-
-      - type: float
-        name: VELO
-        description: axis Velocity (EGU/s)
-        default: 1.0
-
-      - type: int
-        name: PREC
-
-        description: Display Precision
-        default: 3
-
-      - type: str
-        name: EGU
-        description: Engineering Units
-        default: mm
-
-      - type: float
-        name: TWV
-        description: Tweak Step Size (EGU)
-        default: 1
-
-      - type: str
-        name: DTYP
-        description: Datatype of record
-        default: asynMotor
-
-      - type: int
-        name: DIR
-        description: User direction
-        default: 0
-
-      - type: float
-        name: VBAS
-        description: Base Velocity (EGU/s)
-        default: 1.0
-
-      # TODO type float
-      - type: str
-        name: VMAX
-        description: Max Velocity (EGU/s)
-        # TODO make default a UNION of type and str (for jinja)
-        default: "{{VELO}}"
-
-      - type: float
-        name: ACCL
-        description: Seconds to Velocity
-        default: 0.5
-
-      - type: float
-        name: BDST
-        description: BL Distance (EGU)
-        default: 0
-
-      - type: float
-        name: BVEL
-        description: BL Velocity(EGU/s)
-        default: 0
-
-      - type: float
-        name: BACC
-        description: BL Seconds to Veloc
-        default: 0
-
-      - type: float
-        name: DHLM
-        description: Dial High Limit
-        default: 10000
-
-      - type: float
-        name: DLLM
-        description: Dial low limit
-        default: -10000
-
-      - type: float
-        name: HLM
-        description: User High Limit
-        default: 0
-
-      - type: float
-        name: LLM
-        description: User Low Limit
-        default: 0
-
-      - type: str
-        name: HLSV
-        description: HW Lim, Violation Svr
-        default: MAJOR
-
-      - type: str
-        name: INIT
-        description: Startup commands
-        default: ""
-
-      - type: int
-        name: SREV
-        description: Steps per Revolution
-        default: 1000
-
-      - type: float
-        name: RRES
-        description: Readback Step Size (EGU
-        default: 0
-
-      - type: float
-        name: ERES
-        description: Encoder Step Size (EGU)
-        default: 0
-
-      - type: float
-        name: JAR
-        description: Jog Acceleration (EGU/s^2)
-        default: 0
-
-      - type: int
-        name: UEIP
-        description: Use Encoder If Present
-        default: 0
-
-      - type: int
-        name: URIP
-        description: Use RDBL If Present
-        default: 0
-
-      - type: str
-        name: RDBL
-        description: Readback Location, set URIP =1 if you specify this
-        default: "0"
-
-      - type: str
-        name: RLNK
-        description: Readback output link
-        default: ""
-
-      - type: int
-        name: RTRY
-        description: Max retry count
-        default: 0
-
-      - type: float
-        name: DLY
-        description: Readback settle time (s)
-        default: 0
-
-      - type: float
-        name: "OFF"
-        description: User Offset (EGU)
-        default: 0
-
-      - type: float
-        name: RDBD
-        description: Retry Deadband (EGU)
-        default: 0
-
-      - type: int
-        name: FOFF
-        description: Freeze Offset, 0=variable, 1=frozen
-        default: 0
-
-      - type: float
-        name: ADEL
-        description: Alarm monitor deadband (EGU)
-        default: 0
-
-      - type: int
-        name: NTM
-        description: New Target Monitor, only set to 0 for soft motors
-        default: 1
-
-      - type: float
-        name: FEHIGH
-        description: HIGH limit for following error
-        default: 0
-
-      - type: float
-        name: FEHIHI
-        description: HIHI limit for following error
-        default: 0
-
-      - type: str
-        name: FEHHSV
-        description: HIHI alarm severity for following error
-        default: NO_ALARM
-
-      - type: str
-        name: FEHSV
-        description: HIGH alarm severity for following error
-        default: NO_ALARM
-
-      - type: int
-        name: SCALE
-        description: ""
-        default: 1
-
-      - type: int
-        name: HOMEVIS
-        description: If 1 then home is visible on the gui
-        default: 1
-
-      - type: str
-        name: HOMEVISSTR
-        description: ""
-        default: Use motor summary screen
-
-      - type: str
-        name: alh
-        description: Set this to alh to add the motor to the alarm handler and send emails
-        default: ""
-
-      - type: str
-        name: HOME
-        description: Prefix for autohome instance. Defaults to $(P) If unspecified
-        default: "{{P}}"
-
-      - type: str
-        name: ALLOW_HOMED_SET
-        description: Set to a blank to allow this axis to have its homed
-        default: "#"
-
-      - type: str
-        name: RLINK
-        description: not sure what this is
-        default: ""
-
-    databases:
-      - file: dls_pmac_asyn_motor.template
-        args:
-          ADDR: "{{ axis }}"
-          PMAC: "{{ Controller.P }}"
-          PORT: "{{ Controller.name }}"
-          SPORT: "{{ Controller.PORT.name }}"
-          P:
-          M:
-          DESC:
-          MRES:
-          VELO:
-          PREC:
-          EGU:
-          TWV:
-          DTYP:
-          DIR:
-          VBAS:
-          VMAX:
-          ACCL:
-          BDST:
-          BVEL:
-          BACC:
-          DHLM:
-          DLLM:
-          HLM:
-          LLM:
-          HLSV:
-          INIT:
-          SREV:
-          RRES:
-          ERES:
-          JAR:
-          UEIP:
-          RDBL:
-          RLINK:
-          RTRY:
-          DLY:
-          OFF:
-          RDBD:
-          FOFF:
-          ADEL:
-          NTM:
-          FEHIGH:
-          FEHIHI:
-          FEHHSV:
-          FEHSV:
-          SCALE:
-          HOMEVIS:
-          HOMEVISSTR:
-          name:
-          alh:
-          HOME:
-          ALLOW_HOMED_SET:
-
-  - name: DlsCsPmacAsynMotor
-    description: add a DLS Coordinate system motor
+  databases:
+  - file: $(PMAC)/db/accel_dcm.template
     args:
-      - type: str
-        name: name
-        description: Object name and gui association name
+      P:
+      name:
+      COORD:
+      PORT:
 
-      - type: object
-        name: CsController
-        description: Coordinate system controller to attach to
+- name: pmacSetOpenLoopEncoderAxis
+  description: |-
+    TODO:ADD DESCRIPTION
 
-      - type: int
-        name: axis
-        description: which axis number this motor drives
+  args:
+  - type: object
+    name: Controller
+    description: Underlying PMAC or GeoBrick object
+  - type: int
+    name: Axis
+    description: Motor axis number
+  - type: int
+    name: Encoder_axis
+    description: Encoder axis number
 
-      - type: str
-        name: P
-        description: PV prefix name for this motor
+  pre_init:
+  - type: text
+    value: |
+      pmacSetOpenLoopEncoderAxis("{{ControllerPort}}", {{Axis}}, {{Encoder_axis}})
+    warning: 'function Args missing: ControllerPort'
 
-      - type: str
-        name: M
-        description: PV motor name for this motor
+- name: dls_pmac_cs_asyn_motor
+  description: |-
+    TODO:ADD DESCRIPTION
 
-      - type: str
-        name: DESC
-        description: Description, displayed on EDM screen
-        default: ""
+  args:
+  - type: str
+    name: P
+    description: Device Prefix
+  - type: str
+    name: M
+    description: Device Suffix
+  - type: object
+    name: PORT
+    description: Coordinate System object that this motor belongs to
+  - type: str
+    name: ADDR
+    description: Address on controller
+  - type: str
+    name: DESC
+    description: Description, displayed on EDM screen
+  - type: str
+    name: MRES
+    description: Motor Step Size (EGU)
+  - type: str
+    name: VELO
+    description: Velocity (EGU/s)
+  - type: str
+    name: PREC
+    description: Display Precision
+  - type: str
+    name: EGU
+    description: Engineering Units
+  - type: str
+    name: TWV
+    description: Tweak Step Size (EGU)
+  - type: str
+    name: DTYP
+    description: DTYP of record
+    default: asynMotor
+  - type: str
+    name: DIR
+    description: User Direction
+    default: '0'
+  - type: str
+    name: VBAS
+    description: Base Velocity (EGU/s)
+    default: '0'
+  - type: str
+    name: VMAX
+    description: Max Velocity (EGU/s), defaults to VELO
+    default: $(VELO)
+  - type: str
+    name: ACCL
+    description: Seconds to Velocity
+    default: '0.5'
+  - type: str
+    name: BDST
+    description: BL Distance (EGU)
+    default: '0'
+  - type: str
+    name: BVEL
+    description: BL Velocity (EGU/s)
+    default: '0'
+  - type: str
+    name: BACC
+    description: BL Seconds to Veloc.
+  - type: str
+    name: DHLM
+    description: Dial High Limit
+  - type: str
+    name: DLLM
+    description: Dial Low Limit
+  - type: str
+    name: HLM
+    description: User High Limit
+  - type: str
+    name: LLM
+    description: User Low Limit
+  - type: str
+    name: HLSV
+    description: HW Lim. Violation Svr
+    default: MAJOR
+  - type: str
+    name: INIT
+    description: Startup commands
+  - type: str
+    name: SREV
+    description: Steps per Revolution
+    default: '1000'
+  - type: str
+    name: RRES
+    description: Readback Step Size (EGU)
+  - type: str
+    name: ERES
+    description: Encoder Step Size (EGU)
+  - type: str
+    name: JAR
+    description: Jog Acceleration (EGU/s^2)
+  - type: str
+    name: UEIP
+    description: Use Encoder If Present
+    default: '0'
+  - type: str
+    name: URIP
+    description: Use RDBL If Present
+    default: '0'
+  - type: str
+    name: RDBL
+    description: Readback Location, set URIP = 1 if you specify this
+  - type: str
+    name: RLNK
+    description: Readback output link
+  - type: str
+    name: RTRY
+    description: Max retry count
+    default: '0'
+  - type: str
+    name: DLY
+    description: Readback settle time (s)
+    default: '0'
+  - type: str
+    name: OFF
+    description: User Offset (EGU)
+    default: '0'
+  - type: str
+    name: RDBD
+    description: Retry Deadband (EGU)
+  - type: str
+    name: FOFF
+    description: Freeze Offset, 0=variable, 1=frozen
+    default: '0'
+  - type: str
+    name: ADEL
+    description: Alarm monitor deadband (EGU)
+    default: '0'
+  - type: str
+    name: NTM
+    description: New Target Monitor, only set to 0 for soft motors
+    default: '1'
+  - type: str
+    name: FEHIGH
+    description: HIGH limit for following error
+    default: '0'
+  - type: str
+    name: FEHIHI
+    description: HIHI limit for following error
+    default: '0'
+  - type: str
+    name: FEHHSV
+    description: HIHI alarm severity for following error
+    default: NO_ALARM
+  - type: str
+    name: FEHSV
+    description: HIGH alarm severity for following error
+    default: NO_ALARM
+  - type: str
+    name: SCALE
+    description: Scale factor, if pmacSetAxisScale is used this should be set
+    default: '1'
+  - type: str
+    name: HOMEVIS
+    description: If 1 then home is visible on the gui
+    default: '1'
+  - type: str
+    name: HOMEVISSTR
+    description: If HOMEVIS=0, then display this text on the gui instead
+    default: Use motor summary screen
+  - type: id
+    name: name
+    description: Object name and gui association name
+  - type: str
+    name: alh
+    description: set to '#' to comment out alh lines
+    default: None
+  - type: str
+    name: gda_name
+    description: Name to export this as to GDA
+  - type: str
+    name: gda_desc
+    description: Description to export this as to GDA
+    default: $(DESC)
 
-      - type: float
-        name: MRES
-        description: Motor Step Size (EGU)
-        default: 0.0001
-
-      - type: float
-        name: VELO
-        description: axis Velocity (EGU/s)
-        default: 1.0
-
-      - type: int
-        name: PREC
-        description: Display Precision
-        default: 3
-
-      - type: str
-        name: EGU
-        description: Engineering Units
-        default: mm
-
-      - type: float
-        name: TWV
-        description: Tweak Step Size (EGU)
-        default: 1
-
-      - type: str
-        name: DTYP
-        description: Datatype of record
-        default: asynMotor
-
-      - type: int
-        name: DIR
-        description: User direction
-        default: 0
-
-      - type: float
-        name: VBAS
-        description: Base Velocity (EGU/s)
-        default: 1.0
-
-      - type: str
-        name: VMAX
-        description: Max Velocity (EGU/s)
-        default: "{{VELO}}"
-
-      - type: float
-        name: ACCL
-        description: Seconds to Velocity
-        default: 0.5
-
-      - type: float
-        name: BDST
-        description: BL Distance (EGU)
-        default: 0
-
-      - type: float
-        name: BVEL
-        description: BL Velocity(EGU/s)
-        default: 0
-
-      - type: float
-        name: BACC
-        description: BL Seconds to Veloc
-        default: 0
-
-      - type: float
-        name: DHLM
-        description: Dial High Limit
-        default: 10000
-
-      - type: float
-        name: DLLM
-        description: Dial low limit
-        default: -10000
-
-      - type: float
-        name: HLM
-        description: User High Limit
-        default: 0
-
-      - type: float
-        name: LLM
-        description: User Low Limit
-        default: 0
-
-      - type: str
-        name: HLSV
-        description: HW Lim, Violation Svr
-        default: MAJOR
-
-      - type: str
-        name: INIT
-        description: Startup commands
-        default: ""
-
-      - type: int
-        name: SREV
-        description: Steps per Revolution
-        default: 1000
-
-      - type: float
-        name: RRES
-        description: Readback Step Size (EGU
-        default: 0
-
-      - type: float
-        name: ERES
-        description: Encoder Step Size (EGU)
-        default: 0
-
-      - type: float
-        name: JAR
-        description: Jog Acceleration (EGU/s^2)
-        default: 0
-
-      - type: int
-        name: UEIP
-        description: Use Encoder If Present
-        default: 0
-
-      - type: int
-        name: URIP
-        description: Use RDBL If Present
-        default: 0
-
-      - type: str
-        name: RDBL
-        description: Readback Location, set URIP =1 if you specify this
-        default: "0"
-
-      - type: str
-        name: RLNK
-        description: Readback output link
-        default: ""
-
-      - type: int
-        name: RTRY
-        description: Max retry count
-        default: 0
-
-      - type: float
-        name: DLY
-        description: Readback settle time (s)
-        default: 0
-
-      - type: float
-        name: "OFF"
-        description: User Offset (EGU)
-        default: 0
-
-      - type: float
-        name: RDBD
-        description: Retry Deadband (EGU)
-        default: 0
-
-      - type: int
-        name: FOFF
-        description: Freeze Offset, 0=variable, 1=frozen
-        default: 0
-
-      - type: float
-        name: ADEL
-        description: Alarm monitor deadband (EGU)
-        default: 0
-
-      - type: int
-        name: NTM
-        description: New Target Monitor, only set to 0 for soft motors
-        default: 1
-
-      - type: float
-        name: FEHEIGH
-        description: HIGH limit for following error
-        default: 0
-
-      - type: float
-        name: FEHIHI
-        description: HIHI limit for following error
-        default: 0
-
-      - type: str
-        name: FEHHSV
-        description: HIHI alarm severity for following error
-        default: NO_ALARM
-
-      - type: str
-        name: FEHSV
-        description: HIGH alarm severity for following error
-        default: NO_ALARM
-
-      - type: int
-        name: SCALE
-        description: ""
-        default: 1
-
-      - type: int
-        name: HOMEVIS
-        description: If 1 then home is visible on the gui
-        default: 1
-
-      - type: str
-        name: HOMEVISSTR
-        description: ""
-        default: Use motor summary screen
-
-      - type: str
-        name: alh
-        description: Set this to alh to add the motor to the alarm handler and send emails
-        default: ""
-
-      - type: str
-        name: HOME
-        description: Prefix for autohome instance. Defaults to $(P) If unspecified
-        default: "{{P}}"
-
-      - type: str
-        name: ALLOW_HOMED_SET
-        description: Set to a blank to allow this axis to have its homed
-        default: "#"
-
-    databases:
-      - file: dls_pmac_cs_asyn_motor.template
-        args:
-          ADDR: "{{ axis }}"
-          PORT: "{{ CsController.name }}"
-          CS=C: "{{ CsController.CS }}"
-          PMAC: "{{ CsController.Controller.name }}"
-          P:
-          M:
-          DESC:
-          MRES:
-          VELO:
-          PREC:
-          EGU:
-          TWV:
-          DTYP:
-          DIR:
-          VBAS:
-          VMAX:
-          ACCL:
-          BDST:
-          BVEL:
-          BACC:
-          DHLM:
-          DLLM:
-          HLM:
-          LLM:
-          HLSV:
-          INIT:
-          SREV:
-          RRES:
-          ERES:
-          JAR:
-          UEIP:
-          RDBL:
-          RLINK:
-          RTRY:
-          DLY:
-          OFF:
-          RDBD:
-          FOFF:
-          ADEL:
-          NTM:
-          FEHIGH:
-          FEHIHI:
-          FEHHSV:
-          FEHSV:
-          SCALE:
-          HOMEVIS:
-          HOMEVISSTR:
-          name:
-          alh:
-          HOME:
-          ALLOW_HOMED_SET:
-
-  - name: pmacDisableLimitsCheck
-    description: disable the limits check on an axis
+  databases:
+  - file: $(PMAC)/db/dls_pmac_cs_asyn_motor.template
     args:
-      - type: object
-        name: Controller
-        description: Geobrick on which to disable limits
+      VELO:
+      HOMEVISSTR:
+      SCALE:
+      BACC:
+      alh:
+      ACCL:
+      gda_name:
+      DHLM:
+      HOMEVIS:
+      M:
+      EGU:
+      FEHSV:
+      VBAS:
+      PMAC:
+      VMAX:
+      BDST:
+      PORT:
+      SREV:
+      DTYP:
+      FEHIGH:
+      DLLM:
+      name:
+      INIT:
+      RDBL:
+      DIR:
+      LLM:
+      ADEL:
+      HLSV:
+      RDBD:
+      URIP:
+      RTRY:
+      OFF:
+      UEIP:
+      FEHIHI:
+      FEHHSV:
+      JAR:
+      P:
+      BVEL:
+      CS:
+      MRES:
+      DLY:
+      DESC:
+      ERES:
+      ADDR:
+      RRES:
+      PREC:
+      RLNK:
+      FOFF:
+      HLM:
+      NTM:
+      TWV:
+      gda_desc:
+    warning: 'Database Args missing: CS, PMAC'
 
-      - type: int
-        name: Axis
-        description: Axis to have limits disabled
+- name: pmacDisableLimitsCheck
+  description: |-
+    TODO:ADD DESCRIPTION
 
-    pre_init:
-      - type: function
-        name: pmacDisableLimitsCheck
-        when: last
-        args:
-          AsynPortName: "{{Controller.name}}"
-          Axis: "{{Axis}}"
-          AllAxes: False
+  args:
+  - type: object
+    name: Controller
+    description: Underlying PMAC or GeoBrick object
+  - type: int
+    name: Axis
+    description: Axis number to disable limit check, defaults to all
 
-  - name: autohome
-    description: setup auto home groups
+  pre_init:
+  - type: text
+    value: |
+      pmacDisableLimitsCheck("{{ControllerPort}}", {{Axis}}, 0)
+    warning: 'function Args missing: ControllerPort'
+
+- name: pmacAsynSSHPort
+  description: |-
+    This will create an AsynPort connecting to a PowerPMAC over SSH
+
+  args:
+  - type: id
+    name: name
+    description: Port Name, normally something like SSH_PORT
+  - type: str
+    name: IP
+    description: IP address of the powerPMAC
+  - type: str
+    name: USERNAME
+    description: Username for the SSH connection
+    default: root
+  - type: str
+    name: PASSWORD
+    description: Password for the SSH connection
+    default: deltatau
+  - type: int
+    name: PRIORITY
+    description: Priority of the port
+    default: 0
+  - type: int
+    name: NOAUTOCONNECT
+    description: Disable autoconnect if set to 1
+    default: 0
+  - type: int
+    name: NOEOS
+    description: No EOS used if set to 1
+    default: 0
+  - type: str
+    name: simulation
+    description: IP port to connect to if in simulation mode
+
+  pre_init:
+  - type: text
+    value: |
+      # Create SSH Port (PortName, IPAddress, Username, Password, Priority, DisableAutoConnect, noProcessEos)
+      drvAsynPowerPMACPortConfigure("{{name}}", "{{IP}}", "{{USERNAME}}", "{{PASSWORD}}", "{{PRIORITY}}", "{{NOAUTOCONNECT}}", "{{NOEOS}}")
+
+- name: CS_IDT_sagittal_bender
+  description: |-
+    Supporting template that allows setting of variables for an 
+    IDT sagittal DCM CS
+
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: COORD
+    description: Co-ordinate system number
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
+
+  databases:
+  - file: $(PMAC)/db/IDT_sagittal_bender.template
     args:
-      - type: object
-        name: Controller
-        description: the PMAC Controller
+      P:
+      name:
+      COORD:
+      PORT:
 
-      - type: int
-        name: PLC
-        description: PLC number of the auto home PLC
+- name: pmacVariableWrite
+  description: |-
+    Simple template that reads and writes to a variable on a 
+    PMAC or geoBrick via dynamic parameters.
 
-      - type: str
-        name: P
-        description: Prefix for auto home PVs
+  args:
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: Q
+    description: Pv Suffix
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: VAR
+    description: Variable on PMAC to write to, e.g. P700
+  - type: str
+    name: EGU
+    description: Engineering units
+  - type: str
+    name: VARIABLE_PREC
+    description: Variable Record precision
+  - type: str
+    name: LABEL
+    description: Label for GUI
+  - type: id
+    name: name
+    description: Object name and gui association name
+  - type: str
+    name: DTYP
+    description: asyn DTYP (e.g., asynFloat64, asynInt32)
+    default: asynFloat64
+  - type: str
+    name: TYPE
+    description: PMAC variable type (D=double, I=integer, H=hex, S=string)
+    default: D
 
-      - type: str
-        name: GRP1
-        description: name of the 'ALL' group of auto home axes
-        default: All
-      - type: str
-        name: GRP2
-        description: name of the second group of auto home axes
-        default: ""
-      - type: str
-        name: GRP3
-        description: name of the third group of auto home axes
-        default: ""
-      - type: str
-        name: GRP4
-        description: name of the fourth group of auto home axes
-        default: ""
-      - type: str
-        name: GRP5
-        description: name of the fourth group of auto home axes
-        default: ""
-      - type: str
-        name: GRP6
-        description: name of the fourth group of auto home axes
-        default: ""
-      - type: str
-        name: GRP7
-        description: name of the fourth group of auto home axes
-        default: ""
-      - type: str
-        name: GRP8
-        description: name of the fourth group of auto home axes
-        default: ""
-      - type: str
-        name: GRP9
-        description: name of the fourth group of auto home axes
-        default: ""
-
-    databases:
-      - file: autohome.template
-        args:
-          {
-            PORT: "{{Controller.name}}",
-            CTRL: "{{Controller.P}}",
-            P,
-            PLC,
-            GRP1,
-            GRP2,
-            GRP3,
-            GRP4,
-            GRP5,
-            GRP6,
-            GRP7,
-            GRP8,
-            GRP9,
-          }
-
-  - name: CS
-    description: Create a coordinate system
+  databases:
+  - file: $(PMAC)/db/pmacVariableWrite.template
     args:
-      - type: id
-        name: name
-        description: Asyn port name for this object
+      Q:
+      name:
+      DTYP:
+      EGU:
+      LABEL:
+      VARIABLE_PREC:
+      P:
+      VAR:
+      TYPE:
+      PORT:
 
-      - type: object
-        name: Controller
-        description: the PMAC Controller
+- name: autohome
+  description: |-
+    TODO:ADD DESCRIPTION
 
-      - type: int
-        name: CS
-        description: Coordinate system number
+  args:
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: PLC
+    description: PLC number
+  - type: object
+    name: PORT
+    description: Delta tau motor controller port
+  - type: str
+    name: DESC
+    description: Description
+  - type: str
+    name: GRP1
+    description: Optional.  Homing group 1 description.  Defaults to "All".
+    default: All
+  - type: str
+    name: GRP2
+    description: Optional.  Homing group 2 description.  Defaults to give empty description
+      string.
+  - type: str
+    name: GRP3
+    description: Optional.  Homing group 3 description.  Defaults to give empty description
+      string.
+  - type: str
+    name: GRP4
+    description: Optional.  Homing group 4 description.  Defaults to give empty description
+      string.
+  - type: str
+    name: GRP5
+    description: Optional.  Homing group 5 description.  Defaults to give empty description
+      string.
+  - type: str
+    name: GRP6
+    description: Optional.  Homing group 6 description.  Defaults to give empty description
+      string.
+  - type: str
+    name: GRP7
+    description: Optional.  Homing group 7 description.  Defaults to give empty description
+      string.
+  - type: str
+    name: GRP8
+    description: Optional.  Homing group 8 description.  Defaults to give empty description
+      string.
+  - type: str
+    name: GRP9
+    description: Optional.  Homing group 9 description.  Defaults to give empty description
+      string.
+  - type: str
+    name: GRP10
+    description: Optional.  Homing group 10 description.  Defaults to give empty description
+      string.
+  - type: str
+    name: STATE11
+    description: Optional.  Homing state 11 description.  Defaults to give empty description
+      string.
+  - type: str
+    name: STATE12
+    description: Optional.  Homing state 12 description.  Defaults to give empty description
+      string.
+  - type: str
+    name: STATE13
+    description: Optional.  Homing state 13 description.  Defaults to give empty description
+      string.
+  - type: str
+    name: STATE14
+    description: Optional.  Homing state 14 description.  Defaults to give empty description
+      string.
+  - type: str
+    name: STATE15
+    description: Optional.  Homing state 15 description.  Defaults to give empty description
+      string.
+  - type: str
+    name: STATUS11
+    description: Optional.  Homing status 11 description (e.g. for custom limit checks).  Defaults
+      to give empty description string.
+  - type: str
+    name: STATUS12
+    description: Optional.  Homing status 12 description (e.g. for custom limit checks).  Defaults
+      to give empty description string.
+  - type: str
+    name: STATUS13
+    description: Optional.  Homing status 13 description (e.g. for custom limit checks).  Defaults
+      to give empty description string.
+  - type: str
+    name: STATUS14
+    description: Optional.  Homing status 14 description (e.g. for custom limit checks).  Defaults
+      to give empty description string.
+  - type: str
+    name: STATUS15
+    description: Optional.  Homing status 15 description (e.g. for custom limit checks).  Defaults
+      to give empty description string.
+  - type: str
+    name: STATUSSV11
+    description: Optional.  Homing status 11 severity.  Defaults to NO_ALARM.
+    default: NO_ALARM
+  - type: str
+    name: STATUSSV12
+    description: Optional.  Homing status 12 severity.  Defaults to NO_ALARM.
+    default: NO_ALARM
+  - type: str
+    name: STATUSSV13
+    description: Optional.  Homing status 13 severity.  Defaults to NO_ALARM.
+    default: NO_ALARM
+  - type: str
+    name: STATUSSV14
+    description: Optional.  Homing status 14 severity.  Defaults to NO_ALARM.
+    default: NO_ALARM
+  - type: str
+    name: STATUSSV15
+    description: Optional.  Homing status 15 severity.  Defaults to NO_ALARM.
+    default: NO_ALARM
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
 
-      - type: int
-        name: NAxes
-        description: number of CS axes
-        default: 9
+  databases:
+  - file: $(PMAC)/db/autohome.template
+    args:
+      CTRL:
+      GRP10:
+      PORT:
+      GRP9:
+      GRP8:
+      GRP3:
+      GRP2:
+      GRP1:
+      GRP7:
+      GRP6:
+      GRP5:
+      GRP4:
+      STATUS11:
+      P:
+      STATUSSV12:
+      STATUSSV13:
+      STATUS15:
+      STATUSSV15:
+      DESC:
+      name:
+      STATUSSV11:
+      STATE13:
+      STATE12:
+      STATE11:
+      STATUS13:
+      STATE15:
+      STATE14:
+      STATUS12:
+      PLC:
+      STATUSSV14:
+      STATUS14:
+    warning: 'Database Args missing: CTRL'
 
-      - type: int
-        name: Program
-        description: PROG number for CS motion
-        default: 10
+- name: CS_IDT_sagittal_dcm
+  description: |-
+    Supporting template that allows setting of variables for an 
+    IDT sagittal DCM CS
 
-    pre_init:
-      - type: function
-        name: pmacCreateCS
-        args:
-          AsynPortName: "{{name}}"
-          PmacAsynPort: "{{Controller.name}}"
-          CSNumber: "{{CS}}"
-          PLCNumber: "{{Program}}"
-      - type: function
-        name: pmacCreateCSAxes
-        args:
-          AsynPortName: "{{name}}"
-          NumberOfAxes: "{{NAxes}}"
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: COORD
+    description: Co-ordinate system number
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
 
-    databases:
-      - file: pmacCsController.template
-        args:
-          PORT: "{{name}}"
-          TIMEOUT: "{{Controller.TIMEOUT}}"
-          PARENTPORT: "{{Controller.name}}"
-          PMAC: "{{Controller.P}}"
-          CS:
+  databases:
+  - file: $(PMAC)/db/IDT_sagittal_dcm.template
+    args:
+      P:
+      name:
+      COORD:
+      PORT:
+
+- name: EncoderReadback
+  description: |-
+    TODO:ADD DESCRIPTION
+
+  args:
+  - type: id
+    name: name
+    description: Object name
+  - type: str
+    name: P
+    description: PV prefix
+  - type: str
+    name: Q
+    description: PV suffix
+  - type: object
+    name: PORT
+    description: Controller port
+  - type: int
+    name: AXIS
+    description: Axis number
+  - type: str
+    name: DESC
+    description: Description
+  - type: str
+    name: EGU
+    description: Engineering units
+  - type: float
+    name: ERES
+    description: Encoder resolution
+  - type: int
+    name: PREC
+    description: Readback precision
+  - type: str
+    name: SCAN
+    description: Scan rate
+    default: 0.1 second
+
+  databases:
+  - file: $(PMAC)/db/encoder_readback.template
+    args:
+      ERES:
+      name:
+      SCAN:
+      EGU:
+      Q:
+      P:
+      PREC:
+      AXIS:
+      PORT:
+      DESC:
+
+- name: CS_bender
+  description: |-
+    Supporting template that allows setting of variables for a 
+    bender CS
+
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: COORD
+    description: Co-ordinate system number
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
+
+  databases:
+  - file: $(PMAC)/db/bender.template
+    args:
+      P:
+      name:
+      COORD:
+      PORT:
+
+- name: CS_flexure_slits
+  description: |-
+    Supporting template that allows setting of variables for a 
+    set of flexure slits
+
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: COORD
+    description: Co-ordinate system number
+  - type: str
+    name: PREC
+    description: Precision to display variables
+    default: '3'
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
+
+  databases:
+  - file: $(PMAC)/db/flexure_slits.template
+    args:
+      PREC:
+      P:
+      name:
+      COORD:
+      PORT:
+
+- name: pmacMonitorVariables
+  description: |-
+    TODO:ADD DESCRIPTION
+
+  args:
+  - type: object
+    name: Controller
+    description: Underlying PMAC or GeoBrick object
+  - type: str
+    name: Variables
+    description: Space separated list of pmac variables to monitor
+
+  pre_init:
+  - type: text
+    value: |
+      pmacMonitorVariables("{{ControllerPort}}", "{{Variables}}")
+    warning: 'function Args missing: ControllerPort'
+
+- name: CS_gap_and_centre_slits
+  description: |-
+    Supporting template that allows setting of variables for a 
+    set of gap and slits
+
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: COORD
+    description: Co-ordinate system number
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
+
+  databases:
+  - file: $(PMAC)/db/gap_and_centre_slits.template
+    args:
+      P:
+      name:
+      COORD:
+      PORT:
+
+- name: CS_symetrie_hexapod
+  description: |-
+    TODO:ADD DESCRIPTION
+
+  args:
+  - type: id
+    name: name
+    description: Object name
+  - type: str
+    name: P
+    description: Device prefix
+  - type: object
+    name: PORT
+    description: GeoBrick object
+  - type: int
+    name: COORD
+    description: Coordinate system number
+  - type: str
+    name: RX
+    description: GUI label for RX axis (axis 4)
+    default: RX
+  - type: str
+    name: RY
+    description: GUI label for RY axis (axis 5)
+    default: RY
+  - type: str
+    name: RZ
+    description: GUI label for RZ axis (axis 6)
+    default: RZ
+  - type: int
+    name: PREC
+    description: Precision of records
+    default: 3
+
+  databases:
+  - file: $(PMAC)/db/symetrie_hexapod.template
+    args:
+      name:
+      RX:
+      RY:
+      PREC:
+      P:
+      RZ:
+      COORD:
+      BRICK:
+      PORT:
+    warning: 'Database Args missing: BRICK'
+
+  pre_init:
+  - type: text
+    value: |
+      pmacNoCsVelocity("{{PORT}}")
+
+- name: pmacCreateCsGroup
+  description: |-
+    Create a group of axis mappings to coordinate systems. Instantating a GeoBrickGlobalControl
+        will create a PV for switching between these groups
+
+  args:
+  - type: object
+    name: Controller
+    description: Underlying PMAC3 or GeoBrick3 object
+  - type: int
+    name: GroupNumber
+    description: Unique Group number to describe this group
+  - type: str
+    name: GroupName
+    description: Description of the group
+  - type: int
+    name: AxisCount
+    description: Number of CS axes in this group
+
+  pre_init:
+  - type: text
+    value: |
+      pmacCreateCsGroup("{{Controller}}", {{GroupNumber}}, "{{GroupName}}", {{AxisCount}})
+
+- name: CS_qcm
+  description: |-
+    Use this template with CS_qcm.pmc to implement
+    a mode for changing energy that only moves Bragg1.
+
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: COORD
+    description: Co-ordinate system number
+  - type: str
+    name: RADMRES1
+    description: Scale factor to turn B1 units into Rads
+  - type: str
+    name: RADMRES2
+    description: Scale factor to turn B2 units into Rads
+  - type: str
+    name: SCALE
+    description: the same as pmacSetAxisScale (usually 1 but may be 32)
+    default: '32'
+  - type: str
+    name: gda_name
+    description: GDA name
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
+
+  databases:
+  - file: $(PMAC)/db/qcm.template
+    args:
+      SCALE:
+      name:
+      RADMRES2:
+      gda_name:
+      COORD:
+      P:
+      PORT:
+      RADMRES1:
+
+- name: pmacCsGroupAddAxis
+  description: |-
+    TODO:ADD DESCRIPTION
+
+  args:
+  - type: object
+    name: Controller
+    description: Underlying PMAC or GeoBrick object
+  - type: int
+    name: GroupNumber
+    description: Unique Group number to describe this group
+  - type: int
+    name: AxisNumber
+    description: Axis number of axis to add to the group
+  - type: str
+    name: AxisDef
+    description: CS Axis definition for this axis i.e. one of I A B C U V W X Y Z
+      (or may include linear equations)
+  - type: int
+    name: CoordSysNumber
+    description: Axis number of axis to add to the group
+
+  pre_init:
+  - type: text
+    value: |
+      pmacCsGroupAddAxis({{Controller}}, {{GroupNumber}}, {{AxisNumber}}, {{AxisDef}}, {{CoordSysNumber}})
+
+- name: CS_multi_beamstop_on_platform
+  description: |-
+    Supporting template that allows setting of variables for a 
+    multi beamstop on platform CS
+
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: COORD
+    description: Co-ordinate system number
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
+
+  databases:
+  - file: $(PMAC)/db/multi_beamstop_on_platform.template
+    args:
+      P:
+      name:
+      COORD:
+      PORT:
+
+- name: dls_pmac_asyn_motor
+  description: |-
+    TODO:ADD DESCRIPTION
+
+  args:
+  - type: str
+    name: P
+    description: Device Prefix
+  - type: str
+    name: M
+    description: Device Suffix
+  - type: object
+    name: PORT
+    description: Delta tau motor controller
+  - type: str
+    name: ADDR
+    description: Address on controller
+  - type: str
+    name: DESC
+    description: Description, displayed on EDM screen
+  - type: str
+    name: MRES
+    description: Motor Step Size (EGU)
+  - type: str
+    name: VELO
+    description: Velocity (EGU/s)
+  - type: str
+    name: PREC
+    description: Display Precision
+  - type: str
+    name: EGU
+    description: Engineering Units
+  - type: str
+    name: TWV
+    description: Tweak Step Size (EGU)
+  - type: object
+    name: SPORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: DTYP
+    description: DTYP of record
+    default: asynMotor
+  - type: str
+    name: DIR
+    description: User Direction
+    default: '0'
+  - type: str
+    name: VBAS
+    description: Base Velocity (EGU/s)
+    default: '0'
+  - type: str
+    name: VMAX
+    description: Max Velocity (EGU/s), defaults to VELO
+    default: $(VELO)
+  - type: str
+    name: ACCL
+    description: Seconds to Velocity
+    default: '0.5'
+  - type: str
+    name: BDST
+    description: BL Distance (EGU)
+    default: '0'
+  - type: str
+    name: BVEL
+    description: BL Velocity (EGU/s)
+    default: '0'
+  - type: str
+    name: BACC
+    description: BL Seconds to Veloc.
+  - type: str
+    name: DHLM
+    description: Dial High Limit
+  - type: str
+    name: DLLM
+    description: Dial Low Limit
+  - type: str
+    name: HLM
+    description: User High Limit
+  - type: str
+    name: LLM
+    description: User Low Limit
+  - type: str
+    name: HLSV
+    description: HW Lim. Violation Svr
+    default: MAJOR
+  - type: str
+    name: INIT
+    description: Startup commands
+  - type: str
+    name: SREV
+    description: Steps per Revolution
+    default: '1000'
+  - type: str
+    name: RRES
+    description: Readback Step Size (EGU)
+  - type: str
+    name: ERES
+    description: Encoder Step Size (EGU)
+  - type: str
+    name: JAR
+    description: Jog Acceleration (EGU/s^2)
+  - type: str
+    name: UEIP
+    description: Use Encoder If Present
+    default: '0'
+  - type: str
+    name: URIP
+    description: Use RDBL If Present
+    default: '0'
+  - type: str
+    name: RDBL
+    description: Readback Location, set URIP = 1 if you specify this
+  - type: str
+    name: RLNK
+    description: Readback output link
+  - type: str
+    name: RTRY
+    description: Max retry count
+    default: '0'
+  - type: str
+    name: DLY
+    description: Readback settle time (s)
+    default: '0'
+  - type: str
+    name: OFF
+    description: User Offset (EGU)
+    default: '0'
+  - type: str
+    name: RDBD
+    description: Retry Deadband (EGU)
+  - type: str
+    name: FOFF
+    description: Freeze Offset, 0=variable, 1=frozen
+    default: '0'
+  - type: str
+    name: ADEL
+    description: Alarm monitor deadband (EGU)
+    default: '0'
+  - type: str
+    name: NTM
+    description: New Target Monitor, only set to 0 for soft motors
+    default: '1'
+  - type: str
+    name: FEHIGH
+    description: HIGH limit for following error
+    default: '0'
+  - type: str
+    name: FEHIHI
+    description: HIHI limit for following error
+    default: '0'
+  - type: str
+    name: FEHHSV
+    description: HIHI alarm severity for following error
+    default: NO_ALARM
+  - type: str
+    name: FEHSV
+    description: HIGH alarm severity for following error
+    default: NO_ALARM
+  - type: str
+    name: SCALE
+    description: Scale factor, if pmacSetAxisScale is used this should be set
+    default: '1'
+  - type: str
+    name: HOMEVIS
+    description: If 1 then home is visible on the gui
+    default: '1'
+  - type: str
+    name: HOMEVISSTR
+    description: If HOMEVIS=0, then display this text on the gui instead
+    default: Use motor summary screen
+  - type: id
+    name: name
+    description: Object name and gui association name
+  - type: str
+    name: alh
+    description: set to '#' to comment out alh lines
+    default: None
+  - type: str
+    name: gda_name
+    description: Name to export this as to GDA
+  - type: str
+    name: gda_desc
+    description: Description to export this as to GDA
+    default: $(DESC)
+  - type: str
+    name: HOME
+    description: the template contains enough records to keep the motor record happy
+    default: $(P)
+  - type: str
+    name: ALLOW_HOMED_SET
+    description: status manually.  This is set to a comment character by default.
+    default: '#'
+
+  databases:
+  - file: $(PMAC)/db/dls_pmac_asyn_motor.template
+    args:
+      VELO:
+      HOMEVISSTR:
+      SCALE:
+      BACC:
+      alh:
+      ACCL:
+      gda_name:
+      DHLM:
+      HOMEVIS:
+      M:
+      EGU:
+      FEHSV:
+      VBAS:
+      HLSV:
+      PMAC:
+      VMAX:
+      HOME:
+      BDST:
+      PORT:
+      SREV:
+      DTYP:
+      FEHIGH:
+      DLLM:
+      name:
+      INIT:
+      ALLOW_HOMED_SET:
+      RDBL:
+      DIR:
+      LLM:
+      ADEL:
+      SPORT:
+      RDBD:
+      URIP:
+      RTRY:
+      OFF:
+      UEIP:
+      FEHIHI:
+      FEHHSV:
+      JAR:
+      P:
+      BVEL:
+      MRES:
+      DLY:
+      DESC:
+      ERES:
+      ADDR:
+      RRES:
+      PREC:
+      RLNK:
+      FOFF:
+      HLM:
+      NTM:
+      TWV:
+      gda_desc:
+    warning: 'Database Args missing: PMAC'
+
+- name: PowerPMAC
+  description: |-
+    This will create an asyn motor port for a PowerPMAC that we can attach
+        motor records to using the model 3 driver
+
+  args:
+  - type: object
+    name: Port
+    description: pmacAsynSSHPort to connect to
+  - type: str
+    name: P
+    description: PV Prefix
+  - type: id
+    name: name
+    description: Name to use for the asyn port
+  - type: int
+    name: NAxes
+    description: Number of axes
+    default: 8
+  - type: int
+    name: IdlePoll
+    description: Idle Poll Period in ms
+    default: 1000
+  - type: int
+    name: MovingPoll
+    description: Moving Poll Period in ms
+    default: 100
+  - type: str
+    name: NAXES
+    description: Number of axes
+    default: '8'
+  - type: str
+    name: TIMEOUT
+    description: Timeout for controller communication
+    default: '4'
+  - type: str
+    name: FEEDRATE
+    description: feedrate below which we go into error
+    default: '100'
+
+  databases:
+  - file: $(PMAC)/db/pmacController.template
+    args:
+      FEEDRATE:
+      CSG7:
+      CSG6:
+      CSG5:
+      CSG4:
+      CSG3:
+      CSG2:
+      CSG1:
+      CSG0:
+      P:
+      TIMEOUT:
+      NAXES:
+      PORT:
+    warning: 'Database Args missing: CSG7, CSG6, CSG5, CSG4, CSG3, CSG2, CSG1, CSG0,
+      PORT'
+  - file: $(PMAC)/db/pmacStatusAxis.template
+    args:
+      PMAC:
+      PORT:
+      AXIS:
+    warning: 'Database Args missing: PORT, PMAC, AXIS'
+  - file: $(PMAC)/db/powerPmacStatus.template
+    args:
+      P:
+      PORT:
+    warning: 'Database Args missing: PORT'
+
+  pre_init:
+  - type: text
+    value: |
+      # Configure Model 3 Controller Driver (ControlerPort, LowLevelDriverPort, Address, Axes, MovingPoll, IdlePoll)
+      pmacCreateController("{{name}}", "{{PortName}}", 0, {{NAxes}}, {{MovingPoll}}, {{IdlePoll}})
+      # Configure Model 3 Axes Driver (Controler Port, Axis Count)
+      pmacCreateAxes("{{name}}", {{NAxes}})
+    warning: 'function Args missing: PortName'
+
+- name: pmacVmeConfig
+  description: |-
+    This will create an AsynPort connecting to a PMAC or GeoBrick over VME
+
+  args:
+  - type: str
+    name: Prefix
+    description: Prefix for asyn port name, Default of PMAC_S will give PMAC_S0, PMAC_S1,
+      etc.
+    default: PMAC_S
+  - type: str
+    name: simulation
+    description: IP port to connect to if in simulation mode
+  - type: int
+    name: priority
+    description: Priority to give the asyn serial ports
+    default: 0
+
+  pre_init:
+  - type: text
+    value: |
+      pmacVmeDebug=1
+      drvPmacDebug=1
+      # Configure %d PMAC cards
+      pmacVmeConfig(%d, 0x%dfa000, 0x%d00000, 0xC%d, %d)
+      # Startup driver for DPRAM ASCII buffer
+      pmacDrv()
+      pmacVmeDebug=0
+      drvPmacDebug=0
+      pmacAsynConfig(0, "%s", %d)
+
+- name: CS_B22_Optics_Box
+  description: |-
+    Supporting template that allows setting of variables for a 
+    B22 optics box CS
+
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: COORD
+    description: Co-ordinate system number
+  - type: str
+    name: PREC
+    description: Precision to display variables
+    default: '3'
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
+
+  databases:
+  - file: $(PMAC)/db/B22_optics_box.template
+    args:
+      PREC:
+      P:
+      name:
+      COORD:
+      PORT:
+
+- name: CS
+  description: |-
+    Creates some PVs for global control of the pmac controller,
+        namely programmed move time and deferred move control
+
+  args:
+  - type: id
+    name: name
+    description: CS Name (for asyn port that motor records are connected to)
+  - type: object
+    name: Controller
+    description: Underlying PMAC or GeoBrick object
+  - type: int
+    name: CS
+    description: Coordinate System Number for the cs controller
+  - type: str
+    name: PARENTPORT
+    description: The asyn port for the parent pmac controller
+  - type: int
+    name: PLCNum
+    description: PLC Number, defaults to CS + 15
+  - type: int
+    name: NAxes
+    description: Number of axes
+    default: 9
+  - type: int
+    name: Program
+    description: Motion Program to run
+    default: 10
+  - type: int
+    name: IdlePoll
+    description: Idle Poll Period in ms
+    default: 500
+  - type: int
+    name: MovingPoll
+    description: Moving Poll Period in ms
+    default: 100
+  - type: str
+    name: TIMEOUT
+    description: Timeout for controller communication
+    default: '4'
+
+  databases:
+  - file: $(PMAC)/db/pmacCsController.template
+    args:
+      CS:
+      PARENTPORT:
+      PMAC:
+      TIMEOUT:
+      PORT:
+    warning: 'Database Args missing: PMAC, PORT'
+
+  pre_init:
+  - type: text
+    value: |
+      # Create CS (CSPortName, ControllerPort, CSNumber, ProgramNumber)
+      pmacCreateCS("{{name}}", "{{PortName}}", {{CS}}, {{Program}})
+      # Configure Model 3 CS Axes Driver (CSPortName, CSAxisCount)
+      pmacCreateCSAxes("{{name}}", {{NAxes}})
+    warning: 'function Args missing: PortName'
+
+- name: CS_3jack
+  description: |-
+    Supporting template that allows setting of variables for a 
+    3jack CS
+
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: COORD
+    description: Co-ordinate system number
+  - type: str
+    name: PREC
+    description: Precision to display variables
+    default: '3'
+  - type: str
+    name: J1PV
+    description: Pv of real Jack1 motor, e.g. $(P):J1
+    default: $(P):J1
+  - type: str
+    name: J2PV
+    description: Pv of real Jack1 motor, e.g. $(P):J2
+    default: $(P):J2
+  - type: str
+    name: J3PV
+    description: Pv of real Jack1 motor, e.g. $(P):J3
+    default: $(P):J3
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
+
+  databases:
+  - file: $(PMAC)/db/3jack.template
+    args:
+      name:
+      J2PV:
+      P:
+      J1PV:
+      COORD:
+      J3PV:
+      PORT:
+      PREC:
+
+- name: moveAxesToSafeMaster
+  description: |-
+    TODO:ADD DESCRIPTION
+
+  args:
+  - type: id
+    name: name
+    description: Name
+  - type: str
+    name: P
+    description: Device Prefix
+  - type: int
+    name: NO_OF_AXES
+    description: Number of axes
+
+- name: GeoBrickTrajectoryControlT
+  description: |-
+    Creates some PVs for executing trajectory scans on the pmac controller by
+           instantiating an instance of pmacTrajectoryAxis.template for each axis
+
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller
+  - type: str
+    name: NPOINTS
+    description: Number of points that can be built at any time
+  - type: str
+    name: MAXPOINTS
+    description: Maximum number of points in a scan
+    default: '4000000'
+  - type: str
+    name: PREC
+    description: precision of axis defnitions
+    default: '3'
+
+  databases:
+  - file: $(PMAC)/db/pmacControllerTrajectory.template
+    args:
+      PMAC:
+      PREC:
+      NPOINTS:
+      MAXPOINTS:
+      NAxes:
+      PORT:
+    warning: 'Database Args missing: NAxes, PMAC'
+
+- name: CS_blade_slits
+  description: |-
+    Supporting template that allows setting of variables for a 
+    set of blade slits
+
+  args:
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: BPPV
+    description: Pv of real BP motor, e.g. $(P):X:PLUS
+  - type: str
+    name: BMPV
+    description: Pv of real BM motor, e.g. $(P):X:MINUS
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
+
+  databases:
+  - file: $(PMAC)/db/blade_slits.template
+    args:
+      P:
+      BPPV:
+      name:
+      BMPV:
+
+- name: CS_2jack
+  description: |-
+    Supporting template that allows setting of variables for a 
+    2jack CS
+
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: COORD
+    description: Co-ordinate system number
+  - type: str
+    name: PREC
+    description: Precision to display variables
+    default: '3'
+  - type: str
+    name: J1PV
+    description: Pv of real Jack1 motor, e.g. $(P):J1
+    default: $(P):J1
+  - type: str
+    name: J2PV
+    description: Pv of real Jack2 motor, e.g. $(P):J2
+    default: $(P):J2
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
+
+  databases:
+  - file: $(PMAC)/db/2jack.template
+    args:
+      name:
+      COORD:
+      P:
+      J1PV:
+      J2PV:
+      PORT:
+      PREC:
+
+- name: PMAC
+  description: |-
+    This will create an asyn motor port for a PMAC that we can attach
+        motor records to using the model 3 driver
+
+  args:
+  - type: object
+    name: Port
+    description: pmacAsynSSHPort to connect to
+  - type: str
+    name: P
+    description: PV Prefix
+  - type: id
+    name: name
+    description: Name to use for the asyn port
+  - type: int
+    name: NAxes
+    description: Number of axes
+    default: 32
+  - type: int
+    name: IdlePoll
+    description: Idle Poll Period in ms
+    default: 1000
+  - type: int
+    name: MovingPoll
+    description: Moving Poll Period in ms
+    default: 100
+  - type: str
+    name: NAXES
+    description: Number of axes
+    default: '8'
+  - type: str
+    name: TIMEOUT
+    description: Timeout for controller communication
+    default: '4'
+  - type: str
+    name: FEEDRATE
+    description: feedrate below which we go into error
+    default: '100'
+
+  databases:
+  - file: $(PMAC)/db/pmacStatusAxis.template
+    args:
+      PMAC:
+      PORT:
+      AXIS:
+    warning: 'Database Args missing: PORT, PMAC, AXIS'
+  - file: $(PMAC)/db/pmacController.template
+    args:
+      FEEDRATE:
+      CSG7:
+      CSG6:
+      CSG5:
+      CSG4:
+      CSG3:
+      CSG2:
+      CSG1:
+      CSG0:
+      P:
+      TIMEOUT:
+      NAXES:
+      PORT:
+    warning: 'Database Args missing: CSG7, CSG6, CSG5, CSG4, CSG3, CSG2, CSG1, CSG0,
+      PORT'
+
+  pre_init:
+  - type: text
+    value: |
+      # Configure Model 3 Controller Driver (ControlerPort, LowLevelDriverPort, Address, Axes, MovingPoll, IdlePoll)
+      pmacCreateController("{{name}}", "{{PortName}}", 0, {{NAxes}}, {{MovingPoll}}, {{IdlePoll}})
+      # Configure Model 3 Axes Driver (Controler Port, Axis Count)
+      pmacCreateAxes("{{name}}", {{NAxes}})
+    warning: 'function Args missing: PortName'
+
+- name: moveAxesToSafeSlave
+  description: |-
+    TODO:ADD DESCRIPTION
+
+  args:
+  - type: object
+    name: MASTER
+    description: Master
+  - type: str
+    name: AXIS
+    description: Axis PV
+  - type: int
+    name: POSITION
+    description: Safe Position
+  - type: float
+    name: THRESHOLD
+    description: In safe position threshold in EGUs
+
+- name: pmacAsynIPPort
+  description: |-
+    This will create an AsynPort connecting to a PMAC or GeoBrick over IP
+
+  args:
+  - type: id
+    name: name
+    description: Port Name, normally something like BRICK1port
+  - type: str
+    name: IP
+    description: IP address of the geobrick
+  - type: str
+    name: simulation
+    description: IP port to connect to if in simulation mode
+
+  pre_init:
+  - type: text
+    value: |
+      # Create IP Port (PortName, IPAddr)
+      pmacAsynIPConfigure("{{name}}", "{{IP}}")
+
+- name: GeoBrick
+  description: |-
+    This will create an asyn motor port for a GeoBrick that we can attach
+        motor records to using the model 3 driver
+
+  args:
+  - type: object
+    name: Port
+    description: pmacAsynIPPort/pmacVmeConfig to connect to
+  - type: str
+    name: P
+    description: PV Prefix
+  - type: id
+    name: name
+    description: Name to use for the asyn port
+  - type: int
+    name: IdlePoll
+    description: Idle Poll Period in ms
+    default: 500
+  - type: int
+    name: MovingPoll
+    description: Moving Poll Period in ms
+    default: 100
+  - type: str
+    name: ControlIP
+    description: IP/Hostname for dls-pmac-control (CSS)
+  - type: str
+    name: ControlPort
+    description: Port for dls-pmac-control (CSS)
+  - type: str
+    name: ControlMode
+    description: Terminal server or Ethernet for dls-pmac-control (CSS)
+  - type: str
+    name: Description
+    description: Description for pmac status screen (CSS)
+  - type: str
+    name: NAXES
+    description: Number of axes
+    default: '8'
+  - type: str
+    name: TIMEOUT
+    description: Timeout for controller communication
+    default: '4'
+  - type: str
+    name: FEEDRATE
+    description: feedrate below which we go into error
+    default: '100'
+
+  databases:
+  - file: $(PMAC)/db/pmacStatus.template
+    args:
+      P:
+      PORT:
+    warning: 'Database Args missing: PORT'
+  - file: $(PMAC)/db/pmacCSS.template
+    args:
+      Description:
+      ControlPort:
+      ControlIP:
+      P:
+      ControlMode:
+      NAME:
+    warning: 'Database Args missing: NAME'
+  - file: $(PMAC)/db/pmacStatusAxis.template
+    args:
+      PMAC:
+      PORT:
+      AXIS:
+    warning: 'Database Args missing: PORT, PMAC, AXIS'
+  - file: $(PMAC)/db/pmacController.template
+    args:
+      FEEDRATE:
+      CSG7:
+      CSG6:
+      CSG5:
+      CSG4:
+      CSG3:
+      CSG2:
+      CSG1:
+      CSG0:
+      P:
+      TIMEOUT:
+      NAXES:
+      PORT:
+    warning: 'Database Args missing: CSG7, CSG6, CSG5, CSG4, CSG3, CSG2, CSG1, CSG0,
+      PORT'
+
+  pre_init:
+  - type: text
+    value: |
+      # Configure Model 3 Controller Driver (ControlerPort, LowLevelDriverPort, Address, Axes, MovingPoll, IdlePoll)
+      pmacCreateController("{{name}}", "{{PortName}}", 0, {{NAxes}}, {{MovingPoll}}, {{IdlePoll}})
+      # Configure Model 3 Axes Driver (Controler Port, Axis Count)
+      pmacCreateAxes("{{name}}", {{NAxes}})
+    warning: 'function Args missing: PortName, NAxes'
+
+- name: CS_aperture_slits
+  description: |-
+    Supporting template that allows setting of variables for a 
+    set of aperture slits
+
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: COORD
+    description: Co-ordinate system number
+  - type: str
+    name: APPV
+    description: Pv of real AP motor, e.g. $(P):XA
+  - type: str
+    name: AMPV
+    description: Pv of real AM motor, e.g. $(P):XB
+  - type: str
+    name: PREC
+    description: Precision to display variables
+    default: '3'
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
+
+  databases:
+  - file: $(PMAC)/db/aperture_slits.template
+    args:
+      name:
+      APPV:
+      COORD:
+      P:
+      PREC:
+      AMPV:
+      PORT:
+
+- name: CS_1jack_compensated
+  description: |-
+    Supporting template that allows setting of variables for a 
+    2jack CS
+
+  args:
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: P
+    description: Pv Prefix
+  - type: str
+    name: COORD
+    description: Co-ordinate system number
+  - type: str
+    name: PREC
+    description: Precision to display variables
+    default: '3'
+  - type: str
+    name: JPV
+    description: Pv of real Jack motor, e.g. $(P):JACK
+    default: $(P):JACK
+  - type: str
+    name: TPV
+    description: Pv of real Translation motor, e.g. $(P):Y
+    default: $(P):Y
+  - type: id
+    name: name
+    description: This associates an edm screen with the template
+
+  databases:
+  - file: $(PMAC)/db/1jack_compensated.template
+    args:
+      name:
+      TPV:
+      COORD:
+      P:
+      PREC:
+      PORT:
+      JPV:
+
+- name: GeoBricketteMStop
+  description: |-
+    To read the motion stop info and interpret the status for a pmac GeoBrickette.  They do motion stop in firmware and (unlike earlier pmac models like GeoBricks and pmac/umac systems) do not need PLC2.
+
+  args:
+  - type: str
+    name: P
+    description: Mandatory.                           The PV device name prefix for
+      the GeoBrickette for the motion stop.
+  - type: str
+    name: PORT
+    description: Mandatory.                           The PMAC GeoBrickette serial
+      comms port.
+  - type: str
+    name: TIMEOUT
+    description: Optional.  Defaults to 5.            The asyn timeout - the EPICS
+      aysn record TMOT fields.
+    default: '5'
+  - type: str
+    name: SCAN
+    description: Optional.  Defaults to 5 second.     The scan rate on the status
+      records - the EPICS record SCAN fields.
+    default: 5 second
+  - type: str
+    name: mstop_VAR
+    description: Optional.  Defaults to M7647.        The pmac variable containing
+      the Motion stop status.
+    default: M7647
+  - type: str
+    name: active_VAR
+    description: Optional.  Defaults to I35.          The pmac variable containing
+      the Motion stop active status.  If this is not set to active then the GeoBrickette
+      will IGNORE its motion stop input signal.  While it is sometimes made inactive
+      during commissioning, it should not be the case during operation when it should
+      be active.
+    default: I35
+  - type: str
+    name: mstop_R
+    description: Optional.  Defaults to :MOTIONSTOP   The record prefix for motion
+      stop.
+    default: :MOTIONSTOP
+  - type: str
+    name: mstop_DESC
+    description: Optional.  Defaults to motion stop.  The description of the motion
+      stop signal.
+    default: motion stop
+  - type: str
+    name: mstop_ZNAM
+    description: Optional.  Defaults to Stopped.      The zero value string label
+      for the Motion Stop status - the EPICS record ZNAM field.
+    default: Stopped
+  - type: str
+    name: mstop_ONAM
+    description: Optional.  Defaults to Not Stopped.  The one value string label for
+      the Motion Stop status - the EPICS record ONAM field.
+    default: Not Stopped
+  - type: str
+    name: mstop_ZSV
+    description: Optional.  Defaults to MAJOR.        The zero value motion stop alarm
+      severity - the EPICS record ZSV field.
+    default: MAJOR
+  - type: str
+    name: mstop_OSV
+    description: Optional.  Defaults to NO_ALARM.     The one value motion stop alarm
+      severity - the EPICS record OSV field.
+    default: NO_ALARM
+  - type: str
+    name: active_R
+    description: Optional.  Defaults to :MOTIONSTOP_ACTIVE   The record prefix for
+      active status.
+    default: :MOTIONSTOP_ACTIVE
+  - type: str
+    name: active_DESC
+    description: Optional.  Defaults to mstop active. The description of the motion
+      stop signal.
+    default: mstop active
+  - type: str
+    name: active_ZNAM
+    description: Optional.  Defaults to Not Active.   The zero value string label
+      for the active status - the EPICS record ZNAM field.
+    default: Not Active
+  - type: str
+    name: active_ONAM
+    description: Optional.  Defaults to Active.       The one value string label for
+      the active status - the EPICS record ONAM field.
+    default: Active
+  - type: str
+    name: active_ZSV
+    description: Optional.  Defaults to MINOR.        The zero value alarm severity
+      for the active status - the EPICS record ZSV field.
+    default: MINOR
+  - type: str
+    name: active_OSV
+    description: Optional.  Defaults to NO_ALARM.     The one value alarm severity
+      for the active status - the EPICS record OSV field.
+    default: NO_ALARM
+
+  databases:
+  - file: $(PMAC)/db/geobrickette_motion_stop.template
+    args:
+      active_DESC:
+      mstop_ZNAM:
+      active_OSV:
+      active_VAR:
+      SCAN:
+      mstop_ZSV:
+      P:
+      mstop_R:
+      active_ONAM:
+      active_ZNAM:
+      mstop_DESC:
+      mstop_VAR:
+      active_R:
+      TIMEOUT:
+      active_ZSV:
+      mstop_ONAM:
+      PORT:
+      mstop_OSV:
+
+- name: RunCommand
+  description: |-
+    TODO:ADD DESCRIPTION
+
+  args:
+  - type: id
+    name: name
+    description: Object name
+  - type: str
+    name: P
+    description: PV prefix
+  - type: str
+    name: R
+    description: PV prefix
+  - type: object
+    name: BRICK
+    description: Geobrick/PMAC
+  - type: str
+    name: COMMAND
+    description: Command
+  - type: str
+    name: DESC
+    description: Description
+
+  databases:
+  - file: $(PMAC)/db/run_command.template
+    args:
+      name:
+      P:
+      R:
+      COMMAND:
+      PORT:
+      DESC:
+    warning: 'Database Args missing: PORT'
+
+- name: pmacVariableReadLED
+  description: |-
+    Simple template that reads an integer variable on a PMAC or
+    GeoBrick which can have a value of 1 or 0 and uses an LED widget.
+
+  args:
+  - type: str
+    name: P
+    description: PV prefix
+  - type: str
+    name: Q
+    description: PV suffix
+  - type: object
+    name: PORT
+    description: Delta tau motor controller comms port
+  - type: str
+    name: VAR
+    description: Variable on PMAC to read from, e.g. P700
+  - type: str
+    name: LABEL
+    description: Label for GUI
+  - type: str
+    name: SPEED
+    description: Speed to read at (F=motor scan rates, M=medium (2s), S=slow (5s))
+    default: M
+  - type: str
+    name: ONAM
+    description: One name
+    default: On
+  - type: str
+    name: ZNAM
+    description: Zero name
+    default: Off
+  - type: str
+    name: OSV
+    description: One severity
+    default: NO_ALARM
+  - type: str
+    name: ZSV
+    description: Zero severity
+    default: NO_ALARM
+  - type: id
+    name: name
+    description: Template argument
+
+  databases:
+  - file: $(PMAC)/db/pmacVariableReadLED.template
+    args:
+      ZSV:
+      name:
+      ONAM:
+      ZNAM:
+      LABEL:
+      Q:
+      P:
+      VAR:
+      OSV:
+      SPEED:
+      PORT:
