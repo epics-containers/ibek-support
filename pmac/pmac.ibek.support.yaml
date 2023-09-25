@@ -82,7 +82,7 @@ defs:
   - type: text
     value: |
       pmacSetCoordStepsPerUnit("{{Ref}}", {{Axis}}, {{Scale}})
-    warning: 'function Args missing: Ref'
+ # TODO - MISSING ARGS: Ref
 
 - name: RunPlc
   description: |-
@@ -104,13 +104,12 @@ defs:
 
   databases:
   - file: $(PMAC)/db/run_plc.template
-    args:
+    args:  # TODO - MISSING ARGS: P, PORT
       P:
       DESC:
       PLC:
       name:
       PORT:
-    warning: 'Database Args missing: P, PORT'
 
 - name: CS_zform
   description: |-
@@ -232,7 +231,7 @@ defs:
   - type: text
     value: |
       pmacSetOpenLoopEncoderAxis("{{ControllerPort}}", {{Axis}}, {{Encoder_axis}})
-    warning: 'function Args missing: ControllerPort'
+ # TODO - MISSING ARGS: ControllerPort
 
 - name: dls_pmac_cs_asyn_motor
   description: |-
@@ -418,7 +417,7 @@ defs:
 
   databases:
   - file: $(PMAC)/db/dls_pmac_cs_asyn_motor.template
-    args:
+    args:  # TODO - MISSING ARGS: CS, PMAC
       VELO:
       HOMEVISSTR:
       SCALE:
@@ -471,7 +470,6 @@ defs:
       NTM:
       TWV:
       gda_desc:
-    warning: 'Database Args missing: CS, PMAC'
 
 - name: pmacDisableLimitsCheck
   description: |-
@@ -489,7 +487,7 @@ defs:
   - type: text
     value: |
       pmacDisableLimitsCheck("{{ControllerPort}}", {{Axis}}, 0)
-    warning: 'function Args missing: ControllerPort'
+ # TODO - MISSING ARGS: ControllerPort
 
 - name: pmacAsynSSHPort
   description: |-
@@ -735,7 +733,7 @@ defs:
 
   databases:
   - file: $(PMAC)/db/autohome.template
-    args:
+    args:  # TODO - MISSING ARGS: CTRL
       CTRL:
       GRP10:
       PORT:
@@ -767,7 +765,6 @@ defs:
       PLC:
       STATUSSV14:
       STATUS14:
-    warning: 'Database Args missing: CTRL'
 
 - name: CS_IDT_sagittal_dcm
   description: |-
@@ -922,7 +919,7 @@ defs:
   - type: text
     value: |
       pmacMonitorVariables("{{ControllerPort}}", "{{Variables}}")
-    warning: 'function Args missing: ControllerPort'
+ # TODO - MISSING ARGS: ControllerPort
 
 - name: CS_gap_and_centre_slits
   description: |-
@@ -987,7 +984,7 @@ defs:
 
   databases:
   - file: $(PMAC)/db/symetrie_hexapod.template
-    args:
+    args:  # TODO - MISSING ARGS: BRICK
       name:
       RX:
       RY:
@@ -997,7 +994,6 @@ defs:
       COORD:
       BRICK:
       PORT:
-    warning: 'Database Args missing: BRICK'
 
   pre_init:
   - type: text
@@ -1321,7 +1317,7 @@ defs:
 
   databases:
   - file: $(PMAC)/db/dls_pmac_asyn_motor.template
-    args:
+    args:  # TODO - MISSING ARGS: PMAC
       VELO:
       HOMEVISSTR:
       SCALE:
@@ -1376,7 +1372,6 @@ defs:
       NTM:
       TWV:
       gda_desc:
-    warning: 'Database Args missing: PMAC'
 
 - name: PowerPMAC
   description: |-
@@ -1420,7 +1415,7 @@ defs:
 
   databases:
   - file: $(PMAC)/db/pmacController.template
-    args:
+    args:  # TODO - MISSING ARGS: CSG7, CSG6, CSG5, CSG4, CSG3, CSG2, CSG1, CSG0, PORT
       FEEDRATE:
       CSG7:
       CSG6:
@@ -1434,19 +1429,15 @@ defs:
       TIMEOUT:
       NAXES:
       PORT:
-    warning: 'Database Args missing: CSG7, CSG6, CSG5, CSG4, CSG3, CSG2, CSG1, CSG0,
-      PORT'
   - file: $(PMAC)/db/pmacStatusAxis.template
-    args:
+    args:  # TODO - MISSING ARGS: PORT, PMAC, AXIS
       PMAC:
       PORT:
       AXIS:
-    warning: 'Database Args missing: PORT, PMAC, AXIS'
   - file: $(PMAC)/db/powerPmacStatus.template
-    args:
+    args:  # TODO - MISSING ARGS: PORT
       P:
       PORT:
-    warning: 'Database Args missing: PORT'
 
   pre_init:
   - type: text
@@ -1455,7 +1446,7 @@ defs:
       pmacCreateController("{{name}}", "{{PortName}}", 0, {{NAxes}}, {{MovingPoll}}, {{IdlePoll}})
       # Configure Model 3 Axes Driver (Controler Port, Axis Count)
       pmacCreateAxes("{{name}}", {{NAxes}})
-    warning: 'function Args missing: PortName'
+ # TODO - MISSING ARGS: PortName
 
 - name: pmacVmeConfig
   description: |-
@@ -1564,13 +1555,12 @@ defs:
 
   databases:
   - file: $(PMAC)/db/pmacCsController.template
-    args:
+    args:  # TODO - MISSING ARGS: PMAC, PORT
       CS:
       PARENTPORT:
       PMAC:
       TIMEOUT:
       PORT:
-    warning: 'Database Args missing: PMAC, PORT'
 
   pre_init:
   - type: text
@@ -1579,7 +1569,7 @@ defs:
       pmacCreateCS("{{name}}", "{{PortName}}", {{CS}}, {{Program}})
       # Configure Model 3 CS Axes Driver (CSPortName, CSAxisCount)
       pmacCreateCSAxes("{{name}}", {{NAxes}})
-    warning: 'function Args missing: PortName'
+ # TODO - MISSING ARGS: PortName
 
 - name: CS_3jack
   description: |-
@@ -1666,14 +1656,13 @@ defs:
 
   databases:
   - file: $(PMAC)/db/pmacControllerTrajectory.template
-    args:
+    args:  # TODO - MISSING ARGS: NAxes, PMAC
       PMAC:
       PREC:
       NPOINTS:
       MAXPOINTS:
       NAxes:
       PORT:
-    warning: 'Database Args missing: NAxes, PMAC'
 
 - name: CS_blade_slits
   description: |-
@@ -1786,13 +1775,12 @@ defs:
 
   databases:
   - file: $(PMAC)/db/pmacStatusAxis.template
-    args:
+    args:  # TODO - MISSING ARGS: PORT, PMAC, AXIS
       PMAC:
       PORT:
       AXIS:
-    warning: 'Database Args missing: PORT, PMAC, AXIS'
   - file: $(PMAC)/db/pmacController.template
-    args:
+    args:  # TODO - MISSING ARGS: CSG7, CSG6, CSG5, CSG4, CSG3, CSG2, CSG1, CSG0, PORT
       FEEDRATE:
       CSG7:
       CSG6:
@@ -1806,8 +1794,6 @@ defs:
       TIMEOUT:
       NAXES:
       PORT:
-    warning: 'Database Args missing: CSG7, CSG6, CSG5, CSG4, CSG3, CSG2, CSG1, CSG0,
-      PORT'
 
   pre_init:
   - type: text
@@ -1816,7 +1802,7 @@ defs:
       pmacCreateController("{{name}}", "{{PortName}}", 0, {{NAxes}}, {{MovingPoll}}, {{IdlePoll}})
       # Configure Model 3 Axes Driver (Controler Port, Axis Count)
       pmacCreateAxes("{{name}}", {{NAxes}})
-    warning: 'function Args missing: PortName'
+ # TODO - MISSING ARGS: PortName
 
 - name: moveAxesToSafeSlave
   description: |-
@@ -1907,27 +1893,24 @@ defs:
 
   databases:
   - file: $(PMAC)/db/pmacStatus.template
-    args:
+    args:  # TODO - MISSING ARGS: PORT
       P:
       PORT:
-    warning: 'Database Args missing: PORT'
   - file: $(PMAC)/db/pmacCSS.template
-    args:
+    args:  # TODO - MISSING ARGS: NAME
       Description:
       ControlPort:
       ControlIP:
       P:
       ControlMode:
       NAME:
-    warning: 'Database Args missing: NAME'
   - file: $(PMAC)/db/pmacStatusAxis.template
-    args:
+    args:  # TODO - MISSING ARGS: PORT, PMAC, AXIS
       PMAC:
       PORT:
       AXIS:
-    warning: 'Database Args missing: PORT, PMAC, AXIS'
   - file: $(PMAC)/db/pmacController.template
-    args:
+    args:  # TODO - MISSING ARGS: CSG7, CSG6, CSG5, CSG4, CSG3, CSG2, CSG1, CSG0, PORT
       FEEDRATE:
       CSG7:
       CSG6:
@@ -1941,8 +1924,6 @@ defs:
       TIMEOUT:
       NAXES:
       PORT:
-    warning: 'Database Args missing: CSG7, CSG6, CSG5, CSG4, CSG3, CSG2, CSG1, CSG0,
-      PORT'
 
   pre_init:
   - type: text
@@ -1951,7 +1932,7 @@ defs:
       pmacCreateController("{{name}}", "{{PortName}}", 0, {{NAxes}}, {{MovingPoll}}, {{IdlePoll}})
       # Configure Model 3 Axes Driver (Controler Port, Axis Count)
       pmacCreateAxes("{{name}}", {{NAxes}})
-    warning: 'function Args missing: PortName, NAxes'
+ # TODO - MISSING ARGS: PortName, NAxes
 
 - name: CS_aperture_slits
   description: |-
@@ -2180,14 +2161,13 @@ defs:
 
   databases:
   - file: $(PMAC)/db/run_command.template
-    args:
+    args:  # TODO - MISSING ARGS: PORT
       name:
       P:
       R:
       COMMAND:
       PORT:
       DESC:
-    warning: 'Database Args missing: PORT'
 
 - name: pmacVariableReadLED
   description: |-

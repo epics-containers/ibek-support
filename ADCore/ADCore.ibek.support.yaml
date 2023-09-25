@@ -382,7 +382,7 @@ defs:
 
   databases:
   - file: $(ADCORE)/db/NDStats.template
-    args:
+    args:  # TODO - MISSING ARGS: SCANRATE, TS_PORT
       NDARRAY_PORT:
       ADDR:
       SCANRATE:
@@ -397,7 +397,6 @@ defs:
       XSIZE:
       TS_PORT:
       PORT:
-    warning: 'Database Args missing: SCANRATE, TS_PORT'
 
   pre_init:
   - type: text
@@ -412,7 +411,7 @@ defs:
       # NDTimeSeriesConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxSignals)
       NDTimeSeriesConfigure("{{PORT}}_TS", {{QUEUE}}, {{BLOCK}}, "{{PORT}}", 1, 23)
       # Load time series records
-      dbLoadRecords("$(ADCORE)/db/NDTimeSeries.template",  "P={P},R={R}, PORT={PORT} ,ADDR={ADDR},TIMEOUT={TIMEOUT},NDARRAY_PORT={NDARRAY_PORT},NDARRAY_ADDR={NDARRAY_ADDR},NCHANS={NCHANS},ENABLED={ENABLED}")
+      dbLoadRecords("$(ADCORE)/db/NDTimeSeries.template",  "P={{P}},R={{R}}, PORT={{PORT}} ,ADDR={{ADDR}},TIMEOUT={{TIMEOUT}},NDARRAY_PORT={{NDARRAY_PORT}},NDARRAY_ADDR={{NDARRAY_ADDR}},NCHANS={{NCHANS}},ENABLED={{ENABLED}}")
 
 - name: NDOverlay
   description: |-
@@ -466,7 +465,7 @@ defs:
 
   databases:
   - file: $(ADCORE)/db/NDOverlayN.template
-    args:
+    args:  # TODO - MISSING ARGS: XPOS, NAME, YWIDTH, YSIZE, YPOS, O, SHAPE, XSIZE, XCENT, YCENT, XWIDTH
       XPOS:
       NAME:
       YWIDTH:
@@ -483,8 +482,6 @@ defs:
       XSIZE:
       PORT:
       ADDR:
-    warning: 'Database Args missing: XPOS, NAME, YWIDTH, YSIZE, YPOS, O, SHAPE, XSIZE,
-      XCENT, XWIDTH, YCENT'
   - file: $(ADCORE)/db/NDOverlay.template
     args:
       SCANRATE:
@@ -502,7 +499,7 @@ defs:
     value: |
       # NDOverlayConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, NOverlays, maxBuffers, maxMemory, priority, stackSize, maxThreads)
       NDOverlayConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{NOverlays}}, 0, 0, 0, 0, {{MAX_THREADS}})
-    warning: 'function Args missing: NOverlays'
+ # TODO - MISSING ARGS: NOverlays
 
 - name: NDFileNetCDF
   description: |-
@@ -1080,7 +1077,7 @@ defs:
       TIMEOUT:
       PORT:
   - file: $(ADCORE)/db/NDTimeSeriesN.template
-    args:
+    args:  # TODO - MISSING ARGS: NAME
       ADDR:
       NCHANS:
       P:
@@ -1088,7 +1085,6 @@ defs:
       TIMEOUT:
       PORT:
       NAME:
-    warning: 'Database Args missing: NAME'
 
   pre_init:
   - type: text
@@ -1148,12 +1144,11 @@ defs:
 
   databases:
   - file: $(ADCORE)/db/NDAttrPlotAttr.template
-    args:
+    args:  # TODO - MISSING ARGS: ATTR_IND
       P:
       R:
       PORT:
       ATTR_IND:
-    warning: 'Database Args missing: ATTR_IND'
   - file: $(ADCORE)/db/NDAttrPlot.template
     args:
       SCANRATE:
@@ -1166,7 +1161,7 @@ defs:
       TIMEOUT:
       PORT:
   - file: $(ADCORE)/db/NDAttrPlotData.template
-    args:
+    args:  # TODO - MISSING ARGS: DATA_IND, DATA_ADDR, AXIS
       DATA_ADDR:
       P:
       DATA_IND:
@@ -1174,13 +1169,12 @@ defs:
       N_CACHE:
       PORT:
       AXIS:
-    warning: 'Database Args missing: DATA_IND, AXIS, DATA_ADDR'
 
   pre_init:
   - type: text
     value: |
       NDAttrPlotConfig("{{PORT}}", {{N_ATTRS}}, {{N_CACHE}}, 
-    warning: 'function Args missing: N_ATTRS'
+ # TODO - MISSING ARGS: N_ATTRS
 
 - name: NDFileTIFF
   description: |-
@@ -1447,7 +1441,7 @@ defs:
 
   databases:
   - file: $(ADCORE)/db/NDAttributeN.template
-    args:
+    args:  # TODO - MISSING ARGS: TS_PORT
       ADDR:
       NCHANS:
       P:
@@ -1455,7 +1449,6 @@ defs:
       TIMEOUT:
       TS_PORT:
       PORT:
-    warning: 'Database Args missing: TS_PORT'
   - file: $(ADCORE)/db/NDAttribute.template
     args:
       SCANRATE:
@@ -1477,11 +1470,12 @@ defs:
   - type: text
     value: |
       # NDAttrConfigure(portName, queueSize, blockingCallbacks, 
-      NDAttrConfigure("{PORT}", {QUEUE}, {BLOCK}, 
+      NDAttrConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, 
       # NDTimeSeriesConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxSignals)
-      NDTimeSeriesConfigure("{PORT:s}_TS", {QUEUE:d}, {BLOCK:d}, "{PORT:s}", 1, {MAX_ATTRIBUTES:d})
+      NDTimeSeriesConfigure("{{PORT}}_TS", {{QUEUE}}, {{BLOCK}}, "{{PORT}}", 1, {{MAX_ATTRIBUTES}})
       # Load time series records
-      dbLoadRecords("$(ADCORE)/db/NDTimeSeries.template","P={P},R={R_TS},PORT={PORT}_TS,ADDR=0,TIMEOUT={TIMEOUT},NDARRAY_PORT={PORT},NDARRAY_ADDR=1,NCHANS={MAX_ATTRIBUTES},ENABLED=1")
+      dbLoadRecords("$(ADCORE)/db/NDTimeSeries.template","P={{P}},R={{R_TS}},PORT={{PORT}}_TS,ADDR=0,TIMEOUT={{TIMEOUT}},NDARRAY_PORT={{PORT}},NDARRAY_ADDR=1,NCHANS={{MAX_ATTRIBUTES}},ENABLED=1")
+ # TODO - MISSING ARGS: R_TS
 
 - name: NDPosPlugin
   description: |-
@@ -1832,7 +1826,7 @@ defs:
 
   databases:
   - file: $(ADCORE)/db/NDGatherN.template
-    args:
+    args:  # TODO - MISSING ARGS: N
       NDARRAY_PORT:
       ADDR:
       NDARRAY_ADDR:
@@ -1841,9 +1835,8 @@ defs:
       R:
       TIMEOUT:
       PORT:
-    warning: 'Database Args missing: N'
   - file: $(ADCORE)/db/NDGather.template
-    args:
+    args:  # TODO - MISSING ARGS: MAX_PORTS
       SCANRATE:
       ADDR:
       NDARRAY_PORT:
@@ -1854,7 +1847,6 @@ defs:
       R:
       TIMEOUT:
       PORT:
-    warning: 'Database Args missing: MAX_PORTS'
 
 - name: NDROIStat
   description: |-
@@ -1940,4 +1932,4 @@ defs:
   - type: text
     value: |
       # NDROIStatConfigure(portName, queueSize, blockingCallbacks, 
-      NDROIStatConfigure("{PORT}", {QUEUE}, {BLOCK}, 
+      NDROIStatConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, 
