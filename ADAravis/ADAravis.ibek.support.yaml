@@ -1,95 +1,61 @@
-# yaml-language-server: $schema=../_global/ibek.defs.schema.json
+ # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.1.0/ibek.support.schema.json
 
 module: ADAravis
 
 defs:
-  - name: ADAravis
-    description: Defines an ADAravis camera (requires associated ADGenicam instance)
-    args:
-      - type: id
-        name: PORT
-        description: Port Name for teh camera
 
-      - type: str
-        name: P
-        description: The PV prefix
+- name: iocbuilder.modules.ADAravis.aravisCamera
+  description: |-
+    Creates a aravisCamera camera areaDetector driver
 
-      - type: str
-        name: R
-        description: The PV suffix
+  args:
+  - type: str
+    name: P
+    description: PV Prefix
+  - type: str
+    name: R
+    description: PV Suffix
+  - type: id
+    name: PORT
+    description: Port name for the camera
+  - type: str
+    name: ID
+    description: Cam ip address, hostname, MAC address, or ID <manufacturer>-<serial>,
+      (e.g. Prosilica-02-2166A-06844)
+  - type: enum
+    name: CLASS
+    description: Camera class for custom commands
+  - type: enum
+    name: PV_ALIAS
+    description: Use alias template to keep some key PV names the same
+  - type: int
+    name: BUFFERS
+    description: Maximum number of NDArray buffers to be created for plugin callbacks
+    default: 50
+  - type: int
+    name: MEMORY
+    description: Max memory to allocate, should be maxw*maxh*nbuffer for driver and
+      all attached plugins
+    default: -1
 
-      - type: str
-        name: ID
-        description: |
-          Cam ip address, hostname, MAC address, or ID <manufacturer>-<serial>,
-          (e.g. Prosilica-02-2166A-06844)
+  databases:
+  - file: $(ADARAVIS)/db/aravisCamera.template
+    args:  # TODO - MISSING ARGS: ADDR, TIMEOUT
+      P:
+      R:
+      ADDR:
+      TIMEOUT:
+      PORT:
+  - file: $(ADGENICAM)/db/AVT_Mako_1_52.template
+    args:  # TODO - MISSING ARGS: ADDR, TIMEOUT
+      P:
+      R:
+      ADDR:
+      TIMEOUT:
+      PORT:
 
-      - type: int
-        name: BUFFERS
-        description: Max NDArray buffers to be created for plugin callbacks
-        default: 50
-
-      - type: int
-        name: MEMORY
-        description: |
-          Max memory to allocate, should be maxw*maxh*nbuffer
-          for driver and all attached plugins or -1 for unlimited
-        default: -1
-
-      - type: int
-        name: TIMEOUT
-        description: timeout for communication with camera
-        default: 1
-
-      - type: str
-        name: PV_ALIAS
-        description: |
-          TODO this need to look into the purpose of this in builder.py
-          determine its function and see if we can do the equivalent in ibek
-        default: ""
-
-    pre_init:
-      - type: function
-        name: aravisConfig
-        args:
-          AsynPortName: "{{ PORT }}"
-          IpAddressOrName: "{{ ID }}"
-          MaxMemory: "{{ MEMORY }}"
-          Priority: 0
-          StackSize: 1
-
-    databases:
-      - file: aravisCamera.template
-        args: { P, R, PORT, TIMEOUT, CHANNEL: "0" }
-
-  - name: MantaG235B
-    description: Defines a Manta G-235B camera instance
-    args:
-      - type: object
-        name: camera
-        description: reference to ADAravis.ADAravis instance
-
-    databases:
-      - file: AVT_Manta_G235B.template
-        args:
-          P: "{{ camera.P }}"
-          R: "{{ camera.R }}"
-          PORT: "{{ camera.PORT }}"
-          TIMEOUT: "{{ camera.TIMEOUT }}"
-          ADDR: "0"
-
-  - name: Mako_G234B
-    description: Defines a Mako G-234B camera instance
-    args:
-      - type: object
-        name: camera
-        description: reference to ADAravis.ADAravis instance
-
-    databases:
-      - file: AVT_Mako_G234B.template
-        args:
-          P: "{{ camera.P }}"
-          R: "{{ camera.R }}"
-          PORT: "{{ camera.PORT }}"
-          TIMEOUT: "{{ camera.TIMEOUT }}"
-          ADDR: "0"
+  pre_init:
+  - type: text
+    value: |
+      aravisConfig(const char *portName, const char *cameraName, size_t maxMemory, int priority, int stackSize)
+      aravisConfig("{{PORT}}", "{{ID}}", {{MEMORY}}, 0, 1)
