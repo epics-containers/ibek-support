@@ -1,4 +1,4 @@
- # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.1.0/ibek.support.schema.json
+ # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.1.1/ibek.support.schema.json
 
 module: ADCore
 
@@ -46,6 +46,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -122,6 +133,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: str
     name: TIME_LINK
     description: |-
@@ -219,6 +241,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -327,6 +360,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -467,6 +511,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -544,6 +599,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: str
     name: XMLSIZE
     description: |-
@@ -606,6 +672,17 @@ defs:
     name: FTVL
     description: |-
       Field Type of Value
+    values:
+      ENUM:
+      SHORT:
+      STRING:
+      ULONG:
+      UCHAR:
+      DOUBLE:
+      USHORT:
+      LONG:
+      FLOAT:
+      CHAR:
   - type: str
     name: NELEMENTS
     description: |-
@@ -634,6 +711,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -716,6 +804,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: str
     name: PRECOUNT
     description: |-
@@ -786,6 +885,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -859,6 +969,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: str
     name: PRECOUNT
     description: |-
@@ -948,6 +1069,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -1028,6 +1160,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -1098,6 +1241,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -1184,6 +1338,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -1262,6 +1427,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -1396,6 +1572,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: str
     name: TS_PORT
     description: |-
@@ -1481,6 +1668,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: str
     name: TIME_LINK
     description: |-
@@ -1567,16 +1765,32 @@ defs:
     description: |-
       Where the data should be picked up from
     default: EPICS_PV
+    values:
+      EPICS_PV:
+      PARAM:
   - type: enum
     name: dbrtype
     description: |-
       DBR type (only used if type=EPICS_PV)
     default: DBR_NATIVE
+    values:
+      DBR_STRING:
+      DBR_INT:
+      DBR_NATIVE:
+      DBR_SHORT:
+      DBR_CHAR:
+      DBR_ENUM:
+      DBR_LONG:
+      DBR_FLOAT:
   - type: enum
     name: datatype
     description: |-
       Data type (only used if type=PARAM)
     default: INT
+    values:
+      INT:
+      DOUBLE:
+      STRING:
   - type: str
     name: description
     description: |-
@@ -1635,6 +1849,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -1708,6 +1933,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -1773,6 +2009,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -1867,6 +2114,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -1963,6 +2221,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -2039,6 +2308,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -2120,6 +2400,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -2197,6 +2488,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: QUEUE
     description: |-
@@ -2269,6 +2571,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: NAME
     description: |-

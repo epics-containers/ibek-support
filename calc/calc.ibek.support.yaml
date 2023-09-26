@@ -1,0 +1,5 @@
+ # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.1.1/ibek.support.schema.json
+
+module: calc
+
+defs: []

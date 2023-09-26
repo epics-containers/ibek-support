@@ -1,4 +1,4 @@
- # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.1.0/ibek.support.schema.json
+ # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.1.1/ibek.support.schema.json
 
 module: zebra
 
@@ -67,6 +67,17 @@ defs:
     description: |-
       Specified scan rate for cpu intensive PVs
     default: I/O Intr
+    values:
+      .1 second:
+      1 second:
+      10 second:
+      5 second:
+      Passive:
+      2 second:
+      .2 second:
+      .5 second:
+      Event:
+      I/O Intr:
   - type: int
     name: NELM
     description: |-
