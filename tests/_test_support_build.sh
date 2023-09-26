@@ -100,6 +100,8 @@ for dockerfile in ${DOCKERFILES}; do
         fi
     done
 
+    $docker stop -t0 test_me
+
     # The above check is sufficient to show that the generic IOC will load and
     # run and that all the necessary runtime libraries are in place.
 
