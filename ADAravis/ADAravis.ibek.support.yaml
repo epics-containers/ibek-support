@@ -1,10 +1,12 @@
- # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.1.1/ibek.support.schema.json
+ # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
 
 module: ADAravis
 
 defs:
 
 - name: ADAravis.aravisCamera
+  description: |-
+    Creates a aravisCamera camera areaDetector driver
   args:
   - type: str
     name: P
@@ -83,8 +85,6 @@ defs:
     description: |-
       Asyn Port address, default 0
     default: '0'
-  description: |-
-    Creates a aravisCamera camera areaDetector driver
 
   databases:
   - file: $(ADARAVIS)/db/aravisCamera.template

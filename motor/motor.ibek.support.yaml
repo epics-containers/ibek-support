@@ -1,25 +1,31 @@
- # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.1.0/ibek.support.schema.json
+ # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
 
 module: motor
 
 defs:
-- args:
+
+- name: motor.common.motorUtil
+  description: |-
+    TODO:ADD DESCRIPTION
+  args:
   - type: str
     name: P
     description: |-
       Device Prefix
-  name: motor.common.motorUtil
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(MOTOR)/db/motorUtil.template
     args:
       P:
+
   post_init:
   - value: |
       motorUtilInit("{{P}}")
-- args:
+
+- name: motor.common.basic_asyn_motor
+  description: |-
+    Basic template, including motor record and associated tags
+  args:
   - type: str
     name: P
     description: |-
@@ -246,9 +252,6 @@ defs:
     description: |-
       Description to export this as to GDA
     default: $(DESC)
-  name: motor.common.basic_asyn_motor
-  description: |-
-    Basic template, including motor record and associated tags
 
   databases:
   - file: $(MOTOR)/db/basic_asyn_motor.template
@@ -303,7 +306,11 @@ defs:
       TWV:
       gda_desc:
       HOMEVISSTR:
-- args:
+
+- name: motor.common.softMotorForPiezo
+  description: |-
+    TODO:ADD DESCRIPTION
+  args:
   - type: str
     name: P
     description: |-
@@ -367,9 +374,6 @@ defs:
     name: gda_desc
     description: |-
       Description to export this as to GDA
-  name: motor.common.softMotorForPiezo
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(MOTOR)/db/softMotorForPiezo.template
@@ -389,7 +393,11 @@ defs:
       MOVEDLY:
       RDBD:
       DESC:
-- args:
+
+- name: motor.MotorSim.MotorSim
+  description: |-
+    Simulated controller Device - instantiate one per controller '''
+  args:
   - type: id
     name: name
     description: |-
@@ -409,9 +417,6 @@ defs:
     description: |-
       polling period when all motors are idle
     default: 500
-  name: motor.MotorSim.MotorSim
-  description: |-
-    Simulated controller Device - instantiate one per controller '''
 
   pre_init:
   - when: first

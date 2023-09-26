@@ -1,10 +1,13 @@
- # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.1.1/ibek.support.schema.json
+ # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
 
 module: pmac
 
 defs:
 
 - name: pmac.PowerPMAC
+  description: |-
+    This will create an asyn motor port for a PowerPMAC that we can attach
+        motor records to using the model 3 driver
   args:
   - type: object
     name: Port
@@ -92,9 +95,6 @@ defs:
     name: CSG7
     description: |-
       Name for Coordinate System Group 7
-  description: |-
-    This will create an asyn motor port for a PowerPMAC that we can attach
-        motor records to using the model 3 driver
 
   databases:
   - file: $(PMAC)/db/pmacStatusAxis.template
@@ -131,6 +131,9 @@ defs:
  # TODO - MISSING ARGS: PortName
 
 - name: pmac.CS_2jack
+  description: |-
+    Supporting template that allows setting of variables for a 
+    2jack CS
   args:
   - type: object
     name: PORT
@@ -163,9 +166,6 @@ defs:
     name: name
     description: |-
       This associates an edm screen with the template
-  description: |-
-    Supporting template that allows setting of variables for a 
-    2jack CS
 
   databases:
   - file: $(PMAC)/db/2jack.template
@@ -179,6 +179,8 @@ defs:
       name:
 
 - name: pmac._GeoBrickCSST
+  description: |-
+    Creates GUI tags for CSS screens
   args:
   - type: str
     name: NAME
@@ -204,8 +206,6 @@ defs:
     name: ControlMode
     description: |-
       dls-pmac-control.py Mode (tcp/ip or terminal server)
-  description: |-
-    Creates GUI tags for CSS screens
 
   databases:
   - file: $(PMAC)/db/pmacCSS.template
@@ -218,6 +218,9 @@ defs:
       NAME:
 
 - name: pmac.CS_aperture_slits
+  description: |-
+    Supporting template that allows setting of variables for a 
+    set of aperture slits
   args:
   - type: object
     name: PORT
@@ -248,9 +251,6 @@ defs:
     name: name
     description: |-
       This associates an edm screen with the template
-  description: |-
-    Supporting template that allows setting of variables for a 
-    set of aperture slits
 
   databases:
   - file: $(PMAC)/db/aperture_slits.template
@@ -264,6 +264,9 @@ defs:
       PORT:
 
 - name: pmac.CS_3jack
+  description: |-
+    Supporting template that allows setting of variables for a 
+    3jack CS
   args:
   - type: object
     name: PORT
@@ -301,9 +304,6 @@ defs:
     name: name
     description: |-
       This associates an edm screen with the template
-  description: |-
-    Supporting template that allows setting of variables for a 
-    3jack CS
 
   databases:
   - file: $(PMAC)/db/3jack.template
@@ -318,6 +318,8 @@ defs:
       name:
 
 - name: pmac.CS_symetrie_hexapod
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: id
     name: name
@@ -359,8 +361,6 @@ defs:
     name: BRICK
     description: |-
       PV prefix for brick
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(PMAC)/db/symetrie_hexapod.template
@@ -380,6 +380,9 @@ defs:
       pmacNoCsVelocity("{{PORT}}")
 
 - name: pmac.pmacVariableReadLED
+  description: |-
+    Simple template that reads an integer variable on a PMAC or
+    GeoBrick which can have a value of 1 or 0 and uses an LED widget.
   args:
   - type: str
     name: P
@@ -430,9 +433,6 @@ defs:
     name: LABEL
     description: |-
       Label for GUI
-  description: |-
-    Simple template that reads an integer variable on a PMAC or
-    GeoBrick which can have a value of 1 or 0 and uses an LED widget.
 
   databases:
   - file: $(PMAC)/db/pmacVariableReadLED.template
@@ -450,6 +450,8 @@ defs:
       PORT:
 
 - name: pmac.dls_pmac_cs_asyn_motor
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: str
     name: P
@@ -677,8 +679,6 @@ defs:
     description: |-
       Description to export this as to GDA
     default: $(DESC)
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(PMAC)/db/dls_pmac_cs_asyn_motor.template
@@ -735,6 +735,8 @@ defs:
       HOMEVISSTR:
 
 - name: pmac.CS_zform
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: object
     name: PORT
@@ -748,8 +750,6 @@ defs:
     name: P
     description: |-
       Pv Prefix
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(PMAC)/db/zform.template
@@ -759,6 +759,8 @@ defs:
       name:
 
 - name: pmac.autohome
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: str
     name: P
@@ -886,8 +888,6 @@ defs:
     name: DESC
     description: |-
       Description
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(PMAC)/db/autohome.template
@@ -924,6 +924,9 @@ defs:
       STATUSSV15:
 
 - name: pmac.CS_IDT_sagittal_dcm
+  description: |-
+    Supporting template that allows setting of variables for an 
+    IDT sagittal DCM CS
   args:
   - type: object
     name: PORT
@@ -941,9 +944,6 @@ defs:
     name: name
     description: |-
       This associates an edm screen with the template
-  description: |-
-    Supporting template that allows setting of variables for an 
-    IDT sagittal DCM CS
 
   databases:
   - file: $(PMAC)/db/IDT_sagittal_dcm.template
@@ -954,6 +954,9 @@ defs:
       name:
 
 - name: pmac.GeoBrickTrajectoryControlT
+  description: |-
+    Creates some PVs for executing trajectory scans on the pmac controller by
+           instantiating an instance of pmacTrajectoryAxis.template for each axis
   args:
   - type: object
     name: PORT
@@ -973,9 +976,6 @@ defs:
     description: |-
       precision of axis defnitions
     default: '3'
-  description: |-
-    Creates some PVs for executing trajectory scans on the pmac controller by
-           instantiating an instance of pmacTrajectoryAxis.template for each axis
 
   databases:
   - file: $(PMAC)/db/pmacControllerTrajectory.template
@@ -986,6 +986,8 @@ defs:
       PREC:
 
 - name: pmac._CsControlT
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: str
     name: PORT
@@ -1008,8 +1010,6 @@ defs:
     description: |-
       Timeout for controller communication
     default: '4'
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(PMAC)/db/pmacCsController.template
@@ -1021,6 +1021,9 @@ defs:
       PMAC:
 
 - name: pmac.CS_qcm
+  description: |-
+    Use this template with CS_qcm.pmc to implement
+    a mode for changing energy that only moves Bragg1.
   args:
   - type: object
     name: PORT
@@ -1055,9 +1058,6 @@ defs:
     name: name
     description: |-
       This associates an edm screen with the template
-  description: |-
-    Use this template with CS_qcm.pmc to implement
-    a mode for changing energy that only moves Bragg1.
 
   databases:
   - file: $(PMAC)/db/qcm.template
@@ -1072,6 +1072,10 @@ defs:
       name:
 
 - name: pmac._automhomeT
+  description: |-
+    Provides PVs to start and monitor homing via homing PLCs
+    that conform to the DLS standard. If you use custom homing states then be
+    sure to label them here
   args:
   - type: str
     name: P
@@ -1203,10 +1207,6 @@ defs:
     name: DESC
     description: |-
       Description
-  description: |-
-    Provides PVs to start and monitor homing via homing PLCs
-    that conform to the DLS standard. If you use custom homing states then be
-    sure to label them here
 
   databases:
   - file: $(PMAC)/db/autohome.template
@@ -1244,6 +1244,9 @@ defs:
       STATUSSV15:
 
 - name: pmac.pmacVariableWrite
+  description: |-
+    Simple template that reads and writes to a variable on a 
+    PMAC or geoBrick via dynamic parameters.
   args:
   - type: str
     name: P
@@ -1287,9 +1290,6 @@ defs:
     name: LABEL
     description: |-
       Label for GUI
-  description: |-
-    Simple template that reads and writes to a variable on a 
-    PMAC or geoBrick via dynamic parameters.
 
   databases:
   - file: $(PMAC)/db/pmacVariableWrite.template
@@ -1306,6 +1306,9 @@ defs:
       PORT:
 
 - name: pmac._pmacStatusT
+  description: |-
+    Creates some PVs for monitoring status of the pmac controller,
+        not compatible with power Pmac
   args:
   - type: str
     name: PORT
@@ -1315,9 +1318,6 @@ defs:
     name: P
     description: |-
       PV Prefix
-  description: |-
-    Creates some PVs for monitoring status of the pmac controller,
-        not compatible with power Pmac
 
   databases:
   - file: $(PMAC)/db/pmacStatus.template
@@ -1326,6 +1326,8 @@ defs:
       PORT:
 
 - name: pmac.moveAxesToSafeSlave
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: object
     name: MASTER
@@ -1343,10 +1345,10 @@ defs:
     name: THRESHOLD
     description: |-
       In safe position threshold in EGUs
-  description: |-
-    TODO:ADD DESCRIPTION
 
 - name: pmac.pmacAsynSSHPort
+  description: |-
+    This will create an AsynPort connecting to a PowerPMAC over SSH
   args:
   - type: id
     name: name
@@ -1382,8 +1384,6 @@ defs:
     name: simulation
     description: |-
       IP port to connect to if in simulation mode
-  description: |-
-    This will create an AsynPort connecting to a PowerPMAC over SSH
 
   pre_init:
   - value: |
@@ -1391,6 +1391,8 @@ defs:
       drvAsynPowerPMACPortConfigure("{{name}}", "{{IP}}", "{{USERNAME}}", "{{PASSWORD}}", "{{PRIORITY}}", "{{NOAUTOCONNECT}}", "{{NOEOS}}")
 
 - name: pmac.EncoderReadback
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: id
     name: name
@@ -1442,8 +1444,6 @@ defs:
       2 second:
       .2 second:
       .5 second:
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(PMAC)/db/encoder_readback.template
@@ -1460,6 +1460,8 @@ defs:
       AXIS:
 
 - name: pmac.RunCommand
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: id
     name: name
@@ -1489,8 +1491,6 @@ defs:
     name: PORT
     description: |-
       PMAC controller Port
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(PMAC)/db/run_command.template
@@ -1503,6 +1503,8 @@ defs:
       DESC:
 
 - name: pmac._moveAxesToSafeTrig
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: str
     name: A1
@@ -1560,10 +1562,11 @@ defs:
     name: INPOS_CALC
     description: |-
       Template argument
-  description: |-
-    TODO:ADD DESCRIPTION
 
 - name: pmac.CS_IDT_sagittal_bender
+  description: |-
+    Supporting template that allows setting of variables for an 
+    IDT sagittal DCM CS
   args:
   - type: object
     name: PORT
@@ -1581,9 +1584,6 @@ defs:
     name: name
     description: |-
       This associates an edm screen with the template
-  description: |-
-    Supporting template that allows setting of variables for an 
-    IDT sagittal DCM CS
 
   databases:
   - file: $(PMAC)/db/IDT_sagittal_bender.template
@@ -1594,6 +1594,8 @@ defs:
       name:
 
 - name: pmac.pmacDisableLimitsCheck
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: object
     name: Controller
@@ -1603,8 +1605,6 @@ defs:
     name: Axis
     description: |-
       Axis number to disable limit check, defaults to all
-  description: |-
-    TODO:ADD DESCRIPTION
 
   pre_init:
   - value: |
@@ -1612,6 +1612,8 @@ defs:
  # TODO - MISSING ARGS: ControllerPort
 
 - name: pmac.RunPlc
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: id
     name: name
@@ -1637,8 +1639,6 @@ defs:
     name: PORT
     description: |-
       PMAC controller Port
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(PMAC)/db/run_plc.template
@@ -1650,6 +1650,8 @@ defs:
       name:
 
 - name: pmac.dls_pmac_asyn_motor
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: str
     name: P
@@ -1891,8 +1893,6 @@ defs:
     description: |-
       status manually.  This is set to a comment character by default.
     default: '#'
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(PMAC)/db/dls_pmac_asyn_motor.template
@@ -1952,6 +1952,9 @@ defs:
       HOMEVISSTR:
 
 - name: pmac.CS_multi_beamstop_on_platform
+  description: |-
+    Supporting template that allows setting of variables for a 
+    multi beamstop on platform CS
   args:
   - type: object
     name: PORT
@@ -1969,9 +1972,6 @@ defs:
     name: name
     description: |-
       This associates an edm screen with the template
-  description: |-
-    Supporting template that allows setting of variables for a 
-    multi beamstop on platform CS
 
   databases:
   - file: $(PMAC)/db/multi_beamstop_on_platform.template
@@ -1982,6 +1982,8 @@ defs:
       name:
 
 - name: pmac.pmacSetCoordStepsPerUnit
+  description: |-
+    Apply an integer scale factor to an axis on the PMAC
   args:
   - type: int
     name: CS
@@ -1995,8 +1997,6 @@ defs:
     name: Scale
     description: |-
       Scale factor the cts will be multiplied by before being passed to motor record
-  description: |-
-    Apply an integer scale factor to an axis on the PMAC
 
   pre_init:
   - value: |
@@ -2004,6 +2004,8 @@ defs:
  # TODO - MISSING ARGS: Ref
 
 - name: pmac._eloss_kill_autohome_records
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: str
     name: SPORT
@@ -2056,8 +2058,6 @@ defs:
     name: name
     description: |-
       Template argument
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(PMAC)/db/eloss_kill_autohome_records.template
@@ -2076,6 +2076,9 @@ defs:
       name:
 
 - name: pmac.CS_flexure_slits
+  description: |-
+    Supporting template that allows setting of variables for a 
+    set of flexure slits
   args:
   - type: object
     name: PORT
@@ -2098,9 +2101,6 @@ defs:
     name: name
     description: |-
       This associates an edm screen with the template
-  description: |-
-    Supporting template that allows setting of variables for a 
-    set of flexure slits
 
   databases:
   - file: $(PMAC)/db/flexure_slits.template
@@ -2112,6 +2112,8 @@ defs:
       PORT:
 
 - name: pmac.pmacCsGroupAddAxis
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: object
     name: Controller
@@ -2133,14 +2135,14 @@ defs:
     name: CoordSysNumber
     description: |-
       Axis number of axis to add to the group
-  description: |-
-    TODO:ADD DESCRIPTION
 
   pre_init:
   - value: |
       pmacCsGroupAddAxis({{Controller}}, {{GroupNumber}}, {{AxisNumber}}, {{AxisDef}}, {{CoordSysNumber}})
 
 - name: pmac._pmacStatusAxis
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: str
     name: PMAC
@@ -2154,8 +2156,6 @@ defs:
     name: PORT
     description: |-
       Asyn port
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(PMAC)/db/pmacStatusAxis.template
@@ -2165,6 +2165,8 @@ defs:
       PMAC:
 
 - name: pmac.GeoBricketteMStop
+  description: |-
+    To read the motion stop info and interpret the status for a pmac GeoBrickette.  They do motion stop in firmware and (unlike earlier pmac models like GeoBricks and pmac/umac systems) do not need PLC2.
   args:
   - type: str
     name: P
@@ -2254,8 +2256,6 @@ defs:
     description: |-
       Optional.  Defaults to NO_ALARM.     The one value alarm severity for the active status - the EPICS record OSV field.
     default: NO_ALARM
-  description: |-
-    To read the motion stop info and interpret the status for a pmac GeoBrickette.  They do motion stop in firmware and (unlike earlier pmac models like GeoBricks and pmac/umac systems) do not need PLC2.
 
   databases:
   - file: $(PMAC)/db/geobrickette_motion_stop.template
@@ -2280,6 +2280,9 @@ defs:
       active_OSV:
 
 - name: pmac._powerPmacStatusT
+  description: |-
+    Creates some PVs for monitoring status of the power pmac controller,
+        not compatible with pmac
   args:
   - type: str
     name: PORT
@@ -2289,9 +2292,6 @@ defs:
     name: P
     description: |-
       PV Prefix
-  description: |-
-    Creates some PVs for monitoring status of the power pmac controller,
-        not compatible with pmac
 
   databases:
   - file: $(PMAC)/db/powerPmacStatus.template
@@ -2300,6 +2300,8 @@ defs:
       PORT:
 
 - name: pmac.pmacAsynIPPort
+  description: |-
+    This will create an AsynPort connecting to a PMAC or GeoBrick over IP
   args:
   - type: id
     name: name
@@ -2313,8 +2315,6 @@ defs:
     name: simulation
     description: |-
       IP port to connect to if in simulation mode
-  description: |-
-    This will create an AsynPort connecting to a PMAC or GeoBrick over IP
 
   pre_init:
   - value: |
@@ -2322,6 +2322,9 @@ defs:
       pmacAsynIPConfigure("{{name}}", "{{IP}}")
 
 - name: pmac.pmacVariableRead
+  description: |-
+    Simple template that reads a variable on a 
+    PMAC or geoBrick via dynamic parameters.
   args:
   - type: str
     name: P
@@ -2370,9 +2373,6 @@ defs:
     name: LABEL
     description: |-
       Label for GUI
-  description: |-
-    Simple template that reads a variable on a 
-    PMAC or geoBrick via dynamic parameters.
 
   databases:
   - file: $(PMAC)/db/pmacVariableRead.template
@@ -2390,6 +2390,8 @@ defs:
       PORT:
 
 - name: pmac._motor_in_cs_records
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: str
     name: P
@@ -2407,8 +2409,6 @@ defs:
     name: ADDR
     description: |-
       Template argument
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(PMAC)/db/motor_in_cs.template
@@ -2419,6 +2419,8 @@ defs:
       ADDR:
 
 - name: pmac.moveAxesToSafeMaster
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: id
     name: name
@@ -2439,10 +2441,11 @@ defs:
       4:
       5:
       6:
-  description: |-
-    TODO:ADD DESCRIPTION
 
 - name: pmac.CS_blade_slits
+  description: |-
+    Supporting template that allows setting of variables for a 
+    set of blade slits
   args:
   - type: str
     name: P
@@ -2460,9 +2463,6 @@ defs:
     name: name
     description: |-
       This associates an edm screen with the template
-  description: |-
-    Supporting template that allows setting of variables for a 
-    set of blade slits
 
   databases:
   - file: $(PMAC)/db/blade_slits.template
@@ -2473,6 +2473,9 @@ defs:
       BMPV:
 
 - name: pmac.PMAC
+  description: |-
+    This will create an asyn motor port for a PMAC that we can attach
+        motor records to using the model 3 driver
   args:
   - type: object
     name: Port
@@ -2560,9 +2563,6 @@ defs:
     name: CSG7
     description: |-
       Name for Coordinate System Group 7
-  description: |-
-    This will create an asyn motor port for a PMAC that we can attach
-        motor records to using the model 3 driver
 
   databases:
   - file: $(PMAC)/db/pmacStatusAxis.template
@@ -2595,6 +2595,9 @@ defs:
  # TODO - MISSING ARGS: PortName
 
 - name: pmac.GeoBrick
+  description: |-
+    This will create an asyn motor port for a GeoBrick that we can attach
+        motor records to using the model 3 driver
   args:
   - type: object
     name: Port
@@ -2700,9 +2703,6 @@ defs:
     name: CSG7
     description: |-
       Name for Coordinate System Group 7
-  description: |-
-    This will create an asyn motor port for a GeoBrick that we can attach
-        motor records to using the model 3 driver
 
   databases:
   - file: $(PMAC)/db/pmacStatus.template
@@ -2747,6 +2747,8 @@ defs:
  # TODO - MISSING ARGS: PortName, NAxes
 
 - name: pmac._moveAxesToSafe
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: str
     name: POSITION
@@ -2768,10 +2770,11 @@ defs:
     name: AXIS
     description: |-
       Template argument
-  description: |-
-    TODO:ADD DESCRIPTION
 
 - name: pmac._GeoBrickControllerT
+  description: |-
+    Creates some PVs for global control of the pmac controller,
+        namely global feed rate and axis coordinate system assignment
   args:
   - type: str
     name: PORT
@@ -2828,9 +2831,6 @@ defs:
     name: CSG7
     description: |-
       Name for Coordinate System Group 7
-  description: |-
-    Creates some PVs for global control of the pmac controller,
-        namely global feed rate and axis coordinate system assignment
 
   databases:
   - file: $(PMAC)/db/pmacController.template
@@ -2850,6 +2850,8 @@ defs:
       PORT:
 
 - name: pmac.pmacVmeConfig
+  description: |-
+    This will create an AsynPort connecting to a PMAC or GeoBrick over VME
   args:
   - type: str
     name: Prefix
@@ -2864,8 +2866,6 @@ defs:
     name: priority
     description: |-
       Priority to give the asyn serial ports
-  description: |-
-    This will create an AsynPort connecting to a PMAC or GeoBrick over VME
 
   pre_init:
   - value: |
@@ -2880,6 +2880,9 @@ defs:
       pmacAsynConfig(0, "%s", %d)
 
 - name: pmac.CS_B22_Optics_Box
+  description: |-
+    Supporting template that allows setting of variables for a 
+    B22 optics box CS
   args:
   - type: object
     name: PORT
@@ -2902,9 +2905,6 @@ defs:
     name: name
     description: |-
       This associates an edm screen with the template
-  description: |-
-    Supporting template that allows setting of variables for a 
-    B22 optics box CS
 
   databases:
   - file: $(PMAC)/db/B22_optics_box.template
@@ -2916,6 +2916,8 @@ defs:
       PORT:
 
 - name: pmac.pmacSetOpenLoopEncoderAxis
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: object
     name: Controller
@@ -2929,8 +2931,6 @@ defs:
     name: Encoder_axis
     description: |-
       Encoder axis number
-  description: |-
-    TODO:ADD DESCRIPTION
 
   pre_init:
   - value: |
@@ -2938,6 +2938,8 @@ defs:
  # TODO - MISSING ARGS: ControllerPort
 
 - name: pmac.pmacMonitorVariables
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: object
     name: Controller
@@ -2947,8 +2949,6 @@ defs:
     name: Variables
     description: |-
       Space separated list of pmac variables to monitor
-  description: |-
-    TODO:ADD DESCRIPTION
 
   pre_init:
   - value: |
@@ -2956,6 +2956,9 @@ defs:
  # TODO - MISSING ARGS: ControllerPort
 
 - name: pmac.pmacCreateCsGroup
+  description: |-
+    Create a group of axis mappings to coordinate systems. Instantating a GeoBrickGlobalControl
+        will create a PV for switching between these groups
   args:
   - type: object
     name: Controller
@@ -2973,15 +2976,15 @@ defs:
     name: AxisCount
     description: |-
       Number of CS axes in this group
-  description: |-
-    Create a group of axis mappings to coordinate systems. Instantating a GeoBrickGlobalControl
-        will create a PV for switching between these groups
 
   pre_init:
   - value: |
       pmacCreateCsGroup("{{Controller}}", {{GroupNumber}}, "{{GroupName}}", {{AxisCount}})
 
 - name: pmac.CS_gap_and_centre_slits
+  description: |-
+    Supporting template that allows setting of variables for a 
+    set of gap and slits
   args:
   - type: object
     name: PORT
@@ -2999,9 +3002,6 @@ defs:
     name: name
     description: |-
       This associates an edm screen with the template
-  description: |-
-    Supporting template that allows setting of variables for a 
-    set of gap and slits
 
   databases:
   - file: $(PMAC)/db/gap_and_centre_slits.template
@@ -3012,6 +3012,9 @@ defs:
       name:
 
 - name: pmac.CS_accel_dcm
+  description: |-
+    Supporting template that allows setting of variables for an 
+    accel DCM CS
   args:
   - type: object
     name: PORT
@@ -3029,9 +3032,6 @@ defs:
     name: name
     description: |-
       This associates an edm screen with the template
-  description: |-
-    Supporting template that allows setting of variables for an 
-    accel DCM CS
 
   databases:
   - file: $(PMAC)/db/accel_dcm.template
@@ -3042,6 +3042,9 @@ defs:
       name:
 
 - name: pmac.CS_3jack_mirror
+  description: |-
+    Supporting template that allows setting of variables for a 
+    3jack mirror CS
   args:
   - type: object
     name: PORT
@@ -3084,9 +3087,6 @@ defs:
     name: name
     description: |-
       This associates an edm screen with the template
-  description: |-
-    Supporting template that allows setting of variables for a 
-    3jack mirror CS
 
   databases:
   - file: $(PMAC)/db/3jack_mirror.template
@@ -3102,6 +3102,9 @@ defs:
       name:
 
 - name: pmac.CS_bender
+  description: |-
+    Supporting template that allows setting of variables for a 
+    bender CS
   args:
   - type: object
     name: PORT
@@ -3119,9 +3122,6 @@ defs:
     name: name
     description: |-
       This associates an edm screen with the template
-  description: |-
-    Supporting template that allows setting of variables for a 
-    bender CS
 
   databases:
   - file: $(PMAC)/db/bender.template
@@ -3132,6 +3132,9 @@ defs:
       name:
 
 - name: pmac.CS
+  description: |-
+    Creates some PVs for global control of the pmac controller,
+        namely programmed move time and deferred move control
   args:
   - type: id
     name: name
@@ -3186,9 +3189,6 @@ defs:
     name: PMAC
     description: |-
       PV Prefix for the motor controller
-  description: |-
-    Creates some PVs for global control of the pmac controller,
-        namely programmed move time and deferred move control
 
   databases:
   - file: $(PMAC)/db/pmacCsController.template
@@ -3208,6 +3208,9 @@ defs:
  # TODO - MISSING ARGS: PortName
 
 - name: pmac.CS_1jack_compensated
+  description: |-
+    Supporting template that allows setting of variables for a 
+    2jack CS
   args:
   - type: object
     name: PORT
@@ -3240,9 +3243,6 @@ defs:
     name: name
     description: |-
       This associates an edm screen with the template
-  description: |-
-    Supporting template that allows setting of variables for a 
-    2jack CS
 
   databases:
   - file: $(PMAC)/db/1jack_compensated.template

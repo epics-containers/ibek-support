@@ -1,10 +1,12 @@
- # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.1.1/ibek.support.schema.json
+ # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
 
 module: ADCore
 
 defs:
 
 - name: ADCore.NDFileNexus
+  description: |-
+    This plugin can compress NDArrays to Nexus and write them to file
   args:
   - type: str
     name: P
@@ -66,8 +68,6 @@ defs:
     name: BLOCK
     description: |-
       Blocking callbacks?
-  description: |-
-    This plugin can compress NDArrays to Nexus and write them to file
 
   databases:
   - file: $(ADCORE)/db/NDFileNexus.template
@@ -88,6 +88,8 @@ defs:
       NDFileNexusConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
 - name: ADCore.NDFFT
+  description: |-
+    This plugin is used to calculate the FFT of a time series
   args:
   - type: str
     name: P
@@ -175,8 +177,6 @@ defs:
     description: |-
       Maximum number threads
     default: 1
-  description: |-
-    This plugin is used to calculate the FFT of a time series
 
   databases:
   - file: $(ADCORE)/db/NDFFT.template
@@ -200,6 +200,8 @@ defs:
       NDFFTConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}}, {{MAX_THREADS}})
 
 - name: ADCore.NDAttrPlot
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: str
     name: P
@@ -282,8 +284,6 @@ defs:
     name: DATA_ADDR
     description: |-
       Asyn address for this data array
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(ADCORE)/db/NDAttrPlotAttr.template
@@ -319,6 +319,8 @@ defs:
  # TODO - MISSING ARGS: N_ATTRS
 
 - name: ADCore.NDOverlay
+  description: |-
+    This plugin writes overlays on the array, like cursors and boxes
   args:
   - type: str
     name: P
@@ -429,8 +431,6 @@ defs:
     name: YWIDTH
     description: |-
       Link for the YWdith of the overlay
-  description: |-
-    This plugin writes overlays on the array, like cursors and boxes
 
   databases:
   - file: $(ADCORE)/db/NDOverlayN.template
@@ -470,6 +470,8 @@ defs:
  # TODO - MISSING ARGS: NOverlays
 
 - name: ADCore.NDColorConvert
+  description: |-
+    This plugin converts arrays from one colour type to another, e.g. Bayer -> RGB1
   args:
   - type: str
     name: P
@@ -536,8 +538,6 @@ defs:
     description: |-
       Maximum number threads
     default: 1
-  description: |-
-    This plugin converts arrays from one colour type to another, e.g. Bayer -> RGB1
 
   databases:
   - file: $(ADCORE)/db/NDColorConvert.template
@@ -558,6 +558,8 @@ defs:
       NDColorConvertConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
 
 - name: ADCore.NDFileHDF5
+  description: |-
+    This plugin can compress NDArrays to HDF5 and write them to file
   args:
   - type: str
     name: P
@@ -624,8 +626,6 @@ defs:
     name: BLOCK
     description: |-
       Blocking callbacks?
-  description: |-
-    This plugin can compress NDArrays to HDF5 and write them to file
 
   databases:
   - file: $(ADCORE)/db/NDFileHDF5.template
@@ -647,6 +647,9 @@ defs:
       NDFileHDF5Configure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
 - name: ADCore.NDStdArrays
+  description: |-
+    This plugin provides a waveform record that can display the NDArrays
+        produced by its NDARRAY_PORT
   args:
   - type: str
     name: P
@@ -736,9 +739,6 @@ defs:
     description: |-
       Maximum number threads
     default: 1
-  description: |-
-    This plugin provides a waveform record that can display the NDArrays
-        produced by its NDARRAY_PORT
 
   databases:
   - file: $(ADCORE)/db/NDStdArrays.template
@@ -762,6 +762,8 @@ defs:
       NDStdArraysConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
 
 - name: ADCore._NDCircularBuff
+  description: |-
+    TODO:ADD DESCRIPTION
   args:
   - type: str
     name: P
@@ -825,8 +827,6 @@ defs:
     description: |-
       Post-trigger frame count
     default: '100'
-  description: |-
-    TODO:ADD DESCRIPTION
 
   databases:
   - file: $(ADCORE)/db/NDCircularBuff.template
@@ -844,6 +844,9 @@ defs:
       PORT:
 
 - name: ADCore.NDFileMagick
+  description: |-
+    This plugin can compress NDArrays to a range of formats supported by
+        graphics magick and write them to file
   args:
   - type: str
     name: P
@@ -905,9 +908,6 @@ defs:
     name: BLOCK
     description: |-
       Blocking callbacks?
-  description: |-
-    This plugin can compress NDArrays to a range of formats supported by
-        graphics magick and write them to file
 
   databases:
   - file: $(ADCORE)/db/NDFileMagick.template
@@ -928,6 +928,8 @@ defs:
       NDFileMagickConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
 - name: ADCore.NDCircularBuff
+  description: |-
+    This plugin provides a pre and post external trigger frame capture buffer
   args:
   - type: str
     name: P
@@ -1004,8 +1006,6 @@ defs:
     description: |-
       Max buffer size in number of frames
     default: 128
-  description: |-
-    This plugin provides a pre and post external trigger frame capture buffer
 
   databases:
   - file: $(ADCORE)/db/NDCircularBuff.template
@@ -1028,6 +1028,8 @@ defs:
       NDCircularBuffConfigure(
 
 - name: ADCore.NDPosPlugin
+  description: |-
+    This plugin attaches position information to NDArrays
   args:
   - type: str
     name: P
@@ -1097,8 +1099,6 @@ defs:
     name: STACKSIZE
     description: |-
       Max buffers to allocate
-  description: |-
-    This plugin attaches position information to NDArrays
 
   databases:
   - file: $(ADCORE)/db/NDPosPlugin.template
@@ -1119,6 +1119,8 @@ defs:
       NDPosPluginConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}})
 
 - name: ADCore.NDCodec
+  description: |-
+    This plugin can compress or decompress NDArrays
   args:
   - type: str
     name: P
@@ -1185,8 +1187,6 @@ defs:
     description: |-
       Maximum number threads
     default: 1
-  description: |-
-    This plugin can compress or decompress NDArrays
 
   databases:
   - file: $(ADCORE)/db/NDCodec.template
@@ -1207,6 +1207,8 @@ defs:
       NDCodecConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
 
 - name: ADCore.NDGather
+  description: |-
+    This plugin is used to gather NDArrays from multiple upstream plugins and merge them into a single stream
   args:
   - type: str
     name: NDARRAY_PORT
@@ -1274,8 +1276,6 @@ defs:
     name: R
     description: |-
       Device Suffix
-  description: |-
-    This plugin is used to gather NDArrays from multiple upstream plugins and merge them into a single stream
 
   databases:
   - file: $(ADCORE)/db/NDGather.template
@@ -1297,6 +1297,9 @@ defs:
       NDGatherConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{MAX_PORTS}}")
 
 - name: ADCore.NDROI
+  description: |-
+    This plugin selects a region of interest and optionally scales it to
+        fit in a particular data type
   args:
   - type: str
     name: P
@@ -1363,9 +1366,6 @@ defs:
     description: |-
       Maximum number threads
     default: 1
-  description: |-
-    This plugin selects a region of interest and optionally scales it to
-        fit in a particular data type
 
   databases:
   - file: $(ADCORE)/db/NDROI.template
@@ -1386,6 +1386,8 @@ defs:
       NDROIConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
 
 - name: ADCore.NDAttribute
+  description: |-
+    This plugin displays NDArray attributes
   args:
   - type: str
     name: P
@@ -1462,8 +1464,6 @@ defs:
     description: |-
       Asyn Port of Time Series plugin
     default: $(PORT)_TS
-  description: |-
-    This plugin displays NDArray attributes
 
   databases:
   - file: $(ADCORE)/db/NDAttributeN.template
@@ -1502,6 +1502,8 @@ defs:
  # TODO - MISSING ARGS: R_TS
 
 - name: ADCore.NDStats
+  description: |-
+    This plugin calculates statistics like X and Y profile, centroid, and plots a histogram of binned pixels
   args:
   - type: id
     name: PORT
@@ -1588,8 +1590,6 @@ defs:
     description: |-
       TS port
     default: $(PORT)_TS
-  description: |-
-    This plugin calculates statistics like X and Y profile, centroid, and plots a histogram of binned pixels
 
   databases:
   - file: $(ADCORE)/db/NDStats.template
@@ -1623,6 +1623,8 @@ defs:
       dbLoadRecords("$(ADCORE)/db/NDTimeSeries.template",  "P={{P}},R={{R}}, PORT={{PORT}} ,ADDR={{ADDR}},TIMEOUT={{TIMEOUT}},NDARRAY_PORT={{NDARRAY_PORT}},NDARRAY_ADDR={{NDARRAY_ADDR}},NCHANS={{NCHANS}},ENABLED={{ENABLED}}")
 
 - name: ADCore.NDTimeSeries
+  description: |-
+    This plugin creates time series arrays from callback data
   args:
   - type: str
     name: P
@@ -1710,8 +1712,6 @@ defs:
     name: NAME
     description: |-
       Name of the signal
-  description: |-
-    This plugin creates time series arrays from callback data
 
   databases:
   - file: $(ADCORE)/db/NDTimeSeries.template
@@ -1743,6 +1743,9 @@ defs:
       NDTimeSeriesConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{NSIGNALS}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}})
 
 - name: ADCore.NDAttributes
+  description: |-
+    Add an attribute to the NDAttributes file for a particular ADDriver or
+        NDPlugin, and associate it with the NDAttributes file
   args:
   - type: object
     name: port
@@ -1799,15 +1802,15 @@ defs:
     name: addr
     description: |-
       Asyn address of the parameter (only used if type=PARAM)
-  description: |-
-    Add an attribute to the NDAttributes file for a particular ADDriver or
-        NDPlugin, and associate it with the NDAttributes file
 
   post_init:
   - value: |
       dbpf %s%sNDAttributesFile, %s/%s.xml
 
 - name: ADCore.NDProcess
+  description: |-
+    This plugin does image processing like flat field correction, background
+        subtraction, and recursive filtering
   args:
   - type: str
     name: P
@@ -1869,9 +1872,6 @@ defs:
     name: BLOCK
     description: |-
       Blocking callbacks?
-  description: |-
-    This plugin does image processing like flat field correction, background
-        subtraction, and recursive filtering
 
   databases:
   - file: $(ADCORE)/db/NDProcess.template
@@ -1892,6 +1892,8 @@ defs:
       NDProcessConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
 - name: ADCore.NDFileTIFF
+  description: |-
+    This plugin can compress NDArrays to TIFF and write them to file
   args:
   - type: str
     name: P
@@ -1953,8 +1955,6 @@ defs:
     name: BLOCK
     description: |-
       Blocking callbacks?
-  description: |-
-    This plugin can compress NDArrays to TIFF and write them to file
 
   databases:
   - file: $(ADCORE)/db/NDFileTIFF.template
@@ -1975,6 +1975,8 @@ defs:
       NDFileTIFFConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
 - name: ADCore.NDGather8
+  description: |-
+    This plugin is used to gather NDArrays from multiple upstream plugins and merge them into a single stream
   args:
   - type: str
     name: NDARRAY_PORT
@@ -2045,8 +2047,6 @@ defs:
     name: MAX_PORTS
     description: |-
       Maximum number ports
-  description: |-
-    This plugin is used to gather NDArrays from multiple upstream plugins and merge them into a single stream
 
   databases:
   - file: $(ADCORE)/db/NDGatherN.template
@@ -2073,6 +2073,8 @@ defs:
       PORT:
 
 - name: ADCore.NDROIStat
+  description: |-
+    This plugin calculates statistics of ROIs
   args:
   - type: str
     name: P
@@ -2149,8 +2151,6 @@ defs:
     description: |-
       Maximum number threads
     default: 1
-  description: |-
-    This plugin calculates statistics of ROIs
 
   databases:
   - file: $(ADCORE)/db/NDROIStat.template
@@ -2180,6 +2180,8 @@ defs:
       NDROIStatConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, 
 
 - name: ADCore.NDFileNetCDF
+  description: |-
+    This plugin can compress NDArrays to NetCDF and write them to file
   args:
   - type: str
     name: P
@@ -2241,8 +2243,6 @@ defs:
     name: BLOCK
     description: |-
       Blocking callbacks?
-  description: |-
-    This plugin can compress NDArrays to NetCDF and write them to file
 
   databases:
   - file: $(ADCORE)/db/NDFileNetCDF.template
@@ -2263,6 +2263,8 @@ defs:
       NDFileNetCDFConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
 - name: ADCore.NDPvaPlugin
+  description: |-
+    This plugin makes NDArrays available through PVAccess
   args:
   - type: str
     name: P
@@ -2336,8 +2338,6 @@ defs:
     name: STACKSIZE
     description: |-
       Max buffers to allocate
-  description: |-
-    This plugin makes NDArrays available through PVAccess
 
   databases:
   - file: $(ADCORE)/db/NDPva.template
@@ -2359,6 +2359,8 @@ defs:
       startPVAServer
 
 - name: ADCore.NDTransform
+  description: |-
+    This plugin selects a region of interest and optionally scales it to fit in a particular data type
   args:
   - type: str
     name: P
@@ -2425,8 +2427,6 @@ defs:
     description: |-
       Maximum number threads
     default: 1
-  description: |-
-    This plugin selects a region of interest and optionally scales it to fit in a particular data type
 
   databases:
   - file: $(ADCORE)/db/NDTransform.template
@@ -2447,6 +2447,8 @@ defs:
       NDTransformConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
 
 - name: ADCore.NDFileJPEG
+  description: |-
+    This plugin can compress NDArrays to JPEG and write them to file
   args:
   - type: str
     name: P
@@ -2508,8 +2510,6 @@ defs:
     name: BLOCK
     description: |-
       Blocking callbacks?
-  description: |-
-    This plugin can compress NDArrays to JPEG and write them to file
 
   databases:
   - file: $(ADCORE)/db/NDFileJPEG.template
@@ -2530,6 +2530,8 @@ defs:
       NDFileJPEGConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
 - name: ADCore.NDScatter
+  description: |-
+    This plugin is used to distribute processing of NDArrays to multiple downstream plugins
   args:
   - type: str
     name: P
@@ -2595,8 +2597,6 @@ defs:
     name: BLOCK
     description: |-
       Blocking callbacks?
-  description: |-
-    This plugin is used to distribute processing of NDArrays to multiple downstream plugins
 
   databases:
   - file: $(ADCORE)/db/NDScatter.template

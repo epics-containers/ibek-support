@@ -1,10 +1,13 @@
- # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.1.1/ibek.support.schema.json
+ # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
 
 module: zebra
 
 defs:
 
 - name: zebra.zebraLastDivDiff
+  description: |-
+    Makes a record pointing to DIV$(DIV) that will display the difference
+        between the last two DIV readings in position compare mode
   args:
   - type: str
     name: P
@@ -22,9 +25,6 @@ defs:
     name: name
     description: |-
       Object and gui association name
-  description: |-
-    Makes a record pointing to DIV$(DIV) that will display the difference
-        between the last two DIV readings in position compare mode
 
   databases:
   - file: $(ZEBRA)/db/zebraLastDivDiff.template
@@ -35,6 +35,8 @@ defs:
       name:
 
 - name: zebra.zebra
+  description: |-
+    Controls the zebra signal converter box
   args:
   - type: str
     name: P
@@ -185,8 +187,6 @@ defs:
     name: EMPTY
     description: |-
       Empty macro to satisfy VDCT
-  description: |-
-    Controls the zebra signal converter box
 
   databases:
   - file: $(ZEBRA)/db/zebra.template

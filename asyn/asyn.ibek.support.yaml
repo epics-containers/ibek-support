@@ -1,219 +1,396 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.1.0/ibek.support.schema.json
+ # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
 
 module: asyn
 
 defs:
-  - name: Vxi11
+
+- name: asyn._AsynOctetInterface
+  description: |-
+    TODO:ADD DESCRIPTION
+  args:
+  - type: str
+    name: port
     description: |-
-      Asyn vxi11 Port
-
-    args:
-      - type: str
-        name: port
-        description: IP address
-      - type: bool
-        name: noAutoConnect
-        description: Set to stop autoconnect
-      - type: int
-        name: priority
-        description: Priority
-      - type: str
-        name: simulation
-        description: IP port to connect to if in simulation mode
-      - type: id
-        name: name
-        description: Asyn Port name
-      - type: int
-        name: flags
-        description: "flags (lock devices : recover with IFC)"
-        default: 0
-      - type: float
-        name: timeout
-        description: default timeout
-        default: "0.0"
-      - type: str
-        name: vxiName
-        description: vxi name
-        default: gpib0
-
-    pre_init:
-      - type: text
-        value: |
-          vxi11Configure("%s", "%s", %d, %s, "%s", %d, %d)
-
-  - name: AsynSerial
+      Serial port tty name / IP address optionally followed by protocol
+  - type: id
+    name: name
     description: |-
-      Asyn Serial Port
-
-    args:
-      - type: str
-        name: port
-        description: Serial port tty name / IP address optionally followed by protocol
-      - type: int
-        name: baud
-        description: Baud Rate
-      - type: str
-        name: parity
-        description: Parity
-      - type: str
-        name: crtscts
-        description: Set hardware flow control on
-      - type: int
-        name: stop
-        description: Stop Bits
-      - type: str
-        name: disconnectOnReadTimeout
-        description: Disconnect when a read times out
-      - type: int
-        name: bits
-        description: Bits
-      - type: id
-        name: name
-        description: Override name
-      - type: str
-        name: input_eos
-        description: Input end of string (terminator)
-      - type: str
-        name: output_eos
-        description: Output end of string (terminator)
-      - type: int
-        name: priority
-        description: Priority
-        default: 100
-      - type: bool
-        name: noAutoConnect
-        description: Set to stop autoconnect
-        default: false
-      - type: bool
-        name: noProcessEos
-        description: Set to avoid processing end of string
-        default: false
-      - type: str
-        name: simulation
-        description: IP port to connect to if in simulation mode
-
-    pre_init:
-      - type: text
-        value: |
-          %sConfigure("%s", "%s", %d, %d, %d)
-          asynSetOption("%s", 0, "%s", "%s")
-          asynOctetSetInputEos("%s", 0, %s)
-          asynOctetSetOutputEos("%s", 0, %s)
-
-  - name: AsynIP
+      Override name
+  - type: str
+    name: input_eos
     description: |-
-      Asyn IP Port
-
-    args:
-      - type: str
-        name: port
-        description: Serial port tty name / IP address optionally followed by protocol
-      - type: int
-        name: baud
-        description: Baud Rate
-      - type: str
-        name: parity
-        description: Parity
-      - type: str
-        name: crtscts
-        description: Set hardware flow control on
-      - type: int
-        name: stop
-        description: Stop Bits
-      - type: str
-        name: disconnectOnReadTimeout
-        description: Disconnect when a read times out
-      - type: int
-        name: bits
-        description: Bits
-      - type: id
-        name: name
-        description: Override name
-      - type: str
-        name: input_eos
-        description: Input end of string (terminator)
-      - type: str
-        name: output_eos
-        description: Output end of string (terminator)
-      - type: int
-        name: priority
-        description: Priority
-        default: 100
-      - type: bool
-        name: noAutoConnect
-        description: Set to stop autoconnect
-        default: false
-      - type: bool
-        name: noProcessEos
-        description: Set to avoid processing end of string
-        default: false
-      - type: str
-        name: simulation
-        description: IP port to connect to if in simulation mode
-
-    pre_init:
-      - type: text
-        value: |
-          %sConfigure("%s", "%s", %d, %d, %d)
-          asynSetOption("%s", 0, "%s", "%s")
-          asynOctetSetInputEos("%s", 0, %s)
-          asynOctetSetOutputEos("%s", 0, %s)
-
-  - name: AsynIPServer
+      Input end of string (terminator)
+  - type: str
+    name: output_eos
     description: |-
-      Asyn IP Server Port
+      Output end of string (terminator)
+  - type: int
+    name: priority
+    description: |-
+      Priority
+    default: 100
+  - type: bool
+    name: noAutoConnect
+    description: |-
+      Set to stop autoconnect
+  - type: bool
+    name: noProcessEos
+    description: |-
+      Set to avoid processing end of string
+  - type: str
+    name: simulation
+    description: |-
+      IP port to connect to if in simulation mode
+  - type: int
+    name: baud
+    description: |-
+      Baud Rate
+  - type: enum
+    name: parity
+    description: |-
+      Parity
+    values:
+      even:
+      none:
+      odd:
+  - type: enum
+    name: crtscts
+    description: |-
+      Set hardware flow control on
+    values:
+      Y:
+      N:
+  - type: enum
+    name: stop
+    description: |-
+      Stop Bits
+    values:
+      1:
+      2:
+  - type: enum
+    name: disconnectOnReadTimeout
+    description: |-
+      Disconnect when a read times out
+    values:
+      Y:
+      N:
+  - type: enum
+    name: bits
+    description: |-
+      Bits
+    values:
+      8:
+      5:
+      6:
+      7:
 
-    args:
-      - type: str
-        name: port
-        description: Serial port tty name / IP address optionally followed by protocol
-      - type: int
-        name: baud
-        description: Baud Rate
-      - type: str
-        name: parity
-        description: Parity
-      - type: str
-        name: crtscts
-        description: Set hardware flow control on
-      - type: int
-        name: stop
-        description: Stop Bits
-      - type: str
-        name: disconnectOnReadTimeout
-        description: Disconnect when a read times out
-      - type: int
-        name: bits
-        description: Bits
-      - type: id
-        name: name
-        description: Override name
-      - type: str
-        name: input_eos
-        description: Input end of string (terminator)
-      - type: str
-        name: output_eos
-        description: Output end of string (terminator)
-      - type: int
-        name: priority
-        description: Priority
-        default: 100
-      - type: bool
-        name: noAutoConnect
-        description: Set to stop autoconnect
-        default: false
-      - type: bool
-        name: noProcessEos
-        description: Set to avoid processing end of string
-        default: false
-      - type: str
-        name: simulation
-        description: IP port to connect to if in simulation mode
+  pre_init:
+  - value: |
+      %sConfigure("%s", "%s", %d, %d, %d)
+      asynSetOption("%s", 0, "%s", "%s")
+      asynOctetSetInputEos("%s", 0, %s)
+      asynOctetSetOutputEos("%s", 0, %s)
 
-    pre_init:
-      - type: text
-        value: |
-          %sConfigure("%s", "%s", %d, %d, %d)
-          asynSetOption("%s", 0, "%s", "%s")
-          asynOctetSetInputEos("%s", 0, %s)
-          asynOctetSetOutputEos("%s", 0, %s)
+- name: asyn.AsynIP
+  description: |-
+    Asyn IP Port
+  args:
+  - type: str
+    name: port
+    description: |-
+      Serial port tty name / IP address optionally followed by protocol
+  - type: id
+    name: name
+    description: |-
+      Override name
+  - type: str
+    name: input_eos
+    description: |-
+      Input end of string (terminator)
+  - type: str
+    name: output_eos
+    description: |-
+      Output end of string (terminator)
+  - type: int
+    name: priority
+    description: |-
+      Priority
+    default: 100
+  - type: bool
+    name: noAutoConnect
+    description: |-
+      Set to stop autoconnect
+  - type: bool
+    name: noProcessEos
+    description: |-
+      Set to avoid processing end of string
+  - type: str
+    name: simulation
+    description: |-
+      IP port to connect to if in simulation mode
+  - type: int
+    name: baud
+    description: |-
+      Baud Rate
+  - type: enum
+    name: parity
+    description: |-
+      Parity
+    values:
+      even:
+      none:
+      odd:
+  - type: enum
+    name: crtscts
+    description: |-
+      Set hardware flow control on
+    values:
+      Y:
+      N:
+  - type: enum
+    name: stop
+    description: |-
+      Stop Bits
+    values:
+      1:
+      2:
+  - type: enum
+    name: disconnectOnReadTimeout
+    description: |-
+      Disconnect when a read times out
+    values:
+      Y:
+      N:
+  - type: enum
+    name: bits
+    description: |-
+      Bits
+    values:
+      8:
+      5:
+      6:
+      7:
+
+  pre_init:
+  - value: |
+      %sConfigure("%s", "%s", %d, %d, %d)
+      asynSetOption("%s", 0, "%s", "%s")
+      asynOctetSetInputEos("%s", 0, %s)
+      asynOctetSetOutputEos("%s", 0, %s)
+
+- name: asyn.AsynIPServer
+  description: |-
+    Asyn IP Server Port
+  args:
+  - type: str
+    name: port
+    description: |-
+      Serial port tty name / IP address optionally followed by protocol
+  - type: id
+    name: name
+    description: |-
+      Override name
+  - type: str
+    name: input_eos
+    description: |-
+      Input end of string (terminator)
+  - type: str
+    name: output_eos
+    description: |-
+      Output end of string (terminator)
+  - type: int
+    name: priority
+    description: |-
+      Priority
+    default: 100
+  - type: bool
+    name: noAutoConnect
+    description: |-
+      Set to stop autoconnect
+  - type: bool
+    name: noProcessEos
+    description: |-
+      Set to avoid processing end of string
+  - type: str
+    name: simulation
+    description: |-
+      IP port to connect to if in simulation mode
+  - type: int
+    name: baud
+    description: |-
+      Baud Rate
+  - type: enum
+    name: parity
+    description: |-
+      Parity
+    values:
+      even:
+      none:
+      odd:
+  - type: enum
+    name: crtscts
+    description: |-
+      Set hardware flow control on
+    values:
+      Y:
+      N:
+  - type: enum
+    name: stop
+    description: |-
+      Stop Bits
+    values:
+      1:
+      2:
+  - type: enum
+    name: disconnectOnReadTimeout
+    description: |-
+      Disconnect when a read times out
+    values:
+      Y:
+      N:
+  - type: enum
+    name: bits
+    description: |-
+      Bits
+    values:
+      8:
+      5:
+      6:
+      7:
+
+  pre_init:
+  - value: |
+      %sConfigure("%s", "%s", %d, %d, %d)
+      asynSetOption("%s", 0, "%s", "%s")
+      asynOctetSetInputEos("%s", 0, %s)
+      asynOctetSetOutputEos("%s", 0, %s)
+
+- name: asyn.Vxi11
+  description: |-
+    Asyn vxi11 Port
+  args:
+  - type: str
+    name: port
+    description: |-
+      IP address
+  - type: bool
+    name: noAutoConnect
+    description: |-
+      Set to stop autoconnect
+  - type: int
+    name: priority
+    description: |-
+      Priority
+  - type: str
+    name: simulation
+    description: |-
+      IP port to connect to if in simulation mode
+  - type: id
+    name: name
+    description: |-
+      Asyn Port name
+  - type: int
+    name: flags
+    description: |-
+      flags (lock devices : recover with IFC)
+  - type: float
+    name: timeout
+    description: |-
+      default timeout
+    default: '0.0'
+  - type: str
+    name: vxiName
+    description: |-
+      vxi name
+    default: gpib0
+
+  pre_init:
+  - value: |
+      vxi11Configure("%s", "%s", %d, %s, "%s", %d, %d)
+
+- name: asyn.AsynSerial
+  description: |-
+    Asyn Serial Port
+  args:
+  - type: str
+    name: port
+    description: |-
+      Serial port tty name / IP address optionally followed by protocol
+  - type: id
+    name: name
+    description: |-
+      Override name
+  - type: str
+    name: input_eos
+    description: |-
+      Input end of string (terminator)
+  - type: str
+    name: output_eos
+    description: |-
+      Output end of string (terminator)
+  - type: int
+    name: priority
+    description: |-
+      Priority
+    default: 100
+  - type: bool
+    name: noAutoConnect
+    description: |-
+      Set to stop autoconnect
+  - type: bool
+    name: noProcessEos
+    description: |-
+      Set to avoid processing end of string
+  - type: str
+    name: simulation
+    description: |-
+      IP port to connect to if in simulation mode
+  - type: int
+    name: baud
+    description: |-
+      Baud Rate
+  - type: enum
+    name: parity
+    description: |-
+      Parity
+    values:
+      even:
+      none:
+      odd:
+  - type: enum
+    name: crtscts
+    description: |-
+      Set hardware flow control on
+    values:
+      Y:
+      N:
+  - type: enum
+    name: stop
+    description: |-
+      Stop Bits
+    values:
+      1:
+      2:
+  - type: enum
+    name: disconnectOnReadTimeout
+    description: |-
+      Disconnect when a read times out
+    values:
+      Y:
+      N:
+  - type: enum
+    name: bits
+    description: |-
+      Bits
+    values:
+      8:
+      5:
+      6:
+      7:
+
+  pre_init:
+  - value: |
+      %sConfigure("%s", "%s", %d, %d, %d)
+      asynSetOption("%s", 0, "%s", "%s")
+      asynOctetSetInputEos("%s", 0, %s)
+      asynOctetSetOutputEos("%s", 0, %s)
