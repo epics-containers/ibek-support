@@ -22,9 +22,6 @@ builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/pmac/2-5-23beta1/ pmac/p
 
 builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/asyn/4-41dls2 asyn/asyn.ibek.support.yaml
 builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/calc/3-7-3/ calc/calc.ibek.support.yaml
-
-# builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/ /.ibek.support.yaml
-# builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/ /.ibek.support.yaml
-# builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/ /.ibek.support.yaml
-# builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/ /.ibek.support.yaml
-# builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/ /.ibek.support.yaml
+builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/autosave/5-9dls2/ autosave/autosave.ibek.support.yaml
+builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/busy/1-7-2dls6 busy/busy.ibek.support.yaml
+builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/devIocStats/3-1-14dls3-3/ iocStats/iocStats.ibek.support.yaml
