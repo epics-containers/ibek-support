@@ -61,4 +61,8 @@ jobs:
           # ioc folder is found in the super module usually so for testing
           # on github we need to copy it above the root of the repo
           cp -r ioc ..
+          for test in tests/test*.sh; do
+            echo "RUNNING TEST SCRIPT ${test}"
+            ${test}
+          done
           tests/_test_support_build.sh
