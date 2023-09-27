@@ -1,4 +1,5 @@
-# yaml-language-server: $schema=../_global/ibek.defs.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
+
 module: epics
 defs:
   - name: EpicsCaMaxArrayBytes
@@ -33,11 +34,7 @@ defs:
         name: value
         description: Value to set
     post_init:
-      - type: function
-        name: dbpf
-        args:
-          pv: "{{ pv }}"
-          value: "{{ value }}"
+      - value: dbpf "{{ pv }}" "{{ value }}"
 
   - name: EpicsEnvSet
     description: Set an environment variable in the ioc Shell

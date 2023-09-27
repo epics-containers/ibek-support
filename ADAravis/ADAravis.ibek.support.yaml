@@ -63,8 +63,8 @@ defs:
     description: |-
       Use alias template to keep some key PV names the same
     values:
-      0:
-      1:
+      '1':
+      '0':
   - type: int
     name: BUFFERS
     description: |-

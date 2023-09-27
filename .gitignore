@@ -1,1 +1,3 @@
 .coverage
+# generate schemas for tests but don't commit them
+schemas/
