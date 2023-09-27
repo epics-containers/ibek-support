@@ -4,7 +4,7 @@ module: pmac
 
 defs:
 
-- name: pmac.PowerPMAC
+- name: PowerPMAC
   description: |-
     This will create an asyn motor port for a PowerPMAC that we can attach
         motor records to using the model 3 driver
@@ -150,7 +150,7 @@ defs:
       pmacCreateAxes("{{name}}", {{NAxes}})
  # TODO - MISSING ARGS: PortName
 
-- name: pmac.CS_2jack
+- name: CS_2jack
   description: |-
     Supporting template that allows setting of variables for a 
     2jack CS
@@ -205,7 +205,7 @@ defs:
       PORT:
       name:
 
-- name: pmac._GeoBrickCSST
+- name: _GeoBrickCSST
   description: |-
     Creates GUI tags for CSS screens
   args:
@@ -250,7 +250,7 @@ defs:
       ControlMode:
       NAME:
 
-- name: pmac.CS_aperture_slits
+- name: CS_aperture_slits
   description: |-
     Supporting template that allows setting of variables for a 
     set of aperture slits
@@ -303,7 +303,7 @@ defs:
       AMPV:
       PORT:
 
-- name: pmac.CS_3jack
+- name: CS_3jack
   description: |-
     Supporting template that allows setting of variables for a 
     3jack CS
@@ -365,7 +365,7 @@ defs:
       PORT:
       name:
 
-- name: pmac.CS_symetrie_hexapod
+- name: CS_symetrie_hexapod
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -436,7 +436,7 @@ defs:
   - value: |
       pmacNoCsVelocity("{{PORT}}")
 
-- name: pmac.pmacVariableReadLED
+- name: pmacVariableReadLED
   description: |-
     Simple template that reads an integer variable on a PMAC or
     GeoBrick which can have a value of 1 or 0 and uses an LED widget.
@@ -517,7 +517,7 @@ defs:
       SPEED:
       PORT:
 
-- name: pmac.dls_pmac_cs_asyn_motor
+- name: dls_pmac_cs_asyn_motor
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -852,7 +852,7 @@ defs:
       gda_desc:
       HOMEVISSTR:
 
-- name: pmac.CS_zform
+- name: CS_zform
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -879,7 +879,7 @@ defs:
       PORT:
       name:
 
-- name: pmac.autohome
+- name: autohome
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -1074,7 +1074,7 @@ defs:
       STATUSSV14:
       STATUSSV15:
 
-- name: pmac.CS_IDT_sagittal_dcm
+- name: CS_IDT_sagittal_dcm
   description: |-
     Supporting template that allows setting of variables for an 
     IDT sagittal DCM CS
@@ -1108,7 +1108,7 @@ defs:
       COORD:
       name:
 
-- name: pmac.GeoBrickTrajectoryControlT
+- name: GeoBrickTrajectoryControlT
   description: |-
     Creates some PVs for executing trajectory scans on the pmac controller by
            instantiating an instance of pmacTrajectoryAxis.template for each axis
@@ -1144,7 +1144,7 @@ defs:
       PORT:
       PREC:
 
-- name: pmac._CsControlT
+- name: _CsControlT
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -1184,7 +1184,7 @@ defs:
       TIMEOUT:
       PMAC:
 
-- name: pmac.CS_qcm
+- name: CS_qcm
   description: |-
     Use this template with CS_qcm.pmc to implement
     a mode for changing energy that only moves Bragg1.
@@ -1243,7 +1243,7 @@ defs:
       PORT:
       name:
 
-- name: pmac._automhomeT
+- name: _automhomeT
   description: |-
     Provides PVs to start and monitor homing via homing PLCs
     that conform to the DLS standard. If you use custom homing states then be
@@ -1446,7 +1446,7 @@ defs:
       STATUSSV14:
       STATUSSV15:
 
-- name: pmac.pmacVariableWrite
+- name: pmacVariableWrite
   description: |-
     Simple template that reads and writes to a variable on a 
     PMAC or geoBrick via dynamic parameters.
@@ -1518,7 +1518,7 @@ defs:
       TYPE:
       PORT:
 
-- name: pmac._pmacStatusT
+- name: _pmacStatusT
   description: |-
     Creates some PVs for monitoring status of the pmac controller,
         not compatible with power Pmac
@@ -1540,7 +1540,7 @@ defs:
       P:
       PORT:
 
-- name: pmac.moveAxesToSafeSlave
+- name: moveAxesToSafeSlave
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -1565,7 +1565,7 @@ defs:
     description: |-
       In safe position threshold in EGUs
 
-- name: pmac.pmacAsynSSHPort
+- name: pmacAsynSSHPort
   description: |-
     This will create an AsynPort connecting to a PowerPMAC over SSH
   args:
@@ -1617,7 +1617,7 @@ defs:
       # Create SSH Port (PortName, IPAddress, Username, Password, Priority, DisableAutoConnect, noProcessEos)
       drvAsynPowerPMACPortConfigure("{{name}}", "{{IP}}", "{{USERNAME}}", "{{PASSWORD}}", "{{PRIORITY}}", "{{NOAUTOCONNECT}}", "{{NOEOS}}")
 
-- name: pmac.EncoderReadback
+- name: EncoderReadback
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -1696,7 +1696,7 @@ defs:
       PORT:
       AXIS:
 
-- name: pmac.RunCommand
+- name: RunCommand
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -1746,7 +1746,7 @@ defs:
       PORT:
       DESC:
 
-- name: pmac._moveAxesToSafeTrig
+- name: _moveAxesToSafeTrig
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -1821,7 +1821,7 @@ defs:
     description: |-
       Template argument
 
-- name: pmac.CS_IDT_sagittal_bender
+- name: CS_IDT_sagittal_bender
   description: |-
     Supporting template that allows setting of variables for an 
     IDT sagittal DCM CS
@@ -1855,7 +1855,7 @@ defs:
       COORD:
       name:
 
-- name: pmac.pmacDisableLimitsCheck
+- name: pmacDisableLimitsCheck
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -1875,7 +1875,7 @@ defs:
       pmacDisableLimitsCheck("{{ControllerPort}}", {{Axis}}, 0)
  # TODO - MISSING ARGS: ControllerPort
 
-- name: pmac.RunPlc
+- name: RunPlc
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -1919,7 +1919,7 @@ defs:
       PORT:
       name:
 
-- name: pmac.dls_pmac_asyn_motor
+- name: dls_pmac_asyn_motor
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -2274,7 +2274,7 @@ defs:
       gda_desc:
       HOMEVISSTR:
 
-- name: pmac.CS_multi_beamstop_on_platform
+- name: CS_multi_beamstop_on_platform
   description: |-
     Supporting template that allows setting of variables for a 
     multi beamstop on platform CS
@@ -2308,7 +2308,7 @@ defs:
       COORD:
       name:
 
-- name: pmac.pmacSetCoordStepsPerUnit
+- name: pmacSetCoordStepsPerUnit
   description: |-
     Apply an integer scale factor to an axis on the PMAC
   args:
@@ -2333,7 +2333,7 @@ defs:
       pmacSetCoordStepsPerUnit("{{Ref}}", {{Axis}}, {{Scale}})
  # TODO - MISSING ARGS: Ref
 
-- name: pmac._eloss_kill_autohome_records
+- name: _eloss_kill_autohome_records
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -2417,7 +2417,7 @@ defs:
       PORT:
       name:
 
-- name: pmac.CS_flexure_slits
+- name: CS_flexure_slits
   description: |-
     Supporting template that allows setting of variables for a 
     set of flexure slits
@@ -2458,7 +2458,7 @@ defs:
       COORD:
       PORT:
 
-- name: pmac.pmacCsGroupAddAxis
+- name: pmacCsGroupAddAxis
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -2492,7 +2492,7 @@ defs:
   - value: |
       pmacCsGroupAddAxis({{Controller}}, {{GroupNumber}}, {{AxisNumber}}, {{AxisDef}}, {{CoordSysNumber}})
 
-- name: pmac._pmacStatusAxis
+- name: _pmacStatusAxis
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -2519,7 +2519,7 @@ defs:
       PORT:
       PMAC:
 
-- name: pmac.GeoBricketteMStop
+- name: GeoBricketteMStop
   description: |-
     To read the motion stop info and interpret the status for a pmac GeoBrickette.  They do motion stop in firmware and (unlike earlier pmac models like GeoBricks and pmac/umac systems) do not need PLC2.
   args:
@@ -2652,7 +2652,7 @@ defs:
       P:
       active_OSV:
 
-- name: pmac._powerPmacStatusT
+- name: _powerPmacStatusT
   description: |-
     Creates some PVs for monitoring status of the power pmac controller,
         not compatible with pmac
@@ -2674,7 +2674,7 @@ defs:
       P:
       PORT:
 
-- name: pmac.pmacAsynIPPort
+- name: pmacAsynIPPort
   description: |-
     This will create an AsynPort connecting to a PMAC or GeoBrick over IP
   args:
@@ -2699,7 +2699,7 @@ defs:
       # Create IP Port (PortName, IPAddr)
       pmacAsynIPConfigure("{{name}}", "{{IP}}")
 
-- name: pmac.pmacVariableRead
+- name: pmacVariableRead
   description: |-
     Simple template that reads a variable on a 
     PMAC or geoBrick via dynamic parameters.
@@ -2778,7 +2778,7 @@ defs:
       SPEED:
       PORT:
 
-- name: pmac._motor_in_cs_records
+- name: _motor_in_cs_records
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -2811,7 +2811,7 @@ defs:
       PORT:
       ADDR:
 
-- name: pmac.moveAxesToSafeMaster
+- name: moveAxesToSafeMaster
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -2838,7 +2838,7 @@ defs:
       '4':
       '6':
 
-- name: pmac.CS_blade_slits
+- name: CS_blade_slits
   description: |-
     Supporting template that allows setting of variables for a 
     set of blade slits
@@ -2872,7 +2872,7 @@ defs:
       name:
       BMPV:
 
-- name: pmac.PMAC
+- name: PMAC
   description: |-
     This will create an asyn motor port for a PMAC that we can attach
         motor records to using the model 3 driver
@@ -3014,7 +3014,7 @@ defs:
       pmacCreateAxes("{{name}}", {{NAxes}})
  # TODO - MISSING ARGS: PortName
 
-- name: pmac.GeoBrick
+- name: GeoBrick
   description: |-
     This will create an asyn motor port for a GeoBrick that we can attach
         motor records to using the model 3 driver
@@ -3190,7 +3190,7 @@ defs:
       pmacCreateAxes("{{name}}", {{NAxes}})
  # TODO - MISSING ARGS: PortName, NAxes
 
-- name: pmac._moveAxesToSafe
+- name: _moveAxesToSafe
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -3220,7 +3220,7 @@ defs:
     description: |-
       Template argument
 
-- name: pmac._GeoBrickControllerT
+- name: _GeoBrickControllerT
   description: |-
     Creates some PVs for global control of the pmac controller,
         namely global feed rate and axis coordinate system assignment
@@ -3311,7 +3311,7 @@ defs:
       NAXES:
       PORT:
 
-- name: pmac.pmacVmeConfig
+- name: pmacVmeConfig
   description: |-
     This will create an AsynPort connecting to a PMAC or GeoBrick over VME
   args:
@@ -3344,7 +3344,7 @@ defs:
       drvPmacDebug=0
       pmacAsynConfig(0, "%s", %d)
 
-- name: pmac.CS_B22_Optics_Box
+- name: CS_B22_Optics_Box
   description: |-
     Supporting template that allows setting of variables for a 
     B22 optics box CS
@@ -3385,7 +3385,7 @@ defs:
       COORD:
       PORT:
 
-- name: pmac.pmacSetOpenLoopEncoderAxis
+- name: pmacSetOpenLoopEncoderAxis
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -3410,7 +3410,7 @@ defs:
       pmacSetOpenLoopEncoderAxis("{{ControllerPort}}", {{Axis}}, {{Encoder_axis}})
  # TODO - MISSING ARGS: ControllerPort
 
-- name: pmac.pmacMonitorVariables
+- name: pmacMonitorVariables
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -3430,7 +3430,7 @@ defs:
       pmacMonitorVariables("{{ControllerPort}}", "{{Variables}}")
  # TODO - MISSING ARGS: ControllerPort
 
-- name: pmac.pmacCreateCsGroup
+- name: pmacCreateCsGroup
   description: |-
     Create a group of axis mappings to coordinate systems. Instantating a GeoBrickGlobalControl
         will create a PV for switching between these groups
@@ -3460,7 +3460,7 @@ defs:
   - value: |
       pmacCreateCsGroup("{{Controller}}", {{GroupNumber}}, "{{GroupName}}", {{AxisCount}})
 
-- name: pmac.CS_gap_and_centre_slits
+- name: CS_gap_and_centre_slits
   description: |-
     Supporting template that allows setting of variables for a 
     set of gap and slits
@@ -3494,7 +3494,7 @@ defs:
       COORD:
       name:
 
-- name: pmac.CS_accel_dcm
+- name: CS_accel_dcm
   description: |-
     Supporting template that allows setting of variables for an 
     accel DCM CS
@@ -3528,7 +3528,7 @@ defs:
       COORD:
       name:
 
-- name: pmac.CS_3jack_mirror
+- name: CS_3jack_mirror
   description: |-
     Supporting template that allows setting of variables for a 
     3jack mirror CS
@@ -3597,7 +3597,7 @@ defs:
       PORT:
       name:
 
-- name: pmac.CS_bender
+- name: CS_bender
   description: |-
     Supporting template that allows setting of variables for a 
     bender CS
@@ -3631,7 +3631,7 @@ defs:
       COORD:
       name:
 
-- name: pmac.CS
+- name: CS
   description: |-
     Creates some PVs for global control of the pmac controller,
         namely programmed move time and deferred move control
@@ -3719,7 +3719,7 @@ defs:
       pmacCreateCSAxes("{{name}}", {{NAxes}})
  # TODO - MISSING ARGS: PortName
 
-- name: pmac.CS_1jack_compensated
+- name: CS_1jack_compensated
   description: |-
     Supporting template that allows setting of variables for a 
     2jack CS

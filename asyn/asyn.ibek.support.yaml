@@ -4,7 +4,7 @@ module: asyn
 
 defs:
 
-- name: asyn._AsynOctetInterface
+- name: _AsynOctetInterface
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -105,7 +105,7 @@ defs:
       asynOctetSetInputEos("%s", 0, %s)
       asynOctetSetOutputEos("%s", 0, %s)
 
-- name: asyn.AsynIP
+- name: AsynIP
   description: |-
     Asyn IP Port
   args:
@@ -206,7 +206,7 @@ defs:
       asynOctetSetInputEos("%s", 0, %s)
       asynOctetSetOutputEos("%s", 0, %s)
 
-- name: asyn.AsynIPServer
+- name: AsynIPServer
   description: |-
     Asyn IP Server Port
   args:
@@ -307,7 +307,7 @@ defs:
       asynOctetSetInputEos("%s", 0, %s)
       asynOctetSetOutputEos("%s", 0, %s)
 
-- name: asyn.Vxi11
+- name: Vxi11
   description: |-
     Asyn vxi11 Port
   args:
@@ -358,7 +358,7 @@ defs:
   - value: |
       vxi11Configure("%s", "%s", %d, %s, "%s", %d, %d)
 
-- name: asyn.AsynSerial
+- name: AsynSerial
   description: |-
     Asyn Serial Port
   args:

@@ -4,7 +4,7 @@ module: ADAravis
 
 defs:
 
-- name: ADAravis.aravisCamera
+- name: aravisCamera
   description: |-
     Creates a aravisCamera camera areaDetector driver
   args:

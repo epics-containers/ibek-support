@@ -4,7 +4,7 @@ module: ADCore
 
 defs:
 
-- name: ADCore.NDFileNexus
+- name: NDFileNexus
   description: |-
     This plugin can compress NDArrays to Nexus and write them to file
   args:
@@ -98,7 +98,7 @@ defs:
       # NDFileNexusConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
       NDFileNexusConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
-- name: ADCore.NDFFT
+- name: NDFFT
   description: |-
     This plugin is used to calculate the FFT of a time series
   args:
@@ -227,7 +227,7 @@ defs:
       # NDFFTConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
       NDFFTConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}}, {{MAX_THREADS}})
 
-- name: ADCore.NDAttrPlot
+- name: NDAttrPlot
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -362,7 +362,7 @@ defs:
       NDAttrPlotConfig("{{PORT}}", {{N_ATTRS}}, {{N_CACHE}}, 
  # TODO - MISSING ARGS: N_ATTRS
 
-- name: ADCore.NDOverlay
+- name: NDOverlay
   description: |-
     This plugin writes overlays on the array, like cursors and boxes
   args:
@@ -536,7 +536,7 @@ defs:
       NDOverlayConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{NOverlays}}, 0, 0, 0, 0, {{MAX_THREADS}})
  # TODO - MISSING ARGS: NOverlays
 
-- name: ADCore.NDColorConvert
+- name: NDColorConvert
   description: |-
     This plugin converts arrays from one colour type to another, e.g. Bayer -> RGB1
   args:
@@ -636,7 +636,7 @@ defs:
       # NDColorConvertConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
       NDColorConvertConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
 
-- name: ADCore.NDFileHDF5
+- name: NDFileHDF5
   description: |-
     This plugin can compress NDArrays to HDF5 and write them to file
   args:
@@ -737,7 +737,7 @@ defs:
       # NDFileHDF5Configure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
       NDFileHDF5Configure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
-- name: ADCore.NDStdArrays
+- name: NDStdArrays
   description: |-
     This plugin provides a waveform record that can display the NDArrays
         produced by its NDARRAY_PORT
@@ -867,7 +867,7 @@ defs:
       # NDStdArraysConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
       NDStdArraysConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
 
-- name: ADCore._NDCircularBuff
+- name: _NDCircularBuff
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -960,7 +960,7 @@ defs:
       TIMEOUT:
       PORT:
 
-- name: ADCore.NDFileMagick
+- name: NDFileMagick
   description: |-
     This plugin can compress NDArrays to a range of formats supported by
         graphics magick and write them to file
@@ -1055,7 +1055,7 @@ defs:
       # NDFileMagickConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
       NDFileMagickConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
-- name: ADCore.NDCircularBuff
+- name: NDCircularBuff
   description: |-
     This plugin provides a pre and post external trigger frame capture buffer
   args:
@@ -1169,7 +1169,7 @@ defs:
       # NDCircularBuffConfigure(portName, queueSize, blockingCallbacks, 
       NDCircularBuffConfigure(
 
-- name: ADCore.NDPosPlugin
+- name: NDPosPlugin
   description: |-
     This plugin attaches position information to NDArrays
   args:
@@ -1273,7 +1273,7 @@ defs:
       # NDPosPluginConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize)
       NDPosPluginConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}})
 
-- name: ADCore.NDCodec
+- name: NDCodec
   description: |-
     This plugin can compress or decompress NDArrays
   args:
@@ -1373,7 +1373,7 @@ defs:
       # NDCodecConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
       NDCodecConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
 
-- name: ADCore.NDGather
+- name: NDGather
   description: |-
     This plugin is used to gather NDArrays from multiple upstream plugins and merge them into a single stream
   args:
@@ -1475,7 +1475,7 @@ defs:
       # NDGatherConfigure(portName, queueSize, blockingCallbacks, maxPorts)
       NDGatherConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{MAX_PORTS}}")
 
-- name: ADCore.NDROI
+- name: NDROI
   description: |-
     This plugin selects a region of interest and optionally scales it to
         fit in a particular data type
@@ -1576,7 +1576,7 @@ defs:
       # NDROIConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
       NDROIConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
 
-- name: ADCore.NDAttribute
+- name: NDAttribute
   description: |-
     This plugin displays NDArray attributes
   args:
@@ -1706,7 +1706,7 @@ defs:
       dbLoadRecords("$(ADCORE)/db/NDTimeSeries.template","P={{P}},R={{R_TS}},PORT={{PORT}}_TS,ADDR=0,TIMEOUT={{TIMEOUT}},NDARRAY_PORT={{PORT}},NDARRAY_ADDR=1,NCHANS={{MAX_ATTRIBUTES}},ENABLED=1")
  # TODO - MISSING ARGS: R_TS
 
-- name: ADCore.NDStats
+- name: NDStats
   description: |-
     This plugin calculates statistics like X and Y profile, centroid, and plots a histogram of binned pixels
   args:
@@ -1844,7 +1844,7 @@ defs:
       # Load time series records
       dbLoadRecords("$(ADCORE)/db/NDTimeSeries.template",  "P={{P}},R={{R}}, PORT={{PORT}} ,ADDR={{ADDR}},TIMEOUT={{TIMEOUT}},NDARRAY_PORT={{NDARRAY_PORT}},NDARRAY_ADDR={{NDARRAY_ADDR}},NCHANS={{NCHANS}},ENABLED={{ENABLED}}")
 
-- name: ADCore.NDTimeSeries
+- name: NDTimeSeries
   description: |-
     This plugin creates time series arrays from callback data
   args:
@@ -1981,7 +1981,7 @@ defs:
       # NDTimeSeriesConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxSignals, maxBuffers, maxMemory, priority, stackSize)
       NDTimeSeriesConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{NSIGNALS}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}})
 
-- name: ADCore.NDAttributes
+- name: NDAttributes
   description: |-
     Add an attribute to the NDAttributes file for a particular ADDriver or
         NDPlugin, and associate it with the NDAttributes file
@@ -2055,7 +2055,7 @@ defs:
   - value: |
       dbpf %s%sNDAttributesFile, %s/%s.xml
 
-- name: ADCore.NDProcess
+- name: NDProcess
   description: |-
     This plugin does image processing like flat field correction, background
         subtraction, and recursive filtering
@@ -2150,7 +2150,7 @@ defs:
       # NDProcessConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
       NDProcessConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
-- name: ADCore.NDFileTIFF
+- name: NDFileTIFF
   description: |-
     This plugin can compress NDArrays to TIFF and write them to file
   args:
@@ -2244,7 +2244,7 @@ defs:
       # NDFileTIFFConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
       NDFileTIFFConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
-- name: ADCore.NDGather8
+- name: NDGather8
   description: |-
     This plugin is used to gather NDArrays from multiple upstream plugins and merge them into a single stream
   args:
@@ -2355,7 +2355,7 @@ defs:
       MAX_PORTS:
       PORT:
 
-- name: ADCore.NDROIStat
+- name: NDROIStat
   description: |-
     This plugin calculates statistics of ROIs
   args:
@@ -2476,7 +2476,7 @@ defs:
       # NDROIStatConfigure(portName, queueSize, blockingCallbacks, 
       NDROIStatConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, 
 
-- name: ADCore.NDFileNetCDF
+- name: NDFileNetCDF
   description: |-
     This plugin can compress NDArrays to NetCDF and write them to file
   args:
@@ -2570,7 +2570,7 @@ defs:
       # NDFileNetCDFConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
       NDFileNetCDFConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
-- name: ADCore.NDPvaPlugin
+- name: NDPvaPlugin
   description: |-
     This plugin makes NDArrays available through PVAccess
   args:
@@ -2680,7 +2680,7 @@ defs:
       NDPvaConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{PVNAME}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}})
       startPVAServer
 
-- name: ADCore.NDTransform
+- name: NDTransform
   description: |-
     This plugin selects a region of interest and optionally scales it to fit in a particular data type
   args:
@@ -2780,7 +2780,7 @@ defs:
       # NDTransformConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
       NDTransformConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
 
-- name: ADCore.NDFileJPEG
+- name: NDFileJPEG
   description: |-
     This plugin can compress NDArrays to JPEG and write them to file
   args:
@@ -2874,7 +2874,7 @@ defs:
       # NDFileJPEGConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
       NDFileJPEGConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
-- name: ADCore.NDScatter
+- name: NDScatter
   description: |-
     This plugin is used to distribute processing of NDArrays to multiple downstream plugins
   args:

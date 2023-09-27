@@ -4,7 +4,7 @@ module: autosave
 
 defs:
 
-- name: autosave.Autosave
+- name: Autosave
   description: |-
     TODO:ADD DESCRIPTION
   args:

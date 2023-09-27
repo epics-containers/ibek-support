@@ -4,7 +4,7 @@ module: devIocStats
 
 defs:
 
-- name: devIocStats.devIocStatsHelper
+- name: devIocStatsHelper
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -61,7 +61,7 @@ defs:
     args:
       IOC:
 
-- name: devIocStats.iocAdminVxWorks
+- name: iocAdminVxWorks
   description: |-
     Create some records for reading IOC statistics and details.
   args:
@@ -76,7 +76,7 @@ defs:
     args:
       IOC:
 
-- name: devIocStats.iocAdminScanMon
+- name: iocAdminScanMon
   description: |-
     Create some records for reading IOC statistics and details.
   args:
@@ -91,7 +91,7 @@ defs:
     args:
       IOC:
 
-- name: devIocStats.iocGui
+- name: iocGui
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -120,7 +120,7 @@ defs:
       name:
       EDM_FILE:
 
-- name: devIocStats.iocAdminSoft
+- name: iocAdminSoft
   description: |-
     Create some records for reading IOC statistics and details.
   args:

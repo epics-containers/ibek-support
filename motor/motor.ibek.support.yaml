@@ -4,7 +4,7 @@ module: motor
 
 defs:
 
-- name: motor.common.motorUtil
+- name: motorUtil
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -23,7 +23,7 @@ defs:
   - value: |
       motorUtilInit("{{P}}")
 
-- name: motor.common.basic_asyn_motor
+- name: basic_asyn_motor
   description: |-
     Basic template, including motor record and associated tags
   args:
@@ -358,7 +358,7 @@ defs:
       gda_desc:
       HOMEVISSTR:
 
-- name: motor.common.softMotorForPiezo
+- name: softMotorForPiezo
   description: |-
     TODO:ADD DESCRIPTION
   args:
@@ -460,7 +460,7 @@ defs:
       RDBD:
       DESC:
 
-- name: motor.MotorSim.MotorSim
+- name: MotorSim
   description: |-
     Simulated controller Device - instantiate one per controller '''
   args:

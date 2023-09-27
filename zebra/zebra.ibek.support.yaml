@@ -4,7 +4,7 @@ module: zebra
 
 defs:
 
-- name: zebra.zebraLastDivDiff
+- name: zebraLastDivDiff
   description: |-
     Makes a record pointing to DIV$(DIV) that will display the difference
         between the last two DIV readings in position compare mode
@@ -38,7 +38,7 @@ defs:
       DIV:
       name:
 
-- name: zebra.zebra
+- name: zebra
   description: |-
     Controls the zebra signal converter box
   args:
