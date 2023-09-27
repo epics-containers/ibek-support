@@ -14,7 +14,6 @@ set -xe
 
 # install required system dependencies
 ibek support apt-install --only=dev \
-    libboost-all-dev \
     libxext-dev \
     libglib2.0-dev \
     libusb-1.0 \
@@ -31,7 +30,7 @@ ibek support apt-install --only=run libglib2.0-bin libusb-1.0 libxml2
 # build aravis library
 (
     cd /usr/local &&
-    git clone -b ARAVIS_0_8_1 --depth 1 https://github.com/AravisProject/aravis &&
+    git clone -b "0.8.29" --depth 1 https://github.com/AravisProject/aravis &&
     cd aravis &&
     meson build &&
     cd build &&
@@ -55,7 +54,8 @@ ibek support add-dbds ADAravisSupport.dbd
 
 # add any required changes to CONFIG_SITE
 CONFIG='
-AREA_DETECTOR=$(SUPPORT)
+CHECK_RELEASE=WARN
+AREA_DETECTOR=/epics/support
 CROSS_COMPILER_TARGET_ARCHS =
 GLIBPREFIX=/usr
 USR_INCLUDES += -I$(GLIBPREFIX)/include/glib-2.0
@@ -65,6 +65,8 @@ ARAVIS_INCLUDE  = /usr/local/include/aravis-0.8/
 '
 
 ibek support add-to-config-site ${NAME} "${CONFIG}"
+ibek support add-to-config-site ADGenICam "${CONFIG}"
+
 
 # TODO may need
 #    ioc_SYS_LIBS += aravis-0.8
