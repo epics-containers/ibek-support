@@ -8,43 +8,53 @@ defs:
   description: |-
     TODO:ADD DESCRIPTION
   args:
+
   - type: str
     name: port
     description: |-
       Serial port tty name / IP address optionally followed by protocol
+
   - type: id
     name: name
     description: |-
       Override name
+
   - type: str
     name: input_eos
     description: |-
       Input end of string (terminator)
+
   - type: str
     name: output_eos
     description: |-
       Output end of string (terminator)
+
   - type: int
     name: priority
     description: |-
       Priority
     default: 100
+
   - type: bool
     name: noAutoConnect
     description: |-
       Set to stop autoconnect
+
   - type: bool
     name: noProcessEos
     description: |-
       Set to avoid processing end of string
+
   - type: str
     name: simulation
     description: |-
       IP port to connect to if in simulation mode
+
   - type: int
     name: baud
     description: |-
       Baud Rate
+
   - type: enum
     name: parity
     description: |-
@@ -53,6 +63,7 @@ defs:
       even:
       none:
       odd:
+
   - type: enum
     name: crtscts
     description: |-
@@ -60,6 +71,7 @@ defs:
     values:
       Y:
       N:
+
   - type: enum
     name: stop
     description: |-
@@ -67,6 +79,7 @@ defs:
     values:
       '1':
       '2':
+
   - type: enum
     name: disconnectOnReadTimeout
     description: |-
@@ -74,6 +87,7 @@ defs:
     values:
       Y:
       N:
+
   - type: enum
     name: bits
     description: |-
@@ -95,43 +109,53 @@ defs:
   description: |-
     Asyn IP Port
   args:
+
   - type: str
     name: port
     description: |-
       Serial port tty name / IP address optionally followed by protocol
+
   - type: id
     name: name
     description: |-
       Override name
+
   - type: str
     name: input_eos
     description: |-
       Input end of string (terminator)
+
   - type: str
     name: output_eos
     description: |-
       Output end of string (terminator)
+
   - type: int
     name: priority
     description: |-
       Priority
     default: 100
+
   - type: bool
     name: noAutoConnect
     description: |-
       Set to stop autoconnect
+
   - type: bool
     name: noProcessEos
     description: |-
       Set to avoid processing end of string
+
   - type: str
     name: simulation
     description: |-
       IP port to connect to if in simulation mode
+
   - type: int
     name: baud
     description: |-
       Baud Rate
+
   - type: enum
     name: parity
     description: |-
@@ -140,6 +164,7 @@ defs:
       even:
       none:
       odd:
+
   - type: enum
     name: crtscts
     description: |-
@@ -147,6 +172,7 @@ defs:
     values:
       Y:
       N:
+
   - type: enum
     name: stop
     description: |-
@@ -154,6 +180,7 @@ defs:
     values:
       '1':
       '2':
+
   - type: enum
     name: disconnectOnReadTimeout
     description: |-
@@ -161,6 +188,7 @@ defs:
     values:
       Y:
       N:
+
   - type: enum
     name: bits
     description: |-
@@ -182,43 +210,53 @@ defs:
   description: |-
     Asyn IP Server Port
   args:
+
   - type: str
     name: port
     description: |-
       Serial port tty name / IP address optionally followed by protocol
+
   - type: id
     name: name
     description: |-
       Override name
+
   - type: str
     name: input_eos
     description: |-
       Input end of string (terminator)
+
   - type: str
     name: output_eos
     description: |-
       Output end of string (terminator)
+
   - type: int
     name: priority
     description: |-
       Priority
     default: 100
+
   - type: bool
     name: noAutoConnect
     description: |-
       Set to stop autoconnect
+
   - type: bool
     name: noProcessEos
     description: |-
       Set to avoid processing end of string
+
   - type: str
     name: simulation
     description: |-
       IP port to connect to if in simulation mode
+
   - type: int
     name: baud
     description: |-
       Baud Rate
+
   - type: enum
     name: parity
     description: |-
@@ -227,6 +265,7 @@ defs:
       even:
       none:
       odd:
+
   - type: enum
     name: crtscts
     description: |-
@@ -234,6 +273,7 @@ defs:
     values:
       Y:
       N:
+
   - type: enum
     name: stop
     description: |-
@@ -241,6 +281,7 @@ defs:
     values:
       '1':
       '2':
+
   - type: enum
     name: disconnectOnReadTimeout
     description: |-
@@ -248,6 +289,7 @@ defs:
     values:
       Y:
       N:
+
   - type: enum
     name: bits
     description: |-
@@ -269,35 +311,43 @@ defs:
   description: |-
     Asyn vxi11 Port
   args:
+
   - type: str
     name: port
     description: |-
       IP address
+
   - type: bool
     name: noAutoConnect
     description: |-
       Set to stop autoconnect
+
   - type: int
     name: priority
     description: |-
       Priority
+
   - type: str
     name: simulation
     description: |-
       IP port to connect to if in simulation mode
+
   - type: id
     name: name
     description: |-
       Asyn Port name
+
   - type: int
     name: flags
     description: |-
       flags (lock devices : recover with IFC)
+
   - type: float
     name: timeout
     description: |-
       default timeout
     default: '0.0'
+
   - type: str
     name: vxiName
     description: |-
@@ -312,43 +362,53 @@ defs:
   description: |-
     Asyn Serial Port
   args:
+
   - type: str
     name: port
     description: |-
       Serial port tty name / IP address optionally followed by protocol
+
   - type: id
     name: name
     description: |-
       Override name
+
   - type: str
     name: input_eos
     description: |-
       Input end of string (terminator)
+
   - type: str
     name: output_eos
     description: |-
       Output end of string (terminator)
+
   - type: int
     name: priority
     description: |-
       Priority
     default: 100
+
   - type: bool
     name: noAutoConnect
     description: |-
       Set to stop autoconnect
+
   - type: bool
     name: noProcessEos
     description: |-
       Set to avoid processing end of string
+
   - type: str
     name: simulation
     description: |-
       IP port to connect to if in simulation mode
+
   - type: int
     name: baud
     description: |-
       Baud Rate
+
   - type: enum
     name: parity
     description: |-
@@ -357,6 +417,7 @@ defs:
       even:
       none:
       odd:
+
   - type: enum
     name: crtscts
     description: |-
@@ -364,6 +425,7 @@ defs:
     values:
       Y:
       N:
+
   - type: enum
     name: stop
     description: |-
@@ -371,6 +433,7 @@ defs:
     values:
       '1':
       '2':
+
   - type: enum
     name: disconnectOnReadTimeout
     description: |-
@@ -378,6 +441,7 @@ defs:
     values:
       Y:
       N:
+
   - type: enum
     name: bits
     description: |-

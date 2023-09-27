@@ -8,22 +8,27 @@ defs:
   description: |-
     Creates a aravisCamera camera areaDetector driver
   args:
+
   - type: str
     name: P
     description: |-
       PV Prefix
+
   - type: str
     name: R
     description: |-
       PV Suffix
+
   - type: id
     name: PORT
     description: |-
       Port name for the camera
+
   - type: str
     name: ID
     description: |-
       Cam ip address, hostname, MAC address, or ID <manufacturer>-<serial>, (e.g. Prosilica-02-2166A-06844)
+
   - type: enum
     name: CLASS
     description: |-
@@ -58,6 +63,7 @@ defs:
       AVT_Mako_G234C:
       AVT_Mako_G234B:
       AVT_Manta_G609B:
+
   - type: enum
     name: PV_ALIAS
     description: |-
@@ -65,21 +71,25 @@ defs:
     values:
       '1':
       '0':
+
   - type: int
     name: BUFFERS
     description: |-
       Maximum number of NDArray buffers to be created for plugin callbacks
     default: 50
+
   - type: int
     name: MEMORY
     description: |-
       Max memory to allocate, should be maxw*maxh*nbuffer for driver and all attached plugins
     default: -1
+
   - type: str
     name: TIMEOUT
     description: |-
       Timeout, default 1
     default: '1'
+
   - type: str
     name: ADDR
     description: |-

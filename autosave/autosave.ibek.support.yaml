@@ -8,44 +8,54 @@ defs:
   description: |-
     TODO:ADD DESCRIPTION
   args:
+
   - type: str
     name: iocName
     description: |-
       IOC Name EPICS prefix
+
   - type: int
     name: debug
     description: |-
       Debug level
+
   - type: bool
     name: skip_1
     description: |-
       If True, don't restore file 1
+
   - type: str
     name: server
     description: |-
       NFS server name (vxWorks bl=False only)
+
   - type: str
     name: ip
     description: |-
       NFS server ip (vsWorks only), or blgateway ip if bl=True
+
   - type: str
     name: path
     description: |-
       Root of path to put autosave files in, ioc name will be appended to this
+
   - type: id
     name: name
     description: |-
       Object name
+
   - type: int
     name: vx_uid
     description: |-
       UID of vxWorks autosave user
     default: 37134
+
   - type: int
     name: vx_gid
     description: |-
       GID of vxWorks autosave group
     default: 500
+
   - type: bool
     name: bl
     description: |-

@@ -8,34 +8,41 @@ defs:
   description: |-
     TODO:ADD DESCRIPTION
   args:
+
   - type: str
     name: ioc
     description: |-
       ioc name
+
   - type: id
     name: name
     description: |-
       gui element name
+
   - type: bool
     name: scanMonitor
     description: |-
       choice to include scan monitor
     default: true
+
   - type: bool
     name: guiTags
     description: |-
       choice to include gui tags
     default: true
+
   - type: str
     name: screen
     description: |-
       edm file for gui tags
     default: ioc_stats_softdls.edl
+
   - type: str
     name: EDM_FILE
     description: |-
       edm screen, defaults to ioc_stats_softdls.edl
     default: ioc_stats_softdls.edl
+
   - type: str
     name: IOC
     description: |-
@@ -58,6 +65,7 @@ defs:
   description: |-
     Create some records for reading IOC statistics and details.
   args:
+
   - type: str
     name: IOC
     description: |-
@@ -72,6 +80,7 @@ defs:
   description: |-
     Create some records for reading IOC statistics and details.
   args:
+
   - type: str
     name: IOC
     description: |-
@@ -86,16 +95,19 @@ defs:
   description: |-
     TODO:ADD DESCRIPTION
   args:
+
   - type: id
     name: name
     description: |-
       name for gui elements
     default: None
+
   - type: str
     name: EDM_FILE
     description: |-
       edm screen, defaults to ioc_stats_softdls.edl
     default: ioc_stats_softdls.edl
+
   - type: str
     name: IOC
     description: |-
@@ -112,6 +124,7 @@ defs:
   description: |-
     Create some records for reading IOC statistics and details.
   args:
+
   - type: str
     name: IOC
     description: |-
