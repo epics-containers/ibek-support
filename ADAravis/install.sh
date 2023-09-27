@@ -67,11 +67,6 @@ ARAVIS_INCLUDE  = /usr/local/include/aravis-0.8/
 ibek support add-to-config-site ${NAME} "${CONFIG}"
 ibek support add-to-config-site ADGenICam "${CONFIG}"
 
-
-# TODO may need
-#    ioc_SYS_LIBS += aravis-0.8
-# in the Makefile
-
 # compile the support module
 ibek support compile ADGenICam
 ibek support compile ${NAME}
