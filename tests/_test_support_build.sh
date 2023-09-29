@@ -18,7 +18,7 @@ THIS_FOLDER=$(dirname ${0})
 # pass the container context as the folder above the ibek-support folder
 CONTEXT=$(realpath ${THIS_FOLDER}/../..)
 
-BASE_VERSION="23.9.3"
+BASE_VERSION="7.0.7ec2"
 
 ARCH=${ARCH:-linux}
 PLATFORM=${PLATFORM:-linux/amd64}
