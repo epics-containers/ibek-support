@@ -4,7 +4,7 @@
 # released versions of builder support modules at DLS
 # as of 26/09/2023
 
-# assumes ibek a peer to this folder's parent (as ibek-support is usually
+# assumes ibek is a peer to this folder's parent (as ibek-support is usually
 # a submodule of an ioc-xxxx) Adjust Path if this is not the case.
 set -xe
 
