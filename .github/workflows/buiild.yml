@@ -58,11 +58,7 @@ jobs:
           PLATFORM: ${{ matrix.platform }}
           CACHE: ${{ env.CACHE }}
         run: |
-          # ioc folder is found in the super module usually so for testing
-          # on github we need to copy it above the root of the repo
-          cp -r ioc ..
-          for test in tests/test*.sh; do
+          for test in tests/*.sh; do
             echo "RUNNING TEST SCRIPT ${test}"
             ${test}
           done
-          tests/_test_support_build.sh
