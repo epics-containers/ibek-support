@@ -1,13 +1,15 @@
 ##### build stage ##############################################################
 
 ARG TARGET_ARCHITECTURE
-ARG BASE=7.0.7+ec1
+ARG BASE
 ARG REGISTRY=ghcr.io/epics-containers
 
 FROM  ${REGISTRY}/epics-base-${TARGET_ARCHITECTURE}-developer:${BASE} AS developer
 
+RUN pip install --upgrade ibek
+
 # In a devcontainer this folder is mounted on the host's clone of ioc-adsimdetector
-WORKDIR /workspaces/ioc-adsimdetector/ibek-support
+WORKDIR /epics/ioc-adsimdetector/ibek-support
 
 # copy the global ibek files
 COPY ibek-support/_global/ _global
@@ -31,7 +33,6 @@ COPY ibek-support/ADSimDetector/ ADSimDetector/
 RUN ADSimDetector/install.sh R2-10
 
 # Make the IOC
-RUN ibek ioc generate-makefile
 RUN ibek ioc compile
 
 ##### runtime preparation stage ################################################
@@ -39,23 +40,17 @@ RUN ibek ioc compile
 FROM developer AS runtime_prep
 
 # get the products from the build stage and reduce to runtime assets only
-WORKDIR /min_files
-RUN bash /epics/scripts/minimize.sh ${IOC} $(ls -d ${SUPPORT}/*/)
+RUN ibek ioc extract-runtime-assets /assets
 
 ##### runtime stage ############################################################
 
 FROM ${REGISTRY}/epics-base-${TARGET_ARCHITECTURE}-runtime:${BASE} AS runtime
 
-# get the virtual environment from the developer stage
-COPY --from=developer /venv /venv
-# add products from build stage
-COPY --from=runtime_prep /min_files /
+# get runtime assets from the preparation stage
+COPY --from=runtime_prep /assets /
 
 # install runtime system dependencies, collected from install.sh scripts
 RUN ibek support apt-install --runtime
-
-# add ioc sample startup scripts
-COPY ioc ${IOC}
 
 ENV TARGET_ARCHITECTURE ${TARGET_ARCHITECTURE}
 
