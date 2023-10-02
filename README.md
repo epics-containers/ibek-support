@@ -2,7 +2,7 @@
 
 This repo holds details of how to build EPICS support modules within
 an epics-containers Generic IOC Dockerfile. For runtime, it also has details of
-how to use features from each support module in an epics-containers
+how to use features from each support module in an epics-container
 IOC instance.
 
 ## Scope
