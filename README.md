@@ -1,9 +1,9 @@
 # ibek-support
 
-Holds details of how to build EPICS support modules within
-an epics-containers Generic IOC Dockerfile. Plus details of
-how to use features from each support module at runtime inside
-an epics-containers IOC instance.
+This repo holds details of how to build EPICS support modules within
+an epics-containers Generic IOC Dockerfile. For runtime, it also has details of
+how to use features from each support module in an epics-containers
+IOC instance.
 
 ## Scope
 
@@ -18,7 +18,6 @@ epics-containers github organisation or other public registry.
 Such generic IOCs would be required to use public ibek-support only.
 
 
-
 ## Structure
 
 Each EPICS support module has a folder in this repo. By convention,
@@ -29,9 +28,9 @@ Each support module folder contains:-
 
 - install.sh:
   - a script that builds the support module inside of a container.
-  This script is invoked by every Generic IOC build that requires the
-  support module. The script can contain any commands that are required
-  but would usually be a series of calls to `ibek support` functions.
+  This script is invoked by any Generic IOC build that requires the
+  support module. The script can contain any bash  script commands that are
+  required but would usually be a series of calls to `ibek support` functions.
   For an example see
   [install.sh](https://github.com/epics-containers/ibek-support/blob/main/ADSimDetector/install.sh)
   for the ADSimDetector support module.
@@ -50,7 +49,9 @@ Each support module folder contains:-
   files. But perhaps a patch file might be required to make a support module
   build inside of a container for example.
 
-- VERSIONING:- an important aspect of ibek-support is that it will
+
+## Versionig
+An important aspect of ibek-support is that it will
 retain backward compatibility with older versions of support modules going
 forward from inception in October 2023. The install.sh script will be told
 which version of the support moduel to build and will be able to detect which
@@ -71,6 +72,24 @@ For an example Dockerfile that demonstrates this see
 
 For details of the ibek module support functions
 [ibek's github page](https://github.com/epics-containers/ibek)
+
+## An Example IOC
+
+ibek-support and ibek enable us to build a generic IOC that uses support
+for Aravis based cameras using this
+[Dockerfile](https://github.com/epics-containers/ioc-adaravis/blob/main/Dockerfile).
+
+We can then use the
+[Aravis support module YAML](https://github.com/epics-containers/ibek-support/blob/main/ADAravis/ADAravis.ibek.support.yaml)
+combined with an [IOC instance YAML file](https://github.com/epics-containers/ibek-support/blob/main/tests/ioc_instance/ioc.yaml)
+to build an IOC instance.
+
+The IOC instance will use ibek to generate this
+[startup script](https://github.com/epics-containers/ibek-support/blob/main/tests/ioc_instance/st.cmd)
+and this
+[database subst file](https://github.com/epics-containers/ibek-support/blob/main/tests/ioc_instance/ioc.db)
+when it launches. These two files are passed to the generic
+IOC to make it into an IOC instance at container runtime.
 
 ## How to contribute
 
