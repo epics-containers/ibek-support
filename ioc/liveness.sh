@@ -1,11 +1,11 @@
 #!/bin/bash
-TOP=/repos/epics/ioc
+TOP=/epics/ioc
 cd ${TOP}
 CONFIG_DIR=${TOP}/config
 
 set -ex
 
-CONFIG_DIR=/repos/epics/ioc/config
+CONFIG_DIR=/epics/ioc/config
 THIS_SCRIPT=$(realpath ${0})
 override=${CONFIG_DIR}/liveness.sh
 

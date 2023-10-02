@@ -1,0 +1,499 @@
+ # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
+
+module: motor
+
+defs:
+
+- name: motorUtil
+  description: |-
+    TODO:ADD DESCRIPTION
+  args:
+
+  - type: str
+    name: P
+    description: |-
+      Device Prefix
+
+  databases:
+  - file: $(MOTOR)/db/motorUtil.template
+    args:
+      P:
+
+  post_init:
+  - value: |
+      motorUtilInit("{{P}}")
+
+- name: basic_asyn_motor
+  description: |-
+    Basic template, including motor record and associated tags
+  args:
+
+  - type: str
+    name: P
+    description: |-
+      Device Prefix
+
+  - type: str
+    name: M
+    description: |-
+      Device Suffix
+
+  - type: object
+    name: PORT
+    description: |-
+      Asyn port for motor record
+
+  - type: str
+    name: ADDR
+    description: |-
+      Address on controller
+
+  - type: str
+    name: DESC
+    description: |-
+      Description, displayed on EDM screen
+
+  - type: str
+    name: MRES
+    description: |-
+      Motor Step Size (EGU)
+
+  - type: str
+    name: VELO
+    description: |-
+      Velocity (EGU/s)
+
+  - type: str
+    name: PREC
+    description: |-
+      Display Precision
+
+  - type: str
+    name: EGU
+    description: |-
+      Engineering Units
+
+  - type: str
+    name: TWV
+    description: |-
+      Tweak Step Size (EGU)
+
+  - type: str
+    name: DTYP
+    description: |-
+      DTYP of record
+    default: asynMotor
+
+  - type: str
+    name: DIR
+    description: |-
+      User Direction
+    default: '0'
+
+  - type: str
+    name: VBAS
+    description: |-
+      Base Velocity (EGU/s)
+    default: '0'
+
+  - type: str
+    name: VMAX
+    description: |-
+      Max Velocity (EGU/s), defaults to VELO
+    default: $(VELO)
+
+  - type: str
+    name: ACCL
+    description: |-
+      Seconds to Velocity
+    default: '0.5'
+
+  - type: str
+    name: BDST
+    description: |-
+      BL Distance (EGU)
+    default: '0'
+
+  - type: str
+    name: BVEL
+    description: |-
+      BL Velocity (EGU/s)
+    default: '0'
+
+  - type: str
+    name: BACC
+    description: |-
+      BL Seconds to Veloc.
+
+  - type: str
+    name: DHLM
+    description: |-
+      Dial High Limit
+
+  - type: str
+    name: DLLM
+    description: |-
+      Dial Low Limit
+
+  - type: str
+    name: HLM
+    description: |-
+      User High Limit
+
+  - type: str
+    name: LLM
+    description: |-
+      User Low Limit
+
+  - type: str
+    name: HLSV
+    description: |-
+      HW Lim. Violation Svr
+    default: MAJOR
+
+  - type: str
+    name: INIT
+    description: |-
+      Startup commands
+
+  - type: str
+    name: SREV
+    description: |-
+      Steps per Revolution
+    default: '1000'
+
+  - type: str
+    name: RRES
+    description: |-
+      Readback Step Size (EGU)
+
+  - type: str
+    name: ERES
+    description: |-
+      Encoder Step Size (EGU)
+
+  - type: str
+    name: JAR
+    description: |-
+      Jog Acceleration (EGU/s^2)
+
+  - type: str
+    name: UEIP
+    description: |-
+      Use Encoder If Present
+    default: '0'
+
+  - type: str
+    name: URIP
+    description: |-
+      Use RDBL If Present
+    default: '0'
+
+  - type: str
+    name: RDBL
+    description: |-
+      Readback Location, set URIP = 1 if you specify this
+
+  - type: str
+    name: RLNK
+    description: |-
+      Readback output link
+
+  - type: str
+    name: RTRY
+    description: |-
+      Max retry count
+    default: '0'
+
+  - type: str
+    name: DLY
+    description: |-
+      Readback settle time (s)
+    default: '0'
+
+  - type: str
+    name: OFF
+    description: |-
+      User Offset (EGU)
+    default: '0'
+
+  - type: str
+    name: RDBD
+    description: |-
+      Retry Deadband (EGU)
+
+  - type: str
+    name: FOFF
+    description: |-
+      Freeze Offset, 0=variable, 1=frozen
+    default: '0'
+
+  - type: str
+    name: ADEL
+    description: |-
+      Alarm monitor deadband (EGU)
+    default: '0'
+
+  - type: str
+    name: NTM
+    description: |-
+      New Target Monitor, only set to 0 for soft motors
+    default: '1'
+
+  - type: str
+    name: FEHIGH
+    description: |-
+      HIGH limit for following error
+    default: '0'
+
+  - type: str
+    name: FEHIHI
+    description: |-
+      HIHI limit for following error
+    default: '0'
+
+  - type: str
+    name: FEHHSV
+    description: |-
+      HIHI alarm severity for following error
+    default: NO_ALARM
+
+  - type: str
+    name: FEHSV
+    description: |-
+      HIGH alarm severity for following error
+    default: NO_ALARM
+
+  - type: str
+    name: SCALE
+    description: |-
+      Scale factor, if pmacSetAxisScale is used this should be set
+    default: '1'
+
+  - type: str
+    name: HOMEVIS
+    description: |-
+      If 1 then home is visible on the gui
+    default: '1'
+
+  - type: str
+    name: HOMEVISSTR
+    description: |-
+      If HOMEVIS=0, then display this text on the gui instead
+    default: Use motor summary screen
+
+  - type: id
+    name: name
+    description: |-
+      Object name and gui association name
+
+  - type: str
+    name: alh
+    description: |-
+      set to '#' to comment out alh lines
+    default: None
+
+  - type: str
+    name: gda_name
+    description: |-
+      Name to export this as to GDA
+
+  - type: str
+    name: gda_desc
+    description: |-
+      Description to export this as to GDA
+    default: $(DESC)
+
+  databases:
+  - file: $(MOTOR)/db/basic_asyn_motor.template
+    args:
+      VELO:
+      ACCL:
+      SCALE:
+      BACC:
+      alh:
+      gda_name:
+      DHLM:
+      HOMEVIS:
+      M:
+      EGU:
+      FEHSV:
+      VBAS:
+      VMAX:
+      BDST:
+      PORT:
+      SREV:
+      DTYP:
+      FEHIGH:
+      DLLM:
+      INIT:
+      RDBL:
+      DIR:
+      LLM:
+      ADEL:
+      DESC:
+      RDBD:
+      URIP:
+      ADDR:
+      RTRY:
+      OFF:
+      ERES:
+      FEHIHI:
+      FEHHSV:
+      JAR:
+      P:
+      BVEL:
+      MRES:
+      DLY:
+      HLSV:
+      UEIP:
+      name:
+      RRES:
+      PREC:
+      RLNK:
+      FOFF:
+      HLM:
+      NTM:
+      TWV:
+      gda_desc:
+      HOMEVISSTR:
+
+- name: softMotorForPiezo
+  description: |-
+    TODO:ADD DESCRIPTION
+  args:
+
+  - type: str
+    name: P
+    description: |-
+      Device Prefix
+
+  - type: str
+    name: Q
+    description: |-
+      Device Suffix
+
+  - type: str
+    name: DESC
+    description: |-
+      Description, displayed on EDM screen
+
+  - type: str
+    name: RDBL
+    description: |-
+      Readback link
+
+  - type: str
+    name: OUT
+    description: |-
+      Output link
+
+  - type: str
+    name: MOVEDLY
+    description: |-
+      Approximate move time (seconds)
+
+  - type: str
+    name: EGU
+    description: |-
+      Engineering Units
+
+  - type: str
+    name: DHLM
+    description: |-
+      Dial High Limit
+
+  - type: str
+    name: DLLM
+    description: |-
+      Dial Low Limit
+
+  - type: str
+    name: MRES
+    description: |-
+      Motor Step Size (EGU)
+    default: '1'
+
+  - type: str
+    name: RRES
+    description: |-
+      Readback Step Size (EGU)
+    default: '1'
+
+  - type: str
+    name: RDBD
+    description: |-
+      Retry deadband (EGU)
+    default: '1'
+
+  - type: id
+    name: name
+    description: |-
+      Object name and gui association name
+
+  - type: str
+    name: gda_name
+    description: |-
+      Name to export this as to GDA
+
+  - type: str
+    name: gda_desc
+    description: |-
+      Description to export this as to GDA
+
+  databases:
+  - file: $(MOTOR)/db/softMotorForPiezo.template
+    args:
+      name:
+      gda_name:
+      DHLM:
+      OUT:
+      RRES:
+      DLLM:
+      EGU:
+      Q:
+      P:
+      RDBL:
+      MRES:
+      gda_desc:
+      MOVEDLY:
+      RDBD:
+      DESC:
+
+- name: MotorSim
+  description: |-
+    Simulated controller Device - instantiate one per controller '''
+  args:
+
+  - type: id
+    name: name
+    description: |-
+      Asyn port for motor record
+
+  - type: int
+    name: AXES
+    description: |-
+      Number of Axes
+    default: 8
+
+  - type: int
+    name: ACTIVEPOLL
+    description: |-
+      polling period when motors are moving
+    default: 50
+
+  - type: int
+    name: IDLEPOLL
+    description: |-
+      polling period when all motors are idle
+    default: 500
+
+  pre_init:
+  - when: first
+    value: |
+      # Create simulator: ( start card , start axis , hard low limit, 
+      motorSimCreate( 0, 1, -15000000, 15000000, 0, {{}}, 32 )
+ # TODO - MISSING ARGS: 
+  - value: |
+      drvAsynMotorConfigure("{{}}", "motorSim", {{}}, {{}})
+ # TODO - MISSING ARGS: 

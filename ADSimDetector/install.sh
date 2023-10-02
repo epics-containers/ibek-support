@@ -22,6 +22,6 @@ ibek support add-dbds simDetectorSupport.dbd
 # compile the support module
 ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
-ibek support generate-links ${NAME}
+ibek support generate-links
 
 

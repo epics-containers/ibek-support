@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TOP=/repos/epics/ioc
+TOP=/epics/ioc
 cd ${TOP}
 CONFIG_DIR=${TOP}/config
 

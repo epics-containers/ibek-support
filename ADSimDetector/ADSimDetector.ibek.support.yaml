@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.1.0/ibek.support.schema.json
+
+module: ADSimDetector
+
+defs:
+  - name: simDetector
+    description: |-
+      Creates a simulation detector
+
+    args:
+      - type: str
+        name: P
+        description: Device Prefix
+      - type: str
+        name: R
+        description: Device Suffix
+      - type: id
+        name: PORT
+        description: Port name for the detector
+      - type: str
+        name: TIMEOUT
+        description: Timeout
+      - type: str
+        name: ADDR
+        description: Asyn Port address
+      - type: int
+        name: WIDTH
+        description: Image Width
+      - type: int
+        name: HEIGHT
+        description: Image Height
+      - type: int
+        name: DATATYPE
+        description: Datatype
+        default: 1
+      - type: int
+        name: BUFFERS
+        description: Maximum number of NDArray buffers to be created for plugin callbacks
+        default: 50
+      - type: int
+        name: MEMORY
+        description:
+          Max memory to allocate, should be maxw*maxh*nbuffer for driver and
+          all attached plugins
+        default: 0
+
+    databases:
+      - file: $(ADSIMDETECTOR)/db/simDetector.template
+        args:
+          P:
+          R:
+          PORT:
+          TIMEOUT:
+          ADDR:
+
+    pre_init:
+      - type: text
+        value: |
+          # simDetectorConfig(portName, maxSizeX, maxSizeY, dataType, maxBuffers, maxMemory)
+          simDetectorConfig("{{PORT}}", {{WIDTH}}, {{HEIGHT}}, {{DATATYPE}}, {{BUFFERS}}, {{MEMORY}})

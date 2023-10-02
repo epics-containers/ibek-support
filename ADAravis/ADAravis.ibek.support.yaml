@@ -1,95 +1,117 @@
-# yaml-language-server: $schema=../_global/ibek.defs.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
 
 module: ADAravis
 
 defs:
-  - name: ADAravis
-    description: Defines an ADAravis camera (requires associated ADGenicam instance)
+  - name: aravisCamera
+    description: |-
+      Creates a aravisCamera camera areaDetector driver
     args:
-      - type: id
-        name: PORT
-        description: Port Name for teh camera
-
       - type: str
         name: P
-        description: The PV prefix
+        description: |-
+          PV Prefix
 
       - type: str
         name: R
-        description: The PV suffix
+        description: |-
+          PV Suffix
+
+      - type: id
+        name: PORT
+        description: |-
+          Port name for the camera
 
       - type: str
         name: ID
-        description: |
-          Cam ip address, hostname, MAC address, or ID <manufacturer>-<serial>,
-          (e.g. Prosilica-02-2166A-06844)
+        description: |-
+          Cam ip address, hostname, MAC address, or ID <manufacturer>-<serial>, (e.g. Prosilica-02-2166A-06844)
+
+      - type: enum
+        name: CLASS
+        description: |-
+          Camera class for custom commands
+        values:
+          Basler_piA640_210gm:
+          AVT_Manta_G319B:
+          AVT_Manta_G2460C:
+          AVT_Mako_G125B:
+          AVT_Mako_G125C:
+          AVT_Prosilica_GC1280M:
+          AVT_Mako_1_52:
+          AVT_Manta_G507B:
+          AVT_Manta_G145B:
+          AVT_Mako_G507B:
+          AVT_Mako_G507C:
+          AVT_Prosilica_GT5120:
+          AVT_Mako_G319C:
+          AVT_Manta_G419C:
+          AVT_Prosilica_GC1020C:
+          AVT_Prosilica_GC655C:
+          Prosilica_GC:
+          AVT_Manta_G125B:
+          AVT_Manta_G125C:
+          AVT_Manta_G040B:
+          AVT_Manta_G895B:
+          AVT_Mako_G158B:
+          AVT_Mako_G158C:
+          AVT_Manta_G235B:
+          AVT_Manta_G235C:
+          AVT_Manta_1_44:
+          AVT_Mako_G234C:
+          AVT_Mako_G234B:
+          AVT_Manta_G609B:
+
+      - type: enum
+        name: PV_ALIAS
+        description: |-
+          Use alias template to keep some key PV names the same
+        values:
+          "1":
+          "0":
 
       - type: int
         name: BUFFERS
-        description: Max NDArray buffers to be created for plugin callbacks
+        description: |-
+          Maximum number of NDArray buffers to be created for plugin callbacks
         default: 50
 
       - type: int
         name: MEMORY
-        description: |
-          Max memory to allocate, should be maxw*maxh*nbuffer
-          for driver and all attached plugins or -1 for unlimited
+        description: |-
+          Max memory to allocate, should be maxw*maxh*nbuffer for driver and all attached plugins
         default: -1
 
-      - type: int
+      - type: str
         name: TIMEOUT
-        description: timeout for communication with camera
-        default: 1
+        description: |-
+          Timeout, default 1
+        default: "1"
 
       - type: str
-        name: PV_ALIAS
-        description: |
-          TODO this need to look into the purpose of this in builder.py
-          determine its function and see if we can do the equivalent in ibek
-        default: ""
+        name: ADDR
+        description: |-
+          Asyn Port address, default 0
+        default: "0"
+
+    databases:
+      - file: $(ADARAVIS)/db/aravisCamera.template
+        args:
+          P:
+          R:
+          PORT:
+          TIMEOUT:
+          ADDR:
+      # TODO replace AVT_Mako_G234B and make is so ibek will substitue CLASS in
+      - file: $(ADGENICAM)/db/AVT_Mako_G234B.template
+        args:
+          P:
+          R:
+          PORT:
+          TIMEOUT:
+          ADDR:
 
     pre_init:
-      - type: function
-        name: aravisConfig
-        args:
-          AsynPortName: "{{ PORT }}"
-          IpAddressOrName: "{{ ID }}"
-          MaxMemory: "{{ MEMORY }}"
-          Priority: 0
-          StackSize: 1
-
-    databases:
-      - file: aravisCamera.template
-        args: { P, R, PORT, TIMEOUT, CHANNEL: "0" }
-
-  - name: MantaG235B
-    description: Defines a Manta G-235B camera instance
-    args:
-      - type: object
-        name: camera
-        description: reference to ADAravis.ADAravis instance
-
-    databases:
-      - file: AVT_Manta_G235B.template
-        args:
-          P: "{{ camera.P }}"
-          R: "{{ camera.R }}"
-          PORT: "{{ camera.PORT }}"
-          TIMEOUT: "{{ camera.TIMEOUT }}"
-          ADDR: "0"
-
-  - name: Mako_G234B
-    description: Defines a Mako G-234B camera instance
-    args:
-      - type: object
-        name: camera
-        description: reference to ADAravis.ADAravis instance
-
-    databases:
-      - file: AVT_Mako_G234B.template
-        args:
-          P: "{{ camera.P }}"
-          R: "{{ camera.R }}"
-          PORT: "{{ camera.PORT }}"
-          TIMEOUT: "{{ camera.TIMEOUT }}"
-          ADDR: "0"
+      - value: |
+          aravisConfig(const char *portName, const char *cameraName, size_t maxMemory, int priority, int stackSize)
+          aravisConfig("{{PORT}}", "{{ID}}", {{MEMORY}}, 0, 1)

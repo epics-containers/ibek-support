@@ -1,0 +1,92 @@
+ # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
+
+module: autosave
+
+defs:
+
+- name: Autosave
+  description: |-
+    TODO:ADD DESCRIPTION
+  args:
+
+  - type: str
+    name: iocName
+    description: |-
+      IOC Name EPICS prefix
+
+  - type: int
+    name: debug
+    description: |-
+      Debug level
+
+  - type: bool
+    name: skip_1
+    description: |-
+      If True, don't restore file 1
+
+  - type: str
+    name: server
+    description: |-
+      NFS server name (vxWorks bl=False only)
+
+  - type: str
+    name: ip
+    description: |-
+      NFS server ip (vsWorks only), or blgateway ip if bl=True
+
+  - type: str
+    name: path
+    description: |-
+      Root of path to put autosave files in, ioc name will be appended to this
+
+  - type: id
+    name: name
+    description: |-
+      Object name
+
+  - type: int
+    name: vx_uid
+    description: |-
+      UID of vxWorks autosave user
+    default: 37134
+
+  - type: int
+    name: vx_gid
+    description: |-
+      GID of vxWorks autosave group
+    default: 500
+
+  - type: bool
+    name: bl
+    description: |-
+      If True, then assume we are on a beamline, that ip=blgateway machine ip and make sure the relevant storage server or directory is up before booting. 
+
+  databases:
+  - file: $(AUTOSAVE)/db/dlssrfile.template
+    args:
+      device:
+      file:
+  - file: $(AUTOSAVE)/db/dlssrstatus.template
+    args:
+      device:
+      name:
+
+  pre_init:
+  - value: |
+      # Autosave and restore initialisation
+      save_restoreSet_status_prefix "%s"
+      save_restoreSet_Debug %d
+      save_restoreSet_NumSeqFiles 3
+      save_restoreSet_SeqPeriodInSeconds 600
+      save_restoreSet_DatedBackupFiles 1
+      save_restoreSet_IncompleteSetsOk 1
+      set_pass0_restoreFile "%s_0.sav"
+      set_pass0_restoreFile "%s_1.sav"
+      set_pass1_restoreFile "%s_1.sav"
+      set_pass1_restoreFile "%s_2.sav"
+
+  post_init:
+  - value: |
+      create_monitor_set "%s_0.req",  5, ""
+      create_monitor_set "%s_1.req", 30, ""
+      create_monitor_set "%s_2.req", 30, ""
