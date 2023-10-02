@@ -1,8 +1,11 @@
 #!/bin/bash
 
+set -xe
+
 THIS_FOLDER=$(realpath $(dirname ${0}))
 IBEK_SROOT=${THIS_FOLDER}/../
 
+pip install ibek
 
 # make a global ioc schema for all the support modules combined
 echo generating all support schema

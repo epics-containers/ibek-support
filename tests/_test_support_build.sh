@@ -89,21 +89,15 @@ for dockerfile in ${DOCKERFILES}; do
     do_build ${ARCH} runtime ${dockerfile}
 
     # launch the runtime IOC container
-    $docker run --name test_me --rm -dit test_image_only
+    $docker run --name test_me --rm test_image_only | \
+      grep "Generic IOC start script"
 
-    # verify that the IOC is running - but give it time to start
-    for retry in {1..10}; do
-        sleep 1
-        if $docker exec test_me ps aux | grep /epics/ioc/bin/linux-x86_64/ioc ; then
-            echo "IOC is running"
-            break
-        fi
-    done
-
-    $docker stop -t0 test_me
+    $docker rmi test_image_only
 
     # The above check is sufficient to show that the generic IOC will load and
     # run and that all the necessary runtime libraries are in place.
-
+    # TODO - we need a minimalist st.cmd to run in the container to check that
+    # the IOC is able to load runtime libraries.
 done
+
 

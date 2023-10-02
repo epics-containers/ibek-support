@@ -33,15 +33,15 @@ Each support module folder contains:-
   support module. The script can contain any commands that are required
   but would usually be a series of calls to `ibek support` functions.
   For an example see
-  [install.sh](https://github.com/epics-containers/ibek-support/blob/main/asyn/install.sh)
-  for the Asyn support module.
+  [install.sh](https://github.com/epics-containers/ibek-support/blob/main/ADSimDetector/install.sh)
+  for the ADSimDetector support module.
 
 - \<support module name\>.ibek.support.yaml:
   - a definition file that describes how the support module is used by
   an IOC instance. This file is read by ibek when building an IOC instance
   and is used to generate the startup script and database file. For an
   example see
-  [asyn.ibek.def.yaml](https://github.com/epics-containers/ibek-support/blob/main/asyn/asyn.ibek.support.yaml)
+  [ADSimDetector.ibek.support.yaml](https://github.com/epics-containers/ibek-support/blob/main/ADSimDetector/ADSimDetector.ibek.support.yaml)
 
 - other:
   - any other files that are required to build the support module in the
@@ -50,6 +50,13 @@ Each support module folder contains:-
   files. But perhaps a patch file might be required to make a support module
   build inside of a container for example.
 
+- VERSIONING:- an important aspect of ibek-support is that it will
+retain backward compatibility with older versions of support modules going
+forward from inception in October 2023. The install.sh script will be told
+which version of the support moduel to build and will be able to detect which
+OS and EPICS base version it is being built upon. The install.sh script will
+be able to use this information to adjust any configuration that is required
+by the environment.
 
 
 ## How to use
@@ -64,6 +71,14 @@ For an example Dockerfile that demonstrates this see
 
 For details of the ibek module support functions
 [ibek's github page](https://github.com/epics-containers/ibek)
+
+## How to contribute
+
+TODO: mention here how to use submodule in your ioc-xxx repo and how to
+merge changes into ibek-support, also how to add to the CI to keep verifying
+that the head of the repo is not broken for any support module.
+ALSO: TODO point at the main epics-containers docs once updated to this latest
+framework.
 
 
 
