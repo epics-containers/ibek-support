@@ -1,136 +1,130 @@
- # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
 
 module: devIocStats
 
 defs:
-
-- name: devIocStatsHelper
-  description: |-
-    TODO:ADD DESCRIPTION
-  args:
-
-  - type: str
-    name: ioc
+  - name: devIocStatsHelper
     description: |-
-      ioc name
-
-  - type: id
-    name: name
-    description: |-
-      gui element name
-
-  - type: bool
-    name: scanMonitor
-    description: |-
-      choice to include scan monitor
-    default: true
-
-  - type: bool
-    name: guiTags
-    description: |-
-      choice to include gui tags
-    default: true
-
-  - type: str
-    name: screen
-    description: |-
-      edm file for gui tags
-    default: ioc_stats_softdls.edl
-
-  - type: str
-    name: EDM_FILE
-    description: |-
-      edm screen, defaults to ioc_stats_softdls.edl
-    default: ioc_stats_softdls.edl
-
-  - type: str
-    name: IOC
-    description: |-
-      ioc name
-
-  databases:
-  - file: $(DEVIOCSTATS)/db/iocGui.db
+      TODO:ADD DESCRIPTION
     args:
-      IOC:
-      name:
-      EDM_FILE:
-  - file: $(DEVIOCSTATS)/db/iocAdminSoft.db
-    args:
-      IOC:
-  - file: $(DEVIOCSTATS)/db/iocAdminScanMon.db
-    args:
-      IOC:
+      - type: str
+        name: ioc
+        description: |-
+          ioc name
 
-- name: iocAdminVxWorks
-  description: |-
-    Create some records for reading IOC statistics and details.
-  args:
+      - type: id
+        name: name
+        description: |-
+          gui element name
 
-  - type: str
-    name: IOC
+      - type: bool
+        name: scanMonitor
+        description: |-
+          choice to include scan monitor
+        default: true
+
+      - type: bool
+        name: guiTags
+        description: |-
+          choice to include gui tags
+        default: true
+
+      - type: str
+        name: screen
+        description: |-
+          edm file for gui tags
+        default: ioc_stats_softdls.edl
+
+      - type: str
+        name: EDM_FILE
+        description: |-
+          edm screen, defaults to ioc_stats_softdls.edl
+        default: ioc_stats_softdls.edl
+
+      - type: str
+        name: IOC
+        description: |-
+          ioc name
+
+    databases:
+      - file: $(IOCSTATS)/db/iocGui.db
+        args:
+          IOC:
+          name:
+          EDM_FILE:
+      - file: $(IOCSTATS)/db/iocAdminSoft.db
+        args:
+          IOC:
+      - file: $(IOCSTATS)/db/iocAdminScanMon.db
+        args:
+          IOC:
+
+  - name: iocAdminVxWorks
     description: |-
-      Device prefix
-
-  databases:
-  - file: $(DEVIOCSTATS)/db/iocAdminVxWorks.db
+      Create some records for reading IOC statistics and details.
     args:
-      IOC:
+      - type: str
+        name: IOC
+        description: |-
+          Device prefix
 
-- name: iocAdminScanMon
-  description: |-
-    Create some records for reading IOC statistics and details.
-  args:
+    databases:
+      - file: $(IOCSTATS)/db/iocAdminVxWorks.db
+        args:
+          IOC:
 
-  - type: str
-    name: IOC
+  - name: iocAdminScanMon
     description: |-
-      Device prefix
-
-  databases:
-  - file: $(DEVIOCSTATS)/db/iocAdminScanMon.db
+      Create some records for reading IOC statistics and details.
     args:
-      IOC:
+      - type: str
+        name: IOC
+        description: |-
+          Device prefix
 
-- name: iocGui
-  description: |-
-    TODO:ADD DESCRIPTION
-  args:
+    databases:
+      - file: $(IOCSTATS)/db/iocAdminScanMon.db
+        args:
+          IOC:
 
-  - type: id
-    name: name
+  - name: iocGui
     description: |-
-      name for gui elements
-    default: None
-
-  - type: str
-    name: EDM_FILE
-    description: |-
-      edm screen, defaults to ioc_stats_softdls.edl
-    default: ioc_stats_softdls.edl
-
-  - type: str
-    name: IOC
-    description: |-
-      ioc name
-
-  databases:
-  - file: $(DEVIOCSTATS)/db/iocGui.db
+      TODO:ADD DESCRIPTION
     args:
-      IOC:
-      name:
-      EDM_FILE:
+      - type: id
+        name: name
+        description: |-
+          name for gui elements
+        default: None
 
-- name: iocAdminSoft
-  description: |-
-    Create some records for reading IOC statistics and details.
-  args:
+      - type: str
+        name: EDM_FILE
+        description: |-
+          edm screen, defaults to ioc_stats_softdls.edl
+        default: ioc_stats_softdls.edl
 
-  - type: str
-    name: IOC
+      - type: str
+        name: IOC
+        description: |-
+          ioc name
+
+    databases:
+      - file: $(IOCSTATS)/db/iocGui.db
+        args:
+          IOC:
+          name:
+          EDM_FILE:
+
+  - name: iocAdminSoft
     description: |-
-      Device prefix
-
-  databases:
-  - file: $(DEVIOCSTATS)/db/iocAdminSoft.db
+      Create some records for reading IOC statistics and details.
     args:
-      IOC:
+      - type: str
+        name: IOC
+        description: |-
+          Device prefix
+
+    databases:
+      - file: $(IOCSTATS)/db/iocAdminSoft.db
+        args:
+          IOC:
