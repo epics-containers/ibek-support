@@ -6,7 +6,7 @@ ARG REGISTRY=ghcr.io/epics-containers
 
 FROM  ${REGISTRY}/epics-base-${TARGET_ARCHITECTURE}-developer:${BASE} AS developer
 
-RUN pip install --upgrade ibek
+RUN pip install --upgrade ibek==1.4.0
 
 # In a devcontainer this folder is mounted on the host's clone of ioc-adsimdetector
 WORKDIR /epics/ioc-adsimdetector/ibek-support
@@ -33,7 +33,7 @@ COPY ibek-support/ADSimDetector/ ADSimDetector/
 RUN ADSimDetector/install.sh R2-10
 
 # Make the IOC
-RUN ibek ioc compile
+RUN ibek ioc build
 
 ##### runtime preparation stage ################################################
 

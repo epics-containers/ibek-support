@@ -18,7 +18,7 @@ COPY ibek-support/asyn/ asyn/
 RUN asyn/install.sh R4-42
 
 # Make the IOC
-RUN ibek ioc compile
+RUN ibek ioc build
 
 ##### runtime preparation stage ################################################
 

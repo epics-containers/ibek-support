@@ -24,7 +24,7 @@ COPY ibek-support/busy/ busy/
 RUN busy/install.sh R1-7-3
 
 # Make the IOC
-RUN ibek ioc compile
+RUN ibek ioc build
 
 ##### runtime preparation stage ################################################
 
