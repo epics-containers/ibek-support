@@ -1561,14 +1561,14 @@ defs:
           # NDROIConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDROIConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
 
-    opis:
-      - type: pvi
-        file: NDROI.pvi.device.yaml
-        prefix: "{{ P }}{{ R }}"
-      # TODO we probably don't want this its for demo
-      - type: bob
-        file: ADApp/op/bob/autoconvert/NDROI.bob
-        prefix: "{{ P }}{{ R }}"
+    # opis:
+    #   - type: pvi
+    #     file: NDROI.pvi.device.yaml
+    #     prefix: "{{ P }}{{ R }}"
+    #   # TODO we probably don't want this its for demo
+    #   - type: bob
+    #     file: ADApp/op/bob/autoconvert/NDROI.bob
+    #     prefix: "{{ P }}{{ R }}"
 
   - name: NDAttribute
     description: |-
