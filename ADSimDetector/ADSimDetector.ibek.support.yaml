@@ -20,14 +20,18 @@ defs:
       - type: str
         name: TIMEOUT
         description: Timeout
+        default: "1"
       - type: str
         name: ADDR
+        default: "0"
         description: Asyn Port address
       - type: int
         name: WIDTH
+        default: 1280
         description: Image Width
       - type: int
         name: HEIGHT
+        default: 1024
         description: Image Height
       - type: int
         name: DATATYPE

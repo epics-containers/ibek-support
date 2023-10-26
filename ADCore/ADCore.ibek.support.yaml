@@ -2600,12 +2600,13 @@ defs:
         name: NDARRAY_ADDR
         description: |-
           Input array port address
+        default: "0"
 
       - type: str
         name: ENABLED
         description: |-
           Plugin Enabled at startup?
-        default: "0"
+        default: "1"
 
       - type: enum
         name: SCANRATE
@@ -2634,16 +2635,19 @@ defs:
         name: BLOCK
         description: |-
           Blocking callbacks?
+        default: 0
 
       - type: int
         name: PRIORITY
         description: |-
           Max buffers to allocate
+        default: 1
 
       - type: int
         name: STACKSIZE
         description: |-
           Max buffers to allocate
+        default: 0
 
     databases:
       - file: $(ADCORE)/db/NDPva.template
