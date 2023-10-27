@@ -113,5 +113,5 @@ defs:
 
     pre_init:
       - value: |
-          aravisConfig(const char *portName, const char *cameraName, size_t maxMemory, int priority, int stackSize)
+          # aravisConfig(const char *portName, const char *cameraName, size_t maxMemory, int priority, int stackSize)
           aravisConfig("{{PORT}}", "{{ID}}", {{MEMORY}}, 0, 1)
