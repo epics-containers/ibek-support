@@ -103,7 +103,7 @@ defs:
           TIMEOUT:
           ADDR:
       # TODO replace AVT_Mako_G234B and make is so ibek will substitue CLASS in
-      - file: $(ADGENICAM)/db/AVT_Mako_G234B.template
+      - file: $(ADGENICAM)/db/{{CLASS}}.template
         args:
           P:
           R:
