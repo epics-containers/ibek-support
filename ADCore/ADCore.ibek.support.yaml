@@ -1858,7 +1858,7 @@ defs:
       - when: first
         value: |
           # ADCore path for manual NDTimeSeries.template to find base plugin template
-          epicsEnvSet "EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db"\n
+          epicsEnvSet "EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db"
 
       - value: |
           # NDAttrConfigure(portName, queueSize, blockingCallbacks, 
@@ -2001,7 +2001,7 @@ defs:
       - when: first
         value: |
           # ADCore path for manual NDTimeSeries.template to find base plugin template
-          epicsEnvSet "EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db"\n
+          epicsEnvSet "EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db"
 
       - value: |
           # NDStatsConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
