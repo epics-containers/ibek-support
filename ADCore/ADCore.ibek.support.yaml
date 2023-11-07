@@ -881,7 +881,7 @@ defs:
           FLOAT:
           CHAR:
 
-      - type: str
+      - type: int
         name: NELEMENTS
         description: |-
           Number of elements

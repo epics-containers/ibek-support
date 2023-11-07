@@ -2,7 +2,7 @@
 
 # This script is used to generate support YAML for ibek from the latest
 # released versions of builder support modules at DLS
-# as of 26/09/2023
+# as of 07/11/2023
 
 # assumes ibek is a peer to this folder's parent (as ibek-support is usually
 # a submodule of an ioc-xxxx) Adjust Path if this is not the case.
@@ -11,9 +11,17 @@ set -xe
 cd $(realpath $(dirname $0))
 PATH=$PATH:$(realpath ../../ibek)
 
+# overrides coerce NELEMENTS to int
+builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/ADCore/3-12-1dls3 ADCore/ADCore.ibek.support.yaml -o '193:10 178:10'
+builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/ADAravis/2-2-1dls16/ ADAravis/ADAravis.ibek.support.yaml
+# fixup ADAravis template path to parameterised by CLASS and repair comment in startup script
+sed -i ADAravis/ADAravis.ibek.support.yaml -e 's`db/AVT_Mako_1_52.template`db/{{CLASS}}.template`' -e 's/aravisConfig(const/# aravisConfig(const/'
+# remove the PV_ALIAS argument
+sed -i -r '71,78d' ADAravis/ADAravis.ibek.support.yaml
 
-builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/ADCore/3-9dls3alpha/ ADCore/ADCore.ibek.support.yaml
-builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/ADAravis/2-2-1dls9/ ADAravis/ADAravis.ibek.support.yaml
+
+exit 0
+
 builder2ibek.support.py /dls_sw/prod/R3.14.12.7/support/zebra/2-9-2 zebra/zebra.ibek.support.yaml
 
 
