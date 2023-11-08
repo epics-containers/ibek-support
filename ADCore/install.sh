@@ -77,6 +77,6 @@ ibek support add-release-macro SNCSEQ
 ibek support compile ${NAME}
 
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
-ibek support generate-links
+ibek support generate-links ${NAME}
 
 

@@ -48,6 +48,6 @@ ibek support add-dbds pmacAsynIPPort.dbd pmacAsynMotorPort.dbd drvAsynPowerPMACP
 # compile the support module (don't build parallel as Makefile doesn't work)
 ibek support compile ${NAME} -j 1
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
-ibek support generate-links
+ibek support generate-links ${NAME}
 
 

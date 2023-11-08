@@ -200,7 +200,7 @@ defs:
       - type: int
         name: PRIORITY
         description: |-
-          Thread priority if ASYN_CANBLOCK is set 
+          Thread priority if ASYN_CANBLOCK is set
         default: 0
 
       - type: int
@@ -735,6 +735,10 @@ defs:
       - value: |
           # NDFileHDF5Configure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDFileHDF5Configure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
+
+    pvi:
+      yaml_path: NDFileHDF5.pvi.device.yaml
+      prefix: "{{ P }}{{ R }}"
 
   - name: NDFileNull
     description: |-
@@ -1276,7 +1280,7 @@ defs:
     pre_init:
 
       - value: |
-          # NDCircularBuffConfigure(portName, queueSize, blockingCallbacks, 
+          # NDCircularBuffConfigure(portName, queueSize, blockingCallbacks,
           NDCircularBuffConfigure(
 
   - name: NDAttrPlot
@@ -1417,7 +1421,7 @@ defs:
     pre_init:
 
       - value: |
-          NDAttrPlotConfig("{{PORT}}", {{N_ATTRS}}, {{N_CACHE}}, 
+          NDAttrPlotConfig("{{PORT}}", {{N_ATTRS}}, {{N_CACHE}},
  # TODO - MISSING ARGS: N_ATTRS
 
   - name: NDCodec
@@ -1861,8 +1865,8 @@ defs:
           epicsEnvSet "EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db"
 
       - value: |
-          # NDAttrConfigure(portName, queueSize, blockingCallbacks, 
-          NDAttrConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, 
+          # NDAttrConfigure(portName, queueSize, blockingCallbacks,
+          NDAttrConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}},
           # NDTimeSeriesConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxSignals)
           NDTimeSeriesConfigure("{{PORT}}_TS", {{QUEUE}}, {{BLOCK}}, "{{PORT}}", 1, {{MAX_ATTRIBUTES}})
           # Load time series records
@@ -2109,7 +2113,7 @@ defs:
       - type: int
         name: PRIORITY
         description: |-
-          Thread priority if ASYN_CANBLOCK is set 
+          Thread priority if ASYN_CANBLOCK is set
         default: 0
 
       - type: int
@@ -2665,8 +2669,8 @@ defs:
     pre_init:
 
       - value: |
-          # NDROIStatConfigure(portName, queueSize, blockingCallbacks, 
-          NDROIStatConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, 
+          # NDROIStatConfigure(portName, queueSize, blockingCallbacks,
+          NDROIStatConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}},
 
   - name: NDFileNetCDF
     description: |-
