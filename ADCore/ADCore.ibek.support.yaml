@@ -1,14 +1,12 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.5.0b1/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.5.0/ibek.support.schema.json
 
 module: ADCore
 
 defs:
-
   - name: NDFileNexus
     description: |-
       This plugin can compress NDArrays to Nexus and write them to file
     args:
-
       - type: str
         name: P
         description: |-
@@ -83,7 +81,6 @@ defs:
         default: 0
 
     databases:
-
       - file: $(ADCORE)/db/NDFileNexus.template
         args:
           NDARRAY_PORT:
@@ -97,7 +94,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDFileNexusConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDFileNexusConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
@@ -106,7 +102,6 @@ defs:
     description: |-
       This plugin is used to calculate the FFT of a time series
     args:
-
       - type: str
         name: P
         description: |-
@@ -216,7 +211,6 @@ defs:
         default: 1
 
     databases:
-
       - file: $(ADCORE)/db/NDFFT.template
         args:
           NDARRAY_PORT:
@@ -233,7 +227,6 @@ defs:
           ADDR:
 
     pre_init:
-
       - value: |
           # NDFFTConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDFFTConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}}, {{MAX_THREADS}})
@@ -242,7 +235,6 @@ defs:
     description: |-
       This plugin attaches position information to NDArrays
     args:
-
       - type: str
         name: P
         description: |-
@@ -329,7 +321,6 @@ defs:
         default: 0
 
     databases:
-
       - file: $(ADCORE)/db/NDPosPlugin.template
         args:
           NDARRAY_PORT:
@@ -343,7 +334,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDPosPluginConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize)
           NDPosPluginConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}})
@@ -352,7 +342,6 @@ defs:
     description: |-
       This plugin writes overlays on the array, like cursors and boxes
     args:
-
       - type: str
         name: P
         description: |-
@@ -488,7 +477,6 @@ defs:
           Link for the YWdith of the overlay
 
     databases:
-
       - file: $(ADCORE)/db/NDOverlay.template
         args:
           NDARRAY_PORT:
@@ -521,17 +509,14 @@ defs:
           ADDR:
 
     pre_init:
-
       - value: |
           # NDOverlayConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, NOverlays, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDOverlayConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{NOverlays}}, 0, 0, 0, 0, {{MAX_THREADS}})
- # TODO - MISSING ARGS: NOverlays
-
+  # TODO - MISSING ARGS: NOverlays
   - name: NDColorConvert
     description: |-
       This plugin converts arrays from one colour type to another, e.g. Bayer -> RGB1
     args:
-
       - type: str
         name: P
         description: |-
@@ -612,7 +597,6 @@ defs:
         default: 1
 
     databases:
-
       - file: $(ADCORE)/db/NDColorConvert.template
         args:
           NDARRAY_PORT:
@@ -626,7 +610,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDColorConvertConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDColorConvertConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
@@ -635,7 +618,6 @@ defs:
     description: |-
       This plugin can compress NDArrays to HDF5 and write them to file
     args:
-
       - type: str
         name: P
         description: |-
@@ -716,7 +698,6 @@ defs:
         default: 0
 
     databases:
-
       - file: $(ADCORE)/db/NDFileHDF5.template
         args:
           NDARRAY_PORT:
@@ -731,7 +712,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDFileHDF5Configure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDFileHDF5Configure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
@@ -739,13 +719,12 @@ defs:
     pvi:
       yaml_path: NDFileHDF5.pvi.device.yaml
       prefix: "{{ P }}{{ R }}"
-      pva: true
+      pva_template: true
 
   - name: NDFileNull
     description: |-
       Null file plugin for deleting driver files
     args:
-
       - type: str
         name: P
         description: |-
@@ -820,7 +799,6 @@ defs:
         default: 0
 
     databases:
-
       - file: $(ADCORE)/db/NDFileNull.template
         args:
           NDARRAY_PORT:
@@ -834,7 +812,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDFileNullConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDFileNullConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
@@ -844,7 +821,6 @@ defs:
       This plugin provides a waveform record that can display the NDArrays
           produced by its NDARRAY_PORT
     args:
-
       - type: str
         name: P
         description: |-
@@ -951,7 +927,6 @@ defs:
         default: 1
 
     databases:
-
       - file: $(ADCORE)/db/NDStdArrays.template
         args:
           NDARRAY_PORT:
@@ -968,7 +943,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDStdArraysConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDStdArraysConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
@@ -977,7 +951,6 @@ defs:
     description: |-
       TODO:ADD DESCRIPTION
     args:
-
       - type: str
         name: P
         description: |-
@@ -1052,7 +1025,6 @@ defs:
         default: 100
 
     databases:
-
       - file: $(ADCORE)/db/NDCircularBuff.template
         args:
           NDARRAY_PORT:
@@ -1072,7 +1044,6 @@ defs:
       This plugin can compress NDArrays to a range of formats supported by
           graphics magick and write them to file
     args:
-
       - type: str
         name: P
         description: |-
@@ -1147,7 +1118,6 @@ defs:
         default: 0
 
     databases:
-
       - file: $(ADCORE)/db/NDFileMagick.template
         args:
           NDARRAY_PORT:
@@ -1161,7 +1131,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDFileMagickConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDFileMagickConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
@@ -1170,7 +1139,6 @@ defs:
     description: |-
       This plugin provides a pre and post external trigger frame capture buffer
     args:
-
       - type: str
         name: P
         description: |-
@@ -1263,7 +1231,6 @@ defs:
         default: 128
 
     databases:
-
       - file: $(ADCORE)/db/NDCircularBuff.template
         args:
           NDARRAY_PORT:
@@ -1279,7 +1246,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDCircularBuffConfigure(portName, queueSize, blockingCallbacks,
           NDCircularBuffConfigure(
@@ -1288,7 +1254,6 @@ defs:
     description: |-
       TODO:ADD DESCRIPTION
     args:
-
       - type: str
         name: P
         description: |-
@@ -1389,7 +1354,6 @@ defs:
           Asyn address for this data array
 
     databases:
-
       - file: $(ADCORE)/db/NDAttrPlotAttr.template
         args:
           P:
@@ -1420,16 +1384,13 @@ defs:
           AXIS:
 
     pre_init:
-
       - value: |
           NDAttrPlotConfig("{{PORT}}", {{N_ATTRS}}, {{N_CACHE}},
- # TODO - MISSING ARGS: N_ATTRS
-
+  # TODO - MISSING ARGS: N_ATTRS
   - name: NDCodec
     description: |-
       This plugin can compress or decompress NDArrays
     args:
-
       - type: str
         name: P
         description: |-
@@ -1510,7 +1471,6 @@ defs:
         default: 1
 
     databases:
-
       - file: $(ADCORE)/db/NDCodec.template
         args:
           NDARRAY_PORT:
@@ -1524,7 +1484,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDCodecConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDCodecConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
@@ -1533,7 +1492,6 @@ defs:
     description: |-
       This plugin is used to gather NDArrays from multiple upstream plugins and merge them into a single stream
     args:
-
       - type: str
         name: NDARRAY_PORT
         description: |-
@@ -1614,7 +1572,6 @@ defs:
           Device Suffix
 
     databases:
-
       - file: $(ADCORE)/db/NDGather.template
         args:
           NDARRAY_PORT:
@@ -1629,7 +1586,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDGatherConfigure(portName, queueSize, blockingCallbacks, maxPorts)
           NDGatherConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{MAX_PORTS}}")
@@ -1639,7 +1595,6 @@ defs:
       This plugin selects a region of interest and optionally scales it to
           fit in a particular data type
     args:
-
       - type: str
         name: P
         description: |-
@@ -1720,7 +1675,6 @@ defs:
         default: 1
 
     databases:
-
       - file: $(ADCORE)/db/NDROI.template
         args:
           NDARRAY_PORT:
@@ -1734,7 +1688,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDROIConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDROIConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
@@ -1743,7 +1696,6 @@ defs:
     description: |-
       This plugin displays NDArray attributes
     args:
-
       - type: str
         name: P
         description: |-
@@ -1836,7 +1788,6 @@ defs:
         default: $(PORT)_TS
 
     databases:
-
       - file: $(ADCORE)/db/NDAttributeN.template
         args:
           ADDR:
@@ -1876,7 +1827,6 @@ defs:
     description: |-
       This plugin calculates statistics like X and Y profile, centroid, and plots a histogram of binned pixels
     args:
-
       - type: id
         name: PORT
         description: |-
@@ -1984,7 +1934,6 @@ defs:
         default: $(PORT)_TS
 
     databases:
-
       - file: $(ADCORE)/db/NDStats.template
         args:
           NDARRAY_PORT:
@@ -2020,7 +1969,6 @@ defs:
     description: |-
       This plugin creates time series arrays from callback data
     args:
-
       - type: str
         name: P
         description: |-
@@ -2129,7 +2077,6 @@ defs:
           Name of the signal
 
     databases:
-
       - file: $(ADCORE)/db/NDTimeSeries.template
         args:
           NDARRAY_PORT:
@@ -2155,7 +2102,6 @@ defs:
           NAME:
 
     pre_init:
-
       - value: |
           # NDTimeSeriesConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxSignals, maxBuffers, maxMemory, priority, stackSize)
           NDTimeSeriesConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{NSIGNALS}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}})
@@ -2165,7 +2111,6 @@ defs:
       Add an attribute to the NDAttributes file for a particular ADDriver or
           NDPlugin, and associate it with the NDAttributes file
     args:
-
       - type: object
         name: port
         description: |-
@@ -2232,7 +2177,6 @@ defs:
         default: 0
 
     post_init:
-
       - value: |
           dbpf %s%sNDAttributesFile, %s/%s.xml
 
@@ -2241,7 +2185,6 @@ defs:
       This plugin does image processing like flat field correction, background
           subtraction, and recursive filtering
     args:
-
       - type: str
         name: P
         description: |-
@@ -2316,7 +2259,6 @@ defs:
         default: 0
 
     databases:
-
       - file: $(ADCORE)/db/NDProcess.template
         args:
           NDARRAY_PORT:
@@ -2330,7 +2272,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDProcessConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDProcessConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
@@ -2339,7 +2280,6 @@ defs:
     description: |-
       This plugin can compress NDArrays to TIFF and write them to file
     args:
-
       - type: str
         name: P
         description: |-
@@ -2414,7 +2354,6 @@ defs:
         default: 0
 
     databases:
-
       - file: $(ADCORE)/db/NDFileTIFF.template
         args:
           NDARRAY_PORT:
@@ -2428,7 +2367,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDFileTIFFConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDFileTIFFConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
@@ -2437,7 +2375,6 @@ defs:
     description: |-
       This plugin is used to gather NDArrays from multiple upstream plugins and merge them into a single stream
     args:
-
       - type: str
         name: NDARRAY_PORT
         description: |-
@@ -2522,7 +2459,6 @@ defs:
           Maximum number ports
 
     databases:
-
       - file: $(ADCORE)/db/NDGatherN.template
         args:
           NDARRAY_PORT:
@@ -2551,7 +2487,6 @@ defs:
     description: |-
       This plugin calculates statistics of ROIs
     args:
-
       - type: str
         name: P
         description: |-
@@ -2644,7 +2579,6 @@ defs:
         default: 1
 
     databases:
-
       - file: $(ADCORE)/db/NDROIStatN.template
         args:
           ADDR:
@@ -2668,7 +2602,6 @@ defs:
           SCANRATE:
 
     pre_init:
-
       - value: |
           # NDROIStatConfigure(portName, queueSize, blockingCallbacks,
           NDROIStatConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}},
@@ -2677,7 +2610,6 @@ defs:
     description: |-
       This plugin can compress NDArrays to NetCDF and write them to file
     args:
-
       - type: str
         name: P
         description: |-
@@ -2752,7 +2684,6 @@ defs:
         default: 0
 
     databases:
-
       - file: $(ADCORE)/db/NDFileNetCDF.template
         args:
           NDARRAY_PORT:
@@ -2766,7 +2697,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDFileNetCDFConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDFileNetCDFConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
@@ -2775,7 +2705,6 @@ defs:
     description: |-
       This plugin makes NDArrays available through PVAccess
     args:
-
       - type: str
         name: P
         description: |-
@@ -2867,7 +2796,6 @@ defs:
         default: 0
 
     databases:
-
       - file: $(ADCORE)/db/NDPva.template
         args:
           NDARRAY_PORT:
@@ -2881,7 +2809,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDPvaConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, pvName, maxBuffers, maxMemory, priority, stackSize)
           NDPvaConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{PVNAME}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}})
@@ -2891,7 +2818,6 @@ defs:
     description: |-
       This plugin selects a region of interest and optionally scales it to fit in a particular data type
     args:
-
       - type: str
         name: P
         description: |-
@@ -2972,7 +2898,6 @@ defs:
         default: 1
 
     databases:
-
       - file: $(ADCORE)/db/NDTransform.template
         args:
           NDARRAY_PORT:
@@ -2986,7 +2911,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDTransformConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDTransformConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
@@ -2995,7 +2919,6 @@ defs:
     description: |-
       This plugin can compress NDArrays to JPEG and write them to file
     args:
-
       - type: str
         name: P
         description: |-
@@ -3070,7 +2993,6 @@ defs:
         default: 0
 
     databases:
-
       - file: $(ADCORE)/db/NDFileJPEG.template
         args:
           NDARRAY_PORT:
@@ -3084,7 +3006,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDFileJPEGConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDFileJPEGConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
@@ -3093,7 +3014,6 @@ defs:
     description: |-
       This plugin is used to distribute processing of NDArrays to multiple downstream plugins
     args:
-
       - type: str
         name: P
         description: |-
@@ -3174,7 +3094,6 @@ defs:
         default: 0
 
     databases:
-
       - file: $(ADCORE)/db/NDScatter.template
         args:
           NDARRAY_PORT:
@@ -3188,7 +3107,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # NDScatterConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDScatterConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
