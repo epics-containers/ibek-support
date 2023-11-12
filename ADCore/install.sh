@@ -70,10 +70,13 @@ WITH_BOOST    = NO
 '
 ibek support add-to-config-site ${NAME} "${CONFIG}"
 
+# Sequencer causes problems with the build so we disable it
+ibek support add-release-macro SNCSEQ
+
 # compile the support module
 ibek support compile ${NAME}
 
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
-ibek support generate-links
+ibek support generate-links ${NAME}
 
 

@@ -43,8 +43,6 @@ ibek support apt-install --only=run libglib2.0-bin libusb-1.0 libxml2
 )
 
 # get the source and fix up the configure/RELEASE files
-ibek support git-clone ADGenICam R1-9 --org http://github.com/areaDetector/
-ibek support register ADGenICam
 ibek support git-clone ${NAME} ${VERSION} --org http://github.com/areaDetector/
 ibek support register ${NAME}
 
@@ -64,12 +62,13 @@ glib-2.0_DIR = $(GLIBPREFIX)/lib/x86_64-linux-gnu
 ARAVIS_INCLUDE  = /usr/local/include/aravis-0.8/
 '
 
+# Hack to remove incorrectly placed include of ADGENICAM
+sed -i '/ADGENICAM/d' ${SUPPORT}/ADAravis/configure/RELEASE
+
 ibek support add-to-config-site ${NAME} "${CONFIG}"
-ibek support add-to-config-site ADGenICam "${CONFIG}"
 
 # compile the support module
-ibek support compile ADGenICam
 ibek support compile ${NAME}
 
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
-ibek support generate-links
+ibek support generate-links ${NAME}

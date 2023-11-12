@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.5.0/ibek.support.schema.json
 
 module: ADAravis
 
@@ -34,6 +34,7 @@ defs:
         values:
           Basler_piA640_210gm:
           AVT_Manta_G319B:
+          AVT_Mako_G040B:
           AVT_Manta_G2460C:
           AVT_Mako_G125B:
           AVT_Mako_G125C:
@@ -48,6 +49,8 @@ defs:
           AVT_Manta_G419C:
           AVT_Prosilica_GC1020C:
           AVT_Prosilica_GC655C:
+          XIMEA_MC124CG-SY:
+          JAI_CM140_v2-2:
           Prosilica_GC:
           AVT_Manta_G125B:
           AVT_Manta_G125C:
@@ -61,14 +64,7 @@ defs:
           AVT_Mako_G234C:
           AVT_Mako_G234B:
           AVT_Manta_G609B:
-
-      - type: enum
-        name: PV_ALIAS
-        description: |-
-          Use alias template to keep some key PV names the same
-        values:
-          "1":
-          "0":
+          JAI_CM140:
 
       - type: int
         name: BUFFERS
@@ -82,17 +78,17 @@ defs:
           Max memory to allocate, should be maxw*maxh*nbuffer for driver and all attached plugins
         default: -1
 
-      - type: str
+      - type: int
         name: TIMEOUT
         description: |-
           Timeout, default 1
-        default: "1"
+        default: 1
 
-      - type: str
+      - type: int
         name: ADDR
         description: |-
           Asyn Port address, default 0
-        default: "0"
+        default: 0
 
     databases:
       - file: $(ADARAVIS)/db/aravisCamera.template
@@ -102,8 +98,8 @@ defs:
           PORT:
           TIMEOUT:
           ADDR:
-      # TODO replace AVT_Mako_G234B and make is so ibek will substitue CLASS in
-      - file: $(ADGENICAM)/db/AVT_Mako_G234B.template
+
+      - file: $(ADGENICAM)/db/{{CLASS}}.template
         args:
           P:
           R:

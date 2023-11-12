@@ -1,19 +1,12 @@
 #!/bin/bash
 
-# A script for building EPICS container images.
-#
-# Note that this is implemented in bash to make it portable between
-# CI frameworks. This approach uses the minimum of GitHub Actions.
-# Also works locally for testing outside of CI (with podman or docker installed)
-#
-# INPUTS:
-#   CACHE: Where to put buildx cache for build cache between CI runs
-#   ARCH: Target architecture linux or rtems currently
-#   PLATFORM: the platform to build for (linux/amd64 or linux/arm64)
+# TODO - can this script just use ec commands like other CI jobs
 
+# A script for building EPICS container images.
 set -xe
 
 THIS_FOLDER=$(dirname ${0})
+
 # ibek-support is normally a submodule of the Docker Context so we need to
 # pass the container context as the folder above the ibek-support folder
 CONTEXT=$(realpath ${THIS_FOLDER}/../..)
@@ -89,10 +82,12 @@ for dockerfile in ${DOCKERFILES}; do
     do_build ${ARCH} runtime ${dockerfile}
 
     # launch the runtime IOC container
-    $docker run --name test_me --rm test_image_only | \
-      grep "Generic IOC start script"
-
-    $docker rmi test_image_only
+    $docker rm -f test_me
+    $docker run -dit --name test_me test_image_only
+    sleep 1
+    $docker logs test_me | grep "Generic IOC start script"
+    $docker stop -t0 test_me
+    $docker rmi -f test_image_only
 
     # The above check is sufficient to show that the generic IOC will load and
     # run and that all the necessary runtime libraries are in place.

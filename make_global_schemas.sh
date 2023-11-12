@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script creates the global schemas for ibek-defs.
+# This script creates the global schemas for ibek-support.
 # It requires ibek to be installed.
 #
 # ibek.defs.schema.json is the schema for all **ibek.support.yaml files.
