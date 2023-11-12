@@ -1,14 +1,12 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.5.0/ibek.support.schema.json
 
 module: ADAravis
 
 defs:
-
   - name: aravisCamera
     description: |-
       Creates a aravisCamera camera areaDetector driver
     args:
-
       - type: str
         name: P
         description: |-
@@ -93,7 +91,6 @@ defs:
         default: 0
 
     databases:
-
       - file: $(ADARAVIS)/db/aravisCamera.template
         args:
           P:
@@ -111,7 +108,6 @@ defs:
           ADDR:
 
     pre_init:
-
       - value: |
           # aravisConfig(const char *portName, const char *cameraName, size_t maxMemory, int priority, int stackSize)
           aravisConfig("{{PORT}}", "{{ID}}", {{MEMORY}}, 0, 1)
