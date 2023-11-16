@@ -1692,6 +1692,11 @@ defs:
           # NDROIConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDROIConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
 
+    pvi:
+      yaml_path: NDPluginROI.pvi.device.yaml
+      prefix: "{{ P }}{{ R }}"
+      pva_template: true
+
   - name: NDAttribute
     description: |-
       This plugin displays NDArray attributes
@@ -1964,6 +1969,11 @@ defs:
           NDTimeSeriesConfigure("{{PORT}}_TS", {{QUEUE}}, {{BLOCK}}, "{{PORT}}", 1, 23)
           # Load time series records
           dbLoadRecords("$(ADCORE)/db/NDTimeSeries.template",  "P={{P}},R={{R}}, PORT={{PORT}} ,ADDR={{ADDR}},TIMEOUT={{TIMEOUT}},NDARRAY_PORT={{NDARRAY_PORT}},NDARRAY_ADDR={{NDARRAY_ADDR}},NCHANS={{NCHANS}},ENABLED={{ENABLED}}")
+
+    pvi:
+      yaml_path: NDPluginStats.pvi.device.yaml
+      prefix: "{{ P }}{{ R }}"
+      pva_template: true
 
   - name: NDTimeSeries
     description: |-
@@ -2275,6 +2285,11 @@ defs:
       - value: |
           # NDProcessConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDProcessConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
+
+    pvi:
+      yaml_path: NDPluginProcess.pvi.device.yaml
+      prefix: "{{ P }}{{ R }}"
+      pva_template: true
 
   - name: NDFileTIFF
     description: |-

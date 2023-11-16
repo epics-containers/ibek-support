@@ -241,9 +241,11 @@ children:
         pv: XMLFileName
         widget:
           type: TextWrite
+          format: 4
         read_pv: XMLFileName_RBV
         read_widget:
           type: TextRead
+          format: 4
 
       - type: SignalRW
         name: FillValue
