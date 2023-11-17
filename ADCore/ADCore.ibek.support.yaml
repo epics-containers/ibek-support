@@ -2829,6 +2829,11 @@ defs:
           NDPvaConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{PVNAME}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}})
           startPVAServer
 
+    pvi:
+      yaml_path: NDPluginPva.pvi.device.yaml
+      prefix: "{{ P }}{{ R }}"
+      pva_template: true
+
   - name: NDTransform
     description: |-
       This plugin selects a region of interest and optionally scales it to fit in a particular data type

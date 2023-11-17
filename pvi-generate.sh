@@ -46,6 +46,9 @@ pvi regroup NDPluginROI.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 pvi convert device --template ${ADCORE}/db/ADBase.template . ${ADCORE}/ADApp/ADSrc/ADDriver.h
 pvi regroup ADDriver.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 
+pvi convert device --template ${ADCORE}/db/NDPva.template . ${ADCORE}/ADApp/pluginSrc/NDPluginPva.h
+pvi regroup NDPluginPva.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
+
 ADGenICam=/epics/support/ADGenICam
 cd ../ADGenICam
 
