@@ -18,7 +18,8 @@
 
 cd dirname ${0}
 
-if [[ $(realpath $(pwd)) != /epics/*/ibek-support ]]; then
+IBS=$(realpath $(pwd))
+if [[ ${IBS} != /epics/*/ibek-support ]]; then
     echo "Must be run an ibek-suppport directory inside a container"
     exit 1
 fi
@@ -32,7 +33,7 @@ fi
 set -e
 
 ADCORE=/epics/support/ADCore
-cd ADCore
+cd ${IBS}/ADCore
 
 pvi convert device --template ${ADCORE}/db/NDProcess.template . ${ADCORE}/ADApp/pluginSrc/NDPluginProcess.h
 pvi regroup NDPluginProcess.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
@@ -50,13 +51,27 @@ pvi convert device --template ${ADCORE}/db/NDPva.template . ${ADCORE}/ADApp/plug
 pvi regroup NDPluginPva.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 
 ADGenICam=/epics/support/ADGenICam
-cd ../ADGenICam
+cd ${ADGenICam}
+./addCamera.sh AVT_Manta_1_44
+./addCamera.sh AVT_Mako_1_52
+
+cd ${IBS}/ADGenICam
+
+# TODO this does not work yet - see https://github.com/epics-containers/pvi/issues/61
+pvi convert device --template ${ADGenICam}/GenICamApp/Db/AVT_Manta_1_44.template . ${ADGenICam}/GenICamApp/src/ADGenICam.h
+pvi regroup ADGenICam.pvi.device.yaml ${ADGenICam}/GenICamApp/op/adl/*.adl
+mv ADGenICam.pvi.device.yaml AVT_Manta_1_44.pvi.device.yaml
+
+pvi convert device --template ${ADGenICam}/GenICamApp/Db/AVT_Mako_1_52.template . ${ADGenICam}/GenICamApp/src/ADGenICam.h
+pvi regroup ADGenICam.pvi.device.yaml ${ADGenICam}/GenICamApp/op/adl/*.adl
+mv ADGenICam.pvi.device.yaml AVTMako152.pvi.device.yaml
+sed -i AVTMako152.pvi.device.yaml -e 's/AVT_Mako_1_52/AVTMako152/' -e '
 
 pvi convert device --template ${ADGenICam}/db/ADGenICam.template . ${ADGenICam}/GenICamApp/src/ADGenICam.h
 pvi regroup ADGenICam.pvi.device.yaml ${ADGenICam}/GenICamApp/op/adl/*.adl
 
 ADARAVIS=/epics/support/ADAravis
-cd ../ADAravis
+cd ${IBS}/ADAravis
 
 pvi convert device --template ${ADARAVIS}/db/aravisCamera.template . ${ADARAVIS}/aravisApp/src/arvFeature.h
 sed -i arvFeature.pvi.device.yaml -e s/aravisCamera/AravisCamera/

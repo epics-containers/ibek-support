@@ -1,102 +1,99 @@
-label: arvFeature
+label: ArvFeature
 parent: GenICamFeature
 children:
+  - type: Group
+    name: ADAravis
+    layout:
+      type: Grid
+    children:
+      - type: SignalR
+        name: ARFramesCompleted
+        pv: ARFramesCompleted
+        widget:
+          type: TextRead
 
-- type: Group
-  name: ADAravis
-  layout:
-    type: Grid
-  children:
+      - type: SignalR
+        name: ARFrameFailures
+        pv: ARFrameFailures
+        widget:
+          type: TextRead
 
-  - type: SignalR
-    name: ARFramesCompleted
-    pv: ARFramesCompleted
-    widget:
-      type: TextRead
+      - type: SignalR
+        name: ARFrameUnderruns
+        pv: ARFrameUnderruns
+        widget:
+          type: TextRead
 
-  - type: SignalR
-    name: ARFrameFailures
-    pv: ARFrameFailures
-    widget:
-      type: TextRead
+      - type: SignalR
+        name: ARMissingPackets
+        pv: ARMissingPackets
+        widget:
+          type: TextRead
 
-  - type: SignalR
-    name: ARFrameUnderruns
-    pv: ARFrameUnderruns
-    widget:
-      type: TextRead
+      - type: SignalR
+        name: ARResentPackets
+        pv: ARResentPackets
+        widget:
+          type: TextRead
 
-  - type: SignalR
-    name: ARMissingPackets
-    pv: ARMissingPackets
-    widget:
-      type: TextRead
+      - type: SignalW
+        name: ARPacketResendEnable
+        pv: ARPacketResendEnable
+        widget:
+          type: ComboBox
 
-  - type: SignalR
-    name: ARResentPackets
-    pv: ARResentPackets
-    widget:
-      type: TextRead
+      - type: SignalW
+        name: ARPacketTimeout
+        pv: ARPacketTimeout
+        widget:
+          type: TextWrite
 
-  - type: SignalW
-    name: ARPacketResendEnable
-    pv: ARPacketResendEnable
-    widget:
-      type: ComboBox
+      - type: SignalW
+        name: ARFrameRetention
+        pv: ARFrameRetention
+        widget:
+          type: TextWrite
 
-  - type: SignalW
-    name: ARPacketTimeout
-    pv: ARPacketTimeout
-    widget:
-      type: TextWrite
+      - type: SignalW
+        name: ARResetCamera
+        pv: ARResetCamera
+        widget:
+          type: TextWrite
 
-  - type: SignalW
-    name: ARFrameRetention
-    pv: ARFrameRetention
-    widget:
-      type: TextWrite
+      - type: SignalRW
+        name: ARConvertPixelFormat
+        pv: ARConvertPixelFormat
+        widget:
+          type: ComboBox
+        read_pv: ARConvertPixelFormat_RBV
+        read_widget:
+          type: TextRead
 
-  - type: SignalW
-    name: ARResetCamera
-    pv: ARResetCamera
-    widget:
-      type: TextWrite
+      - type: SignalRW
+        name: ARShiftDir
+        pv: ARShiftDir
+        widget:
+          type: ComboBox
+        read_pv: ARShiftDir_RBV
+        read_widget:
+          type: TextRead
 
-  - type: SignalRW
-    name: ARConvertPixelFormat
-    pv: ARConvertPixelFormat
-    widget:
-      type: ComboBox
-    read_pv: ARConvertPixelFormat_RBV
-    read_widget:
-      type: TextRead
+      - type: SignalRW
+        name: ARShiftBits
+        pv: ARShiftBits
+        widget:
+          type: ComboBox
+        read_pv: ARShiftBits_RBV
+        read_widget:
+          type: TextRead
 
-  - type: SignalRW
-    name: ARShiftDir
-    pv: ARShiftDir
-    widget:
-      type: ComboBox
-    read_pv: ARShiftDir_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ARShiftBits
-    pv: ARShiftBits
-    widget:
-      type: ComboBox
-    read_pv: ARShiftBits_RBV
-    read_widget:
-      type: TextRead
-
-- type: Group
-  name: arvFeatureMisc
-  layout:
-    type: Grid
-  children:
-
-  - type: SignalW
-    name: ARConnectCamera
-    pv: ARConnectCamera
-    widget:
-      type: TextWrite
+  - type: Group
+    name: ArvFeatureMisc
+    layout:
+      type: Grid
+    children:
+      - type: SignalW
+        name: ARConnectCamera
+        pv: ARConnectCamera
+        widget:
+          type: TextWrite

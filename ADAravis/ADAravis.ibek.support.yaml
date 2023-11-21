@@ -116,3 +116,16 @@ defs:
       yaml_path: ADDriver.pvi.device.yaml
       prefix: "{{ P }}{{ R }}"
       pva_template: true
+
+  - name: aravisSettings
+    description: |-
+      Creates detailed settings screens for and Aravis camera
+
+    args:
+      - type: object
+        description: the aravisCamera object to create settings for
+        name: camera
+
+    pvi:
+      yaml_path: arvFeature.pvi.device.yaml
+      prefix: "{{ camera.P }}{{ camera.R }}"

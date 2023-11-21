@@ -1,5205 +1,1339 @@
 label: ADGenICam
 parent: ADDriver
 children:
-
-- type: Group
-  name: ADGenICam
-  layout:
-    type: Grid
-  children:
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: GainAuto
-    pv: GainAuto
-    widget:
-      type: ComboBox
-    read_pv: GainAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: PixelFormat
-    pv: PixelFormat
-    widget:
-      type: ComboBox
-    read_pv: PixelFormat_RBV
-    read_widget:
-      type: TextRead
-
-- type: Group
-  name: ADGenICamCollect
-  layout:
-    type: Grid
-  children:
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureAuto
-    pv: ExposureAuto
-    widget:
-      type: ComboBox
-    read_pv: ExposureAuto_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRate
-    pv: FrameRate
-    widget:
-      type: TextWrite
-    read_pv: FrameRate_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FrameRateEnable
-    pv: FrameRateEnable
-    widget:
-      type: CheckBox
-    read_pv: FrameRateEnable_RBV
-    read_widget:
-      type: LED
-
-- type: Group
-  name: ADGenICamTrigger
-  layout:
-    type: Grid
-  children:
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSource
-    pv: TriggerSource
-    widget:
-      type: ComboBox
-    read_pv: TriggerSource_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerOverlap
-    pv: TriggerOverlap
-    widget:
-      type: ComboBox
-    read_pv: TriggerOverlap_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ExposureMode
-    pv: ExposureMode
-    widget:
-      type: ComboBox
-    read_pv: ExposureMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: TriggerSoftware
-    pv: TriggerSoftware
-    widget:
-      type: CheckBox
-    read_pv: TriggerSoftware_RBV
-    read_widget:
-      type: LED
+  - type: Group
+    name: AVT_Mako_1_52
+    layout:
+      type: Grid
+    children:
+      - type: SignalW
+        name: GC_GevTimConLatch
+        pv: GC_GevTimConLatch
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: GC_GevTimConReset
+        pv: GC_GevTimConReset
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: GC_AcquisitionStart
+        pv: GC_AcquisitionStart
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: GC_AcquisitionStop
+        pv: GC_AcquisitionStop
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: GC_AcquisitionAbort
+        pv: GC_AcquisitionAbort
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: GC_TriggerSoftware
+        pv: GC_TriggerSoftware
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: GC_LUTLoadAll
+        pv: GC_LUTLoadAll
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: GC_LUTSaveAll
+        pv: GC_LUTSaveAll
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: GC_UserSetLoad
+        pv: GC_UserSetLoad
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: GC_UserSetSave
+        pv: GC_UserSetSave
+        widget:
+          type: TextWrite
+
+      - type: SignalR
+        name: GC_FirmwareVerMajor
+        pv: GC_FirmwareVerMajor_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_FirmwareVerMinor
+        pv: GC_FirmwareVerMinor_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_FirmwareVerBuild
+        pv: GC_FirmwareVerBuild_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_SensorType
+        pv: GC_SensorType_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_SensorBits
+        pv: GC_SensorBits_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_DeviceVendorName
+        pv: GC_DeviceVendorName_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_DeviceModelName
+        pv: GC_DeviceModelName_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_DevFirVersion
+        pv: GC_DevFirVersion_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_DeviceID
+        pv: GC_DeviceID_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_DevicePartNumber
+        pv: GC_DevicePartNumber_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_DeviceScanType
+        pv: GC_DeviceScanType_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_DeviceTemperature
+        pv: GC_DeviceTemperature_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_PayloadSize
+        pv: GC_PayloadSize_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_NonImaPayloadSize
+        pv: GC_NonImaPayloadSize_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_StrHoldCapacity
+        pv: GC_StrHoldCapacity_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_GevTimTicFre
+        pv: GC_GevTimTicFre_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_GevTimestampValue
+        pv: GC_GevTimestampValue_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_AcqFrameRateLimit
+        pv: GC_AcqFrameRateLimit_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_SensorWidth
+        pv: GC_SensorWidth_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_SensorHeight
+        pv: GC_SensorHeight_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_SensorTaps
+        pv: GC_SensorTaps_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_WidthMax
+        pv: GC_WidthMax_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_HeightMax
+        pv: GC_HeightMax_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_ImageSize
+        pv: GC_ImageSize_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_IrisVideoLevel
+        pv: GC_IrisVideoLevel_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_VsubValue
+        pv: GC_VsubValue_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_LUTBitDepthIn
+        pv: GC_LUTBitDepthIn_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_LUTBitDepthOut
+        pv: GC_LUTBitDepthOut_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_LUTAddress
+        pv: GC_LUTAddress_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_LUTSizeBytes
+        pv: GC_LUTSizeBytes_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_SyncInLevels
+        pv: GC_SyncInLevels_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_EveAcqStart
+        pv: GC_EveAcqStart_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_EveAcquisitionEnd
+        pv: GC_EveAcquisitionEnd_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_EventFrameTrigger
+        pv: GC_EventFrameTrigger_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_EventExposureEnd
+        pv: GC_EventExposureEnd_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_EveAcqRecTrigger
+        pv: GC_EveAcqRecTrigger_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_EveLinRisingEdge
+        pv: GC_EveLinRisingEdge_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_EveLinFallingEdge
+        pv: GC_EveLinFallingEdge_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_EveLinRisingEdg0
+        pv: GC_EveLinRisingEdg0_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_EveLinFallingEdg0
+        pv: GC_EveLinFallingEdg0_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_EveFraTriReady
+        pv: GC_EveFraTriReady_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_EveExposureStart
+        pv: GC_EveExposureStart_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_EventOverflow
+        pv: GC_EventOverflow_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_EventError
+        pv: GC_EventError_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_TimeStampValueLo
+        pv: GC_TimeStampValueLo_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_TimeStampValueHi
+        pv: GC_TimeStampValueHi_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GC_ModelName
+        pv: GC_ModelName_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_DeviceUserID
+        pv: GC_DeviceUserID
+        widget:
+          type: TextWrite
+        read_pv: GC_DeviceUserID_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_DevTemSelector
+        pv: GC_DevTemSelector
+        widget:
+          type: ComboBox
+        read_pv: GC_DevTemSelector_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_StrBytesPerSecond
+        pv: GC_StrBytesPerSecond
+        widget:
+          type: TextWrite
+        read_pv: GC_StrBytesPerSecond_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_BanControlMode
+        pv: GC_BanControlMode
+        widget:
+          type: ComboBox
+        read_pv: GC_BanControlMode_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_GevSCPSPacketSize
+        pv: GC_GevSCPSPacketSize
+        widget:
+          type: TextWrite
+        read_pv: GC_GevSCPSPacketSize_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ChunkModeActive
+        pv: GC_ChunkModeActive
+        widget:
+          type: CheckBox
+        read_pv: GC_ChunkModeActive_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: GC_StrFraRatCon
+        pv: GC_StrFraRatCon
+        widget:
+          type: CheckBox
+        read_pv: GC_StrFraRatCon_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: GC_StreamHoldEnable
+        pv: GC_StreamHoldEnable
+        widget:
+          type: ComboBox
+        read_pv: GC_StreamHoldEnable_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_AcquisitionMode
+        pv: GC_AcquisitionMode
+        widget:
+          type: ComboBox
+        read_pv: GC_AcquisitionMode_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_AcqFrameCount
+        pv: GC_AcqFrameCount
+        widget:
+          type: TextWrite
+        read_pv: GC_AcqFrameCount_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_AcqFrameRateAbs
+        pv: GC_AcqFrameRateAbs
+        widget:
+          type: TextWrite
+        read_pv: GC_AcqFrameRateAbs_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_RecPreEventCount
+        pv: GC_RecPreEventCount
+        widget:
+          type: TextWrite
+        read_pv: GC_RecPreEventCount_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_TriggerSelector
+        pv: GC_TriggerSelector
+        widget:
+          type: ComboBox
+        read_pv: GC_TriggerSelector_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_TriggerMode
+        pv: GC_TriggerMode
+        widget:
+          type: ComboBox
+        read_pv: GC_TriggerMode_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_TriggerSource
+        pv: GC_TriggerSource
+        widget:
+          type: ComboBox
+        read_pv: GC_TriggerSource_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_TriggerActivation
+        pv: GC_TriggerActivation
+        widget:
+          type: ComboBox
+        read_pv: GC_TriggerActivation_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_TriggerOverlap
+        pv: GC_TriggerOverlap
+        widget:
+          type: ComboBox
+        read_pv: GC_TriggerOverlap_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_TriggerDelayAbs
+        pv: GC_TriggerDelayAbs
+        widget:
+          type: TextWrite
+        read_pv: GC_TriggerDelayAbs_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_SenDigTaps
+        pv: GC_SenDigTaps
+        widget:
+          type: ComboBox
+        read_pv: GC_SenDigTaps_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_BinningHorizontal
+        pv: GC_BinningHorizontal
+        widget:
+          type: TextWrite
+        read_pv: GC_BinningHorizontal_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_BinningVertical
+        pv: GC_BinningVertical
+        widget:
+          type: TextWrite
+        read_pv: GC_BinningVertical_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_DecHorizontal
+        pv: GC_DecHorizontal
+        widget:
+          type: TextWrite
+        read_pv: GC_DecHorizontal_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_DecVertical
+        pv: GC_DecVertical
+        widget:
+          type: TextWrite
+        read_pv: GC_DecVertical_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ReverseX
+        pv: GC_ReverseX
+        widget:
+          type: CheckBox
+        read_pv: GC_ReverseX_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: GC_ReverseY
+        pv: GC_ReverseY
+        widget:
+          type: CheckBox
+        read_pv: GC_ReverseY_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: GC_PixelFormat
+        pv: GC_PixelFormat
+        widget:
+          type: ComboBox
+        read_pv: GC_PixelFormat_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_Width
+        pv: GC_Width
+        widget:
+          type: TextWrite
+        read_pv: GC_Width_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_Height
+        pv: GC_Height
+        widget:
+          type: TextWrite
+        read_pv: GC_Height_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_OffsetX
+        pv: GC_OffsetX
+        widget:
+          type: TextWrite
+        read_pv: GC_OffsetX_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_OffsetY
+        pv: GC_OffsetY
+        widget:
+          type: TextWrite
+        read_pv: GC_OffsetY_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_Gamma
+        pv: GC_Gamma
+        widget:
+          type: TextWrite
+        read_pv: GC_Gamma_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_DefectMaskEnable
+        pv: GC_DefectMaskEnable
+        widget:
+          type: CheckBox
+        read_pv: GC_DefectMaskEnable_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: GC_Hue
+        pv: GC_Hue
+        widget:
+          type: TextWrite
+        read_pv: GC_Hue_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_Saturation
+        pv: GC_Saturation
+        widget:
+          type: TextWrite
+        read_pv: GC_Saturation_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_DSPSubregionLeft
+        pv: GC_DSPSubregionLeft
+        widget:
+          type: TextWrite
+        read_pv: GC_DSPSubregionLeft_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_DSPSubregionTop
+        pv: GC_DSPSubregionTop
+        widget:
+          type: TextWrite
+        read_pv: GC_DSPSubregionTop_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_DSPSubregionRight
+        pv: GC_DSPSubregionRight
+        widget:
+          type: TextWrite
+        read_pv: GC_DSPSubregionRight_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_DSPSubBottom
+        pv: GC_DSPSubBottom
+        widget:
+          type: TextWrite
+        read_pv: GC_DSPSubBottom_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ExposureAuto
+        pv: GC_ExposureAuto
+        widget:
+          type: ComboBox
+        read_pv: GC_ExposureAuto_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ExposureMode
+        pv: GC_ExposureMode
+        widget:
+          type: ComboBox
+        read_pv: GC_ExposureMode_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ExposureTimeAbs
+        pv: GC_ExposureTimeAbs
+        widget:
+          type: TextWrite
+        read_pv: GC_ExposureTimeAbs_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ExpAutoTarget
+        pv: GC_ExpAutoTarget
+        widget:
+          type: TextWrite
+        read_pv: GC_ExpAutoTarget_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ExposureAutoAlg
+        pv: GC_ExposureAutoAlg
+        widget:
+          type: ComboBox
+        read_pv: GC_ExposureAutoAlg_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ExposureAutoMin
+        pv: GC_ExposureAutoMin
+        widget:
+          type: TextWrite
+        read_pv: GC_ExposureAutoMin_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ExposureAutoMax
+        pv: GC_ExposureAutoMax
+        widget:
+          type: TextWrite
+        read_pv: GC_ExposureAutoMax_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ExposureAutoRate
+        pv: GC_ExposureAutoRate
+        widget:
+          type: TextWrite
+        read_pv: GC_ExposureAutoRate_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ExpAutoOutliers
+        pv: GC_ExpAutoOutliers
+        widget:
+          type: TextWrite
+        read_pv: GC_ExpAutoOutliers_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ExpAutoAdjustTol
+        pv: GC_ExpAutoAdjustTol
+        widget:
+          type: TextWrite
+        read_pv: GC_ExpAutoAdjustTol_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_GainSelector
+        pv: GC_GainSelector
+        widget:
+          type: ComboBox
+        read_pv: GC_GainSelector_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_Gain
+        pv: GC_Gain
+        widget:
+          type: TextWrite
+        read_pv: GC_Gain_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_GainRaw
+        pv: GC_GainRaw
+        widget:
+          type: TextWrite
+        read_pv: GC_GainRaw_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_GainAuto
+        pv: GC_GainAuto
+        widget:
+          type: ComboBox
+        read_pv: GC_GainAuto_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_GainAutoTarget
+        pv: GC_GainAutoTarget
+        widget:
+          type: TextWrite
+        read_pv: GC_GainAutoTarget_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_GainAutoMin
+        pv: GC_GainAutoMin
+        widget:
+          type: TextWrite
+        read_pv: GC_GainAutoMin_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_GainAutoMax
+        pv: GC_GainAutoMax
+        widget:
+          type: TextWrite
+        read_pv: GC_GainAutoMax_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_GainAutoRate
+        pv: GC_GainAutoRate
+        widget:
+          type: TextWrite
+        read_pv: GC_GainAutoRate_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_GainAutoOutliers
+        pv: GC_GainAutoOutliers
+        widget:
+          type: TextWrite
+        read_pv: GC_GainAutoOutliers_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_GainAutoAdjustTol
+        pv: GC_GainAutoAdjustTol
+        widget:
+          type: TextWrite
+        read_pv: GC_GainAutoAdjustTol_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_BlaLevelSelector
+        pv: GC_BlaLevelSelector
+        widget:
+          type: ComboBox
+        read_pv: GC_BlaLevelSelector_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_BlackLevel
+        pv: GC_BlackLevel
+        widget:
+          type: TextWrite
+        read_pv: GC_BlackLevel_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_BalRatioSelector
+        pv: GC_BalRatioSelector
+        widget:
+          type: ComboBox
+        read_pv: GC_BalRatioSelector_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_BalanceRatioAbs
+        pv: GC_BalanceRatioAbs
+        widget:
+          type: TextWrite
+        read_pv: GC_BalanceRatioAbs_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_BalanceWhiteAuto
+        pv: GC_BalanceWhiteAuto
+        widget:
+          type: ComboBox
+        read_pv: GC_BalanceWhiteAuto_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_BalWhiteAutoRate
+        pv: GC_BalWhiteAutoRate
+        widget:
+          type: TextWrite
+        read_pv: GC_BalWhiteAutoRate_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_BalWhiAutAdjTol
+        pv: GC_BalWhiAutAdjTol
+        widget:
+          type: TextWrite
+        read_pv: GC_BalWhiAutAdjTol_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_IrisMode
+        pv: GC_IrisMode
+        widget:
+          type: ComboBox
+        read_pv: GC_IrisMode_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_IrisAutoTarget
+        pv: GC_IrisAutoTarget
+        widget:
+          type: TextWrite
+        read_pv: GC_IrisAutoTarget_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_IrisVideoLevelMin
+        pv: GC_IrisVideoLevelMin
+        widget:
+          type: TextWrite
+        read_pv: GC_IrisVideoLevelMin_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_IrisVideoLevelMax
+        pv: GC_IrisVideoLevelMax
+        widget:
+          type: TextWrite
+        read_pv: GC_IrisVideoLevelMax_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_LenPIrisFrequency
+        pv: GC_LenPIrisFrequency
+        widget:
+          type: TextWrite
+        read_pv: GC_LenPIrisFrequency_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_LensPIrisNumSteps
+        pv: GC_LensPIrisNumSteps
+        widget:
+          type: TextWrite
+        read_pv: GC_LensPIrisNumSteps_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_LensPIrisPosition
+        pv: GC_LensPIrisPosition
+        widget:
+          type: TextWrite
+        read_pv: GC_LensPIrisPosition_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_LenDCDriStrength
+        pv: GC_LenDCDriStrength
+        widget:
+          type: TextWrite
+        read_pv: GC_LenDCDriStrength_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_DefMasColEnable
+        pv: GC_DefMasColEnable
+        widget:
+          type: ComboBox
+        read_pv: GC_DefMasColEnable_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ColTraSelector
+        pv: GC_ColTraSelector
+        widget:
+          type: ComboBox
+        read_pv: GC_ColTraSelector_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ColTraMode
+        pv: GC_ColTraMode
+        widget:
+          type: ComboBox
+        read_pv: GC_ColTraMode_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ColTraValSelector
+        pv: GC_ColTraValSelector
+        widget:
+          type: ComboBox
+        read_pv: GC_ColTraValSelector_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ColTraValue
+        pv: GC_ColTraValue
+        widget:
+          type: TextWrite
+        read_pv: GC_ColTraValue_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_LUTSelector
+        pv: GC_LUTSelector
+        widget:
+          type: ComboBox
+        read_pv: GC_LUTSelector_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_LUTMode
+        pv: GC_LUTMode
+        widget:
+          type: ComboBox
+        read_pv: GC_LUTMode_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_LUTEnable
+        pv: GC_LUTEnable
+        widget:
+          type: CheckBox
+        read_pv: GC_LUTEnable_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: GC_LUTIndex
+        pv: GC_LUTIndex
+        widget:
+          type: TextWrite
+        read_pv: GC_LUTIndex_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_LUTValue
+        pv: GC_LUTValue
+        widget:
+          type: TextWrite
+        read_pv: GC_LUTValue_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_SyncInSelector
+        pv: GC_SyncInSelector
+        widget:
+          type: ComboBox
+        read_pv: GC_SyncInSelector_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_SynInGlitchFilter
+        pv: GC_SynInGlitchFilter
+        widget:
+          type: TextWrite
+        read_pv: GC_SynInGlitchFilter_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_SyncOutLevels
+        pv: GC_SyncOutLevels
+        widget:
+          type: TextWrite
+        read_pv: GC_SyncOutLevels_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_SyncOutSelector
+        pv: GC_SyncOutSelector
+        widget:
+          type: ComboBox
+        read_pv: GC_SyncOutSelector_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_SyncOutSource
+        pv: GC_SyncOutSource
+        widget:
+          type: ComboBox
+        read_pv: GC_SyncOutSource_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_SyncOutPolarity
+        pv: GC_SyncOutPolarity
+        widget:
+          type: ComboBox
+        read_pv: GC_SyncOutPolarity_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_StrobeSource
+        pv: GC_StrobeSource
+        widget:
+          type: ComboBox
+        read_pv: GC_StrobeSource_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_StrDurationMode
+        pv: GC_StrDurationMode
+        widget:
+          type: ComboBox
+        read_pv: GC_StrDurationMode_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_StrobeDelay
+        pv: GC_StrobeDelay
+        widget:
+          type: TextWrite
+        read_pv: GC_StrobeDelay_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_StrobeDuration
+        pv: GC_StrobeDuration
+        widget:
+          type: TextWrite
+        read_pv: GC_StrobeDuration_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_EventSelector
+        pv: GC_EventSelector
+        widget:
+          type: ComboBox
+        read_pv: GC_EventSelector_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_EventNotification
+        pv: GC_EventNotification
+        widget:
+          type: ComboBox
+        read_pv: GC_EventNotification_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_EventsEnable1
+        pv: GC_EventsEnable1
+        widget:
+          type: TextWrite
+        read_pv: GC_EventsEnable1_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_UserSetSelector
+        pv: GC_UserSetSelector
+        widget:
+          type: ComboBox
+        read_pv: GC_UserSetSelector_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_UseSetDefSelector
+        pv: GC_UseSetDefSelector
+        widget:
+          type: ComboBox
+        read_pv: GC_UseSetDefSelector_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_PvDumTriSelector
+        pv: GC_PvDumTriSelector
+        widget:
+          type: ComboBox
+        read_pv: GC_PvDumTriSelector_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_PvDumFraStaTriMod
+        pv: GC_PvDumFraStaTriMod
+        widget:
+          type: ComboBox
+        read_pv: GC_PvDumFraStaTriMod_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_PvDumTriggerMode
+        pv: GC_PvDumTriggerMode
+        widget:
+          type: ComboBox
+        read_pv: GC_PvDumTriggerMode_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_FraStaTriDelay
+        pv: GC_FraStaTriDelay
+        widget:
+          type: TextWrite
+        read_pv: GC_FraStaTriDelay_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ExposureModeValue
+        pv: GC_ExposureModeValue
+        widget:
+          type: ComboBox
+        read_pv: GC_ExposureModeValue_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_ExposureValue
+        pv: GC_ExposureValue
+        widget:
+          type: TextWrite
+        read_pv: GC_ExposureValue_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_WhitebalValueRed
+        pv: GC_WhitebalValueRed
+        widget:
+          type: TextWrite
+        read_pv: GC_WhitebalValueRed_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_WhitebalValueBlue
+        pv: GC_WhitebalValueBlue
+        widget:
+          type: TextWrite
+        read_pv: GC_WhitebalValueBlue_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_PvGainRaw
+        pv: GC_PvGainRaw
+        widget:
+          type: TextWrite
+        read_pv: GC_PvGainRaw_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_PvGainAutoMin
+        pv: GC_PvGainAutoMin
+        widget:
+          type: TextWrite
+        read_pv: GC_PvGainAutoMin_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_PvGainAutoMax
+        pv: GC_PvGainAutoMax
+        widget:
+          type: TextWrite
+        read_pv: GC_PvGainAutoMax_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: GC_OffsetValue
+        pv: GC_OffsetValue
+        widget:
+          type: TextWrite
+        read_pv: GC_OffsetValue_RBV
+        read_widget:
+          type: TextRead
