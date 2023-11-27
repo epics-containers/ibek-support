@@ -378,7 +378,7 @@ defs:
           # Configure Model 3 CS Axes Driver (CSPortName, CSAxisCount)
           pmacCreateCSAxes("{{name}}", {{NAxes}})
 
-  - name: GeoBrickTrajectoryControlT
+  - name: GeoBrickTrajectoryControl
     description: |-
       Creates some PVs for executing trajectory scans on the pmac controller by
              instantiating an instance of pmacTrajectoryAxis.template for each axis
@@ -791,13 +791,13 @@ defs:
         description: |-
           Pv Prefix
 
-      - type: str
+      - type: int
         name: PLC
         description: |-
           PLC number
 
       - type: object
-        name: PORT
+        name: PmacController
         description: |-
           Delta tau motor controller port
 
@@ -811,96 +811,115 @@ defs:
         name: GRP2
         description: |-
           Optional.  Homing group 2 description.  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: GRP3
         description: |-
           Optional.  Homing group 3 description.  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: GRP4
         description: |-
           Optional.  Homing group 4 description.  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: GRP5
         description: |-
           Optional.  Homing group 5 description.  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: GRP6
         description: |-
           Optional.  Homing group 6 description.  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: GRP7
         description: |-
           Optional.  Homing group 7 description.  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: GRP8
         description: |-
           Optional.  Homing group 8 description.  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: GRP9
         description: |-
           Optional.  Homing group 9 description.  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: GRP10
         description: |-
           Optional.  Homing group 10 description.  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: STATE11
         description: |-
           Optional.  Homing state 11 description.  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: STATE12
         description: |-
           Optional.  Homing state 12 description.  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: STATE13
         description: |-
           Optional.  Homing state 13 description.  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: STATE14
         description: |-
           Optional.  Homing state 14 description.  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: STATE15
         description: |-
           Optional.  Homing state 15 description.  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: STATUS11
         description: |-
           Optional.  Homing status 11 description (e.g. for custom limit checks).  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: STATUS12
         description: |-
           Optional.  Homing status 12 description (e.g. for custom limit checks).  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: STATUS13
         description: |-
           Optional.  Homing status 13 description (e.g. for custom limit checks).  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: STATUS14
         description: |-
           Optional.  Homing status 14 description (e.g. for custom limit checks).  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: STATUS15
         description: |-
           Optional.  Homing status 15 description (e.g. for custom limit checks).  Defaults to give empty description string.
+        default: ""
 
       - type: str
         name: STATUSSV11
@@ -932,21 +951,18 @@ defs:
           Optional.  Homing status 15 severity.  Defaults to NO_ALARM.
         default: NO_ALARM
 
-      - type: id
-        name: name
-        description: |-
-          This associates an edm screen with the template
-
       - type: str
         name: DESC
         description: |-
           Description
+        default: ""
 
     databases:
       - file: $(PMAC)/db/autohome.template
         args:
           GRP10:
-          PORT:
+          CRTL: "{{PmacController.P}}"
+          PORT: "{{name}}"
           GRP9:
           GRP8:
           GRP3:
@@ -963,7 +979,6 @@ defs:
           STATUS15:
           STATUS14:
           DESC:
-          name:
           P:
           STATE13:
           STATE12:
@@ -1046,3 +1061,65 @@ defs:
           VAR:
           TYPE:
           PORT:
+
+  - name: pmacCreateCsGroup
+    description: |-
+      Create a group of axis mappings to coordinate systems. Instantating a GeoBrickGlobalControl
+          will create a PV for switching between these groups
+    args:
+      - type: object
+        name: Controller
+        description: |-
+          Underlying PMAC or GeoBrick object
+
+      - type: int
+        name: GroupNumber
+        description: |-
+          Unique Group number to describe this group
+
+      - type: str
+        name: GroupName
+        description: |-
+          Description of the group
+
+      - type: int
+        name: AxisCount
+        description: |-
+          Number of CS axes in this group
+
+    pre_init:
+      - value: |
+          pmacCreateCsGroup("{{Controller}}", {{GroupNumber}}, "{{GroupName}}", {{AxisCount}})
+
+  - name: pmacCsGroupAddAxis
+    description: |-
+      TODO:ADD DESCRIPTION
+    args:
+      - type: object
+        name: Controller
+        description: |-
+          Underlying PMAC or GeoBrick object
+
+      - type: int
+        name: GroupNumber
+        description: |-
+          Unique Group number to describe this group
+
+      - type: int
+        name: AxisNumber
+        description: |-
+          Axis number of axis to add to the group
+
+      - type: str
+        name: AxisDef
+        description: |-
+          CS Axis definition for this axis i.e. one of I A B C U V W X Y Z (or may include linear equations)
+
+      - type: int
+        name: CoordSysNumber
+        description: |-
+          Axis number of axis to add to the group
+
+    pre_init:
+      - value: |
+          pmacCsGroupAddAxis({{Controller}}, {{GroupNumber}}, {{AxisNumber}}, {{AxisDef}}, {{CoordSysNumber}})
