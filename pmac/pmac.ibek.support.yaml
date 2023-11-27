@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.5.0/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
 
 module: pmac
 
@@ -41,23 +41,23 @@ defs:
           Moving Poll Period in ms
         default: 100
 
-      - type: str
+      - type: int
         name: NAXES
         description: |-
           Number of axes
-        default: "8"
+        default: 8
 
-      - type: str
+      - type: int
         name: TIMEOUT
         description: |-
           Timeout for controller communication
-        default: "4"
+        default: 4
 
-      - type: str
+      - type: int
         name: FEEDRATE
         description: |-
           feedrate below which we go into error
-        default: "100"
+        default: 100
 
       - type: str
         name: PMAC
@@ -120,10 +120,12 @@ defs:
           AXIS:
           PORT:
           PMAC:
+
       - file: $(PMAC)/db/powerPmacStatus.template
         args:
           P:
           PORT:
+
       - file: $(PMAC)/db/pmacController.template
         args:
           FEEDRATE:
@@ -143,11 +145,10 @@ defs:
     pre_init:
       - value: |
           # Configure Model 3 Controller Driver (ControlerPort, LowLevelDriverPort, Address, Axes, MovingPoll, IdlePoll)
-          pmacCreateController("{{name}}", "{{PortName}}", 0, {{NAxes}}, {{MovingPoll}}, {{IdlePoll}})
+          pmacCreateController("{{name}}", "{{PORT}}", 0, {{NAxes}}, {{MovingPoll}}, {{IdlePoll}})
           # Configure Model 3 Axes Driver (Controler Port, Axis Count)
           pmacCreateAxes("{{name}}", {{NAxes}})
-    # TODO - MISSING ARGS: PortName
-
+  # manual PortName -> PORT
   - name: CS_2jack
     description: |-
       Supporting template that allows setting of variables for a
@@ -168,11 +169,11 @@ defs:
         description: |-
           Co-ordinate system number
 
-      - type: str
+      - type: int
         name: PREC
         description: |-
           Precision to display variables
-        default: "3"
+        default: 3
 
       - type: str
         name: J1PV
@@ -276,11 +277,11 @@ defs:
         description: |-
           Pv of real AM motor, e.g. $(P):XB
 
-      - type: str
+      - type: int
         name: PREC
         description: |-
           Precision to display variables
-        default: "3"
+        default: 3
 
       - type: id
         name: name
@@ -318,11 +319,11 @@ defs:
         description: |-
           Co-ordinate system number
 
-      - type: str
+      - type: int
         name: PREC
         description: |-
           Precision to display variables
-        default: "3"
+        default: 3
 
       - type: str
         name: J1PV
@@ -569,17 +570,17 @@ defs:
           DTYP of record
         default: asynMotor
 
-      - type: str
+      - type: int
         name: DIR
         description: |-
           User Direction
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: VBAS
         description: |-
           Base Velocity (EGU/s)
-        default: "0"
+        default: 0
 
       - type: str
         name: VMAX
@@ -587,23 +588,23 @@ defs:
           Max Velocity (EGU/s), defaults to VELO
         default: $(VELO)
 
-      - type: str
+      - type: float
         name: ACCL
         description: |-
           Seconds to Velocity
-        default: "0.5"
+        default: 0.5
 
-      - type: str
+      - type: int
         name: BDST
         description: |-
           BL Distance (EGU)
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: BVEL
         description: |-
           BL Velocity (EGU/s)
-        default: "0"
+        default: 0
 
       - type: str
         name: BACC
@@ -641,11 +642,11 @@ defs:
         description: |-
           Startup commands
 
-      - type: str
+      - type: int
         name: SREV
         description: |-
           Steps per Revolution
-        default: "1000"
+        default: 1000
 
       - type: str
         name: RRES
@@ -662,17 +663,17 @@ defs:
         description: |-
           Jog Acceleration (EGU/s^2)
 
-      - type: str
+      - type: int
         name: UEIP
         description: |-
           Use Encoder If Present
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: URIP
         description: |-
           Use RDBL If Present
-        default: "0"
+        default: 0
 
       - type: str
         name: RDBL
@@ -684,58 +685,58 @@ defs:
         description: |-
           Readback output link
 
-      - type: str
+      - type: int
         name: RTRY
         description: |-
           Max retry count
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: DLY
         description: |-
           Readback settle time (s)
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: OFF
         description: |-
           User Offset (EGU)
-        default: "0"
+        default: 0
 
       - type: str
         name: RDBD
         description: |-
           Retry Deadband (EGU)
 
-      - type: str
+      - type: int
         name: FOFF
         description: |-
           Freeze Offset, 0=variable, 1=frozen
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: ADEL
         description: |-
           Alarm monitor deadband (EGU)
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: NTM
         description: |-
           New Target Monitor, only set to 0 for soft motors
-        default: "1"
+        default: 1
 
-      - type: str
+      - type: int
         name: FEHIGH
         description: |-
           HIGH limit for following error
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: FEHIHI
         description: |-
           HIHI limit for following error
-        default: "0"
+        default: 0
 
       - type: str
         name: FEHHSV
@@ -749,17 +750,17 @@ defs:
           HIGH alarm severity for following error
         default: NO_ALARM
 
-      - type: str
+      - type: int
         name: SCALE
         description: |-
           Scale factor, if pmacSetAxisScale is used this should be set
-        default: "1"
+        default: 1
 
-      - type: str
+      - type: int
         name: HOMEVIS
         description: |-
           If 1 then home is visible on the gui
-        default: "1"
+        default: 1
 
       - type: str
         name: HOMEVISSTR
@@ -1111,17 +1112,17 @@ defs:
         description: |-
           Number of points that can be built at any time
 
-      - type: str
+      - type: int
         name: MAXPOINTS
         description: |-
           Maximum number of points in a scan
-        default: "4000000"
+        default: 4000000
 
-      - type: str
+      - type: int
         name: PREC
         description: |-
           precision of axis defnitions
-        default: "3"
+        default: 3
 
     databases:
       - file: $(PMAC)/db/pmacControllerTrajectory.template
@@ -1155,11 +1156,11 @@ defs:
         description: |-
           Coordinate System Number for the cs controller
 
-      - type: str
+      - type: int
         name: TIMEOUT
         description: |-
           Timeout for controller communication
-        default: "4"
+        default: 4
 
     databases:
       - file: $(PMAC)/db/pmacCsController.template
@@ -1200,11 +1201,11 @@ defs:
         description: |-
           Scale factor to turn B2 units into Rads
 
-      - type: str
+      - type: int
         name: SCALE
         description: |-
           the same as pmacSetAxisScale (usually 1 but may be 32)
-        default: "32"
+        default: 32
 
       - type: str
         name: gda_name
@@ -1576,16 +1577,19 @@ defs:
         name: PRIORITY
         description: |-
           Priority of the port
+        default: 0
 
       - type: int
         name: NOAUTOCONNECT
         description: |-
           Disable autoconnect if set to 1
+        default: 0
 
       - type: int
         name: NOEOS
         description: |-
           No EOS used if set to 1
+        default: 0
 
       - type: str
         name: simulation
@@ -1847,9 +1851,8 @@ defs:
 
     pre_init:
       - value: |
-          pmacDisableLimitsCheck("{{ControllerPort}}", {{Axis}}, 0)
-    # TODO - MISSING ARGS: ControllerPort
-
+          pmacDisableLimitsCheck("{{Controller}}", {{Axis}}, 0)
+  # manual ControllerPort -> Controller
   - name: RunPlc
     description: |-
       TODO:ADD DESCRIPTION
@@ -1958,17 +1961,17 @@ defs:
           DTYP of record
         default: asynMotor
 
-      - type: str
+      - type: int
         name: DIR
         description: |-
           User Direction
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: VBAS
         description: |-
           Base Velocity (EGU/s)
-        default: "0"
+        default: 0
 
       - type: str
         name: VMAX
@@ -1976,23 +1979,23 @@ defs:
           Max Velocity (EGU/s), defaults to VELO
         default: $(VELO)
 
-      - type: str
+      - type: float
         name: ACCL
         description: |-
           Seconds to Velocity
-        default: "0.5"
+        default: 0.5
 
-      - type: str
+      - type: int
         name: BDST
         description: |-
           BL Distance (EGU)
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: BVEL
         description: |-
           BL Velocity (EGU/s)
-        default: "0"
+        default: 0
 
       - type: str
         name: BACC
@@ -2030,11 +2033,11 @@ defs:
         description: |-
           Startup commands
 
-      - type: str
+      - type: int
         name: SREV
         description: |-
           Steps per Revolution
-        default: "1000"
+        default: 1000
 
       - type: str
         name: RRES
@@ -2051,17 +2054,17 @@ defs:
         description: |-
           Jog Acceleration (EGU/s^2)
 
-      - type: str
+      - type: int
         name: UEIP
         description: |-
           Use Encoder If Present
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: URIP
         description: |-
           Use RDBL If Present
-        default: "0"
+        default: 0
 
       - type: str
         name: RDBL
@@ -2073,58 +2076,58 @@ defs:
         description: |-
           Readback output link
 
-      - type: str
+      - type: int
         name: RTRY
         description: |-
           Max retry count
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: DLY
         description: |-
           Readback settle time (s)
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: OFF
         description: |-
           User Offset (EGU)
-        default: "0"
+        default: 0
 
       - type: str
         name: RDBD
         description: |-
           Retry Deadband (EGU)
 
-      - type: str
+      - type: int
         name: FOFF
         description: |-
           Freeze Offset, 0=variable, 1=frozen
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: ADEL
         description: |-
           Alarm monitor deadband (EGU)
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: NTM
         description: |-
           New Target Monitor, only set to 0 for soft motors
-        default: "1"
+        default: 1
 
-      - type: str
+      - type: int
         name: FEHIGH
         description: |-
           HIGH limit for following error
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: FEHIHI
         description: |-
           HIHI limit for following error
-        default: "0"
+        default: 0
 
       - type: str
         name: FEHHSV
@@ -2138,17 +2141,17 @@ defs:
           HIGH alarm severity for following error
         default: NO_ALARM
 
-      - type: str
+      - type: int
         name: SCALE
         description: |-
           Scale factor, if pmacSetAxisScale is used this should be set
-        default: "1"
+        default: 1
 
-      - type: str
+      - type: int
         name: HOMEVIS
         description: |-
           If 1 then home is visible on the gui
-        default: "1"
+        default: 1
 
       - type: str
         name: HOMEVISSTR
@@ -2301,9 +2304,8 @@ defs:
 
     pre_init:
       - value: |
-          pmacSetCoordStepsPerUnit("{{Ref}}", {{Axis}}, {{Scale}})
-    # TODO - MISSING ARGS: Ref
-
+          pmacSetCoordStepsPerUnit("{{CS}}", {{Axis}}, {{Scale}})
+  # manual: Ref -> CS
   - name: _eloss_kill_autohome_records
     description: |-
       TODO:ADD DESCRIPTION
@@ -2407,11 +2409,11 @@ defs:
         description: |-
           Co-ordinate system number
 
-      - type: str
+      - type: int
         name: PREC
         description: |-
           Precision to display variables
-        default: "3"
+        default: 3
 
       - type: id
         name: name
@@ -2500,11 +2502,11 @@ defs:
         description: |-
           Mandatory.                           The PMAC GeoBrickette serial comms port.
 
-      - type: str
+      - type: int
         name: TIMEOUT
         description: |-
           Optional.  Defaults to 5.            The asyn timeout - the EPICS aysn record TMOT fields.
-        default: "5"
+        default: 5
 
       - type: str
         name: SCAN
@@ -2870,23 +2872,23 @@ defs:
           Moving Poll Period in ms
         default: 100
 
-      - type: str
+      - type: int
         name: NAXES
         description: |-
           Number of axes
-        default: "8"
+        default: 8
 
-      - type: str
+      - type: int
         name: TIMEOUT
         description: |-
           Timeout for controller communication
-        default: "4"
+        default: 4
 
-      - type: str
+      - type: int
         name: FEEDRATE
         description: |-
           feedrate below which we go into error
-        default: "100"
+        default: 100
 
       - type: str
         name: PMAC
@@ -2949,6 +2951,7 @@ defs:
           AXIS:
           PORT:
           PMAC:
+
       - file: $(PMAC)/db/pmacController.template
         args:
           FEEDRATE:
@@ -2968,11 +2971,10 @@ defs:
     pre_init:
       - value: |
           # Configure Model 3 Controller Driver (ControlerPort, LowLevelDriverPort, Address, Axes, MovingPoll, IdlePoll)
-          pmacCreateController("{{name}}", "{{PortName}}", 0, {{NAxes}}, {{MovingPoll}}, {{IdlePoll}})
+          pmacCreateController("{{name}}", "{{PORT}}", 0, {{NAxes}}, {{MovingPoll}}, {{IdlePoll}})
           # Configure Model 3 Axes Driver (Controler Port, Axis Count)
           pmacCreateAxes("{{name}}", {{NAxes}})
-    # TODO - MISSING ARGS: PortName
-
+  # manual: PortName -> PORT
   - name: GeoBrick
     description: |-
       This will create an asyn motor port for a GeoBrick that we can attach
@@ -3028,23 +3030,23 @@ defs:
         description: |-
           Description for pmac status screen (CSS)
 
-      - type: str
+      - type: int
         name: NAXES
         description: |-
           Number of axes
-        default: "8"
+        default: 8
 
-      - type: str
+      - type: int
         name: TIMEOUT
         description: |-
           Timeout for controller communication
-        default: "4"
+        default: 4
 
-      - type: str
+      - type: int
         name: FEEDRATE
         description: |-
           feedrate below which we go into error
-        default: "100"
+        default: 100
 
       - type: str
         name: PORT
@@ -3111,6 +3113,7 @@ defs:
         args:
           P:
           PORT:
+
       - file: $(PMAC)/db/pmacCSS.template
         args:
           Description:
@@ -3119,11 +3122,13 @@ defs:
           P:
           ControlMode:
           NAME:
+
       - file: $(PMAC)/db/pmacStatusAxis.template
         args:
           AXIS:
           PORT:
           PMAC:
+
       - file: $(PMAC)/db/pmacController.template
         args:
           FEEDRATE:
@@ -3143,16 +3148,15 @@ defs:
     pre_init:
       - value: |
           # Configure Model 3 Controller Driver (ControlerPort, LowLevelDriverPort, Address, Axes, MovingPoll, IdlePoll)
-          pmacCreateController("{{name}}", "{{PortName}}", 0, {{NAxes}}, {{MovingPoll}}, {{IdlePoll}})
+          pmacCreateController("{{name}}", "{{PORT}}", 0, {{NAXES}}, {{MovingPoll}}, {{IdlePoll}})
           # Configure Model 3 Axes Driver (Controler Port, Axis Count)
           pmacCreateAxes("{{name}}", {{NAxes}})
-    # TODO - MISSING ARGS: PortName, NAxes
-
+  # manual: PortName -> PORT , NAxes -> NAXES
   - name: _moveAxesToSafe
     description: |-
       TODO:ADD DESCRIPTION
     args:
-      - type: str
+      - type: int
         name: POSITION
         description: |-
           Template argument
@@ -3167,12 +3171,12 @@ defs:
         description: |-
           Template argument
 
-      - type: str
+      - type: float
         name: THRESHOLD
         description: |-
           Template argument
 
-      - type: str
+      - type: float
         name: AXIS
         description: |-
           Template argument
@@ -3192,23 +3196,23 @@ defs:
         description: |-
           PV Prefix
 
-      - type: str
+      - type: int
         name: NAXES
         description: |-
           Number of axes
-        default: "8"
+        default: 8
 
-      - type: str
+      - type: int
         name: TIMEOUT
         description: |-
           Timeout for controller communication
-        default: "4"
+        default: 4
 
-      - type: str
+      - type: int
         name: FEEDRATE
         description: |-
           feedrate below which we go into error
-        default: "100"
+        default: 100
 
       - type: str
         name: CSG0
@@ -3286,6 +3290,7 @@ defs:
         name: priority
         description: |-
           Priority to give the asyn serial ports
+        default: 0
 
     pre_init:
       - value: |
@@ -3319,11 +3324,11 @@ defs:
         description: |-
           Co-ordinate system number
 
-      - type: str
+      - type: int
         name: PREC
         description: |-
           Precision to display variables
-        default: "3"
+        default: 3
 
       - type: id
         name: name
@@ -3360,9 +3365,8 @@ defs:
 
     pre_init:
       - value: |
-          pmacSetOpenLoopEncoderAxis("{{ControllerPort}}", {{Axis}}, {{Encoder_axis}})
-    # TODO - MISSING ARGS: ControllerPort
-
+          pmacSetOpenLoopEncoderAxis("{{Controller}}", {{Axis}}, {{Encoder_axis}})
+  # manual: ControllerPort -> Controller
   - name: pmacMonitorVariables
     description: |-
       TODO:ADD DESCRIPTION
@@ -3380,8 +3384,7 @@ defs:
     pre_init:
       - value: |
           pmacMonitorVariables("{{ControllerPort}}", "{{Variables}}")
-    # TODO - MISSING ARGS: ControllerPort
-
+  # TODO - MISSING ARGS: ControllerPort
   - name: pmacCreateCsGroup
     description: |-
       Create a group of axis mappings to coordinate systems. Instantating a GeoBrickGlobalControl
@@ -3497,11 +3500,11 @@ defs:
         description: |-
           Co-ordinate system number
 
-      - type: str
+      - type: int
         name: PREC
         description: |-
           Precision to display variables
-        default: "3"
+        default: 3
 
       - type: str
         name: AEGU
@@ -3632,11 +3635,11 @@ defs:
           Moving Poll Period in ms
         default: 100
 
-      - type: str
+      - type: int
         name: TIMEOUT
         description: |-
           Timeout for controller communication
-        default: "4"
+        default: 4
 
       - type: str
         name: PORT
@@ -3663,8 +3666,7 @@ defs:
           pmacCreateCS("{{name}}", "{{PortName}}", {{CS}}, {{Program}})
           # Configure Model 3 CS Axes Driver (CSPortName, CSAxisCount)
           pmacCreateCSAxes("{{name}}", {{NAxes}})
-    # TODO - MISSING ARGS: PortName
-
+  # TODO - MISSING ARGS: PortName
   - name: CS_1jack_compensated
     description: |-
       Supporting template that allows setting of variables for a
@@ -3685,11 +3687,11 @@ defs:
         description: |-
           Co-ordinate system number
 
-      - type: str
+      - type: int
         name: PREC
         description: |-
           Precision to display variables
-        default: "3"
+        default: 3
 
       - type: str
         name: JPV
