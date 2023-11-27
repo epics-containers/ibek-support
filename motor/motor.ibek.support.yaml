@@ -3,25 +3,21 @@
 module: motor
 
 defs:
-
   - name: motorUtil
     description: |-
       TODO:ADD DESCRIPTION
     args:
-
       - type: str
         name: P
         description: |-
           Device Prefix
 
     databases:
-
       - file: $(MOTOR)/db/motorUtil.template
         args:
           P:
 
     post_init:
-
       - value: |
           motorUtilInit("{{P}}")
 
@@ -29,7 +25,6 @@ defs:
     description: |-
       Basic template, including motor record and associated tags
     args:
-
       - type: str
         name: P
         description: |-
@@ -45,7 +40,7 @@ defs:
         description: |-
           Asyn port for motor record
 
-      - type: str
+      - type: int
         name: ADDR
         description: |-
           Address on controller
@@ -55,12 +50,12 @@ defs:
         description: |-
           Description, displayed on EDM screen
 
-      - type: str
+      - type: float
         name: MRES
         description: |-
           Motor Step Size (EGU)
 
-      - type: str
+      - type: float
         name: VELO
         description: |-
           Velocity (EGU/s)
@@ -292,22 +287,10 @@ defs:
       - type: str
         name: alh
         description: |-
-          set to '#' to comment out alh lines
+          set to '#' to comment out alh lines TODO: REALLY???
         default: None
 
-      - type: str
-        name: gda_name
-        description: |-
-          Name to export this as to GDA
-
-      - type: str
-        name: gda_desc
-        description: |-
-          Description to export this as to GDA
-        default: $(DESC)
-
     databases:
-
       - file: $(MOTOR)/db/basic_asyn_motor.template
         args:
           VELO:
@@ -315,7 +298,6 @@ defs:
           SCALE:
           BACC:
           alh:
-          gda_name:
           DHLM:
           HOMEVIS:
           M:
@@ -358,14 +340,12 @@ defs:
           HLM:
           NTM:
           TWV:
-          gda_desc:
           HOMEVISSTR:
 
   - name: softMotorForPiezo
     description: |-
       TODO:ADD DESCRIPTION
     args:
-
       - type: str
         name: P
         description: |-
@@ -445,7 +425,6 @@ defs:
           Description to export this as to GDA
 
     databases:
-
       - file: $(MOTOR)/db/softMotorForPiezo.template
         args:
           name:
@@ -468,7 +447,6 @@ defs:
     description: |-
       Simulated controller Device - instantiate one per controller '''
     args:
-
       - type: id
         name: name
         description: |-
@@ -495,10 +473,9 @@ defs:
     pre_init:
       - when: first
         value: |
-          # Create simulator: ( start card , start axis , hard low limit, 
+          # Create simulator: ( start card , start axis , hard low limit,
           motorSimCreate( 0, 1, -15000000, 15000000, 0, {{}}, 32 )
- # TODO - MISSING ARGS: 
-
+      # TODO - MISSING ARGS:
       - value: |
           drvAsynMotorConfigure("{{}}", "motorSim", {{}}, {{}})
- # TODO - MISSING ARGS: 
+  # TODO - MISSING ARGS:
