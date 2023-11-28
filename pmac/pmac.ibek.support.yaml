@@ -357,11 +357,6 @@ defs:
           Timeout for controller communication
         default: 4
 
-      - type: str
-        name: PORT
-        description: |-
-          The asyn port for the pmac cs controller
-
     databases:
       - file: $(PMAC)/db/pmacCsController.template
         args:
@@ -696,11 +691,6 @@ defs:
           If HOMEVIS=0, then display this text on the gui instead
         default: Use motor summary screen
 
-      - type: id
-        name: name
-        description: |-
-          Object name and gui association name
-
       - type: str
         name: alh
         description: |-
@@ -727,24 +717,24 @@ defs:
 
       - file: $(PMAC)/db/dls_pmac_{{ "dls_pmac_cs_asyn_motor.template" if is_cs else "dls_pmac_asyn_motor.template" }}
         args:
+          P:
+          M:
+          PORT: "{{ Controller }}"
           CS: "{{Controller.CS if is_cs else 0}}"
-          PMAC:
+          PMAC: "{{ Controller.P }}"
           VELO:
           ACCL:
           SCALE:
           BACC:
           alh:
-          gda_name:
           DHLM:
           HOMEVIS:
-          M:
           EGU:
           FEHSV:
           VBAS:
           VMAX:
           HOME:
           BDST:
-          PORT: "{{ Controller }}"
           DIR:
           DTYP:
           FEHIGH:
@@ -764,7 +754,6 @@ defs:
           FEHIHI:
           FEHHSV:
           JAR:
-          P:
           DESC:
           BVEL:
           MRES:
@@ -779,7 +768,6 @@ defs:
           HLM:
           NTM:
           TWV:
-          gda_desc:
           HOMEVISSTR:
 
   - name: autohome
@@ -1021,15 +1009,11 @@ defs:
         description: |-
           Engineering units
 
-      - type: str
+      - type: int
         name: VARIABLE_PREC
         description: |-
           Variable Record precision
-
-      - type: id
-        name: name
-        description: |-
-          Object name and gui association name
+        default: 5
 
       - type: str
         name: DTYP
@@ -1042,11 +1026,6 @@ defs:
         description: |-
           PMAC variable type (D=double, I=integer, H=hex, S=string)
         default: D
-
-      - type: str
-        name: LABEL
-        description: |-
-          Label for GUI
 
     databases:
       - file: $(PMAC)/db/pmacVariableWrite.template

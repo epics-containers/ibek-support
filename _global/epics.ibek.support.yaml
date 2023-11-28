@@ -24,7 +24,7 @@ defs:
       - name: EPICS_TS_MIN_WEST
         value: "{{ minutes_west }}"
 
-  - name: Dbpf
+  - name: dbpf
     description: Set a PV value after iocInit
     args:
       - type: str
