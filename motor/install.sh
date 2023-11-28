@@ -12,8 +12,7 @@ NAME=motor
 set -xe
 
 # get the source and fix up the configure/RELEASE files
-# TODO sadly DLS has a fork of the motor module - ACTION wean us off this
-ibek support git-clone ${NAME} ${VERSION} --org http://github.com/dls-controls/
+ibek support git-clone ${NAME} ${VERSION}
 ibek support register ${NAME}
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile

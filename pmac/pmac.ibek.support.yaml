@@ -127,12 +127,12 @@ defs:
         default: ""
 
     databases:
-      - file: $(PMAC)/db/pmacStatus.template
+      - file: pmacStatus.template
         args:
           P:
           PORT: "{{name}}"
 
-      - file: $(PMAC)/db/pmacController.template
+      - file: pmacController.template
         args:
           FEEDRATE:
           CSG7:
@@ -151,7 +151,7 @@ defs:
     pre_init:
       - value: |
           # Configure Model 3 Controller Driver (ControlerPort, LowLevelDriverPort, Address, Axes, MovingPoll, IdlePoll)
-          pmacCreateController("{{name}}", "{{name}}", 0, {{NAXES}}, {{MovingPoll}}, {{IdlePoll}})
+          pmacCreateController("{{name}}", "{{Port}}", 0, {{NAXES}}, {{MovingPoll}}, {{IdlePoll}})
           # Configure Model 3 Axes Driver (Controler Port, Axis Count)
           pmacCreateAxes("{{name}}", {{NAxes}})
 
@@ -267,18 +267,18 @@ defs:
           Name for Coordinate System Group 7
 
     databases:
-      - file: $(PMAC)/db/pmacStatusAxis.template
+      - file: pmacStatusAxis.template
         args:
           AXIS:
           PORT:
           PMAC:
 
-      - file: $(PMAC)/db/powerPmacStatus.template
+      - file: powerPmacStatus.template
         args:
           P:
           PORT:
 
-      - file: $(PMAC)/db/pmacController.template
+      - file: pmacController.template
         args:
           FEEDRATE:
           CSG7:
@@ -358,7 +358,7 @@ defs:
         default: 4
 
     databases:
-      - file: $(PMAC)/db/pmacCsController.template
+      - file: pmacCsController.template
         args:
           CS:
           PARENTPORT: "{{PmacController}}"
@@ -402,7 +402,7 @@ defs:
         default: 3
 
     databases:
-      - file: $(PMAC)/db/pmacControllerTrajectory.template
+      - file: pmacControllerTrajectory.template
         args:
           NPOINTS:
           MAXPOINTS:
@@ -710,12 +710,29 @@ defs:
         default: "#"
 
     databases:
-      - file: $(PMAC)/db/pmacStatus.template
+      # TODO dont use this template if is_cs is true
+      # TODO requires change to ibek to make databases optional
+      - file: eloss_kill_autohome_records.template
+        args:
+          PMAC: "{{ Controller.P }}"
+          SPORT: "{{ Controller.Port }}"
+          ALLOW_HOMED_SET:
+          HOME:
+
+      # TODO dont use this template if is_cs is true
+      - file: motor_in_cs.template
+        args:
+          P:
+          M:
+          PORT: "{{ Controller.Port }}"
+          ADDR:
+
+      - file: pmacStatus.template
         args:
           P:
           PORT: "{{ Controller }}"
 
-      - file: $(PMAC)/db/dls_pmac_{{ "dls_pmac_cs_asyn_motor.template" if is_cs else "dls_pmac_asyn_motor.template" }}
+      - file: "{{ 'dls_pmac_cs_asyn_motor.template' if is_cs else 'dls_pmac_asyn_motor.template' }}"
         args:
           P:
           M:
@@ -760,7 +777,6 @@ defs:
           DLY:
           HLSV:
           UEIP:
-          name:
           RRES:
           PREC:
           RLNK:
@@ -946,7 +962,7 @@ defs:
         default: ""
 
     databases:
-      - file: $(PMAC)/db/autohome.template
+      - file: autohome.template
         args:
           GRP10:
           CRTL: "{{PmacController.P}}"
@@ -1028,13 +1044,11 @@ defs:
         default: D
 
     databases:
-      - file: $(PMAC)/db/pmacVariableWrite.template
+      - file: pmacVariableWrite.template
         args:
           Q:
-          name:
           DTYP:
           EGU:
-          LABEL:
           VARIABLE_PREC:
           P:
           VAR:
