@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.5.0/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
 
 module: motor
 
@@ -40,7 +40,7 @@ defs:
         description: |-
           Asyn port for motor record
 
-      - type: str
+      - type: int
         name: ADDR
         description: |-
           Address on controller
@@ -50,12 +50,12 @@ defs:
         description: |-
           Description, displayed on EDM screen
 
-      - type: str
+      - type: float
         name: MRES
         description: |-
           Motor Step Size (EGU)
 
-      - type: str
+      - type: float
         name: VELO
         description: |-
           Velocity (EGU/s)
@@ -81,17 +81,17 @@ defs:
           DTYP of record
         default: asynMotor
 
-      - type: str
+      - type: int
         name: DIR
         description: |-
           User Direction
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: VBAS
         description: |-
           Base Velocity (EGU/s)
-        default: "0"
+        default: 0
 
       - type: str
         name: VMAX
@@ -99,23 +99,23 @@ defs:
           Max Velocity (EGU/s), defaults to VELO
         default: $(VELO)
 
-      - type: str
+      - type: float
         name: ACCL
         description: |-
           Seconds to Velocity
-        default: "0.5"
+        default: 0.5
 
-      - type: str
+      - type: int
         name: BDST
         description: |-
           BL Distance (EGU)
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: BVEL
         description: |-
           BL Velocity (EGU/s)
-        default: "0"
+        default: 0
 
       - type: str
         name: BACC
@@ -153,11 +153,11 @@ defs:
         description: |-
           Startup commands
 
-      - type: str
+      - type: int
         name: SREV
         description: |-
           Steps per Revolution
-        default: "1000"
+        default: 1000
 
       - type: str
         name: RRES
@@ -174,17 +174,17 @@ defs:
         description: |-
           Jog Acceleration (EGU/s^2)
 
-      - type: str
+      - type: int
         name: UEIP
         description: |-
           Use Encoder If Present
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: URIP
         description: |-
           Use RDBL If Present
-        default: "0"
+        default: 0
 
       - type: str
         name: RDBL
@@ -196,58 +196,58 @@ defs:
         description: |-
           Readback output link
 
-      - type: str
+      - type: int
         name: RTRY
         description: |-
           Max retry count
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: DLY
         description: |-
           Readback settle time (s)
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: OFF
         description: |-
           User Offset (EGU)
-        default: "0"
+        default: 0
 
       - type: str
         name: RDBD
         description: |-
           Retry Deadband (EGU)
 
-      - type: str
+      - type: int
         name: FOFF
         description: |-
           Freeze Offset, 0=variable, 1=frozen
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: ADEL
         description: |-
           Alarm monitor deadband (EGU)
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: NTM
         description: |-
           New Target Monitor, only set to 0 for soft motors
-        default: "1"
+        default: 1
 
-      - type: str
+      - type: int
         name: FEHIGH
         description: |-
           HIGH limit for following error
-        default: "0"
+        default: 0
 
-      - type: str
+      - type: int
         name: FEHIHI
         description: |-
           HIHI limit for following error
-        default: "0"
+        default: 0
 
       - type: str
         name: FEHHSV
@@ -261,17 +261,17 @@ defs:
           HIGH alarm severity for following error
         default: NO_ALARM
 
-      - type: str
+      - type: int
         name: SCALE
         description: |-
           Scale factor, if pmacSetAxisScale is used this should be set
-        default: "1"
+        default: 1
 
-      - type: str
+      - type: int
         name: HOMEVIS
         description: |-
           If 1 then home is visible on the gui
-        default: "1"
+        default: 1
 
       - type: str
         name: HOMEVISSTR
@@ -287,19 +287,8 @@ defs:
       - type: str
         name: alh
         description: |-
-          set to '#' to comment out alh lines
+          set to '#' to comment out alh lines TODO: REALLY???
         default: None
-
-      - type: str
-        name: gda_name
-        description: |-
-          Name to export this as to GDA
-
-      - type: str
-        name: gda_desc
-        description: |-
-          Description to export this as to GDA
-        default: $(DESC)
 
     databases:
       - file: $(MOTOR)/db/basic_asyn_motor.template
@@ -309,7 +298,6 @@ defs:
           SCALE:
           BACC:
           alh:
-          gda_name:
           DHLM:
           HOMEVIS:
           M:
@@ -352,7 +340,6 @@ defs:
           HLM:
           NTM:
           TWV:
-          gda_desc:
           HOMEVISSTR:
 
   - name: softMotorForPiezo
@@ -404,23 +391,23 @@ defs:
         description: |-
           Dial Low Limit
 
-      - type: str
+      - type: int
         name: MRES
         description: |-
           Motor Step Size (EGU)
-        default: "1"
+        default: 1
 
-      - type: str
+      - type: int
         name: RRES
         description: |-
           Readback Step Size (EGU)
-        default: "1"
+        default: 1
 
-      - type: str
+      - type: int
         name: RDBD
         description: |-
           Retry deadband (EGU)
-        default: "1"
+        default: 1
 
       - type: id
         name: name
@@ -491,4 +478,4 @@ defs:
       # TODO - MISSING ARGS:
       - value: |
           drvAsynMotorConfigure("{{}}", "motorSim", {{}}, {{}})
-    # TODO - MISSING ARGS:
+  # TODO - MISSING ARGS:

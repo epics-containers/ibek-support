@@ -6,6 +6,13 @@
 
 # assumes ibek is a peer to this folder's parent (as ibek-support is usually
 # a submodule of an ioc-xxxx) Adjust Path if this is not the case.
+
+echo '
+WARNING This file does not add pvi: entries yet and these will get deleted
+so dont run it!
+'
+exit 1
+
 set -xe
 
 cd $(realpath $(dirname $0))

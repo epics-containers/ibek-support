@@ -1,0 +1,336 @@
+label: NDPluginProcess
+parent: NDPluginDriver
+children:
+
+- type: Group
+  name: NDFileHDF5
+  layout:
+    type: Grid
+  children:
+
+  - type: SignalRW
+    name: Offset
+    pv: Offset
+    widget:
+      type: TextWrite
+    read_pv: Offset_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDProcess
+  layout:
+    type: Grid
+  children:
+
+  - type: SignalR
+    name: ValidBackground
+    pv: ValidBackground_RBV
+    widget:
+      type: LED
+
+  - type: SignalRW
+    name: SaveBackground
+    pv: SaveBackground
+    widget:
+      type: CheckBox
+    read_pv: SaveBackground_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: EnableFilter
+    pv: EnableFilter
+    widget:
+      type: CheckBox
+    read_pv: EnableFilter_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: EnableBackground
+    pv: EnableBackground
+    widget:
+      type: CheckBox
+    read_pv: EnableBackground_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalR
+    name: ValidFlatField
+    pv: ValidFlatField_RBV
+    widget:
+      type: LED
+
+  - type: SignalRW
+    name: SaveFlatField
+    pv: SaveFlatField
+    widget:
+      type: CheckBox
+    read_pv: SaveFlatField_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: ResetFilter
+    pv: ResetFilter
+    widget:
+      type: CheckBox
+    read_pv: ResetFilter_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: AutoResetFilter
+    pv: AutoResetFilter
+    widget:
+      type: CheckBox
+    read_pv: AutoResetFilter_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: EnableFlatField
+    pv: EnableFlatField
+    widget:
+      type: CheckBox
+    read_pv: EnableFlatField_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: FilterCallbacks
+    pv: FilterCallbacks
+    widget:
+      type: CheckBox
+    read_pv: FilterCallbacks_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: ScaleFlatField
+    pv: ScaleFlatField
+    widget:
+      type: TextWrite
+    read_pv: ScaleFlatField_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: OOffset
+    pv: OOffset
+    widget:
+      type: TextWrite
+    read_pv: OOffset_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: OC1
+    pv: OC1
+    widget:
+      type: TextWrite
+    read_pv: OC1_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: OC3
+    pv: OC3
+    widget:
+      type: TextWrite
+    read_pv: OC3_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: OC4
+    pv: OC4
+    widget:
+      type: TextWrite
+    read_pv: OC4_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: EnableOffsetScale
+    pv: EnableOffsetScale
+    widget:
+      type: CheckBox
+    read_pv: EnableOffsetScale_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: FOffset
+    pv: FOffset
+    widget:
+      type: TextWrite
+    read_pv: FOffset_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalW
+    name: AutoOffsetScale
+    pv: AutoOffsetScale
+    widget:
+      type: CheckBox
+
+  - type: SignalRW
+    name: Scale
+    pv: Scale
+    widget:
+      type: TextWrite
+    read_pv: Scale_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: FC1
+    pv: FC1
+    widget:
+      type: TextWrite
+    read_pv: FC1_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: FC3
+    pv: FC3
+    widget:
+      type: TextWrite
+    read_pv: FC3_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: FC4
+    pv: FC4
+    widget:
+      type: TextWrite
+    read_pv: FC4_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ROffset
+    pv: ROffset
+    widget:
+      type: TextWrite
+    read_pv: ROffset_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: RC1
+    pv: RC1
+    widget:
+      type: TextWrite
+    read_pv: RC1_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: RC2
+    pv: RC2
+    widget:
+      type: TextWrite
+    read_pv: RC2_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: EnableLowClip
+    pv: EnableLowClip
+    widget:
+      type: CheckBox
+    read_pv: EnableLowClip_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: OScale
+    pv: OScale
+    widget:
+      type: TextWrite
+    read_pv: OScale_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: OC2
+    pv: OC2
+    widget:
+      type: TextWrite
+    read_pv: OC2_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: LowClip
+    pv: LowClip
+    widget:
+      type: TextWrite
+    read_pv: LowClip_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: FScale
+    pv: FScale
+    widget:
+      type: TextWrite
+    read_pv: FScale_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: FC2
+    pv: FC2
+    widget:
+      type: TextWrite
+    read_pv: FC2_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: EnableHighClip
+    pv: EnableHighClip
+    widget:
+      type: CheckBox
+    read_pv: EnableHighClip_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: HighClip
+    pv: HighClip
+    widget:
+      type: TextWrite
+    read_pv: HighClip_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: DataTypeOut
+    pv: DataTypeOut
+    widget:
+      type: ComboBox
+    read_pv: DataTypeOut_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: NumFiltered
+    pv: NumFiltered_RBV
+    widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: NumFilter
+    pv: NumFilter
+    widget:
+      type: TextWrite
+    read_pv: NumFilter_RBV
+    read_widget:
+      type: TextRead
