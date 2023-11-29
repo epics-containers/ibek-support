@@ -12,12 +12,12 @@ NAME=motorMotorSim
 set -xe
 
 # get the source and fix up the configure/RELEASE files
-ibek support git-clone ${NAME} ${VERSION} --org http://github.com/areaDetector/
+ibek support git-clone ${NAME} ${VERSION} --org http://github.com/epics-motor/
 ibek support register ${NAME}
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
-ibek support add-libs simMotor
-ibek support add-dbds simMotor.dbd simMotorSupport.dbd
+ibek support add-libs motorSimSupport
+ibek support add-dbds motorSimSupport.dbd motorSim.dbd
 
 # compile the support module
 ibek support compile ${NAME}

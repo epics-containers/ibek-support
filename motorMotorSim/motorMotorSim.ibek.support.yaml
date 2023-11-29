@@ -86,12 +86,12 @@ defs:
           Neg: 1
 
     pre_init:
-      - when: once
+      - when: once # TODO this feature is broken as the comment is printed for all axes
         value: |
           # motorSimCreateAxis(controller_asyn_port_name, axis, axis_description)
 
       - value: |
-          motorSimConfigAxis({{controller}}, {{ADDR}}, {{DLLM}}, {{DHLM}}, {{home}}, {{start}})
+          motorSimConfigAxis({{controller}}, {{ADDR}}, {{DHLM}}, {{DLLM}}, {{home}}, {{start}})
 
     databases:
       # TODO as this is a simulation I have hard coded some of the DB fields,
