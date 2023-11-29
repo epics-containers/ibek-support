@@ -46,35 +46,35 @@ defs:
       - type: int
         name: ADDR
         description: |-
-          The axis number (allowed to be from 1 to controller.numAxes)
+          The axis number (allowed to be from 0 to controller.numAxes-1)
 
       - type: str
         name: DESC
         description: |-
           The description of the axis
 
-      - type: float
+      - type: int
         name: DLLM
         description: |-
-          The low limit of the axis
-        default: -20000.0
+          The low limit of the axis (in counts)
+        default: -20000
 
-      - type: float
+      - type: int
         name: DHLM
         description: |-
-          The high limit of the axis
-        default: 20000.0
+          The high limit of the axis (in counts)
+        default: 20000
 
-      - type: float
+      - type: int
         name: home
         description: |-
-          The home position of the axis
+          The home position of the axis (in counts)
 
-      - type: float
+      - type: int
         name: start
         description: |-
-          The starting position of the axis
-        default: 0.0
+          The starting position of the axis (in counts)
+        default: 0
 
       - type: enum
         name: DIR
@@ -86,9 +86,12 @@ defs:
           Neg: 1
 
     pre_init:
+      - when: once
+        value: |
+          # motorSimCreateAxis(controller_asyn_port_name, axis, axis_description)
+
       - value: |
-          # motorSimConfigAxis(port, axis, lowLimit, highLimit, home, start)
-          motorSimConfigAxis({{controller}}, {{axisNo}}, {{lowLimit}}, {{highLimit}}, {{home}}, {{start}})
+          motorSimConfigAxis({{controller}}, {{ADDR}}, {{DLLM}}, {{DHLM}}, {{home}}, {{start}})
 
     databases:
       # TODO as this is a simulation I have hard coded some of the DB fields,
