@@ -21,6 +21,7 @@ defs:
         name: simulation
         description: |-
           IP port to connect to if in simulation mode
+        default: ""
 
     pre_init:
       - value: |
@@ -34,7 +35,7 @@ defs:
 
     args:
       - type: object
-        name: Port
+        name: pmacAsynPort
         description: |-
           pmacAsynIPPort/pmacVmeConfig to connect to
 
@@ -151,9 +152,9 @@ defs:
     pre_init:
       - value: |
           # Configure Model 3 Controller Driver (ControlerPort, LowLevelDriverPort, Address, Axes, MovingPoll, IdlePoll)
-          pmacCreateController("{{name}}", "{{Port}}", 0, {{NAXES}}, {{MovingPoll}}, {{IdlePoll}})
+          pmacCreateController("{{name}}", "{{pmacAsynPort}}", 0, {{NAXES}}, {{MovingPoll}}, {{IdlePoll}})
           # Configure Model 3 Axes Driver (Controler Port, Axis Count)
-          pmacCreateAxes("{{name}}", {{NAxes}})
+          pmacCreateAxes("{{name}}", {{NAXES}})
 
   - name: PowerPMAC
     description: |-
@@ -406,7 +407,7 @@ defs:
         args:
           NPOINTS:
           MAXPOINTS:
-          PORT: "{{PmacController.Port}}"
+          PORT: "{{PmacController}}"
           PREC:
           PMAC: "{{PmacController.P}}"
           NAxes: "{{PmacController.NAxes}}"
@@ -583,17 +584,23 @@ defs:
           Jog Acceleration (EGU/s^2)
         default: 0.0
 
-      - type: bool
+      - type: enum
         name: UEIP
         description: |-
           Use Encoder If Present
-        default: false
+        default: 0
+        values:
+          Yes: 0
+          No: 1
 
-      - type: bool
+      - type: enum
         name: URIP
         description: |-
           Use RDBL If Present
-        default: false
+        default: 0
+        values:
+          Yes: 0
+          No: 1
 
       - type: str
         name: RDBL
@@ -710,27 +717,36 @@ defs:
         default: "#"
 
     databases:
-      # TODO dont use this template if is_cs is true
-      # TODO requires change to ibek to make databases optional
       - file: eloss_kill_autohome_records.template
+        enabled: "{{ not is_cs }}"
         args:
           PMAC: "{{ Controller.P }}"
-          SPORT: "{{ Controller.Port }}"
+          SPORT: "{{ Controller.pmacAsynPort }}"
           ALLOW_HOMED_SET:
           HOME:
+          P:
+          M:
+          ADDR:
+          PORT: "{{ Controller }}"
+          PREC:
+          DESC:
+          EGU:
 
       # TODO dont use this template if is_cs is true
       - file: motor_in_cs.template
+        enabled: "{{ not is_cs }}"
         args:
           P:
           M:
-          PORT: "{{ Controller.Port }}"
+          PORT: "{{ Controller }}"
           ADDR:
 
-      - file: pmacStatus.template
+      - file: pmacStatusAxis.template
+        enabled: "{{ not is_cs }}"
         args:
-          P:
+          AXIS: "{{ADDR}}"
           PORT: "{{ Controller }}"
+          PMAC: "{{ Controller.P }}"
 
       - file: "{{ 'dls_pmac_cs_asyn_motor.template' if is_cs else 'dls_pmac_asyn_motor.template' }}"
         args:
@@ -965,8 +981,8 @@ defs:
       - file: autohome.template
         args:
           GRP10:
-          CRTL: "{{PmacController.P}}"
-          PORT: "{{name}}"
+          CTRL: "{{PmacController.P}}"
+          PORT: "{{PmacController}}"
           GRP9:
           GRP8:
           GRP3:
