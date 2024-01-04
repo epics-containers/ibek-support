@@ -1132,3 +1132,21 @@ defs:
     pre_init:
       - value: |
           pmacCsGroupAddAxis({{Controller}}, {{GroupNumber}}, {{AxisNumber}}, {{AxisDef}}, {{CoordSysNumber}})
+
+  - name: pmacDisableLimitsCheck
+    description: |-
+      TODO:ADD DESCRIPTION
+    args:
+      - type: object
+        name: Controller
+        description: |-
+          Underlying PMAC or GeoBrick object
+
+      - type: int
+        name: Axis
+        description: |-
+          Axis number to disable limit check, defaults to all
+
+    pre_init:
+      - value: |
+          pmacDisableLimitsCheck("{{Controller}}", {{Axis}}, 0)
