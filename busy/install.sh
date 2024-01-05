@@ -15,6 +15,10 @@ set -xe
 ibek support git-clone ${NAME} ${VERSION}
 ibek support register ${NAME}
 
+# stop compilation of tests which require autosave
+# (unless autosave is already installed)
+ibek support add-release-macro AUTOSAVE --no-replace
+
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs busy
 ibek support add-dbds busySupport.dbd
