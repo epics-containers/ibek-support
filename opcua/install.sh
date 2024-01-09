@@ -14,7 +14,7 @@ set -xe
 if [ ! -d /tmp/open62541 ]; then
 (
     cd /tmp
-    git clone https://github.com/open62541/open62541.git -b v1.4.0-rc1 --depth 1
+    git clone https://github.com/open62541/open62541.git -b v1.3.9 --depth 1
     cd open62541
     mkdir build
     cd build
@@ -27,11 +27,13 @@ fi
 
 # get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION}
+# dont keep the example
+rm -rf ${SUPPORT}/${NAME}/*Top
 ibek support register ${NAME}
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs opcua
-ibek support add-dbds devOpcua.dbd
+ibek support add-dbds opcuaItemRecord.dbd menuDefAction.dbd devOpcua.dbd
 
 # config site settings for linking with Open62541
 CONFIG='
@@ -56,7 +58,4 @@ ibek support add-to-config-site ${NAME} "${CONFIG}"
 ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
 ibek support generate-links ${NAME}
-
-# tidy up
-rm -rf /tmp/open62541
 
