@@ -8,21 +8,22 @@
 VERSION=${1}
 NAME=opcua
 
+# log output and abort on failure
+set -xe
+
 if [ ! -d /tmp/open62541 ]; then
 (
     cd /tmp
-    git clone https://github.com/open62541/open62541.git --b v1.4.0-rc1 --depth 1
+    git clone https://github.com/open62541/open62541.git -b v1.4.0-rc1 --depth 1
     cd open62541
     mkdir build
     cd build
-    cmake cmake .. -DBUILD_SHARED_LIBS=ON \
+    cmake .. -DBUILD_SHARED_LIBS=ON \
          -DCMAKE_BUILD_TYPE=RelWithDebInfo \
          -DUA_ENABLE_ENCRYPTION=OPENSSL
     make install
 )
-
-# log output and abort on failure
-set -xe
+fi
 
 # get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION}
@@ -56,4 +57,6 @@ ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
 ibek support generate-links ${NAME}
 
+# tidy up
+rm -rf /tmp/open62541
 
