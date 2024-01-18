@@ -62,3 +62,8 @@ defs:
         value: |
           # simDetectorConfig(portName, maxSizeX, maxSizeY, dataType, maxBuffers, maxMemory)
           simDetectorConfig("{{PORT}}", {{WIDTH}}, {{HEIGHT}}, {{DATATYPE}}, {{BUFFERS}}, {{MEMORY}})
+
+    pvi:
+      yaml_path: ADDriver.pvi.device.yaml
+      prefix: "{{ P }}{{ R }}"
+      pva_template: true
