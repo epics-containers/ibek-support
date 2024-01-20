@@ -19,9 +19,12 @@ ibek support apt-install --only=dev libpcre3-dev
 ibek support git-clone ${NAME} ${VERSION} --org https://github.com/paulscherrerinstitute/
 ibek support register ${NAME}
 
+# set CALC blank (to overwrite the RELEASE value) to build without calc
+ibek support add-release-macro CALC
+
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs stream
-ibek support add-dbds stream-scalcout.dbd stream-base.dbd stream.dbd
+ibek support add-dbds stream-base.dbd stream.dbd
 
 # declare location of the pcre system library
 ibek support add-config-macro ${NAME} PCRE_LIB /usr/lib/x86_64-linux-gnu
