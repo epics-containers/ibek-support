@@ -14,8 +14,6 @@ set -xe
 
 # get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION} --org https://github.com/DiamondLightSource/
-# overwrite hard coded DLS release file
-echo 'include $(TOP)/configure/RELEASE.local' > /epics/support/${NAME}/configure/RELEASE
 
 ibek support register ${NAME}
 
