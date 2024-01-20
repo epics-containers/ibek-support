@@ -7,6 +7,7 @@
 #  $1 VERSION to install (must match repo tag)
 VERSION=${1}
 NAME=ADSimDetector
+FOLDER=$(dirname $(readlink -f $0))
 
 # log output and abort on failure
 set -xe
@@ -22,6 +23,6 @@ ibek support add-dbds simDetectorSupport.dbd
 # compile the support module
 ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
-ibek support generate-links ${NAME}
+ibek support generate-links ${FOLDER}
 
 
