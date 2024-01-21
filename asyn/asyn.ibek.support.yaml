@@ -10,7 +10,7 @@ defs:
       - type: str
         name: port
         description: |-
-          Serial port tty name / IP address optionally followed by protocol
+          IP address optionally followed by :port
 
       - type: id
         name: name
@@ -21,13 +21,13 @@ defs:
         name: input_eos
         description: |-
           Input end of string (terminator)
-        default: "\n"
+        default: "\\n"
 
       - type: str
         name: output_eos
         description: |-
           Output end of string (terminator)
-        default: "\n"
+        default: "\\n"
 
       - type: int
         name: priority
@@ -97,23 +97,19 @@ defs:
           N:
         default: N
 
-      - type: enum
-        name: bits
-        description: |-
-          Bits
-        values:
-          "8":
-          "5":
-          "7":
-          "6":
-        default: "8"
-
     pre_init:
       - value: |
-          %sConfigure("%s", "%s", %d, %d, %d)
-          asynSetOption("%s", 0, "%s", "%s")
-          asynOctetSetInputEos("%s", 0, %s)
-          asynOctetSetOutputEos("%s", 0, %s)
+
+          drvAsynIPPortConfigure({{name}}, {{port}}, {{priority}}, {{noAutoConnect}}, {{noProcessEos}})
+          {% if input_eos != "" %}
+          asynOctetSetInputEos({{name}}, 0, "{{input_eos}}")
+          {% endif %}
+          {% if output_eos != "" %}
+          asynOctetSetOutputEos({{name}}, 0, "{{output_eos}}")
+          {% endif %}
+
+          # TODO - we need a tidier way to handle Asyn options
+          asynSetOption({{name}}, 0, "disconnectOnReadTimeout", {{disconnectOnReadTimeout}})
 
   - name: AsynIPServer
     description: |-
@@ -253,7 +249,7 @@ defs:
         name: timeout
         description: |-
           default timeout
-        default: "0.0"
+        default: 0.0
 
       - type: str
         name: vxiName

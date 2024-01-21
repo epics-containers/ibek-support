@@ -57,3 +57,7 @@ defs:
           PORT:
           LOOP:
           ADDR:
+
+    pre_init:
+      - value: |
+          epicsEnvSet "STREAM_PROTOCOL_PATH", "$(LAKESHORE340)/lakeshore340App/protocol/"

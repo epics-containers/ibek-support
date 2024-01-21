@@ -19,7 +19,7 @@ ibek support register ${NAME}
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs asyn
-ibek support add-dbds asyn.dbd
+ibek support add-dbds drvAsynIPPort.dbd asyn.db
 
 # No need for IPAC unless its already installed
 ibek support add-release-macro IPAC --no-replace
