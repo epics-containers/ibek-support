@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.5.0/ibek.support.schema.json
 
-module: ADCore
+module: ADCore-slim
 
 defs:
   - name: NDPvaPlugin
