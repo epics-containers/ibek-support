@@ -3,7 +3,7 @@
 module: ADSimDetector
 
 defs:
-  - name: simDetector
+  - name: simDetector-sample
     description: |-
       Creates a simulation detector
 
