@@ -3,13 +3,11 @@
 module: lakeshore340
 
 defs:
-
   - name: lakeshore340
     description: |-
       Lakeshore 340 Temperature Controller
       Notes: The temperatures in Kelvin are archived once every 10 secs.
     args:
-
       - type: str
         name: P
         description: |-
@@ -20,35 +18,28 @@ defs:
         description: |-
           Bus/Port Address (eg. ASYN Port).
 
-      - type: str
+      - type: int
         name: ADDR
         description: |-
           Address on the bus
+        default: 0
 
-      - type: str
+      - type: int
         name: SCAN
         description: |-
           SCAN rate for non-temperature/voltage parameters.
+        default: 5
 
-      - type: str
+      - type: int
         name: TEMPSCAN
         description: |-
           SCAN rate for the temperature/voltage readings
+        default: 5
 
       - type: id
         name: name
         description: |-
           Object and gui association name
-
-      - type: str
-        name: gda_name
-        description: |-
-          Name in gda interface file (Default = )
-
-      - type: str
-        name: gda_desc
-        description: |-
-          Description in gda interface file (Default = )
 
       - type: int
         name: LOOP
@@ -57,15 +48,12 @@ defs:
         default: 1
 
     databases:
-
       - file: $(LAKESHORE340)/db/lakeshore340.template
         args:
           name:
           SCAN:
-          gda_name:
           P:
           TEMPSCAN:
-          gda_desc:
           PORT:
           LOOP:
           ADDR:
