@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.6.2/ibek.support.schema.json
 
 module: lakeshore340
 
@@ -61,3 +61,8 @@ defs:
     pre_init:
       - value: |
           epicsEnvSet "STREAM_PROTOCOL_PATH", "$(LAKESHORE340)/lakeshore340App/protocol/"
+
+    pvi:
+      yaml_path: lakeshore340.pvi.device.yaml
+      prefix: "{{ P }}{{ name }}"
+      index: true
