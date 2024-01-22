@@ -3,106 +3,6 @@
 module: asyn
 
 defs:
-  - name: _AsynOctetInterface
-    description: |-
-      TODO:ADD DESCRIPTION
-    args:
-      - type: str
-        name: port
-        description: |-
-          Serial port tty name / IP address optionally followed by protocol
-
-      - type: id
-        name: name
-        description: |-
-          Override name
-
-      - type: str
-        name: input_eos
-        description: |-
-          Input end of string (terminator)
-
-      - type: str
-        name: output_eos
-        description: |-
-          Output end of string (terminator)
-
-      - type: int
-        name: priority
-        description: |-
-          Priority
-        default: 100
-
-      - type: bool
-        name: noAutoConnect
-        description: |-
-          Set to stop autoconnect
-
-      - type: bool
-        name: noProcessEos
-        description: |-
-          Set to avoid processing end of string
-
-      - type: str
-        name: simulation
-        description: |-
-          IP port to connect to if in simulation mode
-
-      - type: int
-        name: baud
-        description: |-
-          Baud Rate
-
-      - type: enum
-        name: parity
-        description: |-
-          Parity
-        values:
-          even:
-          none:
-          odd:
-
-      - type: enum
-        name: crtscts
-        description: |-
-          Set hardware flow control on
-        values:
-          Y:
-          N:
-
-      - type: enum
-        name: stop
-        description: |-
-          Stop Bits
-        values:
-          "1":
-          "2":
-
-      - type: enum
-        name: disconnectOnReadTimeout
-        description: |-
-          Disconnect when a read times out
-        values:
-          Y:
-          N:
-
-      - type: enum
-        name: bits
-        description: |-
-          Bits
-        values:
-          "8":
-          "5":
-          "7":
-          "6":
-
-    pre_init:
-      - value: |
-          %sConfigure("%s", "%s", %d, %d, %d)
-          asynSetOption("%s", 0, "%s", "%s")
-          asynOctetSetInputEos("%s", 0, %s)
-          asynOctetSetOutputEos("%s", 0, %s)
-
   - name: AsynIP
     description: |-
       Asyn IP Port
@@ -110,22 +10,24 @@ defs:
       - type: str
         name: port
         description: |-
-          Serial port tty name / IP address optionally followed by protocol
+          IP address optionally followed by :port
 
       - type: id
         name: name
         description: |-
-          Override name
+          Identifying port name
 
       - type: str
         name: input_eos
         description: |-
           Input end of string (terminator)
+        default: "\\n"
 
       - type: str
         name: output_eos
         description: |-
           Output end of string (terminator)
+        default: "\\n"
 
       - type: int
         name: priority
@@ -133,25 +35,30 @@ defs:
           Priority
         default: 100
 
-      - type: bool
+      # TODO - can we handle these as bool?
+      - type: int
         name: noAutoConnect
         description: |-
           Set to stop autoconnect
+        default: 0
 
-      - type: bool
+      - type: int
         name: noProcessEos
         description: |-
           Set to avoid processing end of string
+        default: 0
 
       - type: str
         name: simulation
         description: |-
           IP port to connect to if in simulation mode
+        default: ""
 
       - type: int
         name: baud
         description: |-
           Baud Rate
+        default: 9600
 
       - type: enum
         name: parity
@@ -161,6 +68,7 @@ defs:
           even:
           none:
           odd:
+        default: none
 
       - type: enum
         name: crtscts
@@ -169,6 +77,7 @@ defs:
         values:
           Y:
           N:
+        default: N
 
       - type: enum
         name: stop
@@ -177,6 +86,7 @@ defs:
         values:
           "1":
           "2":
+        default: "1"
 
       - type: enum
         name: disconnectOnReadTimeout
@@ -185,23 +95,21 @@ defs:
         values:
           Y:
           N:
-
-      - type: enum
-        name: bits
-        description: |-
-          Bits
-        values:
-          "8":
-          "5":
-          "7":
-          "6":
+        default: N
 
     pre_init:
       - value: |
-          %sConfigure("%s", "%s", %d, %d, %d)
-          asynSetOption("%s", 0, "%s", "%s")
-          asynOctetSetInputEos("%s", 0, %s)
-          asynOctetSetOutputEos("%s", 0, %s)
+
+          drvAsynIPPortConfigure({{name}}, {{port}}, {{priority}}, {{noAutoConnect}}, {{noProcessEos}})
+          {% if input_eos != "" %}
+          asynOctetSetInputEos({{name}}, 0, "{{input_eos}}")
+          {% endif %}
+          {% if output_eos != "" %}
+          asynOctetSetOutputEos({{name}}, 0, "{{output_eos}}")
+          {% endif %}
+
+          # TODO - we need a tidier way to handle Asyn options
+          asynSetOption({{name}}, 0, "disconnectOnReadTimeout", {{disconnectOnReadTimeout}})
 
   - name: AsynIPServer
     description: |-
@@ -341,7 +249,7 @@ defs:
         name: timeout
         description: |-
           default timeout
-        default: "0.0"
+        default: 0.0
 
       - type: str
         name: vxiName
