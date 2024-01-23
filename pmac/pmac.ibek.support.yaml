@@ -156,6 +156,61 @@ defs:
           # Configure Model 3 Axes Driver (Controler Port, Axis Count)
           pmacCreateAxes("{{name}}", {{NAXES}})
 
+  - name: pmacAsynSSHPort
+    description: |-
+      This will create an AsynPort connecting to a PowerPMAC over SSH
+    args:
+      - type: id
+        name: name
+        description: |-
+          Port Name, normally something like SSH_PORT
+
+      - type: str
+        name: IP
+        description: |-
+          IP address of the powerPMAC
+
+      - type: str
+        name: USERNAME
+        description: |-
+          Username for the SSH connection
+        default: root
+
+      - type: str
+        name: PASSWORD
+        description: |-
+          Password for the SSH connection
+        default: deltatau
+
+      - type: int
+        name: PRIORITY
+        description: |-
+          Priority of the port
+        default: 0
+
+      - type: int
+        name: NOAUTOCONNECT
+        description: |-
+          Disable autoconnect if set to 1
+        default: 0
+
+      - type: int
+        name: NOEOS
+        description: |-
+          No EOS used if set to 1
+        default: 0
+
+      - type: str
+        name: simulation
+        description: |-
+          IP port to connect to if in simulation mode
+
+    pre_init:
+      - value: |
+          # Create SSH Port (PortName, IPAddress, Username, Password, Priority, DisableAutoConnect, noProcessEos)
+          drvAsynPowerPMACPortConfigure("{{name}}", "{{IP}}", "{{USERNAME}}", "{{PASSWORD}}", "{{PRIORITY}}", "{{NOAUTOCONNECT}}", "{{NOEOS}}")
+
+
   - name: PowerPMAC
     description: |-
       This will create an asyn motor port for a PowerPMAC that we can attach
