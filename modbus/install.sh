@@ -18,7 +18,7 @@ ibek support git-clone ${NAME} ${VERSION}
 ibek support register ${NAME}
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
-ibek support add-libs asyn modbus
+ibek support add-libs modbus
 ibek support add-dbds modbusSupport.dbd
 
 # Patches to the CONFIG_SITE
