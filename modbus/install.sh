@@ -8,6 +8,7 @@
 #  $1 VERSION to install (must match repo tag)
 VERSION=${1}
 NAME=modbus
+FOLDER=$(dirname $(readlink -f $0))
 
 # log output and abort on failure
 set -xe
@@ -18,8 +19,7 @@ ibek support register ${NAME}
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs asyn modbus
-ibek support add-dbds asyn.dbd drvAsynIPPort.dbd drvAsynSerialPort.dbd modbusSupport.dbd
-
+ibek support add-dbds modbusSupport.dbd
 
 # Patches to the CONFIG_SITE
 if [[ $TARGET_ARCHITECTURE == "rtems" ]]; then
@@ -33,6 +33,6 @@ fi
 ibek support compile ${NAME}
 
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
-ibek support generate-links ${NAME}
+ibek support generate-links ${FOLDER}
 
 
