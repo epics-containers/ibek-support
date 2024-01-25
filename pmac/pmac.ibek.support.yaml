@@ -211,14 +211,13 @@ defs:
           # Create SSH Port (PortName, IPAddress, Username, Password, Priority, DisableAutoConnect, noProcessEos)
           drvAsynPowerPMACPortConfigure("{{name}}", "{{IP}}", "{{USERNAME}}", "{{PASSWORD}}", "{{PRIORITY}}", "{{NOAUTOCONNECT}}", "{{NOEOS}}")
 
-
   - name: PowerPMAC
     description: |-
       This will create an asyn motor port for a PowerPMAC that we can attach
           motor records to using the model 3 driver
     args:
       - type: object
-        name: Port
+        name: pmacAsynSSHPort
         description: |-
           pmacAsynSSHPort to connect to
 
@@ -365,7 +364,7 @@ defs:
     pre_init:
       - value: |
           # Configure Model 3 Controller Driver (ControlerPort, LowLevelDriverPort, Address, Axes, MovingPoll, IdlePoll)
-          pmacCreateController("{{name}}", "{{PORT}}", 0, {{NAxes}}, {{MovingPoll}}, {{IdlePoll}})
+          pmacCreateController("{{name}}", "{{pmacAsynSSHPort}}", 0, {{NAxes}}, {{MovingPoll}}, {{IdlePoll}})
           # Configure Model 3 Axes Driver (Controler Port, Axis Count)
           pmacCreateAxes("{{name}}", {{NAxes}})
 
