@@ -1,16 +1,21 @@
 #!/bin/bash
 ##########################################################################
-###### install script for ADSimDetector Module ###########################
+###### install script for OPCUA Module ###################################
 ##########################################################################
 
 # ARGUMENTS:
 #  $1 VERSION to install (must match repo tag)
 VERSION=${1}
 NAME=opcua
+FOLDER=$(dirname $(readlink -f $0))
 
 # log output and abort on failure
 set -xe
 
+ibek support apt-install --only=dev cmake libxml2-dev libssl-dev
+ibek support apt-install --only=run libxml2
+
+# the 'if' speeds up retries in the devcontainer. remove the folder to rebuild
 if [ ! -d /tmp/open62541 ]; then
 (
     cd /tmp
@@ -27,8 +32,6 @@ fi
 
 # get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION}
-# dont keep the example
-rm -rf ${SUPPORT}/${NAME}/*Top
 ibek support register ${NAME}
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
@@ -54,8 +57,11 @@ OPEN62541_USE_CRYPTO = YES
 '
 ibek support add-to-config-site ${NAME} "${CONFIG}"
 
+# all the DB templates are in a subfolder - expose them in std location
+ln -s /epics/support/${NAME}/exampleTop/db ${NAME}/db
+
 # compile the support module
 ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
-ibek support generate-links ${NAME}
+ibek support generate-links ${FOLDER}
 
