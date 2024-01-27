@@ -23,6 +23,9 @@ ibek support add-dbds devIocStats.dbd
 # compile the support module
 ibek support compile ${NAME}
 
+# fixup incorrect timezone variable name in template. TODO: why is this needed?
+sed -i 's|@EPICS_TIMEZONE|@EPICS_TZ|' ${SUPPORT}/${NAME}/db/iocAdminSoft.db
+
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
 ibek support generate-links ${FOLDER}
 
