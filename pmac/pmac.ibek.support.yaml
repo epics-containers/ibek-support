@@ -156,13 +156,68 @@ defs:
           # Configure Model 3 Axes Driver (Controler Port, Axis Count)
           pmacCreateAxes("{{name}}", {{NAXES}})
 
+  - name: pmacAsynSSHPort
+    description: |-
+      This will create an AsynPort connecting to a PowerPMAC over SSH
+    args:
+      - type: id
+        name: name
+        description: |-
+          Port Name, normally something like SSH_PORT
+
+      - type: str
+        name: IP
+        description: |-
+          IP address of the powerPMAC
+
+      - type: str
+        name: USERNAME
+        description: |-
+          Username for the SSH connection
+        default: root
+
+      - type: str
+        name: PASSWORD
+        description: |-
+          Password for the SSH connection
+        default: deltatau
+
+      - type: int
+        name: PRIORITY
+        description: |-
+          Priority of the port
+        default: 0
+
+      - type: int
+        name: NOAUTOCONNECT
+        description: |-
+          Disable autoconnect if set to 1
+        default: 0
+
+      - type: int
+        name: NOEOS
+        description: |-
+          No EOS used if set to 1
+        default: 0
+
+      - type: str
+        name: simulation
+        description: |-
+          IP port to connect to if in simulation mode
+        default: ""
+
+    pre_init:
+      - value: |
+          # Create SSH Port (PortName, IPAddress, Username, Password, Priority, DisableAutoConnect, noProcessEos)
+          drvAsynPowerPMACPortConfigure("{{name}}", "{{IP}}", "{{USERNAME}}", "{{PASSWORD}}", "{{PRIORITY}}", "{{NOAUTOCONNECT}}", "{{NOEOS}}")
+
   - name: PowerPMAC
     description: |-
       This will create an asyn motor port for a PowerPMAC that we can attach
           motor records to using the model 3 driver
     args:
       - type: object
-        name: Port
+        name: pmacAsynSSHPort
         description: |-
           pmacAsynSSHPort to connect to
 
@@ -216,56 +271,67 @@ defs:
         name: PMAC
         description: |-
           Pmac/Geobrick name
+        default: ""
 
       - type: str
         name: AXIS
         description: |-
           Axis number
+        default: ""
 
       - type: str
         name: PORT
         description: |-
           Asyn port
+        default: "{{name}}"
 
       - type: str
         name: CSG0
         description: |-
           Name for Coordinate System Group 0
+        default: ""
 
       - type: str
         name: CSG1
         description: |-
           Name for Coordinate System Group 1
+        default: ""
 
       - type: str
         name: CSG2
         description: |-
           Name for Coordinate System Group 2
+        default: ""
 
       - type: str
         name: CSG3
         description: |-
           Name for Coordinate System Group 3
+        default: ""
 
       - type: str
         name: CSG4
         description: |-
           Name for Coordinate System Group 4
+        default: ""
 
       - type: str
         name: CSG5
         description: |-
           Name for Coordinate System Group 5
+        default: ""
 
       - type: str
         name: CSG6
         description: |-
           Name for Coordinate System Group 6
+        default: ""
 
       - type: str
         name: CSG7
         description: |-
           Name for Coordinate System Group 7
+        default: ""
 
     databases:
       - file: pmacStatusAxis.template
@@ -298,7 +364,7 @@ defs:
     pre_init:
       - value: |
           # Configure Model 3 Controller Driver (ControlerPort, LowLevelDriverPort, Address, Axes, MovingPoll, IdlePoll)
-          pmacCreateController("{{name}}", "{{PORT}}", 0, {{NAxes}}, {{MovingPoll}}, {{IdlePoll}})
+          pmacCreateController("{{name}}", "{{pmacAsynSSHPort}}", 0, {{NAxes}}, {{MovingPoll}}, {{IdlePoll}})
           # Configure Model 3 Axes Driver (Controler Port, Axis Count)
           pmacCreateAxes("{{name}}", {{NAxes}})
 
