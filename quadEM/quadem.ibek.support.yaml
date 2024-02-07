@@ -1,0 +1,89 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.6.2/ibek.support.schema.json
+
+module: quadEM
+
+defs:
+  # - name: quadEM
+  #   description: |-
+  #     TODO
+
+  #   args:
+  #     - type: id
+  #       name: PORT
+  #       description: |-
+  #         TODO
+
+  #     - type: object
+  #       name: DEVICE
+  #       description: |-
+  #         TODO
+
+  #     - type: int
+  #       name: NUM_TS
+  #       description: |-
+  #         TODO
+  #       default: 2048
+
+  #     - type: int
+  #       name: NUM_FREQ
+  #       description: |-
+  #         TODO
+  #       default: 2048
+
+  #     - type: int
+  #       name: QUEUE
+  #       description: |-
+  #         TODO
+  #       default: 16
+
+  #     - type: bool
+  #       name: QUEUE
+  #       description: |-
+  #         TODO
+  #       default: true
+
+  #   databases:
+  #     - file: $(QUADEM)/db/TimeSeriesPlugins_archiving.template
+  #       args:
+  #         P:
+  #         R:
+
+
+  - name: TetrAMM
+    description: |-
+      TODO
+
+    args:
+      - type: str
+        name: P
+        description: |-
+          TODO
+
+
+      - type: str
+        name: R
+        description: |-
+          TODO
+          
+
+      - type: id
+        name: PORT
+        description: |-
+          TODO
+
+      - type: int
+        name: QSIZE
+        description: |-
+          TODO
+
+      - type: int
+        name: QSIZE
+        description: |-
+          TODO
+        default: 10000
+
+      - type: str
+        name: IP
+        description: |-
+          TODO
+        default: 172.23.253.12:10001
