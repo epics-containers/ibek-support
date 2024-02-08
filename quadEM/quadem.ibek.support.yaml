@@ -3,52 +3,7 @@
 module: quadEM
 
 defs:
-  # - name: quadEM
-  #   description: |-
-  #     TODO
-
-  #   args:
-  #     - type: id
-  #       name: PORT
-  #       description: |-
-  #         TODO
-
-  #     - type: object
-  #       name: DEVICE
-  #       description: |-
-  #         TODO
-
-  #     - type: int
-  #       name: NUM_TS
-  #       description: |-
-  #         TODO
-  #       default: 2048
-
-  #     - type: int
-  #       name: NUM_FREQ
-  #       description: |-
-  #         TODO
-  #       default: 2048
-
-  #     - type: int
-  #       name: QUEUE
-  #       description: |-
-  #         TODO
-  #       default: 16
-
-  #     - type: bool
-  #       name: QUEUE
-  #       description: |-
-  #         TODO
-  #       default: true
-
-  #   databases:
-  #     - file: $(QUADEM)/db/TimeSeriesPlugins_archiving.template
-  #       args:
-  #         P:
-  #         R:
-
-
+  
   - name: TetrAMM
     description: |-
       TODO
@@ -58,7 +13,6 @@ defs:
         name: P
         description: |-
           TODO
-
 
       - type: str
         name: R
@@ -75,15 +29,40 @@ defs:
         name: QSIZE
         description: |-
           TODO
-
-      - type: int
-        name: QSIZE
-        description: |-
-          TODO
         default: 10000
 
       - type: str
         name: IP
         description: |-
           TODO
-        default: 172.23.253.12:10001
+
+      - type: int
+        name: RingSize
+        description: |-
+          TODO
+        default: 10000
+
+    pre_init: 
+      - value: |
+
+          # drvAsynIPPortConfigure("portName","hostInfo",priority,noAutoConnect, noProcessEos)
+          drvAsynIPPortConfigure({{PORT}}ip, {{IP}}, 100, 0, 0)
+
+          # asynOctetSetInputEos(portName,addr,eos,drvInfo)
+          asynOctetSetInputEos({{PORT}}ip, 0, "\r\n")
+
+          # asynOctetSetOutputEos(portName,addr,eos,drvInfo)
+          asynOctetSetOutputEos({{PORT}}ip, 0, "\r")
+
+          # drvTetrAMMConfigure(portName, IPportName, RingSize)
+          drvTetrAMMConfigure({{PORT}}, "{{PORT}}ip", {{RingSize}})
+          
+
+
+    databases:
+      - file: TetrAMM.template
+        args: 
+          P: 
+          R:
+
+          
