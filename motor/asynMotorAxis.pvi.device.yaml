@@ -1,0 +1,149 @@
+# a hand built PVI representation of the the motor record
+type: Device
+label: asynMotorAxis
+parent: asynPortDriver
+children:
+  - type: Group
+    name: Motor
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalRW
+        name: Position
+        pv: $(P)$(M)
+        widget:
+          type: TextWrite
+        read_pv: $(P)$(M).RBV
+        read_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: Stop
+        pv: $(P)$(M).STOP
+        widget:
+          type: Button
+
+      - type: SignalW
+        name: Jog Forward
+        pv: $(P)$(M).JOGF
+        widget:
+          type: Button
+
+      - type: SignalW
+        name: Jog Reverse
+        pv: $(P)$(M).JOGR
+        widget:
+          type: Button
+
+      - type: SignalW
+        name: Tweak Forward
+        pv: $(P)$(M).TWF
+        widget:
+          type: Button
+
+      - type: SignalW
+        name: Tweak Reverse
+        pv: $(P)$(M).TWR
+        widget:
+          type: Button
+
+      - type: SignalW
+        name: Tweak Step
+        pv: $(P)$(M).TWV
+
+      - type: Group
+        name: Homing
+        layout:
+          type: Grid
+          labelled: true
+        children:
+          - type: SignalW
+            name: Home Forward
+            pv: $(P)$(M).HOMF
+            widget:
+              type: Button
+
+          - type: SignalW
+            name: Home Reverse
+            pv: $(P)$(M).HOMR
+            widget:
+              type: Button
+
+      - type: Group
+        name: Status
+        layout:
+          type: Column
+          labelled: true
+        children:
+          - type: SignalR
+            name: Ready
+            pv: $(P)$(M)Status
+            widget:
+              type: LED
+
+          - type: SignalR
+            name: Moving
+            pv: $(P)$(M).MOVN
+            widget:
+              type: LED
+
+          - type: SignalR
+            name: Forward
+            pv: $(P)$(M).TDIR
+            widget:
+              type: LED
+
+          - type: SignalR
+            name: Homed
+            pv: $(P)$(M).MSTA
+            widget:
+              type: LED
+
+          - type: SignalR
+            name: HighLimit
+            pv: $(P)$(M).HLS
+            widget:
+              type: LED
+
+          - type: SignalR
+            name: LowLimit
+            pv: $(P)$(M).LLS
+            widget:
+              type: LED
+
+          - type: SignalR
+            name: Soft Limit
+            pv: $(P)$(M).LVIO
+            widget:
+              type: LED
+
+          - type: SignalR
+            name: Missed
+            pv: $(P)$(M).MISS
+            widget:
+              type: LED
+
+  - type: Group
+    name: BasicAsynMotor
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalW
+        name: Direction
+        pv: $(P)$(M)Direction
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: Offset
+        pv: $(P)$(M)Offset
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: Resolution
+        pv: $(P)$(M)Resolution
+        widget:
+          type: TextWrite

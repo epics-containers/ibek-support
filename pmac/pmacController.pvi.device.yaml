@@ -1,0 +1,749 @@
+type: Device
+label: pmacController
+# There are no interesting records for the controller in motor - only for Axes
+parent: asynPortDriver
+children:
+  - type: Group
+    name: PmacController
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalW
+        name: PollAllNow
+        pv: $(P):PollAllNow
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: DeferMoves
+        pv: $(P):DeferMoves
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: StopAll
+        pv: $(P):StopAll
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: KillAll
+        pv: $(P):KillAll
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: FEEDRATELIMIT
+        pv: $(P):FEEDRATE_LIMIT
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: REPORTFAST
+        pv: $(P):REPORT_FAST
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: REPORTMEDIUM
+        pv: $(P):REPORT_MEDIUM
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: REPORTSLOW
+        pv: $(P):REPORT_SLOW
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: DEBUGLEVEL
+        pv: $(P):DEBUG_LEVEL
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: DEBUGAXISNO
+        pv: $(P):DEBUG_AXISNO
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: DEBUGCSNO
+        pv: $(P):DEBUG_CSNO
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: DEBUGEXECUTE
+        pv: $(P):DEBUG_EXECUTE
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: DISABLEPOLL
+        pv: $(P):DISABLE_POLL
+        widget:
+          type: ComboBox
+
+      - type: SignalW
+        name: SendCmd
+        pv: $(P):SendCmd
+        widget:
+          type: TextWrite
+          format: 4
+
+      - type: SignalR
+        name: IVARIABLES
+        pv: $(P):I_VARIABLES_RBV
+        widget:
+          type: TextRead
+          format: 4
+
+      - type: SignalR
+        name: PVARIABLES
+        pv: $(P):P_VARIABLES_RBV
+        widget:
+          type: TextRead
+          format: 4
+
+      - type: SignalR
+        name: MVARIABLES
+        pv: $(P):M_VARIABLES_RBV
+        widget:
+          type: TextRead
+          format: 4
+
+      - type: SignalR
+        name: PMACTYPE
+        pv: $(P):PMACTYPE
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: CPULOAD
+        pv: $(P):CPULOAD
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: READCTRLSTAT1
+        pv: $(P):READ_CTRLSTAT1
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: READCTRLSTAT2
+        pv: $(P):READ_CTRLSTAT2
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: READCTRLSTAT3
+        pv: $(P):READ_CTRLSTAT3
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: READPLCBITS00
+        pv: $(P):READ_PLCBITS00
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: READPLCBITS01
+        pv: $(P):READ_PLCBITS01
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: READGPIOINP
+        pv: $(P):READ_GPIO_INP
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: READGPIOOUT
+        pv: $(P):READ_GPIO_OUT
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: READPROGBITS
+        pv: $(P):READ_PROGBITS
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: MACROERRS
+        pv: $(P):MACROERRS
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: GLOBALPROBLEM
+        pv: $(P):GLOBAL_PROBLEM_RBV
+        widget:
+          type: LED
+
+      - type: SignalR
+        name: FEEDRATEPROBLEM
+        pv: $(P):FEEDRATE_PROBLEM_RBV
+        widget:
+          type: LED
+
+      - type: SignalR
+        name: STATMSGNO
+        pv: $(P):STAT_MSG_NO_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: STATTOTALWRITE
+        pv: $(P):STAT_TOTAL_WRITE_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: STATTOTALREAD
+        pv: $(P):STAT_TOTAL_READ_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: STATMSGWRITE
+        pv: $(P):STAT_MSG_WRITE_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: STATMSGREAD
+        pv: $(P):STAT_MSG_READ_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: STATMSGTIME
+        pv: $(P):STAT_MSG_TIME_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: STATMAXWRITE
+        pv: $(P):STAT_MAX_WRITE_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: STATMAXREAD
+        pv: $(P):STAT_MAX_READ_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: STATMAXTIME
+        pv: $(P):STAT_MAX_TIME_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: STATAVEWRITE
+        pv: $(P):STAT_AVE_WRITE_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: STATAVEREAD
+        pv: $(P):STAT_AVE_READ_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: STATAVETIME
+        pv: $(P):STAT_AVE_TIME_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: FASTSIZE
+        pv: $(P):FAST_SIZE_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: MEDIUMSIZE
+        pv: $(P):MEDIUM_SIZE_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: SLOWSIZE
+        pv: $(P):SLOW_SIZE_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: COORDINATESYSGROUP
+        pv: $(P):COORDINATE_SYS_GROUP
+        widget:
+          type: ComboBox
+        read_pv: COORDINATESYSGROUP_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: AxesReadonly
+        pv: $(P):AxesReadonly
+        widget:
+          type: CheckBox
+        read_pv: AxesReadonly_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: FEEDRATE
+        pv: $(P):FEEDRATE
+        widget:
+          type: TextWrite
+        read_pv: FEEDRATE_RBV
+        read_widget:
+          type: TextRead
+
+  - type: Group
+    name: PmacControllerTrajectory
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalW
+        name: ProfileBuild
+        pv: $(PMAC):ProfileBuild
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: ProfileAppend
+        pv: $(PMAC):ProfileAppend
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: ProfileExecute
+        pv: $(PMAC):ProfileExecute
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: ProfileAbort
+        pv: $(PMAC):ProfileAbort
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: AUseAxis
+        pv: $(PMAC):A:UseAxis
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: BUseAxis
+        pv: $(PMAC):B:UseAxis
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: CUseAxis
+        pv: $(PMAC):C:UseAxis
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: UUseAxis
+        pv: $(PMAC):U:UseAxis
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: VUseAxis
+        pv: $(PMAC):V:UseAxis
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: WUseAxis
+        pv: $(PMAC):W:UseAxis
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: XUseAxis
+        pv: $(PMAC):X:UseAxis
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: YUseAxis
+        pv: $(PMAC):Y:UseAxis
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: ZUseAxis
+        pv: $(PMAC):Z:UseAxis
+        widget:
+          type: CheckBox
+
+      - type: SignalW
+        name: ProfileTimeArray
+        pv: $(PMAC):ProfileTimeArray
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: UserArray
+        pv: $(PMAC):UserArray
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: VelocityMode
+        pv: $(PMAC):VelocityMode
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: APositions
+        pv: $(PMAC):A:Positions
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: AVelocities
+        pv: $(PMAC):A:Velocities
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: BPositions
+        pv: $(PMAC):B:Positions
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: BVelocities
+        pv: $(PMAC):B:Velocities
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: CPositions
+        pv: $(PMAC):C:Positions
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: CVelocities
+        pv: $(PMAC):C:Velocities
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: UPositions
+        pv: $(PMAC):U:Positions
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: UVelocities
+        pv: $(PMAC):U:Velocities
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: VPositions
+        pv: $(PMAC):V:Positions
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: VVelocities
+        pv: $(PMAC):V:Velocities
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WPositions
+        pv: $(PMAC):W:Positions
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WVelocities
+        pv: $(PMAC):W:Velocities
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: XPositions
+        pv: $(PMAC):X:Positions
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: XVelocities
+        pv: $(PMAC):X:Velocities
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: YPositions
+        pv: $(PMAC):Y:Positions
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: YVelocities
+        pv: $(PMAC):Y:Velocities
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: ZPositions
+        pv: $(PMAC):Z:Positions
+        widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: ZVelocities
+        pv: $(PMAC):Z:Velocities
+        widget:
+          type: TextWrite
+
+      - type: SignalR
+        name: ProgramVersion
+        pv: $(PMAC):ProgramVersion_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: DriverVersion
+        pv: $(PMAC):DriverVersion_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: ProfileNumAxes
+        pv: $(PMAC):ProfileNumAxes_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: ProfilePointsBuilt
+        pv: $(PMAC):ProfilePointsBuilt_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: ProfileCurrentPoint
+        pv: $(PMAC):ProfileCurrentPoint_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: ProfileBuildState
+        pv: $(PMAC):ProfileBuildState_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: ProfileBuildStatus
+        pv: $(PMAC):ProfileBuildStatus_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: ProfileBuildMessage
+        pv: $(PMAC):ProfileBuildMessage_RBV
+        widget:
+          type: TextRead
+          format: 4
+
+      - type: SignalR
+        name: ProfileAppendState
+        pv: $(PMAC):ProfileAppendState_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: ProfileAppendStatus
+        pv: $(PMAC):ProfileAppendStatus_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: ProfileAppendMessage
+        pv: $(PMAC):ProfileAppendMessage_RBV
+        widget:
+          type: TextRead
+          format: 4
+
+      - type: SignalR
+        name: ProfileExecuteState
+        pv: $(PMAC):ProfileExecuteState_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: ProfileExecuteStatus
+        pv: $(PMAC):ProfileExecuteStatus_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: ProfileExecuteMessage
+        pv: $(PMAC):ProfileExecuteMessage_RBV
+        widget:
+          type: TextRead
+          format: 4
+
+      - type: SignalR
+        name: BufferAAddress
+        pv: $(PMAC):BufferAAddress_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: BufferBAddress
+        pv: $(PMAC):BufferBAddress_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: BufferLength
+        pv: $(PMAC):BufferLength_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: CurrentIndex
+        pv: $(PMAC):CurrentIndex_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: TotalPoints
+        pv: $(PMAC):TotalPoints_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: CurrentBuffer
+        pv: $(PMAC):CurrentBuffer_RBV
+        widget:
+          type: LED
+
+      - type: SignalR
+        name: TrajectoryStatus
+        pv: $(PMAC):TrajectoryStatus_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: EpicsBufferAPtr
+        pv: $(PMAC):EpicsBufferAPtr_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: EpicsBufferBPtr
+        pv: $(PMAC):EpicsBufferBPtr_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: TscanTime
+        pv: $(PMAC):TscanTime_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: TscanCs
+        pv: $(PMAC):TscanCs_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: TscanPercent
+        pv: $(PMAC):TscanPercent_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalR
+        name: TscanExtStatus
+        pv: $(PMAC):TscanExtStatus_RBV
+        widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: ProfileNumPoints
+        pv: $(PMAC):ProfileNumPoints
+        widget:
+          type: TextWrite
+        read_pv: ProfileNumPoints_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: ProfilePointsToBuild
+        pv: $(PMAC):ProfilePointsToBuild
+        widget:
+          type: TextWrite
+        read_pv: ProfilePointsToBuild_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: ProfileTimeMode
+        pv: $(PMAC):ProfileTimeMode
+        widget:
+          type: CheckBox
+        read_pv: ProfileTimeMode_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: ProfileFixedTime
+        pv: $(PMAC):ProfileFixedTime
+        widget:
+          type: TextWrite
+        read_pv: ProfileFixedTime_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: ProfileCalcVel
+        pv: $(PMAC):ProfileCalcVel
+        widget:
+          type: CheckBox
+        read_pv: ProfileCalcVel_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: ProfileCsName
+        pv: $(PMAC):ProfileCsName
+        widget:
+          type: ComboBox
+        read_pv: ProfileCsName_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: TscanProgNo
+        pv: $(PMAC):TscanProgNo
+        widget:
+          type: TextWrite
+        read_pv: TscanProgNo_RBV
+        read_widget:
+          type: TextRead

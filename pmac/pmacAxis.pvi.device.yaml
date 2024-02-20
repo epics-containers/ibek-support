@@ -1,0 +1,82 @@
+type: Device
+label: pmacAxis
+parent: asynMotorAxis
+children:
+
+- type: Group
+  name: Basicasynmotor
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalW
+    name: Direction
+    pv: $(P)$(M)Direction
+    widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: Offset
+    pv: $(P)$(M)Offset
+    widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: Resolution
+    pv: $(P)$(M)Resolution
+    widget:
+      type: TextWrite
+
+- type: Group
+  name: Dlspmacasynmotor
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalW
+    name: MRESSET
+    pv: $(P)$(M):MRES_SET
+    widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: OFFSET
+    pv: $(P)$(M):OFF_SET
+    widget:
+      type: TextWrite
+
+- type: Group
+  name: Elosskillautohomerecords
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalW
+    name: HOMINGSTATUS
+    pv: $(P)$(M):HOMING_STATUS
+    widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: KILL
+    pv: $(P)$(M):KILL
+    widget:
+      type: TextWrite
+
+  - type: SignalR
+    name: HMPOS
+    pv: $(P)$(M):HMPOS_RBV
+    widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: SENDELOSSRC
+    pv: $(P)$(M):SEND_ELOSSRC
+    widget:
+      type: TextWrite
+    read_pv: SENDELOSSRC_RBV
+    read_widget:
+      type: TextRead

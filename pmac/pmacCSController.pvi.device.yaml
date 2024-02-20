@@ -1,0 +1,53 @@
+type: Device
+label: pmacCSController
+parent: asynMotorController
+children:
+
+- type: Group
+  name: PmacCsController
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalW
+    name: Abort
+    pv: $(PMAC):CS$(CS):Abort
+    widget:
+      type: CheckBox
+
+  - type: SignalW
+    name: DeferMoves
+    pv: $(PMAC):CS$(CS):DeferMoves
+    widget:
+      type: CheckBox
+
+  - type: SignalR
+    name: FWDKINEMATIC
+    pv: $(PMAC):CS$(CS):FWD_KINEMATIC_RBV
+    widget:
+      type: TextRead
+      format: 4
+
+  - type: SignalR
+    name: INVKINEMATIC
+    pv: $(PMAC):CS$(CS):INV_KINEMATIC_RBV
+    widget:
+      type: TextRead
+      format: 4
+
+  - type: SignalR
+    name: QVARIABLES
+    pv: $(PMAC):CS$(CS):Q_VARIABLES_RBV
+    widget:
+      type: TextRead
+      format: 4
+
+  - type: SignalRW
+    name: CsMoveTime
+    pv: $(PMAC):CS$(CS):CsMoveTime
+    widget:
+      type: TextWrite
+    read_pv: CsMoveTime_RBV
+    read_widget:
+      type: TextRead
