@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=file:///workspaces/pvi/schemas/pvi.device.schema.json
 # a hand built PVI representation of the the motor record
 type: Device
 label: asynMotorAxis
@@ -16,114 +17,116 @@ children:
           type: TextWrite
         read_pv: $(P)$(M).RBV
         read_widget:
-          type: TextWrite
+          type: TextRead
 
       - type: SignalW
         name: Stop
         pv: $(P)$(M).STOP
         widget:
-          type: Button
+          type: ButtonPanel
+          actions:
+            Stop: "1"
 
       - type: SignalW
-        name: Jog Forward
-        pv: $(P)$(M).JOGF
-        widget:
-          type: Button
-
-      - type: SignalW
-        name: Jog Reverse
-        pv: $(P)$(M).JOGR
-        widget:
-          type: Button
-
-      - type: SignalW
-        name: Tweak Forward
+        name: TweakForward
         pv: $(P)$(M).TWF
         widget:
-          type: Button
+          type: ButtonPanel
+          actions:
+            TweakForward: "1"
 
       - type: SignalW
-        name: Tweak Reverse
+        name: TweakReverse
         pv: $(P)$(M).TWR
         widget:
-          type: Button
+          type: ButtonPanel
+          actions:
+            TweakReverse: "1"
 
       - type: SignalW
-        name: Tweak Step
+        name: TweakStep
         pv: $(P)$(M).TWV
+        widget:
+          type: ButtonPanel
+          actions:
+            TweakStep: "1"
 
-      - type: Group
-        name: Homing
-        layout:
-          type: Grid
-          labelled: true
-        children:
-          - type: SignalW
-            name: Home Forward
-            pv: $(P)$(M).HOMF
-            widget:
-              type: Button
 
-          - type: SignalW
-            name: Home Reverse
-            pv: $(P)$(M).HOMR
-            widget:
-              type: Button
+  - type: Group
+    name: Status
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalR
+        name: Ready
+        pv: $(P)$(M)Status
+        widget:
+          type: LED
 
-      - type: Group
-        name: Status
-        layout:
-          type: Column
-          labelled: true
-        children:
-          - type: SignalR
-            name: Ready
-            pv: $(P)$(M)Status
-            widget:
-              type: LED
+      - type: SignalR
+        name: Moving
+        pv: $(P)$(M).MOVN
+        widget:
+          type: LED
 
-          - type: SignalR
-            name: Moving
-            pv: $(P)$(M).MOVN
-            widget:
-              type: LED
+      - type: SignalR
+        name: Forward
+        pv: $(P)$(M).TDIR
+        widget:
+          type: LED
 
-          - type: SignalR
-            name: Forward
-            pv: $(P)$(M).TDIR
-            widget:
-              type: LED
+      - type: SignalR
+        name: Homed
+        pv: $(P)$(M).MSTA
+        widget:
+          type: LED
 
-          - type: SignalR
-            name: Homed
-            pv: $(P)$(M).MSTA
-            widget:
-              type: LED
+      - type: SignalR
+        name: HighLimit
+        pv: $(P)$(M).HLS
+        widget:
+          type: LED
 
-          - type: SignalR
-            name: HighLimit
-            pv: $(P)$(M).HLS
-            widget:
-              type: LED
+      - type: SignalR
+        name: LowLimit
+        pv: $(P)$(M).LLS
+        widget:
+          type: LED
 
-          - type: SignalR
-            name: LowLimit
-            pv: $(P)$(M).LLS
-            widget:
-              type: LED
+      - type: SignalR
+        name: SoftLimit
+        pv: $(P)$(M).LVIO
+        widget:
+          type: LED
 
-          - type: SignalR
-            name: Soft Limit
-            pv: $(P)$(M).LVIO
-            widget:
-              type: LED
+      - type: SignalR
+        name: Missed
+        pv: $(P)$(M).MISS
+        widget:
+          type: LED
 
-          - type: SignalR
-            name: Missed
-            pv: $(P)$(M).MISS
-            widget:
-              type: LED
+  - type: Group
+    name: Homing
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalW
+        name: HomeForward
+        pv: $(P)$(M).HOMF
+        widget:
+          type: ButtonPanel
+          actions:
+            HomeForward: "1"
 
+      - type: SignalW
+        name: HomeReverse
+        pv: $(P)$(M).HOMR
+        widget:
+          type: ButtonPanel
+          actions:
+            HomeReverse: "1"
   - type: Group
     name: BasicAsynMotor
     layout:
