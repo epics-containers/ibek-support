@@ -1,4 +1,5 @@
-type: Device
+# yaml-language-server: $schema=file:///workspaces/pvi/schemas/pvi.device.schema.json
+
 label: pmacAxis
 parent: asynMotorAxis
 children:
@@ -12,20 +13,20 @@ children:
 
   - type: SignalW
     name: Direction
-    pv: $(P)$(M)Direction
-    widget:
+    write_pv: $(P)$(M)Direction
+    write_widget:
       type: TextWrite
 
   - type: SignalW
     name: Offset
-    pv: $(P)$(M)Offset
-    widget:
+    write_pv: $(P)$(M)Offset
+    write_widget:
       type: TextWrite
 
   - type: SignalW
     name: Resolution
-    pv: $(P)$(M)Resolution
-    widget:
+    write_pv: $(P)$(M)Resolution
+    write_widget:
       type: TextWrite
 
 - type: Group
@@ -37,14 +38,14 @@ children:
 
   - type: SignalW
     name: MRESSET
-    pv: $(P)$(M):MRES_SET
-    widget:
+    write_pv: $(P)$(M):MRES_SET
+    write_widget:
       type: TextWrite
 
   - type: SignalW
     name: OFFSET
-    pv: $(P)$(M):OFF_SET
-    widget:
+    write_pv: $(P)$(M):OFF_SET
+    write_widget:
       type: TextWrite
 
 - type: Group
@@ -56,27 +57,27 @@ children:
 
   - type: SignalW
     name: HOMINGSTATUS
-    pv: $(P)$(M):HOMING_STATUS
-    widget:
+    write_pv: $(P)$(M):HOMING_STATUS
+    write_widget:
       type: TextWrite
 
   - type: SignalW
     name: KILL
-    pv: $(P)$(M):KILL
-    widget:
+    write_pv: $(P)$(M):KILL
+    write_widget:
       type: TextWrite
 
   - type: SignalR
     name: HMPOS
-    pv: $(P)$(M):HMPOS_RBV
-    widget:
+    read_pv: $(P)$(M):HMPOS_RBV
+    read_widget:
       type: TextRead
 
   - type: SignalRW
     name: SENDELOSSRC
-    pv: $(P)$(M):SEND_ELOSSRC
-    widget:
+    write_pv: $(P)$(M):SEND_ELOSSRC
+    write_widget:
       type: TextWrite
-    read_pv: SENDELOSSRC_RBV
+    read_pv: $(P)$(M):ELOSS
     read_widget:
       type: TextRead

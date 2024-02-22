@@ -1,4 +1,5 @@
-type: Device
+# yaml-language-server: $schema=file:///workspaces/pvi/schemas/pvi.device.schema.json
+
 label: pmacCSController
 parent: asynMotorController
 children:
@@ -12,42 +13,42 @@ children:
 
   - type: SignalW
     name: Abort
-    pv: $(PMAC):CS$(CS):Abort
-    widget:
-      type: CheckBox
+    write_pv: $(PMAC):CS$(CS):Abort
+    write_widget:
+      type: ToggleButton
 
   - type: SignalW
     name: DeferMoves
-    pv: $(PMAC):CS$(CS):DeferMoves
-    widget:
-      type: CheckBox
+    write_pv: $(PMAC):CS$(CS):DeferMoves
+    write_widget:
+      type: ToggleButton
 
   - type: SignalR
     name: FWDKINEMATIC
-    pv: $(PMAC):CS$(CS):FWD_KINEMATIC_RBV
-    widget:
+    read_pv: $(PMAC):CS$(CS):FWD_KINEMATIC_RBV
+    read_widget:
       type: TextRead
       format: 4
 
   - type: SignalR
     name: INVKINEMATIC
-    pv: $(PMAC):CS$(CS):INV_KINEMATIC_RBV
-    widget:
+    read_pv: $(PMAC):CS$(CS):INV_KINEMATIC_RBV
+    read_widget:
       type: TextRead
       format: 4
 
   - type: SignalR
     name: QVARIABLES
-    pv: $(PMAC):CS$(CS):Q_VARIABLES_RBV
-    widget:
+    read_pv: $(PMAC):CS$(CS):Q_VARIABLES_RBV
+    read_widget:
       type: TextRead
       format: 4
 
   - type: SignalRW
     name: CsMoveTime
-    pv: $(PMAC):CS$(CS):CsMoveTime
-    widget:
+    write_pv: $(PMAC):CS$(CS):CsMoveTime
+    write_widget:
       type: TextWrite
-    read_pv: CsMoveTime_RBV
+    read_pv: $(PMAC):CS$(CS):CsMoveTime_RBV
     read_widget:
       type: TextRead

@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=file:///workspaces/pvi/schemas/pvi.device.schema.json
+
+label: asynMotorController
+parent: asynPortDriver
+
+# Nothing of interest to the controller in here.
+# asynMotorController is all about axes and the motor record

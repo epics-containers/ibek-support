@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=file:///workspaces/pvi/schemas/pvi.device.schema.json
+
 # a hand built PVI representation of the the motor record
-type: Device
 label: asynMotorAxis
 parent: asynPortDriver
 children:
@@ -12,8 +12,8 @@ children:
     children:
       - type: SignalRW
         name: Position
-        pv: $(P)$(M)
-        widget:
+        write_pv: $(P)$(M)
+        write_widget:
           type: TextWrite
         read_pv: $(P)$(M).RBV
         read_widget:
@@ -21,35 +21,33 @@ children:
 
       - type: SignalW
         name: Stop
-        pv: $(P)$(M).STOP
-        widget:
+        write_pv: $(P)$(M).STOP
+        write_widget:
           type: ButtonPanel
           actions:
             Stop: "1"
 
       - type: SignalW
         name: TweakForward
-        pv: $(P)$(M).TWF
-        widget:
+        write_pv: $(P)$(M).TWF
+        write_widget:
           type: ButtonPanel
           actions:
             TweakForward: "1"
 
       - type: SignalW
+        name: TweakStep
+        write_pv: $(P)$(M).TWV
+        write_widget:
+          type : TextWrite
+
+      - type: SignalW
         name: TweakReverse
-        pv: $(P)$(M).TWR
-        widget:
+        write_pv: $(P)$(M).TWR
+        write_widget:
           type: ButtonPanel
           actions:
             TweakReverse: "1"
-
-      - type: SignalW
-        name: TweakStep
-        pv: $(P)$(M).TWV
-        widget:
-          type: ButtonPanel
-          actions:
-            TweakStep: "1"
 
 
   - type: Group
@@ -60,50 +58,50 @@ children:
     children:
       - type: SignalR
         name: Ready
-        pv: $(P)$(M)Status
-        widget:
+        read_pv: $(P)$(M).DMOV
+        read_widget:
           type: LED
 
       - type: SignalR
         name: Moving
-        pv: $(P)$(M).MOVN
-        widget:
+        read_pv: $(P)$(M).MOVN
+        read_widget:
           type: LED
 
       - type: SignalR
         name: Forward
-        pv: $(P)$(M).TDIR
-        widget:
+        read_pv: $(P)$(M).TDIR
+        read_widget:
           type: LED
 
       - type: SignalR
         name: Homed
-        pv: $(P)$(M).MSTA
-        widget:
+        read_pv: $(P)$(M).MSTA
+        read_widget:
           type: LED
 
       - type: SignalR
         name: HighLimit
-        pv: $(P)$(M).HLS
-        widget:
+        read_pv: $(P)$(M).HLS
+        read_widget:
           type: LED
 
       - type: SignalR
         name: LowLimit
-        pv: $(P)$(M).LLS
-        widget:
+        read_pv: $(P)$(M).LLS
+        read_widget:
           type: LED
 
       - type: SignalR
         name: SoftLimit
-        pv: $(P)$(M).LVIO
-        widget:
+        read_pv: $(P)$(M).LVIO
+        read_widget:
           type: LED
 
       - type: SignalR
         name: Missed
-        pv: $(P)$(M).MISS
-        widget:
+        read_pv: $(P)$(M).MISS
+        read_widget:
           type: LED
 
   - type: Group
@@ -114,39 +112,17 @@ children:
     children:
       - type: SignalW
         name: HomeForward
-        pv: $(P)$(M).HOMF
-        widget:
+        write_pv: $(P)$(M).HOMF
+        write_widget:
           type: ButtonPanel
           actions:
             HomeForward: "1"
 
       - type: SignalW
         name: HomeReverse
-        pv: $(P)$(M).HOMR
-        widget:
+        write_pv: $(P)$(M).HOMR
+        write_widget:
           type: ButtonPanel
           actions:
             HomeReverse: "1"
-  - type: Group
-    name: BasicAsynMotor
-    layout:
-      type: Grid
-      labelled: true
-    children:
-      - type: SignalW
-        name: Direction
-        pv: $(P)$(M)Direction
-        widget:
-          type: TextWrite
 
-      - type: SignalW
-        name: Offset
-        pv: $(P)$(M)Offset
-        widget:
-          type: TextWrite
-
-      - type: SignalW
-        name: Resolution
-        pv: $(P)$(M)Resolution
-        widget:
-          type: TextWrite

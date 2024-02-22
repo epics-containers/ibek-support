@@ -486,6 +486,14 @@ defs:
           PMAC: "{{PmacController.P}}"
           NAxes: "{{PmacController.NAxes}}"
 
+    pvi:
+      yaml_path: pmacTrajectory.pvi.device.yaml
+      prefix: "{{ PMAC }}"
+      pva_template: true
+      index: true
+      macros:
+        PMAC:
+
   - name: dls_pmac_asyn_motor
     description: |-
       describe a single real axis on a pmac controller
