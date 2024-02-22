@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.5.0/ibek.support.schema.json
+# yaml-language-server: $schema=../schemas/ibek.support.schema.json
 
 module: ADCore
 
@@ -718,8 +718,11 @@ defs:
 
     pvi:
       yaml_path: NDFileHDF5.pvi.device.yaml
-      prefix: "{{ P }}{{ R }}"
-      pva_template: true
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: "$(P)$(R)"
 
   - name: NDFileNull
     description: |-
@@ -1694,8 +1697,11 @@ defs:
 
     pvi:
       yaml_path: NDPluginROI.pvi.device.yaml
-      prefix: "{{ P }}{{ R }}"
-      pva_template: true
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: "$(P)$(R)"
 
   - name: NDAttribute
     description: |-
@@ -1972,8 +1978,11 @@ defs:
 
     pvi:
       yaml_path: NDPluginStats.pvi.device.yaml
-      prefix: "{{ P }}{{ R }}"
-      pva_template: true
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: "$(P)$(R)"
 
   - name: NDTimeSeries
     description: |-
@@ -2288,8 +2297,11 @@ defs:
 
     pvi:
       yaml_path: NDPluginProcess.pvi.device.yaml
-      prefix: "{{ P }}{{ R }}"
-      pva_template: true
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: "$(P)$(R)"
 
   - name: NDFileTIFF
     description: |-
@@ -2831,8 +2843,11 @@ defs:
 
     pvi:
       yaml_path: NDPluginPva.pvi.device.yaml
-      prefix: "{{ P }}{{ R }}"
-      pva_template: true
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: "$(P)$(R)"
 
   - name: NDTransform
     description: |-
