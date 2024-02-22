@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.7.0/ibek.support.schema.json
+# yaml-language-server: $schema=file:///tmp/ibek.support.schema.json
 
 module: motor
 
@@ -344,10 +344,8 @@ defs:
 
     pvi:
       yaml_path: asynMotorAxis.pvi.device.yaml
-      prefix: "{{ P }}{{ M }}"
-      pva_template: true
-      index: true
-      macros:
+      pv_prefix: "{{ P }}{{ M }}"
+      ui_macros:
         P:
         M:
 

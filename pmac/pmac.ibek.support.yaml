@@ -158,10 +158,8 @@ defs:
 
     pvi:
       yaml_path: pmacController.pvi.device.yaml
-      prefix: "{{ P }}"
-      pva_template: true
-      index: true
-      macros:
+      pv_prefix: "{{ P }}"
+      ui_macros:
         P:
 
   - name: pmacAsynSSHPort
@@ -486,13 +484,11 @@ defs:
           PMAC: "{{PmacController.P}}"
           NAxes: "{{PmacController.NAxes}}"
 
-    pvi:
-      yaml_path: pmacTrajectory.pvi.device.yaml
-      prefix: "{{ PMAC }}"
-      pva_template: true
-      index: true
-      macros:
-        PMAC:
+    # pvi:
+    #   yaml_path: pmacTrajectory.pvi.device.yaml
+    #   pv_prefix: "{{ PmacController.P }}"
+    #   ui_macros:
+    #     PMAC:
 
   - name: dls_pmac_asyn_motor
     description: |-
@@ -855,10 +851,8 @@ defs:
 
     pvi:
       yaml_path: pmacAxis.pvi.device.yaml
-      prefix: "{{ P }}{{ M }}"
-      pva_template: true
-      index: true
-      macros:
+      pv_prefix: "{{ P }}{{ M }}"
+      ui_macros:
         P:
         M:
         # TODO probably much more required here
