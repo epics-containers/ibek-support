@@ -16,9 +16,13 @@ set -xe
 ibek support git-clone ${NAME} ${VERSION}
 ibek support register ${NAME}
 
+# Simplify calc by removing SSCAN and SNCSEQ (TODO: review need for these)
+ibek support add-release-macro SNCSEQ
+ibek support add-release-macro SSCAN
+
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs calc
-ibek support add-dbds aCalcoutRecord.dbd  calc.dbd  calcSupport.dbd  editSseq.dbd  sCalcoutRecord.dbd  sseqRecord.dbd  swaitRecord.dbd  transformRecord.dbd
+ibek support add-dbds aCalcoutRecord.dbd  calc.dbd  calcSupport.dbd sCalcoutRecord.dbd transformRecord.dbd
 
 # compile the support module
 ibek support compile ${NAME}
