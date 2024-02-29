@@ -28,11 +28,11 @@ ibek support add-dbds asSupport.dbd
 THIS_DIR=$(dirname ${0})
 
 if [[ $TARGET_ARCHITECTURE == "rtems" ]]; then
-    echo "Patching RTEMS autosave"
-    patch -p1 < ${THIS_DIR}/rtems-autosave.patch
+    # echo "Patching RTEMS autosave"
+    # patch -p1 < ${THIS_DIR}/rtems-autosave.patch
 
-    echo >> ${SUPPORT}/${NAME}/configure/CONFIG_SITE.Common.linux-x86_64
-    echo "VALID_BUILDS=Host" >> configure/CONFIG_SITE.Common.linux-x86_64
+    echo "VALID_BUILDS=Host" \
+       >>  ${SUPPORT}/${NAME}/configure/CONFIG_SITE.Common.linux-x86_64
 fi
 
 # compile the support module

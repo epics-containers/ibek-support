@@ -26,8 +26,6 @@ CONFIG="
 #       Otherwise set it to NO
 BUILD_IOCS=NO
 
-CROSS_COMPILER_TARGET_ARCHS =
-
 # Definitions required for compiling the unit tests
 BOOST_LIB       = /usr/lib
 BOOST_INCLUDE   = -I/usr/include
@@ -43,8 +41,12 @@ rm -f /epics/support/pmac/configure/RELEASE.linux-x86_64.Common
 ibek support add-to-config-site ${NAME} "${CONFIG}"
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
-ibek support add-libs pmacAsynIPPort pmacAsynMotorPort pmacAsynMotor powerPmacAsynPort
-ibek support add-dbds pmacAsynIPPort.dbd pmacAsynMotorPort.dbd drvAsynPowerPMACPort.dbd
+ibek support add-libs pmacAsynIPPort pmacAsynMotorPort pmacAsynMotor
+ibek support add-dbds pmacAsynIPPort.dbd pmacAsynMotorPort.dbd
+if [[ $TARGET_ARCHITECTURE != "rtems" ]]; then
+ibek support add-libs powerPmacAsynPort
+ibek support add-dbds drvAsynPowerPMACPort.dbd
+fi
 
 # compile the support module (don't build parallel as Makefile doesn't work)
 ibek support compile ${NAME} -j 1
