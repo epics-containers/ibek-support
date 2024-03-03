@@ -17,8 +17,13 @@ ibek support git-clone ${NAME} ${VERSION}
 ibek support register ${NAME}
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
-ibek support add-libs softMotor motor
-ibek support add-dbds motorRecord.dbd motorSupport.dbd devSoftMotor.dbd
+ibek support add-libs motor softMotor
+ibek support add-dbds motorRecord.dbd devSoftMotor.dbd motorSupport.dbd
+
+# don't build for the host architecture when building for RTEMS
+if [[ $TARGET_ARCHITECTURE == "rtems" ]]; then
+    echo "VALID_BUILDS=Host" >> ${SUPPORT}/${NAME}/configure/CONFIG_SITE.Common.linux-x86_64
+fi
 
 # compile the support module
 ibek support compile ${NAME}

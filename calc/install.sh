@@ -24,6 +24,14 @@ ibek support add-release-macro SSCAN
 ibek support add-libs calc
 ibek support add-dbds aCalcoutRecord.dbd  calc.dbd  calcSupport.dbd sCalcoutRecord.dbd transformRecord.dbd
 
+# comment out the test directories from the Makefile
+sed -i -E 's/tests/# tests/' ${SUPPORT}/${NAME}/Makefile
+
+# don't build for the host architecture when building for RTEMS
+if [[ $TARGET_ARCHITECTURE == "rtems" ]]; then
+    echo "VALID_BUILDS=Host" >> ${SUPPORT}/${NAME}/configure/CONFIG_SITE.Common.linux-x86_64
+fi
+
 # compile the support module
 ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
