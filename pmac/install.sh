@@ -58,8 +58,6 @@ fi
 # comment out the test directories from the Makefile
 sed -i -E 's/(^[^#].*(Tests).*$)/# \1/' ${SUPPORT}/${NAME}/pmacApp/Makefile
 
-# global config settings
-${FOLDER}/../_global/install.sh
 
 # compile the support module (don't build parallel as Makefile doesn't work)
 ibek support compile ${NAME} -j 1
