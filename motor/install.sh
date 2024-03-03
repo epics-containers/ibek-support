@@ -20,10 +20,8 @@ ibek support register ${NAME}
 ibek support add-libs motor softMotor
 ibek support add-dbds motorRecord.dbd devSoftMotor.dbd motorSupport.dbd
 
-# don't build for the host architecture when building for RTEMS
-if [[ $TARGET_ARCHITECTURE == "rtems" ]]; then
-    echo "VALID_BUILDS=Host" >> ${SUPPORT}/${NAME}/configure/CONFIG_SITE.Common.linux-x86_64
-fi
+# global config settings
+${FOLDER}/../_global/install.sh
 
 # compile the support module
 ibek support compile ${NAME}

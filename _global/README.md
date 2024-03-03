@@ -10,7 +10,6 @@ epics.ibek.support.yaml:
     This is not associated with any particular Support module and should be
     included in the definition set for all IOCs.
 
-global.sh:
+install.sh:
 
     A global patch file to apply to all support modules
-

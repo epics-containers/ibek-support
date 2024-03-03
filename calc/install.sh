@@ -27,10 +27,8 @@ ibek support add-dbds aCalcoutRecord.dbd  calc.dbd  calcSupport.dbd sCalcoutReco
 # comment out the test directories from the Makefile
 sed -i -E 's/tests/# tests/' ${SUPPORT}/${NAME}/Makefile
 
-# don't build for the host architecture when building for RTEMS
-if [[ $TARGET_ARCHITECTURE == "rtems" ]]; then
-    echo "VALID_BUILDS=Host" >> ${SUPPORT}/${NAME}/configure/CONFIG_SITE.Common.linux-x86_64
-fi
+# global config settings
+${FOLDER}/../_global/install.sh
 
 # compile the support module
 ibek support compile ${NAME}

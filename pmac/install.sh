@@ -12,16 +12,16 @@ FOLDER=$(dirname $(readlink -f $0))
 # log output and abort on failure
 set -xe
 
-
 # get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION} --org http://github.com/dls-controls/
 ibek support register ${NAME}
 
-if [[ $TARGET_ARCHITECTURE == "rtems" ]]; then
-    # don't build for the host architecture when building for RTEMS
-    echo "VALID_BUILDS=Host" >> ${SUPPORT}/${NAME}/configure/CONFIG_SITE.Common.linux-x86_64
+# original CONFIG_SITE/RELEASE....Common have dls paths - TODO add --overwrite to
+# 'ibek support add-to-config-site'
+rm -f /epics/support/pmac/configure/CONFIG_SITE.linux-x86_64.Common
+rm -f /epics/support/pmac/configure/RELEASE.linux-x86_64.Common
 
-else
+if [[ $TARGET_ARCHITECTURE != "rtems" ]]; then
 
     ibek support apt-install --only=dev libssh2-1-dev
     ibek support apt-install --only=run libssh2-1
@@ -46,11 +46,6 @@ SSH_INCLUDE     = -I/usr/include
 
 fi
 
-# original CONFIG_SITE/RELEASE....Common have dls paths - TODO add --overwrite to
-# 'ibek support add-to-config-site'
-rm -f /epics/support/pmac/configure/CONFIG_SITE.linux-x86_64.Common
-rm -f /epics/support/pmac/configure/RELEASE.linux-x86_64.Common
-
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs pmacAsynIPPort pmacAsynMotorPort
 ibek support add-dbds pmacAsynIPPort.dbd pmacAsynMotorPort.dbd
@@ -62,6 +57,9 @@ fi
 
 # comment out the test directories from the Makefile
 sed -i -E 's/(^[^#].*(Tests).*$)/# \1/' ${SUPPORT}/${NAME}/pmacApp/Makefile
+
+# global config settings
+${FOLDER}/../_global/install.sh
 
 # compile the support module (don't build parallel as Makefile doesn't work)
 ibek support compile ${NAME} -j 1
