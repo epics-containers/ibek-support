@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.5.3/ibek.support.schema.json
+# yaml-language-server: $schema=file:///tmp/ibek.support.schema.json
 
 module: pmac
 
@@ -155,6 +155,12 @@ defs:
           pmacCreateController("{{name}}", "{{pmacAsynPort}}", 0, {{NAXES}}, {{MovingPoll}}, {{IdlePoll}})
           # Configure Model 3 Axes Driver (Controler Port, Axis Count)
           pmacCreateAxes("{{name}}", {{NAXES}})
+
+    pvi:
+      yaml_path: pmacController.pvi.device.yaml
+      pv_prefix: "{{ P }}"
+      ui_macros:
+        P:
 
   - name: pmacAsynSSHPort
     description: |-
@@ -478,6 +484,12 @@ defs:
           PMAC: "{{PmacController.P}}"
           NAxes: "{{PmacController.NAxes}}"
 
+    # pvi:
+    #   yaml_path: pmacTrajectory.pvi.device.yaml
+    #   pv_prefix: "{{ PmacController.P }}"
+    #   ui_macros:
+    #     PMAC:
+
   - name: dls_pmac_asyn_motor
     description: |-
       describe a single real axis on a pmac controller
@@ -783,37 +795,6 @@ defs:
         default: "#"
 
     databases:
-      - file: eloss_kill_autohome_records.template
-        enabled: "{{ not is_cs }}"
-        args:
-          PMAC: "{{ Controller.P }}"
-          SPORT: "{{ Controller.pmacAsynPort }}"
-          ALLOW_HOMED_SET:
-          HOME:
-          P:
-          M:
-          ADDR:
-          PORT: "{{ Controller }}"
-          PREC:
-          DESC:
-          EGU:
-
-      # TODO dont use this template if is_cs is true
-      - file: motor_in_cs.template
-        enabled: "{{ not is_cs }}"
-        args:
-          P:
-          M:
-          PORT: "{{ Controller }}"
-          ADDR:
-
-      - file: pmacStatusAxis.template
-        enabled: "{{ not is_cs }}"
-        args:
-          AXIS: "{{ADDR}}"
-          PORT: "{{ Controller }}"
-          PMAC: "{{ Controller.P }}"
-
       - file: "{{ 'dls_pmac_cs_asyn_motor.template' if is_cs else 'dls_pmac_asyn_motor.template' }}"
         args:
           P:
@@ -867,6 +848,14 @@ defs:
           NTM:
           TWV:
           HOMEVISSTR:
+
+    pvi:
+      yaml_path: pmacAxis.pvi.device.yaml
+      pv_prefix: "{{ P }}{{ M }}"
+      ui_macros:
+        P:
+        M:
+        # TODO probably much more required here
 
   - name: autohome
     description: |-
