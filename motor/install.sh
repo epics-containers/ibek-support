@@ -17,8 +17,11 @@ ibek support git-clone ${NAME} ${VERSION}
 ibek support register ${NAME}
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
-ibek support add-libs softMotor motor
-ibek support add-dbds motorRecord.dbd motorSupport.dbd devSoftMotor.dbd
+ibek support add-libs motor softMotor
+ibek support add-dbds motorRecord.dbd devSoftMotor.dbd motorSupport.dbd
+
+# global config settings
+${FOLDER}/../_global/install.sh
 
 # compile the support module
 ibek support compile ${NAME}

@@ -24,6 +24,12 @@ ibek support add-release-macro AUTOSAVE --no-replace
 ibek support add-libs busy
 ibek support add-dbds busySupport.dbd
 
+# don't build the tests
+sed -i '/testBusy/d' ${SUPPORT}/${NAME}/busyApp/src/Makefile
+
+# global config settings
+${FOLDER}/../_global/install.sh
+
 # compile the support module
 ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.

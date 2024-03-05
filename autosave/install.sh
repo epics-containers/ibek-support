@@ -24,16 +24,8 @@ ibek support register ${NAME}
 ibek support add-libs autosave
 ibek support add-dbds asSupport.dbd
 
-# Patches for RTEMS
-THIS_DIR=$(dirname ${0})
-
-if [[ $TARGET_ARCHITECTURE == "rtems" ]]; then
-    echo "Patching RTEMS autosave"
-    patch -p1 < ${THIS_DIR}/rtems-autosave.patch
-
-    echo >> ${SUPPORT}/${NAME}/configure/CONFIG_SITE.Common.linux-x86_64
-    echo "VALID_BUILDS=Host" >> configure/CONFIG_SITE.Common.linux-x86_64
-fi
+# global config settings
+${FOLDER}/../_global/install.sh
 
 # compile the support module
 ibek support compile ${NAME}

@@ -3,7 +3,6 @@
 ##### install script for Asyn support modules ############################
 ##########################################################################
 
-
 # ARGUMENTS:
 #  $1 VERSION to install (must match repo tag)
 VERSION=${1}
@@ -24,13 +23,13 @@ ibek support add-dbds drvAsynIPPort.dbd drvAsynSerialPort.dbd asyn.dbd
 # No need for IPAC unless its already installed
 ibek support add-release-macro IPAC --no-replace
 
-# Patches to the CONFIG_SITE
-if [[ $TARGET_ARCHITECTURE == "rtems" ]]; then
-    # don't build the test directories (they don't compile on RTEMS)
-    sed -i '/DIRS += ${SUPPORT}/${NAME}.*test/d' Makefile
-else
-    ibek support add-config-macro ${NAME} TIRPC YES
-fi
+ibek support add-config-macro ${NAME} TIRPC YES
+
+# comment out the test directories from the Makefile
+sed -i -E 's/(^[^#].*(test|iocBoot).*$)/# \1/' ${SUPPORT}/${NAME}/Makefile
+
+# global config settings
+${FOLDER}/../_global/install.sh
 
 # compile the support module
 ibek support compile ${NAME}

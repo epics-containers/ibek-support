@@ -8,7 +8,7 @@ children:
     children:
       - type: SignalR
         name: PvName
-        pv: PvName_RBV
-        widget:
+        read_pv: $(P)$(R)PvName_RBV
+        read_widget:
           type: TextRead
           format: 4

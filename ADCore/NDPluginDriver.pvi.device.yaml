@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=/repos/pvi/schemas/pvi.device.schema.json
+# yaml-language-server: $schema=/workspaces/pvi/schemas/pvi.device.schema.json
 
 label: NDPluginDriver
 parent: asynNDArrayDriver
@@ -7,170 +7,172 @@ children:
     name: NDPluginBase
     layout:
       type: Grid
+      labelled: true
     children:
       - type: SignalR
         name: PluginType
-        pv: PluginType_RBV
-        widget:
+        read_pv: $(P)$(R)PluginType_RBV
+        read_widget:
           type: TextRead
 
       - type: SignalRW
         name: NDArrayPort
-        pv: NDArrayPort
-        widget:
+        write_pv: $(P)$(R)NDArrayPort
+        write_widget:
           type: TextWrite
-        read_pv: NDArrayPort_RBV
+        read_pv: $(P)$(R)NDArrayPort_RBV
         read_widget:
           type: TextRead
 
       - type: SignalRW
         name: NDArrayAddress
-        pv: NDArrayAddress
-        widget:
+        write_pv: $(P)$(R)NDArrayAddress
+        write_widget:
           type: TextWrite
-        read_pv: NDArrayAddress_RBV
+        read_pv: $(P)$(R)NDArrayAddress_RBV
         read_widget:
           type: TextRead
 
       - type: SignalRW
         name: EnableCallbacks
-        pv: EnableCallbacks
-        widget:
-          type: CheckBox
-        read_pv: EnableCallbacks_RBV
+        write_pv: $(P)$(R)EnableCallbacks
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)EnableCallbacks_RBV
         read_widget:
           type: LED
 
       - type: SignalRW
         name: MinCallbackTime
-        pv: MinCallbackTime
-        widget:
+        write_pv: $(P)$(R)MinCallbackTime
+        write_widget:
           type: TextWrite
-        read_pv: MinCallbackTime_RBV
+        read_pv: $(P)$(R)MinCallbackTime_RBV
         read_widget:
           type: TextRead
 
       - type: SignalR
         name: QueueFree
-        pv: QueueFree
-        widget:
+        read_pv: $(P)$(R)QueueFree
+        read_widget:
           type: TextRead
 
       - type: SignalRW
         name: QueueSize
-        pv: QueueSize
-        widget:
+        write_pv: $(P)$(R)QueueSize
+        write_widget:
           type: TextWrite
-        read_pv: QueueSize_RBV
+        read_pv: $(P)$(R)QueueSize_RBV
         read_widget:
           type: TextRead
 
       - type: SignalR
         name: ExecutionTime
-        pv: ExecutionTime_RBV
-        widget:
+        read_pv: $(P)$(R)ExecutionTime_RBV
+        read_widget:
           type: TextRead
 
       - type: SignalRW
         name: DroppedArrays
-        pv: DroppedArrays
-        widget:
+        write_pv: $(P)$(R)DroppedArrays
+        write_widget:
           type: TextWrite
-        read_pv: DroppedArrays_RBV
+        read_pv: $(P)$(R)DroppedArrays_RBV
         read_widget:
           type: TextRead
 
       - type: SignalW
         name: ProcessPlugin
-        pv: ProcessPlugin
-        widget:
-          type: CheckBox
+        write_pv: $(P)$(R)ProcessPlugin
+        write_widget:
+          type: ToggleButton
 
   - type: Group
     name: NDPluginBaseFull
     layout:
       type: Grid
+      labelled: true
     children:
       - type: SignalRW
         name: DroppedOutputArrays
-        pv: DroppedOutputArrays
-        widget:
+        write_pv: $(P)$(R)DroppedOutputArrays
+        write_widget:
           type: TextWrite
-        read_pv: DroppedOutputArrays_RBV
+        read_pv: $(P)$(R)DroppedOutputArrays_RBV
         read_widget:
           type: TextRead
 
       - type: SignalRW
         name: MaxByteRate
-        pv: MaxByteRate
-        widget:
+        write_pv: $(P)$(R)MaxByteRate
+        write_widget:
           type: TextWrite
-        read_pv: MaxByteRate_RBV
+        read_pv: $(P)$(R)MaxByteRate_RBV
         read_widget:
           type: TextRead
 
       - type: SignalRW
         name: BlockingCallbacks
-        pv: BlockingCallbacks
-        widget:
-          type: CheckBox
-        read_pv: BlockingCallbacks_RBV
+        write_pv: $(P)$(R)BlockingCallbacks
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)BlockingCallbacks_RBV
         read_widget:
           type: LED
 
       - type: SignalRW
         name: NumThreads
-        pv: NumThreads
-        widget:
+        write_pv: $(P)$(R)NumThreads
+        write_widget:
           type: TextWrite
-        read_pv: NumThreads_RBV
+        read_pv: $(P)$(R)NumThreads_RBV
         read_widget:
           type: TextRead
 
       - type: SignalR
         name: MaxThreads
-        pv: MaxThreads_RBV
-        widget:
+        read_pv: $(P)$(R)MaxThreads_RBV
+        read_widget:
           type: TextRead
 
       - type: SignalRW
         name: SortMode
-        pv: SortMode
-        widget:
+        write_pv: $(P)$(R)SortMode
+        write_widget:
           type: ComboBox
-        read_pv: SortMode_RBV
+        read_pv: $(P)$(R)SortMode_RBV
         read_widget:
           type: TextRead
 
       - type: SignalRW
         name: SortTime
-        pv: SortTime
-        widget:
+        write_pv: $(P)$(R)SortTime
+        write_widget:
           type: TextWrite
-        read_pv: SortTime_RBV
+        read_pv: $(P)$(R)SortTime_RBV
         read_widget:
           type: TextRead
 
       - type: SignalR
         name: SortFree
-        pv: SortFree
-        widget:
+        read_pv: $(P)$(R)SortFree
+        read_widget:
           type: TextRead
 
       - type: SignalRW
         name: SortSize
-        pv: SortSize
-        widget:
+        write_pv: $(P)$(R)SortSize
+        write_widget:
           type: TextWrite
-        read_pv: SortSize_RBV
+        read_pv: $(P)$(R)SortSize_RBV
         read_widget:
           type: TextRead
 
       - type: SignalRW
         name: DisorderedArrays
-        pv: DisorderedArrays
-        widget:
+        write_pv: $(P)$(R)DisorderedArrays
+        write_widget:
           type: TextWrite
-        read_pv: DisorderedArrays_RBV
+        read_pv: $(P)$(R)DisorderedArrays_RBV
         read_widget:
           type: TextRead
