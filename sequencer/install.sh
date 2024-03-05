@@ -16,9 +16,6 @@ ibek support register ${NAME} --macro SNCSEQ
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs pv seq
 
-# comment out the test directories from the Makefile
-sed -i -E 's/tests/# tests/' ${SUPPORT}/${NAME}/Makefile
-
 # global config settings
 ${FOLDER}/../_global/install.sh
 
