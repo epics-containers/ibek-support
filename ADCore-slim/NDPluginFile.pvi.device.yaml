@@ -1,4 +1,0 @@
-# yaml-language-server: $schema=/repos/pvi/schemas/pvi.device.schema.json
-
-label: NDPluginFile
-parent: NDPluginDriver
