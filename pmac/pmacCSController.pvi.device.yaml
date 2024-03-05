@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=file:///workspaces/pvi/schemas/pvi.device.schema.json
+
+label: pmacCSController
+parent: asynMotorController
+children:
+
+- type: Group
+  name: PmacCsController
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalW
+    name: Abort
+    write_pv: $(PMAC):CS$(CS):Abort
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: DeferMoves
+    write_pv: $(PMAC):CS$(CS):DeferMoves
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalR
+    name: FWDKINEMATIC
+    read_pv: $(PMAC):CS$(CS):FWD_KINEMATIC_RBV
+    read_widget:
+      type: TextRead
+      format: 4
+
+  - type: SignalR
+    name: INVKINEMATIC
+    read_pv: $(PMAC):CS$(CS):INV_KINEMATIC_RBV
+    read_widget:
+      type: TextRead
+      format: 4
+
+  - type: SignalR
+    name: QVARIABLES
+    read_pv: $(PMAC):CS$(CS):Q_VARIABLES_RBV
+    read_widget:
+      type: TextRead
+      format: 4
+
+  - type: SignalRW
+    name: CsMoveTime
+    write_pv: $(PMAC):CS$(CS):CsMoveTime
+    write_widget:
+      type: TextWrite
+    read_pv: $(PMAC):CS$(CS):CsMoveTime_RBV
+    read_widget:
+      type: TextRead

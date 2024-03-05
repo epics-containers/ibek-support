@@ -1,0 +1,444 @@
+# yaml-language-server: $schema=file:///workspaces/pvi/schemas/pvi.device.schema.json
+
+label: pmacTrajectory
+parent: asynPortDriver
+children:
+
+- type: Group
+  name: PmacControllerTrajectory
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalW
+    name: ProfileBuild
+    write_pv: $(PMAC):ProfileBuild
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: ProfileAppend
+    write_pv: $(PMAC):ProfileAppend
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: ProfileExecute
+    write_pv: $(PMAC):ProfileExecute
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: ProfileAbort
+    write_pv: $(PMAC):ProfileAbort
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: AUseAxis
+    write_pv: $(PMAC):A:UseAxis
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: BUseAxis
+    write_pv: $(PMAC):B:UseAxis
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: CUseAxis
+    write_pv: $(PMAC):C:UseAxis
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: UUseAxis
+    write_pv: $(PMAC):U:UseAxis
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: VUseAxis
+    write_pv: $(PMAC):V:UseAxis
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: WUseAxis
+    write_pv: $(PMAC):W:UseAxis
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: XUseAxis
+    write_pv: $(PMAC):X:UseAxis
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: YUseAxis
+    write_pv: $(PMAC):Y:UseAxis
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: ZUseAxis
+    write_pv: $(PMAC):Z:UseAxis
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: ProfileTimeArray
+    write_pv: $(PMAC):ProfileTimeArray
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: UserArray
+    write_pv: $(PMAC):UserArray
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: VelocityMode
+    write_pv: $(PMAC):VelocityMode
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: APositions
+    write_pv: $(PMAC):A:Positions
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: AVelocities
+    write_pv: $(PMAC):A:Velocities
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: BPositions
+    write_pv: $(PMAC):B:Positions
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: BVelocities
+    write_pv: $(PMAC):B:Velocities
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: CPositions
+    write_pv: $(PMAC):C:Positions
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: CVelocities
+    write_pv: $(PMAC):C:Velocities
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: UPositions
+    write_pv: $(PMAC):U:Positions
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: UVelocities
+    write_pv: $(PMAC):U:Velocities
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: VPositions
+    write_pv: $(PMAC):V:Positions
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: VVelocities
+    write_pv: $(PMAC):V:Velocities
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: WPositions
+    write_pv: $(PMAC):W:Positions
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: WVelocities
+    write_pv: $(PMAC):W:Velocities
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: XPositions
+    write_pv: $(PMAC):X:Positions
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: XVelocities
+    write_pv: $(PMAC):X:Velocities
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: YPositions
+    write_pv: $(PMAC):Y:Positions
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: YVelocities
+    write_pv: $(PMAC):Y:Velocities
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: ZPositions
+    write_pv: $(PMAC):Z:Positions
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: ZVelocities
+    write_pv: $(PMAC):Z:Velocities
+    write_widget:
+      type: TextWrite
+
+  - type: SignalR
+    name: ProgramVersion
+    read_pv: $(PMAC):ProgramVersion_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: DriverVersion
+    read_pv: $(PMAC):DriverVersion_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ProfileNumAxes
+    read_pv: $(PMAC):ProfileNumAxes_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ProfilePointsBuilt
+    read_pv: $(PMAC):ProfilePointsBuilt_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ProfileCurrentPoint
+    read_pv: $(PMAC):ProfileCurrentPoint_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ProfileBuildState
+    read_pv: $(PMAC):ProfileBuildState_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ProfileBuildStatus
+    read_pv: $(PMAC):ProfileBuildStatus_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ProfileBuildMessage
+    read_pv: $(PMAC):ProfileBuildMessage_RBV
+    read_widget:
+      type: TextRead
+      format: 4
+
+  - type: SignalR
+    name: ProfileAppendState
+    read_pv: $(PMAC):ProfileAppendState_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ProfileAppendStatus
+    read_pv: $(PMAC):ProfileAppendStatus_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ProfileAppendMessage
+    read_pv: $(PMAC):ProfileAppendMessage_RBV
+    read_widget:
+      type: TextRead
+      format: 4
+
+  - type: SignalR
+    name: ProfileExecuteState
+    read_pv: $(PMAC):ProfileExecuteState_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ProfileExecuteStatus
+    read_pv: $(PMAC):ProfileExecuteStatus_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ProfileExecuteMessage
+    read_pv: $(PMAC):ProfileExecuteMessage_RBV
+    read_widget:
+      type: TextRead
+      format: 4
+
+  - type: SignalR
+    name: BufferAAddress
+    read_pv: $(PMAC):BufferAAddress_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: BufferBAddress
+    read_pv: $(PMAC):BufferBAddress_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: BufferLength
+    read_pv: $(PMAC):BufferLength_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: CurrentIndex
+    read_pv: $(PMAC):CurrentIndex_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: TotalPoints
+    read_pv: $(PMAC):TotalPoints_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: CurrentBuffer
+    read_pv: $(PMAC):CurrentBuffer_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalR
+    name: TrajectoryStatus
+    read_pv: $(PMAC):TrajectoryStatus_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: EpicsBufferAPtr
+    read_pv: $(PMAC):EpicsBufferAPtr_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: EpicsBufferBPtr
+    read_pv: $(PMAC):EpicsBufferBPtr_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: TscanTime
+    read_pv: $(PMAC):TscanTime_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: TscanCs
+    read_pv: $(PMAC):TscanCs_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: TscanPercent
+    read_pv: $(PMAC):TscanPercent_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: TscanExtStatus
+    read_pv: $(PMAC):TscanExtStatus_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ProfileNumPoints
+    write_pv: $(PMAC):ProfileNumPoints
+    write_widget:
+      type: TextWrite
+    read_pv: $(PMAC):ProfileNumPoints_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ProfilePointsToBuild
+    write_pv: $(PMAC):ProfilePointsToBuild
+    write_widget:
+      type: TextWrite
+    read_pv: $(PMAC):ProfilePointsToBuild_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ProfileTimeMode
+    write_pv: $(PMAC):ProfileTimeMode
+    write_widget:
+      type: ToggleButton
+    read_pv: $(PMAC):ProfileTimeMode_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: ProfileFixedTime
+    write_pv: $(PMAC):ProfileFixedTime
+    write_widget:
+      type: TextWrite
+    read_pv: $(PMAC):ProfileFixedTime_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ProfileCalcVel
+    write_pv: $(PMAC):ProfileCalcVel
+    write_widget:
+      type: ToggleButton
+    read_pv: $(PMAC):ProfileCalcVel_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: ProfileCsName
+    write_pv: $(PMAC):ProfileCsName
+    write_widget:
+      type: ComboBox
+    read_pv: $(PMAC):ProfileCsName_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: TscanProgNo
+    write_pv: $(PMAC):TscanProgNo
+    write_widget:
+      type: TextWrite
+    read_pv: $(PMAC):TscanProgNo_RBV
+    read_widget:
+      type: TextRead

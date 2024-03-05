@@ -1,0 +1,313 @@
+# yaml-language-server: $schema=file:///workspaces/pvi/schemas/pvi.device.schema.json
+
+label: pmacController
+parent: asynMotorController
+children:
+
+- type: Group
+  name: PmacController
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalW
+    name: PollAllNow
+    write_pv: $(P):PollAllNow
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: DeferMoves
+    write_pv: $(P):DeferMoves
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: StopAll
+    write_pv: $(P):StopAll
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: KillAll
+    write_pv: $(P):KillAll
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: FEEDRATELIMIT
+    write_pv: $(P):FEEDRATE_LIMIT
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: REPORTFAST
+    write_pv: $(P):REPORT_FAST
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: REPORTMEDIUM
+    write_pv: $(P):REPORT_MEDIUM
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: REPORTSLOW
+    write_pv: $(P):REPORT_SLOW
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: DEBUGLEVEL
+    write_pv: $(P):DEBUG_LEVEL
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: DEBUGAXISNO
+    write_pv: $(P):DEBUG_AXISNO
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: DEBUGCSNO
+    write_pv: $(P):DEBUG_CSNO
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: DEBUGEXECUTE
+    write_pv: $(P):DEBUG_EXECUTE
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: DISABLEPOLL
+    write_pv: $(P):DISABLE_POLL
+    write_widget:
+      type: ComboBox
+
+  - type: SignalW
+    name: SendCmd
+    write_pv: $(P):SendCmd
+    write_widget:
+      type: TextWrite
+      format: 4
+
+  - type: SignalR
+    name: IVARIABLES
+    read_pv: $(P):I_VARIABLES_RBV
+    read_widget:
+      type: TextRead
+      format: 4
+
+  - type: SignalR
+    name: PVARIABLES
+    read_pv: $(P):P_VARIABLES_RBV
+    read_widget:
+      type: TextRead
+      format: 4
+
+  - type: SignalR
+    name: MVARIABLES
+    read_pv: $(P):M_VARIABLES_RBV
+    read_widget:
+      type: TextRead
+      format: 4
+
+  - type: SignalR
+    name: PMACTYPE
+    read_pv: $(P):PMACTYPE
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: CPULOAD
+    read_pv: $(P):CPULOAD
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: READCTRLSTAT1
+    read_pv: $(P):READ_CTRLSTAT1
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: READCTRLSTAT2
+    read_pv: $(P):READ_CTRLSTAT2
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: READCTRLSTAT3
+    read_pv: $(P):READ_CTRLSTAT3
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: READPLCBITS00
+    read_pv: $(P):READ_PLCBITS00
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: READPLCBITS01
+    read_pv: $(P):READ_PLCBITS01
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: READGPIOINP
+    read_pv: $(P):READ_GPIO_INP
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: READGPIOOUT
+    read_pv: $(P):READ_GPIO_OUT
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: READPROGBITS
+    read_pv: $(P):READ_PROGBITS
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: MACROERRS
+    read_pv: $(P):MACROERRS
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GLOBALPROBLEM
+    read_pv: $(P):GLOBAL_PROBLEM_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalR
+    name: FEEDRATEPROBLEM
+    read_pv: $(P):FEEDRATE_PROBLEM_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalR
+    name: STATMSGNO
+    read_pv: $(P):STAT_MSG_NO_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: STATTOTALWRITE
+    read_pv: $(P):STAT_TOTAL_WRITE_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: STATTOTALREAD
+    read_pv: $(P):STAT_TOTAL_READ_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: STATMSGWRITE
+    read_pv: $(P):STAT_MSG_WRITE_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: STATMSGREAD
+    read_pv: $(P):STAT_MSG_READ_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: STATMSGTIME
+    read_pv: $(P):STAT_MSG_TIME_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: STATMAXWRITE
+    read_pv: $(P):STAT_MAX_WRITE_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: STATMAXREAD
+    read_pv: $(P):STAT_MAX_READ_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: STATMAXTIME
+    read_pv: $(P):STAT_MAX_TIME_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: STATAVEWRITE
+    read_pv: $(P):STAT_AVE_WRITE_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: STATAVEREAD
+    read_pv: $(P):STAT_AVE_READ_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: STATAVETIME
+    read_pv: $(P):STAT_AVE_TIME_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: FASTSIZE
+    read_pv: $(P):FAST_SIZE_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: MEDIUMSIZE
+    read_pv: $(P):MEDIUM_SIZE_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: SLOWSIZE
+    read_pv: $(P):SLOW_SIZE_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: COORDINATESYSGROUP
+    write_pv: $(P):COORDINATE_SYS_GROUP
+    write_widget:
+      type: ComboBox
+    read_pv: $(P):COORDINATE_SYS_GROUP_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: AxesReadonly
+    write_pv: $(P):AxesReadonly
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P):AxesReadonly_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: FEEDRATE
+    write_pv: $(P):FEEDRATE
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):FEEDRATE_RBV
+    read_widget:
+      type: TextRead

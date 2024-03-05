@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.5.3/ibek.support.schema.json
+# yaml-language-server: $schema=file:///tmp/ibek.support.schema.json
 
 module: motor
 
@@ -19,7 +19,7 @@ defs:
 
     post_init:
       - value: |
-          motorUtilInit("{{P}}")
+          motorUtilInit("{{ P }}")
 
   - name: basic_asyn_motor
     description: |-
@@ -341,6 +341,13 @@ defs:
           NTM:
           TWV:
           HOMEVISSTR:
+
+    pvi:
+      yaml_path: asynMotorAxis.pvi.device.yaml
+      pv_prefix: "{{ P }}{{ M }}"
+      ui_macros:
+        P:
+        M:
 
   - name: softMotorForPiezo
     description: |-
