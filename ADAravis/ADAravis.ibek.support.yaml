@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.5.0/ibek.support.schema.json
+# yaml-language-server: $schema=../schemas/ibek.support.schema.json
 
 module: ADAravis
 
@@ -114,8 +114,11 @@ defs:
 
     pvi:
       yaml_path: ADDriver.pvi.device.yaml
-      prefix: "{{ P }}{{ R }}"
-      pva_template: true
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: "$(P)$(R)"
 
   - name: aravisSettings
     description: |-
@@ -128,4 +131,8 @@ defs:
 
     pvi:
       yaml_path: arvFeature.pvi.device.yaml
-      prefix: "{{ camera.P }}{{ camera.R }}"
+      ui_macros:
+        P: "{{ camera.P }}"
+        R: "{{ camera.R }}"
+      pv: true
+      pv_prefix: "{{ camera.P }}{{ camera.R }}"
