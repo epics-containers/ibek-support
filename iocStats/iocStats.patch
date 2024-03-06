@@ -1,130 +1,270 @@
-Y29tbWl0IDBiYjFhZWM3MDlhZjY0YjJiZWU3YThjMDg5ZDAwZWNkNjhiNjFlODcKQXV0aG9yOiBH
-aWxlcyBLbmFwIDxnaWxlcy5rbmFwQGRpYW1vbmQuYWMudWs+CkRhdGU6ICAgU3VuIE1hciAzIDEx
-OjA4OjMxIDIwMjQgKzAwMDAKCiAgICBQYXVsc0ZpeGVzCgpkaWZmIC0tZ2l0IGEvY29uZmlndXJl
-L0NPTkZJR19TSVRFIGIvY29uZmlndXJlL0NPTkZJR19TSVRFCmluZGV4IGJiMDRkMzYuLmMyMDFm
-MjQgMTAwNjQ0Ci0tLSBhL2NvbmZpZ3VyZS9DT05GSUdfU0lURQorKysgYi9jb25maWd1cmUvQ09O
-RklHX1NJVEUKQEAgLTExLDcgKzExLDcgQEAKICMgU2V0IHRoaXMgd2hlbiB5b3Ugb25seSB3YW50
-IHRvIGNvbXBpbGUgdGhpcyBhcHBsaWNhdGlvbgogIyBmb3IgYSBzdWJzZXQgb2YgdGhlIGNyb3Nz
-LWNvbXBpbGVkIHRhcmdldCBhcmNoaXRlY3R1cmVzCiAjIHRoYXQgQmFzZSBpcyBidWlsdCBmb3Iu
-Ci0jQ1JPU1NfQ09NUElMRVJfVEFSR0VUX0FSQ0hTID0gUlRFTVMtYmVhdG5paworQ1JPU1NfQ09N
-UElMRVJfVEFSR0VUX0FSQ0hTID0gUlRFTVMtYmVhdG5pawogI0NST1NTX0NPTVBJTEVSX1RBUkdF
-VF9BUkNIUyA9IFJURU1TLXVDNTI4MgogI0NST1NTX0NPTVBJTEVSX1RBUkdFVF9BUkNIUyA9IFJU
-RU1TLXBjNTg2CiAKZGlmZiAtLWdpdCBhL2NvbmZpZ3VyZS9SRUxFQVNFIGIvY29uZmlndXJlL1JF
-TEVBU0UKaW5kZXggNmIyN2RlMy4uMTMyOGM5MSAxMDA2NDQKLS0tIGEvY29uZmlndXJlL1JFTEVB
-U0UKKysrIGIvY29uZmlndXJlL1JFTEVBU0UKQEAgLTExLDExICsxMSwxMSBAQCBNQUtFX1RFU1Rf
-SU9DX0FQUD1ZRVMKICMgRGVmaW5lIHRoZSB2ZXJzaW9uIG9mIG1vZHVsZXMgbmVlZGVkIGJ5CiAj
-IElPQyBhcHBzIG9yIG90aGVyIFN1cHBvcnQgYXBwcyAtIHVzZWQgYnkgdGVzdElvY1N0YXRzQXBw
-CiAjID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT0KLVNVUFBPUlQ9L3Vzci9sb2NhbC9lcGljcy9SMy4xNC4xMS9tb2R1bGVzL3NvZnQv
-c3luQXBwc181XzUvc3VwcG9ydAorU1VQUE9SVD0vZGxzX3N3L3dvcmsvUjcuMC1uZXQtbGVnYWN5
-L3N1cHBvcnQKIAotU05DU0VRICAgICA9ICQoU1VQUE9SVCkvc2VxLTItMC0xMgorU05DU0VRICAg
-ICA9ICQoU1VQUE9SVCkvc2VxCiAKLUVQSUNTX0JBU0U9L2Fmcy9zbGFjL2cvc3BlYXIvZXBpY3Mv
-YmFzZQorRVBJQ1NfQkFTRT0vZGxzX3N3L3dvcmsvZXBpY3MvUjcuMC1uZXQtbGVnYWN5CiAKICMg
-VGhlc2UgbGluZXMgYWxsb3cgZGV2ZWxvcGVycyB0byBvdmVycmlkZSB0aGVzZSBSRUxFQVNFIHNl
-dHRpbmdzCiAjIHdpdGhvdXQgaGF2aW5nIHRvIG1vZGlmeSB0aGlzIGZpbGUgZGlyZWN0bHkuCmRp
-ZmYgLS1naXQgYS9kZXZJb2NTdGF0cy9vcy9SVEVNUy9kZXZJb2NTdGF0c09TRC5oIGIvZGV2SW9j
-U3RhdHMvb3MvUlRFTVMvZGV2SW9jU3RhdHNPU0QuaAppbmRleCBiMjFjYzBlLi44YjljOTliIDEw
-MDY0NAotLS0gYS9kZXZJb2NTdGF0cy9vcy9SVEVNUy9kZXZJb2NTdGF0c09TRC5oCisrKyBiL2Rl
-dklvY1N0YXRzL29zL1JURU1TL2RldklvY1N0YXRzT1NELmgKQEAgLTY2LDYgKzY2LDkgQEAKICMg
-ZW5kaWYKIAogI2luY2x1ZGUgPHN0cmluZy5oPgorI2lmICAgKF9fUlRFTVNfTUFKT1JfXyA+IDQp
-CisjdW5kZWYgcmFuZG9tCisjZW5kaWYKICNpbmNsdWRlIDxzdGRsaWIuaD4KIAogI2RlZmluZSBz
-eXNCb290TGluZSBydGVtc19ic2RuZXRfYm9vdHBfY21kbGluZQpkaWZmIC0tZ2l0IGEvZGV2SW9j
-U3RhdHMvb3MvUlRFTVMvb3NkQ3B1VXNhZ2UuYyBiL2RldklvY1N0YXRzL29zL1JURU1TL29zZENw
-dVVzYWdlLmMKaW5kZXggMmRhYTk1ZS4uNjY2ZmMwNyAxMDA2NDQKLS0tIGEvZGV2SW9jU3RhdHMv
-b3MvUlRFTVMvb3NkQ3B1VXNhZ2UuYworKysgYi9kZXZJb2NTdGF0cy9vcy9SVEVNUy9vc2RDcHVV
-c2FnZS5jCkBAIC00Nyw4ICs0NywxMSBAQAogCiAjaW5jbHVkZSA8ZGV2SW9jU3RhdHMuaD4KIAot
-IyBpZiAgIChfX1JURU1TX01BSk9SX18gPiA0KSBcCi0gICB8fCAoX19SVEVNU19NQUpPUl9fID09
-IDQgJiYgX19SVEVNU19NSU5PUl9fID4gNykKKyMgaWYgICAoX19SVEVNU19NQUpPUl9fID49IDUp
-CisjaW5jbHVkZSA8cnRlbXMvc2NvcmUvdG9kaW1wbC5oPgorI2luY2x1ZGUgPHJ0ZW1zL3Njb3Jl
-L3RocmVhZGltcGwuaD4KKyNlbmRpZgorI2lmIChfX1JURU1TX01BSk9SX18gPT0gNCAmJiBfX1JU
-RU1TX01JTk9SX18gPiA3KQogdHlwZWRlZiBjaGFyIG9iak5hbWVbMTNdOwogI2RlZmluZSBSVEVN
-U19PQkpfR0VUX05BTUUodGMsbmFtZSkgcnRlbXNfb2JqZWN0X2dldF9uYW1lKCh0YyktPk9iamVj
-dC5pZCwgc2l6ZW9mKG5hbWUpLChuYW1lKSkKICNpZmRlZiBTU1JMQVBQU01JU0NVVElMUwpAQCAt
-NzksNyArODIsNyBAQCB0eXBlZGVmIGNoYXIgKiBvYmpOYW1lOwogCiBzdGF0aWMgZG91YmxlIHBy
-ZXZfdG90YWwgPSAwOwogc3RhdGljIGRvdWJsZSBwcmV2X2lkbGUgID0gMDsKLQorIyBpZiAgIChf
-X1JURU1TX01BSk9SX18gPCA1KQogc3RhdGljIHZvaWQgY3B1X3RpY2tzKGRvdWJsZSAqdG90YWws
-IGRvdWJsZSAqaWRsZSkKIHsKICAgICBPYmplY3RzX0luZm9ybWF0aW9uICpvYmo7CkBAIC0xMTQs
-NyArMTE3LDY1IEBAIHN0YXRpYyB2b2lkIGNwdV90aWNrcyhkb3VibGUgKnRvdGFsLCBkb3VibGUg
-KmlkbGUpCiAgICAgICAgIH0KICAgICB9CiB9CisjZWxzZQordHlwZWRlZiBzdHJ1Y3QgeworICBU
-aW1lc3RhbXBfQ29udHJvbCAgICB0b3RhbDsKKyAgVGltZXN0YW1wX0NvbnRyb2wgICAgaWRsZTsK
-KworfSBjcHVfdXNhZ2VfY29udGV4dDsKKworc3RhdGljIGJvb2wgY3B1X3VzYWdlX3Zpc2l0b3Iy
-KCBUaHJlYWRfQ29udHJvbCAqdGhlX3RocmVhZCwgdm9pZCAqYXJnKQoreworCWNwdV91c2FnZV9j
-b250ZXh0ICpjdHg7CisKKwlUaW1lc3RhbXBfQ29udHJvbCAgdXNlZDsKKwljaGFyICAgICAgICAg
-ICAgICAgbmFtZVsgMzggXTsJCisJY3R4ID0gYXJnOworCisvKiB0aHJlYWQgbmFtZSB0byBsb2Nh
-dGUgSURMRSB0aHJlYWQgKi8KKwkJCisJX1RocmVhZF9HZXRfbmFtZSggdGhlX3RocmVhZCwgbmFt
-ZSwgc2l6ZW9mKG5hbWUpICk7CisJCisvKiBDUFUgdGltZSB1c2VkIGJ5IHRoaXMgdGhyZWFkIHNp
-bmNlIGxhc3QgcmVzZXQgKi8KKwkKKwl1c2VkID0gX1RocmVhZF9HZXRfQ1BVX3RpbWVfdXNlZCgg
-dGhlX3RocmVhZCk7CisKKy8qIGFkZCB0byB0b3RhbCAqLworCisJX1RpbWVzdGFtcF9BZGRfdG8o
-JmN0eC0+dG90YWwsICZ1c2VkKTsKKyAgCisJaWYgKG5hbWVbMF0pCisJeworICAgICAgICAgICAg
-aWYgKG5hbWVbMF0gPT0gJ0knICYmIG5hbWVbMV0gPT0gJ0QnICYmCisgICAgICAgICAgICAgICAg
-bmFtZVsyXSA9PSAnTCcgJiYgbmFtZVszXSA9PSAnRScpIHsJICAgIAorCQkJCisJCQljdHgtPmlk
-bGUgPSB1c2VkOworICAgICAgICAgICAgfQorCX0KKworCXJldHVybiBmYWxzZTsKK30KIAorc3Rh
-dGljIHZvaWQgY3B1X3RpY2tzKGRvdWJsZSAqdG90YWwsIGRvdWJsZSAqaWRsZSkKK3sKKwljcHVf
-dXNhZ2VfY29udGV4dCBjdHg7CisKKy8qIGNsZWFyIGNvdW50ZXJzICovCisKKwlfVGltZXN0YW1w
-X1NldF90b196ZXJvKCZjdHgudG90YWwpOworCV9UaW1lc3RhbXBfU2V0X3RvX3plcm8oJmN0eC5p
-ZGxlKTsKKwkKKy8qIGl0ZXJhdGUgdGhyb3VnaHQgYWxsIHRhc2tzICh0aHJlYWRzKSAqLworCisJ
-cnRlbXNfdGFza19pdGVyYXRlKCBjcHVfdXNhZ2VfdmlzaXRvcjIsICZjdHgpOworCisvKiBjb252
-ZXJ0IHRvIGRvdWJsZXMgKi8KKworCSppZGxlID0gX1RpbWVzdGFtcF9HZXRfc2Vjb25kcygmY3R4
-LmlkbGUpICsgX1RpbWVzdGFtcF9HZXRfbmFub3NlY29uZHMoJmN0eC5pZGxlKSAvIDFlOTsKKwkq
-dG90YWwgPSBfVGltZXN0YW1wX0dldF9zZWNvbmRzKCZjdHgudG90YWwpICsgX1RpbWVzdGFtcF9H
-ZXRfbmFub3NlY29uZHMoJmN0eC50b3RhbCkgLyAxZTk7Cit9CisKKyNlbmRpZgogaW50IGRldklv
-Y1N0YXRzSW5pdENwdVVzYWdlICh2b2lkKQogewogICAgIGNwdV90aWNrcygmcHJldl90b3RhbCwg
-JnByZXZfaWRsZSk7CmRpZmYgLS1naXQgYS9kZXZJb2NTdGF0cy9vcy9SVEVNUy9vc2RTdXNwVGFz
-a3MuYyBiL2RldklvY1N0YXRzL29zL1JURU1TL29zZFN1c3BUYXNrcy5jCmluZGV4IGU4NzVmNTcu
-LjMwZTFmNjQgMTAwNjQ0Ci0tLSBhL2RldklvY1N0YXRzL29zL1JURU1TL29zZFN1c3BUYXNrcy5j
-CisrKyBiL2RldklvY1N0YXRzL29zL1JURU1TL29zZFN1c3BUYXNrcy5jCkBAIC00MCw2ICs0MCw1
-MCBAQAogCiAjaW5jbHVkZSA8ZGV2SW9jU3RhdHMuaD4KIAorI2lmIChfX1JURU1TX01BSk9SX18g
-Pj0gNSkKKworI2luY2x1ZGUgPHRhc2t3ZC5oPgorCitzdGF0aWMgaW50IG4gPSAwOworCitzdGF0
-aWMgdm9pZCBOb3RpZnkodm9pZCAqdXNyLCBlcGljc1RocmVhZElkIHRpZCwgaW50IHN1c3BlbmRl
-ZCkKK3sKKwlpZiAoc3VzcGVuZGVkKQorCXsKKwkJbisrOworCX0KKwllbHNlCisJeworCQluLS07
-CisJfQorfQorCisvKiByZWdpc3RlciB0byBiZSBub3RpZmllZCBvZiBhbnkgY2hhbmdlcyAqLwor
-CitzdGF0aWMgdGFza3dkTW9uaXRvciBtb247CisKK2ludCBkZXZJb2NTdGF0c0luaXRTdXNwVGFz
-a3MgKHZvaWQpCit7CisJbiA9IDA7CisJCisJbW9uLmluc2VydCA9IE5VTEw7CisJbW9uLnJlbW92
-ZSA9IE5VTEw7CisJbW9uLm5vdGlmeSA9IE5vdGlmeTsKKwkKKwl0YXNrd2RNb25pdG9yQWRkKCZt
-b24sIE5VTEwpOworCisJcmV0dXJuIDA7Cit9CisKK2ludCBkZXZJb2NTdGF0c0dldFN1c3BUYXNr
-cyhpbnQgKnB2YWwpCit7CisJKnB2YWwgPSBuOworCisJcmV0dXJuICgwKTsKK30KKworI2Vsc2UK
-KwogaW50IGRldklvY1N0YXRzSW5pdFN1c3BUYXNrcyAodm9pZCkgeyByZXR1cm4gMDsgfQogCiBp
-bnQgZGV2SW9jU3RhdHNHZXRTdXNwVGFza3MgKGludCAqcHZhbCkKQEAgLTYxLDMgKzEwNSw0IEBA
-IGludCBkZXZJb2NTdGF0c0dldFN1c3BUYXNrcyAoaW50ICpwdmFsKQogICAgICpwdmFsID0gbjsK
-ICAgICByZXR1cm4gMDsKIH0KKyNlbmRpZgpkaWZmIC0tZ2l0IGEvZGV2SW9jU3RhdHMvb3MvUlRF
-TVMvb3NkV29ya3NwYWNlVXNhZ2UuYyBiL2RldklvY1N0YXRzL29zL1JURU1TL29zZFdvcmtzcGFj
-ZVVzYWdlLmMKaW5kZXggM2QwNTY4ZC4uMDMxYzE2NyAxMDA2NDQKLS0tIGEvZGV2SW9jU3RhdHMv
-b3MvUlRFTVMvb3NkV29ya3NwYWNlVXNhZ2UuYworKysgYi9kZXZJb2NTdGF0cy9vcy9SVEVNUy9v
-c2RXb3Jrc3BhY2VVc2FnZS5jCkBAIC0yNSw2ICsyNSw5IEBACiAgICAgICAgCiAgLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0qLwogI2luY2x1ZGUgPGRldklvY1N0YXRzLmg+CisjIGlmICAgKF9fUlRFTVNf
-TUFKT1JfXyA+IDQpCisjaW5jbHVkZSA8cnRlbXMvc2NvcmUvd2tzcGFjZS5oPgorI2VuZGlmCiAK
-IGludCBkZXZJb2NTdGF0c0luaXRXb3Jrc3BhY2VVc2FnZSAodm9pZCkgeyByZXR1cm4gMDsgfQog
-CkBAIC0zOCw4ICs0MSw5IEBAIGludCBkZXZJb2NTdGF0c0dldFdvcmtzcGFjZVVzYWdlIChtZW1J
-bmZvICpwdmFsKQogICAgIF9IZWFwX0dldF9pbmZvcm1hdGlvbiggJl9Xb3Jrc3BhY2VfQXJlYSwg
-JmluZm8pOyAgLypfSGVhcF9HZXRfaW5mb3JtYXRpb24gaXMgcGFydCBvZiB0aGUgUlRFTVMgQVBJ
-ICovCiAgICAgX1JURU1TX1VubG9ja19hbGxvY2F0b3IoKTsKICNlbmRpZiAvKiBSVEVNU19QUk9U
-RUNURURfSEVBUCAqLwotIyBpZiAgIChfX1JURU1TX01BSk9SX18gPiA0KSBcCi0gICB8fCAoX19S
-VEVNU19NQUpPUl9fID09IDQgJiYgX19SVEVNU19NSU5PUl9fID4gOSkKKyMgaWYgICAoX19SVEVN
-U19NQUpPUl9fID4gNCkKKwlwdmFsLT5udW1CeXRlc1RvdGFsICAgID0gcnRlbXNfY29uZmlndXJh
-dGlvbl9nZXRfd29ya19zcGFjZV9zaXplKCk7CisjZWxpZiAoX19SVEVNU19NQUpPUl9fID09IDQg
-JiYgX19SVEVNU19NSU5PUl9fID4gOSkKICAgICBwdmFsLT5udW1CeXRlc1RvdGFsICAgID0gQ29u
-ZmlndXJhdGlvbi53b3JrX3NwYWNlX3NpemU7CiAjZWxzZQogICAgIHB2YWwtPm51bUJ5dGVzVG90
-YWwgICAgPSBfQ29uZmlndXJhdGlvbl9UYWJsZS0+d29ya19zcGFjZV9zaXplOwpkaWZmIC0tZ2l0
-IGEvaW9jQWRtaW4vRGIvaW9jQWRtaW5SVEVNUy5zdWJzdGl0dXRpb25zIGIvaW9jQWRtaW4vRGIv
-aW9jQWRtaW5SVEVNUy5zdWJzdGl0dXRpb25zCmluZGV4IGMwYzdlNmQuLmYxZjU2ZDQgMTAwNjQ0
-Ci0tLSBhL2lvY0FkbWluL0RiL2lvY0FkbWluUlRFTVMuc3Vic3RpdHV0aW9ucworKysgYi9pb2NB
-ZG1pbi9EYi9pb2NBZG1pblJURU1TLnN1YnN0aXR1dGlvbnMKQEAgLTksNyArOSw3IEBACiBmaWxl
-IGlvYy50ZW1wbGF0ZQogewogcGF0dGVybiB7IElPQ05BTUUgLCBUT0RGT1JNQVQgICAgICAgICAg
-IH0KLQl7ICIkKElPQykiICAsICIlbS8lZC8lWSAlSDolTTolUyIgfQorCXsgIiQoSU9DKSIgICwg
-IiVZLSVtLSVkICVIOiVNOiVTIiB9CiB9CiBmaWxlIGlvY0dlbmVyYWxUaW1lLnRlbXBsYXRlCiB7
-CmRpZmYgLS1naXQgYS9pb2NBZG1pbi9EYi9pb2NBZG1pblNvZnQuc3Vic3RpdHV0aW9ucyBiL2lv
-Y0FkbWluL0RiL2lvY0FkbWluU29mdC5zdWJzdGl0dXRpb25zCmluZGV4IGYyNzMyMzYuLmYxNDM5
-NDEgMTAwNjQ0Ci0tLSBhL2lvY0FkbWluL0RiL2lvY0FkbWluU29mdC5zdWJzdGl0dXRpb25zCisr
-KyBiL2lvY0FkbWluL0RiL2lvY0FkbWluU29mdC5zdWJzdGl0dXRpb25zCkBAIC05LDcgKzksNyBA
-QAogZmlsZSBpb2MudGVtcGxhdGUKIHsKIHBhdHRlcm4geyBJT0NOQU1FICwgVE9ERk9STUFUICAg
-ICAgICAgICB9Ci0JeyAiJChJT0MpIiAgLCAiJW0vJWQvJVkgJUg6JU06JVMiIH0KKwl7ICIkKElP
-QykiICAsICIlWS0lbS0lZCAlSDolTTolUyIgfQogfQogZmlsZSBpb2NHZW5lcmFsVGltZS50ZW1w
-bGF0ZQogewpkaWZmIC0tZ2l0IGEvaW9jQWRtaW4vRGIvaW9jQWRtaW5WeFdvcmtzLnN1YnN0aXR1
-dGlvbnMgYi9pb2NBZG1pbi9EYi9pb2NBZG1pblZ4V29ya3Muc3Vic3RpdHV0aW9ucwppbmRleCBh
-MjQwYjU1Li4xNDVhYjI4IDEwMDY0NAotLS0gYS9pb2NBZG1pbi9EYi9pb2NBZG1pblZ4V29ya3Mu
-c3Vic3RpdHV0aW9ucworKysgYi9pb2NBZG1pbi9EYi9pb2NBZG1pblZ4V29ya3Muc3Vic3RpdHV0
-aW9ucwpAQCAtOSw3ICs5LDcgQEAKIGZpbGUgaW9jLnRlbXBsYXRlCiB7CiBwYXR0ZXJuIHsgSU9D
-TkFNRSAsIFRPREZPUk1BVCAgICAgICAgICAgfQotCXsgIiQoSU9DKSIgICwgIiVtLyVkLyVZICVI
-OiVNOiVTIiB9CisJeyAiJChJT0MpIiAgLCAiJVktJW0tJWQgJUg6JU06JVMiIH0KIH0KIGZpbGUg
-aW9jR2VuZXJhbFRpbWUudGVtcGxhdGUKIHsK
+commit 0bb1aec709af64b2bee7a8c089d00ecd68b61e87
+Author: Giles Knap <giles.knap@diamond.ac.uk>
+Date:   Sun Mar 3 11:08:31 2024 +0000
+
+    PaulsFixes
+
+diff --git a/configure/CONFIG_SITE b/configure/CONFIG_SITE
+index bb04d36..c201f24 100644
+--- a/configure/CONFIG_SITE
++++ b/configure/CONFIG_SITE
+@@ -11,7 +11,7 @@
+ # Set this when you only want to compile this application
+ # for a subset of the cross-compiled target architectures
+ # that Base is built for.
+-#CROSS_COMPILER_TARGET_ARCHS = RTEMS-beatnik
++CROSS_COMPILER_TARGET_ARCHS = RTEMS-beatnik
+ #CROSS_COMPILER_TARGET_ARCHS = RTEMS-uC5282
+ #CROSS_COMPILER_TARGET_ARCHS = RTEMS-pc586
+ 
+diff --git a/configure/RELEASE b/configure/RELEASE
+index 6b27de3..1328c91 100644
+--- a/configure/RELEASE
++++ b/configure/RELEASE
+@@ -11,11 +11,11 @@ MAKE_TEST_IOC_APP=YES
+ # Define the version of modules needed by
+ # IOC apps or other Support apps - used by testIocStatsApp
+ # =============================================================
+-SUPPORT=/usr/local/epics/R3.14.11/modules/soft/synApps_5_5/support
++SUPPORT=/dls_sw/work/R7.0-net-legacy/support
+ 
+-SNCSEQ     = $(SUPPORT)/seq-2-0-12
++SNCSEQ     = $(SUPPORT)/seq
+ 
+-EPICS_BASE=/afs/slac/g/spear/epics/base
++EPICS_BASE=/dls_sw/work/epics/R7.0-net-legacy
+ 
+ # These lines allow developers to override these RELEASE settings
+ # without having to modify this file directly.
+diff --git a/devIocStats/os/RTEMS/devIocStatsOSD.h b/devIocStats/os/RTEMS/devIocStatsOSD.h
+index b21cc0e..8b9c99b 100644
+--- a/devIocStats/os/RTEMS/devIocStatsOSD.h
++++ b/devIocStats/os/RTEMS/devIocStatsOSD.h
+@@ -66,6 +66,9 @@
+ # endif
+ 
+ #include <string.h>
++#if   (__RTEMS_MAJOR__ > 4)
++#undef random
++#endif
+ #include <stdlib.h>
+ 
+ #define sysBootLine rtems_bsdnet_bootp_cmdline
+diff --git a/devIocStats/os/RTEMS/osdCpuUsage.c b/devIocStats/os/RTEMS/osdCpuUsage.c
+index 2daa95e..666fc07 100644
+--- a/devIocStats/os/RTEMS/osdCpuUsage.c
++++ b/devIocStats/os/RTEMS/osdCpuUsage.c
+@@ -47,8 +47,11 @@
+ 
+ #include <devIocStats.h>
+ 
+-# if   (__RTEMS_MAJOR__ > 4) \
+-   || (__RTEMS_MAJOR__ == 4 && __RTEMS_MINOR__ > 7)
++# if   (__RTEMS_MAJOR__ >= 5)
++#include <rtems/score/todimpl.h>
++#include <rtems/score/threadimpl.h>
++#endif
++#if (__RTEMS_MAJOR__ == 4 && __RTEMS_MINOR__ > 7)
+ typedef char objName[13];
+ #define RTEMS_OBJ_GET_NAME(tc,name) rtems_object_get_name((tc)->Object.id, sizeof(name),(name))
+ #ifdef SSRLAPPSMISCUTILS
+@@ -79,7 +82,7 @@ typedef char * objName;
+ 
+ static double prev_total = 0;
+ static double prev_idle  = 0;
+-
++# if   (__RTEMS_MAJOR__ < 5)
+ static void cpu_ticks(double *total, double *idle)
+ {
+     Objects_Information *obj;
+@@ -114,7 +117,65 @@ static void cpu_ticks(double *total, double *idle)
+         }
+     }
+ }
++#else
++typedef struct {
++  Timestamp_Control    total;
++  Timestamp_Control    idle;
++
++} cpu_usage_context;
++
++static bool cpu_usage_visitor2( Thread_Control *the_thread, void *arg)
++{
++	cpu_usage_context *ctx;
++
++	Timestamp_Control  used;
++	char               name[ 38 ];	
++	ctx = arg;
++
++/* thread name to locate IDLE thread */
++		
++	_Thread_Get_name( the_thread, name, sizeof(name) );
++	
++/* CPU time used by this thread since last reset */
++	
++	used = _Thread_Get_CPU_time_used( the_thread);
++
++/* add to total */
++
++	_Timestamp_Add_to(&ctx->total, &used);
++  
++	if (name[0])
++	{
++            if (name[0] == 'I' && name[1] == 'D' &&
++                name[2] == 'L' && name[3] == 'E') {	    
++			
++			ctx->idle = used;
++            }
++	}
++
++	return false;
++}
+ 
++static void cpu_ticks(double *total, double *idle)
++{
++	cpu_usage_context ctx;
++
++/* clear counters */
++
++	_Timestamp_Set_to_zero(&ctx.total);
++	_Timestamp_Set_to_zero(&ctx.idle);
++	
++/* iterate throught all tasks (threads) */
++
++	rtems_task_iterate( cpu_usage_visitor2, &ctx);
++
++/* convert to doubles */
++
++	*idle = _Timestamp_Get_seconds(&ctx.idle) + _Timestamp_Get_nanoseconds(&ctx.idle) / 1e9;
++	*total = _Timestamp_Get_seconds(&ctx.total) + _Timestamp_Get_nanoseconds(&ctx.total) / 1e9;
++}
++
++#endif
+ int devIocStatsInitCpuUsage (void)
+ {
+     cpu_ticks(&prev_total, &prev_idle);
+diff --git a/devIocStats/os/RTEMS/osdSuspTasks.c b/devIocStats/os/RTEMS/osdSuspTasks.c
+index e875f57..30e1f64 100644
+--- a/devIocStats/os/RTEMS/osdSuspTasks.c
++++ b/devIocStats/os/RTEMS/osdSuspTasks.c
+@@ -40,6 +40,50 @@
+ 
+ #include <devIocStats.h>
+ 
++#if (__RTEMS_MAJOR__ >= 5)
++
++#include <taskwd.h>
++
++static int n = 0;
++
++static void Notify(void *usr, epicsThreadId tid, int suspended)
++{
++	if (suspended)
++	{
++		n++;
++	}
++	else
++	{
++		n--;
++	}
++}
++
++/* register to be notified of any changes */
++
++static taskwdMonitor mon;
++
++int devIocStatsInitSuspTasks (void)
++{
++	n = 0;
++	
++	mon.insert = NULL;
++	mon.remove = NULL;
++	mon.notify = Notify;
++	
++	taskwdMonitorAdd(&mon, NULL);
++
++	return 0;
++}
++
++int devIocStatsGetSuspTasks(int *pval)
++{
++	*pval = n;
++
++	return (0);
++}
++
++#else
++
+ int devIocStatsInitSuspTasks (void) { return 0; }
+ 
+ int devIocStatsGetSuspTasks (int *pval)
+@@ -61,3 +105,4 @@ int devIocStatsGetSuspTasks (int *pval)
+     *pval = n;
+     return 0;
+ }
++#endif
+diff --git a/devIocStats/os/RTEMS/osdWorkspaceUsage.c b/devIocStats/os/RTEMS/osdWorkspaceUsage.c
+index 3d0568d..031c167 100644
+--- a/devIocStats/os/RTEMS/osdWorkspaceUsage.c
++++ b/devIocStats/os/RTEMS/osdWorkspaceUsage.c
+@@ -25,6 +25,9 @@
+        
+  -----------------------------------------------------------------------------*/
+ #include <devIocStats.h>
++# if   (__RTEMS_MAJOR__ > 4)
++#include <rtems/score/wkspace.h>
++#endif
+ 
+ int devIocStatsInitWorkspaceUsage (void) { return 0; }
+ 
+@@ -38,8 +41,9 @@ int devIocStatsGetWorkspaceUsage (memInfo *pval)
+     _Heap_Get_information( &_Workspace_Area, &info);  /*_Heap_Get_information is part of the RTEMS API */
+     _RTEMS_Unlock_allocator();
+ #endif /* RTEMS_PROTECTED_HEAP */
+-# if   (__RTEMS_MAJOR__ > 4) \
+-   || (__RTEMS_MAJOR__ == 4 && __RTEMS_MINOR__ > 9)
++# if   (__RTEMS_MAJOR__ > 4)
++	pval->numBytesTotal    = rtems_configuration_get_work_space_size();
++#elif (__RTEMS_MAJOR__ == 4 && __RTEMS_MINOR__ > 9)
+     pval->numBytesTotal    = Configuration.work_space_size;
+ #else
+     pval->numBytesTotal    = _Configuration_Table->work_space_size;
+diff --git a/iocAdmin/Db/iocAdminRTEMS.substitutions b/iocAdmin/Db/iocAdminRTEMS.substitutions
+index c0c7e6d..f1f56d4 100644
+--- a/iocAdmin/Db/iocAdminRTEMS.substitutions
++++ b/iocAdmin/Db/iocAdminRTEMS.substitutions
+@@ -9,7 +9,7 @@
+ file ioc.template
+ {
+ pattern { IOCNAME , TODFORMAT           }
+-	{ "$(IOC)"  , "%m/%d/%Y %H:%M:%S" }
++	{ "$(IOC)"  , "%Y-%m-%d %H:%M:%S" }
+ }
+ file iocGeneralTime.template
+ {
+diff --git a/iocAdmin/Db/iocAdminSoft.substitutions b/iocAdmin/Db/iocAdminSoft.substitutions
+index f273236..f143941 100644
+--- a/iocAdmin/Db/iocAdminSoft.substitutions
++++ b/iocAdmin/Db/iocAdminSoft.substitutions
+@@ -9,7 +9,7 @@
+ file ioc.template
+ {
+ pattern { IOCNAME , TODFORMAT           }
+-	{ "$(IOC)"  , "%m/%d/%Y %H:%M:%S" }
++	{ "$(IOC)"  , "%Y-%m-%d %H:%M:%S" }
+ }
+ file iocGeneralTime.template
+ {
+diff --git a/iocAdmin/Db/iocAdminVxWorks.substitutions b/iocAdmin/Db/iocAdminVxWorks.substitutions
+index a240b55..145ab28 100644
+--- a/iocAdmin/Db/iocAdminVxWorks.substitutions
++++ b/iocAdmin/Db/iocAdminVxWorks.substitutions
+@@ -9,7 +9,7 @@
+ file ioc.template
+ {
+ pattern { IOCNAME , TODFORMAT           }
+-	{ "$(IOC)"  , "%m/%d/%Y %H:%M:%S" }
++	{ "$(IOC)"  , "%Y-%m-%d %H:%M:%S" }
+ }
+ file iocGeneralTime.template
+ {

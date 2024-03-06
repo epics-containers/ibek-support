@@ -21,8 +21,7 @@ if [[ $TARGET_ARCHITECTURE == "rtems" ]]; then
     fi
     cd ${SUPPORT}/${NAME}
     git reset --hard '4226b12'
-    base64 -d ${FOLDER}/iocStats.patch > /tmp/patch
-    git apply /tmp/patch
+    git apply ${FOLDER}/iocStats.patch
 )
 else
     ibek support git-clone ${NAME} ${VERSION}
@@ -37,6 +36,9 @@ ibek support add-dbds devIocStats.dbd
 
 # global config settings
 ${FOLDER}/../_global/install.sh
+
+# comment out the test directories from the Makefile
+sed -i -E 's/(^[^#].*+= test.*$)/# \1/' ${SUPPORT}/${NAME}/Makefile
 
 # compile the support module
 ibek support compile ${NAME}
