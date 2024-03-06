@@ -5,9 +5,10 @@ set -xe
 THIS_FOLDER=$(realpath $(dirname ${0}))
 IBEK_SROOT=${THIS_FOLDER}/../
 
-pip install ibek
+pip install "ibek>=1.7.1"
 
 # make a global ioc schema for all the support modules combined
+# this validates all ibek.support.yaml files
 echo generating all support schema
 ibek ioc generate-schema ${IBEK_SROOT}*/*.ibek.support.yaml --no-ibek-defs --output /tmp/all.ibek.ioc.schema.json
 
