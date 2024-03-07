@@ -12,9 +12,6 @@ FOLDER=$(dirname $(readlink -f $0))
 # log output and abort on failure
 set -xe
 
-ibek support apt-install --only=dev \
-    libntirpc-dev
-
 # get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION}
 ibek support register ${NAME}
