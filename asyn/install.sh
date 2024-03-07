@@ -23,7 +23,9 @@ ibek support add-dbds drvAsynIPPort.dbd drvAsynSerialPort.dbd asyn.dbd
 # No need for IPAC unless its already installed
 ibek support add-release-macro IPAC --no-replace
 
-ibek support add-config-macro ${NAME} TIRPC YES
+if [[ $TARGET_ARCHITECTURE != "linux-arm" ]]; then
+    ibek support add-config-macro ${NAME} TIRPC YES
+fi
 
 # comment out the test directories from the Makefile
 sed -i -E 's/(^[^#].*(test|iocBoot).*$)/# \1/' ${SUPPORT}/${NAME}/Makefile
