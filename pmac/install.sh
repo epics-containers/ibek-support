@@ -21,7 +21,7 @@ ibek support register ${NAME}
 rm -f /epics/support/pmac/configure/CONFIG_SITE.linux-x86_64.Common
 rm -f /epics/support/pmac/configure/RELEASE.linux-x86_64.Common
 
-if [[ $TARGET_ARCHITECTURE != "rtems" ]]; then
+if [[ ! $TARGET_ARCHITECTURE == "RTEMS"* ]]; then
 
     ibek support apt-install --only=dev libssh2-1-dev
     ibek support apt-install --only=run libssh2-1
@@ -50,7 +50,7 @@ fi
 ibek support add-libs pmacAsynIPPort pmacAsynMotorPort
 ibek support add-dbds pmacAsynIPPort.dbd pmacAsynMotorPort.dbd
 
-if [[ $TARGET_ARCHITECTURE != "rtems" ]]; then
+if [[ ! $TARGET_ARCHITECTURE == "RTEMS"* ]]; then
     ibek support add-libs powerPmacAsynPort
     ibek support add-dbds drvAsynPowerPMACPort.dbd
 fi
