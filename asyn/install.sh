@@ -12,6 +12,10 @@ FOLDER=$(dirname $(readlink -f $0))
 # log output and abort on failure
 set -xe
 
+# installing for arm
+ibek support apt-install --only=dev \
+    libntirpc-dev
+
 # get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION}
 ibek support register ${NAME}
@@ -23,9 +27,7 @@ ibek support add-dbds drvAsynIPPort.dbd drvAsynSerialPort.dbd asyn.dbd
 # No need for IPAC unless its already installed
 ibek support add-release-macro IPAC --no-replace
 
-if [[ $TARGET_ARCHITECTURE != "linux-arm" ]]; then
-    ibek support add-config-macro ${NAME} TIRPC YES
-fi
+ibek support add-config-macro ${NAME} TIRPC YES
 
 # comment out the test directories from the Makefile
 sed -i -E 's/(^[^#].*(test|iocBoot).*$)/# \1/' ${SUPPORT}/${NAME}/Makefile
