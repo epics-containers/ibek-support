@@ -60,6 +60,9 @@ ibek support add-to-config-site ${NAME} "${CONFIG}"
 # all the DB templates are in a subfolder - expose them in std location
 ln -s /epics/support/${NAME}/exampleTop/db ${NAME}/db
 
+# global config settings
+${FOLDER}/../_global/install.sh ${NAME}
+
 # compile the support module
 ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.

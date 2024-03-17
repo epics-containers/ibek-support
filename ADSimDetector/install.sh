@@ -20,6 +20,9 @@ ibek support register ${NAME}
 ibek support add-libs simDetector
 ibek support add-dbds simDetectorSupport.dbd
 
+# global config settings
+${FOLDER}/../_global/install.sh ${NAME}
+
 # compile the support module
 ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.

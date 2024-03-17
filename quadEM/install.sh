@@ -20,13 +20,16 @@ ibek support register ${NAME}
 # remove IPUNIDIG from configure/RELEASE
 ibek support add-release-macro IPUNIDIG
 
-# do not make VxWorks dbds 
+# do not make VxWorks dbds
 sed -i /epics/support/quadEM/quadEMApp/src/Makefile -e /quadEMTestAppVx.dbd/d
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 # None required for a stream device ------------------------------------
 ibek support add-libs quadEM
 ibek support add-dbds drvTetrAMM.dbd
+
+# global config settings
+${FOLDER}/../_global/install.sh ${NAME}
 
 # compile the support module
 ibek support compile ${NAME}

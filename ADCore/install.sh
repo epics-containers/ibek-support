@@ -74,6 +74,9 @@ ibek support add-to-config-site ${NAME} "${CONFIG}"
 # Sequencer causes problems with the build so we disable it
 ibek support add-release-macro SNCSEQ
 
+# global config settings
+${FOLDER}/../_global/install.sh ${NAME}
+
 # compile the support module
 ibek support compile ${NAME}
 

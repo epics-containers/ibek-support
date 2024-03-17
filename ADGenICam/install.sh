@@ -19,6 +19,9 @@ ibek support register ${NAME}
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs ADGenICam
 
+# global config settings
+${FOLDER}/../_global/install.sh ${NAME}
+
 # compile the support module
 ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.

@@ -29,6 +29,9 @@ else
     ibek support add-config-macro ${NAME} TIRPC YES
 fi
 
+# global config settings
+${FOLDER}/../_global/install.sh ${NAME}
+
 # compile the support module
 ibek support compile ${NAME}
 

@@ -20,6 +20,11 @@ ibek support add-release-macro SNCSEQ --no-replace
 ibek support add-libs sscan
 ibek support add-dbds sscan.dbd
 
+# calc needs the linux targets of this repos
+# hence not calling globals to suppress host target
+# TODO look into what is wrong with calc makefiles
+# ${FOLDER}/../_global/install.sh ${NAME}
+
 # compile the support module
 ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.

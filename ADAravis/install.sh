@@ -68,6 +68,9 @@ sed -i '/ADGENICAM/d' ${SUPPORT}/ADAravis/configure/RELEASE
 
 ibek support add-to-config-site ${NAME} "${CONFIG}"
 
+# global config settings
+${FOLDER}/../_global/install.sh ${NAME}
+
 # compile the support module
 ibek support compile ${NAME}
 

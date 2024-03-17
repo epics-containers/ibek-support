@@ -22,6 +22,9 @@ ibek support register ${NAME}
 #ibek support add-libs
 #ibek support add-dbds
 
+# global config settings
+${FOLDER}/../_global/install.sh ${NAME}
+
 # compile the support module
 ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.

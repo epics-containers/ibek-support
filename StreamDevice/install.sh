@@ -26,6 +26,9 @@ ibek support add-dbds stream-base.dbd stream.dbd
 # declare location of the pcre system library
 ibek support add-config-macro ${NAME} PCRE_LIB /usr/lib/x86_64-linux-gnu
 
+# global config settings
+${FOLDER}/../_global/install.sh ${NAME}
+
 # compile the support module
 ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
