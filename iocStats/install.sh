@@ -12,7 +12,7 @@ FOLDER=$(dirname $(readlink -f $0))
 # log output and abort on failure
 set -xe
 
-if [[ $TARGET_ARCHITECTURE == "RTEMS"* ]]; then
+if [[ $EPICS_TARGET_ARCH == "RTEMS"* ]]; then
 # apply Paul Hamadyk's fix's to iocStats for RTEMS6
 (
     cd ${SUPPORT}

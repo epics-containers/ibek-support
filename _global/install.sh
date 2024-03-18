@@ -10,7 +10,7 @@ support_x86=${SUPPORT}/${NAME}/${x86_cfg}
 echo "support_x86: ${support_x86}"
 
 # for RTEMS builds don't build for the host architecture, target only
-if [[ $TARGET_ARCHITECTURE == "RTEMS"* ]]; then
+if [[ $EPICS_TARGET_ARCH == "RTEMS"* ]]; then
     touch ${support_x86}
     sed -i '/VALID_BUILDS/d' ${support_x86}
     echo "VALID_BUILDS=Host" >> ${support_x86}

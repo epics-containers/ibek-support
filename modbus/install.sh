@@ -22,7 +22,7 @@ ibek support add-libs modbus
 ibek support add-dbds modbusSupport.dbd
 
 # Patches to the CONFIG_SITE
-if [[ $TARGET_ARCHITECTURE == "RTEMS"* ]]; then
+if [[ $EPICS_TARGET_ARCH == "RTEMS"* ]]; then
     # don't build the test directories (they don't compile on RTEMS)
     sed -i '/DIRS += ${SUPPORT}/${NAME}.*test/d' Makefile
 else
