@@ -13,7 +13,7 @@ FOLDER=$(dirname $(readlink -f $0))
 set -xe
 
 # installing for arm
-ibek support apt-install --only=dev \
+ibek support apt-install \
     libntirpc-dev
 
 # get the source and fix up the configure/RELEASE files

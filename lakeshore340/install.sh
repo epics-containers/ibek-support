@@ -10,7 +10,7 @@ FOLDER=$(dirname $(readlink -f $0))
 set -xe
 
 # doxygen is used in documentation build for the developer stage
-ibek support apt-install --only=dev doxygen
+ibek support apt-install doxygen
 
 # get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION} --org https://github.com/DiamondLightSource/

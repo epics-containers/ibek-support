@@ -10,7 +10,7 @@ FOLDER=$(dirname $(readlink -f $0))
 set -xe
 
 # prce developer library
-ibek support apt-install --only=dev libpcre3-dev
+ibek support apt-install libpcre3-dev
 
 # get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION} --org https://github.com/paulscherrerinstitute/

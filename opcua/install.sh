@@ -12,8 +12,8 @@ FOLDER=$(dirname $(readlink -f $0))
 # log output and abort on failure
 set -xe
 
-ibek support apt-install --only=dev cmake libxml2-dev libssl-dev
-ibek support apt-install --only=run libxml2
+ibek support apt-install cmake libxml2-dev libssl-dev
+ibek support add_runtime_packages libxml2
 
 # the 'if' speeds up retries in the devcontainer. remove the folder to rebuild
 if [ ! -d /tmp/open62541 ]; then

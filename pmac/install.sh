@@ -23,8 +23,8 @@ rm -f /epics/support/pmac/configure/RELEASE.linux-x86_64.Common
 
 if [[ ! $EPICS_TARGET_ARCH == "RTEMS"* ]]; then
 
-    ibek support apt-install --only=dev libssh2-1-dev
-    ibek support apt-install --only=run libssh2-1
+    ibek support apt-install libssh2-1-dev
+    ibek support add_runtime_packages libssh2-1
 
     CONFIG="
 # The following definitions must be changed for each site
