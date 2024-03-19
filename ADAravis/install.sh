@@ -26,7 +26,7 @@ ibek support apt-install \
     xz-utils
 
 # declare packages for installation in the Dockerfile's runtime stage
-ibek support add_runtime_packages libglib2.0-bin libusb-1.0 libxml2
+ibek support add-runtime-packages libglib2.0-bin libusb-1.0 libxml2
 
 # build aravis library
 (

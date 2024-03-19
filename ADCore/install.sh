@@ -30,7 +30,7 @@ ibek support apt-install \
     $HDF/libhdf5-dev_1.10.4+repack-10_amd64.deb
 
 # declare packages for installation in the Dockerfile's runtime stage
-ibek support add_runtime_packages libtiff5 libsz2 libblosc1 libxml2 libhdf5-103-1
+ibek support add-runtime-packages libtiff5 libsz2 libblosc1 libxml2 libhdf5-103-1
 
 # get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION} --org http://github.com/areaDetector/
