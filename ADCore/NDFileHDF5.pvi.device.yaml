@@ -1,787 +1,808 @@
-# yaml-language-server: $schema=/repos/pvi/schemas/pvi.device.schema.json
-
 label: NDFileHDF5
 parent: NDPluginFile
 children:
-  - type: Group
-    name: NDFileHDF5
-    layout:
-      type: Grid
-    children:
-      - type: SignalRW
-        name: Compression
-        pv: Compression
-        widget:
-          type: ComboBox
-        read_pv: Compression_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: SWMRSupported
-        pv: SWMRSupported_RBV
-        widget:
-          type: LED
-
-      - type: SignalRW
-        name: NumDataBits
-        pv: NumDataBits
-        widget:
-          type: TextWrite
-        read_pv: NumDataBits_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: DataBitsOffset
-        pv: DataBitsOffset
-        widget:
-          type: TextWrite
-        read_pv: DataBitsOffset_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: SWMRMode
-        pv: SWMRMode
-        widget:
-          type: CheckBox
-        read_pv: SWMRMode_RBV
-        read_widget:
-          type: LED
-
-      - type: SignalR
-        name: SWMRActive
-        pv: SWMRActive_RBV
-        widget:
-          type: LED
-
-      - type: SignalRW
-        name: SZipNumPixels
-        pv: SZipNumPixels
-        widget:
-          type: TextWrite
-        read_pv: SZipNumPixels_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: SWMRCbCounter
-        pv: SWMRCbCounter_RBV
-        widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ZLevel
-        pv: ZLevel
-        widget:
-          type: TextWrite
-        read_pv: ZLevel_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalW
-        name: FlushNow
-        pv: FlushNow
-        widget:
-          type: CheckBox
-
-      - type: SignalRW
-        name: JPEGQuality
-        pv: JPEGQuality
-        widget:
-          type: TextWrite
-        read_pv: JPEGQuality_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ChunkSizeAuto
-        pv: ChunkSizeAuto
-        widget:
-          type: CheckBox
-        read_pv: ChunkSizeAuto_RBV
-        read_widget:
-          type: LED
-
-      - type: SignalRW
-        name: StorePerform
-        pv: StorePerform
-        widget:
-          type: CheckBox
-        read_pv: StorePerform_RBV
-        read_widget:
-          type: LED
-
-      - type: SignalRW
-        name: NumColChunks
-        pv: NumColChunks
-        widget:
-          type: TextWrite
-        read_pv: NumColChunks_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: StoreAttr
-        pv: StoreAttr
-        widget:
-          type: CheckBox
-        read_pv: StoreAttr_RBV
-        read_widget:
-          type: LED
-
-      - type: SignalRW
-        name: BloscShuffle
-        pv: BloscShuffle
-        widget:
-          type: ComboBox
-        read_pv: BloscShuffle_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: NumRowChunks
-        pv: NumRowChunks
-        widget:
-          type: TextWrite
-        read_pv: NumRowChunks_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: RunTime
-        pv: RunTime
-        widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: BloscCompressor
-        pv: BloscCompressor
-        widget:
-          type: ComboBox
-        read_pv: BloscCompressor_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ChunkSize2
-        pv: ChunkSize2
-        widget:
-          type: TextWrite
-        read_pv: ChunkSize2_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: IOSpeed
-        pv: IOSpeed
-        widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: BloscLevel
-        pv: BloscLevel
-        widget:
-          type: TextWrite
-        read_pv: BloscLevel_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: NumFramesChunks
-        pv: NumFramesChunks
-        widget:
-          type: TextWrite
-        read_pv: NumFramesChunks_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: BoundaryAlign
-        pv: BoundaryAlign
-        widget:
-          type: TextWrite
-        read_pv: BoundaryAlign_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: XMLErrorMsg
-        pv: XMLErrorMsg_RBV
-        widget:
-          type: TextRead
-
-      - type: SignalR
-        name: XMLValid
-        pv: XMLValid_RBV
-        widget:
-          type: LED
-
-      - type: SignalRW
-        name: BoundaryThreshold
-        pv: BoundaryThreshold
-        widget:
-          type: TextWrite
-        read_pv: BoundaryThreshold_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: NumFramesFlush
-        pv: NumFramesFlush
-        widget:
-          type: TextWrite
-        read_pv: NumFramesFlush_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: XMLFileName
-        pv: XMLFileName
-        widget:
-          type: TextWrite
-          format: 4
-        read_pv: XMLFileName_RBV
-        read_widget:
-          type: TextRead
-          format: 4
-
-      - type: SignalRW
-        name: FillValue
-        pv: FillValue
-        widget:
-          type: TextWrite
-        read_pv: FillValue_RBV
-        read_widget:
-          type: TextRead
-
-  - type: Group
-    name: NDFileHDF5ChunkingFull
-    layout:
-      type: Grid
-    children:
-      - type: SignalRW
-        name: ChunkSize3
-        pv: ChunkSize3
-        widget:
-          type: TextWrite
-        read_pv: ChunkSize3_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ChunkSize4
-        pv: ChunkSize4
-        widget:
-          type: TextWrite
-        read_pv: ChunkSize4_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ChunkSize5
-        pv: ChunkSize5
-        widget:
-          type: TextWrite
-        read_pv: ChunkSize5_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ChunkSize6
-        pv: ChunkSize6
-        widget:
-          type: TextWrite
-        read_pv: ChunkSize6_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ChunkSize7
-        pv: ChunkSize7
-        widget:
-          type: TextWrite
-        read_pv: ChunkSize7_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ChunkSize8
-        pv: ChunkSize8
-        widget:
-          type: TextWrite
-        read_pv: ChunkSize8_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ChunkSize9
-        pv: ChunkSize9
-        widget:
-          type: TextWrite
-        read_pv: ChunkSize9_RBV
-        read_widget:
-          type: TextRead
-
-  - type: Group
-    name: NDFileHDF5ExtraDims
-    layout:
-      type: Grid
-    children:
-      - type: SignalRW
-        name: NumExtraDims
-        pv: NumExtraDims
-        widget:
-          type: TextWrite
-        read_pv: NumExtraDims_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: DimAttDatasets
-        pv: DimAttDatasets
-        widget:
-          type: CheckBox
-        read_pv: DimAttDatasets_RBV
-        read_widget:
-          type: LED
-
-      - type: SignalRW
-        name: ExtraDimSizeN
-        pv: ExtraDimSizeN
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimSizeN_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: ExtraDimNameN
-        pv: ExtraDimNameN_RBV
-        widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimSizeX
-        pv: ExtraDimSizeX
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimSizeX_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimChunkX
-        pv: ExtraDimChunkX
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimChunkX_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: ExtraDimNameX
-        pv: ExtraDimNameX_RBV
-        widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimSizeY
-        pv: ExtraDimSizeY
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimSizeY_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimChunkY
-        pv: ExtraDimChunkY
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimChunkY_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: ExtraDimNameY
-        pv: ExtraDimNameY_RBV
-        widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimSize3
-        pv: ExtraDimSize3
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimSize3_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimChunk3
-        pv: ExtraDimChunk3
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimChunk3_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: ExtraDimName3
-        pv: ExtraDimName3_RBV
-        widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimSize4
-        pv: ExtraDimSize4
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimSize4_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimChunk4
-        pv: ExtraDimChunk4
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimChunk4_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: ExtraDimName4
-        pv: ExtraDimName4_RBV
-        widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimSize5
-        pv: ExtraDimSize5
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimSize5_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimChunk5
-        pv: ExtraDimChunk5
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimChunk5_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: ExtraDimName5
-        pv: ExtraDimName5_RBV
-        widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimSize6
-        pv: ExtraDimSize6
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimSize6_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimChunk6
-        pv: ExtraDimChunk6
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimChunk6_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: ExtraDimName6
-        pv: ExtraDimName6_RBV
-        widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimSize7
-        pv: ExtraDimSize7
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimSize7_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimChunk7
-        pv: ExtraDimChunk7
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimChunk7_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: ExtraDimName7
-        pv: ExtraDimName7_RBV
-        widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimSize8
-        pv: ExtraDimSize8
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimSize8_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimChunk8
-        pv: ExtraDimChunk8
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimChunk8_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: ExtraDimName8
-        pv: ExtraDimName8_RBV
-        widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimSize9
-        pv: ExtraDimSize9
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimSize9_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ExtraDimChunk9
-        pv: ExtraDimChunk9
-        widget:
-          type: TextWrite
-        read_pv: ExtraDimChunk9_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: ExtraDimName9
-        pv: ExtraDimName9_RBV
-        widget:
-          type: TextRead
-
-  - type: Group
-    name: NDFileHDF5Positions
-    layout:
-      type: Grid
-    children:
-      - type: SignalRW
-        name: PositionMode
-        pv: PositionMode
-        widget:
-          type: CheckBox
-        read_pv: PositionMode_RBV
-        read_widget:
-          type: LED
-
-      - type: SignalRW
-        name: PosIndexDimN
-        pv: PosIndexDimN
-        widget:
-          type: TextWrite
-        read_pv: PosIndexDimN_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosNameDimN
-        pv: PosNameDimN
-        widget:
-          type: TextWrite
-        read_pv: PosNameDimN_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosIndexDimX
-        pv: PosIndexDimX
-        widget:
-          type: TextWrite
-        read_pv: PosIndexDimX_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosNameDimX
-        pv: PosNameDimX
-        widget:
-          type: TextWrite
-        read_pv: PosNameDimX_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosIndexDimY
-        pv: PosIndexDimY
-        widget:
-          type: TextWrite
-        read_pv: PosIndexDimY_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosNameDimY
-        pv: PosNameDimY
-        widget:
-          type: TextWrite
-        read_pv: PosNameDimY_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosIndexDim3
-        pv: PosIndexDim3
-        widget:
-          type: TextWrite
-        read_pv: PosIndexDim3_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosNameDim3
-        pv: PosNameDim3
-        widget:
-          type: TextWrite
-        read_pv: PosNameDim3_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosIndexDim4
-        pv: PosIndexDim4
-        widget:
-          type: TextWrite
-        read_pv: PosIndexDim4_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosNameDim4
-        pv: PosNameDim4
-        widget:
-          type: TextWrite
-        read_pv: PosNameDim4_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosIndexDim5
-        pv: PosIndexDim5
-        widget:
-          type: TextWrite
-        read_pv: PosIndexDim5_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosNameDim5
-        pv: PosNameDim5
-        widget:
-          type: TextWrite
-        read_pv: PosNameDim5_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosIndexDim6
-        pv: PosIndexDim6
-        widget:
-          type: TextWrite
-        read_pv: PosIndexDim6_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosNameDim6
-        pv: PosNameDim6
-        widget:
-          type: TextWrite
-        read_pv: PosNameDim6_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosIndexDim7
-        pv: PosIndexDim7
-        widget:
-          type: TextWrite
-        read_pv: PosIndexDim7_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosNameDim7
-        pv: PosNameDim7
-        widget:
-          type: TextWrite
-        read_pv: PosNameDim7_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosIndexDim8
-        pv: PosIndexDim8
-        widget:
-          type: TextWrite
-        read_pv: PosIndexDim8_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosNameDim8
-        pv: PosNameDim8
-        widget:
-          type: TextWrite
-        read_pv: PosNameDim8_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosIndexDim9
-        pv: PosIndexDim9
-        widget:
-          type: TextWrite
-        read_pv: PosIndexDim9_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: PosNameDim9
-        pv: PosNameDim9
-        widget:
-          type: TextWrite
-        read_pv: PosNameDim9_RBV
-        read_widget:
-          type: TextRead
-
-  - type: Group
-    name: NDFileHDF5Misc
-    layout:
-      type: Grid
-    children:
-      - type: SignalRW
-        name: NDAttributeChunk
-        pv: NDAttributeChunk
-        widget:
-          type: TextWrite
-        read_pv: NDAttributeChunk_RBV
-        read_widget:
-          type: TextRead
+
+- type: Group
+  name: NDCodec
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: Compression
+    write_pv: $(P)$(R)Compression
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)Compression_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: JPEGQuality
+    write_pv: $(P)$(R)JPEGQuality
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)JPEGQuality_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: BloscCompressor
+    write_pv: $(P)$(R)BloscCompressor
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)BloscCompressor_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: BloscShuffle
+    write_pv: $(P)$(R)BloscShuffle
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)BloscShuffle_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDFileHDF5
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: SWMRSupported
+    read_pv: $(P)$(R)SWMRSupported_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: NumDataBits
+    write_pv: $(P)$(R)NumDataBits
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)NumDataBits_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: DataBitsOffset
+    write_pv: $(P)$(R)DataBitsOffset
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)DataBitsOffset_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: SWMRMode
+    write_pv: $(P)$(R)SWMRMode
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)SWMRMode_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalR
+    name: SWMRActive
+    read_pv: $(P)$(R)SWMRActive_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: SZipNumPixels
+    write_pv: $(P)$(R)SZipNumPixels
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)SZipNumPixels_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: SWMRCbCounter
+    read_pv: $(P)$(R)SWMRCbCounter_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ZLevel
+    write_pv: $(P)$(R)ZLevel
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ZLevel_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalW
+    name: FlushNow
+    write_pv: $(P)$(R)FlushNow
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalRW
+    name: ChunkSizeAuto
+    write_pv: $(P)$(R)ChunkSizeAuto
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)ChunkSizeAuto_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: StorePerform
+    write_pv: $(P)$(R)StorePerform
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)StorePerform_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: NumColChunks
+    write_pv: $(P)$(R)NumColChunks
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)NumColChunks_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: StoreAttr
+    write_pv: $(P)$(R)StoreAttr
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)StoreAttr_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: NumRowChunks
+    write_pv: $(P)$(R)NumRowChunks
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)NumRowChunks_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: RunTime
+    read_pv: $(P)$(R)RunTime
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ChunkSize2
+    write_pv: $(P)$(R)ChunkSize2
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ChunkSize2_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: IOSpeed
+    read_pv: $(P)$(R)IOSpeed
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: BloscLevel
+    write_pv: $(P)$(R)BloscLevel
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)BloscLevel_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: NumFramesChunks
+    write_pv: $(P)$(R)NumFramesChunks
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)NumFramesChunks_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: BoundaryAlign
+    write_pv: $(P)$(R)BoundaryAlign
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)BoundaryAlign_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: XMLErrorMsg
+    read_pv: $(P)$(R)XMLErrorMsg_RBV
+    read_widget:
+      type: TextRead
+      format: 4
+
+  - type: SignalR
+    name: XMLValid
+    read_pv: $(P)$(R)XMLValid_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: BoundaryThreshold
+    write_pv: $(P)$(R)BoundaryThreshold
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)BoundaryThreshold_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: NumFramesFlush
+    write_pv: $(P)$(R)NumFramesFlush
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)NumFramesFlush_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: XMLFileName
+    write_pv: $(P)$(R)XMLFileName
+    write_widget:
+      type: TextWrite
+      format: 4
+    read_pv: $(P)$(R)XMLFileName_RBV
+    read_widget:
+      type: TextRead
+      format: 4
+
+  - type: SignalRW
+    name: FillValue
+    write_pv: $(P)$(R)FillValue
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)FillValue_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDFileHDF5ChunkingFull
+  label: NDFileHDF5_ChunkingFull
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: ChunkSize3
+    write_pv: $(P)$(R)ChunkSize3
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ChunkSize3_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ChunkSize4
+    write_pv: $(P)$(R)ChunkSize4
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ChunkSize4_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ChunkSize5
+    write_pv: $(P)$(R)ChunkSize5
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ChunkSize5_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ChunkSize6
+    write_pv: $(P)$(R)ChunkSize6
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ChunkSize6_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ChunkSize7
+    write_pv: $(P)$(R)ChunkSize7
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ChunkSize7_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ChunkSize8
+    write_pv: $(P)$(R)ChunkSize8
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ChunkSize8_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ChunkSize9
+    write_pv: $(P)$(R)ChunkSize9
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ChunkSize9_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDFileHDF5ExtraDims
+  label: NDFileHDF5_ExtraDims
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: NumExtraDims
+    write_pv: $(P)$(R)NumExtraDims
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)NumExtraDims_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: DimAttDatasets
+    write_pv: $(P)$(R)DimAttDatasets
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)DimAttDatasets_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: ExtraDimSizeN
+    write_pv: $(P)$(R)ExtraDimSizeN
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimSizeN_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ExtraDimNameN
+    read_pv: $(P)$(R)ExtraDimNameN_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimSizeX
+    write_pv: $(P)$(R)ExtraDimSizeX
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimSizeX_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimChunkX
+    write_pv: $(P)$(R)ExtraDimChunkX
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimChunkX_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ExtraDimNameX
+    read_pv: $(P)$(R)ExtraDimNameX_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimSizeY
+    write_pv: $(P)$(R)ExtraDimSizeY
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimSizeY_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimChunkY
+    write_pv: $(P)$(R)ExtraDimChunkY
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimChunkY_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ExtraDimNameY
+    read_pv: $(P)$(R)ExtraDimNameY_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimSize3
+    write_pv: $(P)$(R)ExtraDimSize3
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimSize3_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimChunk3
+    write_pv: $(P)$(R)ExtraDimChunk3
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimChunk3_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ExtraDimName3
+    read_pv: $(P)$(R)ExtraDimName3_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimSize4
+    write_pv: $(P)$(R)ExtraDimSize4
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimSize4_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimChunk4
+    write_pv: $(P)$(R)ExtraDimChunk4
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimChunk4_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ExtraDimName4
+    read_pv: $(P)$(R)ExtraDimName4_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimSize5
+    write_pv: $(P)$(R)ExtraDimSize5
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimSize5_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimChunk5
+    write_pv: $(P)$(R)ExtraDimChunk5
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimChunk5_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ExtraDimName5
+    read_pv: $(P)$(R)ExtraDimName5_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimSize6
+    write_pv: $(P)$(R)ExtraDimSize6
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimSize6_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimChunk6
+    write_pv: $(P)$(R)ExtraDimChunk6
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimChunk6_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ExtraDimName6
+    read_pv: $(P)$(R)ExtraDimName6_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimSize7
+    write_pv: $(P)$(R)ExtraDimSize7
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimSize7_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimChunk7
+    write_pv: $(P)$(R)ExtraDimChunk7
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimChunk7_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ExtraDimName7
+    read_pv: $(P)$(R)ExtraDimName7_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimSize8
+    write_pv: $(P)$(R)ExtraDimSize8
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimSize8_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimChunk8
+    write_pv: $(P)$(R)ExtraDimChunk8
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimChunk8_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ExtraDimName8
+    read_pv: $(P)$(R)ExtraDimName8_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimSize9
+    write_pv: $(P)$(R)ExtraDimSize9
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimSize9_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: ExtraDimChunk9
+    write_pv: $(P)$(R)ExtraDimChunk9
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ExtraDimChunk9_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ExtraDimName9
+    read_pv: $(P)$(R)ExtraDimName9_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDFileHDF5Positions
+  label: NDFileHDF5_Positions
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: PositionMode
+    write_pv: $(P)$(R)PositionMode
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)PositionMode_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: PosIndexDimN
+    write_pv: $(P)$(R)PosIndexDimN
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosIndexDimN_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosNameDimN
+    write_pv: $(P)$(R)PosNameDimN
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosNameDimN_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosIndexDimX
+    write_pv: $(P)$(R)PosIndexDimX
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosIndexDimX_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosNameDimX
+    write_pv: $(P)$(R)PosNameDimX
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosNameDimX_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosIndexDimY
+    write_pv: $(P)$(R)PosIndexDimY
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosIndexDimY_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosNameDimY
+    write_pv: $(P)$(R)PosNameDimY
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosNameDimY_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosIndexDim3
+    write_pv: $(P)$(R)PosIndexDim3
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosIndexDim3_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosNameDim3
+    write_pv: $(P)$(R)PosNameDim3
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosNameDim3_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosIndexDim4
+    write_pv: $(P)$(R)PosIndexDim4
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosIndexDim4_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosNameDim4
+    write_pv: $(P)$(R)PosNameDim4
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosNameDim4_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosIndexDim5
+    write_pv: $(P)$(R)PosIndexDim5
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosIndexDim5_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosNameDim5
+    write_pv: $(P)$(R)PosNameDim5
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosNameDim5_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosIndexDim6
+    write_pv: $(P)$(R)PosIndexDim6
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosIndexDim6_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosNameDim6
+    write_pv: $(P)$(R)PosNameDim6
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosNameDim6_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosIndexDim7
+    write_pv: $(P)$(R)PosIndexDim7
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosIndexDim7_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosNameDim7
+    write_pv: $(P)$(R)PosNameDim7
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosNameDim7_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosIndexDim8
+    write_pv: $(P)$(R)PosIndexDim8
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosIndexDim8_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosNameDim8
+    write_pv: $(P)$(R)PosNameDim8
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosNameDim8_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosIndexDim9
+    write_pv: $(P)$(R)PosIndexDim9
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosIndexDim9_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PosNameDim9
+    write_pv: $(P)$(R)PosNameDim9
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PosNameDim9_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDFileHDF5Misc
+  label: NDFileHDF5 Ungrouped
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: NDAttributeChunk
+    write_pv: $(P)$(R)NDAttributeChunk
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)NDAttributeChunk_RBV
+    read_widget:
+      type: TextRead
