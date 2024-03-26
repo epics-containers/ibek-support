@@ -12,6 +12,9 @@ FOLDER=$(dirname $(readlink -f $0))
 # log output and abort on failure
 set -xe
 
+# remove SNCSEQ unless it has already been installed
+ibek support add-release-macro SNCSEQ --no-replace
+
 # installing for arm
 ibek support apt-install \
     libntirpc-dev
