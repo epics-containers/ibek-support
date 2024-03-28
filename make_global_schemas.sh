@@ -25,4 +25,4 @@ for i in */*.ibek.support.yaml; do
 done
 
 # now make a global ioc schema for all the support modules combined
-ibek ioc     generate-schema */*.ibek.support.yaml --output schemas/all.ibek.ioc.schema.json
+ibek ioc generate-schema */*.ibek.support.yaml --output schemas/all.ibek.ioc.schema.json
