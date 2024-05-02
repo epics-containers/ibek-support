@@ -43,22 +43,12 @@ defs:
           Add template with archive tags for useful PVs
         default: true
 
-      - type: str
-        name: P
-        description: |-
-          Device Prefix
-
-      - type: str
-        name: R
-        description: |-
-          Device Suffix
-
     databases:
 
       - file: $(QUADEM)/db/TimeSeriesPlugins_archiving.template
         args:
-          P:
-          R:
+          P: "{{ DEVICE.P }}"
+          R: "{{ DEVICE.R }}"
 
     pre_init:
 
@@ -143,12 +133,6 @@ defs:
 
     databases:
 
-      - file: $(QUADEM)/db/quadEM_GUI.template
-        args:
-          P:
-          R:
-          PORT:
-
       - file: $(QUADEM)/db/TetrAMM.template
         args:
           P:
@@ -202,13 +186,7 @@ defs:
       - type: int
         name: HIST_SIZE
         description: |-
-          Template argument
-        default: 256
-
-      - type: int
-        name: QUEUE
-        description: |-
-          Template argument
+          Template argumentCur1:
         default: 16
 
       - type: bool
@@ -222,36 +200,6 @@ defs:
         description: |-
           Set scan period to be used for the records
         default: 1
-
-      - type: str
-        name: T
-        description: |-
-          Archiver scan period (integer seconds)
-
-      - type: str
-        name: R
-        description: |-
-          Device Suffix
-
-      - type: str
-        name: PORT
-        description: |-
-          Asyn Port name
-
-      - type: str
-        name: NCHANS
-        description: |-
-          Number of channels
-
-      - type: str
-        name: XSIZE
-        description: |-
-          x size
-
-      - type: str
-        name: YSIZE
-        description: |-
-          y size
 
       - type: int
         name: TIMEOUT
@@ -305,20 +253,20 @@ defs:
       - file: $(QUADEM)/db/statPlugins_archiving.template
         args:
           P:
-          T:
+          T: "{{ archive_scan_period }}"
 
       - file: $(ADCORE)/db/NDStats.template
         args:
           NDARRAY_PORT:
-          XSIZE:
-          NCHANS:
+          XSIZE: "{{ STAT_XSIZE }}"
+          NCHANS: "{{ STAT_NCHAN }}"
           NDARRAY_ADDR:
-          YSIZE:
+          YSIZE: "0"
           ENABLED:
           HIST_SIZE:
-          PORT:
+          PORT: "{{ PORTPREFIX }}.I1"
           P:
-          R:
+          R: "Cur1"
           TIMEOUT:
           TS_PORT:
           SCANRATE:
@@ -349,31 +297,6 @@ defs:
         description: |-
           Plugin queue size for NDArrays
         default: 16
-
-      - type: str
-        name: R
-        description: |-
-          Device Suffix
-
-      - type: str
-        name: PORT
-        description: |-
-          Asyn Port name
-
-      - type: str
-        name: TYPE
-        description: |-
-          Asyn Type e.g. Int32
-
-      - type: str
-        name: FTVL
-        description: |-
-          Format, e.g. Int
-
-      - type: str
-        name: NELEMENTS
-        description: |-
-          Number of elements
 
       - type: int
         name: TIMEOUT
@@ -421,17 +344,17 @@ defs:
       - file: $(ADCORE)/db/NDStdArrays.template
         args:
           NDARRAY_PORT:
-          FTVL:
+          FTVL: DOUBLE
           ADDR:
           SCANRATE:
-          NELEMENTS:
+          NELEMENTS: "10000"
           NDARRAY_ADDR:
           ENABLED:
           P:
-          R:
+          R: ":ARR2:"
           TIMEOUT:
-          TYPE:
-          PORT:
+          TYPE: Float64
+          PORT: "PORTPREFIX.I2"
 
   - name: AH401B
     description: |-
