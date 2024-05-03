@@ -10,9 +10,12 @@ FOLDER=$(dirname $(readlink -f $0))
 set -xe
 
 # get the source and fix up the configure/RELEASE files
-ibek support git-clone ${NAME} ${VERSION} --org https://github.com/diamondlightsource/
+ibek support git-clone ${NAME} ${VERSION} --org https://github.com/dls-controls/
 
 ibek support register ${NAME}
+
+# Remove the unecessary DLS 'WORK' macro
+ibek support add-release-macro WORK
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs mks937a
