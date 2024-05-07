@@ -9,6 +9,11 @@ FOLDER=$(dirname $(readlink -f $0))
 # log output and abort on failure
 set -xe
 
+# Simplify calc by removing SSCAN and SNCSEQ
+# (unless they are explicityly inlcuded in the Dockerfile)
+ibek support add-release-macro SNCSEQ --no-replace
+ibek support add-release-macro SSCAN --no-replace
+
 # get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION}
 ibek support register ${NAME}

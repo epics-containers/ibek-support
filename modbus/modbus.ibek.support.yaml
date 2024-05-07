@@ -1,9 +1,9 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.5.0/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/2.0.2/ibek.support.schema.json
 
 module: modbus
 
 defs:
-### modbusPortConfigure
+  ### modbusPortConfigure
   - name: modbusPortConfigure
     description: |-
       This will create an AsynPort connecting to a Modbus TCP
@@ -49,16 +49,16 @@ defs:
       - type: int
         name: MODBUSLINK
         description: |-
-           MODBUS linktype, Default : 0
-           0 : TCP/IP
-           1 : RTU
-           2 : ASCII 
+          MODBUS linktype, Default : 0
+          0 : TCP/IP
+          1 : RTU
+          2 : ASCII
         default: 0
-      
+
       - type: int
         name: TIMEOUT
         description: |-
-           MODBUS timeout (ms), Default : 2000
+          MODBUS timeout (ms), Default : 2000
         default: 2000
       - type: int
         name: WRITEDELAY
@@ -79,7 +79,7 @@ defs:
       - type: id
         name: MODBUSPORT
         description: |-
-          MODBUS Port Name 
+          MODBUS Port Name
 
       - type: str
         name: ASYNPORT
@@ -107,18 +107,18 @@ defs:
       - type: int
         name: DATA_LENGTH
         description: |-
-          The length of the Modbus data segment to be accessed. 
-          1 : 16-bit registers R/W, 
-          4 : 64-bit floats (4 16 bit), 
+          The length of the Modbus data segment to be accessed.
+          1 : 16-bit registers R/W,
+          4 : 64-bit floats (4 16 bit),
           100 : Int32 waveform record NELM = 100
         default: 52
 
       - type: int
         name: DATA_TYPE
         description: |-
-           Modbus register data types : 0,1,2,3,4,5,6,7,8,9,10,11,12 
-           0 : UINT16 Unsigned 16-bit binary integers, 
-           http://htmlpreview.github.io/?https://github.com/epics-modules/modbus/blob/master/documentation/modbusDoc.html 
+          Modbus register data types : 0,1,2,3,4,5,6,7,8,9,10,11,12
+          0 : UINT16 Unsigned 16-bit binary integers,
+          http://htmlpreview.github.io/?https://github.com/epics-modules/modbus/blob/master/documentation/modbusDoc.html
         default: 7
 
       - type: int
@@ -136,15 +136,14 @@ defs:
 
     pre_init:
       - value: |
-          # Create Modbus Port 
+          # Create Modbus Port
           drvModbusAsynConfigure("{{MODBUSPORT}}", "{{ASYNPORT}}", {{SERVER_ADDR}}, {{FUNC_CODE}}, {{STARTADDR}}, {{DATA_LENGTH}}, {{DATA_TYPE}}, {{POLL_DELAY}}, "{{MODBUS_TYPE}}")
 
-
-## modbusSensorTemplate
+  ## modbusSensorTemplate
   - name: modbusFloatReadout
     description: |-
       This will create floating point records
-    args:  
+    args:
       - type: str
         name: P
         description: Device Prefix
@@ -153,7 +152,7 @@ defs:
         description: Device Suffix
       - type: str
         name: PORT
-        description: Port name for the detector 
+        description: Port name for the detector
       - type: str
         name: DESC
         description: |-
@@ -162,7 +161,7 @@ defs:
       - type: int
         name: OFFSET
         description: |-
-           OFFSET register address
+          OFFSET register address
       - type: str
         name: EGU
         description: |-
@@ -200,7 +199,7 @@ defs:
   - name: modbusIntReadout
     description: |-
       This will create int32 point records
-    args:  
+    args:
       - type: str
         name: P
         description: Device Prefix
@@ -209,7 +208,7 @@ defs:
         description: Device Suffix
       - type: str
         name: PORT
-        description: Port name for the detector 
+        description: Port name for the detector
       - type: str
         name: DESC
         description: |-
@@ -218,7 +217,7 @@ defs:
       - type: int
         name: OFFSET
         description: |-
-            OFFSET register address
+          OFFSET register address
       - type: str
         name: EGU
         description: |-
@@ -242,7 +241,7 @@ defs:
       - type: str
         name: SCAN
         description: |-
-          Scan Mode 
+          Scan Mode
         default: "I/O Intr"
       - type: float
         name: EGUL
@@ -269,4 +268,4 @@ defs:
           EGUL:
           EGUF:
           SCAN:
-          MODBUS_DATA: INT32_LE    
+          MODBUS_DATA: INT32_LE
