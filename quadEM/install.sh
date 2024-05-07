@@ -10,7 +10,7 @@ FOLDER=$(dirname $(readlink -f $0))
 set -xe
 
 # get the source and fix up the configure/RELEASE files
-ibek support git-clone ${NAME} ${VERSION} --org https://gitlab.diamond.ac.uk/controls/support/
+ibek support git-clone ${NAME} ${VERSION}
 
 ibek support register ${NAME}
 
