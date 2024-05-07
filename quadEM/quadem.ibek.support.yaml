@@ -59,6 +59,15 @@ defs:
       - value: |
           # Increase precision of sample time for TetrAMM
           dbpf("{{P}}{{R}}SampleTime_RBV.PREC", "5")
+
+    pvi:
+      yaml_path: drvQuadEM.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: "$(P)$(R)"
+
   #
   # WARNING - non print commands in Initialise not parsed
   - name: Plugins

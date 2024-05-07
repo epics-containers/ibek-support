@@ -11,7 +11,6 @@ set -xe
 
 # get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION} --org https://gitlab.diamond.ac.uk/controls/support/
-rm -r ${SUPPORT}/quadEM/etc
 
 ibek support register ${NAME}
 
