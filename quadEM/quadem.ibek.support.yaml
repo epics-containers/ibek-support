@@ -1,14 +1,12 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/2.0.2/ibek.support.schema.json
 
 module: quadEM
 
 defs:
-
   - name: quadEM_TimeSeries
     description: |-
       Create a time series and FFT for each channel using ADCore
     args:
-
       - type: id
         name: PORT
         description: |-
@@ -44,14 +42,12 @@ defs:
         default: true
 
     databases:
-
       - file: $(QUADEM)/db/TimeSeriesPlugins_archiving.template
         args:
           P: "{{ DEVICE.P }}"
           R: "{{ DEVICE.R }}"
 
     pre_init:
-
       - value: |
           # ADCore path for time series and FFTs
           epicsEnvSet "EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db"
@@ -71,11 +67,10 @@ defs:
           NDStatsConfigure("{{FFTSTATSPORT}}", 16, 0, {{FFTPORT}}, 0 , 50, 0)
           NDTimeSeriesConfigure("{{FFTSTATSPORT}}_TS", 16, 0, {{FFTSTATSPORT}}, 1 , 23)
           dbLoadRecords("{{template}}", "{{args}}")
- # TODO - MISSING ARGS: FFTSTATSPORT, NDARRAY_PORT, FFTPORT, SERIES, args, template
- # WARNING - non print commands in Initialise not parsed
+    # TODO - MISSING ARGS: FFTSTATSPORT, NDARRAY_PORT, FFTPORT, SERIES, args, template
+    # WARNING - non print commands in Initialise not parsed
 
     post_init:
-
       - value: |
           # Setting correct display precision for viewing
           dbpf("{{P}}{{R}}TS:TSTimePerPoint.PREC", "5")
@@ -90,14 +85,13 @@ defs:
           dbpf("{{P}}{{R}}TS:TSNumPoints", "{{NUM_TS}}")
           # Suppress zero frequency DC in FFT by default
           dbpf("{{fftDcPv}}", "1")
- # TODO - MISSING ARGS: fftDcPv
- # WARNING - non print commands in Initialise not parsed
+  # TODO - MISSING ARGS: fftDcPv
+  # WARNING - non print commands in Initialise not parsed
 
   - name: TetrAMM
     description: |-
       TODO:ADD DESCRIPTION
     args:
-
       - type: id
         name: PORT
         description: |-
@@ -132,7 +126,6 @@ defs:
         default: 172.23.253.12:10001
 
     databases:
-
       - file: $(QUADEM)/db/TetrAMM.template
         args:
           P:
@@ -140,24 +133,21 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # drvTetrAMMConfigure(portName, IPportName, RingSize)
           drvTetrAMMConfigure("{{PORT}}", "{{PORT}}ip", {{RING_SIZE}})
 
     post_init:
-
       - value: |
           # Increase precision of sample time for TetrAMM
           dbpf("{{P}}{{R}}SampleTime_RBV.PREC", "5")
- # 
- # WARNING - non print commands in Initialise not parsed
+  #
+  # WARNING - non print commands in Initialise not parsed
 
   - name: statPlugins
     description: |-
       This plugin instantiates 11 stats plugins for Current, Sum, Diff and Pos
     args:
-
       - type: int
         name: STAT_NCHAN
         description: |-
@@ -249,7 +239,6 @@ defs:
         default: $(PORT)_TS
 
     databases:
-
       - file: $(QUADEM)/db/statPlugins_archiving.template
         args:
           P:
@@ -276,7 +265,6 @@ defs:
     description: |-
       This plugin instantiates 11 array plugins for Current, Sum, Diff and Pos
     args:
-
       - type: id
         name: PORTPREFIX
         description: |-
@@ -340,7 +328,6 @@ defs:
           I/O Intr:
 
     databases:
-
       - file: $(ADCORE)/db/NDStdArrays.template
         args:
           NDARRAY_PORT:
@@ -360,7 +347,6 @@ defs:
     description: |-
       Create a AH401B quadEM detector
     args:
-
       - type: str
         name: P
         description: |-
@@ -388,7 +374,6 @@ defs:
           Asyn Port name
 
     databases:
-
       - file: $(QUADEM)/db/AH401B.template
         args:
           P:
@@ -402,7 +387,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # drvAHxxxConfigure(QEPortName, IPPortName, RingBufferSize)
           drvAHxxxConfigure("{{PORT}}", {{IPPORTNAME}}, {{RINGBUFFERSIZE}})
@@ -411,7 +395,6 @@ defs:
     description: |-
       Create a AH501 quadEM detector
     args:
-
       - type: str
         name: P
         description: |-
@@ -439,7 +422,6 @@ defs:
           Asyn Port name
 
     databases:
-
       - file: $(QUADEM)/db/AH501.template
         args:
           P:
@@ -453,7 +435,6 @@ defs:
           PORT:
 
     pre_init:
-
       - value: |
           # drvAHxxxConfigure(QEPortName, IPPortName, RingBufferSize)
           drvAHxxxConfigure("{{PORT}}", {{IPPORTNAME}}, {{RINGBUFFERSIZE}})
