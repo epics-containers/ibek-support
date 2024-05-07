@@ -151,14 +151,9 @@ defs:
       This plugin instantiates 11 stats plugins for Current, Sum, Diff and Pos
     args:
       - type: object
-        name: NDARRAY_PORT
+        name: DEVICE
         description: |-
-          The quadEM.AH501 or quadEM.401 port to connect to
-
-      - type: str
-        name: P
-        description: |-
-          Template argument
+          Reference to the parent quadEM device
 
       - type: id
         name: PORTPREFIX
@@ -199,14 +194,14 @@ defs:
           {%- set r_val_stats = "Cur%d" % loop.index if tab.startswith("I") else tab -%}
           {%- set r_val_array = "ARR%d" % loop.index if tab.startswith("I") else "ARR%s" % tab -%}
 
-          NDStatsConfigure({{PORTPREFIX}}.STATS.{{tab}}, {{QUEUE}}, 0, {{NDARRAY_PORT}}, {{loop.index0}}, 0, 0, 0, 0, 1)
-          dbLoadRecords("$(ADCORE)/db/NDStats.template", "P={{P}},R=:{{r_val_stats}}:, PORT={{PORTPREFIX}}.STATS.{{tab}}, ADDR=0, NDARRAY_PORT={{NDARRAY_PORT}}, NDARRAY_ADDR={{loop.index0}}, NCHANS={{STAT_NCHAN}}, ENABLED=1, XSIZE={{STAT_XSIZE}}, YSIZE=0, HIST_SIZE={{HIST_SIZE}}")
+          NDStatsConfigure({{PORTPREFIX}}.STATS.{{tab}}, {{QUEUE}}, 0, {{DEVICE.PORT}}, {{loop.index0}}, 0, 0, 0, 0, 1)
+          dbLoadRecords("$(ADCORE)/db/NDStats.template", "P={{DEVICE.P}},R=:{{r_val_stats}}:, PORT={{PORTPREFIX}}.STATS.{{tab}}, ADDR=0, NDARRAY_PORT={{DEVICE.PORT}}, NDARRAY_ADDR={{loop.index0}}, NCHANS={{STAT_NCHAN}}, ENABLED=1, XSIZE={{STAT_XSIZE}}, YSIZE=0, HIST_SIZE={{HIST_SIZE}}")
 
           NDTimeSeriesConfigure({{PORTPREFIX}}.STATS.{{tab}}_TS, {{QUEUE}}, 0, {{PORTPREFIX}}.STATS.{{tab}}, 1, 23)
-          dbLoadRecords("$(ADCORE)/db/NDTimeSeries.template",  "P={{P}}, R=:{{r_val_stats}}:TS:, PORT={{PORTPREFIX}}.STATS.{{tab}}_TS,ADDR=1, NDARRAY_PORT={{PORTPREFIX}}.{{tab}}, NDARRAY_ADDR=0, NCHANS={{STAT_NCHAN}}, ENABLED=1")
+          dbLoadRecords("$(ADCORE)/db/NDTimeSeries.template",  "P={{DEVICE.P}}, R=:{{r_val_stats}}:TS:, PORT={{PORTPREFIX}}.STATS.{{tab}}_TS,ADDR=1, NDARRAY_PORT={{PORTPREFIX}}.{{tab}}, NDARRAY_ADDR=0, NCHANS={{STAT_NCHAN}}, ENABLED=1")
 
-          NDStdArraysConfigure({{PORTPREFIX}}.ARRAYS.{{tab}}, {{QUEUE}}, 0, {{NDARRAY_PORT}}, {{loop.index0}}, 0, 0, 0, 0, 1)
-          dbLoadRecords("$(ADCORE)/db/NDStdArrays.template", "P={{P}},R=:{{r_val_array}}:, PORT={{PORTPREFIX}}.ARRAYS.{{tab}},ADDR=0, NDARRAY_PORT={{NDARRAY_PORT}}, NDARRAY_ADDR={{loop.index0}}, ENABLED=1, FTVL=DOUBLE, TYPE=Float64, NCHANS={{STAT_NCHAN}}, XSIZE={{STAT_XSIZE}}, YSIZE=0, HIST_SIZE={{HIST_SIZE}}, NELEMENTS={{STAT_XSIZE}}")
+          NDStdArraysConfigure({{PORTPREFIX}}.ARRAYS.{{tab}}, {{QUEUE}}, 0, {{DEVICE.PORT}}, {{loop.index0}}, 0, 0, 0, 0, 1)
+          dbLoadRecords("$(ADCORE)/db/NDStdArrays.template", "P={{DEVICE.P}},R=:{{r_val_array}}:, PORT={{PORTPREFIX}}.ARRAYS.{{tab}},ADDR=0, NDARRAY_PORT={{DEVICE.PORT}}, NDARRAY_ADDR={{loop.index0}}, ENABLED=1, FTVL=DOUBLE, TYPE=Float64, NCHANS={{STAT_NCHAN}}, XSIZE={{STAT_XSIZE}}, YSIZE=0, HIST_SIZE={{HIST_SIZE}}, NELEMENTS={{STAT_XSIZE}}")
           {% endfor %}
 
   - name: arrayPlugins
