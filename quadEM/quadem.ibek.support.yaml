@@ -122,8 +122,7 @@ defs:
       - type: str
         name: IP
         description: |-
-          ..
-        default: 172.23.253.12:10001
+          IP address of the TetrAMM device
 
     databases:
       - file: $(QUADEM)/db/TetrAMM.template
@@ -134,6 +133,10 @@ defs:
 
     pre_init:
       - value: |
+          drvAsynIPPortConfigure({{PORT}}ip, {{IP}}, 100, 0, 0)
+          asynOctetSetInputEos({{PORT}}ip, 0, "\r\n")
+          asynOctetSetOutputEos({{PORT}}ip, 0, "\r")
+
           # drvTetrAMMConfigure(portName, IPportName, RingSize)
           drvTetrAMMConfigure("{{PORT}}", "{{PORT}}ip", {{RING_SIZE}})
 
@@ -143,16 +146,10 @@ defs:
           dbpf("{{P}}{{R}}SampleTime_RBV.PREC", "5")
   #
   # WARNING - non print commands in Initialise not parsed
-
   - name: statPlugins
     description: |-
       This plugin instantiates 11 stats plugins for Current, Sum, Diff and Pos
     args:
-      - type: int
-        name: STAT_NCHAN
-        description: |-
-          Template argument
-
       - type: object
         name: NDARRAY_PORT
         description: |-
@@ -169,6 +166,11 @@ defs:
           The prefix for plugin asyn port names
 
       - type: int
+        name: STAT_NCHAN
+        description: |-
+          Template argument
+
+      - type: int
         name: STAT_XSIZE
         description: |-
           Template argument
@@ -177,89 +179,41 @@ defs:
         name: HIST_SIZE
         description: |-
           Template argumentCur1:
+        default: 256
+
+      - type: int
+        name: QUEUE
+        description: |-
+          length of NDArray queue
         default: 16
 
-      - type: bool
-        name: archive_tags
-        description: |-
-          Add archiver tags to small number of useful records
-        default: true
+    pre_init:
+      - when: first
+      - value: |
+          # NDStatsConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
+          # NDTimeSeriesConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxSignals)
 
-      - type: int
-        name: archive_scan_period
-        description: |-
-          Set scan period to be used for the records
-        default: 1
+      - value: |
+          NDStatsConfigure({{PORTPREFIX}}.I1, {{QUEUE}}, 0, {{NDARRAY_PORT}}, 0, 0, 0, 0, 0, 1)
+          dbLoadRecords("$(ADCORE)/db/NDStats.template", "P={{P}},R=:Cur1:, PORT={{PORTPREFIX}}.I1,ADDR=0, NDARRAY_PORT={{NDARRAY_PORT}}, NDARRAY_ADDR=0, NCHANS={{STAT_NCHAN}}, ENABLED=1, XSIZE={{STAT_XSIZE}}, YSIZE=0, HIST_SIZE={{HIST_SIZE}}")
 
-      - type: int
-        name: TIMEOUT
-        description: |-
-          Timeout
-        default: 1
+          NDTimeSeriesConfigure({{PORTPREFIX}}.I1_TS, {{QUEUE}}, 0, {{PORTPREFIX}}.I1, 1, 23)
+          dbLoadRecords("$(ADCORE)/db/NDTimeSeries.template",  "P={{P}}, R=:Cur1:TS:, PORT={{PORTPREFIX}}.I1_TS,ADDR=1, NDARRAY_PORT={{PORTPREFIX}}.I1, NDARRAY_ADDR=0, NCHANS={{STAT_NCHAN}}, ENABLED=1")
 
-      - type: int
-        name: ADDR
-        description: |-
-          Asyn Port address
-        default: 0
-
-      - type: int
-        name: NDARRAY_ADDR
-        description: |-
-          Input Array Address
-        default: 0
-
-      - type: int
-        name: ENABLED
-        description: |-
-          Plugin Enabled at startup?
-        default: 0
-
-      - type: enum
-        name: SCANRATE
-        description: |-
-          Specified scan rate for cpu intensive PVs
-        default: I/O Intr
-        values:
-          .1 second:
-          1 second:
-          10 second:
-          5 second:
-          Passive:
-          2 second:
-          .2 second:
-          .5 second:
-          Event:
-          I/O Intr:
-
-      - type: str
-        name: TS_PORT
-        description: |-
-          TS port
-        default: $(PORT)_TS
-
-    databases:
-      - file: $(QUADEM)/db/statPlugins_archiving.template
-        args:
-          P:
-          T: "{{ archive_scan_period }}"
-
-      - file: $(ADCORE)/db/NDStats.template
-        args:
-          NDARRAY_PORT:
-          XSIZE: "{{ STAT_XSIZE }}"
-          NCHANS: "{{ STAT_NCHAN }}"
-          NDARRAY_ADDR:
-          YSIZE: "0"
-          ENABLED:
-          HIST_SIZE:
-          PORT: "{{ PORTPREFIX }}.I1"
-          P:
-          R: "Cur1"
-          TIMEOUT:
-          TS_PORT:
-          SCANRATE:
-          ADDR:
+    # databases:
+    #   - file: $(ADCORE)/db/NDStats.template
+    #     args:
+    #       ADDR: "0"
+    #       ENABLED: "1"
+    #       HIST_SIZE:
+    #       NCHANS: "{{ STAT_NCHAN }}"
+    #       NDARRAY_ADDR: "0"
+    #       NDARRAY_PORT:
+    #       P:
+    #       PORT: "{{ PORTPREFIX }}.I1"
+    #       R: ":Cur1:"
+    #       XSIZE: "{{ STAT_XSIZE }}"
+    #       YSIZE: "0"
 
   - name: arrayPlugins
     description: |-
@@ -279,12 +233,6 @@ defs:
         name: NDARRAY_PORT
         description: |-
           Input NDArrayPort for plugins
-
-      - type: int
-        name: QUEUE
-        description: |-
-          Plugin queue size for NDArrays
-        default: 16
 
       - type: int
         name: TIMEOUT
