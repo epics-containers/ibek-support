@@ -1,0 +1,185 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/2.0.2/ibek.support.schema.json
+
+module: quadEM
+
+defs:
+  - name: quadEM_TimeSeries
+    description: |-
+      Create a time series and FFT for each channel using ADCore
+    args:
+      - type: id
+        name: PORT
+        description: |-
+          Asyn port name
+
+      - type: object
+        name: DEVICE
+        description: |-
+          The parent quadEM device to add TS records to
+
+      - type: int
+        name: NUM_TS
+        description: |-
+          Number of elements in time series
+        default: 2048
+
+      - type: int
+        name: NUM_FREQ
+        description: |-
+          Number of elements in FFT
+        default: 2048
+
+      - type: int
+        name: QUEUE
+        description: |-
+          Size of the queue
+        default: 16
+
+      - type: bool
+        name: ARCHIVE
+        description: |-
+          Add template with archive tags for useful PVs
+        default: true
+
+    databases:
+      - file: $(QUADEM)/db/TimeSeriesPlugins_archiving.template
+        args:
+          P: "{{ DEVICE.P }}"
+          R: "{{ DEVICE.R }}"
+
+    pre_init:
+      - value: |
+          # ADCore path for time series and FFTs
+          epicsEnvSet "EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db"
+          # TIME SERIES
+          NDTimeSeriesConfigure("{{PORT}}", {{QUEUE}}, 0, "{{NDARRAY_PORT}}", 11, 11)
+          # NDTimeSeries template
+          dbLoadRecords("$(ADCORE)/db/NDTimeSeries.template", "P={{P}}, R={{R}}TS:, PORT={{PORT}}, ADDR=0, TIMEOUT=1, NDARRAY_PORT={{NDARRAY_PORT}}, NDARRAY_ADDR=11, NCHANS={{NUM_TS}}, TIME_LINK={{P}}{{R}}SampleTime_RBV CP MS, ENABLED=1")
+          # NDTimeSeriesN template for each channel
+          # {{SERIES}}
+
+          # FFTs
+          # {{SERIES}}
+          dbLoadRecords("{{template}}", "{{args}}")
+
+          # FFT NDStats
+          # {{SERIES}}
+          NDStatsConfigure("{{FFTSTATSPORT}}", 16, 0, {{FFTPORT}}, 0 , 50, 0)
+          NDTimeSeriesConfigure("{{FFTSTATSPORT}}_TS", 16, 0, {{FFTSTATSPORT}}, 1 , 23)
+          dbLoadRecords("{{template}}", "{{args}}")
+    # TODO - MISSING ARGS: FFTSTATSPORT, NDARRAY_PORT, FFTPORT, SERIES, args, template
+    # WARNING - non print commands in Initialise not parsed
+
+    post_init:
+      - value: |
+          # Setting correct display precision for viewing
+          dbpf("{{P}}{{R}}TS:TSTimePerPoint.PREC", "5")
+          dbpf("{{P}}{{R}}TS:TSTimePerPoint_RBV.PREC", "5")
+          dbpf("{{P}}{{R}}TS:TSAveragingTime.PREC", "5")
+          dbpf("{{P}}{{R}}TS:TSAveragingTime_RBV.PREC", "5")
+          # Setting averaging time for up to 10kHz
+          dbpf("{{P}}{{R}}TS:TSAveragingTime", "0.00005")
+          # Defaulting to circular buffer
+          dbpf("{{P}}{{R}}TS:TSAcquireMode", "1")
+          # Set channel size in Time series
+          dbpf("{{P}}{{R}}TS:TSNumPoints", "{{NUM_TS}}")
+          # Suppress zero frequency DC in FFT by default
+          dbpf("{{fftDcPv}}", "1")
+  # TODO - MISSING ARGS: fftDcPv
+  # WARNING - non print commands in Initialise not parsed
+
+  - name: AH401B
+    description: |-
+      Create a AH401B quadEM detectorS
+    args:
+      - type: str
+        name: P
+        description: |-
+          Device Prefix
+
+      - type: str
+        name: R
+        description: |-
+          Device Suffix
+
+      - type: str
+        name: IPPORTNAME
+        description: |-
+          The name of the asyn communication IP port to the AH401B
+
+      - type: int
+        name: RINGBUFFERSIZE
+        description: |-
+          The number of samples to hold in the input ring buffer
+        default: 10000
+
+      - type: id
+        name: PORT
+        description: |-
+          Asyn Port name
+
+    databases:
+      - file: $(QUADEM)/db/AH401B.template
+        args:
+          P:
+          R:
+          PORT:
+
+      - file: $(QUADEM)/db/quadEM_GUI.template
+        args:
+          P:
+          R:
+          PORT:
+
+    pre_init:
+      - value: |
+          # drvAHxxxConfigure(QEPortName, IPPortName, RingBufferSize)
+          drvAHxxxConfigure("{{PORT}}", {{IPPORTNAME}}, {{RINGBUFFERSIZE}})
+
+  - name: AH501
+    description: |-
+      Create a AH501 quadEM detector
+    args:
+      - type: str
+        name: P
+        description: |-
+          Device Prefix
+
+      - type: str
+        name: R
+        description: |-
+          Device Suffix
+
+      - type: str
+        name: IPPORTNAME
+        description: |-
+          The name of the asyn communication IP port to the AH501
+
+      - type: int
+        name: RINGBUFFERSIZE
+        description: |-
+          The number of samples to hold in the input ring buffer
+        default: 10000
+
+      - type: id
+        name: PORT
+        description: |-
+          Asyn Port name
+
+    databases:
+      - file: $(QUADEM)/db/AH501.template
+        args:
+          P:
+          R:
+          PORT:
+
+      - file: $(QUADEM)/db/quadEM_GUI.template
+        args:
+          P:
+          R:
+          PORT:
+
+    pre_init:
+      - value: |
+          # drvAHxxxConfigure(QEPortName, IPPortName, RingBufferSize)
+          drvAHxxxConfigure("{{PORT}}", {{IPPORTNAME}}, {{RINGBUFFERSIZE}})
