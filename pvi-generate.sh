@@ -50,7 +50,7 @@ pvi regroup ADDriver.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 pvi convert device --template ${ADCORE}/db/NDPva.template . ${ADCORE}/ADApp/pluginSrc/NDPluginPva.h
 pvi regroup NDPluginPva.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 
-pvi convert device --template ${ADCORE}/db/NDFileHDF5.template . ${ADCORE}/ADApp/pluginSrc/NDFileHDF5.h
+pvi convert device --template ${ADCORE}/db/NDFileHDF5.template --template ${ADCORE}/db/NDFile.template . ${ADCORE}/ADApp/pluginSrc/NDFileHDF5.h
 pvi regroup NDFileHDF5.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 
 ADGenICam=/epics/support/ADGenICam
