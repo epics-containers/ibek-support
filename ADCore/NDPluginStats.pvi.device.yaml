@@ -6,14 +6,15 @@ children:
   name: ADPlugins
   layout:
     type: Grid
+    labelled: true
   children:
 
   - type: SignalRW
     name: Net
-    pv: Net
-    widget:
+    write_pv: $(P)$(R)Net
+    write_widget:
       type: TextWrite
-    read_pv: Net_RBV
+    read_pv: $(P)$(R)Net_RBV
     read_widget:
       type: TextRead
 
@@ -21,23 +22,24 @@ children:
   name: ADReadout
   layout:
     type: Grid
+    labelled: true
   children:
 
   - type: SignalRW
     name: MinY
-    pv: MinY
-    widget:
+    write_pv: $(P)$(R)MinY
+    write_widget:
       type: TextWrite
-    read_pv: MinY_RBV
+    read_pv: $(P)$(R)MinY_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: MinX
-    pv: MinX
-    widget:
+    write_pv: $(P)$(R)MinX
+    write_widget:
       type: TextWrite
-    read_pv: MinX_RBV
+    read_pv: $(P)$(R)MinX_RBV
     read_widget:
       type: TextRead
 
@@ -45,71 +47,72 @@ children:
   name: NDPluginTimeSeriesN
   layout:
     type: Grid
+    labelled: true
   children:
 
   - type: SignalR
     name: TSMinValue
-    pv: TSMinValue
-    widget:
+    read_pv: $(P)$(R)TSMinValue
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSMaxValue
-    pv: TSMaxValue
-    widget:
+    read_pv: $(P)$(R)TSMaxValue
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSMeanValue
-    pv: TSMeanValue
-    widget:
+    read_pv: $(P)$(R)TSMeanValue
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSTotal
-    pv: TSTotal
-    widget:
+    read_pv: $(P)$(R)TSTotal
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSNet
-    pv: TSNet
-    widget:
+    read_pv: $(P)$(R)TSNet
+    read_widget:
       type: TextRead
 
   - type: SignalRW
     name: MinValue
-    pv: MinValue
-    widget:
+    write_pv: $(P)$(R)MinValue
+    write_widget:
       type: TextWrite
-    read_pv: MinValue_RBV
+    read_pv: $(P)$(R)MinValue_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: MaxValue
-    pv: MaxValue
-    widget:
+    write_pv: $(P)$(R)MaxValue
+    write_widget:
       type: TextWrite
-    read_pv: MaxValue_RBV
+    read_pv: $(P)$(R)MaxValue_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: MeanValue
-    pv: MeanValue
-    widget:
+    write_pv: $(P)$(R)MeanValue
+    write_widget:
       type: TextWrite
-    read_pv: MeanValue_RBV
+    read_pv: $(P)$(R)MeanValue_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: Total
-    pv: Total
-    widget:
+    write_pv: $(P)$(R)Total
+    write_widget:
       type: TextWrite
-    read_pv: Total_RBV
+    read_pv: $(P)$(R)Total_RBV
     read_widget:
       type: TextRead
 
@@ -117,14 +120,15 @@ children:
   name: NDROIStat8
   layout:
     type: Grid
+    labelled: true
   children:
 
   - type: SignalRW
     name: BgdWidth
-    pv: BgdWidth
-    widget:
+    write_pv: $(P)$(R)BgdWidth
+    write_widget:
       type: TextWrite
-    read_pv: BgdWidth_RBV
+    read_pv: $(P)$(R)BgdWidth_RBV
     read_widget:
       type: TextRead
 
@@ -132,448 +136,451 @@ children:
   name: NDStats
   layout:
     type: Grid
+    labelled: true
   children:
 
   - type: SignalRW
     name: ComputeStatistics
-    pv: ComputeStatistics
-    widget:
-      type: CheckBox
-    read_pv: ComputeStatistics_RBV
+    write_pv: $(P)$(R)ComputeStatistics
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)ComputeStatistics_RBV
     read_widget:
       type: LED
 
   - type: SignalRW
     name: ComputeProfiles
-    pv: ComputeProfiles
-    widget:
-      type: CheckBox
-    read_pv: ComputeProfiles_RBV
+    write_pv: $(P)$(R)ComputeProfiles
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)ComputeProfiles_RBV
     read_widget:
       type: LED
 
   - type: SignalR
     name: ProfileSizeX
-    pv: ProfileSizeX_RBV
-    widget:
+    read_pv: $(P)$(R)ProfileSizeX_RBV
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: ProfileSizeY
-    pv: ProfileSizeY_RBV
-    widget:
+    read_pv: $(P)$(R)ProfileSizeY_RBV
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: ProfileAverageX
-    pv: ProfileAverageX_RBV
-    widget:
+    read_pv: $(P)$(R)ProfileAverageX_RBV
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: ProfileAverageY
-    pv: ProfileAverageY_RBV
-    widget:
+    read_pv: $(P)$(R)ProfileAverageY_RBV
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: ProfileThresholdX
-    pv: ProfileThresholdX_RBV
-    widget:
+    read_pv: $(P)$(R)ProfileThresholdX_RBV
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: ProfileThresholdY
-    pv: ProfileThresholdY_RBV
-    widget:
+    read_pv: $(P)$(R)ProfileThresholdY_RBV
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: ProfileCentroidX
-    pv: ProfileCentroidX_RBV
-    widget:
+    read_pv: $(P)$(R)ProfileCentroidX_RBV
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: ProfileCentroidY
-    pv: ProfileCentroidY_RBV
-    widget:
+    read_pv: $(P)$(R)ProfileCentroidY_RBV
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: ProfileCursorX
-    pv: ProfileCursorX_RBV
-    widget:
+    read_pv: $(P)$(R)ProfileCursorX_RBV
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: ProfileCursorY
-    pv: ProfileCursorY_RBV
-    widget:
+    read_pv: $(P)$(R)ProfileCursorY_RBV
+    read_widget:
       type: TextRead
 
   - type: SignalRW
     name: CursorX
-    pv: CursorX
-    widget:
+    write_pv: $(P)$(R)CursorX
+    write_widget:
       type: TextWrite
-    read_pv: CursorX_RBV
+    read_pv: $(P)$(R)CursorX_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: CursorY
-    pv: CursorY
-    widget:
+    write_pv: $(P)$(R)CursorY
+    write_widget:
       type: TextWrite
-    read_pv: CursorY_RBV
+    read_pv: $(P)$(R)CursorY_RBV
     read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSMinX
-    pv: TSMinX
-    widget:
+    read_pv: $(P)$(R)TSMinX
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSMinY
-    pv: TSMinY
-    widget:
+    read_pv: $(P)$(R)TSMinY
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSMaxX
-    pv: TSMaxX
-    widget:
+    read_pv: $(P)$(R)TSMaxX
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSMaxY
-    pv: TSMaxY
-    widget:
+    read_pv: $(P)$(R)TSMaxY
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSTimestamp
-    pv: TSTimestamp
-    widget:
+    read_pv: $(P)$(R)TSTimestamp
+    read_widget:
       type: TextRead
 
   - type: SignalRW
     name: MaxX
-    pv: MaxX
-    widget:
+    write_pv: $(P)$(R)MaxX
+    write_widget:
       type: TextWrite
-    read_pv: MaxX_RBV
+    read_pv: $(P)$(R)MaxX_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: MaxY
-    pv: MaxY
-    widget:
+    write_pv: $(P)$(R)MaxY
+    write_widget:
       type: TextWrite
-    read_pv: MaxY_RBV
+    read_pv: $(P)$(R)MaxY_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: ComputeHistogram
-    pv: ComputeHistogram
-    widget:
-      type: CheckBox
-    read_pv: ComputeHistogram_RBV
+    write_pv: $(P)$(R)ComputeHistogram
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)ComputeHistogram_RBV
     read_widget:
       type: LED
 
   - type: SignalRW
     name: HistSize
-    pv: HistSize
-    widget:
+    write_pv: $(P)$(R)HistSize
+    write_widget:
       type: TextWrite
-    read_pv: HistSize_RBV
+    read_pv: $(P)$(R)HistSize_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: ComputeCentroid
-    pv: ComputeCentroid
-    widget:
-      type: CheckBox
-    read_pv: ComputeCentroid_RBV
+    write_pv: $(P)$(R)ComputeCentroid
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)ComputeCentroid_RBV
     read_widget:
       type: LED
 
   - type: SignalRW
     name: HistMin
-    pv: HistMin
-    widget:
+    write_pv: $(P)$(R)HistMin
+    write_widget:
       type: TextWrite
-    read_pv: HistMin_RBV
+    read_pv: $(P)$(R)HistMin_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: CentroidThreshold
-    pv: CentroidThreshold
-    widget:
+    write_pv: $(P)$(R)CentroidThreshold
+    write_widget:
       type: TextWrite
-    read_pv: CentroidThreshold_RBV
+    read_pv: $(P)$(R)CentroidThreshold_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: HistMax
-    pv: HistMax
-    widget:
+    write_pv: $(P)$(R)HistMax
+    write_widget:
       type: TextWrite
-    read_pv: HistMax_RBV
+    read_pv: $(P)$(R)HistMax_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: HistBelow
-    pv: HistBelow
-    widget:
+    write_pv: $(P)$(R)HistBelow
+    write_widget:
       type: TextWrite
-    read_pv: HistBelow_RBV
+    read_pv: $(P)$(R)HistBelow_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: HistAbove
-    pv: HistAbove
-    widget:
+    write_pv: $(P)$(R)HistAbove
+    write_widget:
       type: TextWrite
-    read_pv: HistAbove_RBV
+    read_pv: $(P)$(R)HistAbove_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: HistEntropy
-    pv: HistEntropy
-    widget:
+    write_pv: $(P)$(R)HistEntropy
+    write_widget:
       type: TextWrite
-    read_pv: HistEntropy_RBV
+    read_pv: $(P)$(R)HistEntropy_RBV
     read_widget:
       type: TextRead
 
   - type: SignalR
     name: Histogram
-    pv: Histogram_RBV
-    widget:
+    read_pv: $(P)$(R)Histogram_RBV
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: HistogramX
-    pv: HistogramX_RBV
-    widget:
+    read_pv: $(P)$(R)HistogramX_RBV
+    read_widget:
       type: TextRead
 
   - type: SignalRW
     name: Eccentricity
-    pv: Eccentricity
-    widget:
+    write_pv: $(P)$(R)Eccentricity
+    write_widget:
       type: TextWrite
-    read_pv: Eccentricity_RBV
+    read_pv: $(P)$(R)Eccentricity_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: Orientation
-    pv: Orientation
-    widget:
+    write_pv: $(P)$(R)Orientation
+    write_widget:
       type: TextWrite
-    read_pv: Orientation_RBV
+    read_pv: $(P)$(R)Orientation_RBV
     read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSSigma
-    pv: TSSigma
-    widget:
+    read_pv: $(P)$(R)TSSigma
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSCentroidTotal
-    pv: TSCentroidTotal
-    widget:
+    read_pv: $(P)$(R)TSCentroidTotal
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSCentroidX
-    pv: TSCentroidX
-    widget:
+    read_pv: $(P)$(R)TSCentroidX
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSCentroidY
-    pv: TSCentroidY
-    widget:
+    read_pv: $(P)$(R)TSCentroidY
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSSigmaX
-    pv: TSSigmaX
-    widget:
+    read_pv: $(P)$(R)TSSigmaX
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSSigmaY
-    pv: TSSigmaY
-    widget:
+    read_pv: $(P)$(R)TSSigmaY
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSSigmaXY
-    pv: TSSigmaXY
-    widget:
+    read_pv: $(P)$(R)TSSigmaXY
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSSkewX
-    pv: TSSkewX
-    widget:
+    read_pv: $(P)$(R)TSSkewX
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSSkewY
-    pv: TSSkewY
-    widget:
+    read_pv: $(P)$(R)TSSkewY
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSKurtosisX
-    pv: TSKurtosisX
-    widget:
+    read_pv: $(P)$(R)TSKurtosisX
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSKurtosisY
-    pv: TSKurtosisY
-    widget:
+    read_pv: $(P)$(R)TSKurtosisY
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSEccentricity
-    pv: TSEccentricity
-    widget:
+    read_pv: $(P)$(R)TSEccentricity
+    read_widget:
       type: TextRead
 
   - type: SignalR
     name: TSOrientation
-    pv: TSOrientation
-    widget:
+    read_pv: $(P)$(R)TSOrientation
+    read_widget:
       type: TextRead
 
   - type: SignalRW
     name: CentroidTotal
-    pv: CentroidTotal
-    widget:
+    write_pv: $(P)$(R)CentroidTotal
+    write_widget:
       type: TextWrite
-    read_pv: CentroidTotal_RBV
+    read_pv: $(P)$(R)CentroidTotal_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: CentroidX
-    pv: CentroidX
-    widget:
+    write_pv: $(P)$(R)CentroidX
+    write_widget:
       type: TextWrite
-    read_pv: CentroidX_RBV
+    read_pv: $(P)$(R)CentroidX_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: CentroidY
-    pv: CentroidY
-    widget:
+    write_pv: $(P)$(R)CentroidY
+    write_widget:
       type: TextWrite
-    read_pv: CentroidY_RBV
+    read_pv: $(P)$(R)CentroidY_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: SigmaX
-    pv: SigmaX
-    widget:
+    write_pv: $(P)$(R)SigmaX
+    write_widget:
       type: TextWrite
-    read_pv: SigmaX_RBV
+    read_pv: $(P)$(R)SigmaX_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: SigmaY
-    pv: SigmaY
-    widget:
+    write_pv: $(P)$(R)SigmaY
+    write_widget:
       type: TextWrite
-    read_pv: SigmaY_RBV
+    read_pv: $(P)$(R)SigmaY_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: SigmaXY
-    pv: SigmaXY
-    widget:
+    write_pv: $(P)$(R)SigmaXY
+    write_widget:
       type: TextWrite
-    read_pv: SigmaXY_RBV
+    read_pv: $(P)$(R)SigmaXY_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: SkewX
-    pv: SkewX
-    widget:
+    write_pv: $(P)$(R)SkewX
+    write_widget:
       type: TextWrite
-    read_pv: SkewX_RBV
+    read_pv: $(P)$(R)SkewX_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: SkewY
-    pv: SkewY
-    widget:
+    write_pv: $(P)$(R)SkewY
+    write_widget:
       type: TextWrite
-    read_pv: SkewY_RBV
+    read_pv: $(P)$(R)SkewY_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: KurtosisX
-    pv: KurtosisX
-    widget:
+    write_pv: $(P)$(R)KurtosisX
+    write_widget:
       type: TextWrite
-    read_pv: KurtosisX_RBV
+    read_pv: $(P)$(R)KurtosisX_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
     name: KurtosisY
-    pv: KurtosisY
-    widget:
+    write_pv: $(P)$(R)KurtosisY
+    write_widget:
       type: TextWrite
-    read_pv: KurtosisY_RBV
+    read_pv: $(P)$(R)KurtosisY_RBV
     read_widget:
       type: TextRead
 
 - type: Group
   name: NDPluginStatsMisc
+  label: NDPluginStats Ungrouped
   layout:
     type: Grid
+    labelled: true
   children:
 
   - type: SignalR
     name: CursorVal
-    pv: CursorVal
-    widget:
+    read_pv: $(P)$(R)CursorVal
+    read_widget:
       type: TextRead
 
   - type: SignalRW
     name: SigmaValue
-    pv: SigmaValue
-    widget:
+    write_pv: $(P)$(R)SigmaValue
+    write_widget:
       type: TextWrite
-    read_pv: SigmaValue_RBV
+    read_pv: $(P)$(R)Sigma_RBV
     read_widget:
       type: TextRead
