@@ -1,0 +1,256 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.5.0/ibek.support.schema.json
+
+# #errlogInit(5000)
+# < envPaths
+# # Tell EPICS all about the record types, device-support modules, drivers,
+# # etc.
+# dbLoadDatabase("../../dbd/newport.dbd")
+# newport_registerRecordDeviceDriver(pdbbase)
+
+# ### Motors
+# dbLoadTemplate "motor.substitutions.SMC100"
+
+# ### Serial port setup
+# drvAsynSerialPortConfigure("serial1", "/dev/ttyS0", 0, 0, 0)
+# asynSetOption(serial1,0,baud,57600)
+# asynOctetSetInputEos("serial1",0,"\r\n")
+# asynOctetSetOutputEos("serial1",0,"\r\n")
+
+# ### Newport SMC100 support
+# # (driver port, serial port, axis num, ms mov poll, ms idle poll, egu per step)
+# SMC100CreateController("SMC100_1", "serial1",1, 100, 0, "0.00005")
+
+# file "$(TOP)/db/basic_asyn_motor.db"
+# {
+# pattern
+# {P,      N,     M,         DTYP,      PORT,  ADDR,    DESC,        EGU,     DIR,  VELO,  VBAS,  ACCL,  BDST,  BVEL,  BACC,  MRES,  PREC,  DHLM,  DLLM,  INIT, RTRY}
+# {IOC:,  1,  "m$(N)",  "asynMotor",  "SMC100_1",  0,  "GTS30V",      mm,     Pos,  1,     0,    .2,    0,     .5,     .2,    0.00001,  6,     25,   -5,  ""}
+# }
+# iocInit
+
+module: motorNewport
+
+defs:
+  - name: SMC100CreateController
+    description: |-
+      Creates a SMC100 motion controller connected to an ethernetToSerialServer
+
+    args:
+      - type: id
+        name: controllerName
+        description: |-
+          The name of the controller and its Asyn Port Name
+      
+      - type: str
+        name: P
+        description: |-
+          Device PV Prefix
+
+      - type: str
+        name: IP
+        description: |-
+          IP address of the ethernet2serial
+        default: 127.0.0.1 ## localhost
+
+      - type: int
+        name: TCPPORT
+        description: |-
+          Port of the ethernet2serial
+        default: 4001
+      
+      - type: int
+        name: POLL
+        description: |-
+          Movement poll ms
+        default: 100
+      
+      - type: float
+        name: EGUXSTEP
+        description: |-
+          EGU PER STEP
+        default: 0.00005
+
+      - type: int
+        name: ASYNPRIO
+        description: |-
+          ASYN   PRIORITY, Default : 0
+        default: 0
+
+      - type: int
+        name: AUTOCONNECT
+        description: |-
+          Asyn auto connect
+          0: Auto connection
+          1: no Auto connection
+        default: 0
+
+      - type: int
+        name: NOPRECESSESOS
+        description: |-
+          ASYN   noProcessEos, Default : 0
+          https://epics.anl.gov/tech-talk/2020/msg01705.php
+        default: 0
+
+      
+
+      - type: int
+        name: numAxes
+        description: |-
+          The number of axes to create
+
+    pre_init:
+
+      - value: |
+          # epicsEnvSet "STREAM_PROTOCOL_PATH", "$(MOTORNEWPORT)/protocol/"
+          # Create Asyn Port
+          drvAsynIPPortConfigure("{{controllerName}}_ASYN", "{{IP}}:{{TCPPORT}}", {{ASYNPRIO}}, {{AUTOCONNECT}}, {{NOPRECESSESOS}})
+          # asynInterposeEosConfig("{{controllerName}}_ASYN",0,2000,0)
+          SMC100CreateController("SMC100_{{controllerName}}", "{{controllerName}}_ASYN","{{numAxes}}", "{{POLL}}", 0, "{{EGUXSTEP}}")
+          asynOctetSetInputEos({{controllerName}}_ASYN,0,"\r\n")
+          asynOctetSetOutputEos({{controllerName}}_ASYN,0,"\r\n")
+          asynReport 10
+          
+
+  - name: motorAxis
+    description: |-
+      Creates a motor axis
+
+    args:
+      - type: object
+        name: controller
+        description: |-
+          a reference to the motion controller
+
+      - type: str
+        name: M
+        description: |-
+          PV suffix for the motor record
+
+      - type: int
+        name: ADDR
+        description: |-
+          The axis number (allowed to be from 0 to controller.numAxes-1)
+
+      - type: str
+        name: DESC
+        description: |-
+          The description of the axis
+
+      - type: int
+        name: DLLM
+        description: |-
+          The low limit of the axis
+        default: -5
+
+      - type: int
+        name: DHLM
+        description: |-
+          The high limit of the axis
+        default: 25
+
+      - type: int
+        name: VELO
+        description: |-
+          Velocity
+        default: 1
+
+      - type: int
+        name: home
+        description: |-
+          The home position of the axis (in counts)
+
+      - type: int
+        name: start
+        description: |-
+          The starting position of the axis (in counts)
+        default: 0
+
+      - type: enum
+        name: DIR
+        description: |-
+          The direction of the axis
+        default: 0
+        values:
+          Pos: 0
+          Neg: 1
+
+      - type: str
+        name: EGU
+        description: |-
+          Engineering Units
+        default: "mm"
+      
+      - type: float
+        name: VBAS
+        description: |-
+          Base Velocity (EGU/s)
+        default: 0.2
+
+      - type: float
+        name: ACCL
+        description: |-
+          Seconds to Velocity
+        default: 0.2
+
+      - type: int
+        name: BDST
+        description: |-
+          BL Distance (EGU)
+        default: 0
+
+      - type: float
+        name: BVEL
+        description: |-
+          BL Velocity (EGU/s)
+        default: 0.5
+
+      - type: float
+        name: BACC
+        description: |-
+          BL Seconds to Veloc.
+        default: 0.2
+
+      - type: float
+        name: MRES
+        description: |-
+          Motor Step Size (EGU)
+        default: 0.00001
+
+      - type: int
+        name: PREC
+        description: |-
+          Display precision (EGU)
+        default: 6
+      
+    databases:
+      # TODO as this is a simulation I have hard coded some of the DB fields,
+      # but these could easily be made into arguments above
+      #
+      # Note: supplying no value means that the argument of the same name is used
+      # (the most common case - if you contrive to make args and db fields the same.
+      # Which is  good idea for ease of transition from traditional IOCs)
+      - file: basic_asyn_motor.db
+        args:
+          P: "{{controller.P}}"
+          N: "{{ADDR +1 }}"
+          M:
+          DTYP: "asynMotor"
+          PORT: "SMC100_{{controller}}"
+          ADDR:
+          DESC:
+          EGU: 
+          DIR:
+          VELO:
+          VBAS:
+          ACCL:
+          BDST:
+          BVEL:
+          BACC:
+          MRES: 
+          PREC:
+          DHLM: 
+          DLLM: 
+          INIT: ""
+    post_init:
+      - value: |
+          dbl
