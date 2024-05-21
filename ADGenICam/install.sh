@@ -13,7 +13,7 @@ FOLDER=$(dirname $(readlink -f $0))
 set -xe
 VERSION=master
 # get the source and fix up the configure/RELEASE files
-ibek support git-clone ${NAME} ${VERSION} --org https://github.com/amichelotti # http://github.com/areaDetector/
+ibek support git-clone ${NAME} ${VERSION} --org http://github.com/areaDetector/
 ibek support register ${NAME}
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
