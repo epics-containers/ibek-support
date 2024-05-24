@@ -3,100 +3,21 @@
 module: mks937a
 
 defs:
-
   - name: mks937aPirgDummy
     description: |-
       Template database for a dummy pirani gauge.
       Just enough to keep the Gauge template happy
       Linda Pratt 28/09/2009
     args:
-
       - type: str
         name: device
         description: |-
           device name
 
     databases:
-
       - file: $(MKS937A)/db/mks937aPirgDummy.template
         args:
           device:
-
-  - name: mks937aGauge_sim
-    description: |-
-      TODO:ADD DESCRIPTION
-    args:
-
-      - type: str
-        name: dom
-        description: |-
-          Template argument
-
-      - type: str
-        name: id
-        description: |-
-          Template argument
-
-      - type: id
-        name: name
-        description: |-
-          Template argument
-
-      - type: str
-        name: GCTLR
-        description: |-
-          Template argument
-
-      - type: str
-        name: ctlsp_desc
-        description: |-
-          Template argument
-        default: IMG Enable
-
-      - type: float
-        name: ctlsp_hopr
-        description: |-
-          Template argument
-        default: 0.95
-
-      - type: float
-        name: ctlsp_lopr
-        description: |-
-          Template argument
-        default: 0.0027
-
-      - type: float
-        name: ctlsp_drvh
-        description: |-
-          Template argument
-        default: 0.95
-
-      - type: float
-        name: ctlsp_drvl
-        description: |-
-          Template argument
-        default: 0.0027
-
-      - type: float
-        name: ctlsp_level
-        description: |-
-          Template argument
-        default: 0.01
-
-    databases:
-
-      - file: $(MKS937A)/db/simulation_mks937aGauge.template
-        args:
-          ctlsp_drvl:
-          name:
-          ctlsp_lopr:
-          ctlsp_drvh:
-          ctlsp_hopr:
-          dom:
-          GCTLR:
-          ctlsp_level:
-          ctlsp_desc:
-          id:
 
   - name: mks937aImgMean
     description: |-
@@ -104,7 +25,6 @@ defs:
       number of IMGs
       Pete Owens - 26/6/06
     args:
-
       - type: str
         name: device
         description: |-
@@ -171,7 +91,6 @@ defs:
           img 10 device name
 
     databases:
-
       - file: $(MKS937A)/db/mks937aImgMean.template
         args:
           img10:
@@ -193,7 +112,6 @@ defs:
       Template database for a group of up to 8 IMGs
       Pete Owens - 10/5/05
     args:
-
       - type: str
         name: device
         description: |-
@@ -245,7 +163,6 @@ defs:
           img 8 device name
 
     databases:
-
       - file: $(MKS937A)/db/mks937aImgGroup.template
         args:
           delay:
@@ -263,26 +180,20 @@ defs:
     description: |-
       TODO:ADD DESCRIPTION
     args:
-
       - type: object
         name: GCTLR
         description: |-
           Parent mks937a object
 
-      - type: str
+      - type: id
         name: device
         description: |-
           device name
 
-      - type: str
+      - type: int
         name: channel
         description: |-
           MKS 937A channel number (1-4)
-
-      - type: id
-        name: name
-        description: |-
-          Object name, and gui association name
 
       - type: float
         name: ctlsp_level
@@ -531,7 +442,6 @@ defs:
         default: $(device):PRO:CONSTZERO
 
     databases:
-
       - file: $(MKS937A)/db/mks937aImg.template
         args:
           rlysp_low:
@@ -557,7 +467,6 @@ defs:
           ctlsp_level:
           rlysp_desc:
           offwarn:
-          GCTLR:
           channel:
           ctlsp_hihi:
           ctlsp_low:
@@ -570,7 +479,6 @@ defs:
           device:
           rlasp_lolo:
           rlasp_high:
-          name:
           ctlsp_lolo:
           rlasp_drvh:
           rlysp_lopr:
@@ -584,7 +492,6 @@ defs:
     description: |-
       TODO:ADD DESCRIPTION
     args:
-
       - type: id
         name: name
         description: |-
@@ -666,7 +573,7 @@ defs:
         name: aiinp
         description: |-
           Template argument
-        default: '#C$(c) S$(s) @'
+        default: "#C$(c) S$(s) @"
 
       - type: str
         name: device
@@ -679,7 +586,6 @@ defs:
           Raw value ADC PV name
 
     databases:
-
       - file: $(MKS937A)/db/mks937aGauge.template
         args:
           c:
@@ -708,7 +614,6 @@ defs:
       combination gauges
       Pete Owens - 5/5/05
     args:
-
       - type: str
         name: device
         description: |-
@@ -767,7 +672,6 @@ defs:
         default: 0
 
     databases:
-
       - file: $(MKS937A)/db/mks937aGaugeGroup.template
         args:
           gauge5:
@@ -784,9 +688,13 @@ defs:
 
   - name: mks937a
     description: |-
-      Template database for an MKS937A Multi-Sensor System
-      Pete Owens - 9/3/04
+      The mks937a controller
     args:
+      - type: id
+        name: name
+        description: |-
+          Device identifier (for reference from controlled devices)
+          This is a little redundant but is a legacy from builder
 
       - type: str
         name: device
@@ -799,7 +707,6 @@ defs:
           Asyn Port name, e.g. ty_40_0
 
     databases:
-
       - file: $(MKS937A)/db/mks937a.template
         args:
           device:
@@ -813,7 +720,6 @@ defs:
       value if no value is passed for expansion. They are provided to parallel
       those in the Img template.
     args:
-
       - type: str
         name: device
         description: |-
@@ -880,7 +786,6 @@ defs:
         default: IMG Enable
 
     databases:
-
       - file: $(MKS937A)/db/mks937aImgDummy.template
         args:
           ctlsp_drvl:
@@ -899,26 +804,20 @@ defs:
     description: |-
       TODO:ADD DESCRIPTION
     args:
-
       - type: object
         name: GCTLR
         description: |-
           Parent mks937a object
 
-      - type: str
+      - type: id
         name: device
         description: |-
           device name
 
-      - type: str
+      - type: int
         name: channel
         description: |-
           MKS 937A channel number (1-4)
-
-      - type: id
-        name: name
-        description: |-
-          Object name, and gui association name
 
       - type: float
         name: rlysp_level
@@ -987,11 +886,9 @@ defs:
         default: $(device):CTL:CONSTZERO
 
     databases:
-
       - file: $(MKS937A)/db/mks937aPirg.template
         args:
           rlysp_low:
-          name:
           rlysp_high:
           rlysp_hihi:
           rlysp_level:
@@ -1011,7 +908,6 @@ defs:
       Template database for a group of up to 8 Pirani Gauges
       Pete Owens - 9/5/05
     args:
-
       - type: str
         name: device
         description: |-
@@ -1058,7 +954,6 @@ defs:
           pirg 8 device name
 
     databases:
-
       - file: $(MKS937A)/db/mks937aPirgGroup.template
         args:
           pirg1:
@@ -1084,7 +979,6 @@ defs:
       should only be changed at the request of the vacuum group for non-standard
       vacuum systems.
     args:
-
       - type: str
         name: dom
         description: |-
@@ -1095,12 +989,12 @@ defs:
         description: |-
           ID number as 2 digit string (e.g. 01)
 
-      - type: str
+      - type: int
         name: c
         description: |-
           ADC card number
 
-      - type: str
+      - type: int
         name: s
         description: |-
           ADC signal number
@@ -1110,10 +1004,11 @@ defs:
         description: |-
           The device's name for gui purposes
 
-      - type: str
-        name: GCTLR
-        description: |-
-          The gauge controller PV prefix, for gui purposes
+      # TODO - when we come to construct screens, how is this going to work?
+      # - type: str
+      #   name: GCTLR
+      #   description: |-
+      #     The gauge controller PV prefix, for gui purposes
 
       - type: float
         name: ctlsp_level
@@ -1161,10 +1056,9 @@ defs:
         name: aiinp
         description: |-
           Template argument
-        default: '#C$(c) S$(s) @'
+        default: "#C$(c) S$(s) @"
 
     databases:
-
       - file: $(MKS937A)/db/mks937aGauge.template
         args:
           c:
@@ -1175,7 +1069,6 @@ defs:
           ctlsp_hopr:
           ctlsp_drvh:
           aitype:
-          GCTLR:
           s:
           aiinp:
           ctlsp_level:
