@@ -10,7 +10,7 @@ FOLDER=$(dirname $(readlink -f $0))
 set -xe
 
 # get the source and fix up the configure/RELEASE files
-ibek support git-clone ${NAME} ${VERSION} --org https://github.com/diamondlightsource/
+ibek support git-clone ${NAME} ${VERSION} --org https://github.com/dls-controls/
 
 ibek support register ${NAME}
 
