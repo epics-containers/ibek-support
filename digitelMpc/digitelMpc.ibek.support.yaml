@@ -308,7 +308,7 @@ defs:
         description: |-
           device name
 
-      - type: str
+      - type: int
         name: delay
         description: |-
           delay between starting pumps
