@@ -6,7 +6,7 @@ defs:
 
   - name: mks937aPirgDummy
     description: |-
-      Template database for a dummy pirani gauge. 
+      Template database for a dummy pirani gauge.
       Just enough to keep the Gauge template happy
       Linda Pratt 28/09/2009
     args:
@@ -100,7 +100,7 @@ defs:
 
   - name: mks937aImgMean
     description: |-
-      Template database to calculate the mean pressure from a 
+      Template database to calculate the mean pressure from a
       number of IMGs
       Pete Owens - 26/6/06
     args:
@@ -115,7 +115,7 @@ defs:
         description: |-
           beam current
 
-      - type: str
+      - type: int
         name: nimgs
         description: |-
           number of gauges
@@ -199,7 +199,7 @@ defs:
         description: |-
           device name
 
-      - type: str
+      - type: float
         name: delay
         description: |-
           delay between starting each IMG
@@ -704,7 +704,7 @@ defs:
 
   - name: mks937aGaugeGroup
     description: |-
-      Template database for a group of up to 8 MKS937A 
+      Template database for a group of up to 8 MKS937A
       combination gauges
       Pete Owens - 5/5/05
     args:
@@ -807,10 +807,10 @@ defs:
 
   - name: mks937aImgDummy
     description: |-
-      Template database for a dummy inverted magnetron gauge  
-      Just enough to keep the Gauge template happy 
-      Note on optional macros: these will default to an appropriate hard-coded 
-      value if no value is passed for expansion. They are provided to parallel 
+      Template database for a dummy inverted magnetron gauge
+      Just enough to keep the Gauge template happy
+      Note on optional macros: these will default to an appropriate hard-coded
+      value if no value is passed for expansion. They are provided to parallel
       those in the Img template.
     args:
 
@@ -1073,15 +1073,15 @@ defs:
 
   - name: mks937aGauge
     description: |-
-      Template database for a combination guage connected to 
-      two channels of an MKS937A Multi-Sensor System 
-      A note on the optional macros: they default to an appropriate hard-coded 
-      value if no value is passed for expansion. 
-      They are provided to allow the default set points to be changed. 
-      Once the set point needs to be changed it may be necessary to alter  
-      various other fields defining the range of allowed values. 
-      For the majority of applications the defaults should be used.  The levels 
-      should only be changed at the request of the vacuum group for non-standard 
+      Template database for a combination guage connected to
+      two channels of an MKS937A Multi-Sensor System
+      A note on the optional macros: they default to an appropriate hard-coded
+      value if no value is passed for expansion.
+      They are provided to allow the default set points to be changed.
+      Once the set point needs to be changed it may be necessary to alter
+      various other fields defining the range of allowed values.
+      For the majority of applications the defaults should be used.  The levels
+      should only be changed at the request of the vacuum group for non-standard
       vacuum systems.
     args:
 
