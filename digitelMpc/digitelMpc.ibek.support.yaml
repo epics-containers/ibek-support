@@ -1,88 +1,12 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.0b4/ibek.support.schema.json
 
 module: digitelMpc
 
 defs:
-  - name: digitelMpcqTsp
-    description: |-
-      Template database for digitel MPCq - Titanium Sublimation Pump
-      Pete Owens - January 2020
-    args:
-      - type: str
-        name: device
-        description: |-
-          device name
-
-      - type: str
-        name: port
-        description: |-
-          asyn seral port number (e.g. ty_40_0)
-
-      - type: str
-        name: unit
-        description: |-
-          unit number for multi-drop serial
-
-      - type: str
-        name: ctlsrc
-        description: |-
-          control source (0 = service, 1 = Ion Pump 1, 2 = Ion Pump 2)
-
-      - type: id
-        name: name
-        description: |-
-          Object name and gui association name
-
-      - type: str
-        name: protocol
-        description: |-
-          name of protocol file, either digitelMpcq.proto or digitelMpcDual.proto
-        default: digitelMpcq.proto
-
-      - type: int
-        name: totmax
-        description: |-
-          cycle max off time (default 600 mins)
-        default: 600
-
-      - type: int
-        name: tcmax
-        description: |-
-          duration- On duration (s) - dual TSP systems on MPCe/q - defaults to 10
-        default: 20
-
-    databases:
-      - file: $(DIGITELMPC)/db/digitelMpcqTsp.template
-        args:
-          totmax:
-          protocol:
-          name:
-          tcmax:
-          device:
-          ctlsrc:
-          port:
-          unit:
-
-  - name: digitelMpc
-    description: |-
-      TODO:ADD DESCRIPTION
-    args:
-      - type: id
-        name: name
-        description: |-
-          Gui tag
-
-      - type: str
-        name: device
-        description: |-
-          Device name
-
-      - type: object
-        name: port
-        description: |-
-          Asyn port
-
-      - type: enum
+  - name: digitelMpcqT
+    shared:
+      - &unit
+        type: enum
         name: unit
         description: |-
           Unit number for multi drop serial
@@ -120,6 +44,82 @@ defs:
           "11":
           "24":
           "01":
+    description: |-
+      Template database for digitel MPCq - Titanium Sublimation Pump
+      Pete Owens - January 2020
+
+    args:
+      - type: str
+        name: device
+        description: |-
+          device name
+
+      - type: str
+        name: port
+        description: |-
+          asyn seral port number (e.g. ty_40_0)
+
+      - *unit
+
+      - type: str
+        name: ctlsrc
+        description: |-
+          control source (0 = service, 1 = Ion Pump 1, 2 = Ion Pump 2)
+
+      - type: id
+        name: name
+        description: |-
+          Object name and gui association name
+
+      - type: str
+        name: protocol
+        description: |-
+          name of protocol file, either digitelMpcq.proto or digitelMpcDual.proto
+        default: digitelMpcq.proto
+
+      - type: int
+        name: totmax
+        description: |-
+          cycle max off time (default 600 mins)
+        default: 600
+
+      - type: int
+        name: tcmax
+        description: |-
+          duration- On duration (s) - dual TSP systems on MPCe/q - defaults to 10
+        default: 20
+
+    databases:
+      - file: $(DIGITELMPC)/db/digitelMpcqTsp.template
+        args:
+          totmax:
+          protocol:
+          tcmax:
+          device:
+          ctlsrc:
+          port:
+          unit:
+
+  - name: &digitelMpcPump digitelMpc
+    description: |-
+      TODO:ADD DESCRIPTION
+    args:
+      - type: id
+        name: name
+        description: |-
+          Gui tag
+
+      - type: str
+        name: device
+        description: |-
+          Device name
+
+      - type: object
+        name: port
+        description: |-
+          Asyn port
+
+      - *unit
 
       - type: enum
         name: proto
@@ -135,7 +135,6 @@ defs:
         args:
           device:
           proto:
-          name:
           unit:
           port:
 
@@ -154,28 +153,29 @@ defs:
         description: |-
           Protocol file to use
         values:
-          '"digitelMpc.proto"':
-          '"digitelMpcq.proto"':
+          digitelMpc.proto:
+          digitelMpcq.proto:
+        default: digitelMpc.proto
 
-      - type: str
+      - type: id
         name: device
         description: |-
           device name
 
-      - type: str
+      - type: int
         name: pump
         description: |-
           ion pump number (1 or 2)
 
-      - type: str
+      - type: int
         name: size
         description: |-
           pump size (l/s)
 
-      - type: id
-        name: name
-        description: |-
-          Object name and gui association name
+      # - type: id
+      #   name: name
+      #   description: |-
+      #     Object name and gui association name
 
       - type: float
         name: sp1on
@@ -234,7 +234,6 @@ defs:
           sp2on:
           sp1on:
           sp1off:
-          name:
 
   - name: digitelMpcTspGroup
     description: |-
@@ -389,7 +388,7 @@ defs:
       Template database for digitel MPC - Titanium Sublimation Pump
       Pete Owens - 13/10/03
     args:
-      - type: str
+      - type: id
         name: device
         description: |-
           device name
@@ -399,20 +398,17 @@ defs:
         description: |-
           asyn seral port number (e.g. ty_40_0)
 
-      - type: str
-        name: unit
-        description: |-
-          unit number for multi-drop serial
+      - *unit
 
-      - type: str
+      - type: int
         name: ctlsrc
         description: |-
           control source (0 = service, 1 = Ion Pump 1, 2 = Ion Pump 2)
 
-      - type: id
-        name: name
-        description: |-
-          Object name and gui association name
+      # - type: id
+      #   name: name
+      #   description: |-
+      #     Object name and gui association name
 
       - type: str
         name: protocol
@@ -437,7 +433,6 @@ defs:
         args:
           totmax:
           protocol:
-          name:
           tcmax:
           device:
           ctlsrc:
