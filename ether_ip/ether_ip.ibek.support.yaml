@@ -68,21 +68,19 @@ defs:
     databases:
       - file: $(ETHER_IP)/db/ether_ip_plcInfo.template
         args:
-          device:
-          ip:
           name:
           port:
+          device:
 
     pre_init:
       - when: first
         value: |
+
           # EtherIP Initialisation
           drvEtherIP_init()
-
-      - value: |
           # Define EtherIP to PLC connection
+      - value: |
           drvEtherIP_define_PLC("{{port}}", "{{ip}}", 0)
-
   - name: bi
     description: |-
       Simple bi record for ether_ip connection

@@ -49,7 +49,9 @@ defs:
 
     pre_init:
       - value: |
+
           # finsUDPInit(asyn_port, ip_addr)
+      - value: |
           finsUDPInit("{{name}}", "{{ip}}")
 
   - name: FINSHostlink

@@ -443,50 +443,7 @@ defs:
 
     databases:
       - file: $(MKS937A)/db/mks937aImg.template
-        args:
-          rlysp_low:
-          rlasp_desc:
-          prosp_lolo:
-          ilk_write_access_pv:
-          prosp_hopr:
-          rlysp_drvh:
-          rlysp_drvl:
-          prosp_drvl:
-          prosp_desc:
-          ctlsp_desc:
-          prosp_drvh:
-          ctlsp_drvl:
-          ctlsp_lopr:
-          ctlsp_drvh:
-          rlysp_hihi:
-          rlysp_hopr:
-          prosp_low:
-          rlasp_hihi:
-          prosp_level:
-          prosp_hihi:
-          ctlsp_level:
-          rlysp_desc:
-          offwarn:
-          channel:
-          ctlsp_hihi:
-          ctlsp_low:
-          rlysp_high:
-          ctlsp_hopr:
-          prosp_lopr:
-          rlysp_level:
-          ctlsp_high:
-          prosp_high:
-          device:
-          rlasp_lolo:
-          rlasp_high:
-          ctlsp_lolo:
-          rlasp_drvh:
-          rlysp_lopr:
-          rlasp_drvl:
-          rlysp_lolo:
-          rlasp_hopr:
-          rlasp_low:
-          rlasp_lopr:
+        args: { device, port: "{{GCTLR.port}}", channel, ctlsp_level, ctlsp_drvh, ctlsp_drvl, ctlsp_hopr, ctlsp_lopr, ctlsp_hihi, ctlsp_lolo, ctlsp_high, ctlsp_low, ctlsp_desc, prosp_level, prosp_drvh, prosp_drvl, prosp_hopr, prosp_lopr, prosp_hihi, prosp_lolo, prosp_high, prosp_low, prosp_desc, rlysp_level, rlysp_drvh, rlysp_drvl, rlysp_hopr, rlysp_lopr, rlysp_hihi, rlysp_lolo, rlysp_high, rlysp_low, rlysp_desc, rlasp_drvh, rlasp_drvl, rlasp_hopr, rlasp_lopr, rlasp_hihi, rlasp_lolo, rlasp_high, rlasp_low, rlasp_desc, offwarn, ilk_write_access_pv }
 
   - name: mks937aGaugeEGU
     description: |-
@@ -512,22 +469,26 @@ defs:
         description: |-
           PV providing gauge reading in mbar
 
+    values:
+      - name: eguInputPV
+        description: PV from which the gauge reading in EGU is taken
+        value: "{{dom}}-VA-GAUGE-{{ '%02d' % id }}:PLOG_CALC"
+
     databases:
       - file: $(MKS937A)/db/mks937aGauge.template
         args:
-          name:
-          id:
           dom:
+          id: "{{ '%02d' % id }}"
           c: ""
-          GCTLR: ""
           s: ""
+          name:
           aitype: "Soft Channel"
-          aiinp: "{eguInputPV} CP"
+          aiinp: "{{eguInputPV}}  CP"
 
       - file: $(MKS937A)/db/mks937aPlogEGU.template
         args:
-          device: "{dom}-VA-GAUGE-{id}:PLOG_CALC"
-          p_egu_pv: "{input}"
+          device: "{{eguInputPV}}"
+          p_egu_pv: "{{input}}"
 
   - name: mks937aGaugeGroup
     description: |-
@@ -808,21 +769,7 @@ defs:
 
     databases:
       - file: $(MKS937A)/db/mks937aPirg.template
-        args:
-          rlysp_low:
-          rlysp_high:
-          rlysp_hihi:
-          rlysp_level:
-          rlysp_hopr:
-          ilk_write_access_pv:
-          rlysp_drvh:
-          device:
-          rlysp_lopr:
-          rlysp_lolo:
-          rlysp_drvl:
-          rlysp_desc:
-          GCTLR:
-          channel:
+        args: { device, port: "{{GCTLR.port}}", channel, rlysp_level, rlysp_drvh, rlysp_drvl, rlysp_hopr, rlysp_lopr, rlysp_hihi, rlysp_lolo, rlysp_high, rlysp_low, rlysp_desc, ilk_write_access_pv }
 
   - name: mks937aPirgGroup
     description: |-
@@ -982,16 +929,16 @@ defs:
     databases:
       - file: $(MKS937A)/db/mks937aGauge.template
         args:
-          c:
-          ctlsp_drvl:
-          name:
-          ctlsp_lopr:
           dom:
-          ctlsp_hopr:
-          ctlsp_drvh:
-          aitype:
-          s:
-          aiinp:
-          ctlsp_level:
-          ctlsp_desc:
           id:
+          c:
+          s:
+          name:
+          ctlsp_level:
+          ctlsp_drvh:
+          ctlsp_drvl:
+          ctlsp_hopr:
+          ctlsp_lopr:
+          ctlsp_desc:
+          aitype:
+          aiinp:

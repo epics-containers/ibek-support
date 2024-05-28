@@ -132,11 +132,7 @@ defs:
 
     databases:
       - file: $(DIGITELMPC)/db/digitelMpc.template
-        args:
-          device:
-          proto:
-          unit:
-          port:
+        args: { device, port, unit, proto, name }
 
   - name: digitelMpcIonp
     description: |-
@@ -221,19 +217,7 @@ defs:
 
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcIonp.template
-        args:
-          size:
-          disptext:
-          MPC:
-          alh:
-          proto:
-          text:
-          sp2off:
-          device:
-          pump:
-          sp2on:
-          sp1on:
-          sp1off:
+        args: { device, port: "{{MPC.port}}", unit: "{{MPC.unit}}", pump, size, sp1on, sp1off, sp2on, sp2off, alh, text, proto, disptext }
 
   - name: digitelMpcTspGroup
     description: |-
@@ -355,17 +339,7 @@ defs:
 
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcIonpGroup.template
-        args:
-          ionp7:
-          ionp6:
-          ionp5:
-          ionp4:
-          ionp3:
-          ionp2:
-          ionp1:
-          ionp8:
-          delay:
-          device:
+        args: { device, delay, ionp1, ionp2, ionp3, ionp4, ionp5, ionp6, ionp7, ionp8 }
 
   - name: dummyIonp
     description: |-
@@ -430,11 +404,4 @@ defs:
 
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcTsp.template
-        args:
-          totmax:
-          protocol:
-          tcmax:
-          device:
-          ctlsrc:
-          port:
-          unit:
+        args: { device, port, unit, ctlsrc, protocol, totmax, tcmax }
