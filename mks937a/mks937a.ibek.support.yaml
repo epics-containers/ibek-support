@@ -512,101 +512,22 @@ defs:
         description: |-
           PV providing gauge reading in mbar
 
-      - type: str
-        name: c
-        description: |-
-          ADC card number
-
-      - type: str
-        name: s
-        description: |-
-          ADC signal number
-
-      - type: str
-        name: GCTLR
-        description: |-
-          The gauge controller PV prefix, for gui purposes
-
-      - type: float
-        name: ctlsp_level
-        description: |-
-          The desired control setpoint value (actually for the Pirg).
-        default: 0.01
-
-      - type: float
-        name: ctlsp_drvh
-        description: |-
-          (limits max value of control setpoint)
-        default: 0.95
-
-      - type: float
-        name: ctlsp_drvl
-        description: |-
-          (limits min value of control setpoint)
-        default: 0.0027
-
-      - type: float
-        name: ctlsp_hopr
-        description: |-
-          (high operator value - helps display set correct range).
-        default: 0.95
-
-      - type: float
-        name: ctlsp_lopr
-        description: |-
-          (low operator value - helps display set correct range).
-        default: 0.0027
-
-      - type: str
-        name: ctlsp_desc
-        description: |-
-          (appears as a label on the Pirg EDM screen).
-        default: IMG Enable
-
-      - type: str
-        name: aitype
-        description: |-
-          Template argument
-        default: Hy8401ip
-
-      - type: str
-        name: aiinp
-        description: |-
-          Template argument
-        default: "#C$(c) S$(s) @"
-
-      - type: str
-        name: device
-        description: |-
-          device name
-
-      - type: str
-        name: p_egu_pv
-        description: |-
-          Raw value ADC PV name
-
     databases:
       - file: $(MKS937A)/db/mks937aGauge.template
         args:
-          c:
-          ctlsp_drvl:
           name:
-          ctlsp_lopr:
-          dom:
-          ctlsp_hopr:
-          ctlsp_drvh:
-          aitype:
-          GCTLR:
-          s:
-          aiinp:
-          ctlsp_level:
-          ctlsp_desc:
           id:
+          dom:
+          c: ""
+          GCTLR: ""
+          s: ""
+          aitype: "Soft Channel"
+          aiinp: "{eguInputPV} CP"
 
       - file: $(MKS937A)/db/mks937aPlogEGU.template
         args:
-          device:
-          p_egu_pv:
+          device: "{dom}-VA-GAUGE-{id}:PLOG_CALC"
+          p_egu_pv: "{input}"
 
   - name: mks937aGaugeGroup
     description: |-
