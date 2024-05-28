@@ -1,0 +1,282 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
+
+module: ether_ip
+
+defs:
+  - name: mbboDirect
+    description: |-
+      Simple mbboDirect record for ether_ip connection
+    args:
+      - type: str
+        name: record
+        description: |-
+          Record Name
+
+      - type: str
+        name: port
+        description: |-
+          Ether_IP Port Name
+
+      - type: str
+        name: scan
+        description: |-
+          Scan Time
+
+      - type: str
+        name: tag
+        description: |-
+          Tag to address on PLC
+
+      - type: str
+        name: nobt
+        description: |-
+          Number of bits to write
+
+    databases:
+      - file: $(ETHER_IP)/db/ether_ip_mbboDirect.template
+        args:
+          record:
+          tag:
+          scan:
+          port:
+          nobt:
+
+  - name: EtherIPInit
+    description: |-
+      This creates an IP connection to a plc using the ether_ip driver
+    args:
+      - type: id
+        name: name
+        description: |-
+          Name
+
+      - type: str
+        name: device
+        description: |-
+          PV Prefix
+
+      - type: str
+        name: port
+        description: |-
+          Port Name
+
+      - type: str
+        name: ip
+        description: |-
+          IP Port of PLC
+
+    databases:
+      - file: $(ETHER_IP)/db/ether_ip_plcInfo.template
+        args:
+          device:
+          ip:
+          name:
+          port:
+
+    pre_init:
+      - when: first
+        value: |
+          # EtherIP Initialisation
+          drvEtherIP_init()
+
+      - value: |
+          # Define EtherIP to PLC connection
+          drvEtherIP_define_PLC("{{port}}", "{{ip}}", 0)
+
+  - name: bi
+    description: |-
+      Simple bi record for ether_ip connection
+    args:
+      - type: str
+        name: record
+        description: |-
+          Record Name
+
+      - type: str
+        name: port
+        description: |-
+          Ether_IP Port Name
+
+      - type: str
+        name: scan
+        description: |-
+          Scan Time
+
+      - type: str
+        name: tag
+        description: |-
+          Tag to address on PLC
+
+    databases:
+      - file: $(ETHER_IP)/db/ether_ip_bi.template
+        args:
+          record:
+          tag:
+          port:
+          scan:
+
+  - name: stringin
+    description: |-
+      Simple stringin record for ether_ip connection
+    args:
+      - type: str
+        name: record
+        description: |-
+          Record Name
+
+      - type: str
+        name: port
+        description: |-
+          Ether_IP Port Name
+
+      - type: str
+        name: scan
+        description: |-
+          Scan Time
+
+      - type: str
+        name: tag
+        description: |-
+          Tag to address on PLC
+
+    databases:
+      - file: $(ETHER_IP)/db/ether_ip_stringin.template
+        args:
+          record:
+          tag:
+          port:
+          scan:
+
+  - name: bo
+    description: |-
+      Simple bo record for ether_ip connection
+    args:
+      - type: str
+        name: record
+        description: |-
+          Record Name
+
+      - type: str
+        name: port
+        description: |-
+          Ether_IP Port Name
+
+      - type: str
+        name: scan
+        description: |-
+          Scan Time
+
+      - type: str
+        name: tag
+        description: |-
+          Tag to address on PLC
+
+    databases:
+      - file: $(ETHER_IP)/db/ether_ip_bo.template
+        args:
+          record:
+          tag:
+          port:
+          scan:
+
+  - name: ao
+    description: |-
+      Simple ao record for ether_ip connection
+    args:
+      - type: str
+        name: record
+        description: |-
+          Record Name
+
+      - type: str
+        name: port
+        description: |-
+          Ether_IP Port Name
+
+      - type: str
+        name: scan
+        description: |-
+          Scan Time
+
+      - type: str
+        name: tag
+        description: |-
+          Tag to address on PLC
+
+    databases:
+      - file: $(ETHER_IP)/db/ether_ip_ao.template
+        args:
+          record:
+          tag:
+          port:
+          scan:
+
+  - name: ai
+    description: |-
+      Simple ai record for ether_ip connection
+    args:
+      - type: str
+        name: record
+        description: |-
+          Record Name
+
+      - type: str
+        name: port
+        description: |-
+          Ether_IP Port Name
+
+      - type: str
+        name: scan
+        description: |-
+          Scan Time
+
+      - type: str
+        name: tag
+        description: |-
+          Tag to address on PLC
+
+    databases:
+      - file: $(ETHER_IP)/db/ether_ip_ai.template
+        args:
+          record:
+          tag:
+          port:
+          scan:
+
+  - name: mbbiDirect
+    description: |-
+      Simple mbbiDirect record for ether_ip connection
+    args:
+      - type: str
+        name: record
+        description: |-
+          Record Name
+
+      - type: str
+        name: port
+        description: |-
+          Ether_IP Port Name
+
+      - type: str
+        name: scan
+        description: |-
+          Scan Time
+
+      - type: str
+        name: tag
+        description: |-
+          Tag to address on PLC
+
+      - type: str
+        name: nobt
+        description: |-
+          Number of bits to read
+
+    databases:
+      - file: $(ETHER_IP)/db/ether_ip_mbbiDirect.template
+        args:
+          record:
+          tag:
+          scan:
+          port:
+          nobt:

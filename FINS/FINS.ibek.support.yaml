@@ -1,0 +1,100 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
+
+module: FINS
+
+defs:
+  - name: FINSTemplate
+    description: |-
+      Instantiate FINS db template
+    args:
+      - type: id
+        name: device
+        description: |-
+          Device name
+
+      - type: str
+        name: port
+        description: |-
+          asyn port to use for connection
+
+      - type: int
+        name: etn
+        description: |-
+          PLC Ethernet module address
+        default: 0x10
+
+    databases:
+      - file: FINS.template
+        args: { device, port, etn }
+
+  - name: FINSUDPInit
+    description: |-
+      This creates an asyn port which communicates with a FINS device over
+          UDP
+    args:
+      - type: str
+        name: ip
+        description: |-
+          IP port of FINS device
+
+      - type: id
+        name: name
+        description: |-
+          Asyn port name
+
+      - type: str
+        name: simulation
+        description: |-
+          IP port of simulation device
+
+    pre_init:
+      - value: |
+          # finsUDPInit(asyn_port, ip_addr)
+          finsUDPInit("{{name}}", "{{ip}}")
+
+  - name: FINSHostlink
+    description: |-
+      This creates a port that will send FINS command in a Hostlink wrapper
+          to a PLC over a serial port.
+    args:
+      - type: object
+        name: asyn_port
+        description: |-
+          Asyn port for serial comms (possibly over terminal server)
+
+      - type: id
+        name: name
+        description: |-
+          Asyn port name created by FINS driver
+
+    pre_init:
+      - value: |
+          # HostlinkInterposeInit(asyn_port)
+          HostlinkInterposeInit("{{asyn_port}}")
+          # finsDEVInit(FINS_port_name, asyn_port)
+          finsDEVInit("{{name}}", "{{asyn_port}}")
+
+  - name: FINSTCPInit
+    description: |-
+      This creates an asyn port which communicates with a FINS device over
+          TCP
+    args:
+      - type: str
+        name: ip
+        description: |-
+          IP port of FINS device
+
+      - type: id
+        name: name
+        description: |-
+          Asyn port name
+
+      - type: str
+        name: simulation
+        description: |-
+          IP port of simulation device
+
+    pre_init:
+      - value: |
+          # finsTCPInit(asyn_port, ip_addr)
+          finsTCPInit("{{name}}", "{{ip}}")
