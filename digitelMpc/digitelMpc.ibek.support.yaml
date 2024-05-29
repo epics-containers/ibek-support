@@ -238,49 +238,47 @@ defs:
         name: tsp2
         description: |-
           TSP 2 device name
+        default: "{{tsp1}}"
 
       - type: str
         name: tsp3
         description: |-
           TSP 3 device name
+        default: "{{tsp1}}"
 
       - type: str
         name: tsp4
         description: |-
           TSP 4 device name
+        default: "{{tsp1}}"
 
       - type: str
         name: tsp5
         description: |-
           TSP 5 device name
+        default: "{{tsp1}}"
 
       - type: str
         name: tsp6
         description: |-
           TSP 6 device name
+        default: "{{tsp1}}"
 
       - type: str
         name: tsp7
         description: |-
           TSP 7 device name
+        default: "{{tsp1}}"
 
       - type: str
         name: tsp8
         description: |-
           TSP 8 device name
+        default: "{{tsp1}}"
 
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcTspGroup.template
-        args:
-          tsp3:
-          tsp2:
-          tsp1:
-          tsp7:
-          tsp6:
-          tsp5:
-          tsp4:
-          tsp8:
-          device:
+        args: { device, tsp1, tsp2, tsp3, tsp4, tsp5, tsp6, tsp7, tsp8 }
 
   - name: digitelMpcIonpGroup
     description: |-

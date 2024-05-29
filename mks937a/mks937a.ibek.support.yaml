@@ -92,20 +92,7 @@ defs:
 
     databases:
       - file: $(MKS937A)/db/mks937aImgMean.template
-        args:
-          img10:
-          current:
-          device:
-          img9:
-          img8:
-          nimgs:
-          img3:
-          img2:
-          img1:
-          img7:
-          img6:
-          img5:
-          img4:
+        args: { device, current, nimgs, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10 }
 
   - name: mks937aImgGroup
     description: |-
@@ -131,36 +118,43 @@ defs:
         name: img2
         description: |-
           img 2 device name
+        default: "{{img1}}"
 
       - type: str
         name: img3
         description: |-
           img 3 device name
+        default: "{{img1}}"
 
       - type: str
         name: img4
         description: |-
           img 4 device name
+        default: "{{img1}}"
 
       - type: str
         name: img5
         description: |-
           img 5 device name
+        default: "{{img1}}"
 
       - type: str
         name: img6
         description: |-
           img 6 device name
+        default: "{{img1}}"
 
       - type: str
         name: img7
         description: |-
           img 7 device name
+        default: "{{img1}}"
 
       - type: str
         name: img8
         description: |-
           img 8 device name
+        default: "{{img1}}"
 
     databases:
       - file: $(MKS937A)/db/mks937aImgGroup.template
@@ -510,36 +504,43 @@ defs:
         name: gauge2
         description: |-
           gauge 2 device name
+        default: "{{gauge1}}"
 
       - type: str
         name: gauge3
         description: |-
           gauge 3 device name
+        default: "{{gauge1}}"
 
       - type: str
         name: gauge4
         description: |-
           gauge 4 device name
+        default: "{{gauge1}}"
 
       - type: str
         name: gauge5
         description: |-
           gauge 5 device name
+        default: "{{gauge1}}"
 
       - type: str
         name: gauge6
         description: |-
           gauge 6 device name
+        default: "{{gauge1}}"
 
       - type: str
         name: gauge7
         description: |-
           gauge 7 device name
+        default: "{{gauge1}}"
 
       - type: str
         name: gauge8
         description: |-
           gauge 8 device name
+        default: "{{gauge1}}"
 
       - type: int
         name: SELM
@@ -555,18 +556,7 @@ defs:
 
     databases:
       - file: $(MKS937A)/db/mks937aGaugeGroup.template
-        args:
-          gauge5:
-          gauge4:
-          gauge7:
-          gauge6:
-          gauge1:
-          gauge3:
-          gauge2:
-          SELN:
-          SELM:
-          gauge8:
-          device:
+        args: { device, gauge1, gauge2, gauge3, gauge4, gauge5, gauge6, gauge7, gauge8, SELM, SELN }
 
   - name: mks937a
     description: |-
@@ -790,49 +780,47 @@ defs:
         name: pirg2
         description: |-
           pirg 2 device name
+        default: "{{pirg1}}"
 
       - type: str
         name: pirg3
         description: |-
           pirg 3 device name
+        default: "{{pirg1}}"
 
       - type: str
         name: pirg4
         description: |-
           pirg 4 device name
+        default: "{{pirg1}}"
 
       - type: str
         name: pirg5
         description: |-
           pirg 5 device name
+        default: "{{pirg1}}"
 
       - type: str
         name: pirg6
         description: |-
           pirg 6 device name
+        default: "{{pirg1}}"
 
       - type: str
         name: pirg7
         description: |-
           pirg 7 device name
+        default: "{{pirg1}}"
 
       - type: str
         name: pirg8
         description: |-
           pirg 8 device name
+        default: "{{pirg1}}"
 
     databases:
       - file: $(MKS937A)/db/mks937aPirgGroup.template
-        args:
-          pirg1:
-          pirg3:
-          pirg2:
-          pirg5:
-          pirg4:
-          pirg7:
-          pirg6:
-          device:
-          pirg8:
+        args: { device, pirg1, pirg2, pirg3, pirg4, pirg5, pirg6, pirg7, pirg8 }
 
   - name: mks937aGauge
     description: |-
