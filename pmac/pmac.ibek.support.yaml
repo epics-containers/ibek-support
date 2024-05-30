@@ -666,10 +666,10 @@ defs:
         name: UEIP
         description: |-
           Use Encoder If Present
-        default: 0
+        default: No
         values:
-          Yes: 0
-          No: 1
+          Yes: 1
+          No: 0
 
       - type: enum
         name: URIP
@@ -716,23 +716,29 @@ defs:
           Retry Deadband (EGU)
         default: 0.0
 
-      - type: int
+      - type: enum
         name: FOFF
         description: |-
           Freeze Offset, 0=variable, 1=frozen
-        default: 0
+        default: Variable
+        values:
+          Variable: 0
+          Frozen: 1
 
-      - type: int
+      - type: float
         name: ADEL
         description: |-
           Alarm monitor deadband (EGU)
         default: 0
 
-      - type: int
+      - type: enum
         name: NTM
         description: |-
           New Target Monitor, only set to 0 for soft motors
-        default: 1
+        default: YES
+        values:
+          NO: 0
+          YES: 1
 
       - type: float
         name: FEHIGH
@@ -1205,3 +1211,114 @@ defs:
     pre_init:
       - value: |
           pmacDisableLimitsCheck("{{Controller}}", {{Axis}}, 0)
+
+  - name: auto_translated_motor
+    description: |-
+      define a motor with forward and reverse relationship between user and
+      motor positions
+    args:
+      - type: str
+        name: P
+        description: |-
+          Device Prefix
+
+      - type: str
+        name: M
+        description: |-
+          Device Suffix
+
+      - type: str
+        name: DESC
+        description: |-
+          Description, displayed on OPI screen
+
+      - type: float
+        name: VELO
+        description: |-
+          Velocity (EGU/s)
+        default: 1.0
+
+      - type: int
+        name: PREC
+        description: |-
+          Display Precision
+        default: 5
+
+      - type: str
+        name: EGU
+        description: |-
+          Engineering Units
+
+      - type: float
+        name: TWV
+        description: |-
+          Tweak Step Size (EGU)
+        default: 1.0
+
+      - type: str # float or substitution string
+        name: VMAX
+        description: |-
+          Max Velocity (EGU/s), defaults to VELO
+        default: "{{VELO}}"
+
+      - type: float
+        name: DHLM
+        description: |-
+          Dial High Limit
+
+      - type: float
+        name: DLLM
+        description: |-
+          Dial Low Limit
+
+      - type: str
+        name: FWD
+        description: |-
+          Forward relationship calc field
+
+      - type: str
+        name: BWD
+        description: |-
+          Backward relationship calc field
+
+      - type: str
+        name: SM
+        description: |-
+          PV suffix for the soft motor name
+
+    databases:
+      - file: translated_motor.template
+        args: { P, SM, DESC, VELO, VMAX, PREC, EGU, DHLM, DLLM, M, TWV, FWD, BWD }
+
+  - name: CS_accel_dcm
+    description: |-
+      Supporting template that allows setting of variables for an
+      accel DCM CS
+    args:
+      - type: object
+        name: PORT
+        description: |-
+          Delta tau motor controller comms port
+
+      - type: str
+        name: P
+        description: |-
+          Pv Prefix
+
+      - type: int
+        name: COORD
+        description: |-
+          Co-ordinate system number
+
+      - type: id
+        name: name
+        description: |-
+          This associates an edm screen with the template
+
+    databases:
+      - file: $(PMAC)/db/accel_dcm.template
+        args:
+          P:
+          PORT:
+          COORD:
+          name:
