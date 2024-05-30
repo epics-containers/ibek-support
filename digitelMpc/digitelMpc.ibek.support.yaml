@@ -1,0 +1,405 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.0b4/ibek.support.schema.json
+
+module: digitelMpc
+
+defs:
+  - name: digitelMpcqT
+    shared:
+      - &unit
+        type: enum
+        name: unit
+        description: |-
+          Unit number for multi drop serial
+        default: "01"
+        values:
+          "21":
+          "12":
+          "04":
+          "27":
+          "08":
+          "23":
+          "31":
+          "18":
+          "29":
+          "14":
+          "02":
+          "10":
+          "06":
+          "25":
+          "16":
+          "32":
+          "20":
+          "05":
+          "13":
+          "30":
+          "22":
+          "19":
+          "09":
+          "28":
+          "17":
+          "03":
+          "15":
+          "26":
+          "07":
+          "11":
+          "24":
+          "01":
+    description: |-
+      Template database for digitel MPCq - Titanium Sublimation Pump
+      Pete Owens - January 2020
+
+    args:
+      - type: str
+        name: device
+        description: |-
+          device name
+
+      - type: str
+        name: port
+        description: |-
+          asyn seral port number (e.g. ty_40_0)
+
+      - *unit
+
+      - type: str
+        name: ctlsrc
+        description: |-
+          control source (0 = service, 1 = Ion Pump 1, 2 = Ion Pump 2)
+
+      - type: id
+        name: name
+        description: |-
+          Object name and gui association name
+
+      - type: str
+        name: protocol
+        description: |-
+          name of protocol file, either digitelMpcq.proto or digitelMpcDual.proto
+        default: digitelMpcq.proto
+
+      - type: int
+        name: totmax
+        description: |-
+          cycle max off time (default 600 mins)
+        default: 600
+
+      - type: int
+        name: tcmax
+        description: |-
+          duration- On duration (s) - dual TSP systems on MPCe/q - defaults to 10
+        default: 20
+
+    databases:
+      - file: $(DIGITELMPC)/db/digitelMpcqTsp.template
+        args:
+          totmax:
+          protocol:
+          tcmax:
+          device:
+          ctlsrc:
+          port:
+          unit:
+
+  - name: &digitelMpcPump digitelMpc
+    description: |-
+      TODO:ADD DESCRIPTION
+    args:
+      - type: id
+        name: name
+        description: |-
+          Gui tag
+
+      - type: str
+        name: device
+        description: |-
+          Device name
+
+      - type: object
+        name: port
+        description: |-
+          Asyn port
+
+      - *unit
+
+      - type: enum
+        name: proto
+        description: |-
+          Protocol file to use
+        default: digitelMpc.proto
+        values:
+          '"digitelMpc.proto"':
+          '"digitelMpcq.proto"':
+
+    databases:
+      - file: $(DIGITELMPC)/db/digitelMpc.template
+        args: { device, port, unit, proto, name }
+
+  - name: digitelMpcIonp
+    description: |-
+      Template database for digitel MPC - Ion Pump
+      Pete Owens - 30/9/03
+    args:
+      - type: object
+        name: MPC
+        description: |-
+          digitelMPC object
+
+      - type: enum
+        name: proto
+        description: |-
+          Protocol file to use
+        values:
+          digitelMpc.proto:
+          digitelMpcq.proto:
+        default: digitelMpc.proto
+
+      - type: id
+        name: device
+        description: |-
+          device name
+
+      - type: int
+        name: pump
+        description: |-
+          ion pump number (1 or 2)
+
+      - type: int
+        name: size
+        description: |-
+          pump size (l/s)
+
+      # - type: id
+      #   name: name
+      #   description: |-
+      #     Object name and gui association name
+
+      - type: float
+        name: sp1on
+        description: |-
+          setpoint1 on
+        default: 1e-07
+
+      - type: float
+        name: sp1off
+        description: |-
+          setpoint1 off
+        default: 2e-07
+
+      - type: float
+        name: sp2on
+        description: |-
+          setpoint2 on
+        default: 1e-07
+
+      - type: float
+        name: sp2off
+        description: |-
+          setpoint2 off
+        default: 2e-07
+
+      - type: str
+        name: alh
+        description: |-
+          alarm handler tag (Defaults to None) c.f. mp49's commit 80833
+        default: None
+
+      - type: str
+        name: text
+        description: |-
+          Text to display in the ion pump controller window.
+        default: $(device)
+
+      - type: str
+        name: disptext
+        description: |-
+          Template argument
+        default: $(device)
+
+    databases:
+      - file: $(DIGITELMPC)/db/digitelMpcIonp.template
+        args: { device, port: "{{MPC.port}}", unit: "{{MPC.unit}}", pump, size, sp1on, sp1off, sp2on, sp2off, alh, text, proto, disptext }
+
+  - name: digitelMpcTspGroup
+    description: |-
+      Template database for a group of up to 8 digitel MPC TSPs
+      Pete Owens - 11/4/05
+    args:
+      - type: str
+        name: device
+        description: |-
+          device name
+
+      - type: str
+        name: tsp1
+        description: |-
+          TSP 1 device name
+
+      - type: str
+        name: tsp2
+        description: |-
+          TSP 2 device name
+        default: "{{tsp1}}"
+
+      - type: str
+        name: tsp3
+        description: |-
+          TSP 3 device name
+        default: "{{tsp1}}"
+
+      - type: str
+        name: tsp4
+        description: |-
+          TSP 4 device name
+        default: "{{tsp1}}"
+
+      - type: str
+        name: tsp5
+        description: |-
+          TSP 5 device name
+        default: "{{tsp1}}"
+
+      - type: str
+        name: tsp6
+        description: |-
+          TSP 6 device name
+        default: "{{tsp1}}"
+
+      - type: str
+        name: tsp7
+        description: |-
+          TSP 7 device name
+        default: "{{tsp1}}"
+
+      - type: str
+        name: tsp8
+        description: |-
+          TSP 8 device name
+        default: "{{tsp1}}"
+
+    databases:
+      - file: $(DIGITELMPC)/db/digitelMpcTspGroup.template
+        args: { device, tsp1, tsp2, tsp3, tsp4, tsp5, tsp6, tsp7, tsp8 }
+
+  - name: digitelMpcIonpGroup
+    description: |-
+      Template database for a group of up to 8 digitel MPC Ion Pumps
+      Pete Owens - 3/5/05
+    args:
+      - type: str
+        name: device
+        description: |-
+          device name
+
+      - type: int
+        name: delay
+        description: |-
+          delay between starting pumps
+
+      - type: str
+        name: ionp1
+        description: |-
+          Ion pump 1 device name
+
+      - type: str
+        name: ionp2
+        description: |-
+          Ion pump 2 device name
+
+      - type: str
+        name: ionp3
+        description: |-
+          Ion pump 3 device name
+
+      - type: str
+        name: ionp4
+        description: |-
+          Ion pump 4 device name
+
+      - type: str
+        name: ionp5
+        description: |-
+          Ion pump 5 device name
+
+      - type: str
+        name: ionp6
+        description: |-
+          Ion pump 6 device name
+
+      - type: str
+        name: ionp7
+        description: |-
+          Ion pump 7 device name
+
+      - type: str
+        name: ionp8
+        description: |-
+          Ion pump 8 device name
+
+    databases:
+      - file: $(DIGITELMPC)/db/digitelMpcIonpGroup.template
+        args: { device, delay, ionp1, ionp2, ionp3, ionp4, ionp5, ionp6, ionp7, ionp8 }
+
+  - name: dummyIonp
+    description: |-
+      Template database for dummy Ion Pump.
+      Just holds start, starting and status
+      Malcolm Walters - 02/08/2006
+    args:
+      - type: str
+        name: device
+        description: |-
+          device name
+
+    databases:
+      - file: $(DIGITELMPC)/db/dummyIonp.template
+        args:
+          device:
+
+  - name: digitelMpcTsp
+    description: |-
+      Template database for digitel MPC - Titanium Sublimation Pump
+      Pete Owens - 13/10/03
+    args:
+      - type: id
+        name: device
+        description: |-
+          device name
+
+      - type: str
+        name: port
+        description: |-
+          asyn seral port number (e.g. ty_40_0)
+
+      - *unit
+
+      - type: int
+        name: ctlsrc
+        description: |-
+          control source (0 = service, 1 = Ion Pump 1, 2 = Ion Pump 2)
+
+      # - type: id
+      #   name: name
+      #   description: |-
+      #     Object name and gui association name
+
+      - type: str
+        name: protocol
+        description: |-
+          name of protocol file, either digitelMpc.proto or digitelMpcDual.proto
+        default: digitelMpc.proto
+
+      - type: int
+        name: totmax
+        description: |-
+          cycle max off time (default 600 mins)
+        default: 600
+
+      - type: int
+        name: tcmax
+        description: |-
+          duration- On duration (s)       - new addition May 2010 for dual TSP systems on MPCe - defaults to 10
+        default: 20
+
+    databases:
+      - file: $(DIGITELMPC)/db/digitelMpcTsp.template
+        args: { device, port, unit, ctlsrc, protocol, totmax, tcmax }

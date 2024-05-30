@@ -3,108 +3,28 @@
 module: mks937a
 
 defs:
-
   - name: mks937aPirgDummy
     description: |-
-      Template database for a dummy pirani gauge. 
+      Template database for a dummy pirani gauge.
       Just enough to keep the Gauge template happy
       Linda Pratt 28/09/2009
     args:
-
       - type: str
         name: device
         description: |-
           device name
 
     databases:
-
       - file: $(MKS937A)/db/mks937aPirgDummy.template
         args:
           device:
 
-  - name: mks937aGauge_sim
-    description: |-
-      TODO:ADD DESCRIPTION
-    args:
-
-      - type: str
-        name: dom
-        description: |-
-          Template argument
-
-      - type: str
-        name: id
-        description: |-
-          Template argument
-
-      - type: id
-        name: name
-        description: |-
-          Template argument
-
-      - type: str
-        name: GCTLR
-        description: |-
-          Template argument
-
-      - type: str
-        name: ctlsp_desc
-        description: |-
-          Template argument
-        default: IMG Enable
-
-      - type: float
-        name: ctlsp_hopr
-        description: |-
-          Template argument
-        default: 0.95
-
-      - type: float
-        name: ctlsp_lopr
-        description: |-
-          Template argument
-        default: 0.0027
-
-      - type: float
-        name: ctlsp_drvh
-        description: |-
-          Template argument
-        default: 0.95
-
-      - type: float
-        name: ctlsp_drvl
-        description: |-
-          Template argument
-        default: 0.0027
-
-      - type: float
-        name: ctlsp_level
-        description: |-
-          Template argument
-        default: 0.01
-
-    databases:
-
-      - file: $(MKS937A)/db/simulation_mks937aGauge.template
-        args:
-          ctlsp_drvl:
-          name:
-          ctlsp_lopr:
-          ctlsp_drvh:
-          ctlsp_hopr:
-          dom:
-          GCTLR:
-          ctlsp_level:
-          ctlsp_desc:
-          id:
-
   - name: mks937aImgMean
     description: |-
-      Template database to calculate the mean pressure from a 
+      Template database to calculate the mean pressure from a
       number of IMGs
       Pete Owens - 26/6/06
     args:
-
       - type: str
         name: device
         description: |-
@@ -115,7 +35,7 @@ defs:
         description: |-
           beam current
 
-      - type: str
+      - type: int
         name: nimgs
         description: |-
           number of gauges
@@ -171,35 +91,20 @@ defs:
           img 10 device name
 
     databases:
-
       - file: $(MKS937A)/db/mks937aImgMean.template
-        args:
-          img10:
-          current:
-          device:
-          img9:
-          img8:
-          nimgs:
-          img3:
-          img2:
-          img1:
-          img7:
-          img6:
-          img5:
-          img4:
+        args: { device, current, nimgs, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10 }
 
   - name: mks937aImgGroup
     description: |-
       Template database for a group of up to 8 IMGs
       Pete Owens - 10/5/05
     args:
-
       - type: str
         name: device
         description: |-
           device name
 
-      - type: str
+      - type: float
         name: delay
         description: |-
           delay between starting each IMG
@@ -213,39 +118,45 @@ defs:
         name: img2
         description: |-
           img 2 device name
+        default: "{{img1}}"
 
       - type: str
         name: img3
         description: |-
           img 3 device name
+        default: "{{img1}}"
 
       - type: str
         name: img4
         description: |-
           img 4 device name
+        default: "{{img1}}"
 
       - type: str
         name: img5
         description: |-
           img 5 device name
+        default: "{{img1}}"
 
       - type: str
         name: img6
         description: |-
           img 6 device name
+        default: "{{img1}}"
 
       - type: str
         name: img7
         description: |-
           img 7 device name
+        default: "{{img1}}"
 
       - type: str
         name: img8
         description: |-
           img 8 device name
+        default: "{{img1}}"
 
     databases:
-
       - file: $(MKS937A)/db/mks937aImgGroup.template
         args:
           delay:
@@ -263,26 +174,20 @@ defs:
     description: |-
       TODO:ADD DESCRIPTION
     args:
-
       - type: object
         name: GCTLR
         description: |-
           Parent mks937a object
 
-      - type: str
+      - type: id
         name: device
         description: |-
           device name
 
-      - type: str
+      - type: int
         name: channel
         description: |-
           MKS 937A channel number (1-4)
-
-      - type: id
-        name: name
-        description: |-
-          Object name, and gui association name
 
       - type: float
         name: ctlsp_level
@@ -531,60 +436,13 @@ defs:
         default: $(device):PRO:CONSTZERO
 
     databases:
-
       - file: $(MKS937A)/db/mks937aImg.template
-        args:
-          rlysp_low:
-          rlasp_desc:
-          prosp_lolo:
-          ilk_write_access_pv:
-          prosp_hopr:
-          rlysp_drvh:
-          rlysp_drvl:
-          prosp_drvl:
-          prosp_desc:
-          ctlsp_desc:
-          prosp_drvh:
-          ctlsp_drvl:
-          ctlsp_lopr:
-          ctlsp_drvh:
-          rlysp_hihi:
-          rlysp_hopr:
-          prosp_low:
-          rlasp_hihi:
-          prosp_level:
-          prosp_hihi:
-          ctlsp_level:
-          rlysp_desc:
-          offwarn:
-          GCTLR:
-          channel:
-          ctlsp_hihi:
-          ctlsp_low:
-          rlysp_high:
-          ctlsp_hopr:
-          prosp_lopr:
-          rlysp_level:
-          ctlsp_high:
-          prosp_high:
-          device:
-          rlasp_lolo:
-          rlasp_high:
-          name:
-          ctlsp_lolo:
-          rlasp_drvh:
-          rlysp_lopr:
-          rlasp_drvl:
-          rlysp_lolo:
-          rlasp_hopr:
-          rlasp_low:
-          rlasp_lopr:
+        args: { device, port: "{{GCTLR.port}}", channel, ctlsp_level, ctlsp_drvh, ctlsp_drvl, ctlsp_hopr, ctlsp_lopr, ctlsp_hihi, ctlsp_lolo, ctlsp_high, ctlsp_low, ctlsp_desc, prosp_level, prosp_drvh, prosp_drvl, prosp_hopr, prosp_lopr, prosp_hihi, prosp_lolo, prosp_high, prosp_low, prosp_desc, rlysp_level, rlysp_drvh, rlysp_drvl, rlysp_hopr, rlysp_lopr, rlysp_hihi, rlysp_lolo, rlysp_high, rlysp_low, rlysp_desc, rlasp_drvh, rlasp_drvl, rlasp_hopr, rlasp_lopr, rlasp_hihi, rlasp_lolo, rlasp_high, rlasp_low, rlasp_desc, offwarn, ilk_write_access_pv }
 
   - name: mks937aGaugeEGU
     description: |-
       TODO:ADD DESCRIPTION
     args:
-
       - type: id
         name: name
         description: |-
@@ -605,110 +463,33 @@ defs:
         description: |-
           PV providing gauge reading in mbar
 
-      - type: str
-        name: c
-        description: |-
-          ADC card number
-
-      - type: str
-        name: s
-        description: |-
-          ADC signal number
-
-      - type: str
-        name: GCTLR
-        description: |-
-          The gauge controller PV prefix, for gui purposes
-
-      - type: float
-        name: ctlsp_level
-        description: |-
-          The desired control setpoint value (actually for the Pirg).
-        default: 0.01
-
-      - type: float
-        name: ctlsp_drvh
-        description: |-
-          (limits max value of control setpoint)
-        default: 0.95
-
-      - type: float
-        name: ctlsp_drvl
-        description: |-
-          (limits min value of control setpoint)
-        default: 0.0027
-
-      - type: float
-        name: ctlsp_hopr
-        description: |-
-          (high operator value - helps display set correct range).
-        default: 0.95
-
-      - type: float
-        name: ctlsp_lopr
-        description: |-
-          (low operator value - helps display set correct range).
-        default: 0.0027
-
-      - type: str
-        name: ctlsp_desc
-        description: |-
-          (appears as a label on the Pirg EDM screen).
-        default: IMG Enable
-
-      - type: str
-        name: aitype
-        description: |-
-          Template argument
-        default: Hy8401ip
-
-      - type: str
-        name: aiinp
-        description: |-
-          Template argument
-        default: '#C$(c) S$(s) @'
-
-      - type: str
-        name: device
-        description: |-
-          device name
-
-      - type: str
-        name: p_egu_pv
-        description: |-
-          Raw value ADC PV name
+    values:
+      - name: eguInputPV
+        description: PV from which the gauge reading in EGU is taken
+        value: "{{dom}}-VA-GAUGE-{{ '%02d' % id }}:PLOG_CALC"
 
     databases:
-
       - file: $(MKS937A)/db/mks937aGauge.template
         args:
-          c:
-          ctlsp_drvl:
-          name:
-          ctlsp_lopr:
           dom:
-          ctlsp_hopr:
-          ctlsp_drvh:
-          aitype:
-          GCTLR:
-          s:
-          aiinp:
-          ctlsp_level:
-          ctlsp_desc:
-          id:
+          id: "{{ '%02d' % id }}"
+          c: ""
+          s: ""
+          name:
+          aitype: "Soft Channel"
+          aiinp: "{{eguInputPV}}  CP"
 
       - file: $(MKS937A)/db/mks937aPlogEGU.template
         args:
-          device:
-          p_egu_pv:
+          device: "{{eguInputPV}}"
+          p_egu_pv: "{{input}}"
 
   - name: mks937aGaugeGroup
     description: |-
-      Template database for a group of up to 8 MKS937A 
+      Template database for a group of up to 8 MKS937A
       combination gauges
       Pete Owens - 5/5/05
     args:
-
       - type: str
         name: device
         description: |-
@@ -723,36 +504,43 @@ defs:
         name: gauge2
         description: |-
           gauge 2 device name
+        default: "{{gauge1}}"
 
       - type: str
         name: gauge3
         description: |-
           gauge 3 device name
+        default: "{{gauge1}}"
 
       - type: str
         name: gauge4
         description: |-
           gauge 4 device name
+        default: "{{gauge1}}"
 
       - type: str
         name: gauge5
         description: |-
           gauge 5 device name
+        default: "{{gauge1}}"
 
       - type: str
         name: gauge6
         description: |-
           gauge 6 device name
+        default: "{{gauge1}}"
 
       - type: str
         name: gauge7
         description: |-
           gauge 7 device name
+        default: "{{gauge1}}"
 
       - type: str
         name: gauge8
         description: |-
           gauge 8 device name
+        default: "{{gauge1}}"
 
       - type: int
         name: SELM
@@ -767,26 +555,18 @@ defs:
         default: 0
 
     databases:
-
       - file: $(MKS937A)/db/mks937aGaugeGroup.template
-        args:
-          gauge5:
-          gauge4:
-          gauge7:
-          gauge6:
-          gauge1:
-          gauge3:
-          gauge2:
-          SELN:
-          SELM:
-          gauge8:
-          device:
+        args: { device, gauge1, gauge2, gauge3, gauge4, gauge5, gauge6, gauge7, gauge8, SELM, SELN }
 
   - name: mks937a
     description: |-
-      Template database for an MKS937A Multi-Sensor System
-      Pete Owens - 9/3/04
+      The mks937a controller
     args:
+      - type: id
+        name: name
+        description: |-
+          Device identifier (for reference from controlled devices)
+          This is a little redundant but is a legacy from builder
 
       - type: str
         name: device
@@ -799,7 +579,6 @@ defs:
           Asyn Port name, e.g. ty_40_0
 
     databases:
-
       - file: $(MKS937A)/db/mks937a.template
         args:
           device:
@@ -807,13 +586,12 @@ defs:
 
   - name: mks937aImgDummy
     description: |-
-      Template database for a dummy inverted magnetron gauge  
-      Just enough to keep the Gauge template happy 
-      Note on optional macros: these will default to an appropriate hard-coded 
-      value if no value is passed for expansion. They are provided to parallel 
+      Template database for a dummy inverted magnetron gauge
+      Just enough to keep the Gauge template happy
+      Note on optional macros: these will default to an appropriate hard-coded
+      value if no value is passed for expansion. They are provided to parallel
       those in the Img template.
     args:
-
       - type: str
         name: device
         description: |-
@@ -880,7 +658,6 @@ defs:
         default: IMG Enable
 
     databases:
-
       - file: $(MKS937A)/db/mks937aImgDummy.template
         args:
           ctlsp_drvl:
@@ -899,26 +676,20 @@ defs:
     description: |-
       TODO:ADD DESCRIPTION
     args:
-
       - type: object
         name: GCTLR
         description: |-
           Parent mks937a object
 
-      - type: str
+      - type: id
         name: device
         description: |-
           device name
 
-      - type: str
+      - type: int
         name: channel
         description: |-
           MKS 937A channel number (1-4)
-
-      - type: id
-        name: name
-        description: |-
-          Object name, and gui association name
 
       - type: float
         name: rlysp_level
@@ -987,31 +758,14 @@ defs:
         default: $(device):CTL:CONSTZERO
 
     databases:
-
       - file: $(MKS937A)/db/mks937aPirg.template
-        args:
-          rlysp_low:
-          name:
-          rlysp_high:
-          rlysp_hihi:
-          rlysp_level:
-          rlysp_hopr:
-          ilk_write_access_pv:
-          rlysp_drvh:
-          device:
-          rlysp_lopr:
-          rlysp_lolo:
-          rlysp_drvl:
-          rlysp_desc:
-          GCTLR:
-          channel:
+        args: { device, port: "{{GCTLR.port}}", channel, rlysp_level, rlysp_drvh, rlysp_drvl, rlysp_hopr, rlysp_lopr, rlysp_hihi, rlysp_lolo, rlysp_high, rlysp_low, rlysp_desc, ilk_write_access_pv }
 
   - name: mks937aPirgGroup
     description: |-
       Template database for a group of up to 8 Pirani Gauges
       Pete Owens - 9/5/05
     args:
-
       - type: str
         name: device
         description: |-
@@ -1026,65 +780,61 @@ defs:
         name: pirg2
         description: |-
           pirg 2 device name
+        default: "{{pirg1}}"
 
       - type: str
         name: pirg3
         description: |-
           pirg 3 device name
+        default: "{{pirg1}}"
 
       - type: str
         name: pirg4
         description: |-
           pirg 4 device name
+        default: "{{pirg1}}"
 
       - type: str
         name: pirg5
         description: |-
           pirg 5 device name
+        default: "{{pirg1}}"
 
       - type: str
         name: pirg6
         description: |-
           pirg 6 device name
+        default: "{{pirg1}}"
 
       - type: str
         name: pirg7
         description: |-
           pirg 7 device name
+        default: "{{pirg1}}"
 
       - type: str
         name: pirg8
         description: |-
           pirg 8 device name
+        default: "{{pirg1}}"
 
     databases:
-
       - file: $(MKS937A)/db/mks937aPirgGroup.template
-        args:
-          pirg1:
-          pirg3:
-          pirg2:
-          pirg5:
-          pirg4:
-          pirg7:
-          pirg6:
-          device:
-          pirg8:
+        args: { device, pirg1, pirg2, pirg3, pirg4, pirg5, pirg6, pirg7, pirg8 }
 
   - name: mks937aGauge
     description: |-
-      Template database for a combination guage connected to 
-      two channels of an MKS937A Multi-Sensor System 
-      A note on the optional macros: they default to an appropriate hard-coded 
-      value if no value is passed for expansion. 
-      They are provided to allow the default set points to be changed. 
-      Once the set point needs to be changed it may be necessary to alter  
-      various other fields defining the range of allowed values. 
-      For the majority of applications the defaults should be used.  The levels 
-      should only be changed at the request of the vacuum group for non-standard 
+      Template database for a combination guage connected to
+      two channels of an MKS937A Multi-Sensor System
+      A note on the optional macros: they default to an appropriate hard-coded
+      value if no value is passed for expansion.
+      They are provided to allow the default set points to be changed.
+      Once the set point needs to be changed it may be necessary to alter
+      various other fields defining the range of allowed values.
+      For the majority of applications the defaults should be used.  The levels
+      should only be changed at the request of the vacuum group for non-standard
       vacuum systems.
     args:
-
       - type: str
         name: dom
         description: |-
@@ -1095,12 +845,12 @@ defs:
         description: |-
           ID number as 2 digit string (e.g. 01)
 
-      - type: str
+      - type: int
         name: c
         description: |-
           ADC card number
 
-      - type: str
+      - type: int
         name: s
         description: |-
           ADC signal number
@@ -1110,10 +860,11 @@ defs:
         description: |-
           The device's name for gui purposes
 
-      - type: str
-        name: GCTLR
-        description: |-
-          The gauge controller PV prefix, for gui purposes
+      # TODO - when we come to construct screens, how is this going to work?
+      # - type: str
+      #   name: GCTLR
+      #   description: |-
+      #     The gauge controller PV prefix, for gui purposes
 
       - type: float
         name: ctlsp_level
@@ -1161,23 +912,21 @@ defs:
         name: aiinp
         description: |-
           Template argument
-        default: '#C$(c) S$(s) @'
+        default: "#C$(c) S$(s) @"
 
     databases:
-
       - file: $(MKS937A)/db/mks937aGauge.template
         args:
-          c:
-          ctlsp_drvl:
-          name:
-          ctlsp_lopr:
           dom:
-          ctlsp_hopr:
-          ctlsp_drvh:
-          aitype:
-          GCTLR:
-          s:
-          aiinp:
-          ctlsp_level:
-          ctlsp_desc:
           id:
+          c:
+          s:
+          name:
+          ctlsp_level:
+          ctlsp_drvh:
+          ctlsp_drvl:
+          ctlsp_hopr:
+          ctlsp_lopr:
+          ctlsp_desc:
+          aitype:
+          aiinp:

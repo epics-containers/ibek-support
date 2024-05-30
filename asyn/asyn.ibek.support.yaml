@@ -100,16 +100,20 @@ defs:
     pre_init:
       - value: |
 
+          # drvAsynIPPortConfigure(name, port, priority, noAutoConnect, noProcessEos)
+        when: first
+      - value: |
           drvAsynIPPortConfigure({{name}}, {{port}}, {{priority}}, {{noAutoConnect}}, {{noProcessEos}})
-          {% if input_eos != "" %}
+          {%- if input_eos != "\\n" %}
           asynOctetSetInputEos({{name}}, 0, "{{input_eos}}")
-          {% endif %}
-          {% if output_eos != "" %}
+          {%- endif %}
+          {%- if output_eos != "\\n" %}
           asynOctetSetOutputEos({{name}}, 0, "{{output_eos}}")
-          {% endif %}
-
-          # TODO - we need a tidier way to handle Asyn options
+          {%- endif %}
+          {%- if disconnectOnReadTimeout != "N" %}
           asynSetOption({{name}}, 0, "disconnectOnReadTimeout", {{disconnectOnReadTimeout}})
+          {%- endif %}
+          {#- TODO - we need a tidier way to handle Asyn options #}
 
   - name: AsynIPServer
     description: |-

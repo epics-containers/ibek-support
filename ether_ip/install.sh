@@ -3,20 +3,20 @@
 # ARGUMENTS:
 #  $1 VERSION to install (must match repo tag)
 VERSION=${1}
-NAME=mks937a
+NAME=ether_ip
 FOLDER=$(dirname $(readlink -f $0))
 
 # log output and abort on failure
 set -xe
 
 # get the source and fix up the configure/RELEASE files
-ibek support git-clone ${NAME} ${VERSION} --org https://github.com/dls-controls/
+ibek support git-clone ${NAME} ${VERSION}
 
 ibek support register ${NAME}
 
-# declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
-ibek support add-libs mks937a
-ibek support add-dbds mks937a.dbd
+# no dbds/libs for a streamdevice
+ibek support add-libs ether_ip
+ibek support add-dbds ether_ip.dbd
 
 # global config settings
 ${FOLDER}/../_global/install.sh ${NAME}

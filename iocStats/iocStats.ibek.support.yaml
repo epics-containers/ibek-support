@@ -128,3 +128,7 @@ defs:
       - file: $(IOCSTATS)/db/iocAdminSoft.db
         args:
           IOC:
+
+      - file: $(IOCSTATS)/db/iocAdminScanMon.db
+        args:
+          IOC:
