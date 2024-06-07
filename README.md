@@ -50,7 +50,7 @@ Each support module folder contains:-
   build inside of a container for example.
 
 
-## Versionig
+## Versioning
 An important aspect of ibek-support is that it will
 retain backward compatibility with older versions of support modules going
 forward from inception in October 2023. The install.sh script will be told
