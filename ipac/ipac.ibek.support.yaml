@@ -7,16 +7,15 @@ defs:
     description: |-
       Configure a Hytec 8002 Carrier card
     args:
-      - type: id
-        name: IPACid
-        description: |-
-          Identifier for this device
-        default: IPAC{{slot}}
-
       - type: int
         name: slot
         description: |-
           VME Slot number
+
+      - type: id
+        name: name
+        description: |-
+          Identifier for this device - typically IPAC{{ slot }}
 
       - type: int
         name: intLevel
@@ -24,16 +23,33 @@ defs:
           VME Interrupt Level
         default: 2
 
+      - name: test
+        type: str
+        description: test
+        default: |
+          {{ slot }}
+
       - name: interrupt_vector
         type: object
         description: Interrupt Vector reserved with epics.InterruptVectorVME, count=1
 
+    values:
+      - name: carrier_id
+        value: '{{ __utils__.counter("Carriers", start=0) }}'
+        description: Carrier Card Identifier
+
     pre_init:
-      - value: IPAC4 = ipacAddHy8002("4, 2, {{interrupt_vector.name}}")
+      - value: |
+          # ipacAddHy8002("slot, intLevel, interrupt_vector")
+        when: first
+
+      - value: |
+          ipacAddHy8002("{{ slot }}, {{ intLevel}}, $({{interrupt_vector.name}})")
+          epicsEnvSet {{ name }} = {{ carrier_id }}
 
   - name: Hy8001
     description: |-
-      TODO:ADD DESCRIPTION
+      TODO:ADD DESCRIPTIONS
     args:
       - type: int
         name: slot
