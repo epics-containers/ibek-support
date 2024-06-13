@@ -2054,38 +2054,6 @@
           COORD:
           name:
 
-  - name: CS_accel_dcm
-    description: |-
-      Supporting template that allows setting of variables for an
-      accel DCM CS
-    args:
-      - type: object
-        name: PORT
-        description: |-
-          Delta tau motor controller comms port
-
-      - type: str
-        name: P
-        description: |-
-          Pv Prefix
-
-      - type: str
-        name: COORD
-        description: |-
-          Co-ordinate system number
-
-      - type: id
-        name: name
-        description: |-
-          This associates an edm screen with the template
-
-    databases:
-      - file: $(PMAC)/db/accel_dcm.template
-        args:
-          P:
-          PORT:
-          COORD:
-          name:
 
   - name: CS_3jack_mirror
     description: |-

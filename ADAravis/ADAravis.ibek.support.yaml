@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/2.0.2/ibek.support.schema.json
+# yaml-language-server: $schema=../schemas/ibek.support.schema.json
 
 module: ADAravis
 
@@ -32,6 +32,15 @@ defs:
         description: |-
           Camera class for custom commands
         values:
+          Basler-a2A2600-20gmBAS:
+          Basler-scA1400-30gm:
+          Basler-scA1300-32gm:
+          Basler-scA640-70gm:
+          Basler-acA640-90gm:
+          Basler-acA640-300gm:
+          Basler-acA1300-30gm:
+          Basler-acA1300-60gm:
+          Basler-acA1300-75gm:
           Basler_piA640_210gm:
           AVT_Manta_G319B:
           AVT_Mako_G040B:

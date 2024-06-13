@@ -5,7 +5,7 @@ set -xe
 THIS_FOLDER=$(realpath $(dirname ${0}))
 IBEK_SROOT=${THIS_FOLDER}/../
 
-pip install --upgrade "ibek>=3.0.0b4"
+pip install --upgrade "ibek>=3.0.0b5"
 
 # make a global ioc schema for all the support modules combined
 # this validates all ibek.support.yaml files
