@@ -4,3 +4,6 @@
 [submodule "tests/beamlines/bl45p"]
 	path = tests/ioc_repos/bl45p
 	url = https://github.com/epics-containers/bl45p.git
+[submodule "tests/ioc_repos/bl01t"]
+	path = tests/ioc_repos/bl01t
+	url = https://github.com/epics-containers/bl01t.git
