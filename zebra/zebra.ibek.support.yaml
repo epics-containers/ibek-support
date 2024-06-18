@@ -2,29 +2,29 @@
 
 module: zebra
 
-defs:
+entity_models:
   - name: zebraLastDivDiff
     description: |-
       Makes a record pointing to DIV$(DIV) that will display the difference
           between the last two DIV readings in position compare mode
-    args:
-      - type: str
-        name: P
+    parameters:
+      P:
+        type: str
         description: |-
           Device prefix
 
-      - type: str
-        name: Q
+      Q:
+        type: str
         description: |-
           Device suffix
 
-      - type: str
-        name: DIV
+      DIV:
+        type: str
         description: |-
           DIV number
 
-      - type: id
-        name: name
+      name:
+        type: id
         description: |-
           Object and gui association name
 
@@ -39,41 +39,41 @@ defs:
   - name: zebra
     description: |-
       Controls the zebra signal converter box
-    args:
-      - type: str
-        name: P
+    parameters:
+      P:
+        type: str
         description: |-
           Device prefix
 
-      - type: id
-        name: PORT
+      PORT:
+        type: id
         description: |-
           Driver port name
 
-      - type: str
-        name: Q
+      Q:
+        type: str
         description: |-
           Device suffix
 
-      - type: object
-        name: serialPort
+      serialPort:
+        type: object
         description: |-
           Serial port name
 
-      - type: str
-        name: TIMEOUT
+      TIMEOUT:
+        type: str
         description: |-
           Timeout
-        default: "1"
+        default: '1'
 
-      - type: str
-        name: ADDR
+      ADDR:
+        type: str
         description: |-
           Asyn Port address
-        default: "0"
+        default: '0'
 
-      - type: enum
-        name: SCANRATE
+      SCANRATE:
+        type: enum
         description: |-
           Specified scan rate for cpu intensive PVs
         default: I/O Intr
@@ -88,136 +88,139 @@ defs:
           .5 second:
           Event:
           I/O Intr:
-
-      - type: int
-        name: NELM
+      NELM:
+        type: int
         description: |-
           Number of elements in position capture arrays
         default: 100000
 
-      - type: str
-        name: PREC
+      PREC:
+        type: str
         description: |-
           Precision to show position compare gate and pulse fields
-        default: "4"
+        default: '4'
 
-      - type: str
-        name: M1
+      M1:
+        type: str
         description: |-
           Motor 1 PV
         default: $(P)$(Q):NOMOTOR
 
-      - type: str
-        name: M1DIR
+      M1DIR:
+        type: str
         description: |-
           Set to - if motor inverted in geobrick (decode control = 3 instead of 7)
         default: +
 
-      - type: str
-        name: M1MULT
+      M1MULT:
+        type: str
         description: |-
           Multiplier to account for DT scaling. E.g. if *4 encoder decode, set to 0.25
-        default: "1"
+        default: '1'
 
-      - type: str
-        name: M1HOMESETTLE
+      M1HOMESETTLE:
+        type: str
         description: |-
           Time to wait after an autohome before setting zebra pos to readback pos
-        default: "5"
+        default: '5'
 
-      - type: str
-        name: M2
+      M2:
+        type: str
         description: |-
           Motor 2 PV
         default: $(P)$(Q):NOMOTOR
 
-      - type: str
-        name: M2DIR
+      M2DIR:
+        type: str
         description: |-
           Set to - if motor inverted in geobrick (decode control = 3 instead of 7)
         default: +
 
-      - type: str
-        name: M2MULT
+      M2MULT:
+        type: str
         description: |-
           Multiplier to account for DT scaling. E.g. if *4 encoder decode, set to 0.25
-        default: "1"
+        default: '1'
 
-      - type: str
-        name: M2HOMESETTLE
+      M2HOMESETTLE:
+        type: str
         description: |-
           Time to wait after an autohome before setting zebra pos to readback pos
-        default: "5"
+        default: '5'
 
-      - type: str
-        name: M3
+      M3:
+        type: str
         description: |-
           Motor 3 PV
         default: $(P)$(Q):NOMOTOR
 
-      - type: str
-        name: M3DIR
+      M3DIR:
+        type: str
         description: |-
           Set to - if motor inverted in geobrick (decode control = 3 instead of 7)
         default: +
 
-      - type: str
-        name: M3MULT
+      M3MULT:
+        type: str
         description: |-
           Multiplier to account for DT scaling. E.g. if *4 encoder decode, set to 0.25
-        default: "1"
+        default: '1'
 
-      - type: str
-        name: M3HOMESETTLE
+      M3HOMESETTLE:
+        type: str
         description: |-
           Time to wait after an autohome before setting zebra pos to readback pos
-        default: "5"
+        default: '5'
 
-      - type: str
-        name: M4
+      M4:
+        type: str
         description: |-
           Motor 4 PV
         default: $(P)$(Q):NOMOTOR
 
-      - type: str
-        name: M4DIR
+      M4DIR:
+        type: str
         description: |-
           Set to - if motor inverted in geobrick (decode control = 3 instead of 7)
         default: +
 
-      - type: str
-        name: M4MULT
+      M4MULT:
+        type: str
         description: |-
           Multiplier to account for DT scaling. E.g. if *4 encoder decode, set to 0.25
-        default: "1"
+        default: '1'
 
-      - type: str
-        name: M4HOMESETTLE
+      M4HOMESETTLE:
+        type: str
         description: |-
           Time to wait after an autohome before setting zebra pos to readback pos
-        default: "5"
+        default: '5'
 
-      - type: int
-        name: MAXBUF
+      MAXBUF:
+        type: int
         description: |-
           Maximum number of buffers (areaDetector)
         default: 5
 
-      - type: int
-        name: MAXMEM
+      MAXMEM:
+        type: int
         description: |-
           Maximum memory (areaDetector)
 
-      - type: str
-        name: R
+      R:
+        type: str
         description: |-
           Device Suffix
 
-      - type: str
-        name: EMPTY
+      EMPTY:
+        type: str
         description: |-
           Empty macro to satisfy VDCT
 
+    pre_init:
+      - value: |
+          #zebraConfig(Port, SerialPort, MaxPosCompPoints, MaxBuffers, MaxMemory)
+          zebraConfig("{{PORT}}", "{{serialPort}}", {{NELM}}, {{MAXBUF}}, {{MAXMEM}})
     databases:
       - file: $(ZEBRA)/db/zebra.template
         args:
@@ -248,7 +251,3 @@ defs:
           M1MULT:
           M2DIR:
 
-    pre_init:
-      - value: |
-          #zebraConfig(Port, SerialPort, MaxPosCompPoints, MaxBuffers, MaxMemory)
-          zebraConfig("{{PORT}}", "{{serialPort}}", {{NELM}}, {{MAXBUF}}, {{MAXMEM}})

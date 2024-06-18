@@ -2,24 +2,23 @@
 
 module: motorSim
 
-defs:
+entity_models:
   - name: simMotorController
     description: |-
       Creates a simulation motion controller
-
-    args:
-      - type: id
-        name: controllerName
+    parameters:
+      controllerName:
+        type: id
         description: |-
           The name of the controller and its Asyn Port Name
 
-      - type: str
-        name: P
+      P:
+        type: str
         description: |-
           Device PV Prefix
 
-      - type: int
-        name: numAxes
+      numAxes:
+        type: int
         description: |-
           The number of axes to create
 
@@ -31,53 +30,52 @@ defs:
   - name: simMotorAxis
     description: |-
       Creates a simulation motor axis
-
-    args:
-      - type: object
-        name: controller
+    parameters:
+      controller:
+        type: object
         description: |-
           a reference to the motion controller
 
-      - type: str
-        name: M
+      M:
+        type: str
         description: |-
           PV suffix for the motor record
 
-      - type: int
-        name: ADDR
+      ADDR:
+        type: int
         description: |-
           The axis number (allowed to be from 0 to controller.numAxes-1)
 
-      - type: str
-        name: DESC
+      DESC:
+        type: str
         description: |-
           The description of the axis
 
-      - type: int
-        name: DLLM
+      DLLM:
+        type: int
         description: |-
           The low limit of the axis (in counts)
         default: -20000
 
-      - type: int
-        name: DHLM
+      DHLM:
+        type: int
         description: |-
           The high limit of the axis (in counts)
         default: 20000
 
-      - type: int
-        name: home
+      home:
+        type: int
         description: |-
           The home position of the axis (in counts)
 
-      - type: int
-        name: start
+      start:
+        type: int
         description: |-
           The starting position of the axis (in counts)
         default: 0
 
-      - type: enum
-        name: DIR
+      DIR:
+        type: enum
         description: |-
           The direction of the axis
         default: 0
@@ -102,22 +100,22 @@ defs:
       # Which is  good idea for ease of transition from traditional IOCs)
       - file: basic_asyn_motor.db
         args:
-          P: "{{controller.P}}"
+          P: '{{controller.P}}'
           M:
-          DTYP: "asynMotor"
-          PORT: "{{controller}}"
+          DTYP: asynMotor
+          PORT: '{{controller}}'
           ADDR:
           DESC:
-          EGU: "degrees"
+          EGU: degrees
           DIR:
-          VELO: "1"
-          VBAS: ".1"
-          ACCL: ".2"
-          BDST: "0"
-          BVEL: "1"
-          BACC: ".2"
-          MRES: ".01"
-          PREC: "5"
+          VELO: '1'
+          VBAS: '.1'
+          ACCL: '.2'
+          BDST: '0'
+          BVEL: '1'
+          BACC: '.2'
+          MRES: '.01'
+          PREC: '5'
           DHLM:
           DLLM:
-          INIT: ""
+          INIT: ''

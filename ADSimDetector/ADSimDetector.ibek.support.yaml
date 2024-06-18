@@ -2,51 +2,54 @@
 
 module: ADSimDetector
 
-defs:
+entity_models:
   - name: simDetector
     description: |-
       Creates a simulation detector
-
-    args:
-      - type: str
-        name: P
+    parameters:
+      P:
+        type: str
         description: Device Prefix
-      - type: str
-        name: R
+      R:
+        type: str
         description: Device Suffix
-      - type: id
-        name: PORT
+      PORT:
+        type: id
         description: Port name for the detector
-      - type: str
-        name: TIMEOUT
+      TIMEOUT:
+        type: str
         description: Timeout
-        default: "1"
-      - type: str
-        name: ADDR
-        default: "0"
+        default: '1'
+      ADDR:
+        type: str
+        default: '0'
         description: Asyn Port address
-      - type: int
-        name: WIDTH
+      WIDTH:
+        type: int
         default: 1280
         description: Image Width
-      - type: int
-        name: HEIGHT
+      HEIGHT:
+        type: int
         default: 1024
         description: Image Height
-      - type: int
-        name: DATATYPE
+      DATATYPE:
+        type: int
         description: Datatype
         default: 1
-      - type: int
-        name: BUFFERS
+      BUFFERS:
+        type: int
         description: Maximum number of NDArray buffers to be created for plugin callbacks
         default: 50
-      - type: int
-        name: MEMORY
-        description:
-          Max memory to allocate, should be maxw*maxh*nbuffer for driver and
-          all attached plugins
+      MEMORY:
+        type: int
+        description: Max memory to allocate, should be maxw*maxh*nbuffer for driver and all attached plugins
         default: 0
+
+    pre_init:
+      - type: text
+        value: |
+          # simDetectorConfig(portName, maxSizeX, maxSizeY, dataType, maxBuffers, maxMemory)
+          simDetectorConfig("{{PORT}}", {{WIDTH}}, {{HEIGHT}}, {{DATATYPE}}, {{BUFFERS}}, {{MEMORY}})
 
     databases:
       - file: $(ADSIMDETECTOR)/db/simDetector.template
@@ -57,16 +60,10 @@ defs:
           TIMEOUT:
           ADDR:
 
-    pre_init:
-      - type: text
-        value: |
-          # simDetectorConfig(portName, maxSizeX, maxSizeY, dataType, maxBuffers, maxMemory)
-          simDetectorConfig("{{PORT}}", {{WIDTH}}, {{HEIGHT}}, {{DATATYPE}}, {{BUFFERS}}, {{MEMORY}})
-
     pvi:
       yaml_path: simDetector.pvi.device.yaml
       ui_macros:
         P:
         R:
       pv: true
-      pv_prefix: "$(P)$(R)"
+      pv_prefix: $(P)$(R)

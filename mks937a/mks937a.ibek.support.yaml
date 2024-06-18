@@ -2,15 +2,15 @@
 
 module: mks937a
 
-defs:
+entity_models:
   - name: mks937aPirgDummy
     description: |-
       Template database for a dummy pirani gauge.
       Just enough to keep the Gauge template happy
       Linda Pratt 28/09/2009
-    args:
-      - type: str
-        name: device
+    parameters:
+      device:
+        type: str
         description: |-
           device name
 
@@ -24,137 +24,137 @@ defs:
       Template database to calculate the mean pressure from a
       number of IMGs
       Pete Owens - 26/6/06
-    args:
-      - type: str
-        name: device
+    parameters:
+      device:
+        type: str
         description: |-
           device name
 
-      - type: str
-        name: current
+      current:
+        type: str
         description: |-
           beam current
 
-      - type: int
-        name: nimgs
+      nimgs:
+        type: int
         description: |-
           number of gauges
 
-      - type: str
-        name: img1
+      img1:
+        type: str
         description: |-
           img 1 device name
 
-      - type: str
-        name: img2
+      img2:
+        type: str
         description: |-
           img 2 device name
 
-      - type: str
-        name: img3
+      img3:
+        type: str
         description: |-
           img 3 device name
 
-      - type: str
-        name: img4
+      img4:
+        type: str
         description: |-
           img 4 device name
 
-      - type: str
-        name: img5
+      img5:
+        type: str
         description: |-
           img 5 device name
 
-      - type: str
-        name: img6
+      img6:
+        type: str
         description: |-
           img 6 device name
 
-      - type: str
-        name: img7
+      img7:
+        type: str
         description: |-
           img 7 device name
 
-      - type: str
-        name: img8
+      img8:
+        type: str
         description: |-
           img 8 device name
 
-      - type: str
-        name: img9
+      img9:
+        type: str
         description: |-
           img 9 device name
 
-      - type: str
-        name: img10
+      img10:
+        type: str
         description: |-
           img 10 device name
 
     databases:
       - file: $(MKS937A)/db/mks937aImgMean.template
-        args: { device, current, nimgs, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10 }
+        args: {device: null, current: null, nimgs: null, img1: null, img2: null, img3: null, img4: null, img5: null, img6: null, img7: null, img8: null, img9: null, img10: null}
 
   - name: mks937aImgGroup
     description: |-
       Template database for a group of up to 8 IMGs
       Pete Owens - 10/5/05
-    args:
-      - type: str
-        name: device
+    parameters:
+      device:
+        type: str
         description: |-
           device name
 
-      - type: float
-        name: delay
+      delay:
+        type: float
         description: |-
           delay between starting each IMG
 
-      - type: str
-        name: img1
+      img1:
+        type: str
         description: |-
           img 1 device name
 
-      - type: str
-        name: img2
+      img2:
+        type: str
         description: |-
           img 2 device name
-        default: "{{img1}}"
+        default: '{{img1}}'
 
-      - type: str
-        name: img3
+      img3:
+        type: str
         description: |-
           img 3 device name
-        default: "{{img1}}"
+        default: '{{img1}}'
 
-      - type: str
-        name: img4
+      img4:
+        type: str
         description: |-
           img 4 device name
-        default: "{{img1}}"
+        default: '{{img1}}'
 
-      - type: str
-        name: img5
+      img5:
+        type: str
         description: |-
           img 5 device name
-        default: "{{img1}}"
+        default: '{{img1}}'
 
-      - type: str
-        name: img6
+      img6:
+        type: str
         description: |-
           img 6 device name
-        default: "{{img1}}"
+        default: '{{img1}}'
 
-      - type: str
-        name: img7
+      img7:
+        type: str
         description: |-
           img 7 device name
-        default: "{{img1}}"
+        default: '{{img1}}'
 
-      - type: str
-        name: img8
+      img8:
+        type: str
         description: |-
           img 8 device name
-        default: "{{img1}}"
+        default: '{{img1}}'
 
     databases:
       - file: $(MKS937A)/db/mks937aImgGroup.template
@@ -173,408 +173,403 @@ defs:
   - name: mks937aImg
     description: |-
       TODO:ADD DESCRIPTION
-    args:
-      - type: object
-        name: GCTLR
+    parameters:
+      GCTLR:
+        type: object
         description: |-
           Parent mks937a object
 
-      - type: id
-        name: device
+      device:
+        type: id
         description: |-
           device name
 
-      - type: int
-        name: channel
+      channel:
+        type: int
         description: |-
           MKS 937A channel number (1-4)
 
-      - type: float
-        name: ctlsp_level
+      ctlsp_level:
+        type: float
         description: |-
           The desired control setpoint value.
         default: 0.01
 
-      - type: float
-        name: ctlsp_drvh
+      ctlsp_drvh:
+        type: float
         description: |-
           (limits max value of control setpoint)
         default: 0.95
 
-      - type: float
-        name: ctlsp_drvl
+      ctlsp_drvl:
+        type: float
         description: |-
           (limits min value of control setpoint)
         default: 0.0027
 
-      - type: float
-        name: ctlsp_hopr
+      ctlsp_hopr:
+        type: float
         description: |-
           (high operator value - helps display set correct range).
         default: 0.95
 
-      - type: float
-        name: ctlsp_lopr
+      ctlsp_lopr:
+        type: float
         description: |-
           (low operator value - helps display set correct range).
         default: 0.0027
 
-      - type: float
-        name: ctlsp_hihi
+      ctlsp_hihi:
+        type: float
         description: |-
           The HIHI alarm field on the control setpoint record.
         default: 0.96
 
-      - type: float
-        name: ctlsp_lolo
+      ctlsp_lolo:
+        type: float
         description: |-
           The LOLO alarm field on the control setpoint record.
         default: 0.0026
 
-      - type: float
-        name: ctlsp_high
+      ctlsp_high:
+        type: float
         description: |-
           The HIGH alarm field on the control setpoint record.
         default: 0.011
 
-      - type: float
-        name: ctlsp_low
+      ctlsp_low:
+        type: float
         description: |-
           The LOW alarm field on the control setpoint record.
         default: 0.009
 
-      - type: str
-        name: ctlsp_desc
+      ctlsp_desc:
+        type: str
         description: |-
           The DESC field on the control setpoint record.
         default: IMG Enable
 
-      - type: float
-        name: prosp_level
+      prosp_level:
+        type: float
         description: |-
           The desired protection setpoint value.
         default: 0.0005
 
-      - type: float
-        name: prosp_drvh
+      prosp_drvh:
+        type: float
         description: |-
           (limits max value of protection setpoint)
         default: 0.01
 
-      - type: float
-        name: prosp_drvl
+      prosp_drvl:
+        type: float
         description: |-
           (limits min value of protection setpoint)
         default: 1.3e-05
 
-      - type: float
-        name: prosp_hopr
+      prosp_hopr:
+        type: float
         description: |-
           (high operator value - helps display set correct range).
         default: 0.01
 
-      - type: float
-        name: prosp_lopr
+      prosp_lopr:
+        type: float
         description: |-
           (low operator value - helps display set correct range).
         default: 1.3e-05
 
-      - type: float
-        name: prosp_hihi
+      prosp_hihi:
+        type: float
         description: |-
           The HIHI alarm field on the protection setpoint record.
         default: 0.011
 
-      - type: float
-        name: prosp_lolo
+      prosp_lolo:
+        type: float
         description: |-
           The LOLO alarm field on the protection setpoint record.
         default: 1.2e-05
 
-      - type: float
-        name: prosp_high
+      prosp_high:
+        type: float
         description: |-
           The HIGH alarm field on the protection setpoint record.
         default: 0.00051
 
-      - type: float
-        name: prosp_low
+      prosp_low:
+        type: float
         description: |-
           The LOW alarm field on the protection setpoint record.
         default: 0.00049
 
-      - type: str
-        name: prosp_desc
+      prosp_desc:
+        type: str
         description: |-
           (appears as a label on the Img EDM screen).
         default: IMG Overpressure
 
-      - type: float
-        name: rlysp_level
+      rlysp_level:
+        type: float
         description: |-
           The desired relay setpoint value.
         default: 1e-06
 
-      - type: float
-        name: rlysp_drvh
+      rlysp_drvh:
+        type: float
         description: |-
           (limits max value of relay setpoint)
         default: 0.012
 
-      - type: float
-        name: rlysp_drvl
+      rlysp_drvl:
+        type: float
         description: |-
           (limits min value of relay setpoint)
         default: 2.7e-10
 
-      - type: float
-        name: rlysp_hopr
+      rlysp_hopr:
+        type: float
         description: |-
           (high operator value - helps display set correct range).
         default: 0.012
 
-      - type: float
-        name: rlysp_lopr
+      rlysp_lopr:
+        type: float
         description: |-
           (low operator value - helps display set correct range).
         default: 2.7e-10
 
-      - type: float
-        name: rlysp_hihi
+      rlysp_hihi:
+        type: float
         description: |-
           The HIHI alarm field on the relay setpoint record.
         default: 0.013
 
-      - type: float
-        name: rlysp_lolo
+      rlysp_lolo:
+        type: float
         description: |-
           The LOLO alarm field on the relay setpoint record.
         default: 2.6e-10
 
-      - type: float
-        name: rlysp_high
+      rlysp_high:
+        type: float
         description: |-
           The HIGH alarm field on the relay setpoint record.
         default: 1.1e-06
 
-      - type: float
-        name: rlysp_low
+      rlysp_low:
+        type: float
         description: |-
           The LOW alarm field on the relay setpoint record.
         default: 9e-07
 
-      - type: str
-        name: rlysp_desc
+      rlysp_desc:
+        type: str
         description: |-
           (appears as a label on the Img EDM screen).
         default: Valve Interlock
 
-      - type: float
-        name: rlasp_drvh
+      rlasp_drvh:
+        type: float
         description: |-
           (limits max value of second relay setpoint)
         default: 0.012
 
-      - type: float
-        name: rlasp_drvl
+      rlasp_drvl:
+        type: float
         description: |-
           (limits min value of second relay setpoint)
         default: 2.7e-10
 
-      - type: float
-        name: rlasp_hopr
+      rlasp_hopr:
+        type: float
         description: |-
           (high operator value - helps display set correct range).
         default: 0.012
 
-      - type: float
-        name: rlasp_lopr
+      rlasp_lopr:
+        type: float
         description: |-
           (low operator value - helps display set correct range).
         default: 2.7e-10
 
-      - type: float
-        name: rlasp_hihi
+      rlasp_hihi:
+        type: float
         description: |-
           The HIHI alarm field on the second relay setpoint record.
         default: 0.013
 
-      - type: float
-        name: rlasp_lolo
+      rlasp_lolo:
+        type: float
         description: |-
           The LOLO alarm field on the second relay setpoint record.
         default: 2.6e-10
 
-      - type: float
-        name: rlasp_high
+      rlasp_high:
+        type: float
         description: |-
           The HIGH alarm field on the second relay setpoint record.
         default: 1.1e-07
 
-      - type: float
-        name: rlasp_low
+      rlasp_low:
+        type: float
         description: |-
           The LOW alarm field on the second relay setpoint record.
         default: 9e-08
 
-      - type: str
-        name: rlasp_desc
+      rlasp_desc:
+        type: str
         description: |-
           The DESC field on the second relay setpoint record.
         default: MPS Interlock
 
-      - type: int
-        name: offwarn
+      offwarn:
+        type: int
         description: |-
           Flag to display a warning that switching off the IMG could trip the beam
         default: 0
 
-      - type: str
-        name: ilk_write_access_pv
+      ilk_write_access_pv:
+        type: str
         description: |-
           bi record to allow (0) of inhibit (1) gauge interlock setpoint overwrite. Default is local record forcing 'Allow'.
         default: $(device):PRO:CONSTZERO
 
     databases:
       - file: $(MKS937A)/db/mks937aImg.template
-        args: { device, port: "{{GCTLR.port}}", channel, ctlsp_level, ctlsp_drvh, ctlsp_drvl, ctlsp_hopr, ctlsp_lopr, ctlsp_hihi, ctlsp_lolo, ctlsp_high, ctlsp_low, ctlsp_desc, prosp_level, prosp_drvh, prosp_drvl, prosp_hopr, prosp_lopr, prosp_hihi, prosp_lolo, prosp_high, prosp_low, prosp_desc, rlysp_level, rlysp_drvh, rlysp_drvl, rlysp_hopr, rlysp_lopr, rlysp_hihi, rlysp_lolo, rlysp_high, rlysp_low, rlysp_desc, rlasp_drvh, rlasp_drvl, rlasp_hopr, rlasp_lopr, rlasp_hihi, rlasp_lolo, rlasp_high, rlasp_low, rlasp_desc, offwarn, ilk_write_access_pv }
+        args: {device: null, port: '{{GCTLR.port}}', channel: null, ctlsp_level: null, ctlsp_drvh: null, ctlsp_drvl: null, ctlsp_hopr: null, ctlsp_lopr: null, ctlsp_hihi: null, ctlsp_lolo: null, ctlsp_high: null, ctlsp_low: null, ctlsp_desc: null, prosp_level: null, prosp_drvh: null, prosp_drvl: null, prosp_hopr: null, prosp_lopr: null, prosp_hihi: null, prosp_lolo: null, prosp_high: null, prosp_low: null, prosp_desc: null, rlysp_level: null, rlysp_drvh: null, rlysp_drvl: null, rlysp_hopr: null, rlysp_lopr: null, rlysp_hihi: null, rlysp_lolo: null, rlysp_high: null, rlysp_low: null, rlysp_desc: null, rlasp_drvh: null, rlasp_drvl: null, rlasp_hopr: null, rlasp_lopr: null, rlasp_hihi: null, rlasp_lolo: null, rlasp_high: null, rlasp_low: null, rlasp_desc: null, offwarn: null, ilk_write_access_pv: null}
 
   - name: mks937aGaugeEGU
     description: |-
       TODO:ADD DESCRIPTION
-    args:
-      - type: id
-        name: name
+    parameters:
+      name:
+        type: id
         description: |-
           Device name
 
-      - type: str
-        name: dom
+      dom:
+        type: str
         description: |-
           Domain 5 char string (e.g. BL11I)
 
-      - type: int
-        name: id
+      id:
+        type: int
         description: |-
           ID number as 2 digit string (e.g. 01)
 
-      - type: str
-        name: input
+      input:
+        type: str
         description: |-
           PV providing gauge reading in mbar
-
-    values:
-      - name: eguInputPV
-        description: PV from which the gauge reading in EGU is taken
-        value: "{{dom}}-VA-GAUGE-{{ '%02d' % id }}:PLOG_CALC"
 
     databases:
       - file: $(MKS937A)/db/mks937aGauge.template
         args:
           dom:
           id: "{{ '%02d' % id }}"
-          c: ""
-          s: ""
+          c: ''
+          s: ''
           name:
-          aitype: "Soft Channel"
-          aiinp: "{{eguInputPV}}  CP"
+          aitype: Soft Channel
+          aiinp: '{{eguInputPV}}  CP'
 
       - file: $(MKS937A)/db/mks937aPlogEGU.template
         args:
-          device: "{{eguInputPV}}"
-          p_egu_pv: "{{input}}"
+          device: '{{eguInputPV}}'
+          p_egu_pv: '{{input}}'
 
   - name: mks937aGaugeGroup
     description: |-
       Template database for a group of up to 8 MKS937A
       combination gauges
       Pete Owens - 5/5/05
-    args:
-      - type: str
-        name: device
+    parameters:
+      device:
+        type: str
         description: |-
           device name
 
-      - type: str
-        name: gauge1
+      gauge1:
+        type: str
         description: |-
           gauge 1 device name
 
-      - type: str
-        name: gauge2
+      gauge2:
+        type: str
         description: |-
           gauge 2 device name
-        default: "{{gauge1}}"
+        default: '{{gauge1}}'
 
-      - type: str
-        name: gauge3
+      gauge3:
+        type: str
         description: |-
           gauge 3 device name
-        default: "{{gauge1}}"
+        default: '{{gauge1}}'
 
-      - type: str
-        name: gauge4
+      gauge4:
+        type: str
         description: |-
           gauge 4 device name
-        default: "{{gauge1}}"
+        default: '{{gauge1}}'
 
-      - type: str
-        name: gauge5
+      gauge5:
+        type: str
         description: |-
           gauge 5 device name
-        default: "{{gauge1}}"
+        default: '{{gauge1}}'
 
-      - type: str
-        name: gauge6
+      gauge6:
+        type: str
         description: |-
           gauge 6 device name
-        default: "{{gauge1}}"
+        default: '{{gauge1}}'
 
-      - type: str
-        name: gauge7
+      gauge7:
+        type: str
         description: |-
           gauge 7 device name
-        default: "{{gauge1}}"
+        default: '{{gauge1}}'
 
-      - type: str
-        name: gauge8
+      gauge8:
+        type: str
         description: |-
           gauge 8 device name
-        default: "{{gauge1}}"
+        default: '{{gauge1}}'
 
-      - type: int
-        name: SELM
+      SELM:
+        type: int
         description: |-
           the space template
         default: 1
 
-      - type: int
-        name: SELN
+      SELN:
+        type: int
         description: |-
           Use this to select which gauge to look at if you set SELM=0
         default: 0
 
     databases:
       - file: $(MKS937A)/db/mks937aGaugeGroup.template
-        args: { device, gauge1, gauge2, gauge3, gauge4, gauge5, gauge6, gauge7, gauge8, SELM, SELN }
+        args: {device: null, gauge1: null, gauge2: null, gauge3: null, gauge4: null, gauge5: null, gauge6: null, gauge7: null, gauge8: null, SELM: null, SELN: null}
 
   - name: mks937a
     description: |-
       The mks937a controller
-    args:
-      - type: id
-        name: name
+    parameters:
+      name:
+        type: id
         description: |-
           Device identifier (for reference from controlled devices)
           This is a little redundant but is a legacy from builder
 
-      - type: str
-        name: device
+      device:
+        type: str
         description: |-
           Device name
 
-      - type: str
-        name: port
+      port:
+        type: str
         description: |-
           Asyn Port name, e.g. ty_40_0
 
@@ -591,68 +586,68 @@ defs:
       Note on optional macros: these will default to an appropriate hard-coded
       value if no value is passed for expansion. They are provided to parallel
       those in the Img template.
-    args:
-      - type: str
-        name: device
+    parameters:
+      device:
+        type: str
         description: |-
           device name
 
-      - type: float
-        name: ctlsp_level
+      ctlsp_level:
+        type: float
         description: |-
           The desired control setpoint value.
         default: 0.01
 
-      - type: float
-        name: ctlsp_drvh
+      ctlsp_drvh:
+        type: float
         description: |-
           (limits max value of control setpoint)
         default: 0.95
 
-      - type: float
-        name: ctlsp_drvl
+      ctlsp_drvl:
+        type: float
         description: |-
           (limits min value of control setpoint)
         default: 0.0027
 
-      - type: float
-        name: ctlsp_hopr
+      ctlsp_hopr:
+        type: float
         description: |-
           (high operator value - helps display set correct range).
         default: 0.95
 
-      - type: float
-        name: ctlsp_lopr
+      ctlsp_lopr:
+        type: float
         description: |-
           (low operator value - helps display set correct range).
         default: 0.0027
 
-      - type: float
-        name: ctlsp_hihi
+      ctlsp_hihi:
+        type: float
         description: |-
           The HIHI alarm field on the control setpoint record.
         default: 0.96
 
-      - type: float
-        name: ctlsp_lolo
+      ctlsp_lolo:
+        type: float
         description: |-
           The LOLO alarm field on the control setpoint record.
         default: 0.0026
 
-      - type: float
-        name: ctlsp_high
+      ctlsp_high:
+        type: float
         description: |-
           The HIGH alarm field on the control setpoint record.
         default: 0.011
 
-      - type: float
-        name: ctlsp_low
+      ctlsp_low:
+        type: float
         description: |-
           The LOW alarm field on the control setpoint record.
         default: 0.009
 
-      - type: str
-        name: ctlsp_desc
+      ctlsp_desc:
+        type: str
         description: |-
           The DESC field on the control setpoint record.
         default: IMG Enable
@@ -675,152 +670,152 @@ defs:
   - name: mks937aPirg
     description: |-
       TODO:ADD DESCRIPTION
-    args:
-      - type: object
-        name: GCTLR
+    parameters:
+      GCTLR:
+        type: object
         description: |-
           Parent mks937a object
 
-      - type: id
-        name: device
+      device:
+        type: id
         description: |-
           device name
 
-      - type: int
-        name: channel
+      channel:
+        type: int
         description: |-
           MKS 937A channel number (1-4)
 
-      - type: float
-        name: rlysp_level
+      rlysp_level:
+        type: float
         description: |-
           The desired relay setpoint value for the PIRG device.
         default: 0.01
 
-      - type: float
-        name: rlysp_drvh
+      rlysp_drvh:
+        type: float
         description: |-
           (limits max value of relay setpoint)
         default: 120.0
 
-      - type: float
-        name: rlysp_drvl
+      rlysp_drvl:
+        type: float
         description: |-
           (limits min value of relay setpoint)
         default: 0.0027
 
-      - type: float
-        name: rlysp_hopr
+      rlysp_hopr:
+        type: float
         description: |-
           (high operator value - helps display set correct range).
         default: 120.0
 
-      - type: float
-        name: rlysp_lopr
+      rlysp_lopr:
+        type: float
         description: |-
           (low operator value - helps display set correct range).
         default: 0.0027
 
-      - type: float
-        name: rlysp_hihi
+      rlysp_hihi:
+        type: float
         description: |-
           The HIHI alarm field on the relay setpoint record.
         default: 1000.0
 
-      - type: float
-        name: rlysp_lolo
+      rlysp_lolo:
+        type: float
         description: |-
           The LOLO alarm field on the relay setpoint record.
         default: 0.0026
 
-      - type: float
-        name: rlysp_high
+      rlysp_high:
+        type: float
         description: |-
           The HIGH alarm field on the relay setpoint record.
         default: 0.011
 
-      - type: float
-        name: rlysp_low
+      rlysp_low:
+        type: float
         description: |-
           The LOW alarm field on the relay setpoint record.
         default: 0.009
 
-      - type: str
-        name: rlysp_desc
+      rlysp_desc:
+        type: str
         description: |-
           (appears as a label on the Pirg EDM screen).
         default: Ion Pump I/L
 
-      - type: str
-        name: ilk_write_access_pv
+      ilk_write_access_pv:
+        type: str
         description: |-
           bi record to allow (0) of inhibit (1) gauge interlock setpoint overwrite. Default is local record forcing 'Allow'.
         default: $(device):CTL:CONSTZERO
 
     databases:
       - file: $(MKS937A)/db/mks937aPirg.template
-        args: { device, port: "{{GCTLR.port}}", channel, rlysp_level, rlysp_drvh, rlysp_drvl, rlysp_hopr, rlysp_lopr, rlysp_hihi, rlysp_lolo, rlysp_high, rlysp_low, rlysp_desc, ilk_write_access_pv }
+        args: {device: null, port: '{{GCTLR.port}}', channel: null, rlysp_level: null, rlysp_drvh: null, rlysp_drvl: null, rlysp_hopr: null, rlysp_lopr: null, rlysp_hihi: null, rlysp_lolo: null, rlysp_high: null, rlysp_low: null, rlysp_desc: null, ilk_write_access_pv: null}
 
   - name: mks937aPirgGroup
     description: |-
       Template database for a group of up to 8 Pirani Gauges
       Pete Owens - 9/5/05
-    args:
-      - type: str
-        name: device
+    parameters:
+      device:
+        type: str
         description: |-
           device name
 
-      - type: str
-        name: pirg1
+      pirg1:
+        type: str
         description: |-
           pirg 1 device name
 
-      - type: str
-        name: pirg2
+      pirg2:
+        type: str
         description: |-
           pirg 2 device name
-        default: "{{pirg1}}"
+        default: '{{pirg1}}'
 
-      - type: str
-        name: pirg3
+      pirg3:
+        type: str
         description: |-
           pirg 3 device name
-        default: "{{pirg1}}"
+        default: '{{pirg1}}'
 
-      - type: str
-        name: pirg4
+      pirg4:
+        type: str
         description: |-
           pirg 4 device name
-        default: "{{pirg1}}"
+        default: '{{pirg1}}'
 
-      - type: str
-        name: pirg5
+      pirg5:
+        type: str
         description: |-
           pirg 5 device name
-        default: "{{pirg1}}"
+        default: '{{pirg1}}'
 
-      - type: str
-        name: pirg6
+      pirg6:
+        type: str
         description: |-
           pirg 6 device name
-        default: "{{pirg1}}"
+        default: '{{pirg1}}'
 
-      - type: str
-        name: pirg7
+      pirg7:
+        type: str
         description: |-
           pirg 7 device name
-        default: "{{pirg1}}"
+        default: '{{pirg1}}'
 
-      - type: str
-        name: pirg8
+      pirg8:
+        type: str
         description: |-
           pirg 8 device name
-        default: "{{pirg1}}"
+        default: '{{pirg1}}'
 
     databases:
       - file: $(MKS937A)/db/mks937aPirgGroup.template
-        args: { device, pirg1, pirg2, pirg3, pirg4, pirg5, pirg6, pirg7, pirg8 }
+        args: {device: null, pirg1: null, pirg2: null, pirg3: null, pirg4: null, pirg5: null, pirg6: null, pirg7: null, pirg8: null}
 
   - name: mks937aGauge
     description: |-
@@ -834,29 +829,29 @@ defs:
       For the majority of applications the defaults should be used.  The levels
       should only be changed at the request of the vacuum group for non-standard
       vacuum systems.
-    args:
-      - type: str
-        name: dom
+    parameters:
+      dom:
+        type: str
         description: |-
           Domain 5 char string (e.g. BL11I)
 
-      - type: int
-        name: id
+      id:
+        type: int
         description: |-
           ID number as 2 digit string (e.g. 01)
 
-      - type: int
-        name: c
+      c:
+        type: int
         description: |-
           ADC card number
 
-      - type: int
-        name: s
+      s:
+        type: int
         description: |-
           ADC signal number
 
-      - type: id
-        name: name
+      name:
+        type: id
         description: |-
           The device's name for gui purposes
 
@@ -866,53 +861,53 @@ defs:
       #   description: |-
       #     The gauge controller PV prefix, for gui purposes
 
-      - type: float
-        name: ctlsp_level
+      ctlsp_level:
+        type: float
         description: |-
           The desired control setpoint value (actually for the Pirg).
         default: 0.01
 
-      - type: float
-        name: ctlsp_drvh
+      ctlsp_drvh:
+        type: float
         description: |-
           (limits max value of control setpoint)
         default: 0.95
 
-      - type: float
-        name: ctlsp_drvl
+      ctlsp_drvl:
+        type: float
         description: |-
           (limits min value of control setpoint)
         default: 0.0027
 
-      - type: float
-        name: ctlsp_hopr
+      ctlsp_hopr:
+        type: float
         description: |-
           (high operator value - helps display set correct range).
         default: 0.95
 
-      - type: float
-        name: ctlsp_lopr
+      ctlsp_lopr:
+        type: float
         description: |-
           (low operator value - helps display set correct range).
         default: 0.0027
 
-      - type: str
-        name: ctlsp_desc
+      ctlsp_desc:
+        type: str
         description: |-
           (appears as a label on the Pirg EDM screen).
         default: IMG Enable
 
-      - type: str
-        name: aitype
+      aitype:
+        type: str
         description: |-
           Template argument
         default: Hy8401ip
 
-      - type: str
-        name: aiinp
+      aiinp:
+        type: str
         description: |-
           Template argument
-        default: "#C$(c) S$(s) @"
+        default: '#C$(c) S$(s) @'
 
     databases:
       - file: $(MKS937A)/db/mks937aGauge.template

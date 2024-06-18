@@ -2,97 +2,95 @@
 
 module: mks937b
 
-defs:
-
+entity_models:
   - name: mks937bRelays
     description: |-
       TODO:ADD DESCRIPTION
-    args:
-
-      - type: object
-        name: GAUGE
+    parameters:
+      GAUGE:
+        type: object
         description: |-
           TODO: ADD DESCRIPTION
 
-      - type: str
-        name: relay_number
+      relay_number:
+        type: str
         description: |-
           The relay number (1..12).
 
-      - type: str
-        name: relay_desc
+      relay_desc:
+        type: str
         description: |-
           The DESC field on the relay setpoint record
         default: Valve Interlock
 
-      - type: str
-        name: relay_off_desc
+      relay_off_desc:
+        type: str
         description: |-
           (appears as a label on the Img EDM screen).
         default: Relay OFF setpoint
 
-      - type: float
-        name: relay_level
+      relay_level:
+        type: float
         description: |-
           vv================vv  New feature request May 2012.
         default: 1e-06
 
-      - type: float
-        name: relay_off_level
+      relay_off_level:
+        type: float
         description: |-
           The desired relay off setpoint value.
         default: 0.0
 
-      - type: float
-        name: relay_drvh
+      relay_drvh:
+        type: float
         description: |-
           (limits max value of relay setpoint)
         default: 0.012
 
-      - type: float
-        name: relay_drvl
+      relay_drvl:
+        type: float
         description: |-
           (limits min value of relay setpoint)
         default: 2.7e-10
 
-      - type: float
-        name: relay_hopr
+      relay_hopr:
+        type: float
         description: |-
           (high operator value - helps display set correct range).
         default: 0.012
 
-      - type: float
-        name: relay_lopr
+      relay_lopr:
+        type: float
         description: |-
           (low operator value - helps display set correct range).
         default: 2.7e-10
 
-      - type: float
-        name: relay_hihi
+      relay_hihi:
+        type: float
         description: |-
           The HIHI alarm field on the relay setpoint record.
         default: 0.013
 
-      - type: float
-        name: relay_lolo
+      relay_lolo:
+        type: float
         description: |-
           The LOLO alarm field on the relay setpoint record.
         default: 2.6e-10
 
-      - type: float
-        name: relay_high
+      relay_high:
+        type: float
         description: |-
           The HIGH alarm field on the relay setpoint record.
         default: 1.1e-06
 
-      - type: float
-        name: relay_low
+      relay_low:
+        type: float
         description: |-
           The LOW alarm field on the relay setpoint record.
         default: 9e-07
 
-      - type: str
-        name: ilk_write_access_pv
+      ilk_write_access_pv:
+        type: str
         description: |-
           Link to the interlocks setpoint global write access record.
         default: $(device):CONSTZERO
@@ -122,61 +120,60 @@ defs:
       Template database for a group of up to 8 MKS937B 
       combination gauges
       Pete Owens - 5/5/05
-    args:
-
-      - type: str
-        name: device
+    parameters:
+      device:
+        type: str
         description: |-
           device name
 
-      - type: str
-        name: gauge1
+      gauge1:
+        type: str
         description: |-
           gauge 1 device name
 
-      - type: str
-        name: gauge2
+      gauge2:
+        type: str
         description: |-
           gauge 2 device name
 
-      - type: str
-        name: gauge3
+      gauge3:
+        type: str
         description: |-
           gauge 3 device name
 
-      - type: str
-        name: gauge4
+      gauge4:
+        type: str
         description: |-
           gauge 4 device name
 
-      - type: str
-        name: gauge5
+      gauge5:
+        type: str
         description: |-
           gauge 5 device name
 
-      - type: str
-        name: gauge6
+      gauge6:
+        type: str
         description: |-
           gauge 6 device name
 
-      - type: str
-        name: gauge7
+      gauge7:
+        type: str
         description: |-
           gauge 7 device name
 
-      - type: str
-        name: gauge8
+      gauge8:
+        type: str
         description: |-
           gauge 8 device name
 
-      - type: int
-        name: SELM
+      SELM:
+        type: int
         description: |-
           the space template
         default: 1
 
-      - type: int
-        name: SELN
+      SELN:
+        type: int
         description: |-
           Use this to select which gauge to look at if you set SELM=0
         default: 0
@@ -209,77 +206,76 @@ defs:
       For the majority of applications the defaults should be used.  The levels 
       should only be changed at the request of the vacuum group for non-standard 
       vacuum systems.
-    args:
-
-      - type: str
-        name: dom
+    parameters:
+      dom:
+        type: str
         description: |-
           Domain 5 char string (e.g. BL11I)
 
-      - type: int
-        name: id
+      id:
+        type: int
         description: |-
           ID number as 2 digit string (e.g. 01)
 
-      - type: str
-        name: plog_adc_pv
+      plog_adc_pv:
+        type: str
         description: |-
           or (if using Hy8401 VME IP) mks937bHy8401.template
 
-      - type: id
-        name: name
+      name:
+        type: id
         description: |-
           The device's name for gui purposes
 
-      - type: str
-        name: GCTLR
+      GCTLR:
+        type: str
         description: |-
           The gauge controller PV prefix, for gui purposes
 
-      - type: float
-        name: ctlsp_level
+      ctlsp_level:
+        type: float
         description: |-
           The desired control setpoint value (actually for the Pirg).
         default: 0.01
 
-      - type: float
-        name: ctlsp_drvh
+      ctlsp_drvh:
+        type: float
         description: |-
           (limits max value of control setpoint)
         default: 0.95
 
-      - type: float
-        name: ctlsp_drvl
+      ctlsp_drvl:
+        type: float
         description: |-
           (limits min value of control setpoint)
         default: 0.0027
 
-      - type: float
-        name: ctlsp_hopr
+      ctlsp_hopr:
+        type: float
         description: |-
           (high operator value - helps display set correct range).
         default: 0.95
 
-      - type: float
-        name: ctlsp_lopr
+      ctlsp_lopr:
+        type: float
         description: |-
           (low operator value - helps display set correct range).
         default: 0.0027
 
-      - type: str
-        name: ctlsp_desc
+      ctlsp_desc:
+        type: str
         description: |-
           (appears as a label on the Pirg EDM screen).
         default: IMG Enable
 
-      - type: str
-        name: ctlspoff_desc
+      ctlspoff_desc:
+        type: str
         description: |-
           (appears as a label on the Pirg CSS screen).
         default: IMG Enable Off
 
-      - type: str
-        name: plog_calc
+      plog_calc:
+        type: str
         description: |-
           Template argument
         default: 10.0*A/32767.0/0.6 - 12.0
@@ -306,20 +302,19 @@ defs:
     description: |-
       Template database for an MKS937B Multi-Sensor System
       Ian Gillingham - April 2010
-    args:
-
-      - type: str
-        name: device
+    parameters:
+      device:
+        type: str
         description: |-
           Device name
 
-      - type: str
-        name: port
+      port:
+        type: str
         description: |-
           Asyn Port name, e.g. ty_40_0
 
-      - type: int
-        name: address
+      address:
+        type: int
         description: |-
           Controller address (001 .. 253)
 
@@ -336,10 +331,9 @@ defs:
       Template database for a dummy pirani gauge. 
       Just enough to keep the Gauge template happy
       Linda Pratt 28/09/2009
-    args:
-
-      - type: str
-        name: device
+    parameters:
+      device:
+        type: str
         description: |-
           device name
 
@@ -352,51 +346,50 @@ defs:
   - name: mks937bFastRelay
     description: |-
       TODO:ADD DESCRIPTION
-    args:
-
-      - type: object
-        name: GAUGE
+    parameters:
+      GAUGE:
+        type: object
         description: |-
           TODO: ADD DESCRIPTION
 
-      - type: str
-        name: frcsp_desc
+      frcsp_desc:
+        type: str
         description: |-
           The DESC field on the relay setpoint record
         default: Fast Relay Trigger level
 
-      - type: float
-        name: frcsp_level
+      frcsp_level:
+        type: float
         description: |-
           The desired relay setpoint value.
         default: 1e-06
 
-      - type: float
-        name: frcsp_drvh
+      frcsp_drvh:
+        type: float
         description: |-
           (limits max value of relay setpoint)
         default: 0.012
 
-      - type: float
-        name: frcsp_drvl
+      frcsp_drvl:
+        type: float
         description: |-
           (limits min value of relay setpoint)
         default: 2.7e-10
 
-      - type: float
-        name: frcsp_hopr
+      frcsp_hopr:
+        type: float
         description: |-
           (high operator value - helps display set correct range).
         default: 0.01
 
-      - type: float
-        name: frcsp_lopr
+      frcsp_lopr:
+        type: float
         description: |-
           (low operator value - helps display set correct range).
         default: 1.3e-05
 
-      - type: str
-        name: ilk_write_access_pv
+      ilk_write_access_pv:
+        type: str
         description: |-
           Link to the interlocks setpoint global write access record.
         default: $(device):FRLY:CONSTZERO
@@ -417,60 +410,59 @@ defs:
   - name: mks937bCap
     description: |-
       TODO:ADD DESCRIPTION
-    args:
-
-      - type: object
-        name: GCTLR
+    parameters:
+      GCTLR:
+        type: object
         description: |-
           Parent mks937b object
 
-      - type: str
-        name: device
+      device:
+        type: str
         description: |-
           device name
 
-      - type: str
-        name: channel
+      channel:
+        type: str
         description: |-
           MKS 937A channel number (1-4)
 
-      - type: id
-        name: name
+      name:
+        type: id
         description: |-
           Object name, and gui association name
 
-      - type: int
-        name: offwarn
+      offwarn:
+        type: int
         description: |-
           Flag to display a warning that switching off the PIRG could trip the beam#
         default: 0
 
-      - type: float
-        name: ctlsp_hopr
+      ctlsp_hopr:
+        type: float
         description: |-
           Template argument
         default: 10000.0
 
-      - type: float
-        name: ctlsp_lopr
+      ctlsp_lopr:
+        type: float
         description: |-
           Template argument
         default: 0.01
 
-      - type: float
-        name: ctlsp_drvh
+      ctlsp_drvh:
+        type: float
         description: |-
           Template argument
         default: 10000.0
 
-      - type: float
-        name: ctlsp_drvl
+      ctlsp_drvl:
+        type: float
         description: |-
           Template argument
         default: 0.01
 
-      - type: float
-        name: ctlsp_level
+      ctlsp_level:
+        type: float
         description: |-
           Template argument
         default: 0.01
@@ -494,78 +486,77 @@ defs:
     description: |-
       Template database for a group of up to 8 IMGs
       Pete Owens - 10/5/05
-    args:
-
-      - type: str
-        name: device
+    parameters:
+      device:
+        type: str
         description: |-
           device name
 
-      - type: str
-        name: delay
+      delay:
+        type: str
         description: |-
           delay between starting each IMG
 
-      - type: str
-        name: img1
+      img1:
+        type: str
         description: |-
           img 1 device name
 
-      - type: str
-        name: img2
+      img2:
+        type: str
         description: |-
           img 2 device name
 
-      - type: str
-        name: img3
+      img3:
+        type: str
         description: |-
           img 3 device name
 
-      - type: str
-        name: img4
+      img4:
+        type: str
         description: |-
           img 4 device name
 
-      - type: str
-        name: img5
+      img5:
+        type: str
         description: |-
           img 5 device name
 
-      - type: str
-        name: img6
+      img6:
+        type: str
         description: |-
           img 6 device name
 
-      - type: str
-        name: img7
+      img7:
+        type: str
         description: |-
           img 7 device name
 
-      - type: str
-        name: img8
+      img8:
+        type: str
         description: |-
           img 8 device name
 
-      - type: int
-        name: valveIlRelay
+      valveIlRelay:
+        type: int
         description: |-
           Valve interlock relay
         default: 1
 
-      - type: int
-        name: mpsIlRelay1
+      mpsIlRelay1:
+        type: int
         description: |-
           Machine protection system interlock 1 relay
         default: 2
 
-      - type: int
-        name: mpsIlRelay2
+      mpsIlRelay2:
+        type: int
         description: |-
           Machine protection system interlock 2 relay
         default: 3
 
-      - type: int
-        name: rgaIlRelay
+      rgaIlRelay:
+        type: int
         description: |-
           RGA interlock relay
         default: 4
@@ -592,92 +583,91 @@ defs:
   - name: mks937bGaugeEGU
     description: |-
       TODO:ADD DESCRIPTION
-    args:
-
-      - type: id
-        name: name
+    parameters:
+      name:
+        type: id
         description: |-
           Device name
 
-      - type: str
-        name: dom
+      dom:
+        type: str
         description: |-
           Domain 5 char string (e.g. BL11I)
 
-      - type: int
-        name: id
+      id:
+        type: int
         description: |-
           ID number as 2 digit string (e.g. 01)
 
-      - type: str
-        name: input
+      input:
+        type: str
         description: |-
           PV providing gauge reading in mbar
 
-      - type: str
-        name: device
+      device:
+        type: str
         description: |-
           device name
 
-      - type: str
-        name: p_egu_pv
+      p_egu_pv:
+        type: str
         description: |-
           Raw value ADC PV name
 
-      - type: str
-        name: plog_adc_pv
+      plog_adc_pv:
+        type: str
         description: |-
           or (if using Hy8401 VME IP) mks937bHy8401.template
 
-      - type: str
-        name: GCTLR
+      GCTLR:
+        type: str
         description: |-
           The gauge controller PV prefix, for gui purposes
 
-      - type: float
-        name: ctlsp_level
+      ctlsp_level:
+        type: float
         description: |-
           The desired control setpoint value (actually for the Pirg).
         default: 0.01
 
-      - type: float
-        name: ctlsp_drvh
+      ctlsp_drvh:
+        type: float
         description: |-
           (limits max value of control setpoint)
         default: 0.95
 
-      - type: float
-        name: ctlsp_drvl
+      ctlsp_drvl:
+        type: float
         description: |-
           (limits min value of control setpoint)
         default: 0.0027
 
-      - type: float
-        name: ctlsp_hopr
+      ctlsp_hopr:
+        type: float
         description: |-
           (high operator value - helps display set correct range).
         default: 0.95
 
-      - type: float
-        name: ctlsp_lopr
+      ctlsp_lopr:
+        type: float
         description: |-
           (low operator value - helps display set correct range).
         default: 0.0027
 
-      - type: str
-        name: ctlsp_desc
+      ctlsp_desc:
+        type: str
         description: |-
           (appears as a label on the Pirg EDM screen).
         default: IMG Enable
 
-      - type: str
-        name: ctlspoff_desc
+      ctlspoff_desc:
+        type: str
         description: |-
           (appears as a label on the Pirg CSS screen).
         default: IMG Enable Off
 
-      - type: str
-        name: plog_calc
+      plog_calc:
+        type: str
         description: |-
           Template argument
         default: 10.0*A/32767.0/0.6 - 12.0
@@ -708,180 +698,179 @@ defs:
   - name: mks937bImg
     description: |-
       TODO:ADD DESCRIPTION
-    args:
-
-      - type: object
-        name: GCTLR
+    parameters:
+      GCTLR:
+        type: object
         description: |-
           Parent mks937b object
 
-      - type: str
-        name: device
+      device:
+        type: str
         description: |-
           device name
 
-      - type: str
-        name: channel
+      channel:
+        type: str
         description: |-
           MKS 937B channel number (1-4)
 
-      - type: id
-        name: name
+      name:
+        type: id
         description: |-
           Object name, and gui association name
 
-      - type: int
-        name: ctl_channel
+      ctl_channel:
+        type: int
         description: |-
           The desired control channel 0 = C1, 1 = C2, 2 = None, 3 = A1, 4 = B1, 5 = A2, 6 = B2.
         default: 0
 
-      - type: float
-        name: ctlsp_level
+      ctlsp_level:
+        type: float
         description: |-
           The desired control setpoint value.
         default: 0.01
 
-      - type: float
-        name: ctlsp_drvh
+      ctlsp_drvh:
+        type: float
         description: |-
           (limits max value of control setpoint)
         default: 0.95
 
-      - type: float
-        name: ctlsp_drvl
+      ctlsp_drvl:
+        type: float
         description: |-
           (limits min value of control setpoint)
         default: 0.0027
 
-      - type: float
-        name: ctlsp_hopr
+      ctlsp_hopr:
+        type: float
         description: |-
           (high operator value - helps display set correct range).
         default: 0.95
 
-      - type: float
-        name: ctlsp_lopr
+      ctlsp_lopr:
+        type: float
         description: |-
           (low operator value - helps display set correct range).
         default: 0.0027
 
-      - type: float
-        name: ctlsp_hihi
+      ctlsp_hihi:
+        type: float
         description: |-
           The HIHI alarm field on the control setpoint record.
         default: 0.96
 
-      - type: float
-        name: ctlsp_lolo
+      ctlsp_lolo:
+        type: float
         description: |-
           The LOLO alarm field on the control setpoint record.
         default: 0.0026
 
-      - type: float
-        name: ctlsp_high
+      ctlsp_high:
+        type: float
         description: |-
           The HIGH alarm field on the control setpoint record.
         default: 0.011
 
-      - type: float
-        name: ctlsp_low
+      ctlsp_low:
+        type: float
         description: |-
           The LOW alarm field on the control setpoint record.
         default: 0.009
 
-      - type: str
-        name: ctlsp_desc
+      ctlsp_desc:
+        type: str
         description: |-
           The DESC field on the control setpoint record.
         default: IMG Enable
 
-      - type: float
-        name: ctlhyst_hopr
+      ctlhyst_hopr:
+        type: float
         description: |-
           (high operator value - helps display set correct range).
         default: 0.012
 
-      - type: float
-        name: ctlhyst_lopr
+      ctlhyst_lopr:
+        type: float
         description: |-
           (low operator value - helps display set correct range).
         default: 2.7e-10
 
-      - type: float
-        name: prosp_level
+      prosp_level:
+        type: float
         description: |-
           The desired protection setpoint value.
         default: 0.0005
 
-      - type: float
-        name: prosp_drvh
+      prosp_drvh:
+        type: float
         description: |-
           (limits max value of protection setpoint)
         default: 0.01
 
-      - type: float
-        name: prosp_drvl
+      prosp_drvl:
+        type: float
         description: |-
           (limits min value of protection setpoint)
         default: 1.3e-05
 
-      - type: float
-        name: prosp_hopr
+      prosp_hopr:
+        type: float
         description: |-
           (high operator value - helps display set correct range).
         default: 0.01
 
-      - type: float
-        name: prosp_lopr
+      prosp_lopr:
+        type: float
         description: |-
           (low operator value - helps display set correct range).
         default: 1.3e-05
 
-      - type: float
-        name: prosp_hihi
+      prosp_hihi:
+        type: float
         description: |-
           The HIHI alarm field on the protection setpoint record.
         default: 0.011
 
-      - type: float
-        name: prosp_lolo
+      prosp_lolo:
+        type: float
         description: |-
           The LOLO alarm field on the protection setpoint record.
         default: 1.2e-05
 
-      - type: float
-        name: prosp_high
+      prosp_high:
+        type: float
         description: |-
           The HIGH alarm field on the protection setpoint record.
         default: 0.00051
 
-      - type: float
-        name: prosp_low
+      prosp_low:
+        type: float
         description: |-
           The LOW alarm field on the protection setpoint record.
         default: 0.00049
 
-      - type: str
-        name: prosp_desc
+      prosp_desc:
+        type: str
         description: |-
           (appears as a label on the Img EDM screen).
         default: IMG Overpressure
 
-      - type: int
-        name: offwarn
+      offwarn:
+        type: int
         description: |-
           Flag to display a warning that switching off the IMG could trip the beam
         default: 0
 
-      - type: str
-        name: ilk_write_access_pv
+      ilk_write_access_pv:
+        type: str
         description: |-
           Link to the interlocks setpoint global write access record.
         default: $(device):PRO:CONSTZERO
 
-      - type: int
-        name: img_ctl_setmode
+      img_ctl_setmode:
+        type: int
         description: |-
           Default = 1 (I/L Safe), 0 (Force ON), 2 (I/L Operating).
         default: 1
@@ -928,69 +917,68 @@ defs:
       Note on optional macros: these will default to an appropriate hard-coded 
       value if no value is passed for expansion. They are provided to parallel 
       those in the Img template.
-    args:
-
-      - type: str
-        name: device
+    parameters:
+      device:
+        type: str
         description: |-
           device name
 
-      - type: float
-        name: ctlsp_level
+      ctlsp_level:
+        type: float
         description: |-
           The desired control setpoint value.
         default: 0.01
 
-      - type: float
-        name: ctlsp_drvh
+      ctlsp_drvh:
+        type: float
         description: |-
           (limits max value of control setpoint)
         default: 0.95
 
-      - type: float
-        name: ctlsp_drvl
+      ctlsp_drvl:
+        type: float
         description: |-
           (limits min value of control setpoint)
         default: 0.0027
 
-      - type: float
-        name: ctlsp_hopr
+      ctlsp_hopr:
+        type: float
         description: |-
           (high operator value - helps display set correct range).
         default: 0.95
 
-      - type: float
-        name: ctlsp_lopr
+      ctlsp_lopr:
+        type: float
         description: |-
           (low operator value - helps display set correct range).
         default: 0.0027
 
-      - type: float
-        name: ctlsp_hihi
+      ctlsp_hihi:
+        type: float
         description: |-
           The HIHI alarm field on the control setpoint record.
         default: 0.96
 
-      - type: float
-        name: ctlsp_lolo
+      ctlsp_lolo:
+        type: float
         description: |-
           The LOLO alarm field on the control setpoint record.
         default: 0.0026
 
-      - type: float
-        name: ctlsp_high
+      ctlsp_high:
+        type: float
         description: |-
           The HIGH alarm field on the control setpoint record.
         default: 0.011
 
-      - type: float
-        name: ctlsp_low
+      ctlsp_low:
+        type: float
         description: |-
           The LOW alarm field on the control setpoint record.
         default: 0.009
 
-      - type: str
-        name: ctlsp_desc
+      ctlsp_desc:
+        type: str
         description: |-
           The DESC field on the control setpoint record.
         default: IMG Enable
@@ -1015,55 +1003,54 @@ defs:
     description: |-
       Template database for a group of up to 8 Pirani Gauges
       Pete Owens - 9/5/05
-    args:
-
-      - type: str
-        name: device
+    parameters:
+      device:
+        type: str
         description: |-
           device name
 
-      - type: str
-        name: pirg1
+      pirg1:
+        type: str
         description: |-
           pirg 1 device name
 
-      - type: str
-        name: pirg2
+      pirg2:
+        type: str
         description: |-
           pirg 2 device name
 
-      - type: str
-        name: pirg3
+      pirg3:
+        type: str
         description: |-
           pirg 3 device name
 
-      - type: str
-        name: pirg4
+      pirg4:
+        type: str
         description: |-
           pirg 4 device name
 
-      - type: str
-        name: pirg5
+      pirg5:
+        type: str
         description: |-
           pirg 5 device name
 
-      - type: str
-        name: pirg6
+      pirg6:
+        type: str
         description: |-
           pirg 6 device name
 
-      - type: str
-        name: pirg7
+      pirg7:
+        type: str
         description: |-
           pirg 7 device name
 
-      - type: str
-        name: pirg8
+      pirg8:
+        type: str
         description: |-
           pirg 8 device name
 
-      - type: int
-        name: ionPumpIlRelay
+      ionPumpIlRelay:
+        type: int
         description: |-
           Ion pump interlock relay
         default: 1
@@ -1092,20 +1079,19 @@ defs:
       this new template is simply a helper to users of the old Hy8401 interface.
       The mks937bGauge.template expects an input to PLOG in the range 0 to +32767, representing 0 to +10V.
       The record is scan PP and is triggered via the :P record.
-    args:
-
-      - type: str
-        name: device
+    parameters:
+      device:
+        type: str
         description: |-
           Full name of ADC reading PV.
 
-      - type: str
-        name: c
+      c:
+        type: str
         description: |-
           ADC card number
 
-      - type: str
-        name: s
+      s:
+        type: str
         description: |-
           ADC signal number
 
@@ -1120,30 +1106,29 @@ defs:
   - name: mks937bPirg
     description: |-
       TODO:ADD DESCRIPTION
-    args:
-
-      - type: object
-        name: GCTLR
+    parameters:
+      GCTLR:
+        type: object
         description: |-
           Parent mks937b object
 
-      - type: str
-        name: device
+      device:
+        type: str
         description: |-
           device name
 
-      - type: str
-        name: channel
+      channel:
+        type: str
         description: |-
           MKS 937A channel number (1-4)
 
-      - type: id
-        name: name
+      name:
+        type: id
         description: |-
           Object name, and gui association name
 
-      - type: int
-        name: offwarn
+      offwarn:
+        type: int
         description: |-
           Flag to display a warning that switching off the PIRG could trip the beam#
         default: 0

@@ -2,33 +2,33 @@
 
 module: ADAravis
 
-defs:
+entity_models:
   - name: aravisCamera
     description: |-
       Creates a aravisCamera camera areaDetector driver
-    args:
-      - type: str
-        name: P
+    parameters:
+      P:
+        type: str
         description: |-
           PV Prefix
 
-      - type: str
-        name: R
+      R:
+        type: str
         description: |-
           PV Suffix
 
-      - type: id
-        name: PORT
+      PORT:
+        type: id
         description: |-
           Port name for the camera
 
-      - type: str
-        name: ID
+      ID:
+        type: str
         description: |-
           Cam ip address, hostname, MAC address, or ID <manufacturer>-<serial>, (e.g. Prosilica-02-2166A-06844)
 
-      - type: enum
-        name: CLASS
+      CLASS:
+        type: enum
         description: |-
           Camera class for custom commands
         values:
@@ -74,30 +74,34 @@ defs:
           AVT_Mako_G234B:
           AVT_Manta_G609B:
           JAI_CM140:
-
-      - type: int
-        name: BUFFERS
+      BUFFERS:
+        type: int
         description: |-
           Maximum number of NDArray buffers to be created for plugin callbacks
         default: 50
 
-      - type: int
-        name: MEMORY
+      MEMORY:
+        type: int
         description: |-
           Max memory to allocate, should be maxw*maxh*nbuffer for driver and all attached plugins
         default: -1
 
-      - type: int
-        name: TIMEOUT
+      TIMEOUT:
+        type: int
         description: |-
           Timeout, default 1
         default: 1
 
-      - type: int
-        name: ADDR
+      ADDR:
+        type: int
         description: |-
           Asyn Port address, default 0
         default: 0
+
+    pre_init:
+      - value: |
+          # aravisConfig(const char *portName, const char *cameraName, size_t maxMemory, int priority, int stackSize)
+          aravisConfig("{{PORT}}", "{{ID}}", {{MEMORY}}, 0, 1)
 
     databases:
       - file: $(ADARAVIS)/db/aravisCamera.template
@@ -116,32 +120,25 @@ defs:
           TIMEOUT:
           ADDR:
 
-    pre_init:
-      - value: |
-          # aravisConfig(const char *portName, const char *cameraName, size_t maxMemory, int priority, int stackSize)
-          aravisConfig("{{PORT}}", "{{ID}}", {{MEMORY}}, 0, 1)
-
     pvi:
       yaml_path: ADDriver.pvi.device.yaml
       ui_macros:
         P:
         R:
       pv: true
-      pv_prefix: "$(P)$(R)"
+      pv_prefix: $(P)$(R)
 
   - name: aravisSettings
     description: |-
       Creates detailed settings screens for and Aravis camera
-
-    args:
-      - type: object
+    parameters:
+      camera:
+        type: object
         description: the aravisCamera object to create settings for
-        name: camera
-
     pvi:
       yaml_path: arvFeature.pvi.device.yaml
       ui_macros:
-        P: "{{ camera.P }}"
-        R: "{{ camera.R }}"
+        P: '{{ camera.P }}'
+        R: '{{ camera.R }}'
       pv: true
-      pv_prefix: "{{ camera.P }}{{ camera.R }}"
+      pv_prefix: '{{ camera.P }}{{ camera.R }}'

@@ -30,71 +30,70 @@
 
 module: motorNewport
 
-defs:
+entity_models:
   - name: SMC100CreateController
     description: |-
       Creates a SMC100 motion controller connected to an ethernetToSerialServer
-
-    args:
-      - type: id
-        name: controllerName
+    parameters:
+      controllerName:
+        type: id
         description: |-
           The name of the controller and its Asyn Port Name
-      
-      - type: str
-        name: P
+
+      P:
+        type: str
         description: |-
           Device PV Prefix
 
-      - type: str
-        name: IP
+      IP:
+        type: str
         description: |-
           IP address of the ethernet2serial
         default: 127.0.0.1 ## localhost
 
-      - type: int
-        name: TCPPORT
+      TCPPORT:
+        type: int
         description: |-
           Port of the ethernet2serial
         default: 4001
-      
-      - type: int
-        name: POLL
+
+      POLL:
+        type: int
         description: |-
           Movement poll ms
         default: 100
-      
-      - type: float
-        name: EGUXSTEP
+
+      EGUXSTEP:
+        type: float
         description: |-
           EGU PER STEP
         default: 0.00005
 
-      - type: int
-        name: ASYNPRIO
+      ASYNPRIO:
+        type: int
         description: |-
           ASYN   PRIORITY, Default : 0
         default: 0
 
-      - type: int
-        name: AUTOCONNECT
+      AUTOCONNECT:
+        type: int
         description: |-
           Asyn auto connect
           0: Auto connection
           1: no Auto connection
         default: 0
 
-      - type: int
-        name: NOPRECESSESOS
+      NOPRECESSESOS:
+        type: int
         description: |-
           ASYN   noProcessEos, Default : 0
           https://epics.anl.gov/tech-talk/2020/msg01705.php
         default: 0
 
-      
 
-      - type: int
-        name: numAxes
+
+      numAxes:
+        type: int
         description: |-
           The number of axes to create
 
@@ -109,64 +108,63 @@ defs:
           asynOctetSetInputEos({{controllerName}}_ASYN,0,"\r\n")
           asynOctetSetOutputEos({{controllerName}}_ASYN,0,"\r\n")
           asynReport 10
-          
+
 
   - name: motorAxis
     description: |-
       Creates a motor axis
-
-    args:
-      - type: object
-        name: controller
+    parameters:
+      controller:
+        type: object
         description: |-
           a reference to the motion controller
 
-      - type: str
-        name: M
+      M:
+        type: str
         description: |-
           PV suffix for the motor record
 
-      - type: int
-        name: ADDR
+      ADDR:
+        type: int
         description: |-
           The axis number (allowed to be from 0 to controller.numAxes-1)
 
-      - type: str
-        name: DESC
+      DESC:
+        type: str
         description: |-
           The description of the axis
 
-      - type: int
-        name: DLLM
+      DLLM:
+        type: int
         description: |-
           The low limit of the axis
         default: -5
 
-      - type: int
-        name: DHLM
+      DHLM:
+        type: int
         description: |-
           The high limit of the axis
         default: 25
 
-      - type: int
-        name: VELO
+      VELO:
+        type: int
         description: |-
           Velocity
         default: 1
 
-      - type: int
-        name: home
+      home:
+        type: int
         description: |-
           The home position of the axis (in counts)
 
-      - type: int
-        name: start
+      start:
+        type: int
         description: |-
           The starting position of the axis (in counts)
         default: 0
 
-      - type: enum
-        name: DIR
+      DIR:
+        type: enum
         description: |-
           The direction of the axis
         default: 0
@@ -174,54 +172,56 @@ defs:
           Pos: 0
           Neg: 1
 
-      - type: str
-        name: EGU
+      EGU:
+        type: str
         description: |-
           Engineering Units
-        default: "mm"
-      
-      - type: float
-        name: VBAS
+        default: mm
+      VBAS:
+        type: float
         description: |-
           Base Velocity (EGU/s)
         default: 0.2
 
-      - type: float
-        name: ACCL
+      ACCL:
+        type: float
         description: |-
           Seconds to Velocity
         default: 0.2
 
-      - type: int
-        name: BDST
+      BDST:
+        type: int
         description: |-
           BL Distance (EGU)
         default: 0
 
-      - type: float
-        name: BVEL
+      BVEL:
+        type: float
         description: |-
           BL Velocity (EGU/s)
         default: 0.5
 
-      - type: float
-        name: BACC
+      BACC:
+        type: float
         description: |-
           BL Seconds to Veloc.
         default: 0.2
 
-      - type: float
-        name: MRES
+      MRES:
+        type: float
         description: |-
           Motor Step Size (EGU)
         default: 0.00001
 
-      - type: int
-        name: PREC
+      PREC:
+        type: int
         description: |-
           Display precision (EGU)
         default: 6
-      
+
+    post_init:
+      - value: |-
+          dbl
     databases:
       # TODO as this is a simulation I have hard coded some of the DB fields,
       # but these could easily be made into arguments above
@@ -231,14 +231,14 @@ defs:
       # Which is  good idea for ease of transition from traditional IOCs)
       - file: basic_asyn_motor.db
         args:
-          P: "{{controller.P}}"
-          N: "{{ADDR +1 }}"
+          P: '{{controller.P}}'
+          N: '{{ADDR +1 }}'
           M:
-          DTYP: "asynMotor"
-          PORT: "SMC100_{{controller}}"
+          DTYP: asynMotor
+          PORT: SMC100_{{controller}}
           ADDR:
           DESC:
-          EGU: 
+          EGU:
           DIR:
           VELO:
           VBAS:
@@ -246,11 +246,8 @@ defs:
           BDST:
           BVEL:
           BACC:
-          MRES: 
+          MRES:
           PREC:
-          DHLM: 
-          DLLM: 
-          INIT: ""
-    post_init:
-      - value: |
-          dbl
+          DHLM:
+          DLLM:
+          INIT: ''
