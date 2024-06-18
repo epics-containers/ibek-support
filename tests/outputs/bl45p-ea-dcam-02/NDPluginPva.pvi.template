@@ -1,0 +1,873 @@
+
+### PV Interface for NDPluginPva ###
+
+record("*", "$(P)$(R)PvName_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.PvName.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)PluginType_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.PluginType.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NDArrayPort") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NDArrayPort.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NDArrayPort_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NDArrayPort.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NDArrayAddress") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NDArrayAddress.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NDArrayAddress_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NDArrayAddress.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)EnableCallbacks") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.EnableCallbacks.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)EnableCallbacks_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.EnableCallbacks.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)MinCallbackTime") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.MinCallbackTime.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)MinCallbackTime_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.MinCallbackTime.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)QueueFree") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.QueueFree.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)QueueSize") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.QueueSize.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)QueueSize_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.QueueSize.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ExecutionTime_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ExecutionTime.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)DroppedArrays") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.DroppedArrays.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)DroppedArrays_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.DroppedArrays.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ProcessPlugin") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ProcessPlugin.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)DroppedOutputArrays") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.DroppedOutputArrays.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)DroppedOutputArrays_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.DroppedOutputArrays.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)MaxByteRate") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.MaxByteRate.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)MaxByteRate_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.MaxByteRate.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)BlockingCallbacks") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.BlockingCallbacks.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)BlockingCallbacks_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.BlockingCallbacks.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NumThreads") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NumThreads.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NumThreads_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NumThreads.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)MaxThreads_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.MaxThreads.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)SortMode") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.SortMode.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)SortMode_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.SortMode.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)SortTime") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.SortTime.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)SortTime_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.SortTime.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)SortFree") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.SortFree.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)SortSize") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.SortSize.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)SortSize_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.SortSize.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)DisorderedArrays") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.DisorderedArrays.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)DisorderedArrays_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.DisorderedArrays.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)PortName_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.PortName.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Manufacturer_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Manufacturer.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Model_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Model.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)SerialNumber_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.SerialNumber.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)FirmwareVersion_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.FirmwareVersion.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)SDKVersion_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.SDKVersion.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)DriverVersion_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.DriverVersion.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ADCoreVersion_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ADCoreVersion.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ArraySizeX_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArraySizeX.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ArraySizeY_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArraySizeY.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ArraySize_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArraySize.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)DataType") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.DataType.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)DataType_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.DataType.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ColorMode") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ColorMode.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ColorMode_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ColorMode.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NumQueuedArrays") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NumQueuedArrays.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)WaitForPlugins") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.WaitForPlugins.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Acquire") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Acquire.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Acquire_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Acquire.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ArrayCounter") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArrayCounter.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ArrayCounter_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArrayCounter.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ArrayCallbacks") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArrayCallbacks.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ArrayCallbacks_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArrayCallbacks.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NDAttributesFile") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NDAttributesFile.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NDAttributesMacros") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NDAttributesMacros.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NDAttributesStatus") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NDAttributesStatus.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)EmptyFreeList") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.EmptyFreeList.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)AcquireBusyCB") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.AcquireBusyCB.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)BayerPattern_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.BayerPattern.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ArraySizeZ_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArraySizeZ.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Codec_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Codec.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)CompressedSize_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.CompressedSize.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)UniqueId_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.UniqueId.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)TimeStamp_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.TimeStamp.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)EpicsTSSec_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.EpicsTSSec.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)EpicsTSNsec_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.EpicsTSNsec.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)PoolMaxMem") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.PoolMaxMem.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)PoolUsedMem") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.PoolUsedMem.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)PoolAllocBuffers") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.PoolAllocBuffers.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)PoolFreeBuffers") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.PoolFreeBuffers.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NDimensions") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NDimensions.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NDimensions_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NDimensions.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Dimensions") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Dimensions.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Dimensions_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Dimensions.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+### End of PV Interface for NDPluginPva ###

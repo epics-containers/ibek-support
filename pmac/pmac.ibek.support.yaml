@@ -482,7 +482,7 @@ defs:
           PORT: "{{PmacController}}"
           PREC:
           PMAC: "{{PmacController.P}}"
-          NAxes: "{{PmacController.NAxes}}"
+          NAxes: "{{PmacController.NAXES}}"
 
     # pvi:
     #   yaml_path: pmacTrajectory.pvi.device.yaml
