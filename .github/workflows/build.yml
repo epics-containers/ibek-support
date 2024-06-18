@@ -18,7 +18,7 @@ jobs:
 
       - name: Run schema/ioc instance generation tests
         run: |
-          python tests/test_generate.sh
+          bash tests/test_generate.sh
 
   check-docker-build:
     # pull requests are a duplicate of a branch push if within the same repo.
@@ -74,7 +74,7 @@ jobs:
         env:
           REPO: ${{ matrix.repo }}
         run: |
-          git clone ${REPO} -/tmp/generic_ioc
+          git clone ${REPO} /tmp/generic_ioc
           cp -r . /tmp/generic_ioc/ibek-support
           cp ./requirements.txt /tmp/generic_ioc
 
