@@ -71,8 +71,10 @@ jobs:
       - name: Setup
         # before building the container set up to use this version of ibek-support
         # and its associated version of ibek
+        env:
+          REPO: ${{ matrix.repo }}
         run: |
-          git clone ${{matrix.repo}} -/tmp/generic_ioc
+          git clone ${REPO} -/tmp/generic_ioc
           cp -r . /tmp/generic_ioc/ibek-support
           cp ./requirements.txt /tmp/generic_ioc
 
