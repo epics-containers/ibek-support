@@ -1,105 +1,102 @@
 label: arvFeature
-parent: GenICamFeature
+parent: ADDriver
 children:
+  - type: Group
+    name: ADAravis
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalR
+        name: ARFramesCompleted
+        read_pv: $(P)$(R)ARFramesCompleted
+        read_widget:
+          type: TextRead
 
-- type: Group
-  name: ADAravis
-  layout:
-    type: Grid
-    labelled: true
-  children:
+      - type: SignalR
+        name: ARFrameFailures
+        read_pv: $(P)$(R)ARFrameFailures
+        read_widget:
+          type: TextRead
 
-  - type: SignalR
-    name: ARFramesCompleted
-    read_pv: $(P)$(R)ARFramesCompleted
-    read_widget:
-      type: TextRead
+      - type: SignalR
+        name: ARFrameUnderruns
+        read_pv: $(P)$(R)ARFrameUnderruns
+        read_widget:
+          type: TextRead
 
-  - type: SignalR
-    name: ARFrameFailures
-    read_pv: $(P)$(R)ARFrameFailures
-    read_widget:
-      type: TextRead
+      - type: SignalR
+        name: ARMissingPackets
+        read_pv: $(P)$(R)ARMissingPackets
+        read_widget:
+          type: TextRead
 
-  - type: SignalR
-    name: ARFrameUnderruns
-    read_pv: $(P)$(R)ARFrameUnderruns
-    read_widget:
-      type: TextRead
+      - type: SignalR
+        name: ARResentPackets
+        read_pv: $(P)$(R)ARResentPackets
+        read_widget:
+          type: TextRead
 
-  - type: SignalR
-    name: ARMissingPackets
-    read_pv: $(P)$(R)ARMissingPackets
-    read_widget:
-      type: TextRead
+      - type: SignalW
+        name: ARPacketResendEnable
+        write_pv: $(P)$(R)ARPacketResendEnable
+        write_widget:
+          type: ComboBox
 
-  - type: SignalR
-    name: ARResentPackets
-    read_pv: $(P)$(R)ARResentPackets
-    read_widget:
-      type: TextRead
+      - type: SignalW
+        name: ARPacketTimeout
+        write_pv: $(P)$(R)ARPacketTimeout
+        write_widget:
+          type: TextWrite
 
-  - type: SignalW
-    name: ARPacketResendEnable
-    write_pv: $(P)$(R)ARPacketResendEnable
-    write_widget:
-      type: ComboBox
+      - type: SignalW
+        name: ARFrameRetention
+        write_pv: $(P)$(R)ARFrameRetention
+        write_widget:
+          type: TextWrite
 
-  - type: SignalW
-    name: ARPacketTimeout
-    write_pv: $(P)$(R)ARPacketTimeout
-    write_widget:
-      type: TextWrite
+      - type: SignalW
+        name: ARResetCamera
+        write_pv: $(P)$(R)ARResetCamera
+        write_widget:
+          type: TextWrite
 
-  - type: SignalW
-    name: ARFrameRetention
-    write_pv: $(P)$(R)ARFrameRetention
-    write_widget:
-      type: TextWrite
+      - type: SignalRW
+        name: ARConvertPixelFormat
+        write_pv: $(P)$(R)ARConvertPixelFormat
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)ARConvertPixelFormat_RBV
+        read_widget:
+          type: TextRead
 
-  - type: SignalW
-    name: ARResetCamera
-    write_pv: $(P)$(R)ARResetCamera
-    write_widget:
-      type: TextWrite
+      - type: SignalRW
+        name: ARShiftDir
+        write_pv: $(P)$(R)ARShiftDir
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)ARShiftDir_RBV
+        read_widget:
+          type: TextRead
 
-  - type: SignalRW
-    name: ARConvertPixelFormat
-    write_pv: $(P)$(R)ARConvertPixelFormat
-    write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)ARConvertPixelFormat_RBV
-    read_widget:
-      type: TextRead
+      - type: SignalRW
+        name: ARShiftBits
+        write_pv: $(P)$(R)ARShiftBits
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)ARShiftBits_RBV
+        read_widget:
+          type: TextRead
 
-  - type: SignalRW
-    name: ARShiftDir
-    write_pv: $(P)$(R)ARShiftDir
-    write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)ARShiftDir_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: ARShiftBits
-    write_pv: $(P)$(R)ARShiftBits
-    write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)ARShiftBits_RBV
-    read_widget:
-      type: TextRead
-
-- type: Group
-  name: ArvFeatureMisc
-  label: arvFeature Ungrouped
-  layout:
-    type: Grid
-    labelled: true
-  children:
-
-  - type: SignalW
-    name: ARConnectCamera
-    write_pv: $(P)$(R)ARConnectCamera
-    write_widget:
-      type: TextWrite
+  - type: Group
+    name: ArvFeatureMisc
+    label: arvFeature Ungrouped
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalW
+        name: ARConnectCamera
+        write_pv: $(P)$(R)ARConnectCamera
+        write_widget:
+          type: TextWrite
