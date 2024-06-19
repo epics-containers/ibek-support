@@ -166,7 +166,7 @@ children:
         read_pv: $(P)$(R)Firmware
         read_widget:
           type: TextRead
-          format: 4
+          format: string
 
       - type: SignalR
         name: SampleTime
