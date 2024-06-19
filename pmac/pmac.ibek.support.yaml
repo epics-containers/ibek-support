@@ -21,7 +21,7 @@ entity_models:
         type: str
         description: |-
           IP port to connect to if in simulation mode
-        default: ''
+        default: ""
 
     pre_init:
       - value: |
@@ -82,49 +82,49 @@ entity_models:
         type: str
         description: |-
           Name for Coordinate System Group 0
-        default: ''
+        default: ""
 
       CSG1:
         type: str
         description: |-
           Name for Coordinate System Group 1
-        default: ''
+        default: ""
 
       CSG2:
         type: str
         description: |-
           Name for Coordinate System Group 2
-        default: ''
+        default: ""
 
       CSG3:
         type: str
         description: |-
           Name for Coordinate System Group 3
-        default: ''
+        default: ""
 
       CSG4:
         type: str
         description: |-
           Name for Coordinate System Group 4
-        default: ''
+        default: ""
 
       CSG5:
         type: str
         description: |-
           Name for Coordinate System Group 5
-        default: ''
+        default: ""
 
       CSG6:
         type: str
         description: |-
           Name for Coordinate System Group 6
-        default: ''
+        default: ""
 
       CSG7:
         type: str
         description: |-
           Name for Coordinate System Group 7
-        default: ''
+        default: ""
 
     pre_init:
       - value: |
@@ -137,7 +137,7 @@ entity_models:
       - file: pmacStatus.template
         args:
           P:
-          PORT: '{{name}}'
+          PORT: "{{name}}"
 
       - file: pmacController.template
         args:
@@ -153,11 +153,11 @@ entity_models:
           P:
           TIMEOUT:
           NAXES:
-          PORT: '{{name}}'
+          PORT: "{{name}}"
 
     pvi:
       yaml_path: pmacController.pvi.device.yaml
-      pv_prefix: '{{ P }}'
+      pv_prefix: "{{ P }}"
       ui_macros:
         P:
   - name: pmacAsynSSHPort
@@ -208,7 +208,7 @@ entity_models:
         type: str
         description: |-
           IP port to connect to if in simulation mode
-        default: ''
+        default: ""
 
     pre_init:
       - value: |
@@ -275,67 +275,67 @@ entity_models:
         type: str
         description: |-
           Pmac/Geobrick name
-        default: ''
+        default: ""
 
       AXIS:
         type: str
         description: |-
           Axis number
-        default: ''
+        default: ""
 
       PORT:
         type: str
         description: |-
           Asyn port
-        default: '{{name}}'
+        default: "{{name}}"
 
       CSG0:
         type: str
         description: |-
           Name for Coordinate System Group 0
-        default: ''
+        default: ""
 
       CSG1:
         type: str
         description: |-
           Name for Coordinate System Group 1
-        default: ''
+        default: ""
 
       CSG2:
         type: str
         description: |-
           Name for Coordinate System Group 2
-        default: ''
+        default: ""
 
       CSG3:
         type: str
         description: |-
           Name for Coordinate System Group 3
-        default: ''
+        default: ""
 
       CSG4:
         type: str
         description: |-
           Name for Coordinate System Group 4
-        default: ''
+        default: ""
 
       CSG5:
         type: str
         description: |-
           Name for Coordinate System Group 5
-        default: ''
+        default: ""
 
       CSG6:
         type: str
         description: |-
           Name for Coordinate System Group 6
-        default: ''
+        default: ""
 
       CSG7:
         type: str
         description: |-
           Name for Coordinate System Group 7
-        default: ''
+        default: ""
 
     pre_init:
       - value: |
@@ -439,10 +439,10 @@ entity_models:
       - file: pmacCsController.template
         args:
           CS:
-          PARENTPORT: '{{PmacController}}'
-          PORT: '{{name}}'
+          PARENTPORT: "{{PmacController}}"
+          PORT: "{{name}}"
           TIMEOUT:
-          PMAC: '{{PmacController.P}}'
+          PMAC: "{{PmacController.P}}"
 
   - name: GeoBrickTrajectoryControl
     description: |-
@@ -477,10 +477,10 @@ entity_models:
         args:
           NPOINTS:
           MAXPOINTS:
-          PORT: '{{PmacController}}'
+          PORT: "{{PmacController}}"
           PREC:
-          PMAC: '{{PmacController.P}}'
-          NAxes: '{{PmacController.NAXES}}'
+          PMAC: "{{PmacController.P}}"
+          NAxes: "{{PmacController.NAXES}}"
 
     # pvi:
     #   yaml_path: pmacTrajectory.pvi.device.yaml
@@ -576,7 +576,7 @@ entity_models:
         type: str # float or substitution string
         description: |-
           Max Velocity (EGU/s), defaults to VELO
-        default: '{{VELO}}'
+        default: "{{VELO}}"
 
       ACCL:
         type: float
@@ -616,13 +616,13 @@ entity_models:
         type: str # float or blank
         description: |-
           User High Limit
-        default: ''
+        default: ""
 
       LLM:
         type: str # float or blank
         description: |-
           User Low Limit
-        default: ''
+        default: ""
 
       HLSV:
         type: str
@@ -634,7 +634,7 @@ entity_models:
         type: str
         description: |-
           Startup commands
-        default: ''
+        default: ""
 
       SREV:
         type: int
@@ -682,13 +682,13 @@ entity_models:
         type: str
         description: |-
           Readback Location, set URIP = 1 if you specify this
-        default: ''
+        default: ""
 
       RLNK:
         type: str
         description: |-
           Readback output link
-        default: ''
+        default: ""
 
       RTRY:
         type: int
@@ -790,22 +790,22 @@ entity_models:
         type: str
         description: |-
           the template contains enough records to keep the motor record happy
-        default: '{{P}}'
+        default: "{{P}}"
 
       ALLOW_HOMED_SET:
         type: str
         description: |-
           status manually.  This is set to a comment character by default.
-        default: '#'
+        default: "#"
 
     databases:
       - file: "{{ 'dls_pmac_cs_asyn_motor.template' if is_cs else 'dls_pmac_asyn_motor.template' }}"
         args:
           P:
           M:
-          PORT: '{{ Controller }}'
-          CS: '{{Controller.CS if is_cs else 0}}'
-          PMAC: '{{ Controller.P }}'
+          PORT: "{{ Controller }}"
+          CS: "{{Controller.CS if is_cs else 0}}"
+          PMAC: "{{ Controller.PmacController.P if is_cs else Controller.P }}"
           VELO:
           ACCL:
           SCALE:
@@ -855,7 +855,7 @@ entity_models:
 
     pvi:
       yaml_path: pmacAxis.pvi.device.yaml
-      pv_prefix: '{{ P }}{{ M }}'
+      pv_prefix: "{{ P }}{{ M }}"
       ui_macros:
         P:
         M:
@@ -888,115 +888,115 @@ entity_models:
         type: str
         description: |-
           Optional.  Homing group 2 description.  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       GRP3:
         type: str
         description: |-
           Optional.  Homing group 3 description.  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       GRP4:
         type: str
         description: |-
           Optional.  Homing group 4 description.  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       GRP5:
         type: str
         description: |-
           Optional.  Homing group 5 description.  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       GRP6:
         type: str
         description: |-
           Optional.  Homing group 6 description.  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       GRP7:
         type: str
         description: |-
           Optional.  Homing group 7 description.  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       GRP8:
         type: str
         description: |-
           Optional.  Homing group 8 description.  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       GRP9:
         type: str
         description: |-
           Optional.  Homing group 9 description.  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       GRP10:
         type: str
         description: |-
           Optional.  Homing group 10 description.  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       STATE11:
         type: str
         description: |-
           Optional.  Homing state 11 description.  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       STATE12:
         type: str
         description: |-
           Optional.  Homing state 12 description.  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       STATE13:
         type: str
         description: |-
           Optional.  Homing state 13 description.  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       STATE14:
         type: str
         description: |-
           Optional.  Homing state 14 description.  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       STATE15:
         type: str
         description: |-
           Optional.  Homing state 15 description.  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       STATUS11:
         type: str
         description: |-
           Optional.  Homing status 11 description (e.g. for custom limit checks).  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       STATUS12:
         type: str
         description: |-
           Optional.  Homing status 12 description (e.g. for custom limit checks).  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       STATUS13:
         type: str
         description: |-
           Optional.  Homing status 13 description (e.g. for custom limit checks).  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       STATUS14:
         type: str
         description: |-
           Optional.  Homing status 14 description (e.g. for custom limit checks).  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       STATUS15:
         type: str
         description: |-
           Optional.  Homing status 15 description (e.g. for custom limit checks).  Defaults to give empty description string.
-        default: ''
+        default: ""
 
       STATUSSV11:
         type: str
@@ -1032,14 +1032,14 @@ entity_models:
         type: str
         description: |-
           Description
-        default: ''
+        default: ""
 
     databases:
       - file: autohome.template
         args:
           GRP10:
-          CTRL: '{{PmacController.P}}'
-          PORT: '{{PmacController}}'
+          CTRL: "{{PmacController.P}}"
+          PORT: "{{PmacController}}"
           GRP9:
           GRP8:
           GRP3:
@@ -1255,7 +1255,7 @@ entity_models:
         type: str # float or substitution string
         description: |-
           Max Velocity (EGU/s), defaults to VELO
-        default: '{{VELO}}'
+        default: "{{VELO}}"
 
       DHLM:
         type: float
@@ -1284,7 +1284,7 @@ entity_models:
 
     databases:
       - file: translated_motor.template
-        args: {P: null, SM: null, DESC: null, VELO: null, VMAX: null, PREC: null, EGU: null, DHLM: null, DLLM: null, M: null, TWV: null, FWD: null, BWD: null}
+        args: { P: null, SM: null, DESC: null, VELO: null, VMAX: null, PREC: null, EGU: null, DHLM: null, DLLM: null, M: null, TWV: null, FWD: null, BWD: null }
 
   - name: CS_accel_dcm
     description: |-
