@@ -2398,6 +2398,14 @@ defs:
           # NDFileTIFFConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDFileTIFFConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
+    pvi:
+      yaml_path: NDFileTIFF.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: "$(P)$(R)"
+
   - name: NDGather8
     description: |-
       This plugin is used to gather NDArrays from multiple upstream plugins and merge them into a single stream
