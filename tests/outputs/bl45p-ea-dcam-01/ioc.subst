@@ -52,8 +52,8 @@ pattern
 
 file "$(ADCORE)/db/NDFileTIFF.template" {
 pattern 
-	{ "NDARRAY_PORT", "ADDR", "SCANRATE", "NDARRAY_ADDR", "ENABLED", "P",               "R",      "TIMEOUT", "PORT"     }
-	{ "DET.DET",      "0",    "I/O Intr", "0",            "0",       "BL45P-EA-MAP-01", ":TIFF:", "1",       "DET.tiff" }
+	{ "NDARRAY_PORT", "ADDR", "SCANRATE", "NDARRAY_ADDR", "ENABLED", "P",               "R",      "PORT",     "TIMEOUT" }
+	{ "DET.DET",      "0",    "I/O Intr", "0",            "0",       "BL45P-EA-MAP-01", ":TIFF:", "DET.tiff", "1"       }
 }
 
 file "$(ADCORE)/db/NDFileHDF5.template" {
@@ -102,6 +102,12 @@ file "NDPluginProcess.pvi.template" {
 pattern 
 	{ "P",               "R"      }
 	{ "BL45P-EA-MAP-01", ":PROC:" }
+}
+
+file "NDFileTIFF.pvi.template" {
+pattern 
+	{ "P",               "R"      }
+	{ "BL45P-EA-MAP-01", ":TIFF:" }
 }
 
 file "NDFileHDF5.pvi.template" {

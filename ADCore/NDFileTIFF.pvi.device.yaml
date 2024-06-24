@@ -30,11 +30,11 @@ children:
     write_pv: $(P)$(R)FileName
     write_widget:
       type: TextWrite
-      format: 4
+      format: string
     read_pv: $(P)$(R)FileName_RBV
     read_widget:
       type: TextRead
-      format: 4
+      format: string
 
 - type: Group
   name: NDCircularBuff
@@ -86,11 +86,11 @@ children:
     write_pv: $(P)$(R)FilePath
     write_widget:
       type: TextWrite
-      format: 4
+      format: string
     read_pv: $(P)$(R)FilePath_RBV
     read_widget:
       type: TextRead
-      format: 4
+      format: string
 
   - type: SignalRW
     name: CreateDirectory
@@ -142,18 +142,18 @@ children:
     write_pv: $(P)$(R)FileTemplate
     write_widget:
       type: TextWrite
-      format: 4
+      format: string
     read_pv: $(P)$(R)FileTemplate_RBV
     read_widget:
       type: TextRead
-      format: 4
+      format: string
 
   - type: SignalR
     name: FullFileName
     read_pv: $(P)$(R)FullFileName_RBV
     read_widget:
       type: TextRead
-      format: 4
+      format: string
 
   - type: SignalRW
     name: WriteFile
@@ -217,4 +217,4 @@ children:
     read_pv: $(P)$(R)WriteMessage
     read_widget:
       type: TextRead
-      format: 4
+      format: string
