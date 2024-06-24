@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/2.0.2/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.0b10/ibek.support.schema.json
 
 module: ADCore
 
@@ -476,7 +476,7 @@ entity_models:
       - value: |
           # NDOverlayConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, NOverlays, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDOverlayConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{NOverlays}}, 0, 0, 0, 0, {{MAX_THREADS}})
-  # TODO - MISSING ARGS: NOverlays
+    # TODO - MISSING ARGS: NOverlays
     databases:
       - file: $(ADCORE)/db/NDOverlay.template
         args:
@@ -1346,7 +1346,7 @@ entity_models:
     pre_init:
       - value: |
           NDAttrPlotConfig("{{PORT}}", {{N_ATTRS}}, {{N_CACHE}},
-  # TODO - MISSING ARGS: N_ATTRS
+    # TODO - MISSING ARGS: N_ATTRS
     databases:
       - file: $(ADCORE)/db/NDAttrPlotAttr.template
         args:
@@ -2356,11 +2356,6 @@ entity_models:
           Blocking callbacks?
         default: 0
 
-    pre_init:
-      - value: |
-          # NDFileTIFFConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
-          NDFileTIFFConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
-
     databases:
       - file: $(ADCORE)/db/NDFileTIFF.template
         args:
@@ -2371,8 +2366,21 @@ entity_models:
           ENABLED:
           P:
           R:
-          TIMEOUT:
           PORT:
+          TIMEOUT:
+
+    pre_init:
+      - value: |
+          # NDFileTIFFConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
+          NDFileTIFFConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
+
+    pvi:
+      yaml_path: NDFileTIFF.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: "$(P)$(R)"
 
   - name: NDGather8
     description: |-
@@ -3113,4 +3121,3 @@ entity_models:
           R:
           TIMEOUT:
           PORT:
-

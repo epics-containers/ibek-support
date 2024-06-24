@@ -53,6 +53,9 @@ pvi regroup NDPluginPva.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 pvi convert device --template ${ADCORE}/db/NDFileHDF5.template --template ${ADCORE}/db/NDFile.template . ${ADCORE}/ADApp/pluginSrc/NDFileHDF5.h
 pvi regroup NDFileHDF5.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 
+pvi convert device --template ${ADCORE}/db/NDFileTIFF.template --template ${ADCORE}/db/NDFile.template . ${ADCORE}/ADApp/pluginSrc/NDFileTIFF.h
+pvi regroup NDFileTIFF.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
+
 ADGenICam=/epics/support/ADGenICam
 cd ${ADGenICam}
 ./addCamera.sh AVT_Manta_1_44
