@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.0b10/ibek.support.schema.json
 
 module: mks937a
 
@@ -92,7 +92,7 @@ entity_models:
 
     databases:
       - file: $(MKS937A)/db/mks937aImgMean.template
-        args: {device: null, current: null, nimgs: null, img1: null, img2: null, img3: null, img4: null, img5: null, img6: null, img7: null, img8: null, img9: null, img10: null}
+        args: { device: null, current: null, nimgs: null, img1: null, img2: null, img3: null, img4: null, img5: null, img6: null, img7: null, img8: null, img9: null, img10: null }
 
   - name: mks937aImgGroup
     description: |-
@@ -118,43 +118,43 @@ entity_models:
         type: str
         description: |-
           img 2 device name
-        default: '{{img1}}'
+        default: "{{img1}}"
 
       img3:
         type: str
         description: |-
           img 3 device name
-        default: '{{img1}}'
+        default: "{{img1}}"
 
       img4:
         type: str
         description: |-
           img 4 device name
-        default: '{{img1}}'
+        default: "{{img1}}"
 
       img5:
         type: str
         description: |-
           img 5 device name
-        default: '{{img1}}'
+        default: "{{img1}}"
 
       img6:
         type: str
         description: |-
           img 6 device name
-        default: '{{img1}}'
+        default: "{{img1}}"
 
       img7:
         type: str
         description: |-
           img 7 device name
-        default: '{{img1}}'
+        default: "{{img1}}"
 
       img8:
         type: str
         description: |-
           img 8 device name
-        default: '{{img1}}'
+        default: "{{img1}}"
 
     databases:
       - file: $(MKS937A)/db/mks937aImgGroup.template
@@ -437,7 +437,7 @@ entity_models:
 
     databases:
       - file: $(MKS937A)/db/mks937aImg.template
-        args: {device: null, port: '{{GCTLR.port}}', channel: null, ctlsp_level: null, ctlsp_drvh: null, ctlsp_drvl: null, ctlsp_hopr: null, ctlsp_lopr: null, ctlsp_hihi: null, ctlsp_lolo: null, ctlsp_high: null, ctlsp_low: null, ctlsp_desc: null, prosp_level: null, prosp_drvh: null, prosp_drvl: null, prosp_hopr: null, prosp_lopr: null, prosp_hihi: null, prosp_lolo: null, prosp_high: null, prosp_low: null, prosp_desc: null, rlysp_level: null, rlysp_drvh: null, rlysp_drvl: null, rlysp_hopr: null, rlysp_lopr: null, rlysp_hihi: null, rlysp_lolo: null, rlysp_high: null, rlysp_low: null, rlysp_desc: null, rlasp_drvh: null, rlasp_drvl: null, rlasp_hopr: null, rlasp_lopr: null, rlasp_hihi: null, rlasp_lolo: null, rlasp_high: null, rlasp_low: null, rlasp_desc: null, offwarn: null, ilk_write_access_pv: null}
+        args: { device: null, port: "{{GCTLR.port}}", channel: null, ctlsp_level: null, ctlsp_drvh: null, ctlsp_drvl: null, ctlsp_hopr: null, ctlsp_lopr: null, ctlsp_hihi: null, ctlsp_lolo: null, ctlsp_high: null, ctlsp_low: null, ctlsp_desc: null, prosp_level: null, prosp_drvh: null, prosp_drvl: null, prosp_hopr: null, prosp_lopr: null, prosp_hihi: null, prosp_lolo: null, prosp_high: null, prosp_low: null, prosp_desc: null, rlysp_level: null, rlysp_drvh: null, rlysp_drvl: null, rlysp_hopr: null, rlysp_lopr: null, rlysp_hihi: null, rlysp_lolo: null, rlysp_high: null, rlysp_low: null, rlysp_desc: null, rlasp_drvh: null, rlasp_drvl: null, rlasp_hopr: null, rlasp_lopr: null, rlasp_hihi: null, rlasp_lolo: null, rlasp_high: null, rlasp_low: null, rlasp_desc: null, offwarn: null, ilk_write_access_pv: null }
 
   - name: mks937aGaugeEGU
     description: |-
@@ -463,21 +463,28 @@ entity_models:
         description: |-
           PV providing gauge reading in mbar
 
+      eguInputPV:
+        type: str
+        description: |-
+          PV providing gauge reading in mbar
+        default: |-
+          {{input}}:EGU
+
     databases:
       - file: $(MKS937A)/db/mks937aGauge.template
         args:
           dom:
           id: "{{ '%02d' % id }}"
-          c: ''
-          s: ''
+          c: ""
+          s: ""
           name:
           aitype: Soft Channel
-          aiinp: '{{eguInputPV}}  CP'
+          aiinp: "{{eguInputPV}}  CP"
 
       - file: $(MKS937A)/db/mks937aPlogEGU.template
         args:
-          device: '{{eguInputPV}}'
-          p_egu_pv: '{{input}}'
+          device: "{{eguInputPV}}"
+          p_egu_pv: "{{input}}"
 
   - name: mks937aGaugeGroup
     description: |-
@@ -499,43 +506,43 @@ entity_models:
         type: str
         description: |-
           gauge 2 device name
-        default: '{{gauge1}}'
+        default: "{{gauge1}}"
 
       gauge3:
         type: str
         description: |-
           gauge 3 device name
-        default: '{{gauge1}}'
+        default: "{{gauge1}}"
 
       gauge4:
         type: str
         description: |-
           gauge 4 device name
-        default: '{{gauge1}}'
+        default: "{{gauge1}}"
 
       gauge5:
         type: str
         description: |-
           gauge 5 device name
-        default: '{{gauge1}}'
+        default: "{{gauge1}}"
 
       gauge6:
         type: str
         description: |-
           gauge 6 device name
-        default: '{{gauge1}}'
+        default: "{{gauge1}}"
 
       gauge7:
         type: str
         description: |-
           gauge 7 device name
-        default: '{{gauge1}}'
+        default: "{{gauge1}}"
 
       gauge8:
         type: str
         description: |-
           gauge 8 device name
-        default: '{{gauge1}}'
+        default: "{{gauge1}}"
 
       SELM:
         type: int
@@ -551,7 +558,7 @@ entity_models:
 
     databases:
       - file: $(MKS937A)/db/mks937aGaugeGroup.template
-        args: {device: null, gauge1: null, gauge2: null, gauge3: null, gauge4: null, gauge5: null, gauge6: null, gauge7: null, gauge8: null, SELM: null, SELN: null}
+        args: { device: null, gauge1: null, gauge2: null, gauge3: null, gauge4: null, gauge5: null, gauge6: null, gauge7: null, gauge8: null, SELM: null, SELN: null }
 
   - name: mks937a
     description: |-
@@ -754,7 +761,7 @@ entity_models:
 
     databases:
       - file: $(MKS937A)/db/mks937aPirg.template
-        args: {device: null, port: '{{GCTLR.port}}', channel: null, rlysp_level: null, rlysp_drvh: null, rlysp_drvl: null, rlysp_hopr: null, rlysp_lopr: null, rlysp_hihi: null, rlysp_lolo: null, rlysp_high: null, rlysp_low: null, rlysp_desc: null, ilk_write_access_pv: null}
+        args: { device: null, port: "{{GCTLR.port}}", channel: null, rlysp_level: null, rlysp_drvh: null, rlysp_drvl: null, rlysp_hopr: null, rlysp_lopr: null, rlysp_hihi: null, rlysp_lolo: null, rlysp_high: null, rlysp_low: null, rlysp_desc: null, ilk_write_access_pv: null }
 
   - name: mks937aPirgGroup
     description: |-
@@ -775,47 +782,47 @@ entity_models:
         type: str
         description: |-
           pirg 2 device name
-        default: '{{pirg1}}'
+        default: "{{pirg1}}"
 
       pirg3:
         type: str
         description: |-
           pirg 3 device name
-        default: '{{pirg1}}'
+        default: "{{pirg1}}"
 
       pirg4:
         type: str
         description: |-
           pirg 4 device name
-        default: '{{pirg1}}'
+        default: "{{pirg1}}"
 
       pirg5:
         type: str
         description: |-
           pirg 5 device name
-        default: '{{pirg1}}'
+        default: "{{pirg1}}"
 
       pirg6:
         type: str
         description: |-
           pirg 6 device name
-        default: '{{pirg1}}'
+        default: "{{pirg1}}"
 
       pirg7:
         type: str
         description: |-
           pirg 7 device name
-        default: '{{pirg1}}'
+        default: "{{pirg1}}"
 
       pirg8:
         type: str
         description: |-
           pirg 8 device name
-        default: '{{pirg1}}'
+        default: "{{pirg1}}"
 
     databases:
       - file: $(MKS937A)/db/mks937aPirgGroup.template
-        args: {device: null, pirg1: null, pirg2: null, pirg3: null, pirg4: null, pirg5: null, pirg6: null, pirg7: null, pirg8: null}
+        args: { device: null, pirg1: null, pirg2: null, pirg3: null, pirg4: null, pirg5: null, pirg6: null, pirg7: null, pirg8: null }
 
   - name: mks937aGauge
     description: |-
@@ -907,7 +914,7 @@ entity_models:
         type: str
         description: |-
           Template argument
-        default: '#C$(c) S$(s) @'
+        default: "#C$(c) S$(s) @"
 
     databases:
       - file: $(MKS937A)/db/mks937aGauge.template
