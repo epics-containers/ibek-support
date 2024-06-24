@@ -2,27 +2,22 @@
 
 module: ipac
 
-defs:
+entity_models:
   - name: Hy8002
     description: adds a Hy8002 carrier card to the IOC
-    args:
-      - type: id
-        name: name
-        description: "IPAC identifier (suggested: IPAC<slot>)"
+    parameters:
+      name:
+        type: id
+        description: 'IPAC identifier (suggested: IPAC<slot>)'
 
-      - type: int
-        name: slot
+      slot:
+        type: int
         description: Crate Slot number
 
-      - type: int
-        name: int_level
+      int_level:
+        type: int
         description: Interrupt level
         default: 2
-
-    values:
-      - name: card_id
-        value: '{{ __utils__.counter("Carriers", start=0) }}'
-        description: Carrier Card Identifier
 
     pre_init:
       - type: function
@@ -39,5 +34,5 @@ defs:
         # automatically increments to track them.
         name: epicsEnvSet
         args:
-          name: "{{ name }}"
-          value: "{{ card_id }}"
+          name: '{{ name }}'
+          value: '{{ card_id }}'

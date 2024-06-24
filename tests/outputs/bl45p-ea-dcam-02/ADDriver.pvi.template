@@ -1,0 +1,1093 @@
+
+### PV Interface for ADDriver ###
+
+record("*", "$(P)$(R)ArraySizeX_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArraySizeX.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ArraySizeY_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArraySizeY.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ArraySize_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArraySize.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)DataType") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.DataType.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)DataType_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.DataType.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ColorMode") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ColorMode.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ColorMode_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ColorMode.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)MaxSizeX_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.MaxSizeX.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)MaxSizeY_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.MaxSizeY.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)BinX") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.BinX.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)BinX_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.BinX.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)BinY") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.BinY.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)BinY_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.BinY.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)MinY") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.MinY.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)MinY_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.MinY.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)MinX") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.MinX.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)MinX_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.MinX.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ReverseX") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ReverseX.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ReverseX_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ReverseX.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ReverseY") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ReverseY.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ReverseY_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ReverseY.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)SizeX") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.SizeX.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)SizeX_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.SizeX.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)SizeY") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.SizeY.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)SizeY_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.SizeY.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Gain") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Gain.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Gain_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Gain.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ShutterMode") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ShutterMode.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ShutterMode_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ShutterMode.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ShutterStatus_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ShutterStatus.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ShutterControl") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ShutterControl.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ShutterControl_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ShutterControl.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ShutterOpenDelay") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ShutterOpenDelay.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ShutterOpenDelay_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ShutterOpenDelay.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ShutterCloseDelay") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ShutterCloseDelay.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ShutterCloseDelay_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ShutterCloseDelay.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NumQueuedArrays") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NumQueuedArrays.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)WaitForPlugins") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.WaitForPlugins.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Acquire") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Acquire.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Acquire_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Acquire.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ArrayCounter") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArrayCounter.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ArrayCounter_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArrayCounter.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ArrayCallbacks") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArrayCallbacks.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ArrayCallbacks_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArrayCallbacks.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)AcquireTime") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.AcquireTime.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)AcquireTime_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.AcquireTime.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)AcquirePeriod") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.AcquirePeriod.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)AcquirePeriod_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.AcquirePeriod.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NumImagesCounter_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NumImagesCounter.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NumImages") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NumImages.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NumImages_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NumImages.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NumExposures") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NumExposures.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NumExposures_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NumExposures.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ImageMode") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ImageMode.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ImageMode_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ImageMode.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)TriggerMode") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.TriggerMode.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)TriggerMode_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.TriggerMode.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)DetectorState_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.DetectorState.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)StatusMessage_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.StatusMessage.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)TimeRemaining_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.TimeRemaining.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ReadStatus") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ReadStatus.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NumExposuresCounter_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NumExposuresCounter.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)StringToServer_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.StringToServer.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)StringFromServer_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.StringFromServer.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ShutterControlEPICS") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ShutterControlEPICS.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)TemperatureActual") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.TemperatureActual.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)FrameType") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.FrameType.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)FrameType_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.FrameType.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Temperature") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Temperature.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Temperature_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Temperature.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)PortName_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.PortName.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Manufacturer_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Manufacturer.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Model_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Model.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)SerialNumber_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.SerialNumber.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)FirmwareVersion_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.FirmwareVersion.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)SDKVersion_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.SDKVersion.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)DriverVersion_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.DriverVersion.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ADCoreVersion_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ADCoreVersion.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NDAttributesFile") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NDAttributesFile.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NDAttributesMacros") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NDAttributesMacros.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NDAttributesStatus") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NDAttributesStatus.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)EmptyFreeList") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.EmptyFreeList.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)AcquireBusyCB") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.AcquireBusyCB.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)BayerPattern_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.BayerPattern.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)ArraySizeZ_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.ArraySizeZ.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Codec_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Codec.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)CompressedSize_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.CompressedSize.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)UniqueId_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.UniqueId.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)TimeStamp_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.TimeStamp.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)EpicsTSSec_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.EpicsTSSec.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)EpicsTSNsec_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.EpicsTSNsec.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)PoolMaxMem") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.PoolMaxMem.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)PoolUsedMem") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.PoolUsedMem.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)PoolAllocBuffers") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.PoolAllocBuffers.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)PoolFreeBuffers") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.PoolFreeBuffers.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NDimensions") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NDimensions.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)NDimensions_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.NDimensions.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Dimensions") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Dimensions.w": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+record("*", "$(P)$(R)Dimensions_RBV") {
+    info(Q:group, {
+        "$(P)$(R)PVI": {
+            "pvi.Dimensions.r": {
+                "+channel": "NAME",
+                "+type": "plain",
+            }
+        }
+    })
+}
+
+### End of PV Interface for ADDriver ###

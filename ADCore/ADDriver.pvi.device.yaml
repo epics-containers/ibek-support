@@ -225,7 +225,7 @@ children:
         read_pv: $(P)$(R)StatusMessage_RBV
         read_widget:
           type: TextRead
-          format: 4
+          format: string
 
       - type: SignalR
         name: TimeRemaining
@@ -257,14 +257,14 @@ children:
         read_pv: $(P)$(R)StringToServer_RBV
         read_widget:
           type: TextRead
-          format: 4
+          format: string
 
       - type: SignalR
         name: StringFromServer
         read_pv: $(P)$(R)StringFromServer_RBV
         read_widget:
           type: TextRead
-          format: 4
+          format: string
 
       - type: SignalR
         name: ShutterControlEPICS

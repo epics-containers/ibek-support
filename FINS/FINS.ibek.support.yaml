@@ -2,53 +2,53 @@
 
 module: FINS
 
-defs:
+entity_models:
   - name: FINSTemplate
     description: |-
       Instantiate FINS db template
-    args:
-      - type: id
-        name: device
+    parameters:
+      device:
+        type: id
         description: |-
           Device name
 
-      - type: str
-        name: port
+      port:
+        type: str
         description: |-
           asyn port to use for connection
 
-      - type: int
-        name: etn
+      etn:
+        type: int
         description: |-
           PLC Ethernet module address
         default: 0x10
 
     databases:
       - file: FINS.template
-        args: { device, port, etn: "{{ etn | int }}" }
+        args: {device: null, port: null, etn: '{{ etn | int }}'}
 
   - name: FINSUDPInit
     description: |-
       This creates an asyn port which communicates with a FINS device over
           UDP
-    args:
-      - type: str
-        name: ip
+    parameters:
+      ip:
+        type: str
         description: |-
           IP port of FINS device
 
-      - type: id
-        name: name
+      name:
+        type: id
         description: |-
           Asyn port name
 
-      - type: str
-        name: simulation
+      simulation:
+        type: str
         description: |-
           IP port of simulation device
 
     pre_init:
-      - value: |
+      - value: |2
 
           # finsUDPInit(asyn_port, ip_addr)
       - value: |
@@ -58,14 +58,14 @@ defs:
     description: |-
       This creates a port that will send FINS command in a Hostlink wrapper
           to a PLC over a serial port.
-    args:
-      - type: object
-        name: asyn_port
+    parameters:
+      asyn_port:
+        type: object
         description: |-
           Asyn port for serial comms (possibly over terminal server)
 
-      - type: id
-        name: name
+      name:
+        type: id
         description: |-
           Asyn port name created by FINS driver
 
@@ -80,19 +80,19 @@ defs:
     description: |-
       This creates an asyn port which communicates with a FINS device over
           TCP
-    args:
-      - type: str
-        name: ip
+    parameters:
+      ip:
+        type: str
         description: |-
           IP port of FINS device
 
-      - type: id
-        name: name
+      name:
+        type: id
         description: |-
           Asyn port name
 
-      - type: str
-        name: simulation
+      simulation:
+        type: str
         description: |-
           IP port of simulation device
 

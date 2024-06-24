@@ -2,72 +2,62 @@
 
 module: autosave
 
-defs:
+entity_models:
   - name: Autosave
     description: |-
       TODO:ADD DESCRIPTION
-    args:
-      - type: str
-        name: iocName
+    parameters:
+      iocName:
+        type: str
         description: |-
           IOC Name EPICS prefix
 
-      - type: int
-        name: debug
+      debug:
+        type: int
         description: |-
           Debug level
 
-      - type: bool
-        name: skip_1
+      skip_1:
+        type: bool
         description: |-
           If True, don't restore file 1
 
-      - type: str
-        name: server
+      server:
+        type: str
         description: |-
           NFS server name (vxWorks bl=False only)
 
-      - type: str
-        name: ip
+      ip:
+        type: str
         description: |-
           NFS server ip (vsWorks only), or blgateway ip if bl=True
 
-      - type: str
-        name: path
+      path:
+        type: str
         description: |-
           Root of path to put autosave files in, ioc name will be appended to this
 
-      - type: id
-        name: name
+      name:
+        type: id
         description: |-
           Object name
 
-      - type: int
-        name: vx_uid
+      vx_uid:
+        type: int
         description: |-
           UID of vxWorks autosave user
         default: 37134
 
-      - type: int
-        name: vx_gid
+      vx_gid:
+        type: int
         description: |-
           GID of vxWorks autosave group
         default: 500
 
-      - type: bool
-        name: bl
+      bl:
+        type: bool
         description: |-
           If True, then assume we are on a beamline, that ip=blgateway machine ip and make sure the relevant storage server or directory is up before booting.
-
-    databases:
-      - file: $(AUTOSAVE)/db/dlssrfile.template
-        args:
-          device:
-          file:
-      - file: $(AUTOSAVE)/db/dlssrstatus.template
-        args:
-          device:
-          name:
 
     pre_init:
       - value: |
@@ -88,3 +78,13 @@ defs:
           create_monitor_set "%s_0.req",  5, ""
           create_monitor_set "%s_1.req", 30, ""
           create_monitor_set "%s_2.req", 30, ""
+    databases:
+      - file: $(AUTOSAVE)/db/dlssrfile.template
+        args:
+          device:
+          file:
+      - file: $(AUTOSAVE)/db/dlssrstatus.template
+        args:
+          device:
+          name:
+

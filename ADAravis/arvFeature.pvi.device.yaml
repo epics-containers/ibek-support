@@ -1,99 +1,102 @@
-label: ArvFeature
-parent: GenICamFeature
+label: arvFeature
+parent: ADDriver
 children:
   - type: Group
     name: ADAravis
     layout:
       type: Grid
+      labelled: true
     children:
       - type: SignalR
         name: ARFramesCompleted
-        pv: ARFramesCompleted
-        widget:
+        read_pv: $(P)$(R)ARFramesCompleted
+        read_widget:
           type: TextRead
 
       - type: SignalR
         name: ARFrameFailures
-        pv: ARFrameFailures
-        widget:
+        read_pv: $(P)$(R)ARFrameFailures
+        read_widget:
           type: TextRead
 
       - type: SignalR
         name: ARFrameUnderruns
-        pv: ARFrameUnderruns
-        widget:
+        read_pv: $(P)$(R)ARFrameUnderruns
+        read_widget:
           type: TextRead
 
       - type: SignalR
         name: ARMissingPackets
-        pv: ARMissingPackets
-        widget:
+        read_pv: $(P)$(R)ARMissingPackets
+        read_widget:
           type: TextRead
 
       - type: SignalR
         name: ARResentPackets
-        pv: ARResentPackets
-        widget:
+        read_pv: $(P)$(R)ARResentPackets
+        read_widget:
           type: TextRead
 
       - type: SignalW
         name: ARPacketResendEnable
-        pv: ARPacketResendEnable
-        widget:
+        write_pv: $(P)$(R)ARPacketResendEnable
+        write_widget:
           type: ComboBox
 
       - type: SignalW
         name: ARPacketTimeout
-        pv: ARPacketTimeout
-        widget:
+        write_pv: $(P)$(R)ARPacketTimeout
+        write_widget:
           type: TextWrite
 
       - type: SignalW
         name: ARFrameRetention
-        pv: ARFrameRetention
-        widget:
+        write_pv: $(P)$(R)ARFrameRetention
+        write_widget:
           type: TextWrite
 
       - type: SignalW
         name: ARResetCamera
-        pv: ARResetCamera
-        widget:
+        write_pv: $(P)$(R)ARResetCamera
+        write_widget:
           type: TextWrite
 
       - type: SignalRW
         name: ARConvertPixelFormat
-        pv: ARConvertPixelFormat
-        widget:
+        write_pv: $(P)$(R)ARConvertPixelFormat
+        write_widget:
           type: ComboBox
-        read_pv: ARConvertPixelFormat_RBV
+        read_pv: $(P)$(R)ARConvertPixelFormat_RBV
         read_widget:
           type: TextRead
 
       - type: SignalRW
         name: ARShiftDir
-        pv: ARShiftDir
-        widget:
+        write_pv: $(P)$(R)ARShiftDir
+        write_widget:
           type: ComboBox
-        read_pv: ARShiftDir_RBV
+        read_pv: $(P)$(R)ARShiftDir_RBV
         read_widget:
           type: TextRead
 
       - type: SignalRW
         name: ARShiftBits
-        pv: ARShiftBits
-        widget:
+        write_pv: $(P)$(R)ARShiftBits
+        write_widget:
           type: ComboBox
-        read_pv: ARShiftBits_RBV
+        read_pv: $(P)$(R)ARShiftBits_RBV
         read_widget:
           type: TextRead
 
   - type: Group
     name: ArvFeatureMisc
+    label: arvFeature Ungrouped
     layout:
       type: Grid
+      labelled: true
     children:
       - type: SignalW
         name: ARConnectCamera
-        pv: ARConnectCamera
-        widget:
+        write_pv: $(P)$(R)ARConnectCamera
+        write_widget:
           type: TextWrite

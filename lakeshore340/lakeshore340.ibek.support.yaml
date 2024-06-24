@@ -2,50 +2,54 @@
 
 module: lakeshore340
 
-defs:
+entity_models:
   - name: lakeshore340
     description: |-
       Lakeshore 340 Temperature Controller
       Notes: The temperatures in Kelvin are archived once every 10 secs.
-    args:
-      - type: str
-        name: P
+    parameters:
+      P:
+        type: str
         description: |-
           Prefix for PV name
 
-      - type: str
-        name: PORT
+      PORT:
+        type: str
         description: |-
           Bus/Port Address (eg. ASYN Port).
 
-      - type: int
-        name: ADDR
+      ADDR:
+        type: int
         description: |-
           Address on the bus
         default: 0
 
-      - type: int
-        name: SCAN
+      SCAN:
+        type: int
         description: |-
           SCAN rate for non-temperature/voltage parameters.
         default: 5
 
-      - type: int
-        name: TEMPSCAN
+      TEMPSCAN:
+        type: int
         description: |-
           SCAN rate for the temperature/voltage readings
         default: 5
 
-      - type: id
-        name: name
+      name:
+        type: id
         description: |-
           Object and gui association name
 
-      - type: int
-        name: LOOP
+      LOOP:
+        type: int
         description: |-
           Which heater PID loop to control (Default = 1)
         default: 1
+
+    pre_init:
+      - value: |
+          epicsEnvSet "STREAM_PROTOCOL_PATH", "$(LAKESHORE340)/lakeshore340App/protocol/"
 
     databases:
       - file: $(LAKESHORE340)/db/lakeshore340.template
@@ -58,13 +62,9 @@ defs:
           LOOP:
           ADDR:
 
-    pre_init:
-      - value: |
-          epicsEnvSet "STREAM_PROTOCOL_PATH", "$(LAKESHORE340)/lakeshore340App/protocol/"
-
     pvi:
       yaml_path: lakeshore340.pvi.device.yaml
       ui_macros:
-        lakeshore340: "{{ P }}{{ name }}"
+        lakeshore340: '{{ P }}{{ name }}'
       pv: true
-      pv_prefix: "{{ P }}{{ name }}"
+      pv_prefix: '{{ P }}{{ name }}'

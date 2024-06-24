@@ -2,33 +2,33 @@
 
 module: ether_ip
 
-defs:
+entity_models:
   - name: mbboDirect
     description: |-
       Simple mbboDirect record for ether_ip connection
-    args:
-      - type: str
-        name: record
+    parameters:
+      record:
+        type: str
         description: |-
           Record Name
 
-      - type: str
-        name: port
+      port:
+        type: str
         description: |-
           Ether_IP Port Name
 
-      - type: str
-        name: scan
+      scan:
+        type: str
         description: |-
           Scan Time
 
-      - type: str
-        name: tag
+      tag:
+        type: str
         description: |-
           Tag to address on PLC
 
-      - type: str
-        name: nobt
+      nobt:
+        type: str
         description: |-
           Number of bits to write
 
@@ -44,27 +44,36 @@ defs:
   - name: EtherIPInit
     description: |-
       This creates an IP connection to a plc using the ether_ip driver
-    args:
-      - type: id
-        name: name
+    parameters:
+      name:
+        type: id
         description: |-
           Name
 
-      - type: str
-        name: device
+      device:
+        type: str
         description: |-
           PV Prefix
 
-      - type: str
-        name: port
+      port:
+        type: str
         description: |-
           Port Name
 
-      - type: str
-        name: ip
+      ip:
+        type: str
         description: |-
           IP Port of PLC
 
+    pre_init:
+      - when: first
+        value: |2
+
+          # EtherIP Initialisation
+          drvEtherIP_init()
+          # Define EtherIP to PLC connection
+      - value: |
+          drvEtherIP_define_PLC("{{port}}", "{{ip}}", 0)
     databases:
       - file: $(ETHER_IP)/db/ether_ip_plcInfo.template
         args:
@@ -72,36 +81,27 @@ defs:
           port:
           device:
 
-    pre_init:
-      - when: first
-        value: |
-
-          # EtherIP Initialisation
-          drvEtherIP_init()
-          # Define EtherIP to PLC connection
-      - value: |
-          drvEtherIP_define_PLC("{{port}}", "{{ip}}", 0)
   - name: bi
     description: |-
       Simple bi record for ether_ip connection
-    args:
-      - type: str
-        name: record
+    parameters:
+      record:
+        type: str
         description: |-
           Record Name
 
-      - type: str
-        name: port
+      port:
+        type: str
         description: |-
           Ether_IP Port Name
 
-      - type: str
-        name: scan
+      scan:
+        type: str
         description: |-
           Scan Time
 
-      - type: str
-        name: tag
+      tag:
+        type: str
         description: |-
           Tag to address on PLC
 
@@ -116,24 +116,24 @@ defs:
   - name: stringin
     description: |-
       Simple stringin record for ether_ip connection
-    args:
-      - type: str
-        name: record
+    parameters:
+      record:
+        type: str
         description: |-
           Record Name
 
-      - type: str
-        name: port
+      port:
+        type: str
         description: |-
           Ether_IP Port Name
 
-      - type: str
-        name: scan
+      scan:
+        type: str
         description: |-
           Scan Time
 
-      - type: str
-        name: tag
+      tag:
+        type: str
         description: |-
           Tag to address on PLC
 
@@ -148,24 +148,24 @@ defs:
   - name: bo
     description: |-
       Simple bo record for ether_ip connection
-    args:
-      - type: str
-        name: record
+    parameters:
+      record:
+        type: str
         description: |-
           Record Name
 
-      - type: str
-        name: port
+      port:
+        type: str
         description: |-
           Ether_IP Port Name
 
-      - type: str
-        name: scan
+      scan:
+        type: str
         description: |-
           Scan Time
 
-      - type: str
-        name: tag
+      tag:
+        type: str
         description: |-
           Tag to address on PLC
 
@@ -180,24 +180,24 @@ defs:
   - name: ao
     description: |-
       Simple ao record for ether_ip connection
-    args:
-      - type: str
-        name: record
+    parameters:
+      record:
+        type: str
         description: |-
           Record Name
 
-      - type: str
-        name: port
+      port:
+        type: str
         description: |-
           Ether_IP Port Name
 
-      - type: str
-        name: scan
+      scan:
+        type: str
         description: |-
           Scan Time
 
-      - type: str
-        name: tag
+      tag:
+        type: str
         description: |-
           Tag to address on PLC
 
@@ -212,24 +212,24 @@ defs:
   - name: ai
     description: |-
       Simple ai record for ether_ip connection
-    args:
-      - type: str
-        name: record
+    parameters:
+      record:
+        type: str
         description: |-
           Record Name
 
-      - type: str
-        name: port
+      port:
+        type: str
         description: |-
           Ether_IP Port Name
 
-      - type: str
-        name: scan
+      scan:
+        type: str
         description: |-
           Scan Time
 
-      - type: str
-        name: tag
+      tag:
+        type: str
         description: |-
           Tag to address on PLC
 
@@ -244,29 +244,29 @@ defs:
   - name: mbbiDirect
     description: |-
       Simple mbbiDirect record for ether_ip connection
-    args:
-      - type: str
-        name: record
+    parameters:
+      record:
+        type: str
         description: |-
           Record Name
 
-      - type: str
-        name: port
+      port:
+        type: str
         description: |-
           Ether_IP Port Name
 
-      - type: str
-        name: scan
+      scan:
+        type: str
         description: |-
           Scan Time
 
-      - type: str
-        name: tag
+      tag:
+        type: str
         description: |-
           Tag to address on PLC
 
-      - type: str
-        name: nobt
+      nobt:
+        type: str
         description: |-
           Number of bits to read
 

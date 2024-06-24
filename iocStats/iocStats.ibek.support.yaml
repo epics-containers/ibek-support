@@ -2,47 +2,47 @@
 
 module: devIocStats
 
-defs:
+entity_models:
   - name: devIocStatsHelper
     description: |-
       TODO:ADD DESCRIPTION
-    args:
-      - type: str
-        name: ioc
+    parameters:
+      ioc:
+        type: str
         description: |-
           ioc name
 
-      - type: id
-        name: name
+      name:
+        type: id
         description: |-
           gui element name
 
-      - type: bool
-        name: scanMonitor
+      scanMonitor:
+        type: bool
         description: |-
           choice to include scan monitor
         default: true
 
-      - type: bool
-        name: guiTags
+      guiTags:
+        type: bool
         description: |-
           choice to include gui tags
         default: true
 
-      - type: str
-        name: screen
+      screen:
+        type: str
         description: |-
           edm file for gui tags
         default: ioc_stats_softdls.edl
 
-      - type: str
-        name: EDM_FILE
+      EDM_FILE:
+        type: str
         description: |-
           edm screen, defaults to ioc_stats_softdls.edl
         default: ioc_stats_softdls.edl
 
-      - type: str
-        name: IOC
+      IOC:
+        type: str
         description: |-
           ioc name
 
@@ -62,9 +62,9 @@ defs:
   - name: iocAdminVxWorks
     description: |-
       Create some records for reading IOC statistics and details.
-    args:
-      - type: str
-        name: IOC
+    parameters:
+      IOC:
+        type: str
         description: |-
           Device prefix
 
@@ -76,9 +76,9 @@ defs:
   - name: iocAdminScanMon
     description: |-
       Create some records for reading IOC statistics and details.
-    args:
-      - type: str
-        name: IOC
+    parameters:
+      IOC:
+        type: str
         description: |-
           Device prefix
 
@@ -90,21 +90,21 @@ defs:
   - name: iocGui
     description: |-
       TODO:ADD DESCRIPTION
-    args:
-      - type: id
-        name: name
+    parameters:
+      name:
+        type: id
         description: |-
           name for gui elements
         default: None
 
-      - type: str
-        name: EDM_FILE
+      EDM_FILE:
+        type: str
         description: |-
           edm screen, defaults to ioc_stats_softdls.edl
         default: ioc_stats_softdls.edl
 
-      - type: str
-        name: IOC
+      IOC:
+        type: str
         description: |-
           ioc name
 
@@ -118,9 +118,9 @@ defs:
   - name: iocAdminSoft
     description: |-
       Create some records for reading IOC statistics and details.
-    args:
-      - type: str
-        name: IOC
+    parameters:
+      IOC:
+        type: str
         description: |-
           Device prefix
 
