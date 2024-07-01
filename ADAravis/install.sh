@@ -49,7 +49,7 @@ ibek support register ${NAME}
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs ADAravis
-ibek support add-dbds ADAravisSupport.dbd
+ibek support add-dbds ADAravisSupport.dbd system.dbd
 
 # add any required changes to CONFIG_SITE
 CONFIG='

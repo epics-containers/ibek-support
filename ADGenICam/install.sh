@@ -18,6 +18,11 @@ ibek support register ${NAME}
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs ADGenICam
 
+# declare file or folders to add to the runtime image
+ibek support add-runtime-files \
+    /epics/support/ADGenICam/scripts/makeDb.py \
+    /epics/support/ADGenICam/include/ADGenICam.h
+
 # global config settings
 ${FOLDER}/../_global/install.sh ${NAME}
 
