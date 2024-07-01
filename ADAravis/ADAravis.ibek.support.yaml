@@ -53,10 +53,7 @@ entity_models:
 
     pre_init:
       - value: |
-          system "arv-tool-0.8 -a {{ID}} genicam > /epics/runtime/genicam.xml"
-          system "python /epics/support/ADGenICam/scripts/makeDb.py /epics/runtime/genicam.xml /epics/runtime/genicam.template"
-          dbLoadRecords /epics/runtime/genicam.template "P={{ P }},R={{ R }},PORT={{ PORT }}"
-          system "pvi convert device --template /epics/runtime/genicam.template /epics/pvi-defs/ /epics/support/ADGenICam/include/ADGenICam.h"
+          dbLoadRecords /tmp/genicam.template "P={{ P }},R={{ R }},PORT={{ PORT }}"
           # aravisConfig(const char *portName, const char *cameraName, size_t maxMemory, int priority, int stackSize)
           aravisConfig("{{PORT}}", "{{ID}}", {{MEMORY}}, 0, 1)
 
