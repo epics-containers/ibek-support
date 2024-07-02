@@ -3,7 +3,7 @@ parent: ADDriver
 children:
 
 - type: Group
-  name: Genicam
+  name: AutoADGenICam
   layout:
     type: Grid
     labelled: true

@@ -1,5 +1,5 @@
 label: arvFeature
-parent: ADGenICam
+parent: ADDriver
 children:
   - type: Group
     name: ADAravis
