@@ -1,0 +1,1369 @@
+label: ADGenICam
+parent: ADDriver
+children:
+
+- type: Group
+  name: Genicam
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalW
+    name: GCGevTimConLatch
+    write_pv: $(P)$(R)GC_GevTimConLatch
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: GCGevTimConReset
+    write_pv: $(P)$(R)GC_GevTimConReset
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: GCAcquisitionStart
+    write_pv: $(P)$(R)GC_AcquisitionStart
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: GCAcquisitionStop
+    write_pv: $(P)$(R)GC_AcquisitionStop
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: GCAcquisitionAbort
+    write_pv: $(P)$(R)GC_AcquisitionAbort
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: GCTriggerSoftware
+    write_pv: $(P)$(R)GC_TriggerSoftware
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: GCLUTLoadAll
+    write_pv: $(P)$(R)GC_LUTLoadAll
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: GCLUTSaveAll
+    write_pv: $(P)$(R)GC_LUTSaveAll
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: GCUserSetLoad
+    write_pv: $(P)$(R)GC_UserSetLoad
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: GCUserSetSave
+    write_pv: $(P)$(R)GC_UserSetSave
+    write_widget:
+      type: TextWrite
+
+  - type: SignalR
+    name: GCFirmwareVerMajor
+    read_pv: $(P)$(R)GC_FirmwareVerMajor_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCFirmwareVerMinor
+    read_pv: $(P)$(R)GC_FirmwareVerMinor_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCFirmwareVerBuild
+    read_pv: $(P)$(R)GC_FirmwareVerBuild_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCSensorType
+    read_pv: $(P)$(R)GC_SensorType_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCSensorBits
+    read_pv: $(P)$(R)GC_SensorBits_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCDeviceVendorName
+    read_pv: $(P)$(R)GC_DeviceVendorName_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCDeviceModelName
+    read_pv: $(P)$(R)GC_DeviceModelName_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCDevFirVersion
+    read_pv: $(P)$(R)GC_DevFirVersion_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCDeviceID
+    read_pv: $(P)$(R)GC_DeviceID_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCDevicePartNumber
+    read_pv: $(P)$(R)GC_DevicePartNumber_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCDeviceScanType
+    read_pv: $(P)$(R)GC_DeviceScanType_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCDeviceTemperature
+    read_pv: $(P)$(R)GC_DeviceTemperature_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCPayloadSize
+    read_pv: $(P)$(R)GC_PayloadSize_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCNonImaPayloadSize
+    read_pv: $(P)$(R)GC_NonImaPayloadSize_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCStrHoldCapacity
+    read_pv: $(P)$(R)GC_StrHoldCapacity_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCGevTimTicFre
+    read_pv: $(P)$(R)GC_GevTimTicFre_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCGevTimestampValue
+    read_pv: $(P)$(R)GC_GevTimestampValue_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCPtpStatus
+    read_pv: $(P)$(R)GC_PtpStatus_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCAcqFrameRateLimit
+    read_pv: $(P)$(R)GC_AcqFrameRateLimit_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCSensorWidth
+    read_pv: $(P)$(R)GC_SensorWidth_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCSensorHeight
+    read_pv: $(P)$(R)GC_SensorHeight_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCWidthMax
+    read_pv: $(P)$(R)GC_WidthMax_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCHeightMax
+    read_pv: $(P)$(R)GC_HeightMax_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCImageSize
+    read_pv: $(P)$(R)GC_ImageSize_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCIrisVideoLevel
+    read_pv: $(P)$(R)GC_IrisVideoLevel_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCVsubValue
+    read_pv: $(P)$(R)GC_VsubValue_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCLUTBitDepthIn
+    read_pv: $(P)$(R)GC_LUTBitDepthIn_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCLUTBitDepthOut
+    read_pv: $(P)$(R)GC_LUTBitDepthOut_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCLUTAddress
+    read_pv: $(P)$(R)GC_LUTAddress_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCLUTSizeBytes
+    read_pv: $(P)$(R)GC_LUTSizeBytes_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCSyncInLevels
+    read_pv: $(P)$(R)GC_SyncInLevels_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEveAcqStart
+    read_pv: $(P)$(R)GC_EveAcqStart_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEveAcquisitionEnd
+    read_pv: $(P)$(R)GC_EveAcquisitionEnd_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEventFrameTrigger
+    read_pv: $(P)$(R)GC_EventFrameTrigger_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEventExposureEnd
+    read_pv: $(P)$(R)GC_EventExposureEnd_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEveAcqRecTrigger
+    read_pv: $(P)$(R)GC_EveAcqRecTrigger_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEveLinRisingEdge
+    read_pv: $(P)$(R)GC_EveLinRisingEdge_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEveLinFallingEdge
+    read_pv: $(P)$(R)GC_EveLinFallingEdge_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEveLinRisingEdg0
+    read_pv: $(P)$(R)GC_EveLinRisingEdg0_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEveLinFallingEdg0
+    read_pv: $(P)$(R)GC_EveLinFallingEdg0_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEveLinRisingEdg1
+    read_pv: $(P)$(R)GC_EveLinRisingEdg1_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEveLinFallingEdg1
+    read_pv: $(P)$(R)GC_EveLinFallingEdg1_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEveLinRisingEdg2
+    read_pv: $(P)$(R)GC_EveLinRisingEdg2_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEveLinFallingEdg2
+    read_pv: $(P)$(R)GC_EveLinFallingEdg2_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEveFraTriReady
+    read_pv: $(P)$(R)GC_EveFraTriReady_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEventOverflow
+    read_pv: $(P)$(R)GC_EventOverflow_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCEventError
+    read_pv: $(P)$(R)GC_EventError_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCTimeStampValueLo
+    read_pv: $(P)$(R)GC_TimeStampValueLo_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCTimeStampValueHi
+    read_pv: $(P)$(R)GC_TimeStampValueHi_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: GCModelName
+    read_pv: $(P)$(R)GC_ModelName_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCDevTemSelector
+    write_pv: $(P)$(R)GC_DevTemSelector
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_DevTemSelector_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCStrBytesPerSecond
+    write_pv: $(P)$(R)GC_StrBytesPerSecond
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_StrBytesPerSecond_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCBanControlMode
+    write_pv: $(P)$(R)GC_BanControlMode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_BanControlMode_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCGevSCPSPacketSize
+    write_pv: $(P)$(R)GC_GevSCPSPacketSize
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_GevSCPSPacketSize_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCChunkModeActive
+    write_pv: $(P)$(R)GC_ChunkModeActive
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)GC_ChunkModeActive_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: GCStrFraRatCon
+    write_pv: $(P)$(R)GC_StrFraRatCon
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)GC_StrFraRatCon_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: GCStreamHoldEnable
+    write_pv: $(P)$(R)GC_StreamHoldEnable
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_StreamHoldEnable_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCPtpMode
+    write_pv: $(P)$(R)GC_PtpMode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_PtpMode_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCPtpAcqGateTime
+    write_pv: $(P)$(R)GC_PtpAcqGateTime
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_PtpAcqGateTime_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCAcquisitionMode
+    write_pv: $(P)$(R)GC_AcquisitionMode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_AcquisitionMode_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCAcqFrameCount
+    write_pv: $(P)$(R)GC_AcqFrameCount
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_AcqFrameCount_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCAcqFrameRateAbs
+    write_pv: $(P)$(R)GC_AcqFrameRateAbs
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_AcqFrameRateAbs_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCRecPreEventCount
+    write_pv: $(P)$(R)GC_RecPreEventCount
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_RecPreEventCount_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCTriggerSelector
+    write_pv: $(P)$(R)GC_TriggerSelector
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_TriggerSelector_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCTriggerMode
+    write_pv: $(P)$(R)GC_TriggerMode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_TriggerMode_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCTriggerSource
+    write_pv: $(P)$(R)GC_TriggerSource
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_TriggerSource_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCTriggerActivation
+    write_pv: $(P)$(R)GC_TriggerActivation
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_TriggerActivation_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCTriggerOverlap
+    write_pv: $(P)$(R)GC_TriggerOverlap
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_TriggerOverlap_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCTriggerDelayAbs
+    write_pv: $(P)$(R)GC_TriggerDelayAbs
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_TriggerDelayAbs_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCBinningHorizontal
+    write_pv: $(P)$(R)GC_BinningHorizontal
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_BinningHorizontal_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCBinningVertical
+    write_pv: $(P)$(R)GC_BinningVertical
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_BinningVertical_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCDecHorizontal
+    write_pv: $(P)$(R)GC_DecHorizontal
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_DecHorizontal_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCDecVertical
+    write_pv: $(P)$(R)GC_DecVertical
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_DecVertical_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCPixelFormat
+    write_pv: $(P)$(R)GC_PixelFormat
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_PixelFormat_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCWidth
+    write_pv: $(P)$(R)GC_Width
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_Width_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCHeight
+    write_pv: $(P)$(R)GC_Height
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_Height_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCOffsetX
+    write_pv: $(P)$(R)GC_OffsetX
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_OffsetX_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCOffsetY
+    write_pv: $(P)$(R)GC_OffsetY
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_OffsetY_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCGamma
+    write_pv: $(P)$(R)GC_Gamma
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_Gamma_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCHue
+    write_pv: $(P)$(R)GC_Hue
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_Hue_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCSaturation
+    write_pv: $(P)$(R)GC_Saturation
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_Saturation_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCDSPSubregionLeft
+    write_pv: $(P)$(R)GC_DSPSubregionLeft
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_DSPSubregionLeft_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCDSPSubregionTop
+    write_pv: $(P)$(R)GC_DSPSubregionTop
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_DSPSubregionTop_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCDSPSubregionRight
+    write_pv: $(P)$(R)GC_DSPSubregionRight
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_DSPSubregionRight_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCDSPSubBottom
+    write_pv: $(P)$(R)GC_DSPSubBottom
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_DSPSubBottom_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCExposureMode
+    write_pv: $(P)$(R)GC_ExposureMode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_ExposureMode_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCExposureTimeAbs
+    write_pv: $(P)$(R)GC_ExposureTimeAbs
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_ExposureTimeAbs_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCExposureAuto
+    write_pv: $(P)$(R)GC_ExposureAuto
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_ExposureAuto_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCExpAutoTarget
+    write_pv: $(P)$(R)GC_ExpAutoTarget
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_ExpAutoTarget_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCExposureAutoAlg
+    write_pv: $(P)$(R)GC_ExposureAutoAlg
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_ExposureAutoAlg_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCExposureAutoMin
+    write_pv: $(P)$(R)GC_ExposureAutoMin
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_ExposureAutoMin_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCExposureAutoMax
+    write_pv: $(P)$(R)GC_ExposureAutoMax
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_ExposureAutoMax_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCExposureAutoRate
+    write_pv: $(P)$(R)GC_ExposureAutoRate
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_ExposureAutoRate_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCExpAutoOutliers
+    write_pv: $(P)$(R)GC_ExpAutoOutliers
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_ExpAutoOutliers_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCExpAutoAdjustTol
+    write_pv: $(P)$(R)GC_ExpAutoAdjustTol
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_ExpAutoAdjustTol_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCGainSelector
+    write_pv: $(P)$(R)GC_GainSelector
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_GainSelector_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCGain
+    write_pv: $(P)$(R)GC_Gain
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_Gain_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCGainAuto
+    write_pv: $(P)$(R)GC_GainAuto
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_GainAuto_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCGainAutoTarget
+    write_pv: $(P)$(R)GC_GainAutoTarget
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_GainAutoTarget_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCGainAutoMin
+    write_pv: $(P)$(R)GC_GainAutoMin
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_GainAutoMin_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCGainAutoMax
+    write_pv: $(P)$(R)GC_GainAutoMax
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_GainAutoMax_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCGainAutoRate
+    write_pv: $(P)$(R)GC_GainAutoRate
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_GainAutoRate_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCGainAutoOutliers
+    write_pv: $(P)$(R)GC_GainAutoOutliers
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_GainAutoOutliers_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCGainAutoAdjustTol
+    write_pv: $(P)$(R)GC_GainAutoAdjustTol
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_GainAutoAdjustTol_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCBlaLevelSelector
+    write_pv: $(P)$(R)GC_BlaLevelSelector
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_BlaLevelSelector_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCBlackLevel
+    write_pv: $(P)$(R)GC_BlackLevel
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_BlackLevel_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCBalRatioSelector
+    write_pv: $(P)$(R)GC_BalRatioSelector
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_BalRatioSelector_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCBalanceRatioAbs
+    write_pv: $(P)$(R)GC_BalanceRatioAbs
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_BalanceRatioAbs_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCBalanceWhiteAuto
+    write_pv: $(P)$(R)GC_BalanceWhiteAuto
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_BalanceWhiteAuto_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCBalWhiteAutoRate
+    write_pv: $(P)$(R)GC_BalWhiteAutoRate
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_BalWhiteAutoRate_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCBalWhiAutAdjTol
+    write_pv: $(P)$(R)GC_BalWhiAutAdjTol
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_BalWhiAutAdjTol_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCIrisMode
+    write_pv: $(P)$(R)GC_IrisMode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_IrisMode_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCIrisAutoTarget
+    write_pv: $(P)$(R)GC_IrisAutoTarget
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_IrisAutoTarget_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCIrisVideoLevelMin
+    write_pv: $(P)$(R)GC_IrisVideoLevelMin
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_IrisVideoLevelMin_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCIrisVideoLevelMax
+    write_pv: $(P)$(R)GC_IrisVideoLevelMax
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_IrisVideoLevelMax_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCLenPIrisFrequency
+    write_pv: $(P)$(R)GC_LenPIrisFrequency
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_LenPIrisFrequency_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCLensPIrisNumSteps
+    write_pv: $(P)$(R)GC_LensPIrisNumSteps
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_LensPIrisNumSteps_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCLensPIrisPosition
+    write_pv: $(P)$(R)GC_LensPIrisPosition
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_LensPIrisPosition_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCLenDCDriStrength
+    write_pv: $(P)$(R)GC_LenDCDriStrength
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_LenDCDriStrength_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCDefMasColEnable
+    write_pv: $(P)$(R)GC_DefMasColEnable
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_DefMasColEnable_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCDefMasPixelEnable
+    write_pv: $(P)$(R)GC_DefMasPixelEnable
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_DefMasPixelEnable_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCColTraSelector
+    write_pv: $(P)$(R)GC_ColTraSelector
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_ColTraSelector_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCColTraMode
+    write_pv: $(P)$(R)GC_ColTraMode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_ColTraMode_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCColTraValSelector
+    write_pv: $(P)$(R)GC_ColTraValSelector
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_ColTraValSelector_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCColTraValue
+    write_pv: $(P)$(R)GC_ColTraValue
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_ColTraValue_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCLUTSelector
+    write_pv: $(P)$(R)GC_LUTSelector
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_LUTSelector_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCLUTMode
+    write_pv: $(P)$(R)GC_LUTMode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_LUTMode_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCLUTEnable
+    write_pv: $(P)$(R)GC_LUTEnable
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)GC_LUTEnable_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: GCLUTIndex
+    write_pv: $(P)$(R)GC_LUTIndex
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_LUTIndex_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCLUTValue
+    write_pv: $(P)$(R)GC_LUTValue
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_LUTValue_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCSyncInSelector
+    write_pv: $(P)$(R)GC_SyncInSelector
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_SyncInSelector_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCSynInGlitchFilter
+    write_pv: $(P)$(R)GC_SynInGlitchFilter
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_SynInGlitchFilter_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCSyncOutLevels
+    write_pv: $(P)$(R)GC_SyncOutLevels
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_SyncOutLevels_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCSyncOutSelector
+    write_pv: $(P)$(R)GC_SyncOutSelector
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_SyncOutSelector_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCSyncOutSource
+    write_pv: $(P)$(R)GC_SyncOutSource
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_SyncOutSource_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCSyncOutPolarity
+    write_pv: $(P)$(R)GC_SyncOutPolarity
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_SyncOutPolarity_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCStrobeSource
+    write_pv: $(P)$(R)GC_StrobeSource
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_StrobeSource_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCStrDurationMode
+    write_pv: $(P)$(R)GC_StrDurationMode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_StrDurationMode_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCStrobeDelay
+    write_pv: $(P)$(R)GC_StrobeDelay
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_StrobeDelay_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCStrobeDuration
+    write_pv: $(P)$(R)GC_StrobeDuration
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_StrobeDuration_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCEventSelector
+    write_pv: $(P)$(R)GC_EventSelector
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_EventSelector_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCEventNotification
+    write_pv: $(P)$(R)GC_EventNotification
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_EventNotification_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCEventsEnable1
+    write_pv: $(P)$(R)GC_EventsEnable1
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_EventsEnable1_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCUserSetSelector
+    write_pv: $(P)$(R)GC_UserSetSelector
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_UserSetSelector_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCUseSetDefSelector
+    write_pv: $(P)$(R)GC_UseSetDefSelector
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_UseSetDefSelector_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCCmosisOffset
+    write_pv: $(P)$(R)GC_CmosisOffset
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_CmosisOffset_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCCmosisGain
+    write_pv: $(P)$(R)GC_CmosisGain
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_CmosisGain_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCCmosisVramp
+    write_pv: $(P)$(R)GC_CmosisVramp
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_CmosisVramp_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCPvDumTriSelector
+    write_pv: $(P)$(R)GC_PvDumTriSelector
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_PvDumTriSelector_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCPvDumFraStaTriMod
+    write_pv: $(P)$(R)GC_PvDumFraStaTriMod
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_PvDumFraStaTriMod_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCPvDumTriggerMode
+    write_pv: $(P)$(R)GC_PvDumTriggerMode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)GC_PvDumTriggerMode_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCFraStaTriDelay
+    write_pv: $(P)$(R)GC_FraStaTriDelay
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_FraStaTriDelay_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCExposureValue
+    write_pv: $(P)$(R)GC_ExposureValue
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_ExposureValue_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCWhitebalValueRed
+    write_pv: $(P)$(R)GC_WhitebalValueRed
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_WhitebalValueRed_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCWhitebalValueBlue
+    write_pv: $(P)$(R)GC_WhitebalValueBlue
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_WhitebalValueBlue_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCPvGainRaw
+    write_pv: $(P)$(R)GC_PvGainRaw
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_PvGainRaw_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCPvGainAutoMin
+    write_pv: $(P)$(R)GC_PvGainAutoMin
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_PvGainAutoMin_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCPvGainAutoMax
+    write_pv: $(P)$(R)GC_PvGainAutoMax
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_PvGainAutoMax_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCOffsetValue
+    write_pv: $(P)$(R)GC_OffsetValue
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_OffsetValue_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCPtpAcqGateTimeHi
+    write_pv: $(P)$(R)GC_PtpAcqGateTimeHi
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_PtpAcqGateTimeHi_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: GCPtpAcqGateTimeLo
+    write_pv: $(P)$(R)GC_PtpAcqGateTimeLo
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)GC_PtpAcqGateTimeLo_RBV
+    read_widget:
+      type: TextRead

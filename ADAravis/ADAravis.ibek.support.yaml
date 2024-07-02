@@ -53,7 +53,7 @@ entity_models:
 
     pre_init:
       - value: |
-          dbLoadRecords /tmp/genicam.template "P={{ P }},R={{ R }},PORT={{ PORT }}"
+          dbLoadRecords /tmp/genicam/genicam.template "P={{ P }},R={{ R }},PORT={{ PORT }}"
           # aravisConfig(const char *portName, const char *cameraName, size_t maxMemory, int priority, int stackSize)
           aravisConfig("{{PORT}}", "{{ID}}", {{MEMORY}}, 0, 1)
 
@@ -84,7 +84,7 @@ entity_models:
     pvi:
       yaml_path: arvFeature.pvi.device.yaml
       ui_macros:
-        P: '{{ camera.P }}'
-        R: '{{ camera.R }}'
+        P: "{{ camera.P }}"
+        R: "{{ camera.R }}"
       pv: true
-      pv_prefix: '{{ camera.P }}{{ camera.R }}'
+      pv_prefix: "{{ camera.P }}{{ camera.R }}"
