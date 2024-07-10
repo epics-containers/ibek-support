@@ -137,9 +137,7 @@ entity_models:
         description: the aravisCamera object to create settings for
 
     pvi:
-      # TODO - fix ibek to support yaml
-      #yaml_path: "{{CLASS}}.pvi.device.yaml"
-      yaml_path: "AutoADGenICam.pvi.device.yaml"
+      yaml_path: "{{ '-'.join([camera.ID,camera.CLASS]) if camera.CLASS=='AutoADGenICam' else camera.CLASS }}.pvi.device.yaml"
       ui_macros:
         P: "{{ camera.P }}"
         R: "{{ camera.R }}"
@@ -147,7 +145,7 @@ entity_models:
       pv_prefix: "{{ camera.P }}{{ camera.R }}"
 
     databases:
-      - file: "{{ camera.CLASS }}.template"
+      - file: "{{ '-'.join([camera.ID,camera.CLASS]) if camera.CLASS=='AutoADGenICam' else camera.CLASS }}.template"
         args:
           P: "{{ camera.P }}"
           R: "{{ camera.R }}"
