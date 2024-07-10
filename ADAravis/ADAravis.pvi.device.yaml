@@ -1,4 +1,4 @@
-label: arvFeature
+label: ADAravis Camera
 parent: ADDriver
 children:
   - type: Group
