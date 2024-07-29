@@ -1,9 +1,9 @@
-label: NDFileTIFF
-parent: NDPluginFile
+label: NDPluginGather
+parent: NDPluginDriver
 children:
 
 - type: Group
-  name: NDFileTIFF
+  name: NDGather
   layout:
     type: Grid
     labelled: true

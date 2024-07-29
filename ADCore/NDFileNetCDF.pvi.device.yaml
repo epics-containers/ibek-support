@@ -1,9 +1,9 @@
-label: NDFileTIFF
+label: NDFileNetCDF
 parent: NDPluginFile
 children:
 
 - type: Group
-  name: NDFileTIFF
+  name: NDFileNetCDF
   layout:
     type: Grid
     labelled: true

@@ -1,17 +1,16 @@
-label: NDPluginPva
+label: NDPluginStdArrays
 parent: NDPluginDriver
 children:
 
 - type: Group
-  name: NDPva
+  name: NDStdArrays
   layout:
     type: Grid
     labelled: true
   children:
 
   - type: SignalR
-    name: PvName
-    read_pv: $(P)$(R)PvName_RBV
+    name: ArrayData
+    read_pv: $(P)$(R)ArrayData
     read_widget:
       type: TextRead
-      format: string
