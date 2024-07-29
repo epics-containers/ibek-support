@@ -3,7 +3,8 @@ parent: NDPluginDriver
 children:
 
 - type: Group
-  name: NDStdArrays
+  name: NDPluginStdArraysMisc
+  label: NDPluginStdArrays Ungrouped
   layout:
     type: Grid
     labelled: true

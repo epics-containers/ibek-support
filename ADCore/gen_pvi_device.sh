@@ -32,4 +32,5 @@ for i in $ADCORE/db/ND*.template ; do
     fi
 
     pvi convert device --template $i . ${ADCORE}/ADApp/pluginSrc/ND*${name#"ND"}.h
+    pvi regroup ND*${name#"ND"}.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 done

@@ -3,17 +3,27 @@ parent: NDPluginDriver
 children:
 
 - type: Group
-  name: NDProcess
+  name: NDFileHDF5
   layout:
     type: Grid
     labelled: true
   children:
 
-  - type: SignalW
-    name: AutoOffsetScale
-    write_pv: $(P)$(R)AutoOffsetScale
+  - type: SignalRW
+    name: Offset
+    write_pv: $(P)$(R)Offset
     write_widget:
-      type: ToggleButton
+      type: TextWrite
+    read_pv: $(P)$(R)Offset_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDProcess
+  layout:
+    type: Grid
+    labelled: true
+  children:
 
   - type: SignalR
     name: ValidBackground
@@ -21,33 +31,21 @@ children:
     read_widget:
       type: LED
 
-  - type: SignalR
-    name: ValidFlatField
-    read_pv: $(P)$(R)ValidFlatField_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalR
-    name: NumFiltered
-    read_pv: $(P)$(R)NumFiltered_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: DataTypeOut
-    write_pv: $(P)$(R)DataTypeOut
-    write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)DataTypeOut_RBV
-    read_widget:
-      type: TextRead
-
   - type: SignalRW
     name: SaveBackground
     write_pv: $(P)$(R)SaveBackground
     write_widget:
       type: ToggleButton
     read_pv: $(P)$(R)SaveBackground_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: EnableFilter
+    write_pv: $(P)$(R)EnableFilter
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)EnableFilter_RBV
     read_widget:
       type: LED
 
@@ -60,102 +58,18 @@ children:
     read_widget:
       type: LED
 
+  - type: SignalR
+    name: ValidFlatField
+    read_pv: $(P)$(R)ValidFlatField_RBV
+    read_widget:
+      type: LED
+
   - type: SignalRW
     name: SaveFlatField
     write_pv: $(P)$(R)SaveFlatField
     write_widget:
       type: ToggleButton
     read_pv: $(P)$(R)SaveFlatField_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: EnableFlatField
-    write_pv: $(P)$(R)EnableFlatField
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)EnableFlatField_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: ScaleFlatField
-    write_pv: $(P)$(R)ScaleFlatField
-    write_widget:
-      type: TextWrite
-    read_pv: $(P)$(R)ScaleFlatField_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: EnableOffsetScale
-    write_pv: $(P)$(R)EnableOffsetScale
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)EnableOffsetScale_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: Offset
-    write_pv: $(P)$(R)Offset
-    write_widget:
-      type: TextWrite
-    read_pv: $(P)$(R)Offset_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: Scale
-    write_pv: $(P)$(R)Scale
-    write_widget:
-      type: TextWrite
-    read_pv: $(P)$(R)Scale_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: EnableLowClip
-    write_pv: $(P)$(R)EnableLowClip
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)EnableLowClip_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: LowClip
-    write_pv: $(P)$(R)LowClip
-    write_widget:
-      type: TextWrite
-    read_pv: $(P)$(R)LowClip_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: EnableHighClip
-    write_pv: $(P)$(R)EnableHighClip
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)EnableHighClip_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: HighClip
-    write_pv: $(P)$(R)HighClip
-    write_widget:
-      type: TextWrite
-    read_pv: $(P)$(R)HighClip_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: EnableFilter
-    write_pv: $(P)$(R)EnableFilter
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)EnableFilter_RBV
     read_widget:
       type: LED
 
@@ -178,6 +92,15 @@ children:
       type: LED
 
   - type: SignalRW
+    name: EnableFlatField
+    write_pv: $(P)$(R)EnableFlatField
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)EnableFlatField_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
     name: FilterCallbacks
     write_pv: $(P)$(R)FilterCallbacks
     write_widget:
@@ -187,11 +110,11 @@ children:
       type: LED
 
   - type: SignalRW
-    name: NumFilter
-    write_pv: $(P)$(R)NumFilter
+    name: ScaleFlatField
+    write_pv: $(P)$(R)ScaleFlatField
     write_widget:
       type: TextWrite
-    read_pv: $(P)$(R)NumFilter_RBV
+    read_pv: $(P)$(R)ScaleFlatField_RBV
     read_widget:
       type: TextRead
 
@@ -205,29 +128,11 @@ children:
       type: TextRead
 
   - type: SignalRW
-    name: OScale
-    write_pv: $(P)$(R)OScale
-    write_widget:
-      type: TextWrite
-    read_pv: $(P)$(R)OScale_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
     name: OC1
     write_pv: $(P)$(R)OC1
     write_widget:
       type: TextWrite
     read_pv: $(P)$(R)OC1_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: OC2
-    write_pv: $(P)$(R)OC2
-    write_widget:
-      type: TextWrite
-    read_pv: $(P)$(R)OC2_RBV
     read_widget:
       type: TextRead
 
@@ -250,6 +155,15 @@ children:
       type: TextRead
 
   - type: SignalRW
+    name: EnableOffsetScale
+    write_pv: $(P)$(R)EnableOffsetScale
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)EnableOffsetScale_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
     name: FOffset
     write_pv: $(P)$(R)FOffset
     write_widget:
@@ -258,12 +172,18 @@ children:
     read_widget:
       type: TextRead
 
+  - type: SignalW
+    name: AutoOffsetScale
+    write_pv: $(P)$(R)AutoOffsetScale
+    write_widget:
+      type: ToggleButton
+
   - type: SignalRW
-    name: FScale
-    write_pv: $(P)$(R)FScale
+    name: Scale
+    write_pv: $(P)$(R)Scale
     write_widget:
       type: TextWrite
-    read_pv: $(P)$(R)FScale_RBV
+    read_pv: $(P)$(R)Scale_RBV
     read_widget:
       type: TextRead
 
@@ -273,15 +193,6 @@ children:
     write_widget:
       type: TextWrite
     read_pv: $(P)$(R)FC1_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: FC2
-    write_pv: $(P)$(R)FC2
-    write_widget:
-      type: TextWrite
-    read_pv: $(P)$(R)FC2_RBV
     read_widget:
       type: TextRead
 
@@ -327,5 +238,101 @@ children:
     write_widget:
       type: TextWrite
     read_pv: $(P)$(R)RC2_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: EnableLowClip
+    write_pv: $(P)$(R)EnableLowClip
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)EnableLowClip_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: OScale
+    write_pv: $(P)$(R)OScale
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)OScale_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: OC2
+    write_pv: $(P)$(R)OC2
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)OC2_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: LowClip
+    write_pv: $(P)$(R)LowClip
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)LowClip_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: FScale
+    write_pv: $(P)$(R)FScale
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)FScale_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: FC2
+    write_pv: $(P)$(R)FC2
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)FC2_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: EnableHighClip
+    write_pv: $(P)$(R)EnableHighClip
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)EnableHighClip_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: HighClip
+    write_pv: $(P)$(R)HighClip
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)HighClip_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: DataTypeOut
+    write_pv: $(P)$(R)DataTypeOut
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)DataTypeOut_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: NumFiltered
+    read_pv: $(P)$(R)NumFiltered_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: NumFilter
+    write_pv: $(P)$(R)NumFilter
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)NumFilter_RBV
     read_widget:
       type: TextRead

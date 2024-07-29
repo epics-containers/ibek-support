@@ -3,7 +3,7 @@ parent: NDPluginDriver
 children:
 
 - type: Group
-  name: NDCircularBuff
+  name: ADCollect
   layout:
     type: Grid
     labelled: true
@@ -16,40 +16,16 @@ children:
       type: ToggleButton
 
   - type: SignalR
-    name: StatusMessage
-    read_pv: $(P)$(R)StatusMessage
+    name: Trigger
+    read_pv: $(P)$(R)Trigger_RBV
     read_widget:
-      type: TextRead
+      type: LED
 
-  - type: SignalR
-    name: TriggerAVal
-    read_pv: $(P)$(R)TriggerAVal
-    read_widget:
-      type: TextRead
-
-  - type: SignalR
-    name: TriggerBVal
-    read_pv: $(P)$(R)TriggerBVal
-    read_widget:
-      type: TextRead
-
-  - type: SignalR
-    name: TriggerCalcVal
-    read_pv: $(P)$(R)TriggerCalcVal
-    read_widget:
-      type: TextRead
-
-  - type: SignalR
-    name: CurrentQty
-    read_pv: $(P)$(R)CurrentQty_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalR
-    name: PostTriggerQty
-    read_pv: $(P)$(R)PostTriggerQty_RBV
-    read_widget:
-      type: TextRead
+  - type: SignalW
+    name: Trigger
+    write_pv: $(P)$(R)Trigger
+    write_widget:
+      type: ToggleButton
 
   - type: SignalR
     name: Trigger
@@ -58,19 +34,23 @@ children:
       type: LED
 
   - type: SignalR
-    name: ActualTriggerCount
-    read_pv: $(P)$(R)ActualTriggerCount_RBV
+    name: StatusMessage
+    read_pv: $(P)$(R)StatusMessage
     read_widget:
       type: TextRead
 
-  - type: SignalRW
-    name: Capture
-    write_pv: $(P)$(R)Capture
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)Capture_RBV
+- type: Group
+  name: NDCircularBuff
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: TriggerAVal
+    read_pv: $(P)$(R)TriggerAVal
     read_widget:
-      type: LED
+      type: TextRead
 
   - type: SignalRW
     name: TriggerA
@@ -81,12 +61,24 @@ children:
     read_widget:
       type: TextRead
 
+  - type: SignalR
+    name: TriggerBVal
+    read_pv: $(P)$(R)TriggerBVal
+    read_widget:
+      type: TextRead
+
   - type: SignalRW
     name: TriggerB
     write_pv: $(P)$(R)TriggerB
     write_widget:
       type: TextWrite
     read_pv: $(P)$(R)TriggerB_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: TriggerCalcVal
+    read_pv: $(P)$(R)TriggerCalcVal
     read_widget:
       type: TextRead
 
@@ -101,6 +93,12 @@ children:
       type: TextRead
       format: string
 
+  - type: SignalR
+    name: CurrentQty
+    read_pv: $(P)$(R)CurrentQty_RBV
+    read_widget:
+      type: TextRead
+
   - type: SignalRW
     name: PreCount
     write_pv: $(P)$(R)PreCount
@@ -110,12 +108,24 @@ children:
     read_widget:
       type: TextRead
 
+  - type: SignalR
+    name: PostTriggerQty
+    read_pv: $(P)$(R)PostTriggerQty_RBV
+    read_widget:
+      type: TextRead
+
   - type: SignalRW
     name: PostCount
     write_pv: $(P)$(R)PostCount
     write_widget:
       type: TextWrite
     read_pv: $(P)$(R)PostCount_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ActualTriggerCount
+    read_pv: $(P)$(R)ActualTriggerCount_RBV
     read_widget:
       type: TextRead
 
@@ -134,5 +144,14 @@ children:
     write_widget:
       type: ToggleButton
     read_pv: $(P)$(R)FlushOnSoftTrg_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: Capture
+    write_pv: $(P)$(R)Capture
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)Capture_RBV
     read_widget:
       type: LED

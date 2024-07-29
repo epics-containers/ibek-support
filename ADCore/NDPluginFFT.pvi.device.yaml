@@ -9,29 +9,23 @@ children:
     labelled: true
   children:
 
-  - type: SignalW
-    name: FFTResetAverage
-    write_pv: $(P)$(R)FFTResetAverage
+  - type: SignalRW
+    name: FFTDirection
+    write_pv: $(P)$(R)FFTDirection
     write_widget:
       type: ToggleButton
-
-  - type: SignalR
-    name: FFTTimeAxis
-    read_pv: $(P)$(R)FFTTimeAxis
+    read_pv: $(P)$(R)FFTDirection_RBV
     read_widget:
-      type: TextRead
+      type: LED
 
-  - type: SignalR
-    name: FFTFreqAxis
-    read_pv: $(P)$(R)FFTFreqAxis
+  - type: SignalRW
+    name: FFTSuppressDC
+    write_pv: $(P)$(R)FFTSuppressDC
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)FFTSuppressDC_RBV
     read_widget:
-      type: TextRead
-
-  - type: SignalR
-    name: FFTNumAveraged
-    read_pv: $(P)$(R)FFTNumAveraged
-    read_widget:
-      type: TextRead
+      type: LED
 
   - type: SignalR
     name: FFTTimeSeries
@@ -57,32 +51,11 @@ children:
     read_widget:
       type: TextRead
 
-  - type: SignalRW
-    name: FFTTimePerPoint
-    write_pv: $(P)$(R)FFTTimePerPoint
-    write_widget:
-      type: TextWrite
-    read_pv: $(P)$(R)FFTTimePerPoint_RBV
+  - type: SignalR
+    name: FFTNumAveraged
+    read_pv: $(P)$(R)FFTNumAveraged
     read_widget:
       type: TextRead
-
-  - type: SignalRW
-    name: FFTDirection
-    write_pv: $(P)$(R)FFTDirection
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)FFTDirection_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: FFTSuppressDC
-    write_pv: $(P)$(R)FFTSuppressDC
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)FFTSuppressDC_RBV
-    read_widget:
-      type: LED
 
   - type: SignalRW
     name: FFTNumAverage
@@ -90,5 +63,47 @@ children:
     write_widget:
       type: TextWrite
     read_pv: $(P)$(R)FFTNumAverage_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalW
+    name: FFTResetAverage
+    write_pv: $(P)$(R)FFTResetAverage
+    write_widget:
+      type: ToggleButton
+
+- type: Group
+  name: NDFFTFreqSpectrumPlot
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: FFTFreqAxis
+    read_pv: $(P)$(R)FFTFreqAxis
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDPluginFFTMisc
+  label: NDPluginFFT Ungrouped
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: FFTTimeAxis
+    read_pv: $(P)$(R)FFTTimeAxis
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: FFTTimePerPoint
+    write_pv: $(P)$(R)FFTTimePerPoint
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)FFTTimePerPoint_RBV
     read_widget:
       type: TextRead

@@ -3,7 +3,7 @@ parent: NDPluginFile
 children:
 
 - type: Group
-  name: NDFileJPEG
+  name: NDCodec
   layout:
     type: Grid
     labelled: true

@@ -3,7 +3,7 @@ parent: NDPluginDriver
 children:
 
 - type: Group
-  name: NDTransform
+  name: ADReadout
   layout:
     type: Grid
     labelled: true
