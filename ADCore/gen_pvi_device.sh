@@ -7,6 +7,11 @@ ADCORE=/epics/support/ADCore
 
 set -e
 
+# pvi needs to know which type of waveform to use so this is an unfortunate
+# workaround for now and note that the resulting pvi device will allways use
+# int32 waveform
+sed -i s/\$\(TYPE\)/Int32/g ${ADCORE}/db/NDStdArrays.template
+
 # We are not yet supporting the xxxN templates
 # the base templates are handled separately
 skip="
@@ -47,6 +52,3 @@ pvi regroup ADDriver.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 
 pvi convert device --template ${ADCORE}/db/NDPluginBase.template . ${ADCORE}/ADApp/pluginSrc/NDPluginDriver.h
 pvi regroup NDPluginDriver.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
-
--rw-rw-r--. 1 root root  6293 Jun 24 11:23
--rw-r--r--. 1 root root  4328 Mar 28 10:29
