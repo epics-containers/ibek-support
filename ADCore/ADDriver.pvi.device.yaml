@@ -1,297 +1,309 @@
 label: ADDriver
 parent: asynNDArrayDriver
 children:
-  - type: Group
-    name: ADReadout
-    layout:
-      type: Grid
-      labelled: true
-    children:
-      - type: SignalR
-        name: MaxSizeX
-        read_pv: $(P)$(R)MaxSizeX_RBV
-        read_widget:
-          type: TextRead
 
-      - type: SignalR
-        name: MaxSizeY
-        read_pv: $(P)$(R)MaxSizeY_RBV
-        read_widget:
-          type: TextRead
+- type: Group
+  name: ADCollect
+  layout:
+    type: Grid
+    labelled: true
+  children:
 
-      - type: SignalRW
-        name: BinX
-        write_pv: $(P)$(R)BinX
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)BinX_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalRW
+    name: AcquireTime
+    write_pv: $(P)$(R)AcquireTime
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)AcquireTime_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalRW
-        name: BinY
-        write_pv: $(P)$(R)BinY
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)BinY_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalRW
+    name: AcquirePeriod
+    write_pv: $(P)$(R)AcquirePeriod
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)AcquirePeriod_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalRW
-        name: MinY
-        write_pv: $(P)$(R)MinY
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)MinY_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalR
+    name: NumImagesCounter
+    read_pv: $(P)$(R)NumImagesCounter_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalRW
-        name: MinX
-        write_pv: $(P)$(R)MinX
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)MinX_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalRW
+    name: NumImages
+    write_pv: $(P)$(R)NumImages
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)NumImages_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalRW
-        name: ReverseX
-        write_pv: $(P)$(R)ReverseX
-        write_widget:
-          type: ToggleButton
-        read_pv: $(P)$(R)ReverseX_RBV
-        read_widget:
-          type: LED
+  - type: SignalRW
+    name: NumExposures
+    write_pv: $(P)$(R)NumExposures
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)NumExposures_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalRW
-        name: ReverseY
-        write_pv: $(P)$(R)ReverseY
-        write_widget:
-          type: ToggleButton
-        read_pv: $(P)$(R)ReverseY_RBV
-        read_widget:
-          type: LED
+  - type: SignalRW
+    name: ImageMode
+    write_pv: $(P)$(R)ImageMode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)ImageMode_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalRW
-        name: SizeX
-        write_pv: $(P)$(R)SizeX
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)SizeX_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalRW
+    name: TriggerMode
+    write_pv: $(P)$(R)TriggerMode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)TriggerMode_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalRW
-        name: SizeY
-        write_pv: $(P)$(R)SizeY
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)SizeY_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalR
+    name: DetectorState
+    read_pv: $(P)$(R)DetectorState_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalRW
-        name: Gain
-        write_pv: $(P)$(R)Gain
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)Gain_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalR
+    name: StatusMessage
+    read_pv: $(P)$(R)StatusMessage_RBV
+    read_widget:
+      type: TextRead
+      format: string
 
-  - type: Group
-    name: ADShutter
-    layout:
-      type: Grid
-      labelled: true
-    children:
-      - type: SignalRW
-        name: ShutterMode
-        write_pv: $(P)$(R)ShutterMode
-        write_widget:
-          type: ComboBox
-        read_pv: $(P)$(R)ShutterMode_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalR
+    name: TimeRemaining
+    read_pv: $(P)$(R)TimeRemaining_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalR
-        name: ShutterStatus
-        read_pv: $(P)$(R)ShutterStatus_RBV
-        read_widget:
-          type: LED
+- type: Group
+  name: ADEpicsShutter
+  layout:
+    type: Grid
+    labelled: true
+  children:
 
-      - type: SignalRW
-        name: ShutterControl
-        write_pv: $(P)$(R)ShutterControl
-        write_widget:
-          type: ToggleButton
-        read_pv: $(P)$(R)ShutterControl_RBV
-        read_widget:
-          type: LED
+  - type: SignalR
+    name: ShutterStatus
+    read_pv: $(P)$(R)ShutterStatus_RBV
+    read_widget:
+      type: LED
 
-      - type: SignalRW
-        name: ShutterOpenDelay
-        write_pv: $(P)$(R)ShutterOpenDelay
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)ShutterOpenDelay_RBV
-        read_widget:
-          type: TextRead
+- type: Group
+  name: ADReadout
+  layout:
+    type: Grid
+    labelled: true
+  children:
 
-      - type: SignalRW
-        name: ShutterCloseDelay
-        write_pv: $(P)$(R)ShutterCloseDelay
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)ShutterCloseDelay_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalR
+    name: MaxSizeX
+    read_pv: $(P)$(R)MaxSizeX_RBV
+    read_widget:
+      type: TextRead
 
-  - type: Group
-    name: ADCollect
-    layout:
-      type: Grid
-      labelled: true
-    children:
-      - type: SignalRW
-        name: AcquireTime
-        write_pv: $(P)$(R)AcquireTime
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)AcquireTime_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalR
+    name: MaxSizeY
+    read_pv: $(P)$(R)MaxSizeY_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalRW
-        name: AcquirePeriod
-        write_pv: $(P)$(R)AcquirePeriod
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)AcquirePeriod_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalRW
+    name: BinX
+    write_pv: $(P)$(R)BinX
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)BinX_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalR
-        name: NumImagesCounter
-        read_pv: $(P)$(R)NumImagesCounter_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalRW
+    name: BinY
+    write_pv: $(P)$(R)BinY
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)BinY_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalRW
-        name: NumImages
-        write_pv: $(P)$(R)NumImages
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)NumImages_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalRW
+    name: MinY
+    write_pv: $(P)$(R)MinY
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)MinY_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalRW
-        name: NumExposures
-        write_pv: $(P)$(R)NumExposures
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)NumExposures_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalRW
+    name: MinX
+    write_pv: $(P)$(R)MinX
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)MinX_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalRW
-        name: ImageMode
-        write_pv: $(P)$(R)ImageMode
-        write_widget:
-          type: ComboBox
-        read_pv: $(P)$(R)ImageMode_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalRW
+    name: ReverseX
+    write_pv: $(P)$(R)ReverseX
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)ReverseX_RBV
+    read_widget:
+      type: LED
 
-      - type: SignalRW
-        name: TriggerMode
-        write_pv: $(P)$(R)TriggerMode
-        write_widget:
-          type: ComboBox
-        read_pv: $(P)$(R)TriggerMode_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalRW
+    name: ReverseY
+    write_pv: $(P)$(R)ReverseY
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)ReverseY_RBV
+    read_widget:
+      type: LED
 
-      - type: SignalR
-        name: DetectorState
-        read_pv: $(P)$(R)DetectorState_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalRW
+    name: SizeX
+    write_pv: $(P)$(R)SizeX
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)SizeX_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalR
-        name: StatusMessage
-        read_pv: $(P)$(R)StatusMessage_RBV
-        read_widget:
-          type: TextRead
-          format: string
+  - type: SignalRW
+    name: SizeY
+    write_pv: $(P)$(R)SizeY
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)SizeY_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalR
-        name: TimeRemaining
-        read_pv: $(P)$(R)TimeRemaining_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalRW
+    name: Gain
+    write_pv: $(P)$(R)Gain
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)Gain_RBV
+    read_widget:
+      type: TextRead
 
-  - type: Group
-    name: ADDriverMisc
-    label: ADDriver Ungrouped
-    layout:
-      type: Grid
-      labelled: true
-    children:
-      - type: SignalW
-        name: ReadStatus
-        write_pv: $(P)$(R)ReadStatus
-        write_widget:
-          type: ToggleButton
+- type: Group
+  name: ADShutter
+  layout:
+    type: Grid
+    labelled: true
+  children:
 
-      - type: SignalR
-        name: NumExposuresCounter
-        read_pv: $(P)$(R)NumExposuresCounter_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalRW
+    name: ShutterMode
+    write_pv: $(P)$(R)ShutterMode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)ShutterMode_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalR
-        name: StringToServer
-        read_pv: $(P)$(R)StringToServer_RBV
-        read_widget:
-          type: TextRead
-          format: string
+  - type: SignalRW
+    name: ShutterControl
+    write_pv: $(P)$(R)ShutterControl
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)ShutterControl_RBV
+    read_widget:
+      type: LED
 
-      - type: SignalR
-        name: StringFromServer
-        read_pv: $(P)$(R)StringFromServer_RBV
-        read_widget:
-          type: TextRead
-          format: string
+  - type: SignalRW
+    name: ShutterOpenDelay
+    write_pv: $(P)$(R)ShutterOpenDelay
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ShutterOpenDelay_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalR
-        name: ShutterControlEPICS
-        read_pv: $(P)$(R)ShutterControlEPICS
-        read_widget:
-          type: LED
+  - type: SignalRW
+    name: ShutterCloseDelay
+    write_pv: $(P)$(R)ShutterCloseDelay
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ShutterCloseDelay_RBV
+    read_widget:
+      type: TextRead
 
-      - type: SignalR
-        name: TemperatureActual
-        read_pv: $(P)$(R)TemperatureActual
-        read_widget:
-          type: TextRead
+- type: Group
+  name: ADDriverMisc
+  label: ADDriver Ungrouped
+  layout:
+    type: Grid
+    labelled: true
+  children:
 
-      - type: SignalRW
-        name: FrameType
-        write_pv: $(P)$(R)FrameType
-        write_widget:
-          type: ComboBox
-        read_pv: $(P)$(R)FrameType_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalW
+    name: ReadStatus
+    write_pv: $(P)$(R)ReadStatus
+    write_widget:
+      type: ToggleButton
 
-      - type: SignalRW
-        name: Temperature
-        write_pv: $(P)$(R)Temperature
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)Temperature_RBV
-        read_widget:
-          type: TextRead
+  - type: SignalR
+    name: NumExposuresCounter
+    read_pv: $(P)$(R)NumExposuresCounter_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: StringToServer
+    read_pv: $(P)$(R)StringToServer_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalR
+    name: StringFromServer
+    read_pv: $(P)$(R)StringFromServer_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalR
+    name: ShutterControlEPICS
+    read_pv: $(P)$(R)ShutterControlEPICS
+    read_widget:
+      type: LED
+
+  - type: SignalR
+    name: TemperatureActual
+    read_pv: $(P)$(R)TemperatureActual
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: FrameType
+    write_pv: $(P)$(R)FrameType
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)FrameType_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Temperature
+    write_pv: $(P)$(R)Temperature
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)Temperature_RBV
+    read_widget:
+      type: TextRead
