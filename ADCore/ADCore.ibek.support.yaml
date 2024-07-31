@@ -97,6 +97,14 @@ entity_models:
           TIMEOUT:
           PORT:
 
+    pvi:
+      yaml_path: NDFileNexus.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)
+
   - name: NDFFT
     description: |-
       This plugin is used to calculate the FFT of a time series
@@ -228,6 +236,14 @@ entity_models:
           TIMEOUT:
           SCANRATE:
           ADDR:
+
+    pvi:
+      yaml_path: NDPluginFFT.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)
 
   - name: NDPosPlugin
     description: |-
@@ -490,6 +506,10 @@ entity_models:
           TIMEOUT:
           PORT:
 
+      # TODO these xxxN templates need special handling - we need a repeating
+      # sub-entities feature for this which would require ibek changes
+      # OR: just not support these in ibek and use anchors and aliases in the yaml
+      # to avoid duplication instead
       - file: $(ADCORE)/db/NDOverlayN.template
         args:
           XPOS:
@@ -508,6 +528,14 @@ entity_models:
           XSIZE:
           YCENT:
           ADDR:
+
+    pvi:
+      yaml_path: NDPluginOverlay.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)
 
   - name: NDColorConvert
     description: |-
@@ -608,6 +636,14 @@ entity_models:
           R:
           TIMEOUT:
           PORT:
+
+    pvi:
+      yaml_path: NDPluginColorConvert.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)
 
   - name: NDFileHDF5
     description: |-
@@ -941,6 +977,14 @@ entity_models:
           TYPE:
           PORT:
 
+    pvi:
+      yaml_path: NDPluginStdArrays.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)
+
   - name: _NDCircularBuff
     description: |-
       TODO:ADD DESCRIPTION
@@ -1127,6 +1171,14 @@ entity_models:
           TIMEOUT:
           PORT:
 
+    pvi:
+      yaml_path: NDFileMagick.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)
+
   - name: NDCircularBuff
     description: |-
       This plugin provides a pre and post external trigger frame capture buffer
@@ -1240,6 +1292,14 @@ entity_models:
           R:
           TIMEOUT:
           PORT:
+
+    pvi:
+      yaml_path: NDPluginCircularBuff.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)
 
   - name: NDAttrPlot
     description: |-
@@ -1477,6 +1537,14 @@ entity_models:
           TIMEOUT:
           PORT:
 
+    pvi:
+      yaml_path: NDPluginCodec.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)
+
   - name: NDGather
     description: |-
       This plugin is used to gather NDArrays from multiple upstream plugins and merge them into a single stream
@@ -1577,6 +1645,14 @@ entity_models:
           TIMEOUT:
           MAX_PORTS:
           PORT:
+
+    pvi:
+      yaml_path: NDPluginGather.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)
 
   - name: NDROI
     description: |-
@@ -1817,6 +1893,14 @@ entity_models:
           TIMEOUT:
           PORT:
 
+    pvi:
+      yaml_path: NDPluginAttribute.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)
+
   - name: NDStats
     description: |-
       This plugin calculates statistics like X and Y profile, centroid, and plots a histogram of binned pixels
@@ -1935,10 +2019,9 @@ entity_models:
       - value: |
           # NDStatsConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDStatsConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
-          # NDTimeSeriesConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxSignals)
-          NDTimeSeriesConfigure("{{PORT}}_TS", {{QUEUE}}, {{BLOCK}}, "{{PORT}}", 1, 23)
-          # Load time series records
-          dbLoadRecords("$(ADCORE)/db/NDTimeSeries.template",  "P={{P}},R={{R}}, PORT={{PORT}} ,ADDR={{ADDR}},TIMEOUT={{TIMEOUT}},NDARRAY_PORT={{NDARRAY_PORT}},NDARRAY_ADDR={{NDARRAY_ADDR}},NCHANS={{NCHANS}},ENABLED={{ENABLED}}")
+
+    sub_entities:
+      - { type: ADCore.NDTimeSeries, P: "{{P}}", R: "{{R}}TS:", PORT: "{{PORT}}_TS", NDARRAY_PORT: "{{PORT}}", NAME: "{{PORT}}_TS", NCHANS: "{{NCHANS}}", TIMEOUT: "{{TIMEOUT}}", ADDR: 0, NDARRAY_ADDR: 1, ENABLED: "{{ENABLED}}", QUEUE: "{{QUEUE}}", BLOCK: "{{BLOCK}}", NSIGNALS: 23 }
 
     databases:
       - file: $(ADCORE)/db/NDStats.template
@@ -2615,6 +2698,14 @@ entity_models:
           TIMEOUT:
           SCANRATE:
 
+    pvi:
+      yaml_path: NDPluginROIStat.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)
+
   - name: NDFileNetCDF
     description: |-
       This plugin can compress NDArrays to NetCDF and write them to file
@@ -2929,6 +3020,14 @@ entity_models:
           TIMEOUT:
           PORT:
 
+    pvi:
+      yaml_path: NDPluginTransform.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)
+
   - name: NDFileJPEG
     description: |-
       This plugin can compress NDArrays to JPEG and write them to file
@@ -3022,6 +3121,14 @@ entity_models:
           R:
           TIMEOUT:
           PORT:
+
+    pvi:
+      yaml_path: NDFileJPEG.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)
 
   - name: NDScatter
     description: |-
@@ -3121,3 +3228,11 @@ entity_models:
           R:
           TIMEOUT:
           PORT:
+
+    pvi:
+      yaml_path: NDScatter.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)

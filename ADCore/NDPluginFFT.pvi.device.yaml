@@ -1,0 +1,109 @@
+label: NDPluginFFT
+parent: NDPluginDriver
+children:
+
+- type: Group
+  name: NDFFT
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: FFTDirection
+    write_pv: $(P)$(R)FFTDirection
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)FFTDirection_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: FFTSuppressDC
+    write_pv: $(P)$(R)FFTSuppressDC
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)FFTSuppressDC_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalR
+    name: FFTTimeSeries
+    read_pv: $(P)$(R)FFTTimeSeries
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: FFTReal
+    read_pv: $(P)$(R)FFTReal
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: FFTImaginary
+    read_pv: $(P)$(R)FFTImaginary
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: FFTAbsValue
+    read_pv: $(P)$(R)FFTAbsValue
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: FFTNumAveraged
+    read_pv: $(P)$(R)FFTNumAveraged
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: FFTNumAverage
+    write_pv: $(P)$(R)FFTNumAverage
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)FFTNumAverage_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalW
+    name: FFTResetAverage
+    write_pv: $(P)$(R)FFTResetAverage
+    write_widget:
+      type: ToggleButton
+
+- type: Group
+  name: NDFFTFreqSpectrumPlot
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: FFTFreqAxis
+    read_pv: $(P)$(R)FFTFreqAxis
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDPluginFFTMisc
+  label: NDPluginFFT Ungrouped
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: FFTTimeAxis
+    read_pv: $(P)$(R)FFTTimeAxis
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: FFTTimePerPoint
+    write_pv: $(P)$(R)FFTTimePerPoint
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)FFTTimePerPoint_RBV
+    read_widget:
+      type: TextRead

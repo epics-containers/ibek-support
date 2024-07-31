@@ -1,0 +1,44 @@
+label: NDFileMagick
+parent: NDPluginFile
+children:
+
+- type: Group
+  name: NDCodec
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: Quality
+    write_pv: $(P)$(R)Quality
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)Quality_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDFileMagick
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: CompressType
+    write_pv: $(P)$(R)CompressType
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)CompressType_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: BitDepth
+    write_pv: $(P)$(R)BitDepth
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)BitDepth_RBV
+    read_widget:
+      type: TextRead

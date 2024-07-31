@@ -1,0 +1,170 @@
+label: NDPosPlugin
+parent: NDPluginDriver
+children:
+
+- type: Group
+  name: ADCollect
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: Mode
+    write_pv: $(P)$(R)Mode
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)Mode_RBV
+    read_widget:
+      type: LED
+
+- type: Group
+  name: NDCircularBuff
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalW
+    name: Reset
+    write_pv: $(P)$(R)Reset
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalR
+    name: Qty
+    read_pv: $(P)$(R)Qty_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDFileBase
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: Filename
+    write_pv: $(P)$(R)Filename
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)Filename_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalW
+    name: Delete
+    write_pv: $(P)$(R)Delete
+    write_widget:
+      type: ToggleButton
+
+- type: Group
+  name: NDFileHDF5
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: Position
+    read_pv: $(P)$(R)Position_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDFileHDF5Positions
+  label: NDFileHDF5_Positions
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: Index
+    read_pv: $(P)$(R)Index_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDPos
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: Running
+    write_pv: $(P)$(R)Running
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)Running_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: Missing
+    write_pv: $(P)$(R)Missing
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)Missing_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Duplicate
+    write_pv: $(P)$(R)Duplicate
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)Duplicate_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: ExpectedID
+    read_pv: $(P)$(R)ExpectedID_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: IDName
+    write_pv: $(P)$(R)IDName
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)IDName_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: IDStart
+    write_pv: $(P)$(R)IDStart
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)IDStart_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: IDDifference
+    write_pv: $(P)$(R)IDDifference
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)IDDifference_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDPosPluginMisc
+  label: NDPosPlugin Ungrouped
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: FileValid
+    read_pv: $(P)$(R)FileValid_RBV
+    read_widget:
+      type: LED

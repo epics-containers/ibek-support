@@ -1,0 +1,20 @@
+label: NDPluginScatter
+parent: NDPluginDriver
+children:
+
+- type: Group
+  name: NDPluginScatterMisc
+  label: NDPluginScatter Ungrouped
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: ScatterMethod
+    write_pv: $(P)$(R)ScatterMethod
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)ScatterMethod_RBV
+    read_widget:
+      type: TextRead

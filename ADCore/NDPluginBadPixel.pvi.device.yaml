@@ -1,0 +1,17 @@
+label: NDPluginBadPixel
+parent: NDPluginDriver
+children:
+
+- type: Group
+  name: NDBadPixel
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalW
+    name: FileName
+    write_pv: $(P)$(R)FileName
+    write_widget:
+      type: TextWrite
+      format: string

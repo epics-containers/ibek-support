@@ -1,0 +1,38 @@
+label: NDFileNexus
+parent: NDPluginFile
+children:
+
+- type: Group
+  name: NDFileNexus
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: FileTemplateValid
+    read_pv: $(P)$(R)FileTemplateValid
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: TemplateFilePath
+    write_pv: $(P)$(R)TemplateFilePath
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)TemplateFilePath_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalRW
+    name: TemplateFileName
+    write_pv: $(P)$(R)TemplateFileName
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)TemplateFileName_RBV
+    read_widget:
+      type: TextRead
+      format: string

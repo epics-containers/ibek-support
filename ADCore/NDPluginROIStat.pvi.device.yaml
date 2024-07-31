@@ -1,0 +1,40 @@
+label: NDPluginROIStat
+parent: NDPluginDriver
+children:
+
+- type: Group
+  name: NDROIStat
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalW
+    name: ResetAll
+    write_pv: $(P)$(R)ResetAll
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: TSControl
+    write_pv: $(P)$(R)TSControl
+    write_widget:
+      type: ComboBox
+
+  - type: SignalW
+    name: TSNumPoints
+    write_pv: $(P)$(R)TSNumPoints
+    write_widget:
+      type: TextWrite
+
+  - type: SignalR
+    name: TSCurrentPoint
+    read_pv: $(P)$(R)TSCurrentPoint
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: TSAcquiring
+    read_pv: $(P)$(R)TSAcquiring
+    read_widget:
+      type: LED

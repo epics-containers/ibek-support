@@ -1,0 +1,10 @@
+label: NDPluginGather
+parent: NDPluginDriver
+children:
+
+- type: Group
+  name: NDGather
+  layout:
+    type: Grid
+    labelled: true
+  children: []

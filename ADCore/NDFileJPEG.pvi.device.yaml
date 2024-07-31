@@ -1,0 +1,19 @@
+label: NDFileJPEG
+parent: NDPluginFile
+children:
+
+- type: Group
+  name: NDCodec
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: JPEGQuality
+    write_pv: $(P)$(R)JPEGQuality
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)JPEGQuality_RBV
+    read_widget:
+      type: TextRead

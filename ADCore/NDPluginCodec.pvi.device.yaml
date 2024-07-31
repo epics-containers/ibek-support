@@ -1,0 +1,99 @@
+label: NDPluginCodec
+parent: NDPluginDriver
+children:
+
+- type: Group
+  name: ADCollect
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: Mode
+    write_pv: $(P)$(R)Mode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)Mode_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDCodec
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: CompFactor
+    read_pv: $(P)$(R)CompFactor_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: JPEGQuality
+    write_pv: $(P)$(R)JPEGQuality
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)JPEGQuality_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Compressor
+    write_pv: $(P)$(R)Compressor
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)Compressor_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: BloscCompressor
+    write_pv: $(P)$(R)BloscCompressor
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)BloscCompressor_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: BloscCLevel
+    write_pv: $(P)$(R)BloscCLevel
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)BloscCLevel_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: BloscShuffle
+    write_pv: $(P)$(R)BloscShuffle
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)BloscShuffle_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: BloscNumThreads
+    write_pv: $(P)$(R)BloscNumThreads
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)BloscNumThreads_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: CodecStatus
+    read_pv: $(P)$(R)CodecStatus
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: CodecError
+    read_pv: $(P)$(R)CodecError
+    read_widget:
+      type: TextRead
+      format: string
