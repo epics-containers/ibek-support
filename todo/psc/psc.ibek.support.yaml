@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/2.0.2/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
 
 module: psc
 
@@ -135,29 +135,7 @@ defs:
     databases:
       - file: pmc.template
         # below args with _ instead of - to make legal python names
-        args:
-          {
-            c: "{{ ip_module.carrier.card_id }}",
-            s: "{{ ip_module.ip_site_number }}",
-            startsw-evnt: "{{ startsw_evnt }}",
-            syncsw-evnt: "{{ syncsw_evnt }}",
-            hyscycle-dly: "{{ hyscycle_dly }}",
-            link,
-            device,
-            i_abserr,
-            abserr,
-            relerr,
-            controlerr,
-            hyscydir,
-            hyscmask,
-            hyslock,
-            hysimin,
-            hysimax,
-            oninitcycle,
-            vdclink_adel,
-            vload_adel,
-            icharge_adel,
-          }
+        args: { c: "{{ ip_module.carrier.card_id }}", s: "{{ ip_module.ip_site_number }}", startsw-evnt: "{{ startsw_evnt }}", syncsw-evnt: "{{ syncsw_evnt }}", hyscycle-dly: "{{ hyscycle_dly }}", link, device, i_abserr, abserr, relerr, controlerr, hyscydir, hyscmask, hyslock, hysimin, hysimax, oninitcycle, vdclink_adel, vload_adel, icharge_adel }
 
   - name: pscHy8401Channel-BS
     description: Declares a channel for an Hy8401ip

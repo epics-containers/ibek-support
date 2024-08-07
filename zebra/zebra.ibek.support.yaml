@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/2.0.2/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
 
 module: zebra
 
@@ -64,13 +64,13 @@ entity_models:
         type: str
         description: |-
           Timeout
-        default: '1'
+        default: "1"
 
       ADDR:
         type: str
         description: |-
           Asyn Port address
-        default: '0'
+        default: "0"
 
       SCANRATE:
         type: enum
@@ -98,7 +98,7 @@ entity_models:
         type: str
         description: |-
           Precision to show position compare gate and pulse fields
-        default: '4'
+        default: "4"
 
       M1:
         type: str
@@ -116,13 +116,13 @@ entity_models:
         type: str
         description: |-
           Multiplier to account for DT scaling. E.g. if *4 encoder decode, set to 0.25
-        default: '1'
+        default: "1"
 
       M1HOMESETTLE:
         type: str
         description: |-
           Time to wait after an autohome before setting zebra pos to readback pos
-        default: '5'
+        default: "5"
 
       M2:
         type: str
@@ -140,13 +140,13 @@ entity_models:
         type: str
         description: |-
           Multiplier to account for DT scaling. E.g. if *4 encoder decode, set to 0.25
-        default: '1'
+        default: "1"
 
       M2HOMESETTLE:
         type: str
         description: |-
           Time to wait after an autohome before setting zebra pos to readback pos
-        default: '5'
+        default: "5"
 
       M3:
         type: str
@@ -164,13 +164,13 @@ entity_models:
         type: str
         description: |-
           Multiplier to account for DT scaling. E.g. if *4 encoder decode, set to 0.25
-        default: '1'
+        default: "1"
 
       M3HOMESETTLE:
         type: str
         description: |-
           Time to wait after an autohome before setting zebra pos to readback pos
-        default: '5'
+        default: "5"
 
       M4:
         type: str
@@ -188,13 +188,13 @@ entity_models:
         type: str
         description: |-
           Multiplier to account for DT scaling. E.g. if *4 encoder decode, set to 0.25
-        default: '1'
+        default: "1"
 
       M4HOMESETTLE:
         type: str
         description: |-
           Time to wait after an autohome before setting zebra pos to readback pos
-        default: '5'
+        default: "5"
 
       MAXBUF:
         type: int
@@ -250,4 +250,3 @@ entity_models:
           M3DIR:
           M1MULT:
           M2DIR:
-

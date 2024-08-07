@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/2.0.2/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
 
 module: ADSimDetector
 
@@ -19,10 +19,10 @@ entity_models:
       TIMEOUT:
         type: str
         description: Timeout
-        default: '1'
+        default: "1"
       ADDR:
         type: str
-        default: '0'
+        default: "0"
         description: Asyn Port address
       WIDTH:
         type: int

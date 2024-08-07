@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/2.0.2/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
 
 module: epics
 entity_models:
@@ -11,7 +11,7 @@ entity_models:
         default: 6000000
     env_vars:
       - name: EPICS_CA_MAX_ARRAY_BYTES
-        value: '{{ max_bytes }}'
+        value: "{{ max_bytes }}"
 
   - name: EpicsTsMinWest
     description: Set the relative time zone minutes West relative to GMT (+/-720)
@@ -22,7 +22,7 @@ entity_models:
         default: 0
     env_vars:
       - name: EPICS_TS_MIN_WEST
-        value: '{{ minutes_west }}'
+        value: "{{ minutes_west }}"
 
   - name: dbpf
     description: Set a PV value after iocInit
@@ -46,8 +46,8 @@ entity_models:
         type: str
         description: Value of environment variable
     env_vars:
-      - name: '{{ name }}'
-        value: '{{ value }}'
+      - name: "{{ name }}"
+        value: "{{ value }}"
 
   - name: StartupCommand
     description: Adds an arbitrary command in the startup script before iocInit
@@ -55,10 +55,10 @@ entity_models:
       command:
         type: str
         description: command string
-        default: ''
+        default: ""
     pre_init:
       - type: text
-        value: '{{ command }}'
+        value: "{{ command }}"
 
   - name: PostStartupCommand
     description: Adds an arbitrary command in the startup script after iocInit
@@ -66,10 +66,10 @@ entity_models:
       command:
         type: str
         description: command string
-        default: ''
+        default: ""
     post_init:
       - type: text
-        value: '{{ command }}'
+        value: "{{ command }}"
 
   - name: InterruptVectorVME
     description: Reserve a VME interrupt vector
@@ -84,5 +84,5 @@ entity_models:
         default: 1
 
     env_vars:
-      - name: '{{ name }}'
+      - name: "{{ name }}"
         value: '{{  _global.incrementor("InterruptVector", start=192, stop=255, inc=count) }}'

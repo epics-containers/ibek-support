@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/2.0.2/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
 
 module: asyn
 
@@ -52,7 +52,7 @@ entity_models:
         type: str
         description: |-
           IP port to connect to if in simulation mode
-        default: ''
+        default: ""
 
       baud:
         type: int
@@ -84,9 +84,9 @@ entity_models:
         description: |-
           Stop Bits
         values:
-          '1':
-          '2':
-        default: '1'
+          "1":
+          "2":
+        default: "1"
 
       disconnectOnReadTimeout:
         type: enum
@@ -185,8 +185,8 @@ entity_models:
         description: |-
           Stop Bits
         values:
-          '1':
-          '2':
+          "1":
+          "2":
       disconnectOnReadTimeout:
         type: enum
         description: |-
@@ -199,10 +199,10 @@ entity_models:
         description: |-
           Bits
         values:
-          '8':
-          '5':
-          '7':
-          '6':
+          "8":
+          "5":
+          "7":
+          "6":
     pre_init:
       - value: |
           %sConfigure("%s", "%s", %d, %d, %d)
@@ -330,8 +330,8 @@ entity_models:
         description: |-
           Stop Bits
         values:
-          '1':
-          '2':
+          "1":
+          "2":
       disconnectOnReadTimeout:
         type: enum
         description: |-
@@ -344,10 +344,10 @@ entity_models:
         description: |-
           Bits
         values:
-          '8':
-          '5':
-          '7':
-          '6':
+          "8":
+          "5":
+          "7":
+          "6":
     pre_init:
       - value: |
           %sConfigure("%s", "%s", %d, %d, %d)

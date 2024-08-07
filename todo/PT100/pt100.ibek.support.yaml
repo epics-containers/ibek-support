@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/2.0.2/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
 
 module: PT100
 
@@ -62,18 +62,4 @@ defs:
 
     databases:
       - file: pt100.template
-        args:
-          {
-            PT,
-            ADC_REF_CHAN,
-            ADC_CHAN,
-            deadband,
-            hihi,
-            hi,
-            lo,
-            lolo,
-            scan,
-            prec,
-            hopr,
-            lopr,
-          }
+        args: { PT, ADC_REF_CHAN, ADC_CHAN, deadband, hihi, hi, lo, lolo, scan, prec, hopr, lopr }

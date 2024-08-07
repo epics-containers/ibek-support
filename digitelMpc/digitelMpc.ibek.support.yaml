@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.0b4/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
 
 module: digitelMpc
 
@@ -22,40 +22,40 @@ entity_models:
         type: enum
         description: |-
           Unit number for multi drop serial
-        default: '01'
+        default: "01"
         values: &id001
-          '21':
-          '12':
-          '04':
-          '27':
-          '08':
-          '23':
-          '31':
-          '18':
-          '29':
-          '14':
-          '02':
-          '10':
-          '06':
-          '25':
-          '16':
-          '32':
-          '20':
-          '05':
-          '13':
-          '30':
-          '22':
-          '19':
-          '09':
-          '28':
-          '17':
-          '03':
-          '15':
-          '26':
-          '07':
-          '11':
-          '24':
-          '01':
+          "21":
+          "12":
+          "04":
+          "27":
+          "08":
+          "23":
+          "31":
+          "18":
+          "29":
+          "14":
+          "02":
+          "10":
+          "06":
+          "25":
+          "16":
+          "32":
+          "20":
+          "05":
+          "13":
+          "30":
+          "22":
+          "19":
+          "09":
+          "28":
+          "17":
+          "03":
+          "15":
+          "26":
+          "07":
+          "11":
+          "24":
+          "01":
       ctlsrc:
         type: str
         description: |-
@@ -100,7 +100,7 @@ entity_models:
         name: unit
         description: |-
           Unit number for multi drop serial
-        default: '01'
+        default: "01"
         values: *id001
   - name: &digitelMpcPump digitelMpc
     description: |-
@@ -125,7 +125,7 @@ entity_models:
         type: enum
         description: |-
           Unit number for multi drop serial
-        default: '01'
+        default: "01"
         values: *id001
       proto:
         type: enum
@@ -137,7 +137,7 @@ entity_models:
           '"digitelMpcq.proto"':
     databases:
       - file: $(DIGITELMPC)/db/digitelMpc.template
-        args: {device: null, port: null, unit: null, proto: null, name: null}
+        args: { device: null, port: null, unit: null, proto: null, name: null }
 
   - name: digitelMpcIonp
     description: |-
@@ -222,7 +222,7 @@ entity_models:
 
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcIonp.template
-        args: {device: null, port: '{{MPC.port}}', unit: '{{MPC.unit}}', pump: null, size: null, sp1on: null, sp1off: null, sp2on: null, sp2off: null, alh: null, text: null, proto: null, disptext: null}
+        args: { device: null, port: "{{MPC.port}}", unit: "{{MPC.unit}}", pump: null, size: null, sp1on: null, sp1off: null, sp2on: null, sp2off: null, alh: null, text: null, proto: null, disptext: null }
 
   - name: digitelMpcTspGroup
     description: |-
@@ -243,47 +243,47 @@ entity_models:
         type: str
         description: |-
           TSP 2 device name
-        default: '{{tsp1}}'
+        default: "{{tsp1}}"
 
       tsp3:
         type: str
         description: |-
           TSP 3 device name
-        default: '{{tsp1}}'
+        default: "{{tsp1}}"
 
       tsp4:
         type: str
         description: |-
           TSP 4 device name
-        default: '{{tsp1}}'
+        default: "{{tsp1}}"
 
       tsp5:
         type: str
         description: |-
           TSP 5 device name
-        default: '{{tsp1}}'
+        default: "{{tsp1}}"
 
       tsp6:
         type: str
         description: |-
           TSP 6 device name
-        default: '{{tsp1}}'
+        default: "{{tsp1}}"
 
       tsp7:
         type: str
         description: |-
           TSP 7 device name
-        default: '{{tsp1}}'
+        default: "{{tsp1}}"
 
       tsp8:
         type: str
         description: |-
           TSP 8 device name
-        default: '{{tsp1}}'
+        default: "{{tsp1}}"
 
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcTspGroup.template
-        args: {device: null, tsp1: null, tsp2: null, tsp3: null, tsp4: null, tsp5: null, tsp6: null, tsp7: null, tsp8: null}
+        args: { device: null, tsp1: null, tsp2: null, tsp3: null, tsp4: null, tsp5: null, tsp6: null, tsp7: null, tsp8: null }
 
   - name: digitelMpcIonpGroup
     description: |-
@@ -342,7 +342,7 @@ entity_models:
 
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcIonpGroup.template
-        args: {device: null, delay: null, ionp1: null, ionp2: null, ionp3: null, ionp4: null, ionp5: null, ionp6: null, ionp7: null, ionp8: null}
+        args: { device: null, delay: null, ionp1: null, ionp2: null, ionp3: null, ionp4: null, ionp5: null, ionp6: null, ionp7: null, ionp8: null }
 
   - name: dummyIonp
     description: |-
@@ -379,7 +379,7 @@ entity_models:
         type: enum
         description: |-
           Unit number for multi drop serial
-        default: '01'
+        default: "01"
         values: *id001
       ctlsrc:
         type: int
@@ -411,4 +411,4 @@ entity_models:
 
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcTsp.template
-        args: {device: null, port: null, unit: null, ctlsrc: null, protocol: null, totmax: null, tcmax: null}
+        args: { device: null, port: null, unit: null, ctlsrc: null, protocol: null, totmax: null, tcmax: null }

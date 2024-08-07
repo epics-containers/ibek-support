@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/2.0.2/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
 
 module: lakeshore340
 
@@ -65,6 +65,6 @@ entity_models:
     pvi:
       yaml_path: lakeshore340.pvi.device.yaml
       ui_macros:
-        lakeshore340: '{{ P }}{{ name }}'
+        lakeshore340: "{{ P }}{{ name }}"
       pv: true
-      pv_prefix: '{{ P }}{{ name }}'
+      pv_prefix: "{{ P }}{{ name }}"
