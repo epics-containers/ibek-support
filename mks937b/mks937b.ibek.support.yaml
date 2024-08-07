@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.2.0/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
 
 module: mks937b
 
@@ -96,7 +96,6 @@ entity_models:
         default: $(device):CONSTZERO
 
     databases:
-
       - file: $(MKS937B)/db/mks937bRelays.template
         args:
           relay_drvh:
@@ -117,7 +116,7 @@ entity_models:
 
   - name: mks937bGaugeGroup
     description: |-
-      Template database for a group of up to 8 MKS937B 
+      Template database for a group of up to 8 MKS937B
       combination gauges
       Pete Owens - 5/5/05
     parameters:
@@ -179,7 +178,6 @@ entity_models:
         default: 0
 
     databases:
-
       - file: $(MKS937B)/db/mks937bGaugeGroup.template
         args:
           gauge5:
@@ -196,15 +194,15 @@ entity_models:
 
   - name: mks937bGauge
     description: |-
-      Template database for a combination gauge connected to 
-      two channels of an MKS937B Multi-Sensor System 
-      A note on the optional macros: they default to an appropriate hard-coded 
-      value if no value is passed for expansion. 
-      They are provided to allow the default set points to be changed. 
-      Once the set point needs to be changed it may be necessary to alter  
-      various other fields defining the range of allowed values. 
-      For the majority of applications the defaults should be used.  The levels 
-      should only be changed at the request of the vacuum group for non-standard 
+      Template database for a combination gauge connected to
+      two channels of an MKS937B Multi-Sensor System
+      A note on the optional macros: they default to an appropriate hard-coded
+      value if no value is passed for expansion.
+      They are provided to allow the default set points to be changed.
+      Once the set point needs to be changed it may be necessary to alter
+      various other fields defining the range of allowed values.
+      For the majority of applications the defaults should be used.  The levels
+      should only be changed at the request of the vacuum group for non-standard
       vacuum systems.
     parameters:
       dom:
@@ -281,7 +279,6 @@ entity_models:
         default: 10.0*A/32767.0/0.6 - 12.0
 
     databases:
-
       - file: $(MKS937B)/db/mks937bGauge.template
         args:
           plog_adc_pv:
@@ -319,7 +316,6 @@ entity_models:
           Controller address (001 .. 253)
 
     databases:
-
       - file: $(MKS937B)/db/mks937b.template
         args:
           device:
@@ -328,7 +324,7 @@ entity_models:
 
   - name: mks937bPirgDummy
     description: |-
-      Template database for a dummy pirani gauge. 
+      Template database for a dummy pirani gauge.
       Just enough to keep the Gauge template happy
       Linda Pratt 28/09/2009
     parameters:
@@ -338,7 +334,6 @@ entity_models:
           device name
 
     databases:
-
       - file: $(MKS937B)/db/mks937bPirgDummy.template
         args:
           device:
@@ -395,7 +390,6 @@ entity_models:
         default: $(device):FRLY:CONSTZERO
 
     databases:
-
       - file: $(MKS937B)/db/mks937bFastRelay.template
         args:
           frcsp_hopr:
@@ -468,7 +462,6 @@ entity_models:
         default: 0.01
 
     databases:
-
       - file: $(MKS937B)/db/mks937bCap.template
         args:
           ctlsp_drvl:
@@ -562,7 +555,6 @@ entity_models:
         default: 4
 
     databases:
-
       - file: $(MKS937B)/db/mks937bImgGroup.template
         args:
           rgaIlRelay:
@@ -673,7 +665,6 @@ entity_models:
         default: 10.0*A/32767.0/0.6 - 12.0
 
     databases:
-
       - file: $(MKS937B)/db/mks937bPlogEGU.template
         args:
           device:
@@ -876,7 +867,6 @@ entity_models:
         default: 1
 
     databases:
-
       - file: $(MKS937B)/db/mks937bImg.template
         args:
           prosp_lolo:
@@ -912,10 +902,10 @@ entity_models:
 
   - name: mks937bImgDummy
     description: |-
-      Template database for a dummy inverted magnetron gauge  
-      Just enough to keep the Gauge template happy 
-      Note on optional macros: these will default to an appropriate hard-coded 
-      value if no value is passed for expansion. They are provided to parallel 
+      Template database for a dummy inverted magnetron gauge
+      Just enough to keep the Gauge template happy
+      Note on optional macros: these will default to an appropriate hard-coded
+      value if no value is passed for expansion. They are provided to parallel
       those in the Img template.
     parameters:
       device:
@@ -984,7 +974,6 @@ entity_models:
         default: IMG Enable
 
     databases:
-
       - file: $(MKS937B)/db/mks937bImgDummy.template
         args:
           ctlsp_drvl:
@@ -1056,7 +1045,6 @@ entity_models:
         default: 1
 
     databases:
-
       - file: $(MKS937B)/db/mks937bPirgGroup.template
         args:
           pirg1:
@@ -1096,7 +1084,6 @@ entity_models:
           ADC signal number
 
     databases:
-
       - file: $(MKS937B)/db/mks937bHy8401.template
         args:
           device:
@@ -1134,7 +1121,6 @@ entity_models:
         default: 0
 
     databases:
-
       - file: $(MKS937B)/db/mks937bPirg.template
         args:
           device:

@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/2.0.2/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
 
 module: ipac
 
@@ -8,7 +8,7 @@ entity_models:
     parameters:
       name:
         type: id
-        description: 'IPAC identifier (suggested: IPAC<slot>)'
+        description: "IPAC identifier (suggested: IPAC<slot>)"
 
       slot:
         type: int
@@ -34,5 +34,5 @@ entity_models:
         # automatically increments to track them.
         name: epicsEnvSet
         args:
-          name: '{{ name }}'
-          value: '{{ card_id }}'
+          name: "{{ name }}"
+          value: "{{ card_id }}"

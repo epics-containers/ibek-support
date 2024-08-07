@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/2.0.2/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
 
 module: motorSim
 
@@ -100,22 +100,22 @@ entity_models:
       # Which is  good idea for ease of transition from traditional IOCs)
       - file: basic_asyn_motor.db
         args:
-          P: '{{controller.P}}'
+          P: "{{controller.P}}"
           M:
           DTYP: asynMotor
-          PORT: '{{controller}}'
+          PORT: "{{controller}}"
           ADDR:
           DESC:
           EGU: degrees
           DIR:
-          VELO: '1'
-          VBAS: '.1'
-          ACCL: '.2'
-          BDST: '0'
-          BVEL: '1'
-          BACC: '.2'
-          MRES: '.01'
-          PREC: '5'
+          VELO: "1"
+          VBAS: ".1"
+          ACCL: ".2"
+          BDST: "0"
+          BVEL: "1"
+          BACC: ".2"
+          MRES: ".01"
+          PREC: "5"
           DHLM:
           DLLM:
-          INIT: ''
+          INIT: ""

@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/1.5.0/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
 
 # #errlogInit(5000)
 # < envPaths
@@ -90,15 +90,12 @@ entity_models:
           https://epics.anl.gov/tech-talk/2020/msg01705.php
         default: 0
 
-
-
       numAxes:
         type: int
         description: |-
           The number of axes to create
 
     pre_init:
-
       - value: |
           # epicsEnvSet "STREAM_PROTOCOL_PATH", "$(MOTORNEWPORT)/protocol/"
           # Create Asyn Port
@@ -108,7 +105,6 @@ entity_models:
           asynOctetSetInputEos({{controllerName}}_ASYN,0,"\r\n")
           asynOctetSetOutputEos({{controllerName}}_ASYN,0,"\r\n")
           asynReport 10
-
 
   - name: motorAxis
     description: |-
@@ -231,8 +227,8 @@ entity_models:
       # Which is  good idea for ease of transition from traditional IOCs)
       - file: basic_asyn_motor.db
         args:
-          P: '{{controller.P}}'
-          N: '{{ADDR +1 }}'
+          P: "{{controller.P}}"
+          N: "{{ADDR +1 }}"
           M:
           DTYP: asynMotor
           PORT: SMC100_{{controller}}
@@ -250,4 +246,4 @@ entity_models:
           PREC:
           DHLM:
           DLLM:
-          INIT: ''
+          INIT: ""
