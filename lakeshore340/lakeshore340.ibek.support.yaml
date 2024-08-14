@@ -53,15 +53,10 @@ entity_models:
 
     databases:
       - file: $(LAKESHORE340)/db/lakeshore340.template
+        # use a regex to say that we want all the parameters in the template
+        # this is equivalent to {P: '{{P}}', PORT: '{{PORT}}', ADDR: '{{ADDR}}', SCAN: '{{SCAN}}', TEMPSCAN: '{{TEMPSCAN}}', name: '{{name}}', LOOP: '{{LOOP}}'}
         args:
-          name:
-          SCAN:
-          P:
-          TEMPSCAN:
-          PORT:
-          LOOP:
-          ADDR:
-
+          .*:
     pvi:
       yaml_path: lakeshore340.pvi.device.yaml
       ui_macros:
