@@ -22,6 +22,10 @@ ibek support add-runtime-packages libevent-dev
 ibek support git-clone ${NAME} ${VERSION} --org http://github.com/mdavidsaver
 ibek support register ${NAME}
 
+# don't build test folders
+sed -i -E 's/(^[^#].*example)/# \1/' ${SUPPORT}/${NAME}/Makefile
+sed -i -E 's/(^[^#].*test)/# \1/' ${SUPPORT}/${NAME}/Makefile
+
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs pvxs pvxsIoc
 ibek support add-dbds pvxsIoc.dbd
