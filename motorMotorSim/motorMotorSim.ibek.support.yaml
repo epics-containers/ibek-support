@@ -119,3 +119,10 @@ entity_models:
           DHLM:
           DLLM:
           INIT: ""
+
+    pvi:
+      yaml_path: asynMotorAxis.pvi.device.yaml
+      pv_prefix: "{{ controller.P }}{{ M }}"
+      ui_macros:
+        P: "{{controller.P}}"
+        M:
