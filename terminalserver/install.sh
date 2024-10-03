@@ -14,7 +14,6 @@ ibek support git-clone ${NAME} ${VERSION} --org https://github.com/DiamondLightS
 ibek support register ${NAME}
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
-ibek support add-libs terminalServer
 ibek support add-dbds terminalServer.dbd
 
 # global config settings
