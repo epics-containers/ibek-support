@@ -26,7 +26,7 @@ ibek support add-dbds aCalcoutRecord.dbd  calc.dbd  calcSupport.dbd sCalcoutReco
 sed -i -E 's/tests/# tests/' ${SUPPORT}/${NAME}/Makefile
 
 # global config settings
-${FOLDER}/../_global/install.sh
+${FOLDER}/../_global/install.sh ${NAME}
 
 # compile the support module
 ibek support compile ${NAME}
