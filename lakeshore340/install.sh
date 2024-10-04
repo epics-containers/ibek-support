@@ -22,7 +22,7 @@ ibek support register ${NAME}
 sed -i -E 's/(^[^#].*documentation)/# \1/' ${SUPPORT}/${NAME}/Makefile
 
 # global config settings
-${FOLDER}/../_global/install.sh
+${FOLDER}/../_global/install.sh ${NAME}
 
 # compile the support module
 ibek support compile ${NAME}

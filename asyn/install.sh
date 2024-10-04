@@ -36,7 +36,7 @@ ibek support add-config-macro ${NAME} TIRPC YES
 sed -i -E 's/(^[^#].*(test|iocBoot).*$)/# \1/' ${SUPPORT}/${NAME}/Makefile
 
 # global config settings
-${FOLDER}/../_global/install.sh
+${FOLDER}/../_global/install.sh ${NAME}
 
 # compile the support module
 ibek support compile ${NAME}

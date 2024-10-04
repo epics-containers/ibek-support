@@ -18,7 +18,7 @@ ibek support add-libs Ipac
 ibek support add-dbds drvIpac.dbd
 
 # global config settings
-${FOLDER}/../_global/install.sh
+${FOLDER}/../_global/install.sh ${NAME}
 
 # comment out directories that don't build from the Makefile
 sed -i -E 's/(^[^#].*(tyGSOctal).*$)/# \1/' ${SUPPORT}/${NAME}/Makefile

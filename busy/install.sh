@@ -28,7 +28,7 @@ ibek support add-dbds busySupport.dbd
 sed -i '/testBusy/d' ${SUPPORT}/${NAME}/busyApp/src/Makefile
 
 # global config settings
-${FOLDER}/../_global/install.sh
+${FOLDER}/../_global/install.sh ${NAME}
 
 # compile the support module
 ibek support compile ${NAME}

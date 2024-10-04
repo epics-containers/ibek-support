@@ -26,7 +26,7 @@ ibek support add-config-macro ${NAME} USR_INCLUDES
 ibek support add-config-macro ${NAME} USR_LDFLAGS
 
 # global config settings
-${FOLDER}/../_global/install.sh
+${FOLDER}/../_global/install.sh ${NAME}
 
 # compile the support module
 ibek support compile ${NAME}

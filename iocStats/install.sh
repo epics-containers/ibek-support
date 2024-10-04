@@ -35,7 +35,7 @@ ibek support add-libs devIocStats
 ibek support add-dbds devIocStats.dbd
 
 # global config settings
-${FOLDER}/../_global/install.sh
+${FOLDER}/../_global/install.sh ${NAME}
 
 # comment out the test directories from the Makefile
 sed -i -E 's/(^[^#].*+= test.*$)/# \1/' ${SUPPORT}/${NAME}/Makefile

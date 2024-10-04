@@ -17,7 +17,7 @@ ibek support register ${NAME} --macro SNCSEQ
 ibek support add-libs pv seq
 
 # global config settings
-${FOLDER}/../_global/install.sh
+${FOLDER}/../_global/install.sh ${NAME}
 
 # comment out tests and examples from the Makefile
 sed -i -E 's/(^[^#].*+= (examples|test).*$)/# \1/' ${SUPPORT}/${NAME}/Makefile
