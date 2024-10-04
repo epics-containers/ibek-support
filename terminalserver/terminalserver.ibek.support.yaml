@@ -1,0 +1,113 @@
+# yaml-language-server: $schema=../schemas/ibek.support.schema.json
+
+module: terminalServer
+
+entity_models:
+  - name: Moxa
+    description: |-
+      Root object for Moxa terminal server
+    parameters:
+      name:
+        type: id
+        description: |-
+          Object name
+      P:
+        type: str
+        description: |-
+          PV prefix
+      R:
+        type: str
+        description: |-
+          PV suffix
+      HOST:
+        type: str
+        description: |-
+          Host IP address
+      NCHANS:
+        type: int
+        description: |-
+          Number of channels
+
+    pre_init:
+      - value: |
+          {% for chan in range(NCHANS) -%}
+          {{'dbloadrecords("$(TERMINALSERVER)/db/MoxaChannel.template", P={}, R={}, CHAN={}, HOST={}, name={})'.format(P, R, chan+1, HOST, name + "_" ~ (chan+1) ) }}
+          {% endfor %}
+
+    databases:
+      - file: |
+          {{ "$(TERMINALSERVER)/db/TerminalServer32.template" if NCHANS > 16 else "$(TERMINALSERVER)/db/TerminalServer16.template" }}
+        args:
+          name:
+          P:
+          R:
+
+      - file: $(TERMINALSERVER)/db/Moxa.template
+        args:
+          name: |
+            {{ name + "_top" }}
+          P:
+          R:
+          HOST:
+
+      # - file: $(TERMINALSERVER)/db/Moxa.template
+      #   args:
+      #     P:
+      #     R:
+      #     HOST:
+      #     name:
+
+      # - file: $(TERMINALSERVER)/db/MoxaChannel.template
+      #   args:
+      #     P:
+      #     R:
+      #     CHAN:
+      #     HOST:
+      #     name:
+
+  - name: Acs
+    description: |-
+      TODO:ADD DESCRIPTION
+    parameters:
+      name:
+        type: id
+        description: |-
+          Object name
+      P:
+        type: str
+        description: |-
+          PV prefix
+      R:
+        type: str
+        description: |-
+          PV suffix
+      HOST:
+        type: str
+        description: |-
+          Host IP address
+      NCHANS:
+        type: int
+        description: |-
+          Number of channels
+
+    databases:
+      - file: $(TERMINALSERVER)/db/TerminalServer16.template
+        args:
+          P:
+          R:
+          name:
+
+      - file: $(TERMINALSERVER)/db/Acs.template
+        args:
+          P:
+          R:
+          HOST:
+          name:
+
+      - file: $(TERMINALSERVER)/db/AcsChannel.template
+        args:
+          P:
+          R:
+          CHAN:
+          HOST:
+          name:
