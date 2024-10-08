@@ -1,0 +1,427 @@
+# yaml-language-server: $schema=../schemas/ibek.support.schema.json
+
+module: positioner
+
+entity_models:
+
+  - name: motorpositioner
+    description: |-
+      Template for wrapping a motor as a positioner. This allows it to be controlled by a multipositioner, mapping a list of names onto a list of motor positions
+    parameters:
+      P:
+        type: str
+        description: |-
+          Device prefix, must match P of multipositioner
+      Q:
+        type: str
+        description: |-
+          Device suffix
+      pos:
+        type: str
+        description: |-
+          Multipositioner object      
+      MP:
+        type: str
+        description: |-
+          Multipositioner suffix, must match MP of multipositioner
+      DESC:
+        type: str
+        description: |-
+          Positioner description
+      EGU:
+        type: str
+        description: |-
+          Engineering units
+      PREC:
+        type: int
+        description: |-
+          Precision to display to
+      motor:
+        type: str
+        description: |-
+          Motor record pv
+      VALA:
+        type: float
+        description: |-
+          Positioner value for position 1
+        default: 0
+      VALB:
+        type: float
+        description: |-
+          Positioner value for position 2
+        default: 0
+      VALC:
+        type: float
+        description: |-
+          Positioner value for position 3
+        default: 0
+      VALD:
+        type: float
+        description: |-
+          Positioner value for position 4
+        default: 0
+      VALE:
+        type: float
+        description: |-
+          Positioner value for position 5
+        default: 0
+      VALF:
+        type: float
+        description: |-
+          Positioner value for position 6
+        default: 0
+      VALG:
+        type: float
+        description: |-
+          Positioner value for position 7
+        default: 0
+      VALH:
+        type: float
+        description: |-
+          Positioner value for position 8
+        default: 0
+      VALI:
+        type: float
+        description: |-
+          Positioner value for position 9
+        default: 0
+      VALJ:
+        type: float
+        description: |-
+          Positioner value for position 10
+        default: 0
+      VALK:
+        type: float
+        description: |-
+          Positioner value for position 11
+        default: 0
+      VALL:
+        type: float
+        description: |-
+          Positioner value for position 12
+        default: 0
+      VALM:
+        type: float
+        description: |-
+          Positioner value for position 13
+        default: 0
+      VALN:
+        type: float
+        description: |-
+          Positioner value for position 14
+        default: 0
+      VALO:
+        type: float
+        description: |-
+          Positioner value for position 15
+        default: 0
+      VALP:
+        type: float
+        description: |-
+          Positioner value for position 16
+        default: 0
+
+    databases:
+
+      - file: $(POSITIONER)/db/motorpositioner.template
+        args:
+          .*:
+
+  - name: multipositioner
+    description: |-
+      Template for controlling many positioners mapping a list of names onto pv values and/or motorpositioners mapping the list of names onto a list of motor positions
+    parameters:
+      P:
+        type: str
+        description: |-
+          Device prefix
+      MP:
+        type: str
+        description: |-
+          Device suffix
+      DESC:
+        type: str
+        description: |-
+          Multipositioner description
+      name:
+        type: id
+        description: |-
+          Object name and gui association name
+      STRA:
+        type: str
+        description: |-
+          String description for position 1
+        default: ''
+      STRB:
+        type: str
+        description: |-
+          String description for position 2
+        default: ''
+      STRC:
+        type: str
+        description: |-
+          String description for position 3
+        default: ''
+      STRD:
+        type: str
+        description: |-
+          String description for position 4
+        default: ''
+      STRE:
+        type: str
+        description: |-
+          String description for position 5
+        default: ''
+      STRF:
+        type: str
+        description: |-
+          String description for position 6
+        default: ''
+      STRG:
+        type: str
+        description: |-
+          String description for position 7
+        default: ''
+      STRH:
+        type: str
+        description: |-
+          String description for position 8
+        default: ''
+      STRI:
+        type: str
+        description: |-
+          String description for position 9
+        default: ''
+      STRJ:
+        type: str
+        description: |-
+          String description for position 10
+        default: ''
+      STRK:
+        type: str
+        description: |-
+          String description for position 11
+        default: ''
+      STRL:
+        type: str
+        description: |-
+          String description for position 12
+        default: ''
+      STRM:
+        type: str
+        description: |-
+          String description for position 13
+        default: ''
+      STRN:
+        type: str
+        description: |-
+          String description for position 14
+        default: ''
+      STRO:
+        type: str
+        description: |-
+          String description for position 15
+        default: ''
+      STRP:
+        type: str
+        description: |-
+          String description for position 16
+        default: ''
+
+      P1_VALS:
+        type: str
+        description: |-
+          Optional.  Defaults to P1 Val.  Short label for values button <= 6 characters
+        default: P1 Val
+      P2_VALS:
+        type: str
+        description: |-
+          Optional.  Defaults to P2 Val.  Short label for values button <= 6 characters
+        default: P2 Val
+      P3_VALS:
+        type: str
+        description: |-
+          Optional.  Defaults to P3 Val.  Short label for values button <= 6 characters
+        default: P3 Val
+      P4_VALS:
+        type: str
+        description: |-
+          Optional.  Defaults to P4 Val.  Short label for values button <= 6 characters
+        default: P4 Val
+      P5_VALS:
+        type: str
+        description: |-
+          Optional.  Defaults to P5 Val.  Short label for values button <= 6 characters
+        default: P5 Val
+      P6_VALS:
+        type: str
+        description: |-
+          This associates an edm screen with the template
+        default: P6 Val
+
+
+
+    databases:
+
+      - file: $(POSITIONER)/db/multipositioner.template
+        args:
+          .*:
+
+  - name: positioner
+    description: |-
+      Template for wrapping any pv as a positioner. This allows it to be controlled by a multipositioner, mapping a list of names onto a list of values for this pv
+    parameters:
+      MP:
+        type: object
+        description: |-
+          Parent multipositioner object
+      Q:
+        type: str
+        description: |-
+          Device suffix
+      DESC:
+        type: str
+        description: |-
+          Positioner description
+      SET:
+        type: str
+        description: |-
+          Pv used to set the value
+      EGU:
+        type: str
+        description: |-
+          Engineering units
+      PREC:
+        type: str
+        description: |-
+          Precision to display to
+      READBACK:
+        type: str
+        description: |-
+          Pv used to readback the value
+      STOP:
+        type: str
+        description: |-
+          STOPVAL written to this Pv to stop movement
+      DEADBAND:
+        type: str
+        description: |-
+          In position if abs(demand - readback) < DEADBAND
+      STOPVAL:
+        type: int
+        description: |-
+          The value written to STOP to stop movement
+        default: 1
+      VALA:
+        type: int
+        description: |-
+          Positioner value for position 1
+        default: 0
+      VALB:
+        type: int
+        description: |-
+          Positioner value for position 2
+        default: 0
+      VALC:
+        type: int
+        description: |-
+          Positioner value for position 3
+        default: 0
+      VALD:
+        type: int
+        description: |-
+          Positioner value for position 4
+        default: 0
+      VALE:
+        type: int
+        description: |-
+          Positioner value for position 5
+        default: 0
+      VALF:
+        type: int
+        description: |-
+          Positioner value for position 6
+        default: 0
+      VALG:
+        type: int
+        description: |-
+          Positioner value for position 7
+        default: 0
+      VALH:
+        type: int
+        description: |-
+          Positioner value for position 8
+        default: 0
+      VALI:
+        type: int
+        description: |-
+          Positioner value for position 9
+        default: 0
+      VALJ:
+        type: int
+        description: |-
+          Positioner value for position 10
+        default: 0
+      VALK:
+        type: int
+        description: |-
+          Positioner value for position 11
+        default: 0
+      VALL:
+        type: int
+        description: |-
+          Positioner value for position 12
+        default: 0
+      VALM:
+        type: int
+        description: |-
+          Positioner value for position 13
+        default: 0
+      VALN:
+        type: int
+        description: |-
+          Positioner value for position 14
+        default: 0
+      VALO:
+        type: int
+        description: |-
+          Positioner value for position 15
+        default: 0
+      VALP:
+        type: int
+        description: |-
+          Positioner value for position 16
+        default: 0
+
+    databases:
+
+      - file: $(POSITIONER)/db/positioner.template
+        args:
+          P:
+          Q:
+          MP:
+          DESC:
+          SET:
+          EGU:
+          PREC:
+          READBACK:
+          STOP:
+          DEADBAND:
+          STOPVAL:
+          VALA:
+          VALB:
+          VALC:
+          VALD:
+          VALE:
+          VALF:
+          VALG:
+          VALH:
+          VALI:
+          VALJ:
+          VALK:
+          VALL:
+          VALM:
+          VALN:
+          VALO:
+          VALP:
+          pos:
