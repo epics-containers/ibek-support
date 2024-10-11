@@ -98,7 +98,7 @@ entity_models:
     pre_init:
       - value: |
           # Set LD library path and BitFlow install dir variables to built Andor3 SDK
-          epicsEnvSet "LD_LIBRARY_PATH", \'{{ANDOR_SDK3}}/prefix/lib\'
-          epicsEnvSet "BITFLOW_INSTALL_DIRS", \'{{ANDOR_SDK3}}/prefix/bf\'
+          epicsEnvSet "LD_LIBRARY_PATH", "{{ANDOR_SDK3}}/prefix/lib"
+          epicsEnvSet "BITFLOW_INSTALL_DIRS", "{{ANDOR_SDK3}}/prefix/bf"
           # andor3Config(portName, cameraID, maxBuffers, maxMemory, priority, stackSize, maxFrames)
           andor3Config("{{PORT}}", "{{CAMERA_ID}}", {{BUFFERS}}, {{MEMORY}}, {{PRIORITY}}, {{STACKSIZE}}, "{{MAX_FRAMES}}")
