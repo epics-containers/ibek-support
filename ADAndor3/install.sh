@@ -42,3 +42,5 @@ ${FOLDER}/../../ibek-support/_global/install.sh ${NAME}
 ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
 ibek support generate-links ${FOLDER}
+
+ln -s /dev/video0 /dev/andor3pci
