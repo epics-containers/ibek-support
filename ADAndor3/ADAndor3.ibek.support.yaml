@@ -3,7 +3,6 @@
 module: ADAndor3
 
 entity_models:
-
   - name: andor3
     description: |-
       Creates a andorSCMOS camera areaDetector driver
@@ -21,13 +20,15 @@ entity_models:
         description: |-
           Port name for the detector
       TIMEOUT:
-        type: str
+        type: int
         description: |-
           Timeout
+        default: 1
       ADDR:
-        type: str
+        type: int
         description: |-
           Asyn Port address
+        default: 0
       SCANRATE:
         type: enum
         description: |-
@@ -84,9 +85,7 @@ entity_models:
         description: |-
           Path to the Andor3 SDK
 
-
     databases:
-
       - file: $(ADANDOR3)/db/andor3.template
         args:
           P:
@@ -97,58 +96,9 @@ entity_models:
           SCANRATE:
 
     pre_init:
-
       - value: |
           # Set LD library path and BitFlow install dir variables to built Andor3 SDK
           epicsEnvSet "LD_LIBRARY_PATH", \'{{ANDOR_SDK3}}/prefix/lib\'
           epicsEnvSet "BITFLOW_INSTALL_DIRS", \'{{ANDOR_SDK3}}/prefix/bf\'
           # andor3Config(portName, cameraID, maxBuffers, maxMemory, priority, stackSize, maxFrames)
           andor3Config("{{PORT}}", "{{CAMERA_ID}}", {{BUFFERS}}, {{MEMORY}}, {{PRIORITY}}, {{STACKSIZE}}, "{{MAX_FRAMES}}")
- # TODO - MISSING ARGS: sdk_path
-
-  - name: andor3Template
-    description: |-
-      TODO:ADD DESCRIPTION
-    parameters:
-      P:
-        type: str
-        description: |-
-          Device Prefix
-      R:
-        type: str
-        description: |-
-          Device Suffix
-      PORT:
-        type: str
-        description: |-
-          Asyn Port name
-      TIMEOUT:
-        type: str
-        description: |-
-          Timeout
-      ADDR:
-        type: str
-        description: |-
-          Asyn Port address
-      SCANRATE:
-        type: enum
-        description: |-
-          Specified scan rate for cpu intensive PVs
-        default: I/O Intr
-        values:
-          .1 second:
-          .2 second:
-          .5 second:
-          1 second:
-          2 second:
-          5 second:
-          10 second:
-          I/O Intr:
-          Event:
-          Passive:
-
-    databases:
-
-      - file: $(ADANDOR3)/db/andor3.template
-        args:
-          .*:

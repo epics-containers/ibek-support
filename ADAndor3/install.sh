@@ -28,7 +28,12 @@ SZIP_INCLUDE   = -I/usr/include
 HDF5_LIB      = /usr/lib/x86_64-linux-gnu/hdf5/serial/
 HDF5_INCLUDE  = /usr/include/hdf5/serial/
 '
+
 ibek support add-to-config-site ${NAME} "${CONFIG}"
+
+# declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
+ibek support add-libs andor3 atcore
+ibek support add-dbds andor3Support.dbd
 
 # global config settings
 ${FOLDER}/../../ibek-support/_global/install.sh ${NAME}
