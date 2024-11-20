@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
+# yaml-language-server: $schema=../schemas/ibek.support.schema.json
 
 module: quadEM
 
@@ -60,19 +60,12 @@ entity_models:
           R:
           PORT:
 
-    pvi:
-      yaml_path: drvQuadEM.pvi.device.yaml
-      ui_macros:
-        P:
-        R:
-      pv: true
-      pv_prefix: $(P)$(R)
-
-  #
-  # WARNING - non print commands in Initialise not parsed
   - name: Plugins
     description: |-
-      This plugin instantiates 11 stats plugins for Current, Sum, Diff and Pos
+      Instantiates
+        12 NDStats plugins for Current, Sum, Diff and Pos Channels
+        12 NDTimeSeries plugins
+        12 NDArray plugins
     parameters:
       DEVICE:
         type: object
@@ -107,23 +100,40 @@ entity_models:
         default: 16
 
     pre_init:
-      - when: first
       - value: |
-          # NDStatsConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
-          # NDTimeSeriesConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxSignals)
 
-      - value: |
-          {% for tab in ["I1", "I2", "I3", "I4" , "SumX", "SumY", "SumAll", "DiffX", "DiffY", "PosX", "PosY"] -%}
-          {# support the historical, inconsistent naming of PVs and asyn ports #}
-          {%- set r_val_stats = "Cur%d" % loop.index if tab.startswith("I") else tab -%}
-          {%- set r_val_array = "ARR%d" % loop.index if tab.startswith("I") else "ARR%s" % tab -%}
+          ################################################################################
+          # Just demonstrating that Entities can have their own pre_init AND SubEntities.
+          # This is the pre_init for quadem.Plugins device with id {{PORTPREFIX}}
+          ################################################################################
 
-          NDStatsConfigure({{PORTPREFIX}}.STATS.{{tab}}, {{QUEUE}}, 0, {{DEVICE.PORT}}, {{loop.index0}}, 0, 0, 0, 0, 1)
-          dbLoadRecords("$(ADCORE)/db/NDStats.template", "P={{DEVICE.P}},R=:{{r_val_stats}}:, PORT={{PORTPREFIX}}.STATS.{{tab}}, ADDR=0, NDARRAY_PORT={{DEVICE.PORT}}, NDARRAY_ADDR={{loop.index0}}, NCHANS={{STAT_NCHAN}}, ENABLED=1, XSIZE={{STAT_XSIZE}}, YSIZE=0, HIST_SIZE={{HIST_SIZE}}")
+          #
 
-          NDTimeSeriesConfigure({{PORTPREFIX}}.STATS.{{tab}}_TS, {{QUEUE}}, 0, {{PORTPREFIX}}.STATS.{{tab}}, 1, 23)
-          dbLoadRecords("$(ADCORE)/db/NDTimeSeries.template",  "P={{DEVICE.P}}, R=:{{r_val_stats}}:TS:, PORT={{PORTPREFIX}}.STATS.{{tab}}_TS,ADDR=1, NDARRAY_PORT={{PORTPREFIX}}.{{tab}}, NDARRAY_ADDR=0, NCHANS={{STAT_NCHAN}}, ENABLED=1")
+    shared:
+      - &stats { type: ADCore.NDStats, P: "{{DEVICE.P}}", NCHANS: "{{STAT_NCHAN}}", XSIZE: "{{STAT_XSIZE}}", YSIZE: 0, HIST_SIZE: "{{HIST_SIZE}}", NDARRAY_PORT: "{{DEVICE}}", ENABLED: 1 }
+      - &arrays { type: ADCore.NDStdArrays, P: "{{DEVICE.P}}", NDARRAY_PORT: "{{DEVICE}}", ENABLED: 1, TYPE: Float64, FTVL: DOUBLE, NELEMENTS: "{{STAT_XSIZE}}" }
 
-          NDStdArraysConfigure({{PORTPREFIX}}.ARRAYS.{{tab}}, {{QUEUE}}, 0, {{DEVICE.PORT}}, {{loop.index0}}, 0, 0, 0, 0, 1)
-          dbLoadRecords("$(ADCORE)/db/NDStdArrays.template", "P={{DEVICE.P}},R=:{{r_val_array}}:, PORT={{PORTPREFIX}}.ARRAYS.{{tab}},ADDR=0, NDARRAY_PORT={{DEVICE.PORT}}, NDARRAY_ADDR={{loop.index0}}, ENABLED=1, FTVL=DOUBLE, TYPE=Float64, NCHANS={{STAT_NCHAN}}, XSIZE={{STAT_XSIZE}}, YSIZE=0, HIST_SIZE={{HIST_SIZE}}, NELEMENTS={{STAT_XSIZE}}")
-          {% endfor %}
+    sub_entities:
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I1", R: ":Cur1:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I2", R: ":Cur2:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I3", R: ":Cur3:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I4", R: ":Cur4:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SumX", R: ":SumX:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SumY", R: ":SumY:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SumAll", R: ":SumAll:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.DiffX", R: ":DiffX:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.DiffY", R: ":DiffY:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.PosX", R: ":PosX:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.PosY", R: ":PosY:" }
+
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.Arr1", R: ":Arr1:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.Arr2", R: ":Arr2:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.Arr3", R: ":Arr3:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.Arr4", R: ":Arr4:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumX", R: ":SumX:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumY", R: ":SumY:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumAll", R: ":SumAll:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DiffX", R: ":DiffX:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DiffY", R: ":DiffY:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.PosX", R: ":PosX:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.PosY", R: ":PosY:" }
