@@ -60,6 +60,13 @@ entity_models:
           R:
           PORT:
 
+
+    pvi:
+      yaml_path: drvQuadEM.pvi.device.yaml
+      pv_prefix: "{{ P }}"
+      ui_macros:
+        P:
+
   - name: Plugins
     description: |-
       Instantiates
