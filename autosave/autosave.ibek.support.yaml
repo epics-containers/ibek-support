@@ -1,89 +1,87 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.1.0/ibek.support.schema.json
 
 module: autosave
 
 entity_models:
   - name: Autosave
     description: |-
-      TODO:ADD DESCRIPTION
+      Autosave and restore support for EPICS IOCs
     parameters:
       iocName:
         type: str
         description: |-
           IOC Name EPICS prefix
 
+      P:
+        type: str
+        description: |-
+          PV prefix for autosave status PVs
+
       debug:
         type: int
         description: |-
           Debug level
+        default: 0
 
-      skip_1:
-        type: bool
+      positions_req_period:
+        type: int
         description: |-
-          If True, don't restore file 1
+          no. secs between positions save file updates. 0 for no save file
+        default: 0 # set to 5 for DLS motors
 
-      server:
-        type: str
+      setting_req_period:
+        type: int
         description: |-
-          NFS server name (vxWorks bl=False only)
-
-      ip:
-        type: str
-        description: |-
-          NFS server ip (vsWorks only), or blgateway ip if bl=True
+          no. secs between settings save file updates. 0 for no save file
+        default: 30
 
       path:
         type: str
         description: |-
           Root of path to put autosave files in, ioc name will be appended to this
 
-      name:
-        type: id
-        description: |-
-          Object name
-
-      vx_uid:
+      num_seq_files:
         type: int
         description: |-
-          UID of vxWorks autosave user
-        default: 37134
+          Number of sequence files to keep
+        default: 3
 
-      vx_gid:
+      sequence_period:
         type: int
         description: |-
-          GID of vxWorks autosave group
-        default: 500
+          Period in seconds between sequence files
+        default: 600
 
-      bl:
+      backups:
         type: bool
         description: |-
-          If True, then assume we are on a beamline, that ip=blgateway machine ip and make sure the relevant storage server or directory is up before booting.
+          If True, create dated backup files
+        default: True
 
     pre_init:
       - value: |
           # Autosave and restore initialisation
-          save_restoreSet_status_prefix "%s"
-          save_restoreSet_Debug %d
-          save_restoreSet_NumSeqFiles 3
-          save_restoreSet_SeqPeriodInSeconds 600
-          save_restoreSet_DatedBackupFiles 1
+          set_requestfile_path("/epics", "autosave")
+          save_restoreSet_status_prefix {{ P }}
+          save_restoreSet_Debug {{ debug }}
+          save_restoreSet_NumSeqFiles {{ num_seq_files }}
+          save_restoreSet_SeqPeriodInSeconds {{ sequence_period }}
+          save_restoreSet_DatedBackupFiles {{ backups }}
           save_restoreSet_IncompleteSetsOk 1
-          set_pass0_restoreFile "%s_0.sav"
-          set_pass0_restoreFile "%s_1.sav"
-          set_pass1_restoreFile "%s_1.sav"
-          set_pass1_restoreFile "%s_2.sav"
+          {{ if positions_req_period != 0 -}}
+          set_pass0_restoreFile /epics/runtime/autosave_positions.req
+          {{- endif }}
+          {{ if setting_req_period != 0 -}}
+          set_pass1_restoreFile /epics/runtime/autosave_settings.req
+          {{- endif }}
 
     post_init:
       - value: |
+          {{ if positions_req_period != 0 -}}
           create_monitor_set "%s_0.req",  5, ""
+          {{- endif }}
+          {{ if setting_req_period != 0 -}}
+          set_pass1_restoreFile /epics/runtime/autosave_settings.req
+          {{- endif }}
+
           create_monitor_set "%s_1.req", 30, ""
-          create_monitor_set "%s_2.req", 30, ""
-    databases:
-      - file: $(AUTOSAVE)/db/dlssrfile.template
-        args:
-          device:
-          file:
-      - file: $(AUTOSAVE)/db/dlssrstatus.template
-        args:
-          device:
-          name:
