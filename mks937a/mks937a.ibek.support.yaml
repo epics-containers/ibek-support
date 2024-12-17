@@ -463,12 +463,13 @@ entity_models:
         description: |-
           PV providing gauge reading in mbar
 
+    post_defines:
       eguInputPV:
         type: str
         description: |-
-          PV providing gauge reading in mbar
-        default: |-
-          {{input}}:EGU
+          Name of PV providing gauge reading in mbar
+        value: |-
+          {{ dom }}-VA-GAUGE-{{ "%02d" | format(id) }}:PLOG_CALC
 
     databases:
       - file: $(MKS937A)/db/mks937aGauge.template
