@@ -488,8 +488,9 @@ entity_models:
           p_egu_pv: "{{input}}"
 
     pre_init:
-      - value: |
-          epicsEnvSet "STREAM_PROTOCOL_PATH", "$(MKS937A)/mks937aApp/protocol/"
+      - when: first
+        value: |
+          epicsEnvSet "STREAM_PROTOCOL_PATH", "$(STREAM_PROTOCOL_PATH):$(MKS937A)/mks937aApp/protocol/"
 
   - name: mks937aGaugeGroup
     description: |-

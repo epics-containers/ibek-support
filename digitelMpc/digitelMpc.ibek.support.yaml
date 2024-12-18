@@ -221,8 +221,9 @@ entity_models:
         default: $(device)
 
     pre_init:
-      - value: |
-          epicsEnvSet "STREAM_PROTOCOL_PATH", "$(DIGITELMPC)/digitelMpcApp/protocol/"
+      - when: first
+        value: |
+          epicsEnvSet "STREAM_PROTOCOL_PATH", "$(STREAM_PROTOCOL_PATH):$(DIGITELMPC)/digitelMpcApp/protocol/"
 
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcIonp.template
@@ -414,10 +415,9 @@ entity_models:
         default: 20
 
     pre_init:
-
-      - value: |
+      - when: first
+        value: |
           epicsEnvSet "STREAM_PROTOCOL_PATH", "$(STREAM_PROTOCOL_PATH):$(DIGITELMPC)/digitelMpcApp/protocol/"
-        when: Once
 
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcTsp.template

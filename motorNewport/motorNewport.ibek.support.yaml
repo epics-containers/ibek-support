@@ -97,7 +97,7 @@ entity_models:
 
     pre_init:
       - value: |
-          # epicsEnvSet "STREAM_PROTOCOL_PATH", "$(MOTORNEWPORT)/protocol/"
+          # epicsEnvSet "STREAM_PROTOCOL_PATH", "$(STREAM_PROTOCOL_PATH):$(MOTORNEWPORT)/protocol/"
           # Create Asyn Port
           drvAsynIPPortConfigure("{{controllerName}}_ASYN", "{{IP}}:{{TCPPORT}}", {{ASYNPRIO}}, {{AUTOCONNECT}}, {{NOPRECESSESOS}})
           # asynInterposeEosConfig("{{controllerName}}_ASYN",0,2000,0)
