@@ -1,0 +1,104 @@
+# yaml-language-server: # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
+
+module: ADAndor3
+
+entity_models:
+  - name: andor3
+    description: |-
+      Creates a andorSCMOS camera areaDetector driver
+    parameters:
+      P:
+        type: str
+        description: |-
+          Device Prefix
+      R:
+        type: str
+        description: |-
+          Device Suffix
+      PORT:
+        type: id
+        description: |-
+          Port name for the detector
+      TIMEOUT:
+        type: int
+        description: |-
+          Timeout
+        default: 1
+      ADDR:
+        type: int
+        description: |-
+          Asyn Port address
+        default: 0
+      SCANRATE:
+        type: enum
+        description: |-
+          Specified scan rate for cpu intensive PVs
+        default: I/O Intr
+        values:
+          .1 second:
+          .2 second:
+          .5 second:
+          1 second:
+          2 second:
+          5 second:
+          10 second:
+          I/O Intr:
+          Event:
+          Passive:
+      BUFFERS:
+        type: int
+        description: |-
+          Maximum number of NDArray buffers to be created for plugin callbacks
+        default: 50
+      MEMORY:
+        type: int
+        description: |-
+          Max memory to allocate, should be maxw*maxh*nbuffer for driver and all attached plugins
+        default: 0
+      CAMERA_ID:
+        type: int
+        description: |-
+          Camera identifier
+        default: 0
+      PRIORITY:
+        type: int
+        description: |-
+          The thread priority for the asyn port driver thread
+        default: 0
+      STACKSIZE:
+        type: int
+        description: |-
+          The stack size for the asyn port driver thread
+        default: 100000
+      MAX_FRAMES:
+        type: int
+        description: |-
+          Max Frames - the number of frame buffers the driver queues to the SDK when acquiring data. The default value is 10. Increasing this number will allow the SDK to transfer images from the camera at the full interface speed even when the driver is not reading them that quickly. This will help to prevent frames from filling the camera RAM when operating close to the maximum interface transfer rate
+        default: 10
+      SET_SDK_ENV:
+        type: bool
+        description: |-
+          Add environment variables based on the Andor3 SDK path in configure/RELEASE (required for BitFlow framegrabbers)
+        default: false
+      ANDOR_SDK3:
+        type: str
+        description: |-
+          Path to the Andor3 SDK
+
+    databases:
+      - file: $(ADANDOR3)/db/andor3.template
+        args:
+          P:
+          R:
+          PORT:
+          TIMEOUT:
+          ADDR:
+          SCANRATE:
+
+    pre_init:
+      - value: |
+          # Set LD library path and BitFlow install dir variables to built Andor3 SDK
+          epicsEnvSet "LD_LIBRARY_PATH", \'{{ANDOR_SDK3}}/prefix/lib\'
+          epicsEnvSet "BITFLOW_INSTALL_DIRS", \'{{ANDOR_SDK3}}/prefix/bf\'
+          # andor3Config(portName, cameraID, maxBuffers, maxMemory, priority, stackSize, maxFrames)
+          andor3Config("{{PORT}}", "{{CAMERA_ID}}", {{BUFFERS}}, {{MEMORY}}, {{PRIORITY}}, {{STACKSIZE}}, "{{MAX_FRAMES}}")
