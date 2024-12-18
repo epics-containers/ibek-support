@@ -66,6 +66,7 @@ entity_models:
       pv_prefix: "{{ P }}"
       ui_macros:
         P:
+        R:
 
   - name: Plugins
     description: |-
