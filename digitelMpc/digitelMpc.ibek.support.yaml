@@ -220,6 +220,11 @@ entity_models:
           Template argument
         default: $(device)
 
+    pre_init:
+      - when: first
+        value: |
+          epicsEnvSet "STREAM_PROTOCOL_PATH", "$(STREAM_PROTOCOL_PATH):$(DIGITELMPC)/digitelMpcApp/protocol/"
+
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcIonp.template
         args: { device: null, port: "{{MPC.port}}", unit: "{{MPC.unit}}", pump: null, size: null, sp1on: null, sp1off: null, sp2on: null, sp2off: null, alh: null, text: null, proto: null, disptext: null }
@@ -408,6 +413,11 @@ entity_models:
         description: |-
           duration- On duration (s)       - new addition May 2010 for dual TSP systems on MPCe - defaults to 10
         default: 20
+
+    pre_init:
+      - when: first
+        value: |
+          epicsEnvSet "STREAM_PROTOCOL_PATH", "$(STREAM_PROTOCOL_PATH):$(DIGITELMPC)/digitelMpcApp/protocol/"
 
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcTsp.template

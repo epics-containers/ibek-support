@@ -17,7 +17,7 @@ ibek support git-clone ${NAME} ${VERSION} --org https://github.com/paulscherreri
 ibek support register ${NAME}
 
 # set CALC blank (to overwrite the RELEASE value) to build without calc
-ibek support add-release-macro CALC
+ibek support add-release-macro CALC --no-replace
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs stream
