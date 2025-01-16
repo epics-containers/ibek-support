@@ -13,7 +13,7 @@ entity_models:
           TODO: ADD DESCRIPTION
 
       relay_number:
-        type: str
+        type: int
         description: |-
           The relay number (1..12).
 
@@ -225,10 +225,11 @@ entity_models:
         description: |-
           The device's name for gui purposes
 
-      GCTLR:
-        type: str
-        description: |-
-          The gauge controller PV prefix, for gui purposes
+      # TODO - when we come to construct screens, how is this going to work?
+      # - type: str
+      #   name: GCTLR
+      #   description: |-
+      #     The gauge controller PV prefix, for gui purposes
 
       ctlsp_level:
         type: float
@@ -496,7 +497,7 @@ entity_models:
           device name
 
       delay:
-        type: str
+        type: int
         description: |-
           delay between starting each IMG
 
@@ -1115,7 +1116,7 @@ entity_models:
           device name
 
       channel:
-        type: str
+        type: int
         description: |-
           MKS 937A channel number (1-4)
 
