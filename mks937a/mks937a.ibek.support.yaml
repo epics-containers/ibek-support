@@ -569,7 +569,6 @@ entity_models:
         type: id
         description: |-
           Device identifier (for reference from controlled devices)
-          This is a little redundant but is a legacy from builder
 
       device:
         type: str

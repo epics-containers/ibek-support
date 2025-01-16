@@ -300,6 +300,11 @@ entity_models:
       Template database for an MKS937B Multi-Sensor System
       Ian Gillingham - April 2010
     parameters:
+      name:
+        type: id
+        description: |-
+          Device identifier (for reference from controlled devices)
+
       device:
         type: str
         description: |-
@@ -701,7 +706,7 @@ entity_models:
           device name
 
       channel:
-        type: str
+        type: int
         description: |-
           MKS 937B channel number (1-4)
 
@@ -1074,12 +1079,12 @@ entity_models:
           Full name of ADC reading PV.
 
       c:
-        type: str
+        type: int
         description: |-
           ADC card number
 
       s:
-        type: str
+        type: int
         description: |-
           ADC signal number
 
