@@ -48,8 +48,9 @@ entity_models:
         default: 1
 
     pre_init:
-      - value: |
-          epicsEnvSet "STREAM_PROTOCOL_PATH", "$(LAKESHORE340)/lakeshore340App/protocol/"
+      - when: first
+        value: |
+          epicsEnvSet "STREAM_PROTOCOL_PATH", "$(STREAM_PROTOCOL_PATH):$(LAKESHORE340)/lakeshore340App/protocol/"
 
     databases:
       - file: $(LAKESHORE340)/db/lakeshore340.template

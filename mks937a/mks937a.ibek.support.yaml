@@ -487,6 +487,11 @@ entity_models:
           device: "{{eguInputPV}}"
           p_egu_pv: "{{input}}"
 
+    pre_init:
+      - when: first
+        value: |
+          epicsEnvSet "STREAM_PROTOCOL_PATH", "$(STREAM_PROTOCOL_PATH):$(MKS937A)/mks937aApp/protocol/"
+
   - name: mks937aGaugeGroup
     description: |-
       Template database for a group of up to 8 MKS937A
@@ -569,7 +574,6 @@ entity_models:
         type: id
         description: |-
           Device identifier (for reference from controlled devices)
-          This is a little redundant but is a legacy from builder
 
       device:
         type: str

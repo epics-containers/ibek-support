@@ -16,6 +16,7 @@ entity_models:
         type: id
         description: |-
           Identifier for this device - typically IPAC{{ slot }}
+        default: IPAC{{ slot }}
 
       intLevel:
         type: int
@@ -33,6 +34,14 @@ entity_models:
         type: object
         description: Interrupt Vector reserved with epics.InterruptVectorVME, count=1
 
+    pre_defines:
+      carrier_id:
+        description: |-
+          carrier card ID - zero based and auto incremented on each new carrier
+        type: int
+        value: |-
+          {{ _global.incrementor("CarrierCardId", start=0, stop=64) }}
+
     pre_init:
       - value: |
           # ipacAddHy8002("slot, intLevel, interrupt_vector")
@@ -40,7 +49,9 @@ entity_models:
 
       - value: |
           ipacAddHy8002("{{ slot }}, {{ intLevel}}, $({{interrupt_vector.name}})")
+          # record current carrier card ID in and increment it
           epicsEnvSet {{ name }} = {{ carrier_id }}
+          ipacAddNullCarrier()
 
   - name: Hy8001
     description: |-
@@ -50,6 +61,10 @@ entity_models:
         type: int
         description: |-
           VME Slot number
+
+      interrupt_vector:
+        type: object
+        description: Interrupt Vector reserved with epics.InterruptVectorVME, count=1
 
       direction:
         type: enum
@@ -102,9 +117,7 @@ entity_models:
 
     pre_init:
       - value: |
-          Hy8001Configure({{cardid}}, {{slot}}, {{vector}}, {{intLevel}}, 0, 0, {{clock}}, {{scan}}, {{direction}}, {{invertin}}, {{invertout}})
-  # TODO - MISSING ARGS: vector
-  # WARNING - non print commands in Initialise not parsed
+          Hy8001Configure({{cardid}}, {{slot}}, {{interrupt_vector}}, {{intLevel}}, 0, 0, {{clock}}, {{scan}}, {{direction}}, {{invertin}}, {{invertout}})
 
   - name: Hy8005
     description: |-

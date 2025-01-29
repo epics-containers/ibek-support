@@ -17,7 +17,7 @@ ibek support add-release-macro SNCSEQ --no-replace
 
 # installing for arm
 ibek support apt-install \
-    libntirpc-dev
+    libtirpc-dev
 
 # get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION}

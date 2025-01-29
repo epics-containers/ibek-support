@@ -13,7 +13,7 @@ entity_models:
           TODO: ADD DESCRIPTION
 
       relay_number:
-        type: str
+        type: int
         description: |-
           The relay number (1..12).
 
@@ -225,10 +225,11 @@ entity_models:
         description: |-
           The device's name for gui purposes
 
-      GCTLR:
-        type: str
-        description: |-
-          The gauge controller PV prefix, for gui purposes
+      # TODO - when we come to construct screens, how is this going to work?
+      # - type: str
+      #   name: GCTLR
+      #   description: |-
+      #     The gauge controller PV prefix, for gui purposes
 
       ctlsp_level:
         type: float
@@ -288,7 +289,6 @@ entity_models:
           dom:
           ctlsp_hopr:
           ctlsp_drvh:
-          GCTLR:
           ctlsp_level:
           ctlspoff_desc:
           plog_calc:
@@ -300,6 +300,11 @@ entity_models:
       Template database for an MKS937B Multi-Sensor System
       Ian Gillingham - April 2010
     parameters:
+      name:
+        type: id
+        description: |-
+          Device identifier (for reference from controlled devices)
+
       device:
         type: str
         description: |-
@@ -314,6 +319,11 @@ entity_models:
         type: int
         description: |-
           Controller address (001 .. 253)
+
+    pre_init:
+      - when: first
+        value: |
+          epicsEnvSet "STREAM_PROTOCOL_PATH", "$(STREAM_PROTOCOL_PATH):$(MKS937B)/mks937bApp/protocol/"
 
     databases:
       - file: $(MKS937B)/db/mks937b.template
@@ -472,7 +482,6 @@ entity_models:
           ctlsp_level:
           device:
           offwarn:
-          GCTLR:
           channel:
 
   - name: mks937bImgGroup
@@ -486,7 +495,7 @@ entity_models:
           device name
 
       delay:
-        type: str
+        type: int
         description: |-
           delay between starting each IMG
 
@@ -611,10 +620,10 @@ entity_models:
         description: |-
           or (if using Hy8401 VME IP) mks937bHy8401.template
 
-      GCTLR:
-        type: str
-        description: |-
-          The gauge controller PV prefix, for gui purposes
+      # GCTLR:
+      #   type: str
+      #   description: |-
+      #     The gauge controller PV prefix, for gui purposes
 
       ctlsp_level:
         type: float
@@ -701,7 +710,7 @@ entity_models:
           device name
 
       channel:
-        type: str
+        type: int
         description: |-
           MKS 937B channel number (1-4)
 
@@ -1074,12 +1083,12 @@ entity_models:
           Full name of ADC reading PV.
 
       c:
-        type: str
+        type: int
         description: |-
           ADC card number
 
       s:
-        type: str
+        type: int
         description: |-
           ADC signal number
 
@@ -1105,7 +1114,7 @@ entity_models:
           device name
 
       channel:
-        type: str
+        type: int
         description: |-
           MKS 937A channel number (1-4)
 

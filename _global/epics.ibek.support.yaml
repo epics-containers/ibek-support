@@ -85,4 +85,4 @@ entity_models:
 
     env_vars:
       - name: "{{ name }}"
-        value: '{{  _global.incrementor("InterruptVector", start=192, stop=255, inc=count) }}'
+        value: '{{  _global.incrementor("InterruptVector", start=192, stop=255, increment=count) }}'
