@@ -37,7 +37,8 @@ if [[ $EPICS_TARGET_ARCH == "RTEMS"* ]]; then
     make install
     make clean
 
-    # fix Makefile to not make StreamApp - we only need the library from src/
+    # fix Makefile to not make StreamApp - we only need the library from src
+    # streamApp fails to build for RTEMS as it is a HOST+IOC targetted Makefile
     sed -i -E 's/(^[^#].*streamApp.*$)/# \1/' ${SUPPORT}/${NAME}/Makefile
 
     # declare location of the pcre library
@@ -68,3 +69,10 @@ ${FOLDER}/../_global/install.sh ${NAME}
 ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
 ibek support generate-links ${FOLDER}
+
+
+if [[ $EPICS_TARGET_ARCH == "RTEMS"* ]]; then
+    # make pcre library available to the IOC (can this be done more cleanly?)
+    cp ${SUPPORT}/PCRE/lib/libpcre.a ${SUPPORT}/${NAME}/lib/RTEMS-beatnik
+    ibek support add-libs pcre
+fi
