@@ -15,6 +15,8 @@ ibek support register ${NAME}
 
 if [[ $EPICS_TARGET_ARCH == "RTEMS"* ]]; then
 
+    ibek support add-libs pcre
+
     cd ${SUPPORT}/${NAME}
 
     # get the pcre source
@@ -74,5 +76,4 @@ ibek support generate-links ${FOLDER}
 if [[ $EPICS_TARGET_ARCH == "RTEMS"* ]]; then
     # make pcre library available to the IOC (can this be done more cleanly?)
     cp ${SUPPORT}/PCRE/lib/libpcre.a ${SUPPORT}/${NAME}/lib/RTEMS-beatnik
-    ibek support add-libs pcre
 fi
