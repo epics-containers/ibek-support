@@ -16,8 +16,11 @@ set -xe
 ibek support add-release-macro SNCSEQ --no-replace
 
 # installing for arm
-ibek support apt-install \
-    libtirpc-dev
+ibek support apt-install libtirpc-dev
+
+# declare packages for installation in the Dockerfile's runtime stage
+ibek support add-runtime-packages libtirpc-dev
+
 
 # get the source and fix up the configure/RELEASE files
 ibek support git-clone ${NAME} ${VERSION}
@@ -43,5 +46,3 @@ ibek support compile ${NAME}
 
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
 ibek support generate-links ${FOLDER}
-
-
