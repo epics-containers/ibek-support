@@ -366,8 +366,8 @@ entity_models:
 
     pre_init:
       - value: |
-          # TODO this is wrong!
-          %sConfigure("%s", "%s", %d, %d, %d)
-          asynSetOption("%s", 0, "%s", "%s")
-          asynOctetSetInputEos("%s", 0, %s)
-          asynOctetSetOutputEos("%s", 0, %s)
+          # # TODO add AsynSerialConfigure steps
+          # %sConfigure("%s", "%s", %d, %d, %d)
+          # asynSetOption("%s", 0, "%s", "%s")
+          # asynOctetSetInputEos("%s", 0, %s)
+          # asynOctetSetOutputEos("%s", 0, %s)
