@@ -43,5 +43,3 @@ ibek support compile ${NAME}
 
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
 ibek support generate-links ${FOLDER}
-
-

@@ -51,6 +51,9 @@ else
     ibek support apt-install libpcre3-dev
     ibek support add-runtime-packages libpcre3
 
+    # declare packages for installation in the Dockerfile's runtime stage
+    ibek support add-runtime-packages libpcre3
+
     # declare location of the pcre system library
     ibek support add-config-macro ${NAME} PCRE_LIB /usr/lib/x86_64-linux-gnu
 fi
