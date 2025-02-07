@@ -98,6 +98,9 @@ entity_models:
     databases:
       - file: $(MKS937B)/db/mks937bRelays.template
         args:
+          address: "{{ '%03d' % GAUGE.GCTLR.address }}"
+          port: "{{ GAUGE.GCTLR.port }}"
+          device: "{{ GAUGE.device }}"
           relay_drvh:
           relay_drvl:
           relay_off_desc:
@@ -330,7 +333,7 @@ entity_models:
         args:
           device:
           port:
-          address:
+          address: "{{ '%03d' % address }}"
 
   - name: mks937bPirgDummy
     description: |-
@@ -402,6 +405,10 @@ entity_models:
     databases:
       - file: $(MKS937B)/db/mks937bFastRelay.template
         args:
+          address: "{{ '%03d' % GAUGE.GCTLR.address }}"
+          port: "{{ GAUGE.GCTLR.port }}"
+          device: "{{ GAUGE.device }}"
+          channel: "{{ GAUGE.channel }}"
           frcsp_hopr:
           frcsp_drvl:
           frcsp_drvh:
@@ -697,7 +704,7 @@ entity_models:
 
   - name: mks937bImg
     description: |-
-      TODO:ADD DESCRIPTION
+      Template database for an IMG connected to an MKS937B
     parameters:
       GCTLR:
         type: object
@@ -878,6 +885,8 @@ entity_models:
     databases:
       - file: $(MKS937B)/db/mks937bImg.template
         args:
+          address: "{{ '%03d' % GCTLR.address }}"
+          port: "{{ GCTLR.port }}"
           prosp_lolo:
           ilk_write_access_pv:
           prosp_hopr:
@@ -1132,6 +1141,8 @@ entity_models:
     databases:
       - file: $(MKS937B)/db/mks937bPirg.template
         args:
+          address: "{{ '%03d' % GCTLR.address }}"
+          port: "{{ GCTLR.port }}"
           device:
           offwarn:
           GCTLR:
