@@ -925,7 +925,7 @@ entity_models:
       - file: $(MKS937A)/db/mks937aGauge.template
         args:
           dom:
-          id:
+          id: "{{ '%02d' % id }}"
           c:
           s:
           name:

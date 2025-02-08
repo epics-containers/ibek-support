@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.1.2/ibek.support.schema.json
 
 module: mks937b
 
@@ -95,12 +95,20 @@ entity_models:
           Link to the interlocks setpoint global write access record.
         default: $(device):CONSTZERO
 
+    post_defines:
+      relay_n:
+        description: get the next relay number from the associated gauge
+        type: int
+        value: |-
+          {% set nothing = GAUGE.relay_count.append(0) %}
+          {{ GAUGE.relay_count | length }}
+
     databases:
       - file: $(MKS937B)/db/mks937bRelays.template
         args:
           address: "{{ '%03d' % GAUGE.GCTLR.address }}"
           port: "{{ GAUGE.GCTLR.port }}"
-          device: "{{ GAUGE.device }}"
+          device: "{{ GAUGE.device ~ ':RLY' ~ relay_n }}"
           relay_drvh:
           relay_drvl:
           relay_off_desc:
@@ -282,6 +290,13 @@ entity_models:
           Template argument
         default: 10.0*A/32767.0/0.6 - 12.0
 
+    pre_defines:
+      relay_count:
+        description: next relay number for this guage type
+        type: list
+        # length of a list is used as the count
+        value: "{{ [] | list }}"
+
     databases:
       - file: $(MKS937B)/db/mks937bGauge.template
         args:
@@ -296,7 +311,7 @@ entity_models:
           ctlspoff_desc:
           plog_calc:
           ctlsp_desc:
-          id:
+          id: "{{ '%02d' % id }}"
 
   - name: mks937b
     description: |-
@@ -700,7 +715,7 @@ entity_models:
           ctlspoff_desc:
           plog_calc:
           ctlsp_desc:
-          id:
+          id: "{{ '%02d' % id }}"
 
   - name: mks937bImg
     description: |-
@@ -881,6 +896,13 @@ entity_models:
         description: |-
           Default = 1 (I/L Safe), 0 (Force ON), 2 (I/L Operating).
         default: 1
+
+    pre_defines:
+      relay_count:
+        description: next relay number for this guage type
+        type: list
+        # length of a list is used as the count
+        value: "{{ [] | list }}"
 
     databases:
       - file: $(MKS937B)/db/mks937bImg.template
@@ -1137,6 +1159,13 @@ entity_models:
         description: |-
           Flag to display a warning that switching off the PIRG could trip the beam#
         default: 0
+
+    pre_defines:
+      relay_count:
+        description: next relay number for this guage type
+        type: list
+        # length of a list is used as the count
+        value: "{{ [] | list }}"
 
     databases:
       - file: $(MKS937B)/db/mks937bPirg.template
