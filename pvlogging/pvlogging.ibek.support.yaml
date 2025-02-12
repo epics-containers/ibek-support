@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.1.2/ibek.support.schema.json
+
+module: pvlogging
+
+entity_models:
+
+  - name: BlacklistPvs
+    description: |-
+      Reads a list of PVs which must be excluded from the pvlogging functionality.
+    parameters:
+      blacklist_file:
+        type: str
+        description: |-
+          Name of text file comprising the PVs blacklisted from pvlogging
+        default: /epics/ioc/config/pvlogging_excl.txt
+
+    pre_init:
+      - when: first
+        value: |
+          load_logging_blacklist {{ blacklist_file }}
+
+  - name: PvLogging
+    description: |-
+      Adds logging of caputs to PVs.
+    parameters:
+      access_file:
+        type: str
+        description: |-
+          Name of access control file
+        default: $(PVLOGGING)/src/access.acf
+
+      logging_enabled:
+        type: int
+        description: |-
+          Enable pvlogging functionality (disabled=0)
+        default: 1
+      
+      max_length:
+        type: int
+        description: |-
+          Maximum length of logged arrays
+        default: 10
+
+    pre_init:
+      - when: first
+        value: |
+          asSetFilename {{ access_file }}
+          set_logging_enable {{ logging_enabled }}
+          set_max_array_length {{ max_length }}
