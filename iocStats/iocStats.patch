@@ -3,39 +3,19 @@ Author: Giles Knap <giles.knap@diamond.ac.uk>
 Date:   Sun Mar 3 11:08:31 2024 +0000
 
     PaulsFixes
-
-diff --git a/configure/CONFIG_SITE b/configure/CONFIG_SITE
-index bb04d36..c201f24 100644
---- a/configure/CONFIG_SITE
-+++ b/configure/CONFIG_SITE
-@@ -11,7 +11,7 @@
- # Set this when you only want to compile this application
- # for a subset of the cross-compiled target architectures
- # that Base is built for.
--#CROSS_COMPILER_TARGET_ARCHS = RTEMS-beatnik
-+CROSS_COMPILER_TARGET_ARCHS = RTEMS-beatnik
- #CROSS_COMPILER_TARGET_ARCHS = RTEMS-uC5282
- #CROSS_COMPILER_TARGET_ARCHS = RTEMS-pc586
- 
-diff --git a/configure/RELEASE b/configure/RELEASE
-index 6b27de3..1328c91 100644
---- a/configure/RELEASE
-+++ b/configure/RELEASE
-@@ -11,11 +11,11 @@ MAKE_TEST_IOC_APP=YES
- # Define the version of modules needed by
- # IOC apps or other Support apps - used by testIocStatsApp
- # =============================================================
--SUPPORT=/usr/local/epics/R3.14.11/modules/soft/synApps_5_5/support
-+SUPPORT=/dls_sw/work/R7.0-net-legacy/support
- 
--SNCSEQ     = $(SUPPORT)/seq-2-0-12
-+SNCSEQ     = $(SUPPORT)/seq
- 
--EPICS_BASE=/afs/slac/g/spear/epics/base
-+EPICS_BASE=/dls_sw/work/epics/R7.0-net-legacy
- 
- # These lines allow developers to override these RELEASE settings
- # without having to modify this file directly.
+diff --git a/devIocStats/os/RTEMS/devIocStatsOSD.h b/devIocStats/os/RTEMS/devIocStatsOSD.h
+index b21cc0e..614a326 100644
+--- a/devIocStats/os/RTEMS/devIocStatsOSD.h
++++ b/devIocStats/os/RTEMS/devIocStatsOSD.h
+@@ -79,7 +79,7 @@
+ #elif   (defined(__PPC__) && ((__RTEMS_MAJOR__ > 4) \
+          || (__RTEMS_MAJOR__ == 4 && __RTEMS_MINOR__ > 9) \
+          || (__RTEMS_MAJOR__ == 4 && __RTEMS_MINOR__ == 9 && __RTEMS_REVISION__ > 0)))
+-#define reboot(x) bsp_reset()
++#define reboot(x) exit(x)
+ #else
+ #define reboot(x) rtemsReboot()
+ #endif
 diff --git a/devIocStats/os/RTEMS/devIocStatsOSD.h b/devIocStats/os/RTEMS/devIocStatsOSD.h
 index b21cc0e..8b9c99b 100644
 --- a/devIocStats/os/RTEMS/devIocStatsOSD.h

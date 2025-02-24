@@ -366,8 +366,12 @@ entity_models:
 
     pre_init:
       - value: |
-          # # TODO add AsynSerialConfigure steps
-          # %sConfigure("%s", "%s", %d, %d, %d)
-          # asynSetOption("%s", 0, "%s", "%s")
-          # asynOctetSetInputEos("%s", 0, %s)
-          # asynOctetSetOutputEos("%s", 0, %s)
+
+          # serial port settings for {{name}}
+          drvAsynSerialPortConfigure("{{name}}", "{{port}}" , 0, 0, 0)
+          asynSetOption("{{name}}",0,"baud",{{baud}})
+          asynSetOption("{{name}}",0,"bits",{{bits}})
+          asynSetOption("{{name}}",0,"parity","{{parity}}")
+          asynSetOption("{{name}}",0,"stop","{{stop}}")
+          asynSetOption("{{name}}",0,"clocal","Y")
+          asynSetOption("{{name}}",0,"crtscts","N")
