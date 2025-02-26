@@ -22,7 +22,6 @@ NDAttributeN
 NDGatherN
 NDOverlayN
 NDPluginBase
-NDROIStat8
 NDROIStatN
 NDTimeSeriesN
 "

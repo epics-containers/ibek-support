@@ -2596,7 +2596,7 @@ entity_models:
           Port name for the NDPluginROIStat plugin
 
       NDARRAY_PORT:
-        type: object
+        type: str
         description: |-
           Input array port
 
@@ -2672,12 +2672,13 @@ entity_models:
 
     pre_init:
       - value: |
-          # NDROIStatConfigure(portName, queueSize, blockingCallbacks,
-          NDROIStatConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}},
+          # NDROIStatConfigure(portName, queueSize, blockingCallbacks,, NDArrayPort, NDArrayAddr)
+          NDROIStatConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}},"{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
 
     databases:
-      - file: $(ADCORE)/db/NDROIStatN.template
+      - file: $(ADCORE)/db/NDROIStat8.template
         args:
+          NDARRAY_PORT:
           ADDR:
           NCHANS:
           P:
