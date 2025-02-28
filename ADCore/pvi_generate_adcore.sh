@@ -35,9 +35,14 @@ for nd in $ADCORE/db/ND*.template; do
         echo "Skipping $name"
         continue
     fi
+    if [[ $name == *File* ]] ; then
+        f="--template ${ADCORE}/db/NDFile.template"
+    else
+        f=""
+    fi
     echo ">>>>>>>>>> Processing $name <<<<<<<<<<"
     # maybe add --template ${ADCORE}/db/NDFile.template for NDFileXXX plugins ?
-    pvi convert device --name $name --template $nd .
+    pvi convert device --name $name --template $nd $f .
     pvi regroup NDPluginDriver.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 done
 
