@@ -1,8 +1,8 @@
-label: NDFileTIFF
+label: NDROIStat8
 children:
 
 - type: Group
-  name: NDFileTIFF
+  name: NDROIStat8
   layout:
     type: Grid
     labelled: true

@@ -1,8 +1,8 @@
-label: NDFileTIFF
+label: NDGather
 children:
 
 - type: Group
-  name: NDFileTIFF
+  name: NDGather
   layout:
     type: Grid
     labelled: true

@@ -1,5 +1,4 @@
 label: NDFileNexus
-parent: NDPluginFile
 children:
 
 - type: Group

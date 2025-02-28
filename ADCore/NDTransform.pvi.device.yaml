@@ -1,0 +1,15 @@
+label: NDTransform
+children:
+
+- type: Group
+  name: NDTransform
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalW
+    name: Type
+    write_pv: $(P)$(R)Type
+    write_widget:
+      type: ComboBox

@@ -1,0 +1,21 @@
+label: NDAttrPlot.template
+children:
+
+- type: Group
+  name: NDAttrPlot
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalW
+    name: Reset
+    write_pv: $(P)$(R)Reset
+    write_widget:
+      type: TextWrite
+
+  - type: SignalR
+    name: NPts
+    read_pv: $(P)$(R)NPts
+    read_widget:
+      type: TextRead

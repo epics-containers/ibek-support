@@ -1,3 +1,9 @@
 label: NDFileNetCDF
-parent: NDPluginFile
-children: []
+children:
+
+- type: Group
+  name: NDFileNetCDF
+  layout:
+    type: Grid
+    labelled: true
+  children: []

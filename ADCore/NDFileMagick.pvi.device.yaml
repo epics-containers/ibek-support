@@ -1,9 +1,8 @@
 label: NDFileMagick
-parent: NDPluginFile
 children:
 
 - type: Group
-  name: NDCodec
+  name: NDFileMagick
   layout:
     type: Grid
     labelled: true
@@ -18,12 +17,14 @@ children:
     read_widget:
       type: TextRead
 
-- type: Group
-  name: NDFileMagick
-  layout:
-    type: Grid
-    labelled: true
-  children:
+  - type: SignalRW
+    name: BitDepth
+    write_pv: $(P)$(R)BitDepth
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)BitDepth_RBV
+    read_widget:
+      type: TextRead
 
   - type: SignalRW
     name: CompressType
@@ -31,14 +32,5 @@ children:
     write_widget:
       type: ComboBox
     read_pv: $(P)$(R)CompressType_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: BitDepth
-    write_pv: $(P)$(R)BitDepth
-    write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)BitDepth_RBV
     read_widget:
       type: TextRead
