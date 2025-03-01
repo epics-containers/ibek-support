@@ -1,5 +1,4 @@
 label: asynNDArrayDriver
-parent: asynPortDriver
 children:
 
 - type: Group
