@@ -1,5 +1,4 @@
 label: ADDriver
-parent: asynNDArrayDriver
 children:
 
 - type: Group

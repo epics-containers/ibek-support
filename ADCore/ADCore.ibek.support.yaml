@@ -238,7 +238,7 @@ entity_models:
           ADDR:
 
     pvi:
-      yaml_path: NDPluginFFT.pvi.device.yaml
+      yaml_path: NDFFT.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -575,7 +575,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginOverlay.pvi.device.yaml
+      yaml_path: NDOverlay.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -698,7 +698,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginColorConvert.pvi.device.yaml
+      yaml_path: NDColorConvert.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -1038,7 +1038,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginStdArrays.pvi.device.yaml
+      yaml_path: NDStdArrays.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -1354,7 +1354,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginCircularBuff.pvi.device.yaml
+      yaml_path: NDCircularBuff.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -1598,7 +1598,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginCodec.pvi.device.yaml
+      yaml_path: NDCodec.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -1707,7 +1707,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginGather.pvi.device.yaml
+      yaml_path: NDGather.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -1816,7 +1816,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginROI.pvi.device.yaml
+      yaml_path: NDROI.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -1954,7 +1954,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginAttribute.pvi.device.yaml
+      yaml_path: NDAttribute.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -2102,7 +2102,7 @@ entity_models:
           ADDR:
 
     pvi:
-      yaml_path: NDPluginStats.pvi.device.yaml
+      yaml_path: NDStats.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -2416,7 +2416,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginProcess.pvi.device.yaml
+      yaml_path: NDProcess.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -2653,7 +2653,7 @@ entity_models:
       PORT:
         type: id
         description: |-
-          Port name for the NDPluginROIStat plugin
+          Port name for the NDROIStat plugin
 
       NDARRAY_PORT:
         type: object
@@ -2759,7 +2759,7 @@ entity_models:
           SCANRATE:
 
     pvi:
-      yaml_path: NDPluginROIStat.pvi.device.yaml
+      yaml_path: NDROIStat.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -2973,7 +2973,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginPva.pvi.device.yaml
+      yaml_path: NDPva.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -3081,7 +3081,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginTransform.pvi.device.yaml
+      yaml_path: NDTransform.pvi.device.yaml
       ui_macros:
         P:
         R:

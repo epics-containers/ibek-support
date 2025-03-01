@@ -1,0 +1,29 @@
+label: CCDMultiTrack
+parent: NDPluginBase
+children:
+
+- type: Group
+  name: CCDMultiTrackMisc
+  label: CCDMultiTrack Ungrouped
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalW
+    name: CCDMultiTrackStart
+    write_pv: $(P)$(R)CCDMultiTrackStart
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: CCDMultiTrackEnd
+    write_pv: $(P)$(R)CCDMultiTrackEnd
+    write_widget:
+      type: TextWrite
+
+  - type: SignalW
+    name: CCDMultiTrackBin
+    write_pv: $(P)$(R)CCDMultiTrackBin
+    write_widget:
+      type: TextWrite

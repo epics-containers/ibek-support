@@ -1,10 +1,10 @@
-label: NDPluginStdArrays
-parent: NDPluginDriver
+label: NDStdArrays
+parent: NDPluginBase
 children:
 
 - type: Group
-  name: NDPluginStdArraysMisc
-  label: NDPluginStdArrays Ungrouped
+  name: NDStdArraysMisc
+  label: NDStdArrays Ungrouped
   layout:
     type: Grid
     labelled: true

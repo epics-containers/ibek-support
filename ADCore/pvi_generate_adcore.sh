@@ -16,48 +16,83 @@ fi
 
 set -e
 
-# pvi needs to know which type of waveform to use so this is an unfortunate
-# workaround for now and note that the resulting pvi device will allways use
-# int32 waveform (is this still needed?)
-# sed -i s/\$\(TYPE\)/Int32/g ${ADCORE}/db/NDStdArrays.template
-
 ADCORE=/epics/support/ADCore
 cd ${IBS}
 
+# pvi needs to know which type of waveform to use so this is an unfortunate
+# workaround for now and note that the resulting pvi device will allways use
+# int32 waveform
+sed -i s/\$\(TYPE\)/Int32/g ${ADCORE}/db/NDStdArrays.template
+
+# these do not convert - throw PVI errors - TODO investigate
 blacklist="
 NDAttrPlotAttr.template
 NDAttrPlotData.template
 NDGatherN.template
-NDStdArrays.template
 "
 
-pvi convert device --name ADCore --template ${ADCORE}/db/ADBase.template .
+template_sets="
+NDFile
+CCDMultiTrack
+NDAttrPlot
+NDAttribute
+NDAttributeN,None
+NDBadPixel
+NDCircularBuff
+NDCodec
+NDColorConvert
+NDFFT
+NDFileHDF5,NDFile
+NDFileJPEG,NDFile
+NDFileMagick,NDFile
+NDFileNetCDF,NDFile
+NDFileNexus,NDFile
+NDFileTIFF,NDFile
+NDGather
+NDOverlay
+NDOverlayN,None
+NDPosPlugin
+NDProcess
+NDPva
+NDROI
+NDROIStat
+NDROIStat8,None
+NDROIStatN,None
+NDScatter
+NDStats
+NDStdArrays
+NDTimeSeries
+NDTimeSeriesN,None
+NDTransform
+"
+
+pvi convert device --name ADDriver --template ${ADCORE}/db/ADBase.template .
 pvi regroup ADDriver.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 
-pvi convert device --name asynNDArrayDriver --template ${ADCORE}/db/NDArrayBase.template .
-pvi regroup asynNDArrayDriver.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
+pvi convert device --name NDArrayBase --template ${ADCORE}/db/NDArrayBase.template .
+pvi regroup NDArrayBase.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 
-base="--template ${ADCORE}/db/NDArrayBase.template"
+pvi convert device --name NDPluginBase --parent NDArrayBase --template ${ADCORE}/db/NDPluginBase.template .
+pvi regroup NDPluginBase.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 
-for nd in $ADCORE/db/ND*.template; do
-    name=$(basename $nd .template)
+for template_set in $template_sets; do
 
-    if [[ $blacklist == *"$name".template* ]] ; then
-        echo ">>>>>>>>>> Skipping $name <<<<<<<<<<"
-        continue
+    # use commas to split the template set into a bash array
+    templates=(${template_set//,/ })
+    name=${templates[0]}
+    parent=
+    if [[ ${templates[1]} != "None" ]]; then
+        parent="--parent ${templates[1]:-NDPluginBase}"
     fi
 
-    if [[ $name == *File* ]] ; then
-        f="--template ${ADCORE}/db/NDFile.template"
-    else
-        f=""
-    fi
+    (
+        set -x
+        pvi convert device --name ${name} \
+          --template ${ADCORE}/db/${name}.template \
+          ${parent} .
+    )
+    pvi regroup ${name}.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 
-    echo ">>>>>>>>>> Processing $name <<<<<<<<<<"
-
-    # maybe add --template ${ADCORE}/db/NDFile.template for NDFileXXX plugins ?
-    pvi convert device --name $name $base $f --template $nd  .
-    pvi regroup $name.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 done
 
-ibek support generate-links ADCore
+ibek support generate-links $(pwd)
