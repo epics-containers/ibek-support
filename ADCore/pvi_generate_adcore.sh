@@ -66,7 +66,7 @@ NDTimeSeriesN,None
 NDTransform
 "
 
-pvi convert device --name ADDriver --template ${ADCORE}/db/ADBase.template .
+pvi convert device --name ADDriver --parent NDArrayBase --template ${ADCORE}/db/ADBase.template .
 pvi regroup ADDriver.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 
 pvi convert device --name NDArrayBase --template ${ADCORE}/db/NDArrayBase.template .

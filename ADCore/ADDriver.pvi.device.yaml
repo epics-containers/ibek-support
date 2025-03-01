@@ -1,4 +1,5 @@
 label: ADDriver
+parent: NDArrayBase
 children:
 
 - type: Group
