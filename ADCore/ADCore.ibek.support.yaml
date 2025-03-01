@@ -390,7 +390,6 @@ entity_models:
         type: int
         description: |-
           Asyn Port address
-        default: 0
 
       TIMEOUT:
         type: int
@@ -593,7 +592,7 @@ entity_models:
           R: "{{ R }}{{ idx | int + 1 }}:"
           O: "{{ R }}"
           PORT: "{{ PORT }}"
-          ADDR: "{{ ADDR }}"
+          ADDR: "{{ idx | int }}"
           TIMEOUT: "{{ TIMEOUT }}"
           SHAPE: Rectangle
 
