@@ -32,30 +32,6 @@ fi
 
 set -e
 
-ADCORE=/epics/support/ADCore
-cd ${IBS}/ADCore
-
-pvi convert device --template ${ADCORE}/db/NDProcess.template . ${ADCORE}/ADApp/pluginSrc/NDPluginProcess.h
-pvi regroup NDPluginProcess.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
-
-pvi convert device --template ${ADCORE}/db/NDStats.template . ${ADCORE}/ADApp/pluginSrc/NDPluginStats.h
-pvi regroup NDPluginStats.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
-
-pvi convert device --template ${ADCORE}/db/NDROI.template . ${ADCORE}/ADApp/pluginSrc/NDPluginROI.h
-pvi regroup NDPluginROI.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
-
-pvi convert device --template ${ADCORE}/db/ADBase.template . ${ADCORE}/ADApp/ADSrc/ADDriver.h
-pvi regroup ADDriver.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
-
-pvi convert device --template ${ADCORE}/db/NDPva.template . ${ADCORE}/ADApp/pluginSrc/NDPluginPva.h
-pvi regroup NDPluginPva.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
-
-pvi convert device --template ${ADCORE}/db/NDFileHDF5.template --template ${ADCORE}/db/NDFile.template . ${ADCORE}/ADApp/pluginSrc/NDFileHDF5.h
-pvi regroup NDFileHDF5.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
-
-pvi convert device --template ${ADCORE}/db/NDFileTIFF.template --template ${ADCORE}/db/NDFile.template . ${ADCORE}/ADApp/pluginSrc/NDFileTIFF.h
-pvi regroup NDFileTIFF.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
-
 ADGenICam=/epics/support/ADGenICam
 cd ${ADGenICam}
 ./addCamera.sh AVT_Manta_1_44

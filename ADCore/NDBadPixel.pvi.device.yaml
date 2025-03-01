@@ -1,5 +1,5 @@
-label: NDPluginBadPixel
-parent: NDPluginDriver
+label: NDBadPixel
+parent: NDPluginBase
 children:
 
 - type: Group

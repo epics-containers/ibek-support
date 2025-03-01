@@ -1,5 +1,5 @@
-label: NDPluginCircularBuff
-parent: NDPluginDriver
+label: NDCircularBuff
+parent: NDPluginBase
 children:
 
 - type: Group

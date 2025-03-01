@@ -1,5 +1,5 @@
 label: NDPosPlugin
-parent: NDPluginDriver
+parent: NDPluginBase
 children:
 
 - type: Group

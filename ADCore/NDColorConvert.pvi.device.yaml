@@ -1,5 +1,5 @@
-label: NDPluginColorConvert
-parent: NDPluginDriver
+label: NDColorConvert
+parent: NDPluginBase
 children:
 
 - type: Group

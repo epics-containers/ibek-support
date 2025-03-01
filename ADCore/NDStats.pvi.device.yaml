@@ -1,5 +1,5 @@
-label: NDPluginStats
-parent: NDPluginDriver
+label: NDStats
+parent: NDPluginBase
 children:
 
 - type: Group
@@ -563,8 +563,8 @@ children:
       type: TextRead
 
 - type: Group
-  name: NDPluginStatsMisc
-  label: NDPluginStats Ungrouped
+  name: NDStatsMisc
+  label: NDStats Ungrouped
   layout:
     type: Grid
     labelled: true

@@ -1,5 +1,5 @@
 label: NDFileHDF5
-parent: NDPluginFile
+parent: NDFile
 children:
 
 - type: Group

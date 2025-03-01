@@ -1,0 +1,201 @@
+label: NDOverlayN
+children:
+
+- type: Group
+  name: ADBuffers
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: Use
+    write_pv: $(P)$(R)Use
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)Use_RBV
+    read_widget:
+      type: LED
+
+- type: Group
+  name: ADReadout
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: SizeX
+    write_pv: $(P)$(R)SizeX
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)SizeX_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: SizeY
+    write_pv: $(P)$(R)SizeY
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)SizeY_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: ADSetup
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: Name
+    write_pv: $(P)$(R)Name
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)Name_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDOverlay8
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: PositionX
+    write_pv: $(P)$(R)PositionX
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PositionX_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: PositionY
+    write_pv: $(P)$(R)PositionY
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)PositionY_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: CenterX
+    write_pv: $(P)$(R)CenterX
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)CenterX_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: CenterY
+    write_pv: $(P)$(R)CenterY
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)CenterY_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: WidthX
+    write_pv: $(P)$(R)WidthX
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)WidthX_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: WidthY
+    write_pv: $(P)$(R)WidthY
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)WidthY_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Shape
+    write_pv: $(P)$(R)Shape
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)Shape_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: DrawMode
+    write_pv: $(P)$(R)DrawMode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)DrawMode_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Red
+    write_pv: $(P)$(R)Red
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)Red_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Green
+    write_pv: $(P)$(R)Green
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)Green_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Blue
+    write_pv: $(P)$(R)Blue
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)Blue_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDOverlayN
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: DisplayText
+    write_pv: $(P)$(R)DisplayText
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)DisplayText_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalRW
+    name: TimeStampFormat
+    write_pv: $(P)$(R)TimeStampFormat
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)TimeStampFormat_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Font
+    write_pv: $(P)$(R)Font
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)Font_RBV
+    read_widget:
+      type: TextRead

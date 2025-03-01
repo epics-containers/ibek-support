@@ -1,5 +1,5 @@
-label: NDPluginFFT
-parent: NDPluginDriver
+label: NDFFT
+parent: NDPluginBase
 children:
 
 - type: Group
@@ -86,8 +86,8 @@ children:
       type: TextRead
 
 - type: Group
-  name: NDPluginFFTMisc
-  label: NDPluginFFT Ungrouped
+  name: NDFFTMisc
+  label: NDFFT Ungrouped
   layout:
     type: Grid
     labelled: true

@@ -1,5 +1,5 @@
-label: NDPluginPva
-parent: NDPluginDriver
+label: NDPva
+parent: NDPluginBase
 children:
 
 - type: Group

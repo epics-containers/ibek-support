@@ -1,5 +1,5 @@
-label: NDPluginTransform
-parent: NDPluginDriver
+label: NDTransform
+parent: NDPluginBase
 children:
 
 - type: Group

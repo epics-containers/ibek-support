@@ -1,5 +1,4 @@
-label: asynNDArrayDriver
-parent: asynPortDriver
+label: NDArrayBase
 children:
 
 - type: Group
@@ -293,8 +292,8 @@ children:
       type: TextRead
 
 - type: Group
-  name: AsynNDArrayDriverMisc
-  label: asynNDArrayDriver Ungrouped
+  name: NDArrayBaseMisc
+  label: NDArrayBase Ungrouped
   layout:
     type: Grid
     labelled: true

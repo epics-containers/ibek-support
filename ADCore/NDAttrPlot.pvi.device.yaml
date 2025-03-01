@@ -1,0 +1,30 @@
+label: NDAttrPlot
+parent: NDPluginBase
+children:
+
+- type: Group
+  name: NDCircularBuff
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalW
+    name: Reset
+    write_pv: $(P)$(R)Reset
+    write_widget:
+      type: TextWrite
+
+- type: Group
+  name: NDAttrPlotMisc
+  label: NDAttrPlot Ungrouped
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: NPts
+    read_pv: $(P)$(R)NPts
+    read_widget:
+      type: TextRead

@@ -1,5 +1,5 @@
-label: NDPluginDriver
-parent: asynNDArrayDriver
+label: NDPluginBase
+parent: NDArrayBase
 children:
 
 - type: Group

@@ -1,5 +1,5 @@
 label: NDFileMagick
-parent: NDPluginFile
+parent: NDFile
 children:
 
 - type: Group

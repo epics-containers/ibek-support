@@ -1,5 +1,5 @@
-label: NDPluginFile
-parent: NDPluginDriver
+label: NDFile
+parent: NDPluginBase
 children:
 
 - type: Group
