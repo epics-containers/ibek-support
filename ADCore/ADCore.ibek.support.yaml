@@ -2635,6 +2635,58 @@ entity_models:
           MAX_PORTS:
           PORT:
 
+  - name: NDROIStatN
+    description: |-
+      One of N ROIStat plugins for use by an NDROIStat plugin
+    parameters:
+      P:
+        type: str
+        description: |-
+          First part of base PV name
+
+      R:
+        type: str
+        description: |-
+          Second part of base PV name
+
+      PORT:
+        type: str
+        description: |-
+          Port name for the NDROIStat plugin
+
+      ADDR:
+        type: int
+        description: |-
+          asyn address on port
+
+      TIMEOUT:
+        type: int
+        description: |-
+          Timeout
+        default: 1
+
+      NCHANS:
+        type: int
+        description: |-
+          Number of channels
+
+    databases:
+      - file: $(ADCORE)/db/NDROIStatN.template
+        args:
+          P:
+          R:
+          PORT:
+          ADDR:
+          TIMEOUT:
+          NCHANS:
+
+    pvi:
+      yaml_path: NDROIStatN.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+
   - name: NDROIStat
     description: |-
       This plugin calculates statistics of ROIs
@@ -2699,6 +2751,7 @@ entity_models:
           .5 second:
           Event:
           I/O Intr:
+
       QUEUE:
         type: int
         description: |-
@@ -2732,18 +2785,21 @@ entity_models:
     pre_init:
       - value: |
           # NDROIStatConfigure(portName, queueSize, blockingCallbacks,
-          NDROIStatConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}},
+          NDROIStatConfigure({{PORT}}, {{QUEUE}}, {{BLOCK}}, {{NDARRAY_PORT}}, {{NDARRAY_ADDR}}, {{MAX_ROIS}}, 0, 0, 0, 0, {{MAX_THREADS}})
+
+    sub_entities:
+      - type: ibek.repeat
+        values: "{{ range(MAX_ROIS) | list }}"
+        entity:
+          type: ADCore.NDROIStatN
+          P: "{{ P }}"
+          R: "{{ R }}{{ index + 1}}"
+          PORT: "{{ PORT }}"
+          ADDR: "{{ index }}"
+          TIMEOUT: "{{ TIMEOUT }}"
+          NCHANS: "{{ NCHANS }}"
 
     databases:
-      - file: $(ADCORE)/db/NDROIStatN.template
-        args:
-          ADDR:
-          NCHANS:
-          P:
-          R:
-          TIMEOUT:
-          PORT:
-
       - file: $(ADCORE)/db/NDROIStat.template
         args:
           NDARRAY_PORT:
@@ -2763,7 +2819,6 @@ entity_models:
         P:
         R:
       pv: true
-      pv_prefix: $(P)$(R)
 
   - name: NDFileNetCDF
     description: |-
