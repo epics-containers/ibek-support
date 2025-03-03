@@ -1,10 +1,10 @@
-label: NDPluginScatter
-parent: NDPluginDriver
+label: NDScatter
+parent: NDPluginBase
 children:
 
 - type: Group
-  name: NDPluginScatterMisc
-  label: NDPluginScatter Ungrouped
+  name: NDScatterMisc
+  label: NDScatter Ungrouped
   layout:
     type: Grid
     labelled: true

@@ -1,0 +1,15 @@
+label: NDTimeSeriesN
+children:
+
+- type: Group
+  name: NDFFT
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: TimeSeries
+    read_pv: $(P)$(R)TimeSeries
+    read_widget:
+      type: TextRead

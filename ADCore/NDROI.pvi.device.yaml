@@ -1,9 +1,9 @@
-label: NDPluginROI
-parent: NDPluginDriver
+label: NDROI
+parent: NDPluginBase
 children:
 
 - type: Group
-  name: NDROI
+  name: ADReadout
   layout:
     type: Grid
     labelled: true
@@ -18,39 +18,6 @@ children:
   - type: SignalR
     name: MaxSizeY
     read_pv: $(P)$(R)MaxSizeY_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalR
-    name: MaxSizeZ
-    read_pv: $(P)$(R)MaxSizeZ_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalR
-    name: ArraySizeX
-    read_pv: $(P)$(R)ArraySizeX_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalR
-    name: ArraySizeY
-    read_pv: $(P)$(R)ArraySizeY_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalR
-    name: ArraySizeZ
-    read_pv: $(P)$(R)ArraySizeZ_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: Name
-    write_pv: $(P)$(R)Name
-    write_widget:
-      type: TextWrite
-    read_pv: $(P)$(R)Name_RBV
     read_widget:
       type: TextRead
 
@@ -73,11 +40,11 @@ children:
       type: TextRead
 
   - type: SignalRW
-    name: BinZ
-    write_pv: $(P)$(R)BinZ
+    name: MinY
+    write_pv: $(P)$(R)MinY
     write_widget:
       type: TextWrite
-    read_pv: $(P)$(R)BinZ_RBV
+    read_pv: $(P)$(R)MinY_RBV
     read_widget:
       type: TextRead
 
@@ -91,20 +58,32 @@ children:
       type: TextRead
 
   - type: SignalRW
-    name: MinY
-    write_pv: $(P)$(R)MinY
+    name: ReverseX
+    write_pv: $(P)$(R)ReverseX
     write_widget:
-      type: TextWrite
-    read_pv: $(P)$(R)MinY_RBV
+      type: ToggleButton
+    read_pv: $(P)$(R)ReverseX_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: ReverseY
+    write_pv: $(P)$(R)ReverseY
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)ReverseY_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalR
+    name: ArraySizeX
+    read_pv: $(P)$(R)ArraySizeX_RBV
     read_widget:
       type: TextRead
 
-  - type: SignalRW
-    name: MinZ
-    write_pv: $(P)$(R)MinZ
-    write_widget:
-      type: TextWrite
-    read_pv: $(P)$(R)MinZ_RBV
+  - type: SignalR
+    name: ArraySizeY
+    read_pv: $(P)$(R)ArraySizeY_RBV
     read_widget:
       type: TextRead
 
@@ -126,12 +105,120 @@ children:
     read_widget:
       type: TextRead
 
+- type: Group
+  name: ADSetup
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
   - type: SignalRW
-    name: SizeZ
-    write_pv: $(P)$(R)SizeZ
+    name: Name
+    write_pv: $(P)$(R)Name
     write_widget:
       type: TextWrite
-    read_pv: $(P)$(R)SizeZ_RBV
+    read_pv: $(P)$(R)Name_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDProcess
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: Scale
+    write_pv: $(P)$(R)Scale
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)Scale_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: DataTypeOut
+    write_pv: $(P)$(R)DataTypeOut
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)DataTypeOut_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDROI
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: EnableScale
+    write_pv: $(P)$(R)EnableScale
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)EnableScale_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: CollapseDims
+    write_pv: $(P)$(R)CollapseDims
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)CollapseDims_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalR
+    name: MaxSizeZ
+    read_pv: $(P)$(R)MaxSizeZ_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: EnableX
+    write_pv: $(P)$(R)EnableX
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)EnableX_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: EnableY
+    write_pv: $(P)$(R)EnableY
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)EnableY_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: EnableZ
+    write_pv: $(P)$(R)EnableZ
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)EnableZ_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: BinZ
+    write_pv: $(P)$(R)BinZ
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)BinZ_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: MinZ
+    write_pv: $(P)$(R)MinZ
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)MinZ_RBV
     read_widget:
       type: TextRead
 
@@ -163,24 +250,6 @@ children:
       type: LED
 
   - type: SignalRW
-    name: ReverseX
-    write_pv: $(P)$(R)ReverseX
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)ReverseX_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: ReverseY
-    write_pv: $(P)$(R)ReverseY
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)ReverseY_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
     name: ReverseZ
     write_pv: $(P)$(R)ReverseZ
     write_widget:
@@ -189,65 +258,17 @@ children:
     read_widget:
       type: LED
 
-  - type: SignalRW
-    name: EnableX
-    write_pv: $(P)$(R)EnableX
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)EnableX_RBV
+  - type: SignalR
+    name: ArraySizeZ
+    read_pv: $(P)$(R)ArraySizeZ_RBV
     read_widget:
-      type: LED
+      type: TextRead
 
   - type: SignalRW
-    name: EnableY
-    write_pv: $(P)$(R)EnableY
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)EnableY_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: EnableZ
-    write_pv: $(P)$(R)EnableZ
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)EnableZ_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: EnableScale
-    write_pv: $(P)$(R)EnableScale
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)EnableScale_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: Scale
-    write_pv: $(P)$(R)Scale
+    name: SizeZ
+    write_pv: $(P)$(R)SizeZ
     write_widget:
       type: TextWrite
-    read_pv: $(P)$(R)Scale_RBV
+    read_pv: $(P)$(R)SizeZ_RBV
     read_widget:
       type: TextRead
-
-  - type: SignalRW
-    name: DataTypeOut
-    write_pv: $(P)$(R)DataTypeOut
-    write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)DataTypeOut_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: CollapseDims
-    write_pv: $(P)$(R)CollapseDims
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)CollapseDims_RBV
-    read_widget:
-      type: LED

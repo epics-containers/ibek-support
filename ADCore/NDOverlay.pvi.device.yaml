@@ -1,9 +1,9 @@
-label: NDPluginOverlay
-parent: NDPluginDriver
+label: NDOverlay
+parent: NDPluginBase
 children:
 
 - type: Group
-  name: NDOverlay
+  name: ADReadout
   layout:
     type: Grid
     labelled: true

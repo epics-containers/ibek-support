@@ -1,9 +1,9 @@
-label: NDPluginAttribute
-parent: NDPluginDriver
+label: NDAttribute
+parent: NDPluginBase
 children:
 
 - type: Group
-  name: NDAttribute
+  name: NDCircularBuff
   layout:
     type: Grid
     labelled: true

@@ -1,5 +1,5 @@
 label: NDFileJPEG
-parent: NDPluginFile
+parent: NDFile
 children:
 
 - type: Group

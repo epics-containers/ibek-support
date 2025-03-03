@@ -1,5 +1,5 @@
-label: NDPluginCodec
-parent: NDPluginDriver
+label: NDCodec
+parent: NDPluginBase
 children:
 
 - type: Group

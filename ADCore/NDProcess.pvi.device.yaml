@@ -1,5 +1,5 @@
-label: NDPluginProcess
-parent: NDPluginDriver
+label: NDProcess
+parent: NDPluginBase
 children:
 
 - type: Group

@@ -1,0 +1,109 @@
+label: NDTimeSeries
+parent: NDPluginBase
+children:
+
+- type: Group
+  name: NDFFTFreqSpectrumPlot
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: TSAcquire
+    write_pv: $(P)$(R)TSAcquire
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)TSAcquiring
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: TSAcquireMode
+    write_pv: $(P)$(R)TSAcquireMode
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)TSAcquireMode_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalW
+    name: TSRead
+    write_pv: $(P)$(R)TSRead
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalW
+    name: TSNumPoints
+    write_pv: $(P)$(R)TSNumPoints
+    write_widget:
+      type: TextWrite
+
+  - type: SignalR
+    name: TSCurrentPoint
+    read_pv: $(P)$(R)TSCurrentPoint
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: TSAveragingTime
+    write_pv: $(P)$(R)TSAveragingTime
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)TSAveragingTime_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDFFTPlotAll
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: TSTimeAxis
+    read_pv: $(P)$(R)TSTimeAxis
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDPluginTimeSeries
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: TSElapsedTime
+    read_pv: $(P)$(R)TSElapsedTime
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: TSTimePerPoint
+    write_pv: $(P)$(R)TSTimePerPoint
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)TSTimePerPoint_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: TSNumAverage
+    read_pv: $(P)$(R)TSNumAverage
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDStats
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: TSTimestamp
+    read_pv: $(P)$(R)TSTimestamp
+    read_widget:
+      type: TextRead

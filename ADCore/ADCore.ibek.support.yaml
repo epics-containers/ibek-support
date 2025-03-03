@@ -238,7 +238,7 @@ entity_models:
           ADDR:
 
     pvi:
-      yaml_path: NDPluginFFT.pvi.device.yaml
+      yaml_path: NDFFT.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -351,9 +351,13 @@ entity_models:
           TIMEOUT:
           PORT:
 
-  - name: NDOverlay
+  # _NDOverlayN subentity of NDOverlay #########################################
+
+  - name: _NDOverlayN
     description: |-
-      This plugin writes overlays on the array, like cursors and boxes
+      This plugin represents a single Overlay grouped by an NDOverlay plugin.
+      Do not manually instantiate this - instead create an NDOverlay plugin,
+      specifying the number of overlays required in the NOverlays argument.
     parameters:
       P:
         type: str
@@ -364,6 +368,125 @@ entity_models:
         type: str
         description: |-
           Device Suffix
+
+      O:
+        type: str
+        description: |-
+          NDOverlay Device Suffix
+
+      NAME:
+        type: str
+        description: |-
+          Name for the overlay
+
+      # this is a string rather than ID as all overlayN's are on the same port
+      # (with different address for ASYN to distinguish them)
+      PORT:
+        type: str
+        description: |-
+          Port name for the NDOverlay plugin
+
+      ADDR:
+        type: int
+        description: |-
+          Asyn Port address
+
+      TIMEOUT:
+        type: int
+        description: |-
+          Timeout
+        default: 1
+
+      SHAPE:
+        type: enum
+        values:
+          Cross: 0
+          Rectangle: 1
+          Text: 2
+          Ellipse: 3
+        description: |-
+          Shape of the overlay
+
+      XPOS:
+        type: int
+        description: |-
+          Link for the XPos of the overlay
+        default: 0
+
+      YPOS:
+        type: int
+        description: |-
+          Link for the YPos of the overlay
+        default: 0
+
+      XSIZE:
+        type: int
+        description: |-
+          Link for the XSize of the overlay
+        default: 0
+
+      YSIZE:
+        type: int
+        description: |-
+          Link for the YSize of the overlay
+        default: 0
+
+      XWIDTH:
+        type: int
+        description: |-
+          Link for the XWidth of the overlay
+        default: 0
+
+      YWIDTH:
+        type: int
+        description: |-
+          Link for the YWdith of the overlay
+        default: 0
+
+    databases:
+      - file: $(ADCORE)/db/NDOverlayN.template
+        args:
+          P:
+          R:
+          O:
+          NAME:
+          PORT:
+          ADDR:
+          TIMEOUT:
+          SHAPE:
+          XPOS:
+          YPOS:
+          XSIZE:
+          YSIZE:
+          XWIDTH:
+          YWIDTH:
+
+    pvi:
+      yaml_path: NDOverlayN.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+
+  - name: NDOverlay
+    description: |-
+      This plugin writes overlays on the ND array, ie. cursors and boxes
+    parameters:
+      P:
+        type: str
+        description: |-
+          Device Prefix
+
+      R:
+        type: str
+        description: |-
+          Device Suffix
+
+      NOverlays:
+        type: int
+        description: |-
+          Number of overlays to create
+        default: 8
 
       PORT:
         type: id
@@ -433,66 +556,10 @@ entity_models:
           Maximum number threads
         default: 1
 
-      O:
-        type: str
-        description: |-
-          NDOverlay Device Suffix
-
-      NAME:
-        type: str
-        description: |-
-          Name for the overlay
-
-      SHAPE:
-        type: str
-        description: |-
-          Shape of the overlay
-
-      XPOS:
-        type: str
-        description: |-
-          Link for the XPos of the overlay
-
-      YPOS:
-        type: str
-        description: |-
-          Link for the YPos of the overlay
-
-      XCENT:
-        type: str
-        description: |-
-          Link for the XCent of the overlay
-
-      YCENT:
-        type: str
-        description: |-
-          Link for the YCent of the overlay
-
-      XSIZE:
-        type: str
-        description: |-
-          Link for the XSize of the overlay
-
-      YSIZE:
-        type: str
-        description: |-
-          Link for the YSize of the overlay
-
-      XWIDTH:
-        type: str
-        description: |-
-          Link for the XWidth of the overlay
-
-      YWIDTH:
-        type: str
-        description: |-
-          Link for the YWdith of the overlay
-
     pre_init:
       - value: |
           # NDOverlayConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, NOverlays, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDOverlayConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{NOverlays}}, 0, 0, 0, 0, {{MAX_THREADS}})
-    # TODO - MISSING ARGS: NOverlays
     databases:
       - file: $(ADCORE)/db/NDOverlay.template
         args:
@@ -506,36 +573,28 @@ entity_models:
           TIMEOUT:
           PORT:
 
-      # TODO these xxxN templates need special handling - we need a repeating
-      # sub-entities feature for this which would require ibek changes
-      # OR: just not support these in ibek and use anchors and aliases in the yaml
-      # to avoid duplication instead
-      - file: $(ADCORE)/db/NDOverlayN.template
-        args:
-          XPOS:
-          NAME:
-          YWIDTH:
-          YSIZE:
-          YPOS:
-          O:
-          PORT:
-          P:
-          SHAPE:
-          R:
-          TIMEOUT:
-          XCENT:
-          XWIDTH:
-          XSIZE:
-          YCENT:
-          ADDR:
-
     pvi:
-      yaml_path: NDPluginOverlay.pvi.device.yaml
+      yaml_path: NDOverlay.pvi.device.yaml
       ui_macros:
         P:
         R:
       pv: true
       pv_prefix: $(P)$(R)
+
+    sub_entities:
+      - type: ibek.repeat
+        values: "{{ range(NOverlays) | list }}"
+        variable: idx
+        entity:
+          type: ADCore._NDOverlayN
+          NAME: Overlay {{ idx | int + 1 }}
+          P: "{{ P }}"
+          R: "{{ R }}{{ idx | int + 1 }}:"
+          O: "{{ R }}"
+          PORT: "{{ PORT }}"
+          ADDR: "{{ idx | int }}"
+          TIMEOUT: "{{ TIMEOUT }}"
+          SHAPE: Rectangle
 
   - name: NDColorConvert
     description: |-
@@ -638,7 +697,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginColorConvert.pvi.device.yaml
+      yaml_path: NDColorConvert.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -978,7 +1037,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginStdArrays.pvi.device.yaml
+      yaml_path: NDStdArrays.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -1294,7 +1353,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginCircularBuff.pvi.device.yaml
+      yaml_path: NDCircularBuff.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -1538,7 +1597,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginCodec.pvi.device.yaml
+      yaml_path: NDCodec.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -1647,7 +1706,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginGather.pvi.device.yaml
+      yaml_path: NDGather.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -1756,7 +1815,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginROI.pvi.device.yaml
+      yaml_path: NDROI.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -1894,7 +1953,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginAttribute.pvi.device.yaml
+      yaml_path: NDAttribute.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -2042,7 +2101,7 @@ entity_models:
           ADDR:
 
     pvi:
-      yaml_path: NDPluginStats.pvi.device.yaml
+      yaml_path: NDStats.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -2356,7 +2415,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginProcess.pvi.device.yaml
+      yaml_path: NDProcess.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -2576,6 +2635,58 @@ entity_models:
           MAX_PORTS:
           PORT:
 
+  - name: NDROIStatN
+    description: |-
+      One of N ROIStat plugins for use by an NDROIStat plugin
+    parameters:
+      P:
+        type: str
+        description: |-
+          First part of base PV name
+
+      R:
+        type: str
+        description: |-
+          Second part of base PV name
+
+      PORT:
+        type: str
+        description: |-
+          Port name for the NDROIStat plugin
+
+      ADDR:
+        type: int
+        description: |-
+          asyn address on port
+
+      TIMEOUT:
+        type: int
+        description: |-
+          Timeout
+        default: 1
+
+      NCHANS:
+        type: int
+        description: |-
+          Number of channels
+
+    databases:
+      - file: $(ADCORE)/db/NDROIStatN.template
+        args:
+          P:
+          R:
+          PORT:
+          ADDR:
+          TIMEOUT:
+          NCHANS:
+
+    pvi:
+      yaml_path: NDROIStatN.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+
   - name: NDROIStat
     description: |-
       This plugin calculates statistics of ROIs
@@ -2593,7 +2704,7 @@ entity_models:
       PORT:
         type: id
         description: |-
-          Port name for the NDPluginROIStat plugin
+          Port name for the NDROIStat plugin
 
       NDARRAY_PORT:
         type: object
@@ -2640,6 +2751,7 @@ entity_models:
           .5 second:
           Event:
           I/O Intr:
+
       QUEUE:
         type: int
         description: |-
@@ -2673,18 +2785,21 @@ entity_models:
     pre_init:
       - value: |
           # NDROIStatConfigure(portName, queueSize, blockingCallbacks,
-          NDROIStatConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}},
+          NDROIStatConfigure({{PORT}}, {{QUEUE}}, {{BLOCK}}, {{NDARRAY_PORT}}, {{NDARRAY_ADDR}}, {{MAX_ROIS}}, 0, 0, 0, 0, {{MAX_THREADS}})
+
+    sub_entities:
+      - type: ibek.repeat
+        values: "{{ range(MAX_ROIS) | list }}"
+        entity:
+          type: ADCore.NDROIStatN
+          P: "{{ P }}"
+          R: "{{ R }}{{ index + 1}}"
+          PORT: "{{ PORT }}"
+          ADDR: "{{ index }}"
+          TIMEOUT: "{{ TIMEOUT }}"
+          NCHANS: "{{ NCHANS }}"
 
     databases:
-      - file: $(ADCORE)/db/NDROIStatN.template
-        args:
-          ADDR:
-          NCHANS:
-          P:
-          R:
-          TIMEOUT:
-          PORT:
-
       - file: $(ADCORE)/db/NDROIStat.template
         args:
           NDARRAY_PORT:
@@ -2699,12 +2814,11 @@ entity_models:
           SCANRATE:
 
     pvi:
-      yaml_path: NDPluginROIStat.pvi.device.yaml
+      yaml_path: NDROIStat.pvi.device.yaml
       ui_macros:
         P:
         R:
       pv: true
-      pv_prefix: $(P)$(R)
 
   - name: NDFileNetCDF
     description: |-
@@ -2913,7 +3027,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginPva.pvi.device.yaml
+      yaml_path: NDPva.pvi.device.yaml
       ui_macros:
         P:
         R:
@@ -3021,7 +3135,7 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: NDPluginTransform.pvi.device.yaml
+      yaml_path: NDTransform.pvi.device.yaml
       ui_macros:
         P:
         R:

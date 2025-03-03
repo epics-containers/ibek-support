@@ -1,0 +1,45 @@
+label: NDAttributeN
+children:
+
+- type: Group
+  name: NDCircularBuff
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: Value
+    read_pv: $(P)$(R)Value_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDPluginAttribute8
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: TSArrayValue
+    read_pv: $(P)$(R)TSArrayValue
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: AttrName
+    write_pv: $(P)$(R)AttrName
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)AttrName_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalR
+    name: ValueSum
+    read_pv: $(P)$(R)ValueSum_RBV
+    read_widget:
+      type: TextRead
