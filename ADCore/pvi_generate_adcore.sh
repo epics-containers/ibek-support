@@ -21,7 +21,8 @@ cd ${IBS}
 
 # pvi needs to know which type of waveform to use so this is an unfortunate
 # workaround for now and note that the resulting pvi device will allways use
-# int32 waveform
+# Int32 waveform
+cp ${ADCORE}/db/NDStdArrays.template ${ADCORE}/db/NDStdArraysOriginal.template
 sed -i s/\$\(TYPE\)/Int32/g ${ADCORE}/db/NDStdArrays.template
 
 # these do not convert - throw PVI errors - TODO investigate
@@ -94,5 +95,8 @@ for template_set in $template_sets; do
     pvi regroup ${name}.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
 
 done
+
+# restore the original STDArrays template
+mv ${ADCORE}/db/NDStdArraysOriginal.template ${ADCORE}/db/NDStdArrays.template
 
 ibek support generate-links $(pwd)
