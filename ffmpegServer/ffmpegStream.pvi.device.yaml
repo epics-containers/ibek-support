@@ -1,0 +1,106 @@
+label: ffmpegStream
+parent: NDPluginBase
+children:
+
+- type: Group
+  name: FfmpegStreamMisc
+  label: ffmpegStream Ungrouped
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: HTTPPORT
+    read_pv: $(P)$(R)HTTP_PORT_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: HOST
+    read_pv: $(P)$(R)HOST_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: CLIENTS
+    read_pv: $(P)$(R)CLIENTS_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: JPGURL
+    read_pv: $(P)$(R)JPG_URL_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalR
+    name: MJPGURL
+    read_pv: $(P)$(R)MJPG_URL_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalRW
+    name: QUALITY
+    write_pv: $(P)$(R)QUALITY
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)QUALITY_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: MAXW
+    write_pv: $(P)$(R)MAXW
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)MAXW_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: MAXH
+    write_pv: $(P)$(R)MAXH
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)MAXH_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: SETW
+    write_pv: $(P)$(R)SETW
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)SETW_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: SETH
+    write_pv: $(P)$(R)SETH
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)SETH_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: FALSECOL
+    write_pv: $(P)$(R)FALSE_COL
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)FALSE_COL_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalRW
+    name: ALWAYSON
+    write_pv: $(P)$(R)ALWAYS_ON
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)ALWAYS_ON_RBV
+    read_widget:
+      type: LED
