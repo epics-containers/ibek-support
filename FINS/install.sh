@@ -21,6 +21,9 @@ ibek support add-dbds FINS.dbd
 # global config settings
 ${FOLDER}/../_global/install.sh ${NAME}
 
+# don't build opis with proprietary dls runcss.sh
+sed -i '/opi/d'  ${SUPPORT}/${NAME}/FINSApp/Makefile
+
 # compile the support module
 ibek support compile ${NAME}
 # prepare *.bob, *.pvi, *.ibek.support.yaml for access outside the container.
