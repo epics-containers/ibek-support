@@ -400,12 +400,13 @@ entity_models:
       SHAPE:
         type: enum
         values:
-          Cross: 0
-          Rectangle: 1
-          Text: 2
-          Ellipse: 3
+          0: Cross
+          1: Rectangle
+          2: Text
+          3: Ellipse
         description: |-
           Shape of the overlay
+        default: 1
 
       XPOS:
         type: int
@@ -594,7 +595,7 @@ entity_models:
           PORT: "{{ PORT }}"
           ADDR: "{{ idx | int }}"
           TIMEOUT: "{{ TIMEOUT }}"
-          SHAPE: Rectangle
+          SHAPE: 1
 
   - name: NDColorConvert
     description: |-
