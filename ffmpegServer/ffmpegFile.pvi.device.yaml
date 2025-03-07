@@ -1,0 +1,47 @@
+label: ffmpegFile
+parent: NDPluginBase
+children:
+
+- type: Group
+  name: FfmpegFile
+  label: ffmpegFile
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: BITRATE
+    write_pv: $(P)$(R)BITRATE
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)BITRATE_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: FPS
+    write_pv: $(P)$(R)FPS
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)FPS_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: WIDTH
+    write_pv: $(P)$(R)WIDTH
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)WIDTH_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: HEIGHT
+    write_pv: $(P)$(R)HEIGHT
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)HEIGHT_RBV
+    read_widget:
+      type: TextRead

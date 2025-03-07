@@ -1,0 +1,246 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.1.2/ibek.support.schema.json
+
+module: ffmpegServer
+
+entity_models:
+
+  - name: ffmpegFile
+    description: |-
+      Uses the ffmpeg compression libraries from areaDetector to compress a stream of NDArrays to video format and write them to file.
+    parameters:
+      PORT:
+        type: id
+        description: |-
+          Port name for the ffmpegFile areaDetector plugin
+      
+      P:
+        type: str
+        description: |-
+          Device Prefix
+
+      R:
+        type: str
+        description: |-
+          Device Suffix
+
+      NDARRAY_PORT:
+        type: object
+        description: |-
+          Input array port
+
+      BLOCK:
+        type: int
+        description: |-
+          Blocking callbacks?
+        default: 0
+
+      NDARRAY_ADDR:
+        type: int
+        description: |-
+          Input array port address
+        default: 0
+      
+      PRIORITY:
+        type: int
+        description: |-
+          Thread priority if ASYN_CANBLOCK is set
+        default: 0
+
+      QUEUE:
+        type: int
+        description: |-
+          Input array queue size
+        default: 2
+      
+      SCANRATE:
+        type: enum
+        description: |-
+          Specified scan rate for cpu intensive PVs 
+          (used to limit image display by ImageJ EPICS_AD_Viewer plugin from ADBase)
+        values:
+          .1 second:
+          1 second:
+          10 second:
+          5 second:
+          Passive:
+          2 second:
+          .2 second:
+          .5 second:
+          Event:
+          I/O Intr:
+        default: I/O Intr
+      
+      STACKSIZE:
+        type: int
+        description: |-
+          Stack size if ASYN_CANBLOCK is set
+        default: 0
+
+    pre_init:
+      - value: |
+          # ffmpegFileConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, priority, stackSize)
+          ffmpegFileConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{PRIORITY}}, {{STACKSIZE}})
+
+    databases:
+      - file: $(FFMPEGSERVER)/db/ffmpegFile.template
+        args:
+          PORT:
+          P:
+          R:
+          NDARRAY_PORT:
+
+    pvi:
+      yaml_path: ffmpegFile.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+
+
+  - name: ffmpegStream
+    description: |-
+      Provides an http server that returns to the client an mjpeg stream of NDArrays over http.
+    parameters:
+      PORT:
+        type: id
+        description: |-
+          Port name for the ffmpegStream areaDetector plugin
+      
+      P:
+        type: str
+        description: |-
+          Device Prefix
+
+      R:
+        type: str
+        description: |-
+          Device Suffix
+
+      NDARRAY_PORT:
+        type: object
+        description: |-
+          Input array port
+ 
+      BLOCK:
+        type: int
+        description: |-
+          Blocking callbacks?
+        default: 0
+
+      BUFFERS:
+        type: int
+        description: |-
+          Max buffers to allocate
+        default: 50
+
+      HTTP_PORT:
+        type: int
+        description: |-
+          Http port number to use for the ffmpegStream server
+        default: 8080
+      
+      MAXH:
+        type: int
+        description: |-
+          Maximum Jpeg Height
+        default: 1200
+      
+      MAXW:
+        type: int
+        description: |-
+          Maximum Jpeg Width
+        default: 1600
+      
+      MEMORY:
+        type: int
+        description: |-
+          Max memory to allocate, should be maxw*maxh*nbuffer for driver and all attached plugins
+        default: 0
+
+      NDARRAY_ADDR:
+        type: int
+        description: |-
+          Input array port address
+        default: 0
+      
+      PRIORITY:
+        type: int
+        description: |-
+          Thread priority if ASYN_CANBLOCK is set
+        default: 0
+
+      QUALITY:
+        type: int
+        description: |-
+          Quality of the JPEG compression in percent
+        default: 100
+
+      QUEUE:
+        type: int
+        description: |-
+          Input array queue size
+        default: 2
+
+      SCANRATE:
+        type: enum
+        description: |-
+          Specified scan rate for cpu intensive PVs 
+          (used to limit image display by ImageJ EPICS_AD_Viewer plugin from ADBase)
+        values:
+          .1 second:
+          1 second:
+          10 second:
+          5 second:
+          Passive:
+          2 second:
+          .2 second:
+          .5 second:
+          Event:
+          I/O Intr:
+        default: I/O Intr
+      
+      SETH:
+        type: int
+        description: |-
+          Set initial Jpeg Height
+        default: 0
+
+      SETW:
+        type: int
+        description: |-
+          Set initial Jpeg Width
+        default: 0
+      
+      STACKSIZE:
+        type: int
+        description: |-
+          Stack size if ASYN_CANBLOCK is set
+        default: 0
+
+    pre_init:
+      - when: first
+        value: |
+          ffmpegServerConfigure({{HTTP_PORT}})
+      - value: |
+          # ffmpegStreamConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize)
+          ffmpegStreamConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{BUFFERS}}, {{MEMORY}}, {{PRIORITY}}, {{STACKSIZE}})
+
+    databases:
+      - file: $(FFMPEGSERVER)/db/ffmpegStream.template
+        args:
+          PORT:
+          P:
+          R:
+          NDARRAY_PORT:
+          MAXW:
+          MAXH:
+          QUALITY:
+          SETW:
+          SETH:
+
+    pvi:
+      yaml_path: ffmpegStream.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
