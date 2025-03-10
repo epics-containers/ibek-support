@@ -321,10 +321,10 @@ entity_models:
         description: |-
           Parity
         values:
-          even:
-          none:
-          odd:
-        default: none
+          E:
+          N:
+          O:
+        default: N
 
       crtscts:
         type: enum
@@ -340,9 +340,9 @@ entity_models:
         description: |-
           Stop Bits
         values:
-          "1":
-          "2":
-        default: "1"
+          1:
+          2:
+        default: 1
 
       disconnectOnReadTimeout:
         type: enum
@@ -358,20 +358,45 @@ entity_models:
         description: |-
           Bits
         values:
-          "8":
-          "5":
-          "7":
-          "6":
-        default: "8"
+          8:
+          5:
+          7:
+          6:
+        default: 8
 
     pre_init:
-      - value: |
+      - when: first
+        value: |
 
-          # serial port settings for {{name}}
+          # drvAsynSerialPortConfigure(name, port, priority, noAutoConnect, noProcessEos)
+      - value: |
           drvAsynSerialPortConfigure("{{name}}", "{{port}}" , 0, 0, 0)
+          {%- if baud != 9600 %}
           asynSetOption("{{name}}",0,"baud",{{baud}})
+          {%- endif %}
+          {%- if bits != 8 %}
           asynSetOption("{{name}}",0,"bits",{{bits}})
+          {%- endif %}
+          {%- if parity != "N" %}
           asynSetOption("{{name}}",0,"parity","{{parity}}")
+          {%- endif %}
+          {%- if stop != 1 %}
           asynSetOption("{{name}}",0,"stop","{{stop}}")
-          asynSetOption("{{name}}",0,"clocal","Y")
-          asynSetOption("{{name}}",0,"crtscts","N")
+          {%- endif %}
+          {%- if crtscts != "N" %}
+          asynSetOption("{{name}}",0,"crtscts",{{crtscts}})
+          {%- endif %}
+          {%- if noProcessEos %}
+          asynSetOption("{{name}}",0,"noProcessEos",1)
+          {%- endif %}
+          {%- if disconnectOnReadTimeout != "N" %}
+          asynSetOption("{{name}}",0,"disconnectOnReadTimeout", {{disconnectOnReadTimeout}})
+          {%- endif %}
+          {%- if input_eos != "\\n" %}
+          {%- endif %}
+          {%- if input_eos != "\\n" %}
+          asynOctetSetInputEos("{{name}}", 0, "{{input_eos}}")
+          {%- endif %}
+          {%- if output_eos != "\\n" %}
+          asynOctetSetOutputEos("{{name}}", 0, "{{output_eos}}")
+          {%- endif %}
