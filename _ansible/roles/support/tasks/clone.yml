@@ -1,0 +1,7 @@
+- name: Clone module to {{ local_path }}
+  ansible.builtin.git:
+    repo: "{{ organization }}/{{ module }}"
+    dest: "{{ local_path }}"
+    version: "{{ version }}"
+    update: "{{ force_clone | bool }}"
+    depth: 1

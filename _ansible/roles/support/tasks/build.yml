@@ -1,0 +1,22 @@
+- name: Build module {{ module }}
+  ansible.builtin.command: make {{ options }}
+  args:
+    chdir: "{{ local_path }}"
+  register: build
+  ignore_errors: true
+  changed_when: true
+
+- name: Create build log for {{ module }}
+  ansible.builtin.copy:
+    content: "{{ build.stdout }}"
+    dest: "{{ local_path }}/build.log"
+    mode: '0644'
+  failed_when: build.failed
+
+- name: Clean module {{ module }}
+  ansible.builtin.command: make clean
+  args:
+    chdir: "{{ local_path }}"
+  register: build
+  ignore_errors: true
+  changed_when: true

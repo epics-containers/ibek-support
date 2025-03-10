@@ -1,0 +1,8 @@
+module: busy
+version: R1-7-4
+dbds: busySupport.dbd
+libs: busy
+remove_macros:
+  - AUTOSAVE
+comment_out:
+  busyApp/src/Makefile: ".*testBusy.*"

@@ -1,0 +1,24 @@
+- name: Ensure that configure/RELEASE includes RELEASE.local
+  ansible.builtin.lineinfile:
+    path: "{{ local_path }}/configure/RELEASE"
+    regexp: "include.*TOP./configure/RELEASE.local"
+    line: "-include $(TOP)/configure/RELEASE.local"
+    insertafter: EOF
+
+    create: true
+    mode: "0644"
+
+- name: Add this module to the global configure/RELEASE
+  ansible.builtin.lineinfile:
+    path: "{{ support_folder }}/configure/RELEASE"
+    regexp: "^{{ macro }}.*=.*"
+    line: "{{ macro }} = {{ local_path }}"
+    create: true
+    mode: "0644"
+
+
+# - name: Remove unwanted Macros from global configure/RELEASE
+#   ansible.builtin.lineinfile:
+#     path: "{{ support_folder }}/configure/RELEASE"
+#     regexp: "^{{ item }}.*=.*"
+#     line: "{{ item }} ="

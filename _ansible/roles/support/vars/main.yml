@@ -1,0 +1,30 @@
+# these variables should be overriden by each invocation of the role
+# values with no default value below must be set for each invocation
+
+# mandatory variables ##########################################################
+
+# the name of the support module to build
+module:
+# the version of the support module to clone
+version:
+# dbd files that the module publishes
+dbds:
+# libraries that the module publishes
+libs:
+
+# optional variables ###########################################################
+
+# the macro used in configure/RELEASE for this module
+macro: "{{ module | upper }}"
+# macros to remove from configure/RELEASE unless already built
+remove_macros: []
+# local path to the epics base folder
+local_path: "{{ support_folder }}/{{ module }}"
+# the prefix of the git repository to clone (we clone organization/module)
+organization: https://github.com/epics-modules
+# compilation options
+options: -j{{ ansible_processor_vcpus }}
+# force rebuild
+force_build: false
+# force clone
+force_clone: false

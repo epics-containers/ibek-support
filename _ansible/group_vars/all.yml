@@ -1,0 +1,8 @@
+# global settings for all support modules
+
+# paths
+epics_folder: /epics
+support_folder: /epics/support
+rutime_folder: /epics/runtime
+ibek_defs_folder: /epics/ibek_defs
+autosave_folder: /epics/autosave

@@ -1,0 +1,11 @@
+- name: Clone
+  ansible.builtin.include_tasks: clone.yml
+  tags: [clone]
+
+- name: Setup Configure/RELEASE
+  ansible.builtin.include_tasks: release.yml
+  tags: [configure]
+
+- name: Build
+  ansible.builtin.include_tasks: build.yml
+  tags: [build]

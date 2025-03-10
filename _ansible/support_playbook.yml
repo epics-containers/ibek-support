@@ -1,0 +1,4 @@
+- name: Install support module {{ module }}
+  hosts: localhost
+  roles:
+    - role: support
