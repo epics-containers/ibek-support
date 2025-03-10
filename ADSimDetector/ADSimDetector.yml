@@ -1,0 +1,8 @@
+module: ADSimDetector
+version: R2-11
+dbds:
+  - simDetectorSupport.dbd
+libs:
+  - simDetector
+
+organization: http://github.com/areaDetector/

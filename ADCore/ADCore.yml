@@ -1,0 +1,85 @@
+module: ADCore
+version: R3-14
+organization: https://github.com/areaDetector
+
+dbds:
+  - NDPluginPva.dbd
+  - ADSupport.dbd
+  - NDPluginSupport.dbd
+  - NDFileNull.dbd
+  - NDPosPlugin.dbd
+  - NDFileHDF5.dbd
+  - NDFileJPEG.dbd
+  - NDFileTIFF.dbd
+  - PVAServerRegister.dbd
+libs:
+  - ntndArrayConverter
+  - ADBase
+  - NDPlugin
+  - pvAccessCA
+  - pvAccessIOC
+  - pvAccess
+
+HDF: http://ftp.de.debian.org/debian/pool/main/h/hdf5
+download_extras:
+  - url: "{{ HDF }}/libhdf5-103_1.10.4+repack-10_amd64.deb"
+    dest: /tmp/libhdf5-103.deb
+  - url: "{{ HDF }}/libhdf5-cpp-103_1.10.4+repack-10_amd64.deb"
+    dest: /tmp/libhdf5-cpp-103.deb
+  - url: "{{ HDF }}/libhdf5-dev_1.10.4+repack-10_amd64.deb"
+    dest: /tmp/libhdf5-dev-1.deb
+
+apt_developer:
+  - libaec-dev
+  - libblosc-dev
+  - libglib2.0-dev
+  - libjpeg-dev
+  - libtiff5-dev
+  - libusb-dev
+  - libxml2-dev
+  - libx11-dev
+  - libxext-dev
+  - libz-dev
+  - /tmp/libhdf5-103.deb
+  - /tmp/libhdf5-cpp-103.deb
+  - /tmp/libhdf5-dev-1.deb
+
+apt_runtime:
+  - libtiff5
+  - libsz2
+  - libblosc1
+  - libxml2
+  - libhdf5-103-1
+
+CONFIG: |
+  AREA_DETECTOR=$(SUPPORT)
+  CROSS_COMPILER_TARGET_ARCHS =
+  WITH_GRAPHICSMAGICK = NO
+  WITH_HDF5     = YES
+  HDF5_EXTERNAL = YES
+  HDF5_LIB      = /usr/lib/x86_64-linux-gnu/hdf5/serial/
+  HDF5_INCLUDE  = /usr/include/hdf5/serial/
+  WITH_SZIP     = YES
+  SZIP_EXTERNAL = YES
+  WITH_JPEG     = YES
+  JPEG_EXTERNAL = YES
+  WITH_TIFF     = YES
+  TIFF_EXTERNAL = YES
+  XML2_EXTERNAL = YES
+  XML2_INCLUDE  = /usr/include/libxml2/
+  WITH_ZLIB     = YES
+  ZLIB_EXTERNAL = YES
+  WITH_BLOSC    = YES
+  BLOSC_EXTERNAL= YES
+  WITH_CBF      = YES
+  CBF_EXTERNAL  = YES
+  WITH_PVA      = YES
+  WITH_BOOST    = NO
+
+patch_lines:
+  - path: configure/CONFIG_SITE.linux-x86_64.Common
+    regexp: AREA_DETECTOR[\s\S]*WITH_BOOST
+    line: "{{ CONFIG }}"
+
+remove_macros:
+  - SNCSEQ

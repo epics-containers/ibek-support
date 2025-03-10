@@ -1,0 +1,23 @@
+- name: System Installs for {{ module }}
+  ansible.builtin.include_tasks: system.yml
+  tags: [system]
+
+- name: Clone
+  ansible.builtin.include_tasks: clone.yml
+  tags: [clone]
+
+- name: Pre Build for {{ module }}
+  ansible.builtin.include_tasks: pre_build.yml
+  tags: [pre_build]
+
+- name: Fixup Configure/RELEASE for {{ module }}
+  ansible.builtin.include_tasks: release.yml
+  tags: [release]
+
+- name: Build for {{ module }}
+  ansible.builtin.include_tasks: build.yml
+  tags: [build]
+
+- name: Post Build for {{ module }}
+  ansible.builtin.include_tasks: post_build.yml
+  tags: [post_build]

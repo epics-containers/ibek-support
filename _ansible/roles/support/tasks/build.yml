@@ -1,0 +1,42 @@
+- name: Build block
+  tags: [build]
+  block:
+
+    - name: Clean module for rebuild - {{ module }}
+      ansible.builtin.command: make clean
+      args:
+        chdir: "{{ local_path }}"
+      when: force_build
+
+    - name: Build module {{ module }}
+      # redirect stderr to stdout so that ansible can report the log effectively
+      ansible.builtin.command: bash -c "make {{ options }} 2>&1"
+      args:
+        chdir: "{{ local_path }}"
+      register: build
+      failed_when: false
+
+    - name: Create build log for {{ module }}
+      ansible.builtin.copy:
+        content: "{{ build.stdout }}"
+        dest: "{{ local_path }}/build.log"
+        mode: "0644"
+
+    # otherwise the log file is hidden in the container.
+    - name: Dump build log for {{ module }}
+      ansible.builtin.debug:
+        msg: "{{ build.stdout_lines }}"
+      when: build.rc != 0
+
+    - name: Fail on build failure
+      ansible.builtin.fail:
+        msg: "Build failed for module {{ module }}"
+      when: build.rc != 0
+
+    - name: Clean module {{ module }}
+      ansible.builtin.command: make clean
+      args:
+        chdir: "{{ local_path }}"
+      register: build
+      ignore_errors: true
+      changed_when: true

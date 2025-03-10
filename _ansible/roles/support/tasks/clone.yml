@@ -1,0 +1,24 @@
+- name: Clone block
+  tags: [clone]
+  block:
+    - name: Clone module to {{ local_path }}
+      ansible.builtin.git:
+        repo: "{{ organization }}/{{ module }}"
+        dest: "{{ local_path }}"
+        version: "{{ version }}"
+        update: "{{ force_clone | bool }}"
+        # use shallow clone unless we want a specific commit
+        depth: "{{ 0 if patch_file.when | default(false) | bool else 1}}"
+
+    # get a specific commit to apply a patch
+    - name: Get specific commit to prepare for patch
+      ansible.builtin.shell: git reset --hard "{{ patch_file.commit }}"
+      args:
+        chdir: "{{ local_path }}"
+      when: patch_file.when | default(false) | bool and patch_file.commit
+
+    - name: Patch file
+      ansible.builtin.shell: git apply "{{ ibek_support_folder }}/{{ patch_file.path }}"
+      args:
+        chdir: "{{ local_path }}"
+      when: patch_file.when | default(false) | bool

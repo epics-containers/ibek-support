@@ -1,0 +1,29 @@
+
+    - name: RTEMS settings
+      ansible.builtin.lineinfile:
+        path: "{{ local_path }}/{{ config_linux_target }}"
+        line: VALID_BUILDS=Host
+        regexp: ".*VALID_BUILDS.*"
+        create: true
+      when: is_rtems | bool
+
+    - name: Pip install rtems-proxy
+      ansible.builtin.pip:
+        name: rtems-proxy
+        version: 1.0.1
+        state: present
+      when: is_rtems | bool
+
+    - name: Build IOC
+      # redirect stderr to stdout so that ansible can report the log effectively
+      ansible.builtin.command: bash -c "make {{ options }} 2>&1"
+      args:
+        chdir: "{{ local_path }}"
+      register: build
+      failed_when: false
+
+    # otherwise the log file is hidden in the container.
+    - name: Dump build log for IOC
+      ansible.builtin.debug:
+        msg: "{{ build.stdout_lines }}"
+      failed_when: build.rc != 0

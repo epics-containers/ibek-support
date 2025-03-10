@@ -1,0 +1,31 @@
+module: ffmpegServer
+version: R3-2
+dbds:
+  - ffmpegServer.dbd
+libs:
+  - ffmpegServer
+
+organization: http://github.com/areaDetector
+
+apt_developer:
+  - ffmpeg
+  - libavcodec-dev
+  - libswscale-dev
+  - libavformat-dev
+  - libavdevice-dev
+
+apt_runtime:
+  - ffmpeg
+
+comment_out:
+  # don't build the vendor libraries
+  - path: Makefile
+    regexp: vendor
+  - path: ffmpegServerApp/src/Makefile
+    regexp: vendor\/ffmpeg
+
+patch_lines:
+  # use external ffmpeg libraries
+  - path: ffmpegServerApp/src/Makefile
+    regexp: LIB_LIBS \+= avdevice
+    line: ffmpegServer_SYS_LIBS += avdevice avformat avcodec swresample swscale avutil

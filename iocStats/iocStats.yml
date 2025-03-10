@@ -1,0 +1,32 @@
+module: iocStats
+version: 3.2.0
+dbds:
+  - devIocStats.dbd
+libs:
+  - devIocStats
+
+apt_developer:
+  - libtirpc-dev
+apt_runtime:
+  - libtirpc3
+
+patch_lines:
+  # fixup incorrect timezone variable name in template. TODO: why is this needed?
+  - path: db/iocAdminSoft.db
+    regexp: "@EPICS_TIMEZONE"
+    line: '  field(INP, "@EPICS_TZ")'
+    post_build: true
+
+patch_file:
+  path: iocStats.patch
+  commit: 4226b12
+  when: is_rtems
+
+remove_macros:
+  - SNCSEQ
+  - IPAC
+
+comment_out:
+  # don't build tests
+  - path: Makefile
+    regexp: \+\= test

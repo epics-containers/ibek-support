@@ -1,0 +1,27 @@
+module: asyn
+version: R4-45
+dbds:
+  - drvAsynIPPort.dbd
+  - drvAsynSerialPort.dbd
+  - asyn.dbd
+libs:
+  - asyn
+
+apt_developer:
+  - libtirpc-dev
+apt_runtime:
+  - libtirpc3
+
+patch_lines:
+  - path: "{{ config_linux_target }}"
+    regexp: TIRPC
+    line: TIRPC = YES
+
+remove_macros:
+  - SNCSEQ
+  - IPAC
+
+comment_out:
+  # don't build tests
+  - path: Makefile
+    regexp: test|iocBoot

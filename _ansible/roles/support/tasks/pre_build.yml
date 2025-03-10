@@ -1,0 +1,27 @@
+- name: Config block
+  tags: [pre_build]
+  block:
+    - name: Comment out lines in Makefiles etc.
+      ansible.builtin.replace:
+        path: "{{ local_path }}/{{ item.path }}"
+        regexp: "^(?!#)(.*{{ item.regexp }}.*$)"
+        replace: "# \\1"
+      loop: "{{ comment_out }}"
+
+    - name: RTEMS settings
+      ansible.builtin.lineinfile:
+        path: "{{ local_path }}/{{ config_linux_target }}"
+        line: VALID_BUILDS=Host
+        regexp: ".*VALID_BUILDS.*"
+        create: true
+      when: is_rtems | bool
+
+    # ad hoc patching of individual lines
+    - name: Patch lines
+      ansible.builtin.lineinfile:
+        path: "{{ local_path }}/{{ item.path }}"
+        line: "{{ item.line }}"
+        regexp: "{{ item.regexp }}"
+        create: true
+      loop: "{{ patch_lines }}"
+      when: item.when | default(true) and not (item.post_build | default(false) | bool)
