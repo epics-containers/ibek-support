@@ -23,7 +23,8 @@ entity_models:
         type: int
         description: |-
           no. secs between positions save file updates. 0 for no save file
-        default: 0 # set to 5 for motors
+        default: 5
+        # set to 5 for motors and vacuum gauges, 0 for everything else
 
       settings_req_period:
         type: int
@@ -71,7 +72,6 @@ entity_models:
           set_pass0_restoreFile autosave_positions.sav
           {%- endif %}
           {% if settings_req_period != 0 -%}
-          set_pass0_restoreFile autosave_settings.sav
           set_pass1_restoreFile autosave_settings.sav
           {%- endif %}
 
