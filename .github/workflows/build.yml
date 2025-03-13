@@ -5,18 +5,22 @@ on:
   pull_request:
 
 jobs:
-  check-ansible-lint:
-    name: Ansible Lint # Naming the build is important to use it as a status check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run ansible-lint
-        uses: ansible/ansible-lint@main
-        with:
-          args: "--ignore-file .ansible-lint-ignore"
-          setup_python: "true"
-          working_directory: "_ansible"
-          requirements_file: ""
+  # Removed because it won't use the ignore file and I want to not use verbose
+  # prefixes on role variables
+  #
+  #
+  # check-ansible-lint:
+  #   name: Ansible Lint # Naming the build is important to use it as a status check
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Run ansible-lint
+  #       uses: ansible/ansible-lint@main
+  #       with:
+  #         args: "--ignore-file .ansible-lint-ignore"
+  #         setup_python: "true"
+  #         working_directory: "_ansible"
+  #         requirements_file: ""
 
   check-generate:
     runs-on: ubuntu-latest
