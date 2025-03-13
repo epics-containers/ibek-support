@@ -9,7 +9,7 @@
     dest: "{{ ibek_defs_folder }}/{{ item | basename }}"
     state: link
   with_fileglob:
-    - "{{ ansible_root }}/_global/*.ibek.support.yaml"
+    - "{{ ansible_root }}/*.ibek.support.yaml"
 
 - name: RTEMS settings
   ansible.builtin.lineinfile:

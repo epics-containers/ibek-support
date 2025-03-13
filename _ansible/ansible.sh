@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# To use this launch script, symlink in into the root of ibek-support
-# or ibek-support-dls etc.
-
 module_name=$1
 module_version=$2
 
@@ -20,17 +17,19 @@ if [[ $ANSIBLE_TAGS ]]; then
     echo "limiting ansible run to tags: ${ANSIBLE_TAGS}"
 fi
 
-# module are relative to this dir (ibek-support or ibek-support-dls etc.)
+# modules are relative to this dir (ibek-support or ibek-support-dls etc.)
 this_dir=$(dirname $0)
 cd $this_dir
 
 # ansible playbook and roles come from the ibek-support repo always
 ansible_dir=/epics/generic-source/ibek-support/_ansible
+vars=
 
-# separate playbooks for all modules or single support module
+# separate playbooks for all modules, a single support module or the
 if [[ ${module_name} == "all" ]] ; then
     pb=${ansible_dir}/all_playbook.yml
-    vars=
+elif [[ ${module_name} == "ioc" ]] ; then
+    pb=${ansible_dir}/ioc_playbook.yml
 else
     pb=${ansible_dir}/support_playbook.yml
     # load vars from the module yaml file
