@@ -13,7 +13,7 @@ jobs:
       - name: Run ansible-lint
         uses: ansible/ansible-lint@main
         with:
-          args: ""
+          args: "--ignore-file .ansible-lint-ignore"
           setup_python: "true"
           working_directory: "_ansible"
           requirements_file: ""
