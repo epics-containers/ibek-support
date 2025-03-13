@@ -1,0 +1,5 @@
+# This file contains ignores rule violations for ansible-lint
+
+# prefixes in variable names are counter producitve when sharing tasks between roles
+_ansible/roles/support/vars/main.yml var-naming[no-role-prefix]
+_ansible/roles/ioc/vars/main.yml var-naming[no-role-prefix]

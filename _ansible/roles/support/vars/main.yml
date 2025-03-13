@@ -1,5 +1,7 @@
 # Variables that may be supplied in ibek-support/module_name/module_name.yml
 
+# noqa var-naming[no-role-prefix]
+
 # mandatory variables ##########################################################
 
 # the name of the support module to build
@@ -63,4 +65,3 @@ patch_file:
   path:     # path to the patch file
   commit:   # optional commit to apply the patch to
   when:     # can be true, is_linux or is_rtems or any bool
-

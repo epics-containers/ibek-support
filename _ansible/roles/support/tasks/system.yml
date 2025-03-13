@@ -9,7 +9,7 @@
         url: "{{ item.url }}"
         dest: "{{ item.dest }}"
         mode: "0644"
-      loop: "{{download_extras}}"
+      loop: "{{ download_extras }}"
 
     - name: Install system dependencies from registries
       ansible.builtin.package:
@@ -27,8 +27,9 @@
 
     - name: Register system dependencies for the runtime stage
       ansible.builtin.lineinfile:
-        path: "{{configure_folder}}/runtime_debs"
+        path: "{{ configure_folder }}/runtime_debs"
         regexp: "^{{ item }}$"
         line: "{{ item }}"
         create: true
+        mode: "0644"
       loop: "{{ apt_runtime }}"

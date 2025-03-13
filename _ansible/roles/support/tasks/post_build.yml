@@ -1,4 +1,3 @@
-
 - name: Post Build block
   tags: [post_build]
   block:
@@ -39,6 +38,7 @@
         line: "{{ item }}"
         regexp: "^{{ item }}$"
         create: true
+        mode: "0644"
       loop: "{{ libs }}"
 
     - name: Add this module to the dbds_list file
@@ -47,6 +47,7 @@
         line: "{{ item }}"
         regexp: "^{{ item }}$"
         create: true
+        mode: "0644"
       loop: "{{ dbds }}"
 
 # Patching #####################################################################
@@ -58,6 +59,7 @@
         line: "{{ item.line }}"
         regexp: "{{ item.regexp }}"
         create: true
+        mode: "0644"
       loop: "{{ patch_lines }}"
       when: item.when | default(true) and (item.post_build | default(false) | bool)
 
@@ -67,6 +69,7 @@
       ansible.builtin.file:
         dest: "{{ item }}"
         state: directory
+        mode: "0755"
       loop:
         - "{{ ibek_defs_folder }}"
         - "{{ pvi_defs_folder }}"

@@ -14,6 +14,7 @@
         line: VALID_BUILDS=Host
         regexp: ".*VALID_BUILDS.*"
         create: true
+        mode: "0644"
       when: is_rtems | bool
 
     # ad hoc patching of individual lines
@@ -23,5 +24,6 @@
         line: "{{ item.line }}"
         regexp: "{{ item.regexp }}"
         create: true
+        mode: "0644"
       loop: "{{ patch_lines }}"
       when: item.when | default(true) and not (item.post_build | default(false) | bool)

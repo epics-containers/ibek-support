@@ -6,13 +6,13 @@ ibek_support_folder: "{{ ibek_support_root }}/{{ module }}"
 
 epics_folder: /epics
 support_folder: /epics/support
-configure_folder: "{{support_folder}}/configure"
-modules_file: "{{configure_folder}}/MODULES"
-release_file: "{{configure_folder}}/RELEASE"
-release_shell_file: "{{configure_folder}}/RELEASE.shell"
+configure_folder: "{{ support_folder }}/configure"
+modules_file: "{{ configure_folder }}/MODULES"
+release_file: "{{ configure_folder }}/RELEASE"
+release_shell_file: "{{ configure_folder }}/RELEASE.shell"
 
-libs_list: "{{configure_folder}}/lib_list"
-dbds_list: "{{configure_folder}}/dbd_list"
+libs_list: "{{ configure_folder }}/lib_list"
+dbds_list: "{{ configure_folder }}/dbd_list"
 
 rutime_folder: /epics/runtime
 ibek_defs_folder: /epics/ibek-defs
