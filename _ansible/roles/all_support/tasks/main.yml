@@ -13,7 +13,7 @@
 
 - name: Loop over the support module in Dockerfile order
   ansible.builtin.include_tasks:
-    file: "roles/all/tasks/one_support.yml"
+    file: one_support.yml
   loop: "{{ modules.stdout_lines }}"
   loop_control:
     loop_var: module

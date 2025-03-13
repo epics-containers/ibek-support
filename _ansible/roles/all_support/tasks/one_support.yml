@@ -1,0 +1,25 @@
+- name: Read in default values for all vars
+  ansible.builtin.include_vars:
+    file: ../support/vars/main.yml
+
+- name: Ensure root vars folder exists
+  ansible.builtin.file:
+    dest: "{{ ansible_root }}/vars"
+    state: directory
+    mode: "0755"
+
+- name: Copy module vars into ansible folder for {{ module }}
+  ansible.builtin.file:
+    src: "{{ ibek_support_folder }}/{{ module }}.yml"
+    dest: "{{ ansible_root }}/vars/.tmp.yml"
+    state: link
+    force: true
+    mode: "0644"
+
+- name: Read in the support module vars for {{ module }}
+  ansible.builtin.include_vars:
+    file: "{{ ansible_root }}/vars/.tmp.yml"
+
+- name: Run the support role with correct vars for {{ module }}
+  ansible.builtin.include_role:
+    name: support

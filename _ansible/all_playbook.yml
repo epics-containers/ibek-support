@@ -1,4 +1,4 @@
 - name: Configure and build the IOC
   hosts: localhost
   roles:
-    - all
+    - all_support

@@ -3,7 +3,7 @@
   block:
     - name: Ensure that the global configure/RELEASE exists
       ansible.builtin.copy:
-        src: "{{ ibek_support_root }}/_ansible/RELEASE.global"
+        src: "{{ ansible_root }}/RELEASE.global"
         dest: "{{ release_file }}"
         mode: "0644"
         force: false
