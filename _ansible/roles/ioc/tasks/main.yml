@@ -6,7 +6,7 @@
 - name: Link ibek defs files from _global
   ansible.builtin.file:
     src: "{{ item }}"
-    dest: "{{ ibek_defs_folder }}/{{ item | basename }}"
+    dest: "{{ ansible_root }}/{{ item | basename }}"
     state: link
   with_fileglob:
     - "{{ ibek_support_root }}/_global/*.ibek.support.yaml"
@@ -51,3 +51,4 @@
     file: ../../support/tasks/build.yml
   vars:
     module: IOC
+    local_path: /epics/ioc
