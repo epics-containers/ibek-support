@@ -3,13 +3,13 @@
 
 # Perform global setup steps ###################################################
 
-- name: Link ibek defs files from _global
+- name: Link global ibek defs file from _ansible
   ansible.builtin.file:
     src: "{{ item }}"
-    dest: "{{ ansible_root }}/{{ item | basename }}"
+    dest: "{{ ibek_defs_folder }}/{{ item | basename }}"
     state: link
   with_fileglob:
-    - "{{ ibek_support_root }}/_global/*.ibek.support.yaml"
+    - "{{ ansible_root }}/_global/*.ibek.support.yaml"
 
 - name: RTEMS settings
   ansible.builtin.lineinfile:
