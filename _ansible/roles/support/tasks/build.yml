@@ -1,7 +1,6 @@
 - name: Build block
   tags: [build]
   block:
-
     - name: Clean module for rebuild - {{ module }}
       ansible.builtin.command: make clean
       args:
@@ -19,7 +18,7 @@
     - name: Create build log for {{ module }}
       ansible.builtin.copy:
         content: "{{ build.stdout }}"
-        dest: "{{ local_path }}/build.log"
+        dest: "{{ local_path }}/{{ module }}.build.log"
         mode: "0644"
 
     # otherwise the log file is hidden in the container.
