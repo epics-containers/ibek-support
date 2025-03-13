@@ -27,11 +27,15 @@ cd $this_dir
 # ansible playbook and roles come from the ibek-support repo always
 ansible_dir=/epics/generic-source/ibek-support/_ansible
 
-path=${module_name}/${module_name}.yml
+# separate playbooks for all modules or single support module
+if [[ ${module_name} == "all" ]] ; then
+    pb=${ansible_dir}/all_playbook.yml
+    vars=
+else
+    pb=${ansible_dir}/support_playbook.yml
+    # load vars from the module yaml file
+    vars="-e @${module_name}/${module_name}.yml"
+fi
 
-ansible-playbook \
-    ${ansible_dir}/support_playbook.yml \
-    -i ${ansible_dir}/hosts.yml \
-    -e @${path} ${vers} \
-    ${tags}
-
+set -x
+ansible-playbook ${pb} -i ${ansible_dir}/hosts.yml ${vars} ${vers} ${tags}

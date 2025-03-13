@@ -3,20 +3,20 @@
   block:
     # RELEASE.shell is used to set up the environment with paths to the modules
 
-    - name: Add this module to the RELEASE.shell file
+    - name: Add this module to the RELEASE.shell file for {{ module }}
       ansible.builtin.lineinfile:
         path: "{{ release_shell_file }}"
-        line: "export {{ macro }}=\"{{ local_path }}\""
+        line: 'export {{ macro }}="{{ local_path }}"'
         regexp: "export *{{ macro }} *=.*$"
         mode: "0644"
         create: true
 
-    - name: Get db folders
+    - name: Get db folders for {{ module }}
       ansible.builtin.shell: ls -d {{ support_folder }}/*/db
       register: db_folders
       changed_when: false
 
-    - name: Add EPICS_DB_INCLUDE_PATH to RELEASE.shell file
+    - name: Add EPICS_DB_INCLUDE_PATH to RELEASE.shell file for {{ module }}
       ansible.builtin.lineinfile:
         path: "{{ release_shell_file }}"
         mode: "0644"
@@ -24,7 +24,7 @@
         regexp: "export *EPICS_DB_INCLUDE_PATH.*$"
       when: db_folders.stdout_lines | length > 0
 
-    - name: Validate libs and dbds are lists
+    - name: Validate libs and dbds are lists for {{ module }}
       ansible.builtin.assert:
         that:
           - libs | type_debug == 'list'
@@ -32,7 +32,7 @@
         msg: "libs and dbds for module '{{ module }}' must be lists"
 
     # the lib and dbd files are used to track what the IOC build needs to link against
-    - name: Add this module to the libs_list file
+    - name: Add this module to the libs_list file - {{ module }}
       ansible.builtin.lineinfile:
         path: "{{ libs_list }}"
         line: "{{ item }}"
@@ -41,7 +41,7 @@
         mode: "0644"
       loop: "{{ libs }}"
 
-    - name: Add this module to the dbds_list file
+    - name: Add this module to the dbds_list file - {{ module }}
       ansible.builtin.lineinfile:
         path: "{{ dbds_list }}"
         line: "{{ item }}"
@@ -50,10 +50,10 @@
         mode: "0644"
       loop: "{{ dbds }}"
 
-# Patching #####################################################################
+    # Patching #####################################################################
 
     # ad hoc patching of individual lines
-    - name: Patch lines
+    - name: Patch lines for {{ module }}
       ansible.builtin.lineinfile:
         path: "{{ item.path }}"
         line: "{{ item.line }}"
@@ -63,7 +63,7 @@
       loop: "{{ patch_lines }}"
       when: item.when | default(true) and (item.post_build | default(false) | bool)
 
-# Linking files for runtime into known folders #################################
+    # Linking files for runtime into known folders #################################
 
     - name: Ensure destination folders exist
       ansible.builtin.file:
@@ -75,7 +75,7 @@
         - "{{ pvi_defs_folder }}"
         - "{{ autosave_folder }}"
 
-    - name: Link ibek defs files
+    - name: Link ibek defs files for {{ module }}
       ansible.builtin.file:
         src: "{{ item }}"
         dest: "{{ ibek_defs_folder }}/{{ item | basename }}"
@@ -83,7 +83,7 @@
       with_fileglob:
         - "{{ ibek_support_folder }}/*.ibek.support.yaml"
 
-    - name: Link pvi device files
+    - name: Link pvi device files for {{ module }}
       ansible.builtin.file:
         src: "{{ item }}"
         dest: "{{ pvi_defs_folder }}/{{ item | basename }}"
@@ -91,7 +91,7 @@
       with_fileglob:
         - "{{ ibek_support_folder }}/*.pvi.device.yaml"
 
-    - name: Link autosave request files
+    - name: Link autosave request files for {{ module }}
       ansible.builtin.file:
         src: "{{ item }}"
         dest: "{{ autosave_folder }}/{{ item | basename }}"

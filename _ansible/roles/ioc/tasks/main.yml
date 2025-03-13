@@ -1,4 +1,5 @@
-# IOC tasks
+# IOC tasks - global config not related to a single support module, plus
+# IOC compilation
 
 # Perform global setup steps ###################################################
 

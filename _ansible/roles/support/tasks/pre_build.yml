@@ -1,14 +1,14 @@
 - name: Config block
   tags: [pre_build]
   block:
-    - name: Comment out lines in Makefiles etc.
+    - name: Comment out lines as required for {{ module }}
       ansible.builtin.replace:
         path: "{{ local_path }}/{{ item.path }}"
         regexp: "^(?!#)(.*{{ item.regexp }}.*$)"
         replace: "# \\1"
       loop: "{{ comment_out }}"
 
-    - name: RTEMS settings
+    - name: RTEMS settings for {{ module }}
       ansible.builtin.lineinfile:
         path: "{{ local_path }}/{{ config_linux_target }}"
         line: VALID_BUILDS=Host
@@ -18,7 +18,7 @@
       when: is_rtems | bool
 
     # ad hoc patching of individual lines
-    - name: Patch lines
+    - name: Patch lines for {{ module }}
       ansible.builtin.lineinfile:
         path: "{{ local_path }}/{{ item.path }}"
         line: "{{ item.line }}"

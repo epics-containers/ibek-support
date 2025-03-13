@@ -1,0 +1,11 @@
+- name: Read in default values for all vars
+  ansible.builtin.include_vars:
+    file: ../support/vars/main.yml
+
+- name: Read in the vars for the support module {{ module }}
+  ansible.builtin.include_vars:
+    file: "modules/{{ module }}/{{ module }}.yml"
+
+- name: Run the support role with correct vars for {{ module }}
+  ansible.builtin.include_role:
+    name: support

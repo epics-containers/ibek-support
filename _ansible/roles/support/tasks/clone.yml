@@ -11,20 +11,20 @@
         depth: "{{ 0 if patch_file.when | default(false) | bool else 1 }}"
 
     # get a specific commit to apply a patch
-    - name: Get specific commit to prepare for patch
+    - name: Get specific commit to prepare for patch for {{ module }}
       ansible.builtin.git:
         repo: "{{ organization }}/{{ module }}"
         dest: "{{ local_path }}"
         version: "{{ patch_file.commit }}"
         force: true
       when:
-        - patch_file.when | default(false) | boo
+        - patch_file.when | default(false) | bool
         - patch_file.commit is defined
 
-    - name: Patch file
-      ansible.builtin.patch:
-        src: "{{ ibek_support_folder }}/{{ patch_file.path }}"
-        dest: "{{ local_path }}"
-      when:
-        - patch_file.when | default(false) | bool
-        - patch_file.path is defined
+    - name: Patch file for {{ module }} # noqa command-instead-of-module
+      ansible.builtin.command: >
+        git apply "{{ ibek_support_folder }}/{{ patch_file.path }}"
+      args:
+        chdir: "{{ local_path }}"
+      when: patch_file.when | default(false) | bool
+      changed_when: true

@@ -3,29 +3,28 @@
 - name: System block
   tags: [system]
   block:
-
-    - name: Download additional files
+    - name: Download additional files for {{ module }}
       ansible.builtin.get_url:
         url: "{{ item.url }}"
         dest: "{{ item.dest }}"
         mode: "0644"
       loop: "{{ download_extras }}"
 
-    - name: Install system dependencies from registries
+    - name: Install system dependencies from registries {{ module }}
       ansible.builtin.package:
         name: "{{ item }}"
         state: present
       loop: "{{ apt_developer }}"
       when: not item.startswith('/')
 
-    - name: Install local system dependencies
+    - name: Install local system dependencies {{ module }}
       ansible.builtin.package:
         deb: "{{ item }}"
         state: present
       loop: "{{ apt_developer }}"
       when: item.startswith('/')
 
-    - name: Register system dependencies for the runtime stage
+    - name: Register system dependencies for the runtime stage {{ module }}
       ansible.builtin.lineinfile:
         path: "{{ configure_folder }}/runtime_debs"
         regexp: "^{{ item }}$"

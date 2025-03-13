@@ -1,0 +1,20 @@
+# a Role to build all support modules listed in the Dockerfile
+
+- name: Discover modules in Dockerfile
+  ansible.builtin.shell: >
+    grep -oP '(?<=ibek-support/).*(?=/)' /epics/generic-source/Dockerfile
+  register: modules
+  changed_when: false
+
+- name: Report modules
+  ansible.builtin.debug:
+    msg: "{{ modules.stdout_lines }}"
+  changed_when: false
+
+- name: Loop over the support module in Dockerfile order
+  ansible.builtin.include_tasks:
+    file: "roles/all/tasks/one_support.yml"
+  loop: "{{ modules.stdout_lines }}"
+  loop_control:
+    loop_var: module
+  when: modules.stdout_lines | length > 0
