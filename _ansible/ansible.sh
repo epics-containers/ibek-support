@@ -33,7 +33,7 @@ elif [[ ${module_name} == "ioc" ]] ; then
 else
     pb=${ansible_dir}/support_playbook.yml
     # load vars from the module yaml file
-    vars="-e @${module_name}/${module_name}.yml"
+    vars="-e @${module_name}/${module_name}.install.yml"
 fi
 
 set -x

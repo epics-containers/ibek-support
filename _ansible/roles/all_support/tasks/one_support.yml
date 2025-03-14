@@ -9,16 +9,15 @@
     mode: "0755"
 
 - name: Copy module vars into ansible folder for {{ module }}
-  ansible.builtin.file:
-    src: "{{ ibek_support_folder }}/{{ module }}.yml"
-    dest: "{{ ansible_root }}/vars/.tmp.yml"
-    state: link
+  ansible.builtin.copy:
+    src: "{{ ibek_support_folder }}/{{ module }}.install.yml"
+    dest: "{{ ansible_root }}/vars/.tmp.install.yml"
     force: true
     mode: "0644"
 
 - name: Read in the support module vars for {{ module }}
   ansible.builtin.include_vars:
-    file: "{{ ansible_root }}/vars/.tmp.yml"
+    file: "{{ ansible_root }}/vars/.tmp.install.yml"
 
 - name: Run the support role with correct vars for {{ module }}
   ansible.builtin.include_role:
