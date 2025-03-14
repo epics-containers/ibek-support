@@ -112,7 +112,7 @@ class SupportVariables(BaseModel):
         "Optionally specify a commit to apply the patch to",
         default=(),
     )
-    script: Sequence[Scripts] = Field(
+    scripts: Sequence[Scripts] = Field(
         description="List of scripts to execute",
         default=(),
     )

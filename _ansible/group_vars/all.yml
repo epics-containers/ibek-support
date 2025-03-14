@@ -1,7 +1,9 @@
 # global settings for all support modules
 
 # paths
-ibek_support_root: /epics/generic-source/ibek-support
+all_root: /epics/generic-source
+ibek_support_root: "{{ all_root }}/ibek-support"
+# OVERRIDE on command line when module is NOT in ibek-support (e.g. ibek-support-dls)
 ibek_support_folder: "{{ ibek_support_root }}/{{ module }}"
 ansible_root: "{{ ibek_support_root }}/_ansible"
 

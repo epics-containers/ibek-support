@@ -9,6 +9,9 @@ libs:
 
 organization: https://github.com/diamondlightsource
 
+protocol_files:
+  - mks937aApp/protocol/mks937a.protocol
+
 remove_macros:
   - WORK
 

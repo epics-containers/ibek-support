@@ -114,3 +114,11 @@
         dest: "{{ protocol_folder }}"
         mode: "0644"
       loop: "{{ protocol_files }}"
+
+    - name: Call prebuild ad hoc scripts for {{ module }}
+      ansible.builtin.command: "bash {{ ibek_support_folder }}/{{ item.path }}"
+      args:
+        chdir: "{{ local_path }}"
+      loop: "{{ scripts }}"
+      when: (item.post_build | default(false)) | bool
+      changed_when: true

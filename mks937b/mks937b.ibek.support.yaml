@@ -338,11 +338,6 @@ entity_models:
         description: |-
           Controller address (001 .. 253)
 
-    pre_init:
-      - when: first
-        value: |
-          epicsEnvSet "STREAM_PROTOCOL_PATH", "$(STREAM_PROTOCOL_PATH):$(MKS937B)/mks937bApp/protocol/"
-
     databases:
       - file: $(MKS937B)/db/mks937b.template
         args:

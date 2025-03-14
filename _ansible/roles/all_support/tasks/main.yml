@@ -1,8 +1,11 @@
 # a Role to build all support modules listed in the Dockerfile
 
 - name: Discover modules in Dockerfile
-  ansible.builtin.shell: >
+  ansible.builtin.shell: |
+    set -e -o pipefail
     cat /epics/generic-source/Dockerfile | sed -n 's/^RUN *\.\/ansible.sh \([^ ]*\).*$/\1/p'
+  args:
+    executable: /bin/bash
   register: modules
   changed_when: false
 
@@ -11,7 +14,7 @@
     msg: "{{ modules.stdout_lines }}"
   changed_when: false
 
-- name: Loop over the support module in Dockerfile order
+- name: Loop over the support modules in Dockerfile order
   ansible.builtin.include_tasks:
     file: one_support.yml
   loop: "{{ modules.stdout_lines }}"
