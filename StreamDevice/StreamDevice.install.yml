@@ -21,7 +21,6 @@ patch_lines:
     regexp: PCRE_LIB
     line: PCRE_LIB=/usr/lib/x86_64-linux-gnu
     when: "{{ is_linux }}"
-    post_build: false
 
 comment_out:
   - path: Makefile
