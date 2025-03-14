@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: ADSimDetector
+version: R2-11
+dbds:
+  - simDetectorSupport.dbd
+libs:
+  - simDetector
+
+organization: http://github.com/areaDetector/

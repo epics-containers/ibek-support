@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: busy
+version: R1-7-4
+dbds:
+  - busySupport.dbd
+libs:
+  - busy
+
+remove_macros:
+  - AUTOSAVE
+
+comment_out:
+  # don't build tests
+  - path: busyApp/src/Makefile
+    regexp: testBusy

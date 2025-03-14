@@ -1,0 +1,37 @@
+# global settings for all support modules
+
+# paths
+all_root: /epics/generic-source
+ibek_support_root: "{{ all_root }}/ibek-support"
+# OVERRIDE on command line when module is NOT in ibek-support (e.g. ibek-support-dls)
+ibek_support_folder: "{{ ibek_support_root }}/{{ module }}"
+ansible_root: "{{ ibek_support_root }}/_ansible"
+
+epics_folder: /epics
+support_folder: /epics/support
+configure_folder: "{{ support_folder }}/configure"
+modules_file: "{{ configure_folder }}/MODULES"
+release_file: "{{ configure_folder }}/RELEASE"
+release_shell_file: "{{ configure_folder }}/RELEASE.shell"
+
+libs_list: "{{ configure_folder }}/lib_list"
+dbds_list: "{{ configure_folder }}/dbd_list"
+
+rutime_folder: /epics/runtime
+ibek_defs_folder: /epics/ibek-defs
+pvi_defs_folder: /epics/pvi-defs
+autosave_folder: /epics/autosave
+protocol_folder: /epics/runtime/protocol
+
+# files relative to support module root
+config_linux_target: configure/CONFIG_SITE.Common.linux-x86_64
+
+# quick access to the target architecture
+target_arch: "{{ lookup('ansible.builtin.env', 'EPICS_TARGET_ARCH') }}"
+is_rtems: "{{ 'RTEMS' in target_arch }}"
+is_linux: "{{ 'linux' in target_arch }}"
+
+# force rebuild
+force_build: false
+# force clone even when the repo exists
+force_clone: false

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: ffmpegServer
+version: R3-2
+dbds:
+  - ffmpegServer.dbd
+libs:
+  - ffmpegServer
+
+organization: http://github.com/areaDetector
+
+apt_developer:
+  - libavcodec-dev
+  - libswscale-dev
+  - libavformat-dev
+
+apt_runtime:
+  - libavcodec58
+  - libswscale5
+  - libavformat58
+
+comment_out:
+  # don't build the vendor libraries
+  - path: Makefile
+    regexp: vendor
+  - path: ffmpegServerApp/src/Makefile
+    regexp: vendor\/ffmpeg
+
+patch_lines:
+  # use external ffmpeg libraries
+  - path: ffmpegServerApp/src/Makefile
+    regexp: LIB_LIBS \+= avdevice
+    line: ffmpegServer_SYS_LIBS += avformat avcodec swresample swscale avutil

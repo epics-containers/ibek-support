@@ -1,0 +1,5 @@
+# IOC source location
+local_path: /epics/ioc
+
+# Make options (don't parallel build the IOC)
+options: ""

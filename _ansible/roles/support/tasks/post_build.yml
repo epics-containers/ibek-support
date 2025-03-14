@@ -1,0 +1,124 @@
+- name: Post Build block
+  tags: [post_build]
+  block:
+
+    # Generating files in /epics/support/configure #############################
+
+    # RELEASE.shell is used to set up the environment with paths to the modules
+    - name: Add this module to the RELEASE.shell file for {{ module }}
+      ansible.builtin.lineinfile:
+        path: "{{ release_shell_file }}"
+        line: 'export {{ macro }}="{{ local_path }}"'
+        regexp: "export *{{ macro }} *=.*$"
+        mode: "0644"
+        create: true
+
+    - name: Get db folders for {{ module }}
+      ansible.builtin.shell: ls -d {{ support_folder }}/*/db
+      register: db_folders
+      changed_when: false
+
+    - name: Add EPICS_DB_INCLUDE_PATH to RELEASE.shell file for {{ module }}
+      ansible.builtin.lineinfile:
+        path: "{{ release_shell_file }}"
+        mode: "0644"
+        line: export EPICS_DB_INCLUDE_PATH="{{ db_folders.stdout_lines | join(':') }}"
+        regexp: "export *EPICS_DB_INCLUDE_PATH.*$"
+      when: db_folders.stdout_lines | length > 0
+
+    - name: Validate libs and dbds are lists for {{ module }}
+      ansible.builtin.assert:
+        that:
+          - libs | type_debug == 'list'
+          - dbds | type_debug == 'list'
+        msg: "libs and dbds for module '{{ module }}' must be lists"
+
+    # the lib and dbd files are used to track what the IOC build needs to link against
+    - name: Add this module to the libs_list file - {{ module }}
+      ansible.builtin.lineinfile:
+        path: "{{ libs_list }}"
+        line: "{{ item }}"
+        regexp: "^{{ item }}$"
+        create: true
+        mode: "0644"
+      loop: "{{ libs }}"
+
+    - name: Add this module to the dbds_list file - {{ module }}
+      ansible.builtin.lineinfile:
+        path: "{{ dbds_list }}"
+        line: "{{ item }}"
+        regexp: "^{{ item }}$"
+        create: true
+        mode: "0644"
+      loop: "{{ dbds }}"
+
+    # Patching #################################################################
+
+    # ad hoc patching of individual lines
+    - name: Patch lines for {{ module }}
+      ansible.builtin.lineinfile:
+        path: "{{ local_path }}/{{ item.path }}"
+        line: "{{ item.line }}"
+        regexp: "{{ item.regexp }}"
+        create: true
+        mode: "0644"
+      loop: "{{ patch_lines }}"
+      when: item.when | default(true) and (item.post_build | default(false) | bool)
+
+    # Linking files for runtime into known folders #############################
+
+    - name: Ensure destination folders exist
+      ansible.builtin.file:
+        dest: "{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - "{{ ibek_defs_folder }}"
+        - "{{ pvi_defs_folder }}"
+        - "{{ autosave_folder }}"
+
+    - name: Link ibek defs files for {{ module }}
+      ansible.builtin.file:
+        src: "{{ item }}"
+        dest: "{{ ibek_defs_folder }}/{{ item | basename }}"
+        state: link
+      with_fileglob:
+        - "{{ ibek_support_folder }}/*.ibek.support.yaml"
+
+    - name: Link pvi device files for {{ module }}
+      ansible.builtin.file:
+        src: "{{ item }}"
+        dest: "{{ pvi_defs_folder }}/{{ item | basename }}"
+        state: link
+      with_fileglob:
+        - "{{ ibek_support_folder }}/*.pvi.device.yaml"
+
+    - name: Link autosave request files for {{ module }}
+      ansible.builtin.file:
+        src: "{{ item }}"
+        dest: "{{ autosave_folder }}/{{ item | basename }}"
+        state: link
+      with_fileglob:
+        - "{{ ibek_support_folder }}/*.req"
+
+    # copy protocol files into runtime folder ##################################
+    - name: Make sure protocol folder exists
+      ansible.builtin.file:
+        dest: "{{ protocol_folder }}"
+        state: directory
+        mode: "0755"
+
+    - name: Copy protocol files for {{ module }}
+      ansible.builtin.copy:
+        src: "{{ local_path }}/{{ item }}"
+        dest: "{{ protocol_folder }}"
+        mode: "0644"
+      loop: "{{ protocol_files }}"
+
+    - name: Call prebuild ad hoc scripts for {{ module }}
+      ansible.builtin.command: "bash {{ ibek_support_folder }}/{{ item.path }}"
+      args:
+        chdir: "{{ local_path }}"
+      loop: "{{ scripts }}"
+      when: (item.post_build | default(false)) | bool
+      changed_when: true

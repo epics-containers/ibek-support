@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: sscan
+version: R2-11-6
+dbds:
+  - sscan.dbd
+libs:
+  - sscan
+
+patch_lines:
+  - path: Makefile
+    regexp: configure calcApp tests
+    line: DIRS += configure calcApp
+
+remove_macros:
+  - SNCSEQ
+
+# sscan needs to be built for linux and rtems (calc uses the linux build)
+# TODO investigate why this - probably a makefile issue in calc.
+is_rtems: false

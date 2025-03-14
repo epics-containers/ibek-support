@@ -1,0 +1,16 @@
+- name: Install support module {{ module_name }}
+  hosts: localhost
+  roles:
+    # module_name == "all": build all support modules and IOC
+    # module_name == "ioc": build only the IOC
+    # any other value: just build the named support module
+    - role: all_support
+      when: module_name == "all"
+    - role: find
+      when: module_name not in ["all", "ioc"]
+      vars:
+        module: "{{ module_name }}"
+    - role: support
+      when: module_name not in ["all", "ioc"]
+    - role: ioc
+      when: module_name in ["all", "ioc"]

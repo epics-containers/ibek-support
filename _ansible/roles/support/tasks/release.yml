@@ -1,0 +1,41 @@
+- name: Release block
+  tags: [release]
+  block:
+    - name: Ensure that the global configure/RELEASE exists
+      ansible.builtin.copy:
+        src: "{{ ansible_root }}/RELEASE.global"
+        dest: "{{ release_file }}"
+        mode: "0644"
+        force: false
+
+    - name: Ensure that configure/RELEASE includes RELEASE.local for {{ module }}
+      ansible.builtin.lineinfile:
+        path: "{{ local_path }}/configure/RELEASE"
+        regexp: "include.*TOP./configure/RELEASE.local"
+        line: "-include $(TOP)/configure/RELEASE.local"
+        insertafter: EOF
+
+        create: true
+        mode: "0644"
+
+    - name: Insert the global RELEASE as link to RELEASE.local for {{ module }}
+      ansible.builtin.file:
+        src: "{{ release_file }}"
+        dest: "{{ local_path }}/configure/RELEASE.local"
+        state: link
+        mode: "0644"
+        force: true # overwrite existing file
+
+    - name: Add this module to the global configure/RELEASE - {{ module }}
+      ansible.builtin.lineinfile:
+        path: "{{ release_file }}"
+        regexp: "^{{ macro }}.*=.*"
+        line: "{{ macro }} = {{ local_path }}"
+        create: true
+        mode: "0644"
+
+    - name: Remove requested macros from configure/RELEASE for {{ module }}
+      ansible.builtin.include_tasks: remove_macros.yml
+      loop: "{{ remove_macros }}"
+      loop_control:
+        loop_var: remove_macro

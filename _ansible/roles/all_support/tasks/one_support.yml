@@ -1,0 +1,17 @@
+- name: Ensure root vars folder exists
+  ansible.builtin.file:
+    dest: "{{ ansible_root }}/vars"
+    state: directory
+    mode: "0755"
+
+- name: Read in default values for all vars to reset them
+  ansible.builtin.include_vars:
+    file: ../support/vars/main.yml
+
+- name: Find the config folder and set variables for {{ module }}
+  ansible.builtin.include_role:
+    name: find
+
+- name: Run the support role with correct vars for {{ module }}
+  ansible.builtin.include_role:
+    name: support

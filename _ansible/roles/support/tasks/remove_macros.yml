@@ -1,0 +1,16 @@
+- name: Remove requested macros block
+  tags: [release]
+  block:
+    - name: Check for existing macro {{ remove_macro }}
+      ansible.builtin.shell: grep -q '{{ remove_macro }} *=.*' "{{ release_file }}"
+      register: macro_exists
+      failed_when: false
+      changed_when: false
+
+    - name: Remove requested macro from configure/RELEASE {{ remove_macro }}
+      ansible.builtin.lineinfile:
+        path: "{{ release_file }}"
+        line: "{{ remove_macro }} ="
+        insertbefore: "^{{ macro }} *=.*"
+      # only insert the blank macro if there is not already one pointing at a path
+      when: macro_exists.rc == 1

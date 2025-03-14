@@ -1,0 +1,55 @@
+# IOC tasks - global config not related to a single support module, plus
+# IOC compilation
+
+# Perform global setup steps ###################################################
+
+- name: Link global ibek defs file from _ansible
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ibek_defs_folder }}/{{ item | basename }}"
+    state: link
+  with_fileglob:
+    - "{{ ansible_root }}/*.ibek.support.yaml"
+
+- name: RTEMS settings
+  ansible.builtin.lineinfile:
+    path: "{{ local_path }}/{{ config_linux_target }}"
+    line: VALID_BUILDS=Host
+    regexp: ".*VALID_BUILDS.*"
+    create: true
+    mode: "0644"
+  when: is_rtems | bool
+
+- name: Pip install rtems-proxy
+  ansible.builtin.pip:
+    name: rtems-proxy
+    version: 1.0.1
+    virtualenv: "/venv"
+    state: present
+  when: is_rtems | bool
+
+- name: Make an ioc.yaml schema for all support modules
+  ansible.builtin.shell: >
+    ibek ioc generate-schema --output /epics/ibek-defs/ioc.schema.json 2>&1
+  changed_when: true
+  register: schema_build
+  failed_when: false
+
+- name: Report errors if needed
+  ansible.builtin.debug:
+    msg: "{{ schema_build.stdout_lines }}"
+  when: schema_build.rc != 0
+
+- name: Fail on schema failure
+  ansible.builtin.fail:
+    msg: "Schema build failed"
+  when: schema_build.rc != 0
+
+# Compile the IOC binary #######################################################
+
+- name: Compile the IOC binary
+  ansible.builtin.include_tasks:
+    file: ../../support/tasks/build.yml
+  vars:
+    module: IOC
+    local_path: /epics/ioc

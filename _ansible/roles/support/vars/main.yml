@@ -1,0 +1,76 @@
+# Variables that may be supplied in ibek-support/module_name/module_name.yml
+
+# noqa var-naming[no-role-prefix]
+
+# mandatory variables ##########################################################
+
+# the name of the support module to build
+module:
+# the version of the support module to clone
+version:
+# dbd files that the module publishes
+dbds:
+# libraries that the module publishes
+libs:
+
+# optional variables ###########################################################
+
+# the prefix of the git repository to clone (i.e. clone organization/module)
+organization: https://github.com/epics-modules
+
+# list of StreamDevice protocol files to copy into /runtime/protocol
+protocol_files: []
+
+# the macro used in configure/RELEASE for this module
+macro: "{{ module | upper }}"
+
+# macros to remove from configure/RELEASE unless already built
+remove_macros: []
+
+# compilation options
+options: -j{{ ansible_processor_vcpus }}
+
+# packages to install in developer target
+apt_developer: []
+
+# packages to install in runtime target
+apt_runtime: []
+
+# additional files to download
+# e.g.
+# download_extras:
+#   - url: "{{ HDF }}/libhdf5-103_1.10.4+repack-10_amd64.deb"
+#   - dest: /tmp/libhdf5-103.deb
+download_extras: []
+
+# local path to the support module - where it is cloned to
+local_path: "{{ support_folder }}/{{ module }}"
+
+# patching options #############################################################
+
+# files to comment out lines in e.g.
+# comment_out:
+#   - path: busyApp/src/Makefile
+#     regex: .*testBusy.*
+comment_out: []
+
+# files to patch individual lines in e.g.
+# patch_lines:
+#   - path: "{{ config_linux_target }}"
+#     regexp: TIRPC
+#     line: TIRPC = YES
+#     when: is_linux      # defaults to any
+#     post_build: true    # defaults to false
+patch_lines: []
+
+# apply a patch file to the repository before compilation
+patch_file:
+  path:     # path to the patch file
+  commit:   # optional commit to apply the patch to
+  when:     # can be true, is_linux or is_rtems or any bool
+
+# scripts to execute after clone or after compilation (post_build=true)
+# e.g.
+# scripts:
+#   path: myscript    # path is relative to the ibek-support/<module> folder
+scripts: []

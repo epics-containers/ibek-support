@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: mks937a
+version: 3-0
+dbds:
+  - mks937a.dbd
+libs:
+  - mks937a
+
+organization: https://github.com/diamondlightsource
+
+protocol_files:
+  - mks937aApp/protocol/mks937a.protocol
+
+remove_macros:
+  - WORK
+
+comment_out:
+  - path: mks937aApp/Makefile
+    regexp: opi
