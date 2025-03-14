@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: digitelMPC
+version: 6-21
+dbds:
+  - digitelMpc.dbd
+libs:
+  - digitelMpc
+
+organization: https://github.com/DiamondLightSource
+
+protocol_files:
+  - digitelMpcApp/protocol/digitelMpc.proto

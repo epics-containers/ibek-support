@@ -18,6 +18,9 @@ libs:
 # the prefix of the git repository to clone (i.e. clone organization/module)
 organization: https://github.com/epics-modules
 
+# list of StreamDevice protocol files to copy into /runtime/protocol
+protocol_files: []
+
 # the macro used in configure/RELEASE for this module
 macro: "{{ module | upper }}"
 
@@ -65,3 +68,9 @@ patch_file:
   path:     # path to the patch file
   commit:   # optional commit to apply the patch to
   when:     # can be true, is_linux or is_rtems or any bool
+
+# scripts to execute after clone or after compilation (post_build=true)
+# e.g.
+# scripts:
+#   path: myscript    # path is relative to the ibek-support/<module> folder
+scripts: []

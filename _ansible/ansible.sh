@@ -22,6 +22,10 @@ if [[ $ANSIBLE_TAGS ]]; then
     echo "limiting ansible run to tags: ${ANSIBLE_TAGS}"
 fi
 
+if [[ $ANSIBLE_ARGS ]]; then
+    args="${ANSIBLE_ARGS}"
+fi
+
 # modules are relative to this dir (ibek-support or ibek-support-dls etc.)
 this_dir=$(dirname $0)
 cd $this_dir
@@ -42,4 +46,4 @@ else
 fi
 
 set -x
-ansible-playbook ${pb} -i ${ansible_dir}/hosts.yml ${vars} ${vers} ${tags}
+ansible-playbook ${pb} -i ${ansible_dir}/hosts.yml ${vars} ${vers} ${tags} ${args}

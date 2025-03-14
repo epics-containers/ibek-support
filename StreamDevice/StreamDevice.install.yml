@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+# TODO TODO
+
+module: streamDevice
+version: 2-8-16
+dbds:
+  - stream-base.dbd
+  - stream.dbd
+libs:
+  - stream
+
+organization: https://github.com/paulscherrerinstitute
+
+protocol_files:
+  - digitelMpcApp/protocol/digitelMpc.proto

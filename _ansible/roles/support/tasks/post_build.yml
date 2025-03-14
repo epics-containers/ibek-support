@@ -1,8 +1,10 @@
 - name: Post Build block
   tags: [post_build]
   block:
-    # RELEASE.shell is used to set up the environment with paths to the modules
 
+    # Generating files in /epics/support/configure #############################
+
+    # RELEASE.shell is used to set up the environment with paths to the modules
     - name: Add this module to the RELEASE.shell file for {{ module }}
       ansible.builtin.lineinfile:
         path: "{{ release_shell_file }}"
@@ -50,7 +52,7 @@
         mode: "0644"
       loop: "{{ dbds }}"
 
-    # Patching #####################################################################
+    # Patching #################################################################
 
     # ad hoc patching of individual lines
     - name: Patch lines for {{ module }}
@@ -63,7 +65,7 @@
       loop: "{{ patch_lines }}"
       when: item.when | default(true) and (item.post_build | default(false) | bool)
 
-    # Linking files for runtime into known folders #################################
+    # Linking files for runtime into known folders #############################
 
     - name: Ensure destination folders exist
       ansible.builtin.file:
@@ -98,3 +100,17 @@
         state: link
       with_fileglob:
         - "{{ ibek_support_folder }}/*.req"
+
+    # copy protocol files into runtime folder ##################################
+    - name: Make sure protocol folder exists
+      ansible.builtin.file:
+        dest: "{{ protocol_folder }}"
+        state: directory
+        mode: "0755"
+
+    - name: Copy protocol files for {{ module }}
+      ansible.builtin.copy:
+        src: "{{ local_path }}/{{ item }}"
+        dest: "{{ protocol_folder }}"
+        mode: "0644"
+      loop: "{{ protocol_files }}"

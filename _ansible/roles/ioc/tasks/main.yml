@@ -24,6 +24,7 @@
   ansible.builtin.pip:
     name: rtems-proxy
     version: 1.0.1
+    virtualenv: "/venv"
     state: present
   when: is_rtems | bool
 

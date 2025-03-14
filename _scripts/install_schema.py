@@ -40,6 +40,10 @@ class SupportVariables(BaseModel):
         commit: str = Field(default="HEAD")
         when: bool = Field(default=False)
 
+    class Scripts(BaseModel):
+        path: str
+        post_build: bool = Field(default=False)
+
     # mandatory fields ########################################################
 
     module: str = Field(description="Support module name, normally the repo name")
@@ -59,6 +63,10 @@ class SupportVariables(BaseModel):
         description="The git organization that owns the support module."
         "Used to generate the git remote from organization/module",
         default="https://github.com/epics-modules",
+    )
+    protocol_files: Sequence[str] = Field(
+        description="List of protocol files to copy to /epics/runtime/protocol",
+        default=(),
     )
     macro: str = Field(
         description="The macro used in configure/RELEASE for this module."
@@ -102,6 +110,10 @@ class SupportVariables(BaseModel):
     patch_file: PatchFile = Field(
         description="Apply a patch file to the repo."
         "Optionally specify a commit to apply the patch to",
+        default=(),
+    )
+    script: Sequence[Scripts] = Field(
+        description="List of scripts to execute",
         default=(),
     )
 

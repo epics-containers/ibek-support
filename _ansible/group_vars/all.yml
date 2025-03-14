@@ -19,6 +19,7 @@ rutime_folder: /epics/runtime
 ibek_defs_folder: /epics/ibek-defs
 pvi_defs_folder: /epics/pvi-defs
 autosave_folder: /epics/autosave
+protocol_folder: /epics/runtime/protocol
 
 # files relative to support module root
 config_linux_target: configure/CONFIG_SITE.Common.linux-x86_64
