@@ -1,10 +1,15 @@
 #!/bin/bash
 
+# launch script for the ansible playbooks
+
 module_name=$1
 module_version=$2
 
 if [[ -z $module_name ]]; then
     echo "Usage: $0 <module_name> [<module_version>]"
+    echo "  where <module_name> the support module to install, or 'ioc' or 'all'"
+    echo
+    echo "  launches an ansible playbook to configure and install the module[s]"
     exit 1
 fi
 
@@ -25,14 +30,14 @@ cd $this_dir
 ansible_dir=/epics/generic-source/ibek-support/_ansible
 vars=
 
-# separate playbooks for all modules, a single support module or the
+# separate playbooks a single support module, the ioc, or all modules
 if [[ ${module_name} == "all" ]] ; then
-    pb=${ansible_dir}/all_playbook.yml
+    pb=${ansible_dir}/playbook_all.yml
 elif [[ ${module_name} == "ioc" ]] ; then
-    pb=${ansible_dir}/ioc_playbook.yml
+    pb=${ansible_dir}/playbook_ioc.yml
 else
-    pb=${ansible_dir}/support_playbook.yml
-    # load vars from the module yaml file
+    pb=${ansible_dir}/playbook_support.yml
+    # load vars from the ibek-supprt/<module>/<module>.install.yaml file
     vars="-e @${module_name}/${module_name}.install.yml"
 fi
 
