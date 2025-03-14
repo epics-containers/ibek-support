@@ -19,6 +19,12 @@
   ansible.builtin.debug:
     msg: "ibek_support_folder: {{ ibek_support_folder }}"
 
+- name: Ensure root vars folder exists
+  ansible.builtin.file:
+    dest: "{{ ansible_root }}/vars"
+    state: directory
+    mode: "0755"
+
 # because ansible only loads vars from inside the root anisble folder!
 - name: Copy module vars into ansible folder for {{ module }}
   ansible.builtin.copy:
