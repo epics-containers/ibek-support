@@ -1,6 +1,0 @@
-module: autosave
-version: R5-11
-dbds:
-  - asSupport.dbd
-libs:
-  - autosave

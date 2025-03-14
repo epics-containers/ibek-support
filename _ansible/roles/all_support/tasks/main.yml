@@ -2,7 +2,7 @@
 
 - name: Discover modules in Dockerfile
   ansible.builtin.shell: >
-    grep -oP '(?<=ibek-support/).*(?=/)' /epics/generic-source/Dockerfile
+    cat /epics/generic-source/Dockerfile | sed -n 's/^RUN *\.\/ansible.sh \([^ ]*\).*$/\1/p'
   register: modules
   changed_when: false
 
