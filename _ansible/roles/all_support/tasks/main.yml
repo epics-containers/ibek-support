@@ -20,4 +20,4 @@
   loop: "{{ modules.stdout_lines }}"
   loop_control:
     loop_var: module
-  when: modules.stdout_lines | length > 0
+  when: modules.stdout_lines | length > 0 and module != "ioc"
