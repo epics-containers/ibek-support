@@ -1,4 +1,0 @@
-- name: Configure and build the IOC
-  hosts: localhost
-  roles:
-    - role: ioc

@@ -1,5 +1,0 @@
-- name: Configure and build all support plus the IOC
-  hosts: localhost
-  roles:
-    - all_support
-    - ioc

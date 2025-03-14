@@ -15,6 +15,7 @@
 - name: Set the correct ibek-support folder
   ansible.builtin.set_fact:
     ibek_support_folder: "{{ module_exists.stdout_lines[0] }}"
+    module: "{{ module }}"
 
 - name: Report the ibek-support folder
   ansible.builtin.debug:
