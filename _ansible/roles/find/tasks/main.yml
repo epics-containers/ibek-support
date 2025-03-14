@@ -2,20 +2,18 @@
 # the support variables from ibek-support*/<module>/<module>.install.yml
 
 - name: Find the ibek-support* folder for {{ module }}
-  ansible.builtin.shell:
-    ls -d {{ all_root }}/ibek-support*/{{ module }}
+  ansible.builtin.shell: ls -d {{ all_root }}/ibek-support*/{{ module }}
   register: module_exists
   changed_when: false
 
 - name: Make sure it was found
   ansible.builtin.fail:
-    msg: "Module {{ module }} not found in ibek-support* folders"
-  when: module_exists.stdout_lines | length == 0
+    msg: Module {{ module }} not found (or duplicated) in ibek-support* folders
+  when: module_exists.stdout_lines | length != 1
 
 - name: Set the correct ibek-support folder
   ansible.builtin.set_fact:
     ibek_support_folder: "{{ module_exists.stdout_lines[0] }}"
-    module: "{{ module }}"
 
 - name: Report the ibek-support folder
   ansible.builtin.debug:
