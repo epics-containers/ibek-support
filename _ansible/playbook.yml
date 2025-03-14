@@ -9,13 +9,8 @@
     - role: find
       vars:
         module: "{{ module_name }}"
-      when:
-        - module_name != "all"
-        - module_name != "ioc"
+      when: module_name not in ["all", "ioc"]
     - role: support
-      when:
-        - module_name != "all"
-        - module_name != "ioc"
+      when: module_name not in ["all", "ioc"]
     - role: ioc
-      when:
-        - module_name == "all" or module_name == "ioc"
+      when: module_name in ["all", "ioc"]

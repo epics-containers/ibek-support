@@ -26,9 +26,6 @@ if [[ $ANSIBLE_ARGS ]]; then
     args="${ANSIBLE_ARGS}"
 fi
 
-this_dir=$(realpath $(dirname $0))
-cd $this_dir
-
 # ansible playbook and roles come from the ibek-support repo always
 ansible_dir=/epics/generic-source/ibek-support/_ansible
 pb=${ansible_dir}/playbook.yml
