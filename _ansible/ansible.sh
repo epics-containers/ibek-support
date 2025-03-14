@@ -32,7 +32,6 @@ cd $this_dir
 
 # ansible playbook and roles come from the ibek-support repo always
 ansible_dir=/epics/generic-source/ibek-support/_ansible
-vars="-e ibek_support_folder=${this_dir}/${module_name}"
 
 # separate playbooks a single support module, the ioc, or all modules
 if [[ ${module_name} == "all" ]] ; then
@@ -43,7 +42,7 @@ elif [[ ${module_name} == "ioc" ]] ; then
 else
     pb=${ansible_dir}/playbook_support.yml
     # load vars from the ibek-supprt/<module>/<module>.install.yaml file
-    vars=${vars}" -e @${module_name}/${module_name}.install.yml"
+    vars=" -e module=${module_name}"
 fi
 
 set -x

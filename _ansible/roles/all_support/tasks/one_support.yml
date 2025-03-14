@@ -2,46 +2,12 @@
   ansible.builtin.include_vars:
     file: ../support/vars/main.yml
 
-# determine which ibek-support folder to use ###################################
-# TODO - this is a little over complicated try to simplify - note that this
-# RTEQUIRES 'all' playbook ibek_support_root is NOT set on the command line
-- name: Find the ibek-support* folder for {{ module }}
-  ansible.builtin.shell:
-    ls -d {{ all_root }}/ibek-support*/{{ module }}
-  register: module_exists
-  changed_when: false
-
-- name: Make sure it was found
-  ansible.builtin.fail:
-    msg: "Module {{ module }} not found in ibek-support* folders"
-  when: module_exists.stdout_lines | length == 0
-
-- name: Set the correct ibek-support folder
-  ansible.builtin.set_fact:
-    ibek_support_folder: "{{ module_exists.stdout_lines[0] }}"
-
-- name: Report the ibek-support folder
-  ansible.builtin.debug:
-    msg: "ibek_support_folder: {{ ibek_support_folder }}"
-
-# END determine which ibek-support folder to use ###############################
-
 - name: Ensure root vars folder exists
   ansible.builtin.file:
     dest: "{{ ansible_root }}/vars"
     state: directory
     mode: "0755"
 
-- name: Copy module vars into ansible folder for {{ module }}
-  ansible.builtin.copy:
-    src: "{{ ibek_support_folder }}/{{ module }}.install.yml"
-    dest: "{{ ansible_root }}/vars/.tmp.install.yml"
-    force: true
-    mode: "0644"
-
-- name: Read in the support module vars for {{ module }}
-  ansible.builtin.include_vars:
-    file: "{{ ansible_root }}/vars/.tmp.install.yml"
 
 - name: Run the support role with correct vars for {{ module }}
   ansible.builtin.include_role:
