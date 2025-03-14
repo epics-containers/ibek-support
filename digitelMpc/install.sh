@@ -15,8 +15,8 @@ ibek support git-clone ${NAME} ${VERSION} --org https://github.com/DiamondLightS
 ibek support register ${NAME}
 
 # no dbds/libs for a streamdevice
-# ibek support add-libs
-# ibek support add-dbds
+ibek support add-libs digitelMpc
+ibek support add-dbds digitelMpc.dbd
 
 # global config settings
 ${FOLDER}/../_global/install.sh ${NAME}
