@@ -3,7 +3,7 @@
   block:
     - name: Clone module to {{ local_path }}
       ansible.builtin.git:
-        repo: "{{ organization }}/{{ module }}"
+        repo: "{{ git_repo }}"
         dest: "{{ local_path }}"
         version: "{{ version }}"
         update: "{{ force_clone | bool }}"

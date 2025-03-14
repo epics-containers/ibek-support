@@ -15,8 +15,9 @@ libs:
 
 # optional variables ###########################################################
 
-# the prefix of the git repository to clone (i.e. clone organization/module)
+# the prefix of the git repository to clone
 organization: https://github.com/epics-modules
+git_repo: "{{ organization }}/{{ module }}"
 
 # list of StreamDevice protocol files to copy into /runtime/protocol
 protocol_files: []

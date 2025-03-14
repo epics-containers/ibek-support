@@ -64,9 +64,12 @@ class SupportVariables(BaseModel):
         "Used to generate the git remote from organization/module",
         default="https://github.com/epics-modules",
     )
-    protocol_files: Sequence[str] = Field(
-        description="List of protocol files to copy to /epics/runtime/protocol",
-        default=(),
+    git_repo: str = Field(
+        description="The git repository that contains the support module."
+        "Used to generate the git remote from organization/module",
+        default=Field(
+            default_factory=lambda data: f"{data['organization']}/{data['module']}"
+        ),
     )
     macro: str = Field(
         description="The macro used in configure/RELEASE for this module."
