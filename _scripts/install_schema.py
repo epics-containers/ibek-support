@@ -83,6 +83,10 @@ class SupportVariables(BaseModel):
         "Sets MACRO_NAME= in the RELEASE.local file",
         default=(),
     )
+    make_options: str = Field(
+        description="Options to pass to make. Used to build the support module",
+        default="-j{{ ansible_processor_vcpus }}",
+    )
     apt_developer: Sequence[str] = Field(
         description="List of apt packages to install in the developer target."
         "Uses the ubuntu package manager or deb files from download_extras",

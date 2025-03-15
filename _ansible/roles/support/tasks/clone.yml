@@ -1,7 +1,7 @@
 - name: Clone block
   tags: [clone]
   block:
-    - name: Clone module to {{ local_path }}
+    - name: Clone {{ git_repo ~ " vers " ~ version ~ " to " ~ local_path }}
       ansible.builtin.git:
         repo: "{{ git_repo }}"
         dest: "{{ local_path }}"
