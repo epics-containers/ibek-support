@@ -15,7 +15,7 @@ apt_runtime:
   - libtirpc3
 
 patch_lines:
-  - path: "{{ config_linux_target }}"
+  - path: "{{ config_linux_host }}"
     regexp: TIRPC
     line: TIRPC = YES
 

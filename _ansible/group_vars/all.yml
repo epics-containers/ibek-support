@@ -24,6 +24,7 @@ autosave_folder: /epics/autosave
 protocol_folder: /epics/runtime/protocol
 
 # files relative to support module root
+config_linux_host: configure/CONFIG_SITE.linux-x86_64.Common
 config_linux_target: configure/CONFIG_SITE.Common.linux-x86_64
 
 # quick access to the target architecture

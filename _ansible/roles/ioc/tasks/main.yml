@@ -13,7 +13,7 @@
 
 - name: RTEMS settings
   ansible.builtin.lineinfile:
-    path: "{{ local_path }}/{{ config_linux_target }}"
+    path: "{{ local_path }}/{{ config_linux_host }}"
     line: VALID_BUILDS=Host
     regexp: ".*VALID_BUILDS.*"
     create: true

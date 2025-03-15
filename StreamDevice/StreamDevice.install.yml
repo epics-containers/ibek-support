@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: StreamDevice
-version: 2-8-16
+version: 2.8.16
 dbds:
   - stream-base.dbd
   - stream.dbd
@@ -17,16 +17,22 @@ apt_runtime:
   - libpcre3
 
 patch_lines:
-  - path: "{{ config_linux_target }}"
+  - path: "{{ config_linux_host }}"
     regexp: PCRE_LIB
     line: PCRE_LIB=/usr/lib/x86_64-linux-gnu
     when: "{{ is_linux }}"
+  - path: "{{ config_linux_host }}"
+    regexp: PCRE_LIB
+    line: PCRE_LIB=/epics/support/PCRE/lib
+    when: "{{ is_rtems }}"
+  - path: "{{ config_linux_host }}"
+    regexp: PCRE_INCLUDE
+    line: PCRE_INCLUDE=/epics/support/PCRE/include
+    when: "{{ is_rtems }}"
 
 comment_out:
   - path: Makefile
     regexp: streamApp
-  - path: Makefile
-    regexp: PROGRAMS =
   - path: Makefile
     regexp: pdf
 

@@ -79,7 +79,7 @@ CONFIG: |
   WITH_BOOST    = NO
 
 patch_lines:
-  - path: configure/CONFIG_SITE.linux-x86_64.Common
+  - path: "{{ config_linux_host }}"
     regexp: AREA_DETECTOR[\s\S]*WITH_BOOST
     line: "{{ CONFIG }}"
 

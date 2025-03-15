@@ -57,7 +57,7 @@ comment_out: []
 
 # files to patch individual lines in e.g.
 # patch_lines:
-#   - path: "{{ config_linux_target }}"
+#   - path: "{{ config_linux_host }}"
 #     regexp: TIRPC
 #     line: TIRPC = YES
 #     when: is_linux      # defaults to any
