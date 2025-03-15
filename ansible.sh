@@ -1,1 +1,0 @@
-_ansible/ansible.sh
