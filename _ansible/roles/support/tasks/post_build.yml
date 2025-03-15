@@ -1,7 +1,6 @@
 - name: Post Build block
   tags: [post_build]
   block:
-
     # Generating files in /epics/support/configure #############################
 
     # RELEASE.shell is used to set up the environment with paths to the modules
@@ -25,13 +24,6 @@
         line: export EPICS_DB_INCLUDE_PATH="{{ db_folders.stdout_lines | join(':') }}"
         regexp: "export *EPICS_DB_INCLUDE_PATH.*$"
       when: db_folders.stdout_lines | length > 0
-
-    - name: Validate libs and dbds are lists for {{ module }}
-      ansible.builtin.assert:
-        that:
-          - libs | type_debug == 'list'
-          - dbds | type_debug == 'list'
-        msg: "libs and dbds for module '{{ module }}' must be lists"
 
     # the lib and dbd files are used to track what the IOC build needs to link against
     - name: Add this module to the libs_list file - {{ module }}

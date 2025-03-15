@@ -9,9 +9,9 @@ module:
 # the version of the support module to clone
 version:
 # dbd files that the module publishes
-dbds:
+dbds: []
 # libraries that the module publishes
-libs:
+libs: []
 
 # optional variables ###########################################################
 

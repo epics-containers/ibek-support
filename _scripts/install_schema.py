@@ -50,11 +50,13 @@ class SupportVariables(BaseModel):
     version: str = Field(description="Version of the support module")
     dbds: Sequence[str] = Field(
         description="List of dbds the support module creates. "
-        "Used to build a list for linking into the IOC"
+        "Used to build a list for linking into the IOC",
+        default=(),
     )
     libs: Sequence[str] = Field(
         description="List of libraries the support module creates. "
-        "Used to build a list for linking into the IOC"
+        "Used to build a list for linking into the IOC",
+        default=(),
     )
 
     # optional fields #########################################################
