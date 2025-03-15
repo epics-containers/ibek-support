@@ -47,11 +47,6 @@ entity_models:
           Which heater PID loop to control (Default = 1)
         default: 1
 
-    pre_init:
-      - when: first
-        value: |
-          epicsEnvSet "STREAM_PROTOCOL_PATH", "$(STREAM_PROTOCOL_PATH):$(LAKESHORE340)/lakeshore340App/protocol/"
-
     databases:
       - file: $(LAKESHORE340)/db/lakeshore340.template
         # use a regex to say that we want all the parameters in the template
