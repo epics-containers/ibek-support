@@ -6,5 +6,7 @@
     apply:
       tags: [always]
   loop: "{{ tasks }}"
-  when: item.post_build | default(false) | bool == is_post_build
+  when:
+    - item.post_build | default(false) | bool == is_post_build
+    - item.when | default('true') | bool
   tags: [pre_build_tasks, post_build_tasks]

@@ -77,4 +77,14 @@ patch_file:
 # e.g.
 # scripts:
 #   path: myscript    # path is relative to the ibek-support/<module> folder
+#     post_build: true
+#     when: is_linux
 scripts: []
+
+# Additional tasks to execute before or after the build
+# e.g.
+# tasks:
+#   - my_ansible_task.yml
+#     post_build: true
+#     when: is_linux
+tasks: []

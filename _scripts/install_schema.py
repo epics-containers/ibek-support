@@ -17,7 +17,7 @@ class StrictModel(BaseModel):
         use_enum_values=True,
     )
 
-class SupportVariables(BaseModel):
+class SupportVariables(StrictModel):
 
     # nested classes ##########################################################
 
@@ -48,11 +48,15 @@ class SupportVariables(BaseModel):
     class Task(StrictModel):
         path: str
         post_build: bool = Field(default=False)
+        when: str = Field(default="")
 
     # mandatory fields ########################################################
 
     module: str = Field(description="Support module name, normally the repo name")
     version: str = Field(description="Version of the support module")
+
+    # optional fields #########################################################
+
     dbds: Sequence[str] = Field(
         description="List of dbds the support module creates. "
         "Used to build a list for linking into the IOC",
@@ -63,8 +67,6 @@ class SupportVariables(BaseModel):
         "Used to build a list for linking into the IOC",
         default=(),
     )
-
-    # optional fields #########################################################
 
     organization: str = Field(
         description="The git organization that owns the support module."
