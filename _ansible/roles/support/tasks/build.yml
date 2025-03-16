@@ -10,7 +10,7 @@
 
     - name: Build module {{ module }}
       # redirect stderr to stdout so that ansible can report the log effectively
-      ansible.builtin.command: bash -c "make {{ options }} 2>&1"
+      ansible.builtin.command: bash -c "make {{ make_options }} 2>&1"
       args:
         chdir: "{{ local_path }}"
       register: build

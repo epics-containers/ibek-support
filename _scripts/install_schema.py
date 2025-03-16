@@ -50,11 +50,13 @@ class SupportVariables(BaseModel):
     version: str = Field(description="Version of the support module")
     dbds: Sequence[str] = Field(
         description="List of dbds the support module creates. "
-        "Used to build a list for linking into the IOC"
+        "Used to build a list for linking into the IOC",
+        default=(),
     )
     libs: Sequence[str] = Field(
         description="List of libraries the support module creates. "
-        "Used to build a list for linking into the IOC"
+        "Used to build a list for linking into the IOC",
+        default=(),
     )
 
     # optional fields #########################################################
@@ -64,9 +66,12 @@ class SupportVariables(BaseModel):
         "Used to generate the git remote from organization/module",
         default="https://github.com/epics-modules",
     )
-    protocol_files: Sequence[str] = Field(
-        description="List of protocol files to copy to /epics/runtime/protocol",
-        default=(),
+    git_repo: str = Field(
+        description="The git repository that contains the support module."
+        "Used to generate the git remote from organization/module",
+        default=Field(
+            default_factory=lambda data: f"{data['organization']}/{data['module']}"
+        ),
     )
     macro: str = Field(
         description="The macro used in configure/RELEASE for this module."
@@ -77,6 +82,10 @@ class SupportVariables(BaseModel):
         description="List of macros to remove from configure/RELEASE."
         "Sets MACRO_NAME= in the RELEASE.local file",
         default=(),
+    )
+    make_options: str = Field(
+        description="Options to pass to make. Used to build the support module",
+        default="-j{{ ansible_processor_vcpus }}",
     )
     apt_developer: Sequence[str] = Field(
         description="List of apt packages to install in the developer target."

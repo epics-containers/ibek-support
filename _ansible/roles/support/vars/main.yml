@@ -9,14 +9,15 @@ module:
 # the version of the support module to clone
 version:
 # dbd files that the module publishes
-dbds:
+dbds: []
 # libraries that the module publishes
-libs:
+libs: []
 
 # optional variables ###########################################################
 
-# the prefix of the git repository to clone (i.e. clone organization/module)
+# the prefix of the git repository to clone
 organization: https://github.com/epics-modules
+git_repo: "{{ organization }}/{{ module }}"
 
 # list of StreamDevice protocol files to copy into /runtime/protocol
 protocol_files: []
@@ -28,7 +29,7 @@ macro: "{{ module | upper }}"
 remove_macros: []
 
 # compilation options
-options: -j{{ ansible_processor_vcpus }}
+make_options: -j{{ ansible_processor_vcpus }}
 
 # packages to install in developer target
 apt_developer: []
@@ -56,7 +57,7 @@ comment_out: []
 
 # files to patch individual lines in e.g.
 # patch_lines:
-#   - path: "{{ config_linux_target }}"
+#   - path: "{{ config_linux_host }}"
 #     regexp: TIRPC
 #     line: TIRPC = YES
 #     when: is_linux      # defaults to any

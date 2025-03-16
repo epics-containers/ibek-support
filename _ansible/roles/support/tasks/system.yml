@@ -15,14 +15,18 @@
         name: "{{ item }}"
         state: present
       loop: "{{ apt_developer }}"
-      when: not item.startswith('/')
+      when:
+        - not item.startswith('/')
+        - is_linux
 
     - name: Install local system dependencies {{ module }}
       ansible.builtin.package:
         deb: "{{ item }}"
         state: present
       loop: "{{ apt_developer }}"
-      when: item.startswith('/')
+      when:
+        - item.startswith('/')
+        - is_linux
 
     - name: Register system dependencies for the runtime stage {{ module }}
       ansible.builtin.lineinfile:
@@ -32,3 +36,4 @@
         create: true
         mode: "0644"
       loop: "{{ apt_runtime }}"
+      when: is_linux
