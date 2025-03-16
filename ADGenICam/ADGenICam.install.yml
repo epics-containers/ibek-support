@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: ADGenICam
+version: R1-9
+libs:
+  - ADGenICam
+
+organization: http://github.com/areaDetector/
+
+runtime_files:
+  - /epics/support/ADGenICam/scripts/makeDb.py
+  - /epics/support/ADGenICam/include/ADGenICam.h

@@ -3,7 +3,7 @@
 - name: Discover modules in Dockerfile
   ansible.builtin.shell: |
     set -e -o pipefail
-    cat /epics/generic-source/Dockerfile | sed -n 's/^RUN *ansible.sh \([^ ]*\).*$/\1/p'
+    cat {{ all_root }}/Dockerfile | sed -n 's/^RUN *ansible.sh \([^ ]*\).*$/\1/p'
   args:
     executable: /bin/bash
   register: modules

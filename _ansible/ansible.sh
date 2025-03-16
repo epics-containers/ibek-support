@@ -27,7 +27,7 @@ if [[ $ANSIBLE_ARGS ]]; then
 fi
 
 # ansible playbook and roles come from the ibek-support repo always
-ansible_dir=/epics/generic-source/ibek-support/_ansible
+ansible_dir=$(realpath $(dirname ${0}))
 pb=${ansible_dir}/playbook.yml
 
 vars=" -e module_name=${module_name}"

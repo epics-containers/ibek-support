@@ -68,7 +68,7 @@ class SupportVariables(BaseModel):
     )
     git_repo: str = Field(
         description="The git repository that contains the support module."
-        "Used to generate the git remote from organization/module",
+        "Use this to override the default organization/module",
         default=Field(
             default_factory=lambda data: f"{data['organization']}/{data['module']}"
         ),
@@ -80,7 +80,8 @@ class SupportVariables(BaseModel):
     )
     remove_macros: Sequence[str] = Field(
         description="List of macros to remove from configure/RELEASE."
-        "Sets MACRO_NAME= in the RELEASE.local file",
+        "Sets MACRO_NAME= in the RELEASE.local file unless the macro already"
+        "has a value (i.e. the module is aready built)",
         default=(),
     )
     make_options: str = Field(
@@ -101,14 +102,20 @@ class SupportVariables(BaseModel):
         description="List of extra files to download (e.g. apt packages)",
         default=(),
     )
+    runtime_files: Sequence[str] = Field(
+        description="List of files to copy into the runtime stage"
+        "Must be full path to the file.",
+        default=(),
+    )
     local_path: str = Field(
         description="Local path to the support module inside the conatiner."
-        "Defaults to epics/support/<module>",
+        "Full path required. Defaults to /epics/support/<module>",
         default=Field(default_factory=lambda data: f"/epics/support/{data['module']}"),
     )
     comment_out: Sequence[CommentOut] = Field(
         description="List of files to comment out lines in."
-        "Used unecessary lines from Makefiles to keep the build small",
+        "Used unecessary lines from Makefiles to keep the build small"
+        "Filepaths are relative to the root of the repository local path",
         default=(),
     )
     patch_lines: Sequence[PatchLines] = Field(
@@ -122,7 +129,13 @@ class SupportVariables(BaseModel):
         default=(),
     )
     scripts: Sequence[Scripts] = Field(
-        description="List of scripts to execute",
+        description="List of ad hoc bash scripts to execute."
+        "Paths are relative to the the ibek-support/<module>",
+        default=(),
+    )
+    tasks: Sequence[str] = Field(
+        description="List of ad hoc ansible   tasks to execute."
+        "Paths are relative to the the ibek-support/<module>",
         default=(),
     )
 
@@ -131,3 +144,4 @@ class SupportVariables(BaseModel):
 path = Path(__file__).parent / "support_install_variables.json"
 with path.open(mode="w") as f:
     f.write(json.dumps(SupportVariables.model_json_schema()))
+[]
