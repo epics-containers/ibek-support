@@ -13,6 +13,7 @@ configure_folder: "{{ support_folder }}/configure"
 modules_file: "{{ configure_folder }}/MODULES"
 release_file: "{{ configure_folder }}/RELEASE"
 release_shell_file: "{{ configure_folder }}/RELEASE.shell"
+runtime_files_file: "{{ configure_folder }}/runtime_files_list"
 
 libs_list: "{{ configure_folder }}/lib_list"
 dbds_list: "{{ configure_folder }}/dbd_list"

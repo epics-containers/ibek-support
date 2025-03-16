@@ -1,0 +1,46 @@
+# Prepare files required at IOC instance launch time
+- name: Post Build block
+  tags: [runtime]
+  block:
+
+  - name: Ensure destination folders exist
+    ansible.builtin.file:
+      dest: "{{ item }}"
+      state: directory
+      mode: "0755"
+    loop:
+      - "{{ ibek_defs_folder }}"
+      - "{{ pvi_defs_folder }}"
+      - "{{ autosave_folder }}"
+      - "{{ protocol_folder }}"
+
+  - name: Link ibek defs files for {{ module }}
+    ansible.builtin.file:
+      src: "{{ item }}"
+      dest: "{{ ibek_defs_folder }}/{{ item | basename }}"
+      state: link
+    with_fileglob:
+      - "{{ ibek_support_folder }}/*.ibek.support.yaml"
+
+  - name: Link pvi device files for {{ module }}
+    ansible.builtin.file:
+      src: "{{ item }}"
+      dest: "{{ pvi_defs_folder }}/{{ item | basename }}"
+      state: link
+    with_fileglob:
+      - "{{ ibek_support_folder }}/*.pvi.device.yaml"
+
+  - name: Link autosave request files for {{ module }}
+    ansible.builtin.file:
+      src: "{{ item }}"
+      dest: "{{ autosave_folder }}/{{ item | basename }}"
+      state: link
+    with_fileglob:
+      - "{{ ibek_support_folder }}/*.req"
+
+  - name: Copy protocol files for {{ module }}
+    ansible.builtin.copy:
+      src: "{{ local_path }}/{{ item }}"
+      dest: "{{ protocol_folder }}"
+      mode: "0644"
+    loop: "{{ protocol_files }}"

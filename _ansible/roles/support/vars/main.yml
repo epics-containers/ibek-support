@@ -44,6 +44,9 @@ apt_runtime: []
 #   - dest: /tmp/libhdf5-103.deb
 download_extras: []
 
+# additional files to copy into the runtime stage from the developer stage
+runtime_files: []
+
 # local path to the support module - where it is cloned to
 local_path: "{{ support_folder }}/{{ module }}"
 
