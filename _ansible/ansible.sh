@@ -2,28 +2,29 @@
 
 # launch script for the ansible playbooks
 
-module_name=$1
-module_version=$2
+# allow -v VERSION to override the version of the module to install
+# remaining arguments are passed to the ansible-playbook command
+while getopts 'v:h' opt; do
+  case "$opt" in
+    v) module_version="$OPTARG" ;;
+    h) ;;
+  esac
+done
+
+module_name=${@:$OPTIND:1}
+args=${@:$OPTIND+1:20}
 
 if [[ -z $module_name ]]; then
-    echo "Usage: $0 <module_name> [<module_version>]"
-    echo "  where <module_name> the support module to install, or 'ioc' or 'all'"
-    echo
-    echo "  launches an ansible playbook to configure and install the module[s]"
+    echo "Usage: $(basename $0) module/all/ioc [-v version] [-h] [arguments]"
+    echo "  where:"
+    echo "    module is support module to install or 'ioc' or 'all'"
+    echo "    version is an optional version override for the module"
+    echo "    arguments are passed to the ansible-playbook command"
     exit 1
 fi
 
 if [[ -n $module_version ]]; then
     vers="-e version=${module_version}"
-fi
-
-if [[ $ANSIBLE_TAGS ]]; then
-    tags=" --tags ${ANSIBLE_TAGS}"
-    echo "limiting ansible run to tags: ${ANSIBLE_TAGS}"
-fi
-
-if [[ $ANSIBLE_ARGS ]]; then
-    args="${ANSIBLE_ARGS}"
 fi
 
 # ansible playbook and roles come from the ibek-support repo always
@@ -33,4 +34,4 @@ pb=${ansible_dir}/playbook.yml
 vars=" -e module_name=${module_name}"
 
 set -x
-ansible-playbook ${pb} -i ${ansible_dir}/hosts.yml ${vars} ${vers} ${tags} ${args}
+ansible-playbook ${pb} -i ${ansible_dir}/hosts.yml ${vars} ${vers} ${args}

@@ -1,0 +1,10 @@
+# execute additional arbitrary tasks supplied ibek-support/<module>
+
+- name: Execute additional tasks for {{ module }}
+  include_tasks:
+    file: "{{ ibek_support_folder }}/{{ item.path }}"
+    apply:
+      tags: [always]
+  loop: "{{ tasks }}"
+  when: item.post_build | default(false) | bool == is_post_build
+  tags: [pre_build_tasks, post_build_tasks]

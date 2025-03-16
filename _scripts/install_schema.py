@@ -11,36 +11,41 @@ from typing import Sequence
 
 from pydantic import BaseModel, ConfigDict, Field
 
-
-class SupportVariables(BaseModel):
+class StrictModel(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
         use_enum_values=True,
     )
 
+class SupportVariables(BaseModel):
+
     # nested classes ##########################################################
 
-    class DownloadExtras(BaseModel):
+    class DownloadExtras(StrictModel):
         url: str
         dest: str
 
-    class CommentOut(BaseModel):
+    class CommentOut(StrictModel):
         path: str
         regexp: str
 
-    class PatchLines(BaseModel):
+    class PatchLines(StrictModel):
         path: str
         regexp: str
         line: str
         when: str = Field(default="")
         post_build: bool = Field(default=False)
 
-    class PatchFile(BaseModel):
+    class PatchFile(StrictModel):
         path: str
         commit: str = Field(default="HEAD")
         when: bool = Field(default=False)
 
-    class Scripts(BaseModel):
+    class Script(StrictModel):
+        path: str
+        post_build: bool = Field(default=False)
+
+    class Task(StrictModel):
         path: str
         post_build: bool = Field(default=False)
 
@@ -108,34 +113,34 @@ class SupportVariables(BaseModel):
         default=(),
     )
     local_path: str = Field(
-        description="Local path to the support module inside the conatiner."
+        description="Local path to the support module inside the conatiner. "
         "Full path required. Defaults to /epics/support/<module>",
         default=Field(default_factory=lambda data: f"/epics/support/{data['module']}"),
     )
     comment_out: Sequence[CommentOut] = Field(
-        description="List of files to comment out lines in."
+        description="List of files to comment out lines in. "
         "Used unecessary lines from Makefiles to keep the build small"
         "Filepaths are relative to the root of the repository local path",
         default=(),
     )
     patch_lines: Sequence[PatchLines] = Field(
-        description="List of files to patch lines in."
+        description="List of files to patch lines in. "
         "Used to add extra flags to Makefiles, CONFIG_SITE etc.",
         default=(),
     )
     patch_file: PatchFile = Field(
-        description="Apply a patch file to the repo."
+        description="Apply a patch file to the repo. "
         "Optionally specify a commit to apply the patch to",
         default=(),
     )
-    scripts: Sequence[Scripts] = Field(
-        description="List of ad hoc bash scripts to execute."
-        "Paths are relative to the the ibek-support/<module>",
+    scripts: Sequence[Script] = Field(
+        description="List of ad hoc bash scripts to execute. "
+        "Paths are relative to the the ibek-support/module",
         default=(),
     )
-    tasks: Sequence[str] = Field(
-        description="List of ad hoc ansible   tasks to execute."
-        "Paths are relative to the the ibek-support/<module>",
+    tasks: Sequence[Task] = Field(
+        description="List of ad hoc ansible tasks to execute. "
+        "Paths are relative to the the ibek-support/module",
         default=(),
     )
 

@@ -8,13 +8,11 @@ dbds:
 libs:
   - ADAravis
 
-organization: http://github.com/areaDetector/
+organization: http://github.com/areaDetector
 
 apt_developer:
-  - support apt-install
   - libxext-dev
   - libglib2.0-dev
-  - libusb-1.0
   - libxml2-dev
   - libx11-dev
   - meson
@@ -44,3 +42,7 @@ patch_lines:
   - path: configure_RELEASE
     regexp: "ADGENICAM"
     line: ""
+
+tasks:
+  - path: arvlib_task.yml
+    post_build: true
