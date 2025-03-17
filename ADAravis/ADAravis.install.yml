@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: ADAravis
+version: R2-3
+
+dbds:
+  - ADAravisSupport.dbd
+libs:
+  - ADAravis
+
+organization: http://github.com/areaDetector
+
+apt_developer:
+  - libxext-dev
+  - libglib2.0-dev
+  - libusb-1.0-0-dev
+  - libxml2-dev
+  - libx11-dev
+  - meson
+  - intltool
+  - pkg-config
+  - xz-utils
+
+apt_runtime:
+  - libglib2.0-bin
+  - libusb-1.0
+  - libxml2
+  - aravis-tools-cli
+
+  # incorrecly placed macro does not get overriden by RELEASE.local. Remove it.
+comment_out:
+  - path: configure/RELEASE
+    regexp: "ADGENICAM"
+
+patch_lines:
+  - path: "{{ config_linux_host }}"
+    regexp: CHECK_RELEASE[\s\S]*ARAVIS_INCLUDE
+    line: |
+      CHECK_RELEASE=WARN
+      AREA_DETECTOR=/epics/support
+      CROSS_COMPILER_TARGET_ARCHS =
+      GLIBPREFIX=/usr
+      USR_INCLUDES += -I$(GLIBPREFIX)/include/glib-2.0
+      USR_INCLUDES += -I$(GLIBPREFIX)/lib/x86_64-linux-gnu/glib-2.0/include/
+      glib-2.0_DIR = $(GLIBPREFIX)/lib/x86_64-linux-gnu
+      ARAVIS_INCLUDE  = /usr/local/include/aravis-0.8/
+
+tasks:
+  - path: arvlib_task.yml
+
+# copy the aravis library built above to the runtime stage
+runtime_files:
+  - /usr/local/lib/x86_64-linux-gnu

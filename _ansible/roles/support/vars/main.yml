@@ -44,6 +44,9 @@ apt_runtime: []
 #   - dest: /tmp/libhdf5-103.deb
 download_extras: []
 
+# additional files to copy into the runtime stage from the developer stage
+runtime_files: []
+
 # local path to the support module - where it is cloned to
 local_path: "{{ support_folder }}/{{ module }}"
 
@@ -74,4 +77,14 @@ patch_file:
 # e.g.
 # scripts:
 #   path: myscript    # path is relative to the ibek-support/<module> folder
+#     post_build: true
+#     when: is_linux
 scripts: []
+
+# Additional tasks to execute before or after the build
+# e.g.
+# tasks:
+#   - my_ansible_task.yml
+#     post_build: true
+#     when: is_linux
+tasks: []

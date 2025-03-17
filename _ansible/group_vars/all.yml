@@ -1,7 +1,7 @@
 # global settings for all support modules
 
 # paths
-all_root: /epics/generic-source
+all_root: '{{ (playbook_dir ~ "/../..") | realpath }}'
 ibek_support_root: "{{ all_root }}/ibek-support"
 # OVERRIDE on command line when module is NOT in ibek-support (e.g. ibek-support-dls)
 ibek_support_folder: "{{ ibek_support_root }}/{{ module }}"
@@ -13,6 +13,7 @@ configure_folder: "{{ support_folder }}/configure"
 modules_file: "{{ configure_folder }}/MODULES"
 release_file: "{{ configure_folder }}/RELEASE"
 release_shell_file: "{{ configure_folder }}/RELEASE.shell"
+runtime_files_file: "{{ configure_folder }}/runtime_files_list"
 
 libs_list: "{{ configure_folder }}/lib_list"
 dbds_list: "{{ configure_folder }}/dbd_list"

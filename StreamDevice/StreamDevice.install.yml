@@ -36,7 +36,6 @@ comment_out:
   - path: Makefile
     regexp: pdf
 
-scripts:
-  - path: pcre.sh
-  - path: post-pcre.sh
-    post_build: true
+tasks:
+  - path: pcre-build.yml
+    when: "{{ is_rtems }}"

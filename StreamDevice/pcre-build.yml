@@ -1,0 +1,42 @@
+- name: Get the PCRE source
+  ansible.builtin.get_url:
+    url: https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.gz
+    dest: /epics/support/StreamDevice/pcre-8.45.tar.gz
+
+- name: Extract the PCRE source
+  ansible.builtin.unarchive:
+    src: /epics/support/StreamDevice/pcre-8.45.tar.gz
+    dest: /epics/support/StreamDevice
+
+- name: Build PCRE vendor library for RTEMS
+  ansible.builtin.shell:
+    cmd: |
+      set -e
+
+      # set up cross-compilation
+      export CC=powerpc-rtems6-gcc
+      export CXX=powerpc-rtems6-g++
+      ./configure --host=powerpc-rtems6 --build=x86_64-linux-gnu \
+          --prefix=${SUPPORT}/PCRE
+
+      # remove build of executables - just build the library
+      sed -i -E 's/(^[^#].*PROGRAMS =.*$)/# \1/' Makefile
+      make
+      make install
+      make clean
+    executable: /bin/bash
+    chdir: /epics/support/StreamDevice/pcre-8.45
+    creates: /epics/support/PCRE/lib/libpcre.a
+
+- name: Make the pcre library available to IOC link stage
+  ansible.builtin.file:
+    src: /epics/support/PCRE/lib/libpcre.a
+    dest: /epics/support/StreamDevice/lib/RTEMS-beatnik/libpcre.a
+    state: link
+    mode: "0644"
+
+- name: Add pcre module to the libs_list file
+  ansible.builtin.lineinfile:
+    path: "{{ libs_list }}"
+    line: pcre
+    regexp: pcre

@@ -4,9 +4,15 @@
   ansible.builtin.include_tasks: system.yml
   tags: [system]
 
-- name: Clone
+- name: Clone {{ module }}
   ansible.builtin.include_tasks: clone.yml
   tags: [clone]
+
+- name: Pre Build Tasks for {{ module }}
+  ansible.builtin.include_tasks: tasks.yml
+  tags: [pre_build_tasks]
+  vars:
+    is_post_build: false
 
 - name: Pre Build for {{ module }}
   ansible.builtin.include_tasks: pre_build.yml
@@ -23,3 +29,13 @@
 - name: Post Build for {{ module }}
   ansible.builtin.include_tasks: post_build.yml
   tags: [post_build]
+
+- name: Post Build Tasks for {{ module }}
+  ansible.builtin.include_tasks: tasks.yml
+  tags: [post_build_tasks]
+  vars:
+    is_post_build: true
+
+- name: Runtime setup for {{ module }}
+  ansible.builtin.include_tasks: runtime.yml
+  tags: [runtime]
