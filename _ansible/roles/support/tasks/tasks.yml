@@ -1,12 +1,14 @@
 # execute additional arbitrary tasks supplied ibek-support/<module>
 
 - name: Execute additional tasks for {{ module }}
-  include_tasks:
-    file: "{{ ibek_support_folder }}/{{ item.path }}"
+  ansible.builtin.include_tasks:
+    file: "{{ ibek_support_folder }}/{{ this_task.path }}"
     apply:
       tags: [always]
   loop: "{{ tasks }}"
+  loop_control:
+    loop_var: this_task
   when:
-    - item.post_build | default(false) | bool == is_post_build
-    - item.when | default('true') | bool
+    - this_task.post_build | default(false) | bool == is_post_build
+    - this_task.when | default('true') | bool
   tags: [pre_build_tasks, post_build_tasks]

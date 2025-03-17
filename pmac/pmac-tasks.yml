@@ -1,0 +1,21 @@
+- name: Remove DLS specific CONFIG
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /epics/support/pmac/configure/CONFIG_SITE.linux-x86_64.Common
+    - /epics/support/pmac/configure/RELEASE.linux-x86_64.Common
+
+- name: Add linux specific libraries
+  ansible.builtin.lineinfile:
+    path: "{{ libs_list }}"
+    regexp: powerPmacAsynPort
+    line: powerPmacAsynPort
+  when: is_linux
+
+- name: Add linux specific dbds
+  ansible.builtin.lineinfile:
+    path: "{{ dbds_list }}"
+    regexp: drvAsynPowerPMACPort.dbd
+    line: drvAsynPowerPMACPort.dbd
+  when: is_linux

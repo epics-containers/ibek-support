@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: pvlogging
+version: 1-5-2
+dbds:
+  - pvlogging.dbd
+libs:
+  - pvlogging
+
+organization: https://github.com/diamondlightsource
+
+runtime_files:
+  - /epics/support/pvlogging/src/access.acf
