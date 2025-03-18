@@ -64,10 +64,10 @@
     - /epics
     - /epics/ioc
 
-- name: Make /epics/ioc files writeable
+- name: Make /epics/ioc/start.sh executable
   ansible.builtin.file:
     path: "{{ item }}"
-    mode: "0644"
+    mode: "0777"
     state: file
   with_fileglob:
-    - /epics/ioc/*.*
+    - /epics/ioc/start.sh
