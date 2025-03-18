@@ -57,10 +57,17 @@
 # Make some folders writeable so non root runtime user can create subfolders
 - name: Make /epics writeable
   ansible.builtin.file:
-    path:
+    path: "{{ item }}"
     mode: "0777"
     state: directory
   with_fileglob:
     - /epics
     - /epics/ioc
-    - /epics/ioc/*
+
+- name: Make /epics/ioc files writeable
+  ansible.builtin.file:
+    path: "{{ item }}"
+    mode: "0644"
+    state: file
+  with_fileglob:
+    - /epics/ioc/*.*
