@@ -64,6 +64,7 @@
   with_items:
     - /epics
     - /epics/autosave
+    - /epics/ioc
 
 - name: Make files writeable
   ansible.builtin.file:
