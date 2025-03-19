@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: sequencer
+version: R2-2-9
+# organization: https://github.com/epics-modules
+
+macro: SNCSEQ
+
+libs:
+  - pv
+  - seq
+
+comment_out:
+  - path: Makefile
+    regexp: examples|(^|\s)test

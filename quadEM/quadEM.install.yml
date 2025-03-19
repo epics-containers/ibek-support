@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: quadEM
+version: R9-5
+# organization: https://github.com/epics-modules
+
+dbds:
+  - drvTetrAMM.dbd
+
+libs:
+  - quadEM
+
+remove_macros:
+  - IPUNIDIG

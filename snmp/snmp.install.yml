@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: snmp
+version: R2.6
+organization: https://github.com/slac-epics/
+
+dbds:
+  - devSnmp.dbd
+  - snmp.dbd
+
+libs:
+  - devSnmp
+
+apt_developer:
+  - libsnmp-dev
+
+apt_runtime:
+  - libsnmp40
+
+patch_lines:
+  - path: "{{ config_linux_host }}"
+    regexp: NET_SNMP_PKG
+    line: NET_SNMP_PKG=
+    when: "{{ is_linux }}"
+  - path: "{{ config_linux_host }}"
+    regexp: USR_INCLUDES
+    line: USR_INCLUDES=
+    when: "{{ is_linux }}"
+  - path: "{{ config_linux_host }}"
+    regexp: USR_LDFLAGS
+    line: USR_LDFLAGS=
+    when: "{{ is_linux }}"

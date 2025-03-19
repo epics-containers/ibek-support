@@ -1,0 +1,21 @@
+- name: Build OPCUA C-library (remove the folder to rebuild)
+  ansible.builtin.shell:
+    creates: /tmp/open62541
+    cmd: |
+      setopt -e
+      git clone -b v1.3.9 --depth 1 https://github.com/open62541/open62541.git
+      cd open62541
+      mkdir build
+      cd build
+      cmake .. -DBUILD_SHARED_LIBS=ON \
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+          -DUA_ENABLE_ENCRYPTION=OPENSSL
+      make install
+    executable: /bin/bash
+    chdir: /tmp
+
+- name: Expose the DB templates into the standard location
+  ansible.builtin.file:
+    src: "/epics/support/opcua/exampleTop/db"
+    dest: "opcua/db"
+    state: link

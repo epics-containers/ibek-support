@@ -1,0 +1,6 @@
+- name: Comment out iocBoot as test directories don't compile on RTEMS
+  ansible.builtin.replace:
+    path: Makefile
+    regexp: "^DIRS.*iocBoot.*$"
+    replace: "# \\1"
+    when: "{{ is_rtems }}"

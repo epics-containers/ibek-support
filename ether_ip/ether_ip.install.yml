@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: ether_ip
+version: ether_ip-3-3
+# organization: https://github.com/epics-modules
+
+dbds:
+  - ether_ip.dbd
+
+libs:
+  - ether_ip

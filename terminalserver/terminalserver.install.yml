@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: terminalserver
+version: 2-7
+organization: https://github.com/DiamondLightSource/
+
+dbds:
+  - terminalServer.dbd

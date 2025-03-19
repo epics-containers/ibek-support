@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: ADAndor3
+version: R2-2
+organization: http://github.com/areaDetector
+
+dbds:
+  - andor3Support.dbd
+
+libs:
+  - atcore
+  - andor3
+
+apt_developer:
+  - libnuma-dev
+
+apt_runtime:
+  - libnuma-dev
+
+patch_lines:
+  - path: "{{ config_linux_host }}"
+    regexp: SZIP_LIB[\s\S]*HDF5_INCLUDE
+    line: |
+      SZIP_LIB       = /usr/lib/x86_64-linux-gnu/
+      SZIP_INCLUDE   = -I/usr/include
+      HDF5_LIB      = /usr/lib/x86_64-linux-gnu/hdf5/serial/
+      HDF5_INCLUDE  = /usr/include/hdf5/serial/
+
+tasks:
+  - path: ADAndor3-tasks.yml
