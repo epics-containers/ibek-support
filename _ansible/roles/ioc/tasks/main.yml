@@ -53,3 +53,24 @@
   vars:
     module: IOC
     local_path: /epics/ioc
+
+# Make some folders writeable so non root runtime user can create subfolders
+- name: Make dirs writeable, executable
+  ansible.builtin.file:
+    path: "{{ item }}"
+    mode: "0777"
+    state: touch
+  changed_when: true
+  with_items:
+    - /epics
+    - /epics/autosave
+    - /epics/ioc
+
+- name: Make files writeable
+  ansible.builtin.file:
+    path: "{{ item }}"
+    mode: "0666"
+    state: touch
+  changed_when: true
+  with_fileglob:
+    - /epics/autosave/*

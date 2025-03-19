@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: motor
+version: R7-3-1
+
+dbds:
+  - motorRecord.dbd
+  - devSoftMotor.dbd
+  - motorSupport.dbd
+libs:
+  - motor
+  - softMotor

@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: pmac
+version: 2-6-5
+
+dbds:
+  - pmacAsynIPPort.dbd
+  - pmacAsynMotorPort.dbd
+libs:
+  - pmacAsynIPPort
+  - pmacAsynMotorPort
+
+organization: http://github.com/diamondlightsource
+
+apt_developer:
+  - libssh2-1-dev
+apt_runtime:
+  - libssh2-1
+
+tasks:
+  - path: pmac-tasks.yml
+
+comment_out:
+  - path: pmacApp/Makefile
+    regexp: Tests
+
+# parallel builds not supported
+make_options: ""
+
+patch_lines:
+  - path: "{{ config_linux_target }}"
+    regexp: BUILD_IOCS[\s\S]*SSH_INCLUDE *= -I/usr/include
+    line: |
+      BUILD_IOCS=NO
+
+      # Definitions required for compiling the unit tests
+      BOOST_LIB       = /usr/lib
+      BOOST_INCLUDE   = -I/usr/include
+
+      SSH             = /usr
+      SSH_LIB         = /usr/lib/x86_64-linux-gnu
+      SSH_INCLUDE     = -I/usr/include
