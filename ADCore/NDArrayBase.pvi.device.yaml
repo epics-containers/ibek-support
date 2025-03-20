@@ -35,6 +35,21 @@ children:
     labelled: true
   children:
 
+  - type: SignalW
+    name: PreAllocBuffers
+    write_pv: $(P)$(R)PreAllocBuffers
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalRW
+    name: NumPreAllocBuffers
+    write_pv: $(P)$(R)NumPreAllocBuffers
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)NumPreAllocBuffers_RBV
+    read_widget:
+      type: TextRead
+
   - type: SignalR
     name: PoolAllocBuffers
     read_pv: $(P)$(R)PoolAllocBuffers
@@ -58,6 +73,12 @@ children:
     read_pv: $(P)$(R)PoolUsedMem
     read_widget:
       type: TextRead
+
+  - type: SignalW
+    name: PoolPollStats
+    write_pv: $(P)$(R)PoolPollStats
+    write_widget:
+      type: ToggleButton
 
   - type: SignalW
     name: EmptyFreeList

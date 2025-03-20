@@ -269,11 +269,11 @@ children:
       type: TextRead
 
   - type: SignalRW
-    name: LowClip
-    write_pv: $(P)$(R)LowClip
+    name: LowClipThresh
+    write_pv: $(P)$(R)LowClipThresh
     write_widget:
       type: TextWrite
-    read_pv: $(P)$(R)LowClip_RBV
+    read_pv: $(P)$(R)LowClipThresh_RBV
     read_widget:
       type: TextRead
 
@@ -296,6 +296,15 @@ children:
       type: TextRead
 
   - type: SignalRW
+    name: LowClipValue
+    write_pv: $(P)$(R)LowClipValue
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)LowClipValue_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
     name: EnableHighClip
     write_pv: $(P)$(R)EnableHighClip
     write_widget:
@@ -305,20 +314,20 @@ children:
       type: LED
 
   - type: SignalRW
-    name: HighClip
-    write_pv: $(P)$(R)HighClip
+    name: HighClipThresh
+    write_pv: $(P)$(R)HighClipThresh
     write_widget:
       type: TextWrite
-    read_pv: $(P)$(R)HighClip_RBV
+    read_pv: $(P)$(R)HighClipThresh_RBV
     read_widget:
       type: TextRead
 
   - type: SignalRW
-    name: DataTypeOut
-    write_pv: $(P)$(R)DataTypeOut
+    name: HighClipValue
+    write_pv: $(P)$(R)HighClipValue
     write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)DataTypeOut_RBV
+      type: TextWrite
+    read_pv: $(P)$(R)HighClipValue_RBV
     read_widget:
       type: TextRead
 
@@ -334,5 +343,14 @@ children:
     write_widget:
       type: TextWrite
     read_pv: $(P)$(R)NumFilter_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: DataTypeOut
+    write_pv: $(P)$(R)DataTypeOut
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)DataTypeOut_RBV
     read_widget:
       type: TextRead

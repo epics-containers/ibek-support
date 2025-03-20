@@ -25,14 +25,10 @@ cd ${IBS}
 cp ${ADCORE}/db/NDStdArrays.template ${ADCORE}/db/NDStdArraysOriginal.template
 sed -i s/\$\(TYPE\)/Int32/g ${ADCORE}/db/NDStdArrays.template
 
-# these do not convert - throw PVI errors - TODO investigate
-blacklist="
-NDAttrPlotAttr.template
-NDAttrPlotData.template
-NDGatherN.template
-"
-
 template_sets="
+NDAttrPlotAttr
+NDAttrPlotData
+NDGatherN,None
 NDFile
 CCDMultiTrack
 NDAttrPlot

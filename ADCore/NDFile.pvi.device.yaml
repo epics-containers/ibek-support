@@ -197,18 +197,24 @@ children:
     read_widget:
       type: TextRead
 
+  - type: SignalW
+    name: FreeCapture
+    write_pv: $(P)$(R)FreeCapture
+    write_widget:
+      type: ToggleButton
+
+  - type: SignalR
+    name: WriteStatus
+    read_pv: $(P)$(R)WriteStatus
+    read_widget:
+      type: LED
+
   - type: SignalRW
     name: DeleteDriverFile
     write_pv: $(P)$(R)DeleteDriverFile
     write_widget:
       type: ToggleButton
     read_pv: $(P)$(R)DeleteDriverFile_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalR
-    name: WriteStatus
-    read_pv: $(P)$(R)WriteStatus
     read_widget:
       type: LED
 
