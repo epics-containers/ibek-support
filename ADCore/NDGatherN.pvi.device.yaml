@@ -1,0 +1,27 @@
+label: NDGatherN
+children:
+
+- type: Group
+  name: NDCircularBuff
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: NDArrayPort
+    write_pv: $(P)$(R)NDArrayPort_$(N)
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)NDArrayPort_$(N)_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: NDArrayAddress
+    write_pv: $(P)$(R)NDArrayAddress_$(N)
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)NDArrayAddress_$(N)_RBV
+    read_widget:
+      type: TextRead

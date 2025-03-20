@@ -1,0 +1,39 @@
+label: NDAttrPlotData
+parent: NDPluginBase
+children:
+
+- type: Group
+  name: ADReadout
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: Data
+    read_pv: $(P)$(R)$(AXIS):Data$(DATA_IND)
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: NDAttrPlotDataMisc
+  label: NDAttrPlotData Ungrouped
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: DataLabel
+    read_pv: $(P)$(R)$(AXIS):DataLabel$(DATA_IND)
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: DataSelect
+    write_pv: $(P)$(R)$(AXIS):DataSelect$(DATA_IND)
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)$(AXIS):DataSelect$(DATA_IND)_RBV
+    read_widget:
+      type: TextRead
