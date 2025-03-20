@@ -80,6 +80,10 @@ class SupportVariables(StrictModel):
             default_factory=lambda data: f"{data['organization']}/{data['module']}"
         ),
     )
+    recursive: bool = Field(
+        description="Clone the support module with --recursive",
+        default=False,
+    )
     macro: str = Field(
         description="The macro used in configure/RELEASE for this module."
         "Defaults to the module name in uppercase",

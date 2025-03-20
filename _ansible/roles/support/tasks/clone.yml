@@ -6,8 +6,7 @@
         repo: "{{ git_repo }}"
         dest: "{{ local_path }}"
         version: "{{ version }}"
-        update: "{{ force_clone | bool }}"
-        # use shallow clone unless we want a specific commit
+        recursive: "{{ recursive | default(false) | bool }}"
         depth: "{{ 0 if patch_file.when | default(false) | bool else 1 }}"
 
     # get a specific commit to apply a patch

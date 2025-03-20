@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: motorMotorSim
+version: R1-2
+
+dbds:
+  - motorSimSupport.dbd
+  - motorSim.dbd
+libs:
+  - motorSimSupport
+
+organization: http://github.com/epics-motor

@@ -23,7 +23,7 @@
 - name: Pip install rtems-proxy
   ansible.builtin.pip:
     name: rtems-proxy
-    version: 1.0.1
+    version: 1.1.0
     virtualenv: "/venv"
     state: present
   when: is_rtems | bool
