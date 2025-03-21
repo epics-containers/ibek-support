@@ -14,6 +14,7 @@ dbds:
   - NDFileJPEG.dbd
   - NDFileTIFF.dbd
   - PVAServerRegister.dbd
+  - NDFileNetCDF.dbd
 libs:
   - ntndArrayConverter
   - ADBase
@@ -42,6 +43,7 @@ apt_developer:
   - libx11-dev
   - libxext-dev
   - libz-dev
+  - libnetcdf-dev
   - /tmp/libhdf5-103.deb
   - /tmp/libhdf5-cpp-103.deb
   - /tmp/libhdf5-dev-1.deb
@@ -52,6 +54,7 @@ apt_runtime:
   - libblosc1
   - libxml2
   - libhdf5-103-1
+  - libnetcdf19
 
 CONFIG: |
   AREA_DETECTOR=$(SUPPORT)
@@ -76,6 +79,8 @@ CONFIG: |
   WITH_CBF      = YES
   CBF_EXTERNAL  = YES
   WITH_PVA      = YES
+  WITH_NETCDF   = YES
+  NETCDF_EXTERNAL = YES
   WITH_BOOST    = NO
 
 patch_lines:

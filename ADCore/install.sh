@@ -69,6 +69,7 @@ CBF_EXTERNAL  = YES
 WITH_PVA      = YES
 WITH_BOOST    = NO
 '
+
 ibek support add-to-config-site ${NAME} "${CONFIG}"
 
 # Sequencer causes problems with the build so we disable it
