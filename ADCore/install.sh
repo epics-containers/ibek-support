@@ -41,7 +41,7 @@ ibek support add-libs ntndArrayConverter ADBase NDPlugin pvAccessCA \
      pvAccessIOC pvAccess
 ibek support add-dbds NDPluginPva.dbd ADSupport.dbd NDPluginSupport.dbd \
      NDFileNull.dbd NDPosPlugin.dbd NDFileHDF5.dbd NDFileJPEG.dbd NDFileTIFF.dbd \
-     PVAServerRegister.dbd NDFileNetCDF.dbd
+     PVAServerRegister.dbd
 
 # add any required changes to CONFIG_SITE
 CONFIG='
@@ -68,8 +68,6 @@ WITH_CBF      = YES
 CBF_EXTERNAL  = YES
 WITH_PVA      = YES
 WITH_BOOST    = NO
-WITH_NETCDF   = YES
-NETCDF_EXTERNAL = YES
 
 '
 ibek support add-to-config-site ${NAME} "${CONFIG}"
