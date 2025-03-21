@@ -68,6 +68,7 @@ WITH_CBF      = YES
 CBF_EXTERNAL  = YES
 WITH_PVA      = YES
 WITH_BOOST    = NO
+'
 
 ibek support add-to-config-site ${NAME} "${CONFIG}"
 
