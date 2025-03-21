@@ -24,6 +24,7 @@
         deb: "{{ item }}"
         state: present
       loop: "{{ apt_developer }}"
+      ignore_errors: true # local packages may already be installed
       when:
         - item.startswith('/')
         - is_linux
