@@ -1,1 +1,2 @@
-ibek==3.1.2
+# we always want the latest version of ibek and latest version of IOCs and ibek-support working together
+ibek
