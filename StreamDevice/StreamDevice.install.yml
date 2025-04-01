@@ -16,6 +16,9 @@ apt_developer:
 apt_runtime:
   - libpcre3
 
+remove_macros:
+  - CALC
+
 patch_lines:
   - path: "{{ config_linux_host }}"
     regexp: PCRE_LIB
