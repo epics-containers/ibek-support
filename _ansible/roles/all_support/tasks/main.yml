@@ -8,16 +8,39 @@
     executable: /bin/bash
   register: modules
   changed_when: false
+  when: from_dockerfile | default(true) | bool
+
+- name: Set module list
+  ansible.builtin.set_fact:
+    module_list: "{{ modules.stdout_lines | list }}"
+  changed_when: false
+  when: from_dockerfile | default(true) | bool
+
+- name: Find all install.yml files
+  ansible.builtin.find:
+    paths: /epics/generic-source/ibek-support/
+    patterns: "*.install.yml"
+    recurse: yes
+  register: module_files
+  changed_when: false
+  when: not (from_dockerfile | default(true) | bool)
+
+- name: Gather ALL ibek-support module folders
+  ansible.builtin.set_fact:
+    module_list: "{{ module_files.files | map(attribute='path') | map('dirname') | map('basename') }}"
+  changed_when: false
+  when: not (from_dockerfile | default(true) | bool)
 
 - name: Report modules
   ansible.builtin.debug:
-    msg: "{{ modules.stdout_lines }}"
+    msg: "{{ module_list }}"
   changed_when: false
 
-- name: Loop over the support modules in Dockerfile order
+- name: Loop over the support modules
   ansible.builtin.include_tasks:
     file: one_support.yml
-  loop: "{{ modules.stdout_lines }}"
+  loop: "{{ module_list }}"
   loop_control:
     loop_var: module
-  when: modules.stdout_lines | length > 0 and module != "ioc"
+  when:
+    - module_list | length > 0 and module != "ioc"
