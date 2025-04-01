@@ -28,6 +28,7 @@ class SupportVariables(StrictModel):
     class CommentOut(StrictModel):
         path: str
         regexp: str
+        when: str = Field(default="")
 
     class PatchLines(StrictModel):
         path: str

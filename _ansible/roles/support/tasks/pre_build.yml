@@ -7,6 +7,7 @@
         regexp: "^(?!#)(.*{{ item.regexp }}.*$)"
         replace: "# \\1"
       loop: "{{ comment_out }}"
+      when: item.when | default(true)
 
     - name: RTEMS settings for {{ module }}
       ansible.builtin.lineinfile:
