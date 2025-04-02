@@ -3,22 +3,28 @@
   # Use tasks with include_role instead of direct use of playbook roles.
   # Avoids verbose 'skipping' of all tasks in the roles that are not needed.
   tasks:
+    - name: Check for single module name
+      ansible.builtin.set_fact:
+        # all_support can take a comma separated list of modules or 'all'
+        single: module_name.count(',') > 0 and module_name not in ["all", "ioc"]
+      changed_when: false
+
     - name: All support modules
       ansible.builtin.include_role:
         name: all_support
-      when: module_name == "all"
+      when: not single and module_name != "ioc"
 
     - name: Find support module yml
       ansible.builtin.include_role:
         name: find
-      when: module_name not in ["all", "ioc"]
       vars:
         module: "{{ module_name }}"
+      when: single
 
     - name: Support module build
       ansible.builtin.include_role:
         name: support
-      when: module_name not in ["all", "ioc"]
+      when: single
 
     - name: Ioc build
       ansible.builtin.include_role:

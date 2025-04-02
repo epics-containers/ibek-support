@@ -41,3 +41,5 @@
       register: build
       ignore_errors: true
       changed_when: true
+      when:
+        - not skip_clean
