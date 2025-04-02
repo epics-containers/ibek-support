@@ -24,7 +24,7 @@
 
 - name: Build for {{ module }}
   ansible.builtin.include_tasks: build.yml
-  tags: [build]
+  tags: [do_build]
 
 - name: Post Build for {{ module }}
   ansible.builtin.include_tasks: post_build.yml

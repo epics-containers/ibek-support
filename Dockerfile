@@ -34,5 +34,4 @@ RUN ansible.sh quadEM -e skip_clean=true
 RUN ansible.sh all -e from_dockerfile=false -e skip_clean=true
 
 # link everything including the kitchen sink into an IOC
-RUN mkdir -p /epics/ioc
 RUN ansible.sh ioc
