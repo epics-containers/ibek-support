@@ -30,6 +30,7 @@ RUN ansible.sh snmp,motor -e skip_clean=true
 RUN ansible.sh pvxs -e skip_clean=true
 RUN ansible.sh ADCore,ADGenICam -e skip_clean=true
 # build everything else
+RUN ansible.sh quadEM -e skip_clean=true
 RUN ansible.sh all -e from_dockerfile=false -e skip_clean=true
 
 # link everything including the kitchen sink into an IOC
