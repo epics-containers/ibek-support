@@ -6,13 +6,13 @@
     - name: Check for single module name
       ansible.builtin.set_fact:
         # all_support can take a comma separated list of modules or 'all'
-        single: module_name.count(',') > 0 and module_name not in ["all", "ioc"]
+        single: "{{ module_name.count(',') == 0 and module_name not in ['all', 'ioc'] }}"
       changed_when: false
 
     - name: All support modules
       ansible.builtin.include_role:
         name: all_support
-      when: not single and module_name != "ioc"
+      when: not single | bool and module_name != "ioc"
 
     - name: Find support module yml
       ansible.builtin.include_role:
