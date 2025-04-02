@@ -10,3 +10,5 @@
     src: "/dev/video0"
     dest: "/dev/andor3pci"
     state: link
+    # when the container launches with device mounted we will have a good link
+    force: yes
