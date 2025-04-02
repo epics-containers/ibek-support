@@ -8,9 +8,8 @@
     creates: /usr/local/lib/libopen62541.so.{{ open62541_version }}
     cmd: |
       set -xe
-      if [ ! -d /tmp/open62541 ]; then
-        git clone -b v{{ open62541_version }} --depth 1 https://github.com/open62541/open62541.git
-      fi
+      rm -rf /tmp/open62541
+      git clone -b v{{ open62541_version }} --depth 1 https://github.com/open62541/open62541.git
       cd open62541
       mkdir -p build
       cd build
