@@ -25,16 +25,12 @@ RUN mkdir /epics/support/configure
 # get ansible script into path
 ENV PATH=$PATH:${SOURCE_FOLDER}/ibek-support/_ansible
 # build all things that are dependencies in dependency order
-RUN ansible.sh calc,sscan,asyn,busy
-RUN ansible.sh autosave
-RUN ansible.sh sequencer,std,StreamDevice
-RUN ansible.sh snmp
-RUN ansible.sh motor
-RUN ansible.sh pvxs
-RUN ansible.sh ADCore
-RUN ansible.sh ADGenICam
+RUN ansible.sh calc,sscan,asyn,busy,autosave,sequencer,std,StreamDevice -e skip_clean=true
+RUN ansible.sh snmp,motor -e skip_clean=true
+RUN ansible.sh pvxs -e skip_clean=true
+RUN ansible.sh ADCore,ADGenICam -e skip_clean=true
 # build everything else
-RUN ansible.sh all
+RUN ansible.sh all -e from_dockerfile=false -e skip_clean=true
 
 # link everything including the kitchen sink into an IOC
 COPY ioc ${SOURCE_FOLDER}/ioc
