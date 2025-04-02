@@ -12,3 +12,8 @@ libs:
 
 remove_macros:
   - IPUNIDIG
+
+# don't make vxWorks dbds
+comment_out:
+  - path: quadEMApp/src/Makefile
+    regexp: quadEMTestAppVx
