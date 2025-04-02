@@ -2,7 +2,8 @@
 
 module: pvxs
 version: 1.3.2
-# organization: https://github.com/epics-modules
+
+organization: https://github.com/epics-base
 
 dbds:
   - pvxsIoc.dbd
@@ -19,7 +20,7 @@ apt_runtime:
 
 comment_out:
   - path: Makefile
-    regexp: example|test
+    regexp: test|example
 
 tasks:
   - path: pvxs-tasks.yml

@@ -1,5 +1,6 @@
 - name: Install support module {{ module_name }}
   hosts: localhost
+  tags: [always]
   # Use tasks with include_role instead of direct use of playbook roles.
   # Avoids verbose 'skipping' of all tasks in the roles that are not needed.
   tasks:
