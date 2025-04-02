@@ -22,6 +22,8 @@ apt_runtime:
 
 tasks:
   - path: opcua_task.yml
+  - path: opcua_postbuild.yml
+    post_build: true
 
 patch_lines:
   - path: "{{ config_linux_host }}"
