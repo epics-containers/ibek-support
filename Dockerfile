@@ -10,7 +10,7 @@ FROM  ${DEVELOPER} AS developer
 # Using the same location here makes devcontainer/runtime differences transparent.
 ENV SOURCE_FOLDER=/epics/generic-source
 # connect ioc source folder to its know location
-RUN ln -s ${SOURCE_FOLDER}/ioc ${IOC}
+COPY ioc /epics/ioc
 
 # Get the current version of ibek
 COPY requirements.txt requirements.txt
@@ -34,5 +34,5 @@ RUN ansible.sh quadEM -e skip_clean=true
 RUN ansible.sh all -e from_dockerfile=false -e skip_clean=true
 
 # link everything including the kitchen sink into an IOC
-COPY ioc ${SOURCE_FOLDER}/ioc
+RUN mkdir -p /epics/ioc
 RUN ansible.sh ioc
