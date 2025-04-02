@@ -1,11 +1,14 @@
 - name: Read in default values for all vars to reset them
   ansible.builtin.include_vars:
     file: ../support/vars/main.yml
+  tags: [always]
 
 - name: Find the config folder and set variables for {{ module }}
   ansible.builtin.include_role:
     name: find
+  tags: [always]
 
 - name: Run the support role with correct vars for {{ module }}
   ansible.builtin.include_role:
     name: support
+  tags: [always]
