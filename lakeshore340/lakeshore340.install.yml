@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: lakeshore340
+version: 2-6-3
+organization: https://github.com/DiamondLightSource/
+
+protocol_files:
+  - lakeshore340App/protocol/lakeshore340.proto
+
+comment_out:
+  - path: Makefile
+    regexp: documentation

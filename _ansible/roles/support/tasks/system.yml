@@ -2,6 +2,7 @@
 
 - name: System block
   tags: [system]
+  when: not skip_apt
   block:
     - name: Download additional files for {{ module }}
       ansible.builtin.get_url:

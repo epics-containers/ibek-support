@@ -17,7 +17,7 @@ libs: []
 
 # the prefix of the git repository to clone
 organization: https://github.com/epics-modules
-git_repo: "{{ organization }}/{{ module }}"
+git_repo: "{{ organization.rstrip('/') }}/{{ module }}"
 
 # list of StreamDevice protocol files to copy into /runtime/protocol
 protocol_files: []
@@ -88,3 +88,12 @@ scripts: []
 #     post_build: true
 #     when: is_linux
 tasks: []
+
+# skip the clean step after build
+# use `ansible.sh all -e skip_clean=true` to skip all the clean steps
+# when debugging a build
+skip_clean: false
+# skip apt installs
+# useful for debugging a build as it speeds up second builds massively
+# use `ansible.sh all -e skip_apt=true` to skip all the apt installs
+skip_apt: false

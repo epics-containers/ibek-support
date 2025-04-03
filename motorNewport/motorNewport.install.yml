@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: motorNewport
+version: R1-2-1
+organization: http://github.com/epics-motor/
+
+dbds:
+  - devNewport.dbd
+  - motorRecord.dbd
+  - motorSupport.dbd
+
+libs:
+  - Newport
+  - motor
+  - asyn

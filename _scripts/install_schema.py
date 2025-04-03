@@ -28,6 +28,7 @@ class SupportVariables(StrictModel):
     class CommentOut(StrictModel):
         path: str
         regexp: str
+        when: str = Field(default="")
 
     class PatchLines(StrictModel):
         path: str
@@ -67,7 +68,6 @@ class SupportVariables(StrictModel):
         "Used to build a list for linking into the IOC",
         default=(),
     )
-
     organization: str = Field(
         description="The git organization that owns the support module."
         "Used to generate the git remote from organization/module",
@@ -79,6 +79,11 @@ class SupportVariables(StrictModel):
         default=Field(
             default_factory=lambda data: f"{data['organization']}/{data['module']}"
         ),
+    )
+    protocol_files: Sequence[str] = Field(
+        description="List of protocol files to copy into the runtime stage."
+        "Path relative to support module root.",
+        default=(),
     )
     recursive: bool = Field(
         description="Clone the support module with --recursive",

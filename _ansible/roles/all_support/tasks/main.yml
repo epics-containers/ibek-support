@@ -1,23 +1,71 @@
 # a Role to build all support modules listed in the Dockerfile
+# use always for tags so that tag limiting gets passed down to the support role
 
-- name: Discover modules in Dockerfile
-  ansible.builtin.shell: |
-    set -e -o pipefail
-    cat {{ all_root }}/Dockerfile | sed -n 's/^RUN *ansible.sh \([^ ]*\).*$/\1/p'
-  args:
-    executable: /bin/bash
-  register: modules
-  changed_when: false
+- name: All support modules block
+  block:
+  # use ansible.sh "module1,module2,etc" to build specific sequence modules
+  - name: Check for list of modules
+    ansible.builtin.set_fact:
+      module_list: "{{ module_name.split(',') }}"
+    changed_when: false
+    when: module_name.count(',') > 0
+    tags: [always]
 
-- name: Report modules
-  ansible.builtin.debug:
-    msg: "{{ modules.stdout_lines }}"
-  changed_when: false
+  - name: Discover modules in Dockerfile
+    ansible.builtin.shell: |
+      set -e -o pipefail
+      cat {{ all_root }}/Dockerfile | sed -n 's/^RUN *ansible.sh \([^ ]*\).*$/\1/p'
+    args:
+      executable: /bin/bash
+    register: modules
+    changed_when: false
+    when:
+      - from_dockerfile | default(true) | bool
+      - module_list is undefined
+    tags: [always]
 
-- name: Loop over the support modules in Dockerfile order
-  ansible.builtin.include_tasks:
-    file: one_support.yml
-  loop: "{{ modules.stdout_lines }}"
-  loop_control:
-    loop_var: module
-  when: modules.stdout_lines | length > 0 and module != "ioc"
+  - name: Set module list
+    ansible.builtin.set_fact:
+      module_list: "{{ modules.stdout_lines | list }}"
+    changed_when: false
+    when:
+      - from_dockerfile | default(true) | bool
+      - module_list is undefined
+    tags: [always]
+
+  - name: Find all install.yml files
+    ansible.builtin.find:
+      paths: /epics/generic-source/ibek-support/
+      patterns: "*.install.yml"
+      recurse: true
+    register: module_files
+    changed_when: false
+    when:
+      - not (from_dockerfile | default(true) | bool)
+      - module_list is undefined
+    tags: [always]
+
+  - name: Gather ALL ibek-support module folders
+    ansible.builtin.set_fact:
+      module_list: "{{ module_files.files | map(attribute='path') | map('dirname') | map('basename') }}"
+    changed_when: false
+    when:
+      - not (from_dockerfile | default(true) | bool)
+      - module_list is undefined
+    tags: [always]
+
+  - name: Report modules
+    ansible.builtin.debug:
+      msg: "{{ module_list }}"
+    changed_when: false
+    tags: [always]
+
+  - name: Loop over the support modules
+    ansible.builtin.include_tasks:
+      file: one_support.yml
+    loop: "{{ module_list }}"
+    loop_control:
+      loop_var: module
+    when:
+      - module_list | length > 0 and module != "ioc"
+    tags: [always]

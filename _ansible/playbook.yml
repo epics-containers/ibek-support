@@ -2,25 +2,37 @@
   hosts: localhost
   # Use tasks with include_role instead of direct use of playbook roles.
   # Avoids verbose 'skipping' of all tasks in the roles that are not needed.
+  # also use [always] so that tag limiting gets passed on to the support role
   tasks:
-    - name: All support modules
+    - name: PB - Check for single module name
+      ansible.builtin.set_fact:
+        # all_support can take a comma separated list of modules or 'all'
+        single: "{{ module_name.count(',') == 0 and module_name not in ['all', 'ioc'] }}"
+      changed_when: false
+      tags: [always]
+
+    - name: PB - All support modules
       ansible.builtin.include_role:
         name: all_support
-      when: module_name == "all"
+      when: not single | bool and module_name != "ioc"
+      tags: [always]
 
-    - name: Find support module yml
+    - name: PB - Find support module yml
       ansible.builtin.include_role:
         name: find
-      when: module_name not in ["all", "ioc"]
       vars:
         module: "{{ module_name }}"
+      when: single
+      tags: [always]
 
-    - name: Support module build
+    - name: PB - Support module build
       ansible.builtin.include_role:
         name: support
-      when: module_name not in ["all", "ioc"]
+      when: single
+      tags: [always]
 
     - name: Ioc build
       ansible.builtin.include_role:
         name: ioc
       when: module_name in ["all", "ioc"]
+      tags: [always]

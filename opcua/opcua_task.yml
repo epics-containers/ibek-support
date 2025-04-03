@@ -1,0 +1,21 @@
+- name: Set Open62541 version
+  ansible.builtin.set_fact:
+    open62541_version: "1.3.15"
+  changed_when: false
+
+- name: Build OPCUA C-library (remove the folder to rebuild)
+  ansible.builtin.shell:
+    creates: /usr/local/lib/libopen62541.so.{{ open62541_version }}
+    cmd: |
+      set -xe
+      rm -rf /tmp/open62541
+      git clone -b v{{ open62541_version }} --depth 1 https://github.com/open62541/open62541.git
+      cd open62541
+      mkdir -p build
+      cd build
+      cmake .. -DBUILD_SHARED_LIBS=ON \
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+          -DUA_ENABLE_ENCRYPTION=OPENSSL
+      make install
+    executable: /bin/bash
+    chdir: /tmp

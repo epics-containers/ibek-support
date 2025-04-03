@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: modbus
+version: R3-4
+# organization: https://github.com/epics-modules
+
+dbds:
+  - modbusSupport.dbd
+
+libs:
+  - modbus
+
+patch_lines:
+  - path: "{{ config_linux_host }}"
+    regexp: TIRPC
+    line: TIRPC = YES
+    when: "{{ is_linux }}"
+
+comment_out:
+  - path: Makefile
+    regexp: "^DIRS.*iocBoot.*$"
+    when: "{{ is_rtems }}"

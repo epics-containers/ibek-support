@@ -1,0 +1,5 @@
+- name: Expose the DB templates into the standard location
+  ansible.builtin.file:
+    src: "/epics/support/opcua/exampleTop/db"
+    dest: "{{ local_path }}/db"
+    state: link
