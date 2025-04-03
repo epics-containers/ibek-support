@@ -29,7 +29,7 @@
     - name: Add this module to the global configure/RELEASE - {{ module }}
       ansible.builtin.lineinfile:
         path: "{{ release_file }}"
-        regexp: "^{{ macro }}.*=.*"
+        regexp: "^{{ macro }} *=.*"
         line: "{{ macro }} = {{ local_path }}"
         create: true
         mode: "0644"

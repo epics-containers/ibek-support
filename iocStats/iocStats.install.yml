@@ -15,7 +15,7 @@ apt_runtime:
 patch_file:
   path: iocStats.patch
   commit: 4226b12
-  when: "{{ is_rtems }}"
+  when: "{{ is_rtems | bool }}"
 
 remove_macros:
   - SNCSEQ

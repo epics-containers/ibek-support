@@ -3,3 +3,8 @@ local_path: /epics/ioc
 
 # Make options (don't parallel build the IOC)
 make_options: ""
+
+# skip the clean step after build
+# use `ansible.sh all -e skip_clean=true` to skip all the clean steps
+# when debugging a build
+skip_clean: false

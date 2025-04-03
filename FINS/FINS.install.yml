@@ -12,3 +12,9 @@ organization: https://github.com/DiamondLightSource
 comment_out:
   - path: FINSApp/Makefile
     regexp: opi
+
+patch_lines:
+  - path: "{{ config_linux_host }}"
+    regexp: CROSS_COMPILER_TARGET_ARCHS
+    line: CROSS_COMPILER_TARGET_ARCHS=
+    when: "{{ is_linux }}"

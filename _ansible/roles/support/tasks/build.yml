@@ -1,5 +1,5 @@
 - name: Build block
-  tags: [build]
+  tags: [do_build]
   block:
     - name: Clean module for rebuild - {{ module }}
       ansible.builtin.command: make clean
@@ -41,3 +41,5 @@
       register: build
       ignore_errors: true
       changed_when: true
+      when:
+        - not skip_clean

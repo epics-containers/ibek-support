@@ -23,13 +23,12 @@ libs:
   - pvAccessIOC
   - pvAccess
 
-HDF: http://ftp.de.debian.org/debian/pool/main/h/hdf5
 download_extras:
-  - url: "{{ HDF }}/libhdf5-103_1.10.4+repack-10_amd64.deb"
+  - url: "http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-103_1.10.4+repack-10_amd64.deb"
     dest: /tmp/libhdf5-103.deb
-  - url: "{{ HDF }}/libhdf5-cpp-103_1.10.4+repack-10_amd64.deb"
+  - url: "http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-cpp-103_1.10.4+repack-10_amd64.deb"
     dest: /tmp/libhdf5-cpp-103.deb
-  - url: "{{ HDF }}/libhdf5-dev_1.10.4+repack-10_amd64.deb"
+  - url: "http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-dev_1.10.4+repack-10_amd64.deb"
     dest: /tmp/libhdf5-dev-1.deb
 
 apt_developer:
@@ -56,37 +55,33 @@ apt_runtime:
   - libhdf5-103-1
   - libnetcdf19
 
-CONFIG: |
-  AREA_DETECTOR=$(SUPPORT)
-  CROSS_COMPILER_TARGET_ARCHS =
-  WITH_GRAPHICSMAGICK = NO
-  WITH_HDF5     = YES
-  HDF5_EXTERNAL = YES
-  HDF5_LIB      = /usr/lib/x86_64-linux-gnu/hdf5/serial/
-  HDF5_INCLUDE  = /usr/include/hdf5/serial/
-  WITH_SZIP     = YES
-  SZIP_EXTERNAL = YES
-  WITH_JPEG     = YES
-  JPEG_EXTERNAL = YES
-  WITH_TIFF     = YES
-  TIFF_EXTERNAL = YES
-  XML2_EXTERNAL = YES
-  XML2_INCLUDE  = /usr/include/libxml2/
-  WITH_ZLIB     = YES
-  ZLIB_EXTERNAL = YES
-  WITH_BLOSC    = YES
-  BLOSC_EXTERNAL= YES
-  WITH_CBF      = YES
-  CBF_EXTERNAL  = YES
-  WITH_PVA      = YES
-  WITH_NETCDF   = YES
-  NETCDF_EXTERNAL = YES
-  WITH_BOOST    = NO
-
 patch_lines:
   - path: "{{ config_linux_host }}"
     regexp: AREA_DETECTOR[\s\S]*WITH_BOOST
-    line: "{{ CONFIG }}"
+    line: |
+      AREA_DETECTOR=$(SUPPORT)
+      CROSS_COMPILER_TARGET_ARCHS =
+      WITH_GRAPHICSMAGICK = NO
+      WITH_HDF5           = YES
+      HDF5_EXTERNAL       = YES
+      HDF5_LIB            = /usr/lib/x86_64-linux-gnu/hdf5/serial/
+      HDF5_INCLUDE        = /usr/include/hdf5/serial/
+      WITH_SZIP           = YES
+      SZIP_EXTERNAL       = YES
+      WITH_JPEG           = YES
+      JPEG_EXTERNAL       = YES
+      WITH_TIFF           = YES
+      TIFF_EXTERNAL       = YES
+      XML2_EXTERNAL       = YES
+      XML2_INCLUDE        = /usr/include/libxml2/
+      WITH_ZLIB           = YES
+      ZLIB_EXTERNAL       = YES
+      WITH_BLOSC          = YES
+      BLOSC_EXTERNAL      = YES
+      WITH_PVA            = YES
+      WITH_BOOST          = NO
+      WITH_NETCDF         = YES
+      NETCDF_EXTERNAL     = YES
 
 remove_macros:
   - SNCSEQ

@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: opcua
+version: v0.10.0
+# organization: https://github.com/epics-modules
+
+dbds:
+  - opcuaItemRecord.dbd
+  - menuDefAction.dbd
+  - devOpcua.dbd
+
+libs:
+  - opcua
+
+apt_developer:
+  - cmake
+  - libxml2-dev
+  - libssl-dev
+
+apt_runtime:
+  - libxml2
+
+tasks:
+  - path: opcua_task.yml
+  - path: opcua_postbuild.yml
+    post_build: true
+
+patch_lines:
+  - path: "{{ config_linux_host }}"
+    regexp: OPEN62541[\s\S]*OPEN62541_USE_CRYPTO
+    line: |
+      OPEN62541 = /usr/local
+      # Settings for linking with the Open62541 C++ installation
+      # How the Open62541 shared libraries are deployed
+      #   SYSTEM = shared libs are in a system location
+      #   PROVIDED = shared libs are in $(OPEN62541_SHRLIB_DIR)
+      #   INSTALL = shared libs are installed (copied) into this module
+      #   EMBED = link Open62541 code statically into libopcua,
+      #           the Open62541 libraries are not required on target system
+      OPEN62541_DEPLOY_MODE = PROVIDED
+      OPEN62541_LIB_DIR = $(OPEN62541)/lib
+      OPEN62541_SHRLIB_DIR = $(OPEN62541_LIB_DIR)
+      # How the Open62541 libraries were built
+      OPEN62541_USE_CRYPTO = YES

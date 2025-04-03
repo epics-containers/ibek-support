@@ -4,9 +4,10 @@
     - name: Comment out lines as required for {{ module }}
       ansible.builtin.replace:
         path: "{{ local_path }}/{{ item.path }}"
-        regexp: "^(?!#)(.*{{ item.regexp }}.*$)"
+        regexp: "^(?!#)(.*({{ item.regexp }}).*$)"
         replace: "# \\1"
       loop: "{{ comment_out }}"
+      when: item.when | default(true)
 
     - name: RTEMS settings for {{ module }}
       ansible.builtin.lineinfile:

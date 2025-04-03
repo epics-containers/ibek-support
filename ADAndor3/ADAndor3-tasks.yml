@@ -1,0 +1,14 @@
+- name: Remove DLS specific RELEASE
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /epics/support/ADAndor3/configure/RELEASE.linux-x86_64.Common
+
+- name: Symlink the video capture device to andor PCI frame grabber card
+  ansible.builtin.file:
+    src: "/dev/video0"
+    dest: "/dev/andor3pci"
+    state: link
+    # when the container launches with device mounted we will have a good link
+    force: yes

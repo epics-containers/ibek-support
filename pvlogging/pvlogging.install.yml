@@ -2,12 +2,13 @@
 
 module: pvlogging
 version: 1-5-2
+organization: https://github.com/diamondlightsource
+
 dbds:
   - pvlogging.dbd
+
 libs:
   - pvlogging
-
-organization: https://github.com/diamondlightsource
 
 runtime_files:
   - /epics/support/pvlogging/src/access.acf

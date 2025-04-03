@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: positioner
+version: 2024.10.1
+
+organization: https://github.com/diamondlightsource

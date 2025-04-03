@@ -1,0 +1,7 @@
+- block:
+    - name: "end play if RTEMS architecture"
+      debug:
+        msg: "pvxs is not supported on RTEMS, ending play"
+
+    - meta: end_play
+  when: is_rtems
