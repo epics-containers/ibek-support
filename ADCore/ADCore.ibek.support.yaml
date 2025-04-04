@@ -1333,10 +1333,16 @@ entity_models:
           Max buffer size in number of frames
         default: 128
 
+      MAX_MEMORY:
+        type: int
+        description: |-
+          Max memory size in bytes
+        default: 1048576
+
     pre_init:
       - value: |
-          # NDCircularBuffConfigure(portName, queueSize, blockingCallbacks,
-          NDCircularBuffConfigure(
+          # NDCircularBuffConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory)
+          NDCircularBuffConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{MAX_BUFFERS}}, {{MAX_MEMORY}})
 
     databases:
       - file: $(ADCORE)/db/NDCircularBuff.template
