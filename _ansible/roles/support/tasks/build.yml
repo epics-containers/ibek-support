@@ -5,7 +5,6 @@
       ansible.builtin.command: make clean
       args:
         chdir: "{{ local_path }}"
-      when: force_build
       changed_when: true
 
     - name: Build module {{ module }}
