@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: ADCore
-version: R3-14
-organization: https://github.com/areaDetector
+version: pvxs
+organization: https://github.com/jsouter
 
 dbds:
   - NDPluginPva.dbd
@@ -13,15 +13,15 @@ dbds:
   - NDFileHDF5.dbd
   - NDFileJPEG.dbd
   - NDFileTIFF.dbd
-  - PVAServerRegister.dbd
+  # - PVAServerRegister.dbd
   - NDFileNetCDF.dbd
 libs:
   - ntndArrayConverter
   - ADBase
   - NDPlugin
-  - pvAccessCA
-  - pvAccessIOC
-  - pvAccess
+  # - pvAccessCA
+  # - pvAccessIOC
+  # - pvAccess
 
 download_extras:
   - url: "http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-103_1.10.4+repack-10_amd64.deb"
@@ -82,6 +82,7 @@ patch_lines:
       WITH_BOOST          = NO
       WITH_NETCDF         = YES
       NETCDF_EXTERNAL     = YES
+      WITH_PVXS           = YES
 
 remove_macros:
   - SNCSEQ
