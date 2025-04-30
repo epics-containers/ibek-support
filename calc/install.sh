@@ -20,7 +20,7 @@ ibek support register ${NAME}
 
 # declare the libs and DBDs that are required in ioc/iocApp/src/Makefile
 ibek support add-libs calc
-ibek support add-dbds aCalcoutRecord.dbd  calc.dbd  calcSupport.dbd sCalcoutRecord.dbd transformRecord.dbd
+ibek support add-dbds aCalcoutRecord.dbd  calc.dbd  calcSupport.dbd sCalcoutRecord.dbd sseqRecord.dbd swaitRecord.dbd transformRecord.dbd
 
 # comment out the test directories from the Makefile
 sed -i -E 's/tests/# tests/' ${SUPPORT}/${NAME}/Makefile

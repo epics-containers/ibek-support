@@ -3,19 +3,21 @@
 module: calc
 version: R3-7-5
 dbds:
-  - aCalcoutRecord.dbd
-  - calc.dbd
-  - calcSupport.dbd
-  - sCalcoutRecord.dbd
-  - transformRecord.dbd
+- aCalcoutRecord.dbd
+- calc.dbd
+- calcSupport.dbd
+- sCalcoutRecord.dbd
+- sseqRecord.dbd
+- swaitRecord.dbd
+- transformRecord.dbd
 libs:
-  - calc
+- calc
 
 patch_lines:
-  - path: Makefile
-    regexp: configure calcApp tests
-    line: DIRS += configure calcApp
+- path: Makefile
+  regexp: configure calcApp tests
+  line: DIRS += configure calcApp
 
 remove_macros:
-  - SNCSEQ
-  - SSCAN
+- SNCSEQ
+- SSCAN
