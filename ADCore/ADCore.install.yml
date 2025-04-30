@@ -43,6 +43,7 @@ apt_developer:
   - libxext-dev
   - libz-dev
   - libnetcdf-dev
+  - libgraphicsmagick++1-dev
   - /tmp/libhdf5-103.deb
   - /tmp/libhdf5-cpp-103.deb
   - /tmp/libhdf5-dev-1.deb
@@ -54,6 +55,7 @@ apt_runtime:
   - libxml2
   - libhdf5-103-1
   - libnetcdf19
+  - graphicsmagick
 
 patch_lines:
   - path: "{{ config_linux_host }}"
@@ -61,7 +63,9 @@ patch_lines:
     line: |
       AREA_DETECTOR=$(SUPPORT)
       CROSS_COMPILER_TARGET_ARCHS =
-      WITH_GRAPHICSMAGICK = NO
+      WITH_GRAPHICSMAGICK = YES
+      GRAPHICSMAGICK_EXTERNAL = YES
+      GRAPHICSMAGICK_INCLUDE = /usr/include/GraphicsMagick/
       WITH_HDF5           = YES
       HDF5_EXTERNAL       = YES
       HDF5_LIB            = /usr/lib/x86_64-linux-gnu/hdf5/serial/
