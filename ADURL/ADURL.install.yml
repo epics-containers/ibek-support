@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: ADURL
+version: R2-3
+
+organization: https://github.com/areadetector
+
+dbds:
+  - URLDriverSupport.dbd
+libs:
+  - URLDriver
+
+patch_lines:
+  - path: "{{ config_linux_host }}"
+    regexp: WITH_GRAPH[\s\S]*include/GraphicsMagick/
+    line: |
+      WITH_GRAPHICSMAGICK = YES
+      GRAPHICSMAGICK_EXTERNAL = YES
+      GRAPHICSMAGICK_INCLUDE = /usr/include/GraphicsMagick/
