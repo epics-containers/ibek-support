@@ -1,0 +1,120 @@
+label: ADURL
+parent: NDArrayBase
+children:
+
+- type: Group
+  name: URLDriverSetup
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: URL2
+    write_pv: $(P)$(R)URL2
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)URL_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalRW
+    name: URL3
+    write_pv: $(P)$(R)URL3
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)URL_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalRW
+    name: URL4
+    write_pv: $(P)$(R)URL4
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)URL_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalRW
+    name: URL5
+    write_pv: $(P)$(R)URL5
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)URL_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalRW
+    name: URL6
+    write_pv: $(P)$(R)URL6
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)URL_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalRW
+    name: URL7
+    write_pv: $(P)$(R)URL7
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)URL_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalRW
+    name: URL8
+    write_pv: $(P)$(R)URL8
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)URL_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalRW
+    name: URL9
+    write_pv: $(P)$(R)URL9
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)URL_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalRW
+    name: URL1
+    write_pv: $(P)$(R)URL1
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)URL_RBV
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalRW
+    name: URL10
+    write_pv: $(P)$(R)URL10
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)URL_RBV
+    read_widget:
+      type: TextRead
+      format: string
