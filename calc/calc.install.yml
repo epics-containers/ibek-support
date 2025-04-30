@@ -8,6 +8,8 @@ dbds:
   - calcSupport.dbd
   - sCalcoutRecord.dbd
   - transformRecord.dbd
+  - swaitRecord.dbd
+  - sseqRecord.dbd
 libs:
   - calc
 
