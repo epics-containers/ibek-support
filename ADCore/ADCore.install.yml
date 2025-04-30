@@ -55,7 +55,7 @@ apt_runtime:
   - libxml2
   - libhdf5-103-1
   - libnetcdf19
-  - graphicsmagick
+  - libgraphicsmagick++-q16-12
 
 patch_lines:
   - path: "{{ config_linux_host }}"
