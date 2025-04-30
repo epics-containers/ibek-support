@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: optics
+version: R2-14
+dbds:
+  - opticsSupport.dbd
+  - tableRecord.dbd
+libs:
+  - optics
