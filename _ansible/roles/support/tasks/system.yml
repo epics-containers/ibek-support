@@ -33,7 +33,8 @@
     - name: Register system dependencies for the runtime stage {{ module }}
       ansible.builtin.lineinfile:
         path: "{{ configure_folder }}/runtime_debs"
-        regexp: "^{{ item }}$"
+        # note \Q...\E is used to escape the string
+        regexp: "^{{ item | regex_escape() }}$"
         line: "{{ item }}"
         create: true
         mode: "0644"
