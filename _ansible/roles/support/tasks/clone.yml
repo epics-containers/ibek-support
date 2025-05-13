@@ -33,5 +33,5 @@
         git apply "{{ ibek_support_folder }}/{{ patch_file.path }}"
       args:
         chdir: "{{ local_path }}"
-      when: patch_file.when | default(false) | bool
+      when: patch_file.when | default(false) and not stat_result.stat.exists | bool
       changed_when: true
