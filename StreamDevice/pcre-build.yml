@@ -28,6 +28,12 @@
     chdir: /epics/support/StreamDevice/pcre-8.45
     creates: /epics/support/PCRE/lib/libpcre.a
 
+- name: Create lib folder for /epics/support/StreamDevice
+  ansible.builtin.file:
+    dest: /epics/support/StreamDevice/lib/RTEMS-beatnik/
+    state: directory
+    mode: "0755"
+
 - name: Make the pcre library available to IOC link stage
   ansible.builtin.file:
     src: /epics/support/PCRE/lib/libpcre.a
