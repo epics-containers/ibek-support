@@ -804,6 +804,7 @@ entity_models:
           P:
           M:
           PORT: "{{ Controller }}"
+          SPORT: "{{ '' if is_cs else Controller.pmacAsynPort }}"
           CS: "{{Controller.CS if is_cs else 0}}"
           PMAC: "{{ Controller.PmacController.P if is_cs else Controller.P }}"
           VELO:
