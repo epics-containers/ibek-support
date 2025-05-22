@@ -60,7 +60,6 @@ entity_models:
           R:
           PORT:
 
-
     pvi:
       yaml_path: drvQuadEM.pvi.device.yaml
       pv_prefix: "{{ P }}"
@@ -118,8 +117,8 @@ entity_models:
           #
 
     shared:
-      - &stats { type: ADCore.NDStats, P: "{{NDARRAY_PORT.P}}", NCHANS: "{{STAT_NCHAN}}", XSIZE: "{{STAT_XSIZE}}", YSIZE: 0, HIST_SIZE: "{{HIST_SIZE}}", NDARRAY_PORT: , ENABLED: 1 }
-      - &arrays { type: ADCore.NDStdArrays, P: "{{NDARRAY_PORT.P}}", NDARRAY_PORT: , ENABLED: 1, TYPE: Float64, FTVL: DOUBLE, NELEMENTS: "{{STAT_XSIZE}}" }
+      - &stats { type: ADCore.NDStats, P: "{{NDARRAY_PORT.P}}", NCHANS: "{{STAT_NCHAN}}", XSIZE: "{{STAT_XSIZE}}", YSIZE: 0, HIST_SIZE: "{{HIST_SIZE}}", NDARRAY_PORT, ENABLED: 1 }
+      - &arrays { type: ADCore.NDStdArrays, P: "{{NDARRAY_PORT.P}}", NDARRAY_PORT, ENABLED: 1, TYPE: Float64, FTVL: DOUBLE, NELEMENTS: "{{STAT_XSIZE}}" }
 
     sub_entities:
       - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I1", R: ":Cur1:" }
@@ -179,15 +178,27 @@ entity_models:
           Add template with archive tags for useful PVs
         default: true
 
-    databases:
+    post_defines:
+      time_series:
+        description: list of names of time series channels for use in jinja rendering
+        type: list
+        value: ["Cur1", "Cur2", "Cur3", "Cur4", "SumX", "SumY", "SumAll", "DiffX", "DiffY", "PosX", "PosY"]
 
+    databases:
       - file: $(QUADEM)/db/TimeSeriesPlugins_archiving.template
         args:
           P:
           R:
 
-    pre_init:
+    shared:
+      - &timeSeriesN tsn:
+          type: ADCore.NDTimeSeriesN
+          P: "{{NDARRAY_PORT.P}}"
+          R: "{{NDARRAY_PORT.R}}:calculate_me"
+          PORT: "{{PORT}}"
+          ADDR: "{{calculate_me}}"
 
+    pre_init:
       - value: |
           # ADCore path for time series and FFTs
           epicsEnvSet "EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db"
@@ -196,6 +207,7 @@ entity_models:
           # NDTimeSeries template
           dbLoadRecords("$(ADCORE)/db/NDTimeSeries.template", "P={{NDARRAY_PORT.P}}, R={{NDARRAY_PORT.R}}TS:, PORT={{PORT}}, ADDR=0, TIMEOUT=1, NDARRAY_PORT={{NDARRAY_PORT}}, NDARRAY_ADDR=11, NCHANS={{NUM_TS}}, TIME_LINK={{NDARRAY_PORT.P}}{{NDARRAY_PORT.R}}SampleTime_RBV CP MS, ENABLED=1")
           # NDTimeSeriesN template for each channel
+          {% for SERIES in time_series %}
           # {{SERIES}}
 
           # FFTs
@@ -211,7 +223,6 @@ entity_models:
         # WARNING - non print commands in Initialise not parsed
 
     post_init:
-
       - value: |
           # Setting correct display precision for viewing
           dbpf("{{NDARRAY_PORT.P}}{{R}}TS:TSTimePerPoint.PREC", "5")
