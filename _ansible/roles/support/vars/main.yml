@@ -97,3 +97,7 @@ skip_clean: false
 # useful for debugging a build as it speeds up second builds massively
 # use `ansible.sh all -e skip_apt=true` to skip all the apt installs
 skip_apt: false
+
+# List of files to remove before the build
+# Can be useful where the repo includes configure/*.local files (which is should not!)
+remove_files_prebuild: []

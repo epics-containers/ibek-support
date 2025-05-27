@@ -1,6 +1,13 @@
 - name: Config block
   tags: [pre_build]
   block:
+    - name: Remove files as required for {{ item }}
+      ansible.builtin.file:
+        state: absent
+        path: "{{ local_path }}/{{ item }}"
+      loop: "{{ remove_files_prebuild }}"
+
+
     - name: Comment out lines as required for {{ module }}
       ansible.builtin.replace:
         path: "{{ local_path }}/{{ item.path }}"
