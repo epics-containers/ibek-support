@@ -7,22 +7,14 @@ entity_models:
     description: |-
       Template for wrapping a motor as a positioner. This allows it to be controlled by a multipositioner, mapping a list of names onto a list of motor positions
     parameters:
-      P:
-        type: str
-        description: |-
-          Device prefix, must match P of multipositioner
       Q:
         type: str
         description: |-
           Device suffix
-      pos:
-        type: str
-        description: |-
-          Multipositioner object
       MP:
-        type: str
+        type: object
         description: |-
-          Multipositioner suffix, must match MP of multipositioner
+          Parent multipositioner object
       DESC:
         type: str
         description: |-
@@ -31,6 +23,7 @@ entity_models:
         type: str
         description: |-
           Engineering units
+        default: ""
       PREC:
         type: int
         description: |-
@@ -128,6 +121,7 @@ entity_models:
       - file: $(POSITIONER)/db/motorpositioner.template
         args:
           .*:
+          P: "{{MP.P}}"
 
   - name: multipositioner
     description: |-
@@ -401,7 +395,7 @@ entity_models:
     databases:
       - file: $(POSITIONER)/db/positioner.template
         args:
-          P:
+          P: "{{MP.P}}"
           Q:
           MP:
           DESC:
@@ -428,4 +422,3 @@ entity_models:
           VALN:
           VALO:
           VALP:
-          pos:
