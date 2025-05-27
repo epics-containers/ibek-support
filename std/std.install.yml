@@ -9,3 +9,7 @@ dbds:
 
 libs:
   - std
+
+comment_out:
+  - path: stdApp/Makefile
+    regexp: wildcard \*op\*
