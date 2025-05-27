@@ -573,10 +573,10 @@ entity_models:
         default: 0.0
 
       VMAX:
-        type: str # float or substitution string
+        type: float
         description: |-
           Max Velocity (EGU/s), defaults to VELO
-        default: "{{VELO}}"
+        default: "{{VELO | float}}"
 
       ACCL:
         type: float
@@ -1253,10 +1253,10 @@ entity_models:
         default: 1.0
 
       VMAX:
-        type: str # float or substitution string
+        type: float
         description: |-
           Max Velocity (EGU/s), defaults to VELO
-        default: "{{VELO}}"
+        default: "{{VELO | float}}"
 
       DHLM:
         type: float
