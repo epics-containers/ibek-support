@@ -119,6 +119,10 @@ entity_models:
         description: |-
           Positioner value for position 16
         default: 0
+      name:
+        type: str
+        description: |-
+          Name of the positioner
 
     databases:
       - file: $(POSITIONER)/db/motorpositioner.template
@@ -300,9 +304,10 @@ entity_models:
         description: |-
           STOPVAL written to this Pv to stop movement
       DEADBAND:
-        type: int
+        type: str
         description: |-
           In position if abs(demand - readback) < DEADBAND
+          May be a CA link to a record or a constant
       STOPVAL:
         type: int
         description: |-
