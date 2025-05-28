@@ -494,11 +494,6 @@
           the same as pmacSetAxisScale (usually 1 but may be 32)
         default: 32
 
-      - type: str
-        name: gda_name
-        description: |-
-          GDA name
-
       - type: id
         name: name
         description: |-
@@ -510,7 +505,6 @@
           SCALE:
           RADMRES1:
           RADMRES2:
-          gda_name:
           COORD:
           P:
           PORT:

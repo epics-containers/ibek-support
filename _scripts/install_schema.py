@@ -11,14 +11,15 @@ from typing import Sequence
 
 from pydantic import BaseModel, ConfigDict, Field
 
+
 class StrictModel(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
         use_enum_values=True,
     )
 
-class SupportVariables(StrictModel):
 
+class SupportVariables(StrictModel):
     # nested classes ##########################################################
 
     class DownloadExtras(StrictModel):
@@ -152,6 +153,10 @@ class SupportVariables(StrictModel):
     tasks: Sequence[Task] = Field(
         description="List of ad hoc ansible tasks to execute. "
         "Paths are relative to the the ibek-support/module",
+        default=(),
+    )
+    remove_files_prebuild: Sequence[str] = Field(
+        description="A list project relative files to remove pre build.",
         default=(),
     )
 

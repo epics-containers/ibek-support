@@ -348,6 +348,7 @@ entity_models:
       ui_macros:
         P:
         M:
+
   - name: softMotorForPiezo
     description: |-
       TODO:ADD DESCRIPTION
@@ -378,9 +379,10 @@ entity_models:
           Output link
 
       MOVEDLY:
-        type: str
+        type: float
         description: |-
           Approximate move time (seconds)
+        default: 0.1
 
       EGU:
         type: str
@@ -388,53 +390,42 @@ entity_models:
           Engineering Units
 
       DHLM:
-        type: str
+        type: float
         description: |-
           Dial High Limit
 
       DLLM:
-        type: str
+        type: float
         description: |-
           Dial Low Limit
 
       MRES:
-        type: int
+        type: float
         description: |-
           Motor Step Size (EGU)
         default: 1
 
       RRES:
-        type: int
+        type: float
         description: |-
           Readback Step Size (EGU)
         default: 1
 
       RDBD:
-        type: int
+        type: float
         description: |-
           Retry deadband (EGU)
         default: 1
 
       name:
-        type: id
-        description: |-
-          Object name and gui association name
-
-      gda_name:
         type: str
         description: |-
-          Name to export this as to GDA
-
-      gda_desc:
-        type: str
-        description: |-
-          Description to export this as to GDA
+          Unused gui association name
+        default: ""
 
     databases:
       - file: $(MOTOR)/db/softMotorForPiezo.template
         args:
-          name:
-          gda_name:
           DHLM:
           OUT:
           RRES:
@@ -444,7 +435,6 @@ entity_models:
           P:
           RDBL:
           MRES:
-          gda_desc:
           MOVEDLY:
           RDBD:
           DESC:
