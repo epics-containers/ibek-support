@@ -108,8 +108,8 @@ entity_models:
 
     shared:
       # repeated fields for NDStats and NDStdArrays sub_entities
-      - &stats { type: ADCore.NDStats, P: "{{NDARRAY_PORT.P}}", NCHANS: "{{STAT_NCHAN}}", XSIZE: "{{STAT_XSIZE}}", YSIZE: 0, HIST_SIZE: "{{HIST_SIZE}}", NDARRAY_PORT, ENABLED: 1 }
-      - &arrays { type: ADCore.NDStdArrays, P: "{{NDARRAY_PORT.P}}", NDARRAY_PORT, ENABLED: 1, TYPE: Float64, FTVL: DOUBLE, NELEMENTS: "{{STAT_XSIZE}}" }
+      - &stats { type: ADCore.NDStats, P: "{{NDARRAY_PORT.P}}", NDARRAY_PORT: "{{NDARRAY_PORT.PORT}}", NCHANS: "{{STAT_NCHAN}}", XSIZE: "{{STAT_XSIZE}}", YSIZE: 0, HIST_SIZE: "{{HIST_SIZE}}", ENABLED: 1, QUEUE: "{{QUEUE}}" }
+      - &arrays { type: ADCore.NDStdArrays, P: "{{NDARRAY_PORT.P}}", NDARRAY_PORT: "{{NDARRAY_PORT.PORT}}", ENABLED: 1, TYPE: Float64, FTVL: DOUBLE, NELEMENTS: "{{STAT_XSIZE}}", QUEUE: "{{QUEUE}}" }
 
     sub_entities:
       # NDStats for each channel
@@ -117,26 +117,26 @@ entity_models:
       - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I2", R: ":Cur2:" }
       - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I3", R: ":Cur3:" }
       - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I4", R: ":Cur4:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SumX", R: ":SumX:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SumY", R: ":SumY:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SumAll", R: ":SumAll:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.DiffX", R: ":DiffX:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.DiffY", R: ":DiffY:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.PosX", R: ":PosX:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.PosY", R: ":PosY:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SUMX", R: ":SumX:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SUMY", R: ":SumY:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SUMALL", R: ":SumAll:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.DIFFX", R: ":DiffX:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.DIFFY", R: ":DiffY:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.POSX", R: ":PosX:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.POSY", R: ":PosY:" }
 
       # NDStdArrays for each channel
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.Arr1", R: ":Arr1:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.Arr2", R: ":Arr2:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.Arr3", R: ":Arr3:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.Arr4", R: ":Arr4:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumX", R: ":SumX:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumY", R: ":SumY:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumAll", R: ":SumAll:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DiffX", R: ":DiffX:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DiffY", R: ":DiffY:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.PosX", R: ":PosX:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.PosY", R: ":PosY:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I1", R: ":ARR1:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I2", R: ":ARR2:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I3", R: ":ARR3:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I4", R: ":ARR4:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SUMX", R: ":ARRSumX:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SUMY", R: ":ARRSumY:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SUMALL", R: ":ARRSumAll:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DIFFX", R: ":ARRDiffX:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DIFFY", R: ":ARRDiffY:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.POSX", R: ":ARRPosX:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.POSY", R: ":ARRPosY:" }
 
   # TODO should this be moved up into ADCore?
   # TODO YES - plus ADCore.NDTimeSeries and ADCore.NDStats should use it.
@@ -216,12 +216,6 @@ entity_models:
     shared:
       - &channels ["Cur1", "Cur2", "Cur3", "Cur4", "SumX", "SumY", "SumAll", "DiffX", "DiffY", "PosX", "PosY"]
 
-    databases:
-      - file: $(QUADEM)/db/TimeSeriesPlugins_archiving.template
-        args:
-          P: "{{NDARRAY_PORT.P}}"
-          R: "{{NDARRAY_PORT.R}}"
-
     sub_entities:
       - type: ADCore.NDTimeSeries
         PORT: "{{PORT}}"
@@ -261,6 +255,7 @@ entity_models:
           NDARRAY_PORT: "{{PORT}}"
           NDARRAY_ADDR: "{{SERIES_num}}"
           NCHANS: "{{NUM_FREQ}}"
+          QUEUE: "{{QUEUE}}"
           TIME_LINK: "{{NDARRAY_PORT.P}}{{NDARRAY_PORT.R}}TS:TSAveragingTime_RBV CP MS, ENABLED=1"
 
       # NDStats for FFT for each channel
