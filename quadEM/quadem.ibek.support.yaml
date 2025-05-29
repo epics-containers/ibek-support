@@ -117,26 +117,26 @@ entity_models:
       - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I2", R: ":Cur2:" }
       - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I3", R: ":Cur3:" }
       - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I4", R: ":Cur4:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SUMX", R: ":SumX:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SUMY", R: ":SumY:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SUMALL", R: ":SumAll:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.DIFFX", R: ":DiffX:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.DIFFY", R: ":DiffY:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.POSX", R: ":PosX:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.POSY", R: ":PosY:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SumX", R: ":SumX:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SumY", R: ":SumY:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SumAll", R: ":SumAll:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.DiffX", R: ":DiffX:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.DiffY", R: ":DiffY:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.PosX", R: ":PosX:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.PosY", R: ":PosY:" }
 
       # NDStdArrays for each channel
       - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I1", R: ":ARR1:" }
       - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I2", R: ":ARR2:" }
       - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I3", R: ":ARR3:" }
       - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I4", R: ":ARR4:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SUMX", R: ":ARRSumX:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SUMY", R: ":ARRSumY:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SUMALL", R: ":ARRSumAll:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DIFFX", R: ":ARRDiffX:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DIFFY", R: ":ARRDiffY:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.POSX", R: ":ARRPosX:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.POSY", R: ":ARRPosY:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumX", R: ":ARRSumX:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumY", R: ":ARRSumY:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumAll", R: ":ARRSumAll:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DiffX", R: ":ARRDiffX:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DiffY", R: ":ARRDiffY:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.PosX", R: ":ARRPosX:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.PosY", R: ":ARRPosY:" }
 
   # TODO should this be moved up into ADCore?
   # TODO YES - plus ADCore.NDTimeSeries and ADCore.NDStats should use it.
