@@ -1,5 +1,5 @@
 label: drvQuadEM
-parent: asynNDArrayDriver
+parent: NDArrayBase
 children:
   - type: Group
     name: AH401B

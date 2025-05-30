@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../schemas/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
 
 module: quadEM
 
@@ -60,7 +60,6 @@ entity_models:
           R:
           PORT:
 
-
     pvi:
       yaml_path: drvQuadEM.pvi.device.yaml
       pv_prefix: "{{ P }}"
@@ -75,7 +74,7 @@ entity_models:
         12 NDTimeSeries plugins
         12 NDArray plugins
     parameters:
-      DEVICE:
+      NDARRAY_PORT:
         type: object
         description: |-
           Reference to the parent quadEM device
@@ -107,21 +106,13 @@ entity_models:
           length of NDArray queue
         default: 16
 
-    pre_init:
-      - value: |
-
-          ################################################################################
-          # Just demonstrating that Entities can have their own pre_init AND SubEntities.
-          # This is the pre_init for quadem.Plugins device with id {{PORTPREFIX}}
-          ################################################################################
-
-          #
-
     shared:
-      - &stats { type: ADCore.NDStats, P: "{{DEVICE.P}}", NCHANS: "{{STAT_NCHAN}}", XSIZE: "{{STAT_XSIZE}}", YSIZE: 0, HIST_SIZE: "{{HIST_SIZE}}", NDARRAY_PORT: "{{DEVICE}}", ENABLED: 1 }
-      - &arrays { type: ADCore.NDStdArrays, P: "{{DEVICE.P}}", NDARRAY_PORT: "{{DEVICE}}", ENABLED: 1, TYPE: Float64, FTVL: DOUBLE, NELEMENTS: "{{STAT_XSIZE}}" }
+      # repeated fields for NDStats and NDStdArrays sub_entities
+      - &stats { type: ADCore.NDStats, P: "{{NDARRAY_PORT.P}}", NDARRAY_PORT: "{{NDARRAY_PORT.PORT}}", NCHANS: "{{STAT_NCHAN}}", XSIZE: "{{STAT_XSIZE}}", YSIZE: 0, HIST_SIZE: "{{HIST_SIZE}}", ENABLED: 1, QUEUE: "{{QUEUE}}" }
+      - &arrays { type: ADCore.NDStdArrays, P: "{{NDARRAY_PORT.P}}", NDARRAY_PORT: "{{NDARRAY_PORT.PORT}}", ENABLED: 1, TYPE: Float64, FTVL: DOUBLE, NELEMENTS: "{{STAT_XSIZE}}", QUEUE: "{{QUEUE}}" }
 
     sub_entities:
+      # NDStats for each channel
       - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I1", R: ":Cur1:" }
       - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I2", R: ":Cur2:" }
       - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I3", R: ":Cur3:" }
@@ -134,14 +125,151 @@ entity_models:
       - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.PosX", R: ":PosX:" }
       - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.PosY", R: ":PosY:" }
 
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.Arr1", R: ":Arr1:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.Arr2", R: ":Arr2:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.Arr3", R: ":Arr3:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.Arr4", R: ":Arr4:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumX", R: ":SumX:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumY", R: ":SumY:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumAll", R: ":SumAll:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DiffX", R: ":DiffX:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DiffY", R: ":DiffY:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.PosX", R: ":PosX:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.PosY", R: ":PosY:" }
+      # NDStdArrays for each channel
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I1", R: ":ARR1:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I2", R: ":ARR2:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I3", R: ":ARR3:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I4", R: ":ARR4:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumX", R: ":ARRSumX:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumY", R: ":ARRSumY:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumAll", R: ":ARRSumAll:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DiffX", R: ":ARRDiffX:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DiffY", R: ":ARRDiffY:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.PosX", R: ":ARRPosX:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.PosY", R: ":ARRPosY:" }
+
+  # TODO should this be moved up into ADCore?
+  # TODO YES - plus ADCore.NDTimeSeries and ADCore.NDStats should use it.
+  - name: _NDTimeSeriesN
+    description: |-
+      Instantiate a single NDTimeSeriesN database template
+    parameters:
+      NAME:
+        type: id
+        description: |-
+          Name of the NDTimeSeriesN plugin
+      P:
+        type: str
+        description: |-
+          PV Prefix
+      R:
+        type: str
+        description: |-
+          PV Suffix
+      PORT:
+        type: str
+        description: |-
+          Asyn port name
+      ADDR:
+        type: int
+        description: |-
+          Asyn Address of the NDTimeSeriesN plugin
+      TIMEOUT:
+        type: int
+        description: |-
+          Timeout for the NDTimeSeriesN plugin
+        default: 1
+      NCHANS:
+        type: int
+        description: |-
+          Number of channels in the NDTimeSeriesN plugin
+        default: 2048
+
+    databases:
+      - file: $(ADCORE)/db/NDTimeSeriesN.template
+        args: { NAME, P, R, PORT, ADDR, TIMEOUT, NCHANS }
+
+  - name: quadEM_TimeSeries
+    description: |-
+      Create a time series and FFT for each channel using ADCore
+    parameters:
+      PORT:
+        # not at id because it is the id of the subentity NDTimeSeries
+        type: str
+        description: |-
+          Asyn port name
+      NDARRAY_PORT:
+        type: object
+        description: |-
+          The parent quadEM device to add TS records to
+      NUM_TS:
+        type: int
+        description: |-
+          Number of elements in time series
+        default: 2048
+      NUM_FREQ:
+        type: int
+        description: |-
+          Number of elements in FFT
+        default: 2048
+      QUEUE:
+        type: int
+        description: |-
+          Size of the queue
+        default: 16
+      ARCHIVE:
+        type: bool
+        description: |-
+          Add template with archive tags for useful PVs
+        default: true
+
+    shared:
+      - &channels ["Cur1", "Cur2", "Cur3", "Cur4", "SumX", "SumY", "SumAll", "DiffX", "DiffY", "PosX", "PosY"]
+
+    sub_entities:
+      - type: ADCore.NDTimeSeries
+        PORT: "{{PORT}}"
+        ADDR: 11
+        NDARRAY_ADDR: 11
+        NSIGNALS: 11
+        NDARRAY_PORT: "{{NDARRAY_PORT.PORT}}"
+        P: "{{NDARRAY_PORT.P}}"
+        R: "{{NDARRAY_PORT.R}}TS:"
+        NCHANS: "{{NUM_TS}}"
+        QUEUE: "{{QUEUE}}"
+        NAME: "{{PORT}}"
+
+      # Time series for each channel
+      - type: ibek.repeat
+        variable: SERIES
+        values: *channels
+        entity:
+          type: quadEM._NDTimeSeriesN
+          NAME: "{{SERIES}}"
+          P: "{{NDARRAY_PORT.P}}"
+          R: "{{NDARRAY_PORT.R}}TS:{{SERIES}}"
+          PORT: "{{PORT}}{{SERIES}}"
+          ADDR: "{{SERIES_num}}"
+          NCHANS: "{{NUM_TS}}"
+
+      # FFT for each channel
+      - type: ibek.repeat
+        variable: SERIES
+        values: *channels
+        entity:
+          type: ADCore.NDFFT
+          NAME: "{{SERIES}}"
+          PORT: "{{PORT}}.FFT{{SERIES_num}}"
+          P: "{{NDARRAY_PORT.P}}"
+          R: "{{NDARRAY_PORT.R}}FTT:{{SERIES}}:"
+          NDARRAY_PORT: "{{PORT}}"
+          NDARRAY_ADDR: "{{SERIES_num}}"
+          NCHANS: "{{NUM_FREQ}}"
+          QUEUE: "{{QUEUE}}"
+          TIME_LINK: "{{NDARRAY_PORT.P}}{{NDARRAY_PORT.R}}TS:TSAveragingTime_RBV CP MS, ENABLED=1"
+
+      # NDStats for FFT for each channel
+      - type: ibek.repeat
+        variable: SERIES
+        values: *channels
+        entity:
+          type: ADCore.NDStats
+          P: "{{NDARRAY_PORT.P}}"
+          R: "{{NDARRAY_PORT.R}}FFT:{{SERIES}}:"
+          PORT: "{{PORT}}.TS.FFT{{SERIES_num}}.stats"
+          NDARRAY_PORT: "{{PORT}}.FFT{{SERIES_num}}"
+          HIST_SIZE: 28
+          XSIZE: 128
+          YSIZE: 0
+          QUEUE: 16
+          MAX_BUFFERS: 50
