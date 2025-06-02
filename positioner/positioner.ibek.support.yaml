@@ -15,6 +15,10 @@ entity_models:
         type: object
         description: |-
           Parent multipositioner object
+      motor:
+        type: object
+        description: |-
+          Motor record pv
       DESC:
         type: str
         description: |-
@@ -28,10 +32,6 @@ entity_models:
         type: int
         description: |-
           Precision to display to
-      motor:
-        type: str
-        description: |-
-          Motor record pv
       VALA:
         type: float
         description: |-
@@ -122,6 +122,9 @@ entity_models:
         args:
           .*:
           P: "{{MP.P}}"
+          MP: "{{MP.MP}}"
+          EGU: "{{motor.EGU}}"
+          motor: "{{motor.M | default(motor.Q) }}"
 
   - name: multipositioner
     description: |-
@@ -397,7 +400,7 @@ entity_models:
         args:
           P: "{{MP.P}}"
           Q:
-          MP:
+          MP: "{{MP.MP}}"
           DESC:
           SET:
           EGU:
