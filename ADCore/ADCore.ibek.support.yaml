@@ -175,16 +175,16 @@ entity_models:
           Event:
           I/O Intr:
       TIME_LINK:
-        type: float
+        type: str
         description: |-
           Time in seconds between points (Can point to a record - use CP)
-        default: 0.1
+        default: "0.1"
 
       NAME:
-        type: int
+        type: str
         description: |-
           Label for signal
-        default: 0
+        default: "0"
 
       QUEUE:
         type: int
@@ -217,8 +217,11 @@ entity_models:
         default: 1
 
     pre_init:
-      - value: |
+      - when: first
+        value: |
+
           # NDFFTConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
+      - value: |
           NDFFTConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}}, {{MAX_THREADS}})
 
     databases:
@@ -1017,8 +1020,11 @@ entity_models:
         default: 1
 
     pre_init:
-      - value: |
+      - when: first
+        value: |
+
           # NDStdArraysConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
+      - value: |
           NDStdArraysConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
 
     databases:
@@ -2054,6 +2060,18 @@ entity_models:
           Maximum number threads
         default: 1
 
+      MAX_BUFFERS:
+        type: int
+        description: |-
+          Maximum number of buffers (0 = no limit)
+        default: 0
+
+      MAX_MEMORY:
+        type: int
+        description: |-
+          Maximum memory size in bytes (0 = no limit)
+        default: 0
+
       SCANRATE:
         type: enum
         description: |-
@@ -2082,9 +2100,10 @@ entity_models:
           # ADCore path for manual NDTimeSeries.template to find base plugin template
           epicsEnvSet "EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db"
 
-      - value: |
           # NDStatsConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
-          NDStatsConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
+
+      - value: |
+          NDStatsConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{MAX_BUFFERS}}, {{MAX_MEMORY}}, 0, 0, {{MAX_THREADS}})
 
     sub_entities:
       - { type: ADCore.NDTimeSeries, P: "{{P}}", R: "{{R}}TS:", PORT: "{{PORT}}_TS", NDARRAY_PORT: "{{PORT}}", NAME: "{{PORT}}_TS", NCHANS: "{{NCHANS}}", TIMEOUT: "{{TIMEOUT}}", ADDR: 0, NDARRAY_ADDR: 1, ENABLED: "{{ENABLED}}", QUEUE: "{{QUEUE}}", BLOCK: "{{BLOCK}}", NSIGNALS: 23 }
@@ -2140,7 +2159,7 @@ entity_models:
           Input array port
 
       NCHANS:
-        type: str
+        type: int
         description: |-
           Length of time series waveform
 
@@ -2185,10 +2204,10 @@ entity_models:
           Event:
           I/O Intr:
       TIME_LINK:
-        type: float
+        type: str
         description: |-
           Time between points (Can point to a record - use CP)
-        default: 0.1
+        default: "0.1"
 
       NSIGNALS:
         type: int
@@ -2226,8 +2245,12 @@ entity_models:
           Name of the signal
 
     pre_init:
-      - value: |
+      - when: first
+        value: |
+
           # NDTimeSeriesConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxSignals, maxBuffers, maxMemory, priority, stackSize)
+
+      - value: |
           NDTimeSeriesConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{NSIGNALS}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}})
 
     databases:
@@ -2246,14 +2269,7 @@ entity_models:
           SCANRATE:
 
       - file: $(ADCORE)/db/NDTimeSeriesN.template
-        args:
-          ADDR:
-          NCHANS:
-          P:
-          R:
-          TIMEOUT:
-          PORT:
-          NAME:
+        args: { NAME, P, R, PORT, ADDR, TIMEOUT, NCHANS }
 
   - name: NDAttributes
     description: |-
