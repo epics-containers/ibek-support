@@ -418,13 +418,12 @@ entity_models:
         default: 1
 
       name:
-        type: str
-        description: |-
-          Unused gui association name
+        type: id
+        description: object name for references from motor positioner for example
         default: ""
 
     databases:
-      - file: $(MOTOR)/db/softMotorForPiezo.template
+      - file: softMotorForPiezo.template
         args:
           DHLM:
           OUT:
