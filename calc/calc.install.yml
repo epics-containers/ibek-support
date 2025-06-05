@@ -3,13 +3,7 @@
 module: calc
 version: R3-7-5
 dbds:
-  - aCalcoutRecord.dbd
-  - calc.dbd
   - calcSupport.dbd
-  - sCalcoutRecord.dbd
-  - transformRecord.dbd
-  - swaitRecord.dbd
-  - sseqRecord.dbd
 libs:
   - calc
 
@@ -19,5 +13,6 @@ patch_lines:
     line: DIRS += configure calcApp
 
 remove_macros:
+  # if these have not been compiled then we need them blanked out
   - SNCSEQ
   - SSCAN
