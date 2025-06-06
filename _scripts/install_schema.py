@@ -3,6 +3,7 @@
 A Pydantic model for the support install variables. Describes the variables
 that can be supplied to the ansible role support described in
 
+Execute this python script to generate a new schema file.
 """
 
 import json
@@ -35,6 +36,14 @@ class SupportVariables(StrictModel):
         path: str
         regexp: str
         line: str
+        when: str = Field(default="")
+        post_build: bool = Field(default=False)
+
+    class PatchBlocks(StrictModel):
+        path: str
+        block: str
+        insertafter: str = Field(default="EOF")
+        marker: str = Field(default="# {mark} ANSIBLE MANAGED BLOCK")
         when: str = Field(default="")
         post_build: bool = Field(default=False)
 
@@ -133,6 +142,11 @@ class SupportVariables(StrictModel):
         description="List of files to comment out lines in. "
         "Used unecessary lines from Makefiles to keep the build small"
         "Filepaths are relative to the root of the repository local path",
+        default=(),
+    )
+    patch_blocks: Sequence[PatchBlocks] = Field(
+        description="List of files to patch blocks of text into. "
+        "Used to add extra flags to Makefiles, CONFIG_SITE etc.",
         default=(),
     )
     patch_lines: Sequence[PatchLines] = Field(
