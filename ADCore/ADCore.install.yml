@@ -57,10 +57,10 @@ apt_runtime:
   - libnetcdf19
   - libgraphicsmagick++-q16-12
 
-patch_lines:
+patch_blocks:
   - path: "{{ config_linux_host }}"
-    regexp: AREA_DETECTOR[\s\S]*WITH_BOOST
-    line: |
+    marker: "# {mark} set all libraries to external ---------------------------"
+    block: |
       AREA_DETECTOR=$(SUPPORT)
       CROSS_COMPILER_TARGET_ARCHS =
       WITH_GRAPHICSMAGICK = YES

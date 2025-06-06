@@ -32,10 +32,9 @@ comment_out:
   - path: configure/RELEASE
     regexp: "ADGENICAM"
 
-patch_lines:
+patch_blocks:
   - path: "{{ config_linux_host }}"
-    regexp: CHECK_RELEASE[\s\S]*ARAVIS_INCLUDE
-    line: |
+    block: |
       CHECK_RELEASE=WARN
       AREA_DETECTOR=/epics/support
       CROSS_COMPILER_TARGET_ARCHS =

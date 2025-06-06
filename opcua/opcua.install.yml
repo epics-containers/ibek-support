@@ -25,10 +25,9 @@ tasks:
   - path: opcua_postbuild.yml
     post_build: true
 
-patch_lines:
+patch_blocks:
   - path: "{{ config_linux_host }}"
-    regexp: OPEN62541[\s\S]*OPEN62541_USE_CRYPTO
-    line: |
+    block: |
       OPEN62541 = /usr/local
       # Settings for linking with the Open62541 C++ installation
       # How the Open62541 shared libraries are deployed

@@ -17,4 +17,6 @@ remove_macros:
 
 # sscan needs to be built for linux and rtems (calc uses the linux build)
 # TODO investigate why this - probably a makefile issue in calc.
+# setting is_rtems to false means that it will build for linux and rtems
+#   in an rtems container
 is_rtems: false

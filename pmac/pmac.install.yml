@@ -27,10 +27,9 @@ comment_out:
 # parallel builds not supported
 make_options: ""
 
-patch_lines:
+patch_blocks:
   - path: "{{ config_linux_target }}"
-    regexp: BUILD_IOCS[\s\S]*SSH_INCLUDE *= -I/usr/include
-    line: |
+    block: |
       BUILD_IOCS=NO
 
       # Definitions required for compiling the unit tests

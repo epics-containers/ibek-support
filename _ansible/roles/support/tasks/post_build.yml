@@ -55,6 +55,18 @@
 
     # Patching #################################################################
 
+    # ad hoc patching of blocks of text
+    - name: Patch blocks for {{ module }}
+      ansible.builtin.blockinfile:
+        path: "{{ local_path }}/{{ item.path }}"
+        block: "{{ item.block }}"
+        insertafter: "{{ item.insertafter | default('EOF') }}"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK"
+        create: true
+        mode: "0644"
+      loop: "{{ patch_blocks }}"
+      when: item.when | default(true) and (item.post_build | default(false) | bool)
+
     # ad hoc patching of individual lines
     - name: Patch lines for {{ module }}
       ansible.builtin.lineinfile:
