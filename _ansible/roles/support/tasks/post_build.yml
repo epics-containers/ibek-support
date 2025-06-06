@@ -71,9 +71,8 @@
     - name: Patch lines for {{ module }}
       ansible.builtin.lineinfile:
         path: "{{ local_path }}/{{ item.path }}"
-        block: "{{ item.block }}"
-        insertafter: "{{ item.insertafter: }}"
-        insertbefore: "{{ item.insertbefore: }}"
+        line: "{{ item.line }}"
+        regexp: "{{ item.regexp }}"
         create: true
         mode: "0644"
       loop: "{{ patch_lines }}"

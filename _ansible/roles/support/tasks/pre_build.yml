@@ -7,7 +7,6 @@
         path: "{{ local_path }}/{{ item }}"
       loop: "{{ remove_files_prebuild }}"
 
-
     - name: Comment out lines as required for {{ module }}
       ansible.builtin.replace:
         path: "{{ local_path }}/{{ item.path }}"
@@ -41,7 +40,7 @@
     - name: Patch lines for {{ module }}
       ansible.builtin.lineinfile:
         path: "{{ local_path }}/{{ item.path }}"
-        lines: "{{ item.lines }}"
+        line: "{{ item.line }}"
         regexp: "{{ item.regexp }}"
         create: true
         mode: "0644"
