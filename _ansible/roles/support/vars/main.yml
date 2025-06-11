@@ -67,6 +67,16 @@ comment_out: []
 #     post_build: true    # defaults to false
 patch_lines: []
 
+# files to patch with blocks of text e.g.
+# patch_blocks:
+#   - path: "{{ config_linux_host }}"
+#     marker: "# {mark} set all libraries to external ---------------------------"
+#     block: |
+#       AREA_DETECTOR=$(SUPPORT)
+#       CROSS_COMPILER_TARGET_ARCHS =
+#       ...
+patch_blocks: []
+
 # apply a patch file to the repository before compilation
 patch_file:
   path:     # path to the patch file
