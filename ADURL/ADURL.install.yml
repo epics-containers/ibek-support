@@ -10,10 +10,9 @@ dbds:
 libs:
   - URLDriver
 
-patch_lines:
+patch_blocks:
   - path: "{{ config_linux_host }}"
-    regexp: WITH_GRAPH[\s\S]*include/GraphicsMagick/
-    line: |
+    block: |
       WITH_GRAPHICSMAGICK = YES
       GRAPHICSMAGICK_EXTERNAL = YES
       GRAPHICSMAGICK_INCLUDE = /usr/include/GraphicsMagick/
