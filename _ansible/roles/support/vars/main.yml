@@ -67,7 +67,7 @@ comment_out: []
 #     post_build: true    # defaults to false
 patch_lines: []
 
-# files to path with blocks of text e.g.
+# files to patch with blocks of text e.g.
 # patch_blocks:
 #   - path: "{{ config_linux_host }}"
 #     marker: "# {mark} set all libraries to external ---------------------------"
