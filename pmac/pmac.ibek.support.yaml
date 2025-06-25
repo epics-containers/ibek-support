@@ -157,9 +157,9 @@ entity_models:
 
     pvi:
       yaml_path: pmacController.pvi.device.yaml
-      pv_prefix: "{{ P }}"
       ui_macros:
         P:
+
   - name: pmacAsynSSHPort
     description: |-
       This will create an AsynPort connecting to a PowerPMAC over SSH
@@ -482,11 +482,10 @@ entity_models:
           PMAC: "{{PmacController.P}}"
           NAxes: "{{PmacController.NAXES}}"
 
-    # pvi:
-    #   yaml_path: pmacTrajectory.pvi.device.yaml
-    #   pv_prefix: "{{ PmacController.P }}"
-    #   ui_macros:
-    #     PMAC:
+    pvi:
+      yaml_path: pmacTrajectory.pvi.device.yaml
+      ui_macros:
+        PMAC: "{{ PmacController.P }}"
 
   - name: dls_pmac_asyn_motor
     description: |-
