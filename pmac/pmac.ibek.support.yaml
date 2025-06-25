@@ -355,19 +355,16 @@ entity_models:
           # Configure Model 3 Axes Driver (Controler Port, Axis Count)
           pmacCreateAxes("{{name}}", {{NAxes}})
 
-    # TODO - these are needed to create description in the axis status screen
-    # BUT this is creating a load of repeated AXIS0: records
-    # TODO debug this.
-
-    # sub_entities:
-    #   - type: ibek.repeat
-    #     variable: axis
-    #     values: "{{ range(1, NAxes + 1) }}"
-    #     entity:
-    #       type: pmac._axisStatus
-    #       PMAC: "{{ P }}"
-    #       PORT: "{{ name }}"
-    #       AXIS: "{{ axis | int }}"
+    # these are needed to create individual axis status PVs
+    sub_entities:
+      - type: ibek.repeat
+        variable: axis
+        values: "{{ range(1, NAxes + 1) | list }}"
+        entity:
+          type: pmac._axisStatus
+          PMAC: "{{ P }}"
+          PORT: "{{ name }}"
+          AXIS: "{{ axis | int }}"
 
     databases:
       - file: powerPmacStatus.template
