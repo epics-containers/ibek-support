@@ -1,4 +1,4 @@
-label: pmacController
+label: ppmacController
 children:
   - type: Group
     name: PmacController
@@ -332,61 +332,19 @@ children:
           type: TextRead
 
   - type: Group
-    name: PmacStatus
+    name: PowerPmacStatus
     layout:
       type: Grid
       labelled: true
     children:
       - type: SignalR
-        name: I10
-        read_pv: $(P):I10
+        name: SERVOPERIOD
+        read_pv: $(P):SERVO_PERIOD
         read_widget:
           type: TextRead
 
       - type: SignalR
-        name: IOHANDSHAKE
-        read_pv: $(P):IO_HANDSHAKE
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: PLCCONTROL
-        read_pv: $(P):PLC_CONTROL
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: ERRREPMODE
-        read_pv: $(P):ERRREPMODE
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: DPRAMCOMMSINT
-        read_pv: $(P):DPRAM_COMMS_INT
-        read_widget:
-          type: LED
-
-      - type: SignalR
-        name: DPRAMCOMMS
-        read_pv: $(P):DPRAM_COMMS
-        read_widget:
-          type: LED
-
-      - type: SignalR
-        name: VMEADDRMODE
-        read_pv: $(P):VME_ADDR_MODE
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: VMEDPRAMBASE
-        read_pv: $(P):VME_DPRAMBASE
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: VMEINTLVL
-        read_pv: $(P):VME_INTLVL
+        name: READECHO
+        read_pv: $(P):READ_ECHO
         read_widget:
           type: TextRead

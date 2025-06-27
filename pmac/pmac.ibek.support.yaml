@@ -3,6 +3,29 @@
 module: pmac
 
 entity_models:
+  - name: _axisStatus
+    description: adds a single axis status set of PVs to a controller
+    parameters:
+      PMAC:
+        type: str
+        description: |-
+          PV Prefix from the contoller
+
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller asyn port
+
+      AXIS:
+        type: int
+        description: |-
+          Axis number on controller
+
+    databases:
+      - file: pmacStatusAxis.template
+        args:
+          .*:
+
   - name: pmacAsynIPPort
     description: |-
       This will create an AsynPort connecting to a PMAC or GeoBrick over IP
@@ -157,9 +180,9 @@ entity_models:
 
     pvi:
       yaml_path: pmacController.pvi.device.yaml
-      pv_prefix: "{{ P }}"
       ui_macros:
         P:
+
   - name: pmacAsynSSHPort
     description: |-
       This will create an AsynPort connecting to a PowerPMAC over SSH
@@ -271,18 +294,6 @@ entity_models:
           feedrate below which we go into error
         default: 100
 
-      PMAC:
-        type: str
-        description: |-
-          Pmac/Geobrick name
-        default: ""
-
-      AXIS:
-        type: str
-        description: |-
-          Axis number
-        default: ""
-
       PORT:
         type: str
         description: |-
@@ -344,13 +355,18 @@ entity_models:
           # Configure Model 3 Axes Driver (Controler Port, Axis Count)
           pmacCreateAxes("{{name}}", {{NAxes}})
 
-    databases:
-      - file: pmacStatusAxis.template
-        args:
-          AXIS:
-          PORT:
-          PMAC:
+    # these are needed to create individual axis status PVs
+    sub_entities:
+      - type: ibek.repeat
+        variable: axis
+        values: "{{ range(1, NAxes + 1) | list }}"
+        entity:
+          type: pmac._axisStatus
+          PMAC: "{{ P }}"
+          PORT: "{{ name }}"
+          AXIS: "{{ axis | int }}"
 
+    databases:
       - file: powerPmacStatus.template
         args:
           P:
@@ -371,6 +387,11 @@ entity_models:
           TIMEOUT:
           NAXES:
           PORT:
+
+    pvi:
+      yaml_path: ppmacController.pvi.device.yaml
+      ui_macros:
+        P:
 
   - name: CS
     description: |-
@@ -482,11 +503,10 @@ entity_models:
           PMAC: "{{PmacController.P}}"
           NAxes: "{{PmacController.NAXES}}"
 
-    # pvi:
-    #   yaml_path: pmacTrajectory.pvi.device.yaml
-    #   pv_prefix: "{{ PmacController.P }}"
-    #   ui_macros:
-    #     PMAC:
+    pvi:
+      yaml_path: pmacTrajectory.pvi.device.yaml
+      ui_macros:
+        PMAC: "{{ PmacController.P }}"
 
   - name: dls_pmac_asyn_motor
     description: |-
@@ -804,7 +824,7 @@ entity_models:
           P:
           M:
           PORT: "{{ Controller }}"
-          SPORT: "{{ '' if is_cs else Controller.pmacAsynPort }}"
+          SPORT: "{{ '' if is_cs else Controller.pmacAsynPort | default(Controller.pmacAsynSSHPort) }}"
           CS: "{{Controller.CS if is_cs else 0}}"
           PMAC: "{{ Controller.PmacController.P if is_cs else Controller.P }}"
           VELO:
