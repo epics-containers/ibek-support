@@ -1,0 +1,71 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
+
+module: ADZMQ
+
+entity_models:
+  - name: ZMQControlledDevice
+    description: |-
+      Creates an ADZMQ area detector instance
+    parameters:
+      P:
+        type: str
+        description: Device Prefix
+      R:
+        type: str
+        description: Device Suffix
+      PORT:
+        type: id
+        description: Port name for the NDProcess plugin
+      SOURCE_ADDR:
+        type: str
+        default: "*:1515"
+        description: Address of the ZMQ sender
+      TRANSPORT:
+        type: str
+        description: Transport protocol
+        default: "tcp"
+      ZMQ_TYPE:
+        type: enum
+        description: ZMQ socket type
+        values:
+          PULL:
+          SUB:
+      CTRL_MODE:
+        type: int
+        description: "Set which control messages are sent (bitwise flags, stop=1, busyAcquire=2)"
+        default: 0
+      QUEUE:
+        type: int
+        description: Input array queue size
+        default: 1000
+      ADDR:
+        type: int
+        description: Asyn param address
+        default: 0
+      TIMEOUT:
+        type: int
+        description: Asyn param timeout
+        default: 0
+
+    pre_init:
+      - type: text
+        value: |
+          # ZMQDriver(portName, sourceAddr, transport, zmqType, ctrlMode, queue, addr, timeout)
+          ZMQDriver("{{PORT}}", {{SOURCE_ADDR}}, {{TRANSPORT}}, {{ZMQ_TYPE}}, {{CTRL_MODE}}, {{QUEUE}}, {{ADDR}}, {{TIMEOUT}})
+
+    # databases:
+    #   - file: $(ADSIMDETECTOR)/db/simDetector.template
+    #     args:
+    #       P:
+    #       R:
+    #       PORT:
+    #       TIMEOUT:
+    #       ADDR:
+
+    # pvi:
+    #   yaml_path: simDetector.pvi.device.yaml
+    #   ui_macros:
+    #     P:
+    #     R:
+    #   pv: true
+    #   pv_prefix: $(P)$(R)
