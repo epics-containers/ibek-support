@@ -23,17 +23,6 @@ entity_models:
         type: str
         description: |-
           Address of ZMQ data sender
-      TRANSPORT:
-        type: str
-        description: |-
-          Transport Protocol
-      ZMQ_TYPE:
-        type: enum
-        description: |-
-          ZMQ socket type
-        values:
-          PULL:
-          SUB:
       TIMEOUT:
         type: int
         description: |-
@@ -60,20 +49,15 @@ entity_models:
           I/O Intr:
           Event:
           Passive:
-      QUEUE:
-        type: int
-        description: |-
-          Input array queue size
-        default: 2
 
     databases:
-      - file: $(ADZMQ)/db/ZMQDriver.template
-        args:
-          P:
-          R:
-          PORT:
-          ADDR:
-          TIMEOUT:
+      #   - file: $(ADZMQ)/db/ZMQDriver.template
+      #     args:
+      #       P:
+      #       R:
+      #       PORT:
+      #       ADDR:
+      #       TIMEOUT:
 
       - file: $(ADCORE)/db/ADBase.template
         args:
@@ -86,107 +70,107 @@ entity_models:
 
     pre_init:
       - value: |
-          # ZMQDriverConfig(portName, serverHost, queueSize, maxBuffers, maxMemory, priority, stackSize)
-          ZMQDriverConfig({{PORT}}, {{SOURCE_ADDR}}, {{TRANSPORT}}, {{ZMQ_TYPE}}, {{QUEUE}}, 0, 0, 0, 0)
+          # ZMQDriverConfig(portName, serverHost, maxBuffers, maxMemory, priority, stackSize)
+          ZMQDriverConfig("{{PORT}}", "{{SOURCE_ADDR}}", 0, 0, 0, 0)
 
-  - name: ZMQControlledDriver
-    description: |-
-      TODO:ADD DESCRIPTION
-    parameters:
-      P:
-        type: str
-        description: |-
-          Device Prefix
-      R:
-        type: str
-        description: |-
-          Device Suffix
-      PORT:
-        type: id
-        description: |-
-          Port name for the NDProcess plugin
-      SOURCE_ADDR:
-        type: str
-        description: |-
-          Address of ZMQ data sender
-      TRANSPORT:
-        type: str
-        description: |-
-          Transport Protocol
-      ZMQ_TYPE:
-        type: enum
-        description: |-
-          ZMQ socket type
-        values:
-          PULL:
-          SUB:
-      TIMEOUT:
-        type: int
-        description: |-
-          Asyn parm timeout
-        default: 1
-      ADDR:
-        type: int
-        description: |-
-          Asyn param address
-        default: 0
-      SCANRATE:
-        type: enum
-        description: |-
-          Specified scan rate for cpu intensive PVs
-        default: I/O Intr
-        values:
-          .1 second:
-          .2 second:
-          .5 second:
-          1 second:
-          2 second:
-          5 second:
-          10 second:
-          I/O Intr:
-          Event:
-          Passive:
-      CTRL_MODE:
-        type: int
-        description: |-
-          Set which control messages are sent (bitwise flags, stop=1, busyAcquire=2)
-        default: 0
-      QUEUE:
-        type: int
-        description: |-
-          Input array queue size
-        default: 2
+  # - name: ZMQControlledDriver
+  #   description: |-
+  #     TODO:ADD DESCRIPTION
+  #   parameters:
+  #     P:
+  #       type: str
+  #       description: |-
+  #         Device Prefix
+  #     R:
+  #       type: str
+  #       description: |-
+  #         Device Suffix
+  #     PORT:
+  #       type: id
+  #       description: |-
+  #         Port name for the NDProcess plugin
+  #     SOURCE_ADDR:
+  #       type: str
+  #       description: |-
+  #         Address of ZMQ data sender
+  #     TRANSPORT:
+  #       type: str
+  #       description: |-
+  #         Transport Protocol
+  #     ZMQ_TYPE:
+  #       type: enum
+  #       description: |-
+  #         ZMQ socket type
+  #       values:
+  #         PULL:
+  #         SUB:
+  #     TIMEOUT:
+  #       type: int
+  #       description: |-
+  #         Asyn parm timeout
+  #       default: 1
+  #     ADDR:
+  #       type: int
+  #       description: |-
+  #         Asyn param address
+  #       default: 0
+  #     SCANRATE:
+  #       type: enum
+  #       description: |-
+  #         Specified scan rate for cpu intensive PVs
+  #       default: I/O Intr
+  #       values:
+  #         .1 second:
+  #         .2 second:
+  #         .5 second:
+  #         1 second:
+  #         2 second:
+  #         5 second:
+  #         10 second:
+  #         I/O Intr:
+  #         Event:
+  #         Passive:
+  #     CTRL_MODE:
+  #       type: int
+  #       description: |-
+  #         Set which control messages are sent (bitwise flags, stop=1, busyAcquire=2)
+  #       default: 0
+  #     QUEUE:
+  #       type: int
+  #       description: |-
+  #         Input array queue size
+  #       default: 2
 
-    databases:
-      - file: $(ADZMQ)/db/ZMQControlledDriver.template
-        args:
-          P:
-          R:
-          PORT:
-          ADDR:
-          TIMEOUT:
+  #   databases:
+  #     - file: $(ADZMQ)/db/ZMQControlledDriver.template
+  #       args:
+  #         P:
+  #         R:
+  #         PORT:
+  #         ADDR:
+  #         TIMEOUT:
 
-      - file: $(ADZMQ)/db/ZMQDriver.template
-        args:
-          P:
-          R:
-          PORT:
-          ADDR:
-          TIMEOUT:
+  #     - file: $(ADZMQ)/db/ZMQDriver.template
+  #       args:
+  #         P:
+  #         R:
+  #         PORT:
+  #         ADDR:
+  #         TIMEOUT:
 
-      - file: $(ADCORE)/db/ADBase.template
-        args:
-          P:
-          R:
-          PORT:
-          TIMEOUT:
-          ADDR:
-          SCANRATE:
+  #     - file: $(ADCORE)/db/ADBase.template
+  #       args:
+  #         P:
+  #         R:
+  #         PORT:
+  #         TIMEOUT:
+  #         ADDR:
+  #         SCANRATE:
 
-    pre_init:
-      - value: |
-          # ZMQControlledDriverConfig(portName, serverHost, queueSize, maxBuffers, maxMemory, priority, stackSize)
-          ZMQControlledDriverConfig("{{PORT}}", {{SOURCE_ADDR}}, {{TRANSPORT}}, {{ZMQ_TYPE}}, {{CTRL_MODE}}, {{QUEUE}}, 0, 0, 0, 0)
+  #   pre_init:
+  #     - value: |
+  #         # ZMQControlledDriverConfig(portName, serverHost, queueSize, maxBuffers, maxMemory, priority, stackSize)
+  #         ZMQControlledDriverConfig("{{PORT}}", {{SOURCE_ADDR}}, {{TRANSPORT}}, {{ZMQ_TYPE}}, {{CTRL_MODE}}, {{QUEUE}}, 0, 0, 0, 0)
 
   - name: CAWaveformToZMQ
     description: |-
