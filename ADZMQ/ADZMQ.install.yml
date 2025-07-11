@@ -2,7 +2,10 @@
 
 module: ADZMQ
 version: 1.4.2
-libs:
-  - ADZMQ
 
 organization: http://github.com/paulscherrerinstitute/
+
+dbds:
+  - ADZMQSupport.dbd
+libs:
+  - ADZMQ
