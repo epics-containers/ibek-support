@@ -1,71 +1,384 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
+# yaml-language-server: $schema=../schemas/ibek.support.schema.json
 
 module: ADZMQ
 
 entity_models:
-  - name: ZMQControlledDevice
+  - name: ZMQDriver
     description: |-
-      Creates an ADZMQ area detector instance
+      TODO:ADD DESCRIPTION
     parameters:
       P:
         type: str
-        description: Device Prefix
+        description: |-
+          Device Prefix
       R:
         type: str
-        description: Device Suffix
+        description: |-
+          Device Suffix
       PORT:
         type: id
-        description: Port name for the NDProcess plugin
+        description: |-
+          Port name for the NDProcess plugin
       SOURCE_ADDR:
         type: str
-        default: "*:1515"
-        description: Address of the ZMQ sender
+        description: |-
+          Address of ZMQ data sender
       TRANSPORT:
         type: str
-        description: Transport protocol
-        default: "tcp"
+        description: |-
+          Transport Protocol
       ZMQ_TYPE:
         type: enum
-        description: ZMQ socket type
+        description: |-
+          ZMQ socket type
         values:
           PULL:
           SUB:
+      TIMEOUT:
+        type: int
+        description: |-
+          Asyn parm timeout
+        default: 1
+      ADDR:
+        type: int
+        description: |-
+          Asyn param address
+        default: 0
+      SCANRATE:
+        type: enum
+        description: |-
+          Specified scan rate for cpu intensive PVs
+        default: I/O Intr
+        values:
+          .1 second:
+          .2 second:
+          .5 second:
+          1 second:
+          2 second:
+          5 second:
+          10 second:
+          I/O Intr:
+          Event:
+          Passive:
+      QUEUE:
+        type: int
+        description: |-
+          Input array queue size
+        default: 2
+
+    databases:
+      - file: $(ADZMQ)/db/ZMQDriver.template
+        args:
+          P:
+          R:
+          PORT:
+          ADDR:
+          TIMEOUT:
+
+      - file: $(ADCORE)/db/ADBase.template
+        args:
+          P:
+          R:
+          PORT:
+          TIMEOUT:
+          ADDR:
+          SCANRATE:
+
+    pre_init:
+      - value: |
+          # ZMQDriverConfig(portName, serverHost, queueSize, maxBuffers, maxMemory, priority, stackSize)
+          ZMQDriverConfig({{PORT}}, {{SOURCE_ADDR}}, {{TRANSPORT}}, {{ZMQ_TYPE}}, {{QUEUE}}, 0, 0, 0, 0)
+
+  - name: ZMQControlledDriver
+    description: |-
+      TODO:ADD DESCRIPTION
+    parameters:
+      P:
+        type: str
+        description: |-
+          Device Prefix
+      R:
+        type: str
+        description: |-
+          Device Suffix
+      PORT:
+        type: id
+        description: |-
+          Port name for the NDProcess plugin
+      SOURCE_ADDR:
+        type: str
+        description: |-
+          Address of ZMQ data sender
+      TRANSPORT:
+        type: str
+        description: |-
+          Transport Protocol
+      ZMQ_TYPE:
+        type: enum
+        description: |-
+          ZMQ socket type
+        values:
+          PULL:
+          SUB:
+      TIMEOUT:
+        type: int
+        description: |-
+          Asyn parm timeout
+        default: 1
+      ADDR:
+        type: int
+        description: |-
+          Asyn param address
+        default: 0
+      SCANRATE:
+        type: enum
+        description: |-
+          Specified scan rate for cpu intensive PVs
+        default: I/O Intr
+        values:
+          .1 second:
+          .2 second:
+          .5 second:
+          1 second:
+          2 second:
+          5 second:
+          10 second:
+          I/O Intr:
+          Event:
+          Passive:
       CTRL_MODE:
         type: int
-        description: "Set which control messages are sent (bitwise flags, stop=1, busyAcquire=2)"
+        description: |-
+          Set which control messages are sent (bitwise flags, stop=1, busyAcquire=2)
         default: 0
       QUEUE:
         type: int
-        description: Input array queue size
-        default: 1000
-      ADDR:
-        type: int
-        description: Asyn param address
-        default: 0
-      TIMEOUT:
-        type: int
-        description: Asyn param timeout
-        default: 0
+        description: |-
+          Input array queue size
+        default: 2
+
+    databases:
+      - file: $(ADZMQ)/db/ZMQControlledDriver.template
+        args:
+          P:
+          R:
+          PORT:
+          ADDR:
+          TIMEOUT:
+
+      - file: $(ADZMQ)/db/ZMQDriver.template
+        args:
+          P:
+          R:
+          PORT:
+          ADDR:
+          TIMEOUT:
+
+      - file: $(ADCORE)/db/ADBase.template
+        args:
+          P:
+          R:
+          PORT:
+          TIMEOUT:
+          ADDR:
+          SCANRATE:
 
     pre_init:
-      - type: text
-        value: |
-          # ZMQDriver(portName, sourceAddr, transport, zmqType, ctrlMode, queue, addr, timeout)
-          ZMQDriver("{{PORT}}", {{SOURCE_ADDR}}, {{TRANSPORT}}, {{ZMQ_TYPE}}, {{CTRL_MODE}}, {{QUEUE}}, {{ADDR}}, {{TIMEOUT}})
+      - value: |
+          # ZMQControlledDriverConfig(portName, serverHost, queueSize, maxBuffers, maxMemory, priority, stackSize)
+          ZMQControlledDriverConfig("{{PORT}}", {{SOURCE_ADDR}}, {{TRANSPORT}}, {{ZMQ_TYPE}}, {{CTRL_MODE}}, {{QUEUE}}, 0, 0, 0, 0)
 
-    # databases:
-    #   - file: $(ADSIMDETECTOR)/db/simDetector.template
-    #     args:
-    #       P:
-    #       R:
-    #       PORT:
-    #       TIMEOUT:
-    #       ADDR:
+  - name: CAWaveformToZMQ
+    description: |-
+      TODO:ADD DESCRIPTION
+    parameters:
+      P:
+        type: str
+        description: |-
+          Device Prefix
+      R:
+        type: str
+        description: |-
+          Device Suffix
+      PORT:
+        type: id
+        description: |-
+          Port name for the NDProcess plugin
+      WAVEFORM_PV:
+        type: str
+        description: |-
+          Waveform PV data source
+      SOURCE_ADDR:
+        type: str
+        description: |-
+          Address of ZMQ data sender
+      DEST_ADDR:
+        type: str
+        description: |-
+          Address to which to send ZMQ data
+      TRANSPORT:
+        type: str
+        description: |-
+          Transport Protocol
+      ZMQ_TYPE:
+        type: str
+        description: |-
+          ZMQ Socket Type
+      TIMEOUT:
+        type: int
+        description: |-
+          Asyn parm timeout
+        default: 1
+      ADDR:
+        type: int
+        description: |-
+          Asyn param address
+        default: 0
+      SCANRATE:
+        type: enum
+        description: |-
+          Specified scan rate for cpu intensive PVs
+        default: I/O Intr
+        values:
+          .1 second:
+          .2 second:
+          .5 second:
+          1 second:
+          2 second:
+          5 second:
+          10 second:
+          I/O Intr:
+          Event:
+          Passive:
+      QUEUE:
+        type: int
+        description: |-
+          Input array queue size
+        default: 2
 
-    # pvi:
-    #   yaml_path: simDetector.pvi.device.yaml
-    #   ui_macros:
-    #     P:
-    #     R:
-    #   pv: true
-    #   pv_prefix: $(P)$(R)
+    databases:
+      - file: $(ADCORE)/db/ADBase.template
+        args:
+          P:
+          R:
+          PORT:
+          TIMEOUT:
+          ADDR:
+          SCANRATE:
+
+      - file: $(ADZMQ)/db/ZMQDriver.template
+        args:
+          P:
+          R:
+          PORT:
+          ADDR:
+          TIMEOUT:
+
+    pre_init:
+      - {}
+
+  - name: NDZMQPlugin
+    description: |-
+      TODO:ADD DESCRIPTION
+    parameters:
+      P:
+        type: str
+        description: |-
+          Device Prefix
+      R:
+        type: str
+        description: |-
+          Device Suffix
+      PORT:
+        type: id
+        description: |-
+          Port name for the NDProcess plugin
+      NDARRAY_PORT:
+        type: object
+        description: |-
+          Input array port
+      DEST_ADDR:
+        type: str
+        description: |-
+          Address to which to send ZMQ data
+      TRANSPORT:
+        type: str
+        description: |-
+          Transport Protocol
+      ZMQ_TYPE:
+        type: enum
+        description: |-
+          ZMQ socket type
+        values:
+          PULL:
+          SUB:
+      TIMEOUT:
+        type: int
+        description: |-
+          Asyn parm timeout
+        default: 1
+      ADDR:
+        type: int
+        description: |-
+          Asyn param address
+        default: 0
+      NDARRAY_ADDR:
+        type: int
+        description: |-
+          Input array port address
+        default: 0
+      ENABLED:
+        type: int
+        description: |-
+          Plugin Enabled at startup?
+        default: 0
+      SCANRATE:
+        type: enum
+        description: |-
+          Specified scan rate for cpu intensive PVs
+        default: I/O Intr
+        values:
+          .1 second:
+          .2 second:
+          .5 second:
+          1 second:
+          2 second:
+          5 second:
+          10 second:
+          I/O Intr:
+          Event:
+          Passive:
+      QUEUE:
+        type: int
+        description: |-
+          Input array queue size
+        default: 2
+      BLOCK:
+        type: int
+        description: |-
+          Blocking callbacks?
+        default: 0
+
+    databases:
+      - file: $(ADZMQ)/db/NDPluginZMQ.template
+        args:
+          P:
+          R:
+          PORT:
+          ADDR:
+          TIMEOUT:
+
+      - file: $(ADCORE)/db/NDPluginBase.template
+        args:
+          P:
+          R:
+          PORT:
+          NDARRAY_PORT:
+          TIMEOUT:
+          ADDR:
+          NDARRAY_ADDR:
+          ENABLED:
+          SCANRATE:
+
+    pre_init:
+      - {}
