@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: ADZMQ
+version: 1.4.2
+
+organization: http://github.com/paulscherrerinstitute/
+
+dbds:
+  - ADZMQSupport.dbd
+libs:
+  - ADZMQ
