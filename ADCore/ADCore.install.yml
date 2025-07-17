@@ -7,7 +7,7 @@ version: pvxs
 git_repo: https://github.com/jsouter/ADCore
 
 dbds:
-  - NDPluginPva.dbd
+  - NDPluginPvxs.dbd
   - ADSupport.dbd
   - NDPluginSupport.dbd
   - NDFileNull.dbd
@@ -15,15 +15,11 @@ dbds:
   - NDFileHDF5.dbd
   - NDFileJPEG.dbd
   - NDFileTIFF.dbd
-  - PVAServerRegister.dbd
   - NDFileNetCDF.dbd
 libs:
-  - ntndArrayConverter
+  - ntndArrayConverterPvxs
   - ADBase
   - NDPlugin
-  - pvAccessCA
-  - pvAccessIOC
-  - pvAccess
 
 download_extras:
   - url: "http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-103-1t64_1.10.10+repack-3.1ubuntu4_amd64.deb"
@@ -84,10 +80,11 @@ patch_blocks:
       ZLIB_EXTERNAL       = YES
       WITH_BLOSC          = YES
       BLOSC_EXTERNAL      = YES
-      WITH_PVA            = YES
+      WITH_PVA            = NO
       WITH_BOOST          = NO
       WITH_NETCDF         = YES
       NETCDF_EXTERNAL     = YES
+      WITH_PVXS           = YES
 
 remove_macros:
   - SNCSEQ
