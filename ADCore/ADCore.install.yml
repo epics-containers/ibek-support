@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: ADCore
-version: R3-14
-organization: https://github.com/areaDetector
+# version: R3-14
+version: pvxs
+#organization: https://github.com/areaDetector
+git_repo: https://github.com/jsouter/ADCore
 
 dbds:
   - NDPluginPva.dbd
