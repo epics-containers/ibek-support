@@ -92,7 +92,12 @@ jobs:
         env:
           REPO: ${{ matrix.repo }}
         run: |
-          git clone https://github.com/epics-containers/${REPO} /tmp/generic_ioc
+          if [[ ${{ matrix.repo }} == @(ioc-adsimdetector|ioc-tetramm|ioc-adaravis) ]]; then
+            export BRANCH=pvxs;
+          else
+            export BRANCH=main;
+          fi;
+          git clone --branch ${BRANCH} https://github.com/epics-containers/${REPO} /tmp/generic_ioc
           cp -r . /tmp/generic_ioc/ibek-support
           cp ./requirements.txt /tmp/generic_ioc
 
