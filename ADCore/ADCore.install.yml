@@ -20,6 +20,8 @@ libs:
   - ntndArrayConverterPvxs
   - ADBase
   - NDPlugin
+  - pvxs
+  - pvxsIoc
 
 download_extras:
   - url: "http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-103-1t64_1.10.10+repack-3.1ubuntu4_amd64.deb"
