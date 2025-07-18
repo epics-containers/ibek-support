@@ -36,7 +36,7 @@ apt_developer:
   - libblosc-dev
   - libglib2.0-dev
   - libjpeg-dev
-  - libtiff5-dev
+  - libtiff-dev
   - libusb-dev
   - libxml2-dev
   - libx11-dev
@@ -49,7 +49,7 @@ apt_developer:
   - /tmp/libhdf5-dev-1.deb
 
 apt_runtime:
-  - libtiff5
+  - libtiff6
   - libsz2
   - libblosc1
   - libxml2
