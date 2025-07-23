@@ -3,7 +3,7 @@
 module: ADCore
 # version: R3-14
 version: pvxs
-#organization: https://github.com/areaDetector
+# pointing at James fork for pvxs support until merged upstream
 git_repo: https://github.com/jsouter/ADCore
 
 dbds:
