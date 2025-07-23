@@ -1,13 +1,14 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: ffmpegServer
-version: 99f93d9
+# JSouter's fix to bypass scaling skip for mono 8 bit images
+version: 3d192ed
 dbds:
   - ffmpegServer.dbd
 libs:
   - ffmpegServer
 
-organization: http://github.com/areaDetector
+organization: http://github.com/DiamondLightSource
 
 apt_developer:
   - libavcodec-dev
