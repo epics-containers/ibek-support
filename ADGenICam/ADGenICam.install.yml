@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: ADGenICam
-version: R1-9
+version: R1-10
 libs:
   - ADGenICam
 
