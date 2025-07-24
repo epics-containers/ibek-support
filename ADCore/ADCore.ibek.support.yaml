@@ -2816,7 +2816,7 @@ entity_models:
         entity:
           type: ADCore.NDROIStatN
           P: "{{ P }}"
-          R: "{{ R }}{{ index + 1}}"
+          R: "{{ R }}{{ index + 1}}:"
           PORT: "{{ PORT }}"
           ADDR: "{{ index }}"
           TIMEOUT: "{{ TIMEOUT }}"
