@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: pvDatabaseCPP
+organization: https://github.com/epics-base
+version: 4.7.2
+libs:
+  - pvDatabase
+# dbds:
+#   - registerChannelProviderLocal.dbd
+#   - traceRecordRegister.dbd
+#   - removeRecordRegister.dbd
+#   - processRecordRegister.dbd

@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: normativeTypesCPP
+organization: https://github.com/epics-base
+version: 6.0.1
+libs:
+  - nt

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: pvAccessCPP
+organization: https://github.com/epics-base
+version: 7.1.7
+libs:
+  - pvAccess
+  - pvAccessCA
+  - pvAccessIOC
+dbds:
+  - PVACommonRegister.dbd
+  - PVAClientRegister.dbd
+  - PVAServerRegister.dbd

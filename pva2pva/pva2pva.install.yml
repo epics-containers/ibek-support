@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: pva2pva
+version: 1.4.1
+organization: https://github.com/epics-base
+dbds:
+  - qsrv.dbd
+libs:
+  - qsrv

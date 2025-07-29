@@ -1,0 +1,17 @@
+label: NDPva
+parent: NDPluginBase
+children:
+
+- type: Group
+  name: NDPva
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: PvName
+    read_pv: $(P)$(R)PvName_RBV
+    read_widget:
+      type: TextRead
+      format: string

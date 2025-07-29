@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: pvDataCPP
+organization: https://github.com/epics-base
+version: 8.0.6
+libs:
+  - pvData

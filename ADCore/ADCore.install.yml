@@ -8,6 +8,7 @@ git_repo: https://github.com/DiamondLightSource/ADCore
 
 dbds:
   - NDPluginPvxs.dbd
+  - NDPluginPva.dbd
   - ADSupport.dbd
   - NDPluginSupport.dbd
   - NDFileNull.dbd
@@ -18,6 +19,7 @@ dbds:
   - NDFileNetCDF.dbd
 libs:
   - ntndArrayConverterPvxs
+  - ntndArrayConverter
   - ADBase
   - NDPlugin
   - pvxs
@@ -82,7 +84,8 @@ patch_blocks:
       ZLIB_EXTERNAL       = YES
       WITH_BLOSC          = YES
       BLOSC_EXTERNAL      = YES
-      WITH_PVA            = NO
+      WITH_QSRV           = YES
+      WITH_PVA            = YES
       WITH_BOOST          = NO
       WITH_NETCDF         = YES
       NETCDF_EXTERNAL     = YES
