@@ -1,11 +1,13 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: ADCore
-version: R3-14
-organization: https://github.com/areaDetector
+# version: R3-14
+version: pvxs
+# pointing at DLS fork for pvxs support until merged upstream
+git_repo: https://github.com/DiamondLightSource/ADCore
 
 dbds:
-  - NDPluginPva.dbd
+  - NDPluginPvxs.dbd
   - ADSupport.dbd
   - NDPluginSupport.dbd
   - NDFileNull.dbd
@@ -13,15 +15,13 @@ dbds:
   - NDFileHDF5.dbd
   - NDFileJPEG.dbd
   - NDFileTIFF.dbd
-  - PVAServerRegister.dbd
   - NDFileNetCDF.dbd
 libs:
-  - ntndArrayConverter
+  - ntndArrayConverterPvxs
   - ADBase
   - NDPlugin
-  - pvAccessCA
-  - pvAccessIOC
-  - pvAccess
+  - pvxs
+  - pvxsIoc
 
 download_extras:
   - url: "http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-103-1t64_1.10.10+repack-3.1ubuntu4_amd64.deb"
@@ -36,7 +36,7 @@ apt_developer:
   - libblosc-dev
   - libglib2.0-dev
   - libjpeg-dev
-  - libtiff5-dev
+  - libtiff-dev
   - libusb-dev
   - libxml2-dev
   - libx11-dev
@@ -49,7 +49,7 @@ apt_developer:
   - /tmp/libhdf5-dev-1.deb
 
 apt_runtime:
-  - libtiff5
+  - libtiff6
   - libsz2
   - libblosc1
   - libxml2
@@ -82,10 +82,11 @@ patch_blocks:
       ZLIB_EXTERNAL       = YES
       WITH_BLOSC          = YES
       BLOSC_EXTERNAL      = YES
-      WITH_PVA            = YES
+      WITH_PVA            = NO
       WITH_BOOST          = NO
       WITH_NETCDF         = YES
       NETCDF_EXTERNAL     = YES
+      WITH_PVXS           = YES
 
 remove_macros:
   - SNCSEQ
