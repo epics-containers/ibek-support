@@ -113,30 +113,30 @@ entity_models:
 
     sub_entities:
       # NDStats for each channel
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I1", R: ":Cur1:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I2", R: ":Cur2:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I3", R: ":Cur3:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I4", R: ":Cur4:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SumX", R: ":SumX:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SumY", R: ":SumY:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SumAll", R: ":SumAll:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.DiffX", R: ":DiffX:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.DiffY", R: ":DiffY:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.PosX", R: ":PosX:" }
-      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.PosY", R: ":PosY:" }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I1", R: ":Cur1:", NDARRAY_ADDR: 0 }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I2", R: ":Cur2:", NDARRAY_ADDR: 1 }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I3", R: ":Cur3:", NDARRAY_ADDR: 2 }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.I4", R: ":Cur4:", NDARRAY_ADDR: 3 }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SumX", R: ":SumX:", NDARRAY_ADDR: 4 }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SumY", R: ":SumY:", NDARRAY_ADDR: 5 }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.SumAll", R: ":SumAll:", NDARRAY_ADDR: 6 }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.DiffX", R: ":DiffX:", NDARRAY_ADDR: 7 }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.DiffY", R: ":DiffY:", NDARRAY_ADDR: 8 }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.PosX", R: ":PosX:", NDARRAY_ADDR: 9 }
+      - { <<: *stats, PORT: "{{PORTPREFIX}}.STATS.PosY", R: ":PosY:", NDARRAY_ADDR: 10 }
 
       # NDStdArrays for each channel
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I1", R: ":ARR1:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I2", R: ":ARR2:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I3", R: ":ARR3:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I4", R: ":ARR4:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumX", R: ":ARRSumX:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumY", R: ":ARRSumY:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumAll", R: ":ARRSumAll:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DiffX", R: ":ARRDiffX:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DiffY", R: ":ARRDiffY:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.PosX", R: ":ARRPosX:" }
-      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.PosY", R: ":ARRPosY:" }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I1", R: ":ARR1:", NDARRAY_ADDR: 0 }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I2", R: ":ARR2:", NDARRAY_ADDR: 1 }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I3", R: ":ARR3:", NDARRAY_ADDR: 2 }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.I4", R: ":ARR4:", NDARRAY_ADDR: 3 }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumX", R: ":ARRSumX:", NDARRAY_ADDR: 4 }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumY", R: ":ARRSumY:", NDARRAY_ADDR: 5 }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.SumAll", R: ":ARRSumAll:", NDARRAY_ADDR: 6 }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DiffX", R: ":ARRDiffX:", NDARRAY_ADDR: 7 }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.DiffY", R: ":ARRDiffY:", NDARRAY_ADDR: 8 }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.PosX", R: ":ARRPosX:", NDARRAY_ADDR: 9 }
+      - { <<: *arrays, PORT: "{{PORTPREFIX}}.ARRAYS.PosY", R: ":ARRPosY:", NDARRAY_ADDR: 10 }
 
   # TODO should this be moved up into ADCore?
   # TODO YES - plus ADCore.NDTimeSeries and ADCore.NDStats should use it.
@@ -237,8 +237,8 @@ entity_models:
           type: quadEM._NDTimeSeriesN
           NAME: "{{SERIES}}"
           P: "{{NDARRAY_PORT.P}}"
-          R: "{{NDARRAY_PORT.R}}TS:{{SERIES}}"
-          PORT: "{{PORT}}{{SERIES}}"
+          R: "{{NDARRAY_PORT.R}}TS:{{SERIES}}:"
+          PORT: "{{PORT}}"
           ADDR: "{{SERIES_num}}"
           NCHANS: "{{NUM_TS}}"
 
@@ -248,7 +248,7 @@ entity_models:
         values: *channels
         entity:
           type: ADCore.NDFFT
-          NAME: "{{SERIES}}"
+          NAME: "{{SERIES}}:"
           PORT: "{{PORT}}.FFT{{SERIES_num}}"
           P: "{{NDARRAY_PORT.P}}"
           R: "{{NDARRAY_PORT.R}}FTT:{{SERIES}}:"
