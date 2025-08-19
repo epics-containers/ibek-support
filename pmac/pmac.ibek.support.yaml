@@ -1149,6 +1149,73 @@ entity_models:
           TYPE:
           PORT:
 
+  - name: pmacVariableRead
+    description: |-
+      Simple template that reads a variable on a
+      PMAC or geoBrick via dynamic parameters.
+    parameters:
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      Q:
+        type: str
+        description: |-
+          Pv Suffix
+
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller comms port
+
+      VAR:
+        type: str
+        description: |-
+          Variable on PMAC to write to, e.g. P700
+
+      EGU:
+        type: str
+        description: |-
+          Engineering units
+
+      VARIABLE_PREC:
+        type: int
+        description: |-
+          Variable Record precision
+        default: 5
+
+      DTYP:
+        type: str
+        description: |-
+          asyn DTYP (e.g., asynFloat64, asynInt32)
+        default: asynFloat64
+
+      TYPE:
+        type: str
+        description: |-
+          PMAC variable type (D=double, I=integer, H=hex, S=string)
+        default: D
+
+      SPEED:
+        type: str
+        description: |-
+          Speed to read at (F=motor scan rates, M=medium (2 s), S=slow (5 s))
+        default: M
+
+    databases:
+      - file: pmacVariableRead.template
+        args:
+          P:
+          Q:
+          DTYP:
+          PORT:
+          TYPE:
+          SPEED:
+          VAR:
+          EGU:
+          VARIABLE_PREC:
+
   - name: pmacCreateCsGroup
     description: |-
       Create a group of axis mappings to coordinate systems. Instantating a GeoBrickGlobalControl
