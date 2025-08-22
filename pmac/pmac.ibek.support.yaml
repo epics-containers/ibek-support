@@ -1089,6 +1089,28 @@ entity_models:
           STATUSSV14:
           STATUSSV15:
 
+  - name: pmacSetCoordStepsPerUnit
+    description: |-
+      Apply an integer scale factor to an axis on the pmac.
+    parameters:
+      CS:
+        type: str
+        description: |-
+          Underlying CS object
+      AXIS:
+        type: int
+        description: |-
+          Axis number to apply scale to
+      SCALE:
+        type: float
+        description: |-
+          Scale factor the cts will be multiplied by before
+          being passed to the motor record.
+
+    pre_init:
+      - value: |
+          pmacSetCoordStepsPerUnit("{{CS}}", {{AXIS}}, {{SCALE}})
+
   - name: pmacVariableWrite
     description: |-
       Simple template that reads and writes to a variable on a
