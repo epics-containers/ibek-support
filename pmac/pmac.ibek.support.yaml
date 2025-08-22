@@ -1407,6 +1407,61 @@ entity_models:
           COORD:
           name:
 
+  - name: EncoderReadback
+    description: |-
+      Read back encoder-only axes
+    parameters:
+      NAME:
+        type: str
+        description: |-
+          Command name
+
+      P:
+        type: str
+        description: |-
+          Device Prefix
+
+      Q:
+        type: str
+        description: |-
+          Device Suffix
+
+      PORT:
+        type: str
+        description: |-
+          Controller Port
+
+      AXIS:
+        type: int
+        description: |-
+          Axis number
+
+      DESC:
+        type: str
+        description: |-
+          Description
+
+      EGU:
+        type: str
+        description: |-
+          Engineering units
+
+      ERES:
+        type: float
+        description: |-
+          Encoder resolution
+
+      PREC:
+        type: int
+        description: |-
+          Readback precision
+
+      SCAN:
+        type: str
+        description: |-
+          Scan rate
+        default: "0.1 second"
+
   - name: RunCommand
     description: |-
       Execute a custom command on the pmac
