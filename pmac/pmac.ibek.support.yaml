@@ -1107,6 +1107,23 @@ entity_models:
           Scale factor the cts will be multiplied by before
           being passed to the motor record.
 
+  - name: pmacSetOpenLoopEncoderAxis
+    description: |-
+      Set a PMAC axis to open loop.
+    parameters:
+      CONTROLLER:
+        type: str
+        description: |-
+          Underlying PMAC or Geobrick object
+      AXIS:
+        type: int
+        description: |-
+          Motor axis number
+      ENCODER_AXIS:
+        type: int
+        description: |-
+          Encoder axis number
+
   - name: pmacVariableWrite
     description: |-
       Simple template that reads and writes to a variable on a
