@@ -1406,3 +1406,37 @@ entity_models:
           PORT:
           COORD:
           name:
+
+  - name: RunCommand
+    description: |-
+      Execute a custom command on the pmac
+    parameters:
+      NAME:
+        type: str
+        description: |-
+          Command name
+
+      BRICK:
+        type: str
+        description: |-
+          Geobrick/PMAC name
+
+      P:
+        type: str
+        description: |-
+          Device Prefix
+
+      R:
+        type: str
+        description: |-
+          Device Suffix
+
+      DESC:
+        type: str
+        description: |-
+          Description, displayed on OPI screen
+
+      COMMAND:
+        type: str
+        description: |-
+          Command to execute
