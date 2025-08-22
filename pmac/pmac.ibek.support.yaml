@@ -1089,6 +1089,54 @@ entity_models:
           STATUSSV14:
           STATUSSV15:
 
+  - name: pmacSetCoordStepsPerUnit
+    description: |-
+      Apply an integer scale factor to an axis on the pmac.
+    parameters:
+      CS:
+        type: str
+        description: |-
+          Underlying CS object
+      AXIS:
+        type: int
+        description: |-
+          Axis number to apply scale to
+      SCALE:
+        type: float
+        description: |-
+          Scale factor the cts will be multiplied by before
+          being passed to the motor record.
+
+  - name: pmacSetOpenLoopEncoderAxis
+    description: |-
+      Set a PMAC axis to open loop.
+    parameters:
+      CONTROLLER:
+        type: str
+        description: |-
+          Underlying PMAC or Geobrick object
+      AXIS:
+        type: int
+        description: |-
+          Motor axis number
+      ENCODER_AXIS:
+        type: int
+        description: |-
+          Encoder axis number
+
+  - name: pmacMonitorVariables
+    description: |-
+      Monitor PMAC variables
+    parameters:
+      CONTROLLER:
+        type: str
+        description: |-
+          Underlying PMAC or Geobrick object
+      VARIABLES:
+        type: str
+        description: |-
+          Space seperated list of pmac variables to monitor
+
   - name: pmacVariableWrite
     description: |-
       Simple template that reads and writes to a variable on a
@@ -1215,6 +1263,71 @@ entity_models:
           VAR:
           EGU:
           VARIABLE_PREC:
+
+  - name: pmacVariableReadLED
+    description: |-
+      Simple template that reads an integer variable on a
+      PMAC or GeoBrick which can have a value of 1 or 0
+      and uses an LED widget.
+    parameters:
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      Q:
+        type: str
+        description: |-
+          Pv Suffix
+
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller comms port
+
+      SPEED:
+        type: str
+        description: |-
+          Speed to read at (F=motor scan rates, M=medium (2 s), S=slow (5 s))
+        default: M
+
+      VAR:
+        type: str
+        description: |-
+          Variable on PMAC to write to, e.g. P700
+
+      ONAM:
+        type: str
+        description: |-
+          One name
+
+      ZNAM:
+        type: str
+        description: |-
+          Zero name
+
+      OSV:
+        type: str
+        description: |-
+          One severity
+
+      ZSV:
+        type: str
+        description: |-
+          Zero severity
+
+    databases:
+      - file: pmacVariableReadLED.template
+        args:
+          P:
+          Q:
+          PORT:
+          SPEED:
+          VAR:
+          ONAM:
+          ZNAM:
+          OSV:
+          ZSV:
 
   - name: pmacCreateCsGroup
     description: |-
@@ -1406,3 +1519,116 @@ entity_models:
           PORT:
           COORD:
           name:
+
+  - name: EncoderReadback
+    description: |-
+      Read back encoder-only axes
+    parameters:
+      NAME:
+        type: str
+        description: |-
+          Command name
+
+      P:
+        type: str
+        description: |-
+          Device Prefix
+
+      Q:
+        type: str
+        description: |-
+          Device Suffix
+
+      PORT:
+        type: str
+        description: |-
+          Controller Port
+
+      AXIS:
+        type: int
+        description: |-
+          Axis number
+
+      DESC:
+        type: str
+        description: |-
+          Description
+
+      EGU:
+        type: str
+        description: |-
+          Engineering units
+
+      ERES:
+        type: float
+        description: |-
+          Encoder resolution
+
+      PREC:
+        type: int
+        description: |-
+          Readback precision
+
+      SCAN:
+        type: str
+        description: |-
+          Scan rate
+        default: "0.1 second"
+
+  - name: RunCommand
+    description: |-
+      Execute a custom command on the pmac
+    parameters:
+      NAME:
+        type: str
+        description: |-
+          Command name
+
+      BRICK:
+        type: str
+        description: |-
+          Geobrick/PMAC name
+
+      P:
+        type: str
+        description: |-
+          Device Prefix
+
+      R:
+        type: str
+        description: |-
+          Device Suffix
+
+      DESC:
+        type: str
+        description: |-
+          Description, displayed on OPI screen
+
+      COMMAND:
+        type: str
+        description: |-
+          Command to execute
+
+  - name: RunPlc
+    description: |-
+      Execute a PLC on the pmac
+    parameters:
+      NAME:
+        type: str
+        description: |-
+          Command name
+
+      BRICK:
+        type: str
+        description: |-
+          Geobrick/PMAC name
+
+      PLC:
+        type: int
+        description: |-
+          PLC to execute
+
+      DESC:
+        type: str
+        description: |-
+          Description, displayed on OPI screen
