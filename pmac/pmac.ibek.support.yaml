@@ -1111,6 +1111,27 @@ entity_models:
       - value: |
           pmacSetCoordStepsPerUnit("{{CS}}", {{AXIS}}, {{SCALE}})
 
+  - name: pmacSetOpenLoopEncoderAxis
+    description: |-
+      Set a PMAC axis to open loop.
+    parameters:
+      CONTROLLER:
+        type: str
+        description: |-
+          Underlying PMAC or Geobrick object
+      AXIS:
+        type: int
+        description: |-
+          Motor axis number
+      ENCODER_AXIS:
+        type: int
+        description: |-
+          Encoder axis number
+
+    pre_init:
+      - value: |
+          pmacSetOpenLoopEncoderAxis("{{CONTROLLER}}", {{AXIS}}, {{ENCODER_AXIS}})
+
   - name: pmacVariableWrite
     description: |-
       Simple template that reads and writes to a variable on a
