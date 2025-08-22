@@ -1440,3 +1440,27 @@ entity_models:
         type: str
         description: |-
           Command to execute
+
+  - name: RunPlc
+    description: |-
+      Execute a PLC on the pmac
+    parameters:
+      NAME:
+        type: str
+        description: |-
+          Command name
+
+      BRICK:
+        type: str
+        description: |-
+          Geobrick/PMAC name
+
+      PLC:
+        type: int
+        description: |-
+          PLC to execute
+
+      DESC:
+        type: str
+        description: |-
+          Description, displayed on OPI screen
