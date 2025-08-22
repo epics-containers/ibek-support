@@ -1124,6 +1124,19 @@ entity_models:
         description: |-
           Encoder axis number
 
+  - name: pmacMonitorVariables
+    description: |-
+      Monitor PMAC variables
+    parameters:
+      CONTROLLER:
+        type: str
+        description: |-
+          Underlying PMAC or Geobrick object
+      VARIABLES:
+        type: str
+        description: |-
+          Space seperated list of pmac variables to monitor
+
   - name: pmacVariableWrite
     description: |-
       Simple template that reads and writes to a variable on a
