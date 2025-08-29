@@ -1562,7 +1562,7 @@ entity_models:
     description: |-
       Read back encoder-only axes
     parameters:
-      NAME:
+      name:
         type: str
         description: |-
           Command name
@@ -1617,7 +1617,7 @@ entity_models:
     description: |-
       Execute a custom command on the pmac
     parameters:
-      NAME:
+      name:
         type: str
         description: |-
           Command name
@@ -1651,7 +1651,7 @@ entity_models:
     description: |-
       Execute a PLC on the pmac
     parameters:
-      NAME:
+      name:
         type: str
         description: |-
           Command name
