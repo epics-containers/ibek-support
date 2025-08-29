@@ -2805,6 +2805,12 @@ entity_models:
           Maximum number threads
         default: 1
 
+      XMLSIZE:
+        type: int
+        description: |-
+          Number of elements of the ND attributes xml waveform record
+        default: 1024
+
     pre_init:
       - value: |
           # NDROIStatConfigure(portName, queueSize, blockingCallbacks,
@@ -2835,6 +2841,7 @@ entity_models:
           R:
           TIMEOUT:
           SCANRATE:
+          XMLSIZE:
 
     pvi:
       yaml_path: NDROIStat.pvi.device.yaml
