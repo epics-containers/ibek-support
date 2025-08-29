@@ -1206,6 +1206,12 @@ entity_models:
           "H":
           "S":
 
+      LABEL:
+        type: str
+        description: |-
+          Label for GUI
+        default: ""
+
     databases:
       - file: pmacVariableWrite.template
         args:
@@ -1217,6 +1223,7 @@ entity_models:
           VAR:
           TYPE:
           PORT:
+          LABEL:
 
   - name: pmacVariableRead
     description: |-
@@ -1285,6 +1292,12 @@ entity_models:
           "M":
           "S":
 
+      LABEL:
+        type: str
+        description: |-
+          Label for GUI
+        default: ""
+
     databases:
       - file: pmacVariableRead.template
         args:
@@ -1297,6 +1310,7 @@ entity_models:
           VAR:
           EGU:
           VARIABLE_PREC:
+          LABEL:
 
   - name: pmacVariableReadLED
     description: |-
@@ -1550,6 +1564,12 @@ entity_models:
         description: |-
           This associates an edm screen with the template
 
+      LABEL:
+        type: str
+        description: |-
+          Label for GUI
+        default: ""
+
     databases:
       - file: $(PMAC)/db/accel_dcm.template
         args:
@@ -1557,6 +1577,7 @@ entity_models:
           PORT:
           COORD:
           name:
+          LABEL:
 
   - name: EncoderReadback
     description: |-
