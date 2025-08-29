@@ -1102,7 +1102,7 @@ entity_models:
         description: |-
           Axis number to apply scale to
       SCALE:
-        type: float
+        type: int
         description: |-
           Scale factor the cts will be multiplied by before
           being passed to the motor record.
