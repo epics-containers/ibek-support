@@ -1571,13 +1571,12 @@ entity_models:
         default: ""
 
     databases:
-      - file: $(PMAC)/db/accel_dcm.template
+      - file: accel_dcm.template
         args:
           P:
           PORT:
           COORD:
           name:
-          LABEL:
 
   - name: EncoderReadback
     description: |-
@@ -1634,6 +1633,20 @@ entity_models:
           Scan rate
         default: "0.1 second"
 
+    databases:
+      - file: encoder_readback.template
+        args:
+          name:
+          P:
+          Q:
+          PORT:
+          AXIS:
+          DESC:
+          EGU:
+          ERES:
+          PREC:
+          SCAN:
+
   - name: RunCommand
     description: |-
       Execute a custom command on the pmac
@@ -1668,6 +1681,16 @@ entity_models:
         description: |-
           Command to execute
 
+    databases:
+      - file: run_command.template
+        args:
+          name:
+          BRICK:
+          P:
+          R:
+          DESC:
+          COMMAND:
+
   - name: RunPlc
     description: |-
       Execute a PLC on the pmac
@@ -1691,3 +1714,11 @@ entity_models:
         type: str
         description: |-
           Description, displayed on OPI screen
+
+    databases:
+      - file: run_plc.template
+        args:
+          name:
+          BRICK:
+          PLC:
+          DESC:
