@@ -1,7 +1,8 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: FINS
-version: rtems-epics-7
+# RTEMS requires rtems-epics-7
+version: 3-12ec1
 dbds:
   - FINS.dbd
 libs:
