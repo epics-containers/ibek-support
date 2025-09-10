@@ -1656,11 +1656,6 @@ entity_models:
         description: |-
           Command name
 
-      BRICK:
-        type: str
-        description: |-
-          Geobrick/PMAC name
-
       P:
         type: str
         description: |-
@@ -1671,25 +1666,30 @@ entity_models:
         description: |-
           Device Suffix
 
-      DESC:
+      PORT:
         type: str
         description: |-
-          Description, displayed on OPI screen
+          Geobrick/PMAC name
 
       COMMAND:
         type: str
         description: |-
           Command to execute
 
+      DESC:
+        type: str
+        description: |-
+          Description, displayed on OPI screen
+
     databases:
       - file: run_command.template
         args:
           name:
-          BRICK:
           P:
           R:
-          DESC:
+          PORT:
           COMMAND:
+          DESC:
 
   - name: RunPlc
     description: |-
@@ -1700,15 +1700,20 @@ entity_models:
         description: |-
           Command name
 
-      BRICK:
+      P:
         type: str
         description: |-
-          Geobrick/PMAC name
+          Device Prefix
 
       PLC:
         type: int
         description: |-
           PLC to execute
+
+      PORT:
+        type: str
+        description: |-
+          Geobrick/PMAC name
 
       DESC:
         type: str
@@ -1719,6 +1724,7 @@ entity_models:
       - file: run_plc.template
         args:
           name:
-          BRICK:
+          P:
           PLC:
+          PORT:
           DESC:
