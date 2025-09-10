@@ -86,3 +86,41 @@ entity_models:
     env_vars:
       - name: "{{ name }}"
         value: '{{  _global.incrementor("InterruptVector", start=192, stop=255, increment=count) }}'
+
+  - name: DbLine
+    description: Adds a line of text to ioc.db
+    parameters:
+      line:
+        type: str
+        description: line of text to add to the Db
+    databases:
+      - file: /epics/generic-source/ibek-support/_ansible/Db/any.template
+        args: { line }
+
+  - name: DbText
+    description: Adds an arbitrary block of text to ioc.db
+    parameters:
+      text:
+        type: str
+        description: block of text to add to the DbText
+    sub_entities:
+      - type: ibek.repeat
+        values: "{{ text.splitlines() | map('trim') | list }}"
+        variable: line
+        entity:
+          type: epics.DbLine
+          line: "{{ line }}"
+
+  - name: DbAlias
+    description: Adds an alias to a record in the Db
+    parameters:
+      name:
+        type: str
+        description: the name of the record to alias
+      alias:
+        type: str
+        description: the alias to apply to the above name
+    databases:
+      - file: /epics/generic-source/ibek-support/_ansible/Db/alias.template
+        args:
+          .*:
