@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: pmac
-version: 2-7-2
+version: 2-7-9
 
 dbds:
   - pmacAsynIPPort.dbd
