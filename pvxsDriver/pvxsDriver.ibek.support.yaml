@@ -115,3 +115,11 @@ entity_models:
       - value: |
           # pvxsDriverConfig(portName, pvName, maxBuffers, maxMemory, priority, stackSize)
           pvxsDriverConfig("{{PORT}}", {{PVNAME}}, {{BUFFERS}}, {{MEMORY}}, {{PRIORITY}}, {{STACKSIZE}})
+
+    pvi:
+      yaml_path: pvxsDriver.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)

@@ -1,0 +1,32 @@
+label: PVXS driver
+parent: ADDriver
+children:
+  - type: Group
+    name: PvxsDriver
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalRW
+        name: OverrunCounter
+        write_pv: $(P)$(R)OverrunCounter
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)OverrunCounter_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: PvName # TODO, how do we display this properly???
+        write_pv: $(P)$(R)PvName
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)PvName_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: PVConnection
+        read_pv: $(P)$(R)PVConnection_RBV
+        read_widget:
+          type: TextRead
