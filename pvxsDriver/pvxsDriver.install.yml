@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: pvxsDriver
+
+version: main
+
+organization: https://github.com/jsouter
+
+dbds:
+  - pvxsDriverSupport.dbd
+libs:
+  - pvxsDriver
