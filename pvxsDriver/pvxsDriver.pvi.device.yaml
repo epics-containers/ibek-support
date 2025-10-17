@@ -26,7 +26,7 @@ children:
           type: TextRead
 
       - type: SignalR
-        name: PVConnection
-        read_pv: $(P)$(R)PVConnection_RBV
+        name: PvConnection
+        read_pv: $(P)$(R)PvConnection_RBV
         read_widget:
-          type: TextRead
+          type: LED
