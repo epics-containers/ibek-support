@@ -4,7 +4,7 @@ module: ADCore
 # version: R3-14
 version: pvxs
 # pointing at DLS fork for pvxs support until merged upstream
-git_repo: https://github.com/DiamondLightSource/ADCore
+git_repo: https://github.com/jsouter/ADCore
 
 dbds:
   - NDPluginPvxs.dbd
