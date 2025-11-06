@@ -51,7 +51,6 @@ jobs:
             ioc-pmac,
             ioc-lakeshore340,
             ioc-tetramm,
-            ioc-opcua,
             ioc-motorSim,
             ioc-adsimdetector,
           ]
