@@ -26,12 +26,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v6
         with:
-          python-version: "3.x"
+          python-version: "3.13"
 
       - name: Run schema/ioc instance generation tests
         run: |
@@ -45,7 +45,16 @@ jobs:
       fail-fast: false
       max-parallel: 10
       matrix:
-        repo: [ioc-adaravis, ioc-pmac, ioc-lakeshore340, ioc-tetramm, ioc-opcua, ioc-motorSim, ioc-adsimdetector]
+        repo:
+          [
+            ioc-adaravis,
+            ioc-pmac,
+            ioc-lakeshore340,
+            ioc-tetramm,
+            ioc-opcua,
+            ioc-motorSim,
+            ioc-adsimdetector,
+          ]
         include:
           # rtems is cross compiled on ubuntu-latest
           # linux is natively compiled on ubuntu-latest and macos-latest
