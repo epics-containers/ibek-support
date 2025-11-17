@@ -1,0 +1,91 @@
+label: SlsDetector
+parent: ADDriver
+children:
+
+- type: Group
+  name: SlsDetector
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: BitDepth
+    write_pv: $(P)$(R)BitDepth
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)BitDepth_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: HighVoltage
+    write_pv: $(P)$(R)HighVoltage
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)HighVoltage_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Setting
+    write_pv: $(P)$(R)Setting
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R)Setting_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Counter1Threshold
+    write_pv: $(P)$(R)Counter1Threshold
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)Counter1Threshold_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Counter2Threshold
+    write_pv: $(P)$(R)Counter2Threshold
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)Counter2Threshold_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Counter3Threshold
+    write_pv: $(P)$(R)Counter3Threshold
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)Counter3Threshold_RBV
+    read_widget:
+      type: TextRead
+
+  # - type: SignalRW
+  #   name: Threshold energy mode
+  #   write_pv: $(P)$(R)Thr1Only
+  #   write_widget:
+  #     type: ComboBox
+  #   read_pv: $(P)$(R)Thr1Only_RBV
+  #   read_widget:
+  #     type: TextRead
+
+  - type: SignalRW
+    name: ThresholdEnergy
+    write_pv: $(P)$(R)ThresholdEnergy
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)ThresholdEnergy_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: BeamEnergy
+    write_pv: $(P)$(R)BeamEnergy
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)BeamEnergy_RBV
+    read_widget:
+      type: TextRead
