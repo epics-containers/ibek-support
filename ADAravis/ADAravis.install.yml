@@ -1,14 +1,14 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: ADAravis
-version: R2-3
+version: interface-add
 
 dbds:
   - ADAravisSupport.dbd
 libs:
   - ADAravis
 
-organization: http://github.com/areaDetector
+organization: http://github.com/coretl
 
 apt_developer:
   - libxext-dev

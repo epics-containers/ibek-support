@@ -3,6 +3,19 @@
 module: ADAravis
 
 entity_models:
+  - name: interfaceName
+    description: |-
+      Limit connection discovery to a specific network interface
+    parameters:
+      name:
+        type: str
+        description: |-
+          Name of the network interface to use for camera discovery (e.g. em1, p2p1, ...)
+    pre_init:
+      - value: |
+          # aravisInterfaceName(const char *interfaceName)
+          aravisInterfaceName("{{name}}")
+
   - name: aravisCamera
     description: |-
       Creates an aravisCamera camera areaDetector driver
@@ -26,6 +39,12 @@ entity_models:
         type: id
         description: |-
           Port name for the camera
+
+      CACHING:
+        type: bool
+        description: |-
+          Enable/disable caching of camera parameters
+        default: true
 
       BUFFERS:
         type: int
@@ -142,8 +161,8 @@ entity_models:
 
     pre_init:
       - value: |
-          # aravisConfig(const char *portName, const char *cameraName, size_t maxMemory, int priority, int stackSize)
-          aravisConfig("{{PORT}}", "{{ID}}", {{MEMORY}}, 0, 1)
+          # aravisConfig(portName, cameraName, enableCaching, maxMemory, priority, stackSize)
+          aravisConfig("{{PORT}}", "{{ID}}", {{CACHING | int}}, {{MEMORY}}, 0, 1)
 
     databases:
       - file: $(ADARAVIS)/db/aravisCamera.template
@@ -190,3 +209,4 @@ entity_models:
           PORT: "{{ camera.PORT }}"
           TIMEOUT: "{{ camera.TIMEOUT }}"
           ADDR: "{{ camera.ADDR }}"
+
