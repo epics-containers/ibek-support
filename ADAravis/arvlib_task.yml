@@ -2,7 +2,7 @@
   ansible.builtin.shell:
     cmd: |
       setopt -e
-      git clone -b "0.8.31" --depth 1 https://github.com/AravisProject/aravis
+      git clone -b "0.8.35" --depth 1 https://github.com/AravisProject/aravis
       cd aravis
       meson build
       cd build

@@ -27,6 +27,12 @@ entity_models:
         description: |-
           Port name for the camera
 
+      CACHING:
+        type: bool
+        description: |-
+          Enable/disable caching of camera parameters
+        default: true
+
       BUFFERS:
         type: int
         description: |-
@@ -142,8 +148,8 @@ entity_models:
 
     pre_init:
       - value: |
-          # aravisConfig(const char *portName, const char *cameraName, size_t maxMemory, int priority, int stackSize)
-          aravisConfig("{{PORT}}", "{{ID}}", {{MEMORY}}, 0, 1)
+          # aravisConfig(portName, cameraName, enableCaching, maxMemory, priority, stackSize)
+          aravisConfig("{{PORT}}", "{{ID}}", {{CACHING | int}}, {{MEMORY}}, 0, 1)
 
     databases:
       - file: $(ADARAVIS)/db/aravisCamera.template
