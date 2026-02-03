@@ -40,6 +40,8 @@ entity_models:
 
 
       SCAN_RATE:
+        type: int
+        description: |-
 
 
     pre_init:
