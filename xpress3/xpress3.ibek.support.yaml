@@ -2,14 +2,14 @@
 
 module: xspress3
 
-entity_modules:
+entity_models:
   - name: xspress3
     description: |-
       xspress3
     parameters:
       P:
         type: str
-        ddescription: |-
+        description: |-
           Prefix for PV name
 
       PORT:
