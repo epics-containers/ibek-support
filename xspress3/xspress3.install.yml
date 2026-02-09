@@ -10,3 +10,5 @@ organization: https://github.com/epics-modules
 comment_out:
   - path: Makefile
     regexp: documentation
+  - path: Makefile
+    regexp: iocs
