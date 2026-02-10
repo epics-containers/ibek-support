@@ -1,9 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 module: xspress3
-# version: 2-2
 version: 3.3.0
 
-# organization: https://github.com/DiamondLightSource
 organization: https://github.com/epics-modules
 
 # comment out the documentation from the Makefile
