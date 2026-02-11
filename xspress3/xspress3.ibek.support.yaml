@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
+
+module: xspress3
+
+entity_models:
+  - name: xspress3
+    description: |-
+      xspress3
+    parameters:
+      P:
+        type: str
+        description: |-
+          Prefix for PV name
+
+      PORT:
+        type: str
+        description: |-
+          Bus/Port Address
+
+      ADDR:
+        type: int
+        description: |-
+          Address on the bus
+        default: 0
+
+      TIMEOUT:
+        type: int
+        description: |-
+
+        default: 5
+
+      MAX_SPECTRA:
+        type: int
+        description: |-
+
+
+      MAX_FRAMES:
+        type: int
+        description: |-
+
+
+      SCAN_RATE:
+        type: int
+        description: |-
+
+
+    pre_init:
+      - value: |
+          epicsEnvSet ""
+
+    databases:
+      - file: $(XSPRESS3)/db/xspress3.template
+        args:
+          .*:
+          # P: "{{P + ':' + name + ':'}}"
+
+    
+
+      
