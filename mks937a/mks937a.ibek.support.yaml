@@ -862,11 +862,11 @@ entity_models:
         description: |-
           The device's name for gui purposes
 
-      # TODO - when we come to construct screens, how is this going to work?
-      # - type: str
-      #   name: GCTLR
-      #   description: |-
-      #     The gauge controller PV prefix, for gui purposes
+      GCTLR:
+        type: str
+        description: |-
+          The gauge controller PV prefix, for gui purposes
+        default: ""
 
       ctlsp_level:
         type: float
@@ -929,6 +929,7 @@ entity_models:
           ctlsp_drvl:
           ctlsp_hopr:
           ctlsp_lopr:
+          GCTLR:
           ctlsp_desc:
           aitype:
           aiinp:

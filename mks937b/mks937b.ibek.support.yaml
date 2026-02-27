@@ -236,11 +236,11 @@ entity_models:
         description: |-
           The device's name for gui purposes
 
-      # TODO - when we come to construct screens, how is this going to work?
-      # - type: str
-      #   name: GCTLR
-      #   description: |-
-      #     The gauge controller PV prefix, for gui purposes
+      GCTLR:
+        type: str
+        description: |-
+          The gauge controller PV prefix, for gui purposes
+        default: ""
 
       ctlsp_level:
         type: float
@@ -307,6 +307,7 @@ entity_models:
           dom:
           ctlsp_hopr:
           ctlsp_drvh:
+          GCTLR:
           ctlsp_level:
           ctlspoff_desc:
           plog_calc:
@@ -637,10 +638,11 @@ entity_models:
         description: |-
           or (if using Hy8401 VME IP) mks937bHy8401.template
 
-      # GCTLR:
-      #   type: str
-      #   description: |-
-      #     The gauge controller PV prefix, for gui purposes
+      GCTLR:
+        type: str
+        description: |-
+          The gauge controller PV prefix, for gui purposes
+        default: ""
 
       ctlsp_level:
         type: float
