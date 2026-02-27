@@ -196,6 +196,11 @@ entity_models:
           TIMEOUT:
           NAXES:
           PORT: "{{name}}"
+    sub_entities:
+      - type: ibek.wait_ip
+        entity_enabled: true
+        device: "{{name}}"
+        address: "{{IP}}"
 
   - name: GeoBrick
     description: |-
@@ -1687,7 +1692,22 @@ entity_models:
 
     databases:
       - file: translated_motor.template
-        args: { P: null, SM: null, DESC: null, VELO: null, VMAX: null, PREC: null, EGU: null, DHLM: null, DLLM: null, M: null, TWV: null, FWD: null, BWD: null }
+        args:
+          {
+            P: null,
+            SM: null,
+            DESC: null,
+            VELO: null,
+            VMAX: null,
+            PREC: null,
+            EGU: null,
+            DHLM: null,
+            DLLM: null,
+            M: null,
+            TWV: null,
+            FWD: null,
+            BWD: null,
+          }
 
   - name: CS_accel_dcm
     description: |-
