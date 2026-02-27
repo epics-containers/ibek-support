@@ -59,6 +59,7 @@ entity_models:
         type: str
         description: |-
           PV suffix
+        default: ""
       HOST:
         type: str
         description: |-
@@ -117,6 +118,7 @@ entity_models:
         type: str
         description: |-
           PV suffix
+        default: ""
       HOST:
         type: str
         description: |-
