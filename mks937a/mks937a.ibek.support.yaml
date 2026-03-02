@@ -10,7 +10,7 @@ entity_models:
       Linda Pratt 28/09/2009
     parameters:
       device:
-        type: str
+        type: id
         description: |-
           device name
 
@@ -595,7 +595,7 @@ entity_models:
       those in the Img template.
     parameters:
       device:
-        type: str
+        type: id
         description: |-
           device name
 
