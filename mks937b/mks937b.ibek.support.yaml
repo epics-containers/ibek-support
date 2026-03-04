@@ -302,7 +302,6 @@ entity_models:
         args:
           plog_adc_pv:
           ctlsp_drvl:
-          name:
           ctlsp_lopr:
           dom:
           ctlsp_hopr:
@@ -353,7 +352,7 @@ entity_models:
       Linda Pratt 28/09/2009
     parameters:
       device:
-        type: id
+        type: str
         description: |-
           device name
 
@@ -603,11 +602,6 @@ entity_models:
     description: |-
       TODO:ADD DESCRIPTION
     parameters:
-      name:
-        type: id
-        description: |-
-          Device name
-
       dom:
         type: str
         description: |-
@@ -946,7 +940,7 @@ entity_models:
       those in the Img template.
     parameters:
       device:
-        type: id
+        type: str
         description: |-
           device name
 
@@ -1173,4 +1167,3 @@ entity_models:
           offwarn:
           GCTLR:
           channel:
-          name:

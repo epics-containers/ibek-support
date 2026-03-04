@@ -54,6 +54,7 @@ entity_models:
         type: str
         description: |-
           Device suffix
+        default: ""
 
       serialPort:
         type: object
@@ -206,16 +207,19 @@ entity_models:
         type: int
         description: |-
           Maximum memory (areaDetector)
+        default: 0
 
       R:
         type: str
         description: |-
           Device Suffix
+        default: "{{ Q }}:"
 
       EMPTY:
         type: str
         description: |-
           Empty macro to satisfy VDCT
+        default: ""
 
     pre_init:
       - value: |
