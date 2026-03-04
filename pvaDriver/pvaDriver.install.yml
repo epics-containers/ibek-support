@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: pvaDriver
+version: 1-5dls9
+dbds:
+  - pvaDriverSupport.dbd
+libs:
+  - pvaDriver
+
+organization: http://github.com/areaDetector/
