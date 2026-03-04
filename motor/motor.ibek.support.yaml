@@ -361,6 +361,33 @@ entity_models:
         P:
         M:
 
+  - name: auto_asyn_auto_power
+    description: |-
+      Automatic amplifier power control for asyn model 3 motor drivers.
+      Provides records to enable/disable auto power on/off and set delays.
+    parameters:
+      P:
+        type: str
+        description: Device Prefix
+      M:
+        type: str
+        description: Device Suffix
+      PORT:
+        type: str
+        description: Asyn port
+      ADDR:
+        type: int
+        description: Asyn address
+      FRAC:
+        type: int
+        description: Holding current percentage
+        default: 0
+
+    databases:
+      - file: $(MOTOR)/db/asyn_auto_power.db
+        args:
+          .*:
+
   - name: softMotorForPiezo
     description: |-
       TODO:ADD DESCRIPTION
