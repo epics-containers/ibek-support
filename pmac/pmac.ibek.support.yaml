@@ -1178,6 +1178,7 @@ entity_models:
         type: str
         description: |-
           Engineering units
+        default: ""
 
       VARIABLE_PREC:
         type: int
@@ -1254,6 +1255,7 @@ entity_models:
         type: str
         description: |-
           Engineering units
+        default: ""
 
       VARIABLE_PREC:
         type: int
@@ -1362,11 +1364,13 @@ entity_models:
         type: str
         description: |-
           One severity
+        default: NO_ALARM
 
       ZSV:
         type: str
         description: |-
           Zero severity
+        default: NO_ALARM
 
     databases:
       - file: pmacVariableReadLED.template
@@ -1728,3 +1732,43 @@ entity_models:
           PLC:
           PORT:
           DESC:
+
+  - name: auto_pmacStatus8Axes
+    description: |-
+      Instantiate pmacStatusAxis template for 8 axes.
+      Maps to pmacStatus8Axes.template in the pmac db directory.
+    parameters:
+      PMAC:
+        type: str
+        description: |-
+          Pmac/Geobrick name (PV prefix for the controller)
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller asyn port
+
+    databases:
+      - file: pmacStatus8Axes.template
+        args:
+          PMAC:
+          PORT:
+
+  - name: auto_pmacStatus32Axes
+    description: |-
+      Instantiate pmacStatusAxis template for 32 axes.
+      Maps to pmacStatus32Axes.template in the pmac db directory.
+    parameters:
+      PMAC:
+        type: str
+        description: |-
+          Pmac/Geobrick name (PV prefix for the controller)
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller asyn port
+
+    databases:
+      - file: pmacStatus32Axes.template
+        args:
+          PMAC:
+          PORT:

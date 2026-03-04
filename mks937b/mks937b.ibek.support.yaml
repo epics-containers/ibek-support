@@ -235,6 +235,7 @@ entity_models:
         type: id
         description: |-
           The device's name for gui purposes
+        default: "GAUGE_{{ dom }}_{{ id }}"
 
       GCTLR:
         type: str

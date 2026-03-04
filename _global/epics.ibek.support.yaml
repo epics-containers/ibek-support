@@ -71,6 +71,17 @@ entity_models:
       - type: text
         value: "{{ command }}"
 
+  - name: PreBootCommandSet
+    description: Adds an arbitrary command in the startup script before iocInit (pre-boot)
+    parameters:
+      command:
+        type: str
+        description: command string
+        default: ""
+    pre_init:
+      - type: text
+        value: "{{ command }}"
+
   - name: InterruptVectorVME
     description: Reserve a VME interrupt vector
     parameters:
