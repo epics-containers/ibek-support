@@ -633,16 +633,16 @@ entity_models:
           Dial Low Limit
 
       HLM:
-        type: str # float or blank
+        type: float
         description: |-
           User High Limit
-        default: ""
+        default: 0
 
       LLM:
-        type: str # float or blank
+        type: float
         description: |-
           User Low Limit
-        default: ""
+        default: 0
 
       HLSV:
         type: str
