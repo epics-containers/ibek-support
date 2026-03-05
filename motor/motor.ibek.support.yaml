@@ -118,35 +118,34 @@ entity_models:
         default: 0
 
       BACC:
-        type: str
+        type: float
         description: |-
           BL Seconds to Veloc.
+        default: 0
 
-        default: ""
       DHLM:
-        type: str
+        type: float
         description: |-
           Dial High Limit
+        default: 0
 
-        default: ""
       DLLM:
-        type: str
+        type: float
         description: |-
           Dial Low Limit
+        default: 0
 
-        default: ""
       HLM:
-        type: str
+        type: float
         description: |-
           User High Limit
+        default: 0
 
-        default: ""
       LLM:
-        type: str
+        type: float
         description: |-
           User Low Limit
-
-        default: ""
+        default: 0
       HLSV:
         type: str
         description: |-
@@ -166,23 +165,20 @@ entity_models:
         default: 1000
 
       RRES:
-        type: str
+        type: float
         description: |-
           Readback Step Size (EGU)
-
-        default: ""
+        default: 0
       ERES:
-        type: str
+        type: float
         description: |-
           Encoder Step Size (EGU)
-
-        default: ""
+        default: 0
       JAR:
-        type: str
+        type: float
         description: |-
           Jog Acceleration (EGU/s^2)
-
-        default: ""
+        default: 0
       UEIP:
         type: int
         description: |-
@@ -226,11 +222,10 @@ entity_models:
         default: 0
 
       RDBD:
-        type: str
+        type: float
         description: |-
           Retry Deadband (EGU)
-
-        default: ""
+        default: 0
       FOFF:
         type: int
         description: |-
