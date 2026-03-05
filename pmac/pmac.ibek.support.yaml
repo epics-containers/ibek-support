@@ -51,6 +51,152 @@ entity_models:
           # Create IP Port (PortName, IPAddr)
           pmacAsynIPConfigure("{{name}}", "{{IP}}")
 
+  - name: pmacVmeConfig
+    description: |-
+      This will create an AsynPort connecting to a PMAC over VME bus
+    parameters:
+      name:
+        type: id
+        description: |-
+          Port Name, normally something like PMAC_S0
+
+      IP:
+        type: str
+        description: |-
+          IP address of the geobrick (unused for VME, present for compatibility)
+        default: ""
+
+    pre_init:
+      - value: |
+          # VME PMAC port placeholder (VME config is handled by hardware setup)
+
+  - name: PMAC
+    description: |-
+      This will create an asyn motor port for a PMAC that we can attach
+          motor records to using the model 3 driver
+    parameters:
+      pmacAsynPort:
+        type: object
+        description: |-
+          pmacAsynIPPort/pmacVmeConfig to connect to
+
+      P:
+        type: str
+        description: |-
+          PV Prefix
+
+      name:
+        type: id
+        description: |-
+          Name to use for the asyn port
+
+      IdlePoll:
+        type: int
+        description: |-
+          Idle Poll Period in ms
+        default: 500
+
+      MovingPoll:
+        type: int
+        description: |-
+          Moving Poll Period in ms
+        default: 200
+
+      NAXES:
+        type: int
+        description: |-
+          Number of axes
+        default: 32
+
+      TIMEOUT:
+        type: int
+        description: |-
+          Timeout for controller communication
+        default: 4
+
+      FEEDRATE:
+        type: int
+        description: |-
+          feedrate below which we go into error
+        default: 100
+
+      CSG0:
+        type: str
+        description: |-
+          Name for Coordinate System Group 0
+        default: ""
+
+      CSG1:
+        type: str
+        description: |-
+          Name for Coordinate System Group 1
+        default: ""
+
+      CSG2:
+        type: str
+        description: |-
+          Name for Coordinate System Group 2
+        default: ""
+
+      CSG3:
+        type: str
+        description: |-
+          Name for Coordinate System Group 3
+        default: ""
+
+      CSG4:
+        type: str
+        description: |-
+          Name for Coordinate System Group 4
+        default: ""
+
+      CSG5:
+        type: str
+        description: |-
+          Name for Coordinate System Group 5
+        default: ""
+
+      CSG6:
+        type: str
+        description: |-
+          Name for Coordinate System Group 6
+        default: ""
+
+      CSG7:
+        type: str
+        description: |-
+          Name for Coordinate System Group 7
+        default: ""
+
+    pre_init:
+      - value: |
+          # Configure Model 3 Controller Driver (ControlerPort, LowLevelDriverPort, Address, Axes, MovingPoll, IdlePoll)
+          pmacCreateController("{{name}}", "{{pmacAsynPort}}", 0, {{NAXES}}, {{MovingPoll}}, {{IdlePoll}})
+          # Configure Model 3 Axes Driver (Controler Port, Axis Count)
+          pmacCreateAxes("{{name}}", {{NAXES}})
+
+    databases:
+      - file: pmacStatus.template
+        args:
+          P:
+          PORT: "{{name}}"
+
+      - file: pmacController.template
+        args:
+          FEEDRATE:
+          CSG7:
+          CSG6:
+          CSG5:
+          CSG4:
+          CSG3:
+          CSG2:
+          CSG1:
+          CSG0:
+          P:
+          TIMEOUT:
+          NAXES:
+          PORT: "{{name}}"
+
   - name: GeoBrick
     description: |-
       This will create an asyn motor port for a GeoBrick that we can attach
