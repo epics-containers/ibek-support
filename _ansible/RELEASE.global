@@ -9,8 +9,4 @@ SUPPORT=/epics/support
 EPICS_BASE=/epics/epics-base
 PVXS=/epics/support/pvxs
 
-# AREA_DETECTOR is referenced by several upstream RELEASE files and must be
-# consistent across all modules to pass checkRelease
-AREA_DETECTOR=$(SUPPORT)
-
 # Additional Support Modules for individual IOCs will be added below this line
