@@ -14,13 +14,12 @@ COPY ioc /epics/ioc
 
 # Get the current version of ibek
 COPY requirements.txt requirements.txt
-RUN pip install --upgrade -r requirements.txt
+RUN uv pip install --upgrade -r requirements.txt
 
 WORKDIR ${SOURCE_FOLDER}/ibek-support
 
 # get all of ibek-support
 COPY . .
-RUN mkdir /epics/support/configure
 
 # get ansible script into path
 ENV PATH=$PATH:${SOURCE_FOLDER}/ibek-support/_ansible
