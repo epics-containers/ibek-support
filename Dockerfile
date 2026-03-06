@@ -26,7 +26,6 @@ ENV PATH=$PATH:${SOURCE_FOLDER}/ibek-support/_ansible
 # build all things that are dependencies in dependency order
 RUN ansible.sh calc,sscan,asyn,busy,autosave,sequencer,std,StreamDevice -e skip_clean=true
 RUN ansible.sh snmp,motor -e skip_clean=true
-RUN ansible.sh pvxs -e skip_clean=true
 RUN ansible.sh ADCore,ADGenICam -e skip_clean=true
 # build everything else
 RUN ansible.sh quadEM -e skip_clean=true
