@@ -10,8 +10,15 @@ set -e
 DEP_GROUPS="$1"
 TARGET_GROUP="$2"
 
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-REPO_ROOT="$(dirname "$SCRIPT_DIR")"
+# When run from Dockerfile.ci, the script is copied to /tmp but WORKDIR
+# is the ibek-support directory. When run locally, fall back to deriving
+# the repo root from the script's own location.
+if [ -f "$(pwd)/build-groups.yml" ]; then
+    REPO_ROOT="$(pwd)"
+else
+    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+    REPO_ROOT="$(dirname "$SCRIPT_DIR")"
+fi
 
 # Extract module list for a given group name from build-groups.yml
 get_group_modules() {
