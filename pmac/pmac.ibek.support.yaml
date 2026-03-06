@@ -1904,7 +1904,7 @@ entity_models:
       Instantiate pmacStatusAxis template for 32 axes.
       Maps to pmacStatus32Axes.template in the pmac db directory.
     parameters:
-      PMAC:
+      DEVICE:
         type: str
         description: |-
           Pmac/Geobrick name (PV prefix for the controller)
@@ -1912,9 +1912,108 @@ entity_models:
         type: object
         description: |-
           Delta tau motor controller asyn port
+      PLC:
+        type: int
+        description: |-
+          PLC for CPU load monitoring
+        default: 5
+      VERSION:
+        type: int
+        description: |-
+          0 for Pmac, 1 for Geobrick
+        default: 0
+      NAXES:
+        type: int
+        description: |-
+          Number of axes
+        default: 32
+      name:
+        type: id
+        description: |-
+          Object and gui association name
 
     databases:
       - file: pmacStatus32Axes.template
         args:
-          PMAC:
+          DEVICE:
           PORT:
+          PLC:
+          VERSION:
+          NAXES:
+          name:
+
+  - name: moveAxesToSafeMaster
+    description: |-
+      Create a master safe-position entity that triggers simultaneous moves
+      of up to 6 axes to predefined safe positions.
+    parameters:
+      name:
+        type: id
+        description: |-
+          Name for this safe-position master (slaves reference this)
+
+      P:
+        type: str
+        description: |-
+          Device Prefix
+
+      NO_OF_AXES:
+        type: int
+        description: |-
+          Number of axes (1-6)
+
+    databases:
+      - file: moveAxesToSafeTrig.template
+        args:
+          P:
+          A1: "{{ P }}:POS1_OUT"
+          A2: "{% if NO_OF_AXES | int >= 2 %}{{ P }}:POS2_OUT{% endif %}"
+          A3: "{% if NO_OF_AXES | int >= 3 %}{{ P }}:POS3_OUT{% endif %}"
+          A4: "{% if NO_OF_AXES | int >= 4 %}{{ P }}:POS4_OUT{% endif %}"
+          A5: "{% if NO_OF_AXES | int >= 5 %}{{ P }}:POS5_OUT{% endif %}"
+          A6: "{% if NO_OF_AXES | int >= 6 %}{{ P }}:POS6_OUT{% endif %}"
+          INPOS1: "{{ P }}:POS1_SAFE CP"
+          INPOS2: "{% if NO_OF_AXES | int >= 2 %}{{ P }}:POS2_SAFE CP{% endif %}"
+          INPOS3: "{% if NO_OF_AXES | int >= 3 %}{{ P }}:POS3_SAFE CP{% endif %}"
+          INPOS4: "{% if NO_OF_AXES | int >= 4 %}{{ P }}:POS4_SAFE CP{% endif %}"
+          INPOS5: "{% if NO_OF_AXES | int >= 5 %}{{ P }}:POS5_SAFE CP{% endif %}"
+          INPOS6: "{% if NO_OF_AXES | int >= 6 %}{{ P }}:POS6_SAFE CP{% endif %}"
+          INPOS_CALC: "{% set letters = ['A','B','C','D','E','F'] %}{% for i in range(NO_OF_AXES | int) %}{% if i > 0 %}&&{% endif %}{{ letters[i] }}{% endfor %}"
+
+  - name: moveAxesToSafeSlave
+    description: |-
+      Define one axis to be moved to a safe position by a moveAxesToSafeMaster.
+    parameters:
+      MASTER:
+        type: object
+        description: |-
+          Master safe-position object
+
+      AXIS:
+        type: str
+        description: |-
+          Axis PV (e.g. BL04I-MO-SDE-01:X)
+
+      POSITION:
+        type: float
+        description: |-
+          Safe Position
+
+      THRESHOLD:
+        type: float
+        description: |-
+          In safe position threshold in EGUs
+
+      N:
+        type: int
+        description: |-
+          Axis number (1-6), assigned by converter
+
+    databases:
+      - file: moveAxesToSafe.template
+        args:
+          P: "{{ MASTER.P }}"
+          N:
+          AXIS:
+          POSITION:
+          THRESHOLD:
