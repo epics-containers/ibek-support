@@ -49,14 +49,13 @@ groups:
       - ADZMQ
       - ffmpegServer
       - xspress3
+      - quadEM
 
   general:
     desc: "General-purpose modules with few dependencies"
     deps: [core]
     modules:
-      - snmp
       - modbus
-      - quadEM
       - iocStats
       - pvxs
       - pvlogging
@@ -67,6 +66,7 @@ groups:
     desc: "Fieldbus and simple protocol modules"
     deps: [core]
     modules:
+      - snmp
       - ether_ip
       - FINS
       - digitelMpc
