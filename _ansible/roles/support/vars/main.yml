@@ -97,6 +97,14 @@ patch_file:
 #     when: is_linux
 scripts: []
 
+# bash commands to execute after clone or after compilation (post_build=true)
+# e.g.
+# bash:
+#   - cmd: echo "hello"
+#     post_build: true
+#     when: is_linux
+bash: []
+
 # Additional tasks to execute before or after the build
 # e.g.
 # tasks:

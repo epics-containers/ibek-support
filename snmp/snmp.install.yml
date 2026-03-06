@@ -30,3 +30,7 @@ patch_lines:
     regexp: USR_LDFLAGS
     line: USR_LDFLAGS=
     when: "{{ is_linux }}"
+
+bash:
+  # this redundant folder fails to build
+  - cmd: rm -r snmpApp/srcDisplay
