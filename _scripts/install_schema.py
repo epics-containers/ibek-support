@@ -61,6 +61,11 @@ class SupportVariables(StrictModel):
         post_build: bool = Field(default=False)
         when: str = Field(default="")
 
+    class Bash(StrictModel):
+        cmd: str
+        when: bool = Field(default=True)
+        post_build: bool = Field(default=False)
+
     # mandatory fields ########################################################
 
     module: str = Field(description="Support module name, normally the repo name")
@@ -168,6 +173,15 @@ class SupportVariables(StrictModel):
         description="List of ad hoc ansible tasks to execute. "
         "Paths are relative to the the ibek-support/module",
         default=(),
+    )
+    bash: Sequence[Bash] = Field(
+        description="List of bash commands to execute. "
+        "The working directory is the support module folder e.g. /epics/support/snmp",
+        default=(),
+    )
+    extra_release_macros: dict[str, str] = Field(
+        description="Extra macros to add to the global configure/RELEASE",
+        default={},
     )
     remove_files_prebuild: Sequence[str] = Field(
         description="A list project relative files to remove pre build.",
