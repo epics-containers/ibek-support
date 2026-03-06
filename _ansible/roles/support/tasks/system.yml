@@ -4,6 +4,28 @@
   tags: [system]
   when: not skip_apt
   block:
+    - name: Check for apt cache sentinel
+      ansible.builtin.stat:
+        path: /tmp/.apt_cache_updated
+      register: apt_cache_updated_sentinel
+
+    - name: Update apt cache once per container build
+      ansible.builtin.apt:
+        update_cache: true
+      when:
+        - is_linux
+        - not apt_cache_updated_sentinel.stat.exists
+
+    - name: Create apt cache sentinel
+      ansible.builtin.file:
+        path: /tmp/.apt_cache_updated
+        state: touch
+        mode: "0644"
+      when:
+        - is_linux
+        - not apt_cache_updated_sentinel.stat.exists
+      changed_when: false
+
     - name: Download additional files for {{ module }}
       ansible.builtin.get_url:
         url: "{{ item.url }}"

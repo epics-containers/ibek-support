@@ -5,23 +5,6 @@ on:
   pull_request:
 
 jobs:
-  # Removed because it won't use the ignore file and I want to not use verbose
-  # prefixes on role variables
-  #
-  #
-  # check-ansible-lint:
-  #   name: Ansible Lint # Naming the build is important to use it as a status check
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Run ansible-lint
-  #       uses: ansible/ansible-lint@main
-  #       with:
-  #         args: "--ignore-file .ansible-lint-ignore"
-  #         setup_python: "true"
-  #         working_directory: "_ansible"
-  #         requirements_file: ""
-
   check-generate:
     runs-on: ubuntu-latest
     steps:
@@ -38,6 +21,71 @@ jobs:
           pip install -r requirements.txt
           bash tests/test_generate.sh
 
+  # Generate the build matrix from build-groups.yml + auto-discovered modules
+  generate-matrix:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Generate matrix
+        id: matrix
+        run: python _scripts/build_matrix.py --github >> "$GITHUB_OUTPUT"
+
+      - name: Warn about uncategorized modules
+        run: python _scripts/build_matrix.py --check || echo "::warning::Uncategorized modules detected - add them to build-groups.yml"
+
+  # Build each module group in parallel
+  check-docker-build-group:
+    needs: generate-matrix
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
+
+    runs-on: ubuntu-latest
+    name: "build-${{ matrix.group }}"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Log in to GitHub GHCR
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io/${{ github.repository_owner }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build group ${{ matrix.group }}
+        uses: docker/build-push-action@v5
+        with:
+          file: Dockerfile.ci
+          context: .
+          build-args: |
+            BUILD_GROUP=${{ matrix.group }}
+            BUILD_DEPS=${{ join(matrix.deps, ',') }}
+          cache-from: type=gha,scope=group-${{ matrix.group }}
+          cache-to: type=gha,mode=max,scope=group-${{ matrix.group }}
+          tags: ci_test_${{ matrix.group }}
+          load: true
+
+  # Also keep the per-IOC builds for integration testing
   check-docker-build:
     # pull requests are a duplicate of a branch push if within the same repo.
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
@@ -55,24 +103,10 @@ jobs:
             ioc-adsimdetector,
           ]
         include:
-          # rtems is cross compiled on ubuntu-latest
-          # linux is natively compiled on ubuntu-latest and macos-latest
-
-          # enable below for RTEMS
-          # - architecture: rtems
-          #   os: ubuntu-latest
-          #   platform: linux/amd64
-
           - os: ubuntu-latest
             epics-target: linux-x86_64
             extension: ""
             platform: linux/amd64
-
-          # enable below for MACOS native build on M1 macs
-          # M1 Macs are coming!: https://github.com/github/roadmap/issues/528
-          # - architecture: linux
-          #   os: macos-latest-x1
-          #   platform: linux/arm64
 
     runs-on: ${{ matrix.os }}
 
@@ -121,31 +155,3 @@ jobs:
         # can't test non native without some hardware to run on
         if: ${{ matrix.epics-target == 'linux-x86_64' }}
         run: /tmp/generic_ioc/tests/run-tests.sh ci_test
-
-  docker-build-all:
-    # pull requests are a duplicate of a branch push if within the same repo.
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Setup docker (missing on MacOS)
-        if: runner.os == 'macos'
-        uses: docker-practice/actions-setup-docker@fd7ecdac7caf8e2c541a48c9bcc280aae59a8461
-
-      - name: Log in to GitHub GHCR
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io/${{ github.repository_owner }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build image
-        uses: docker/build-push-action@v5
-        with:
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          tags: ci_test
-          load: true

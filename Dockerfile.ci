@@ -14,7 +14,7 @@ COPY ioc /epics/ioc
 
 # Get the current version of ibek
 COPY requirements.txt requirements.txt
-RUN uv pip install --upgrade -r requirements.txt
+RUN uv pip install --upgrade -r requirements.txt pyyaml
 
 WORKDIR ${SOURCE_FOLDER}/ibek-support
 
@@ -23,13 +23,18 @@ COPY . .
 
 # get ansible script into path
 ENV PATH=$PATH:${SOURCE_FOLDER}/ibek-support/_ansible
-# build all things that are dependencies in dependency order
-RUN ansible.sh calc,sscan,asyn,busy,autosave,sequencer,std,StreamDevice -e skip_clean=true
-RUN ansible.sh snmp,motor -e skip_clean=true
-RUN ansible.sh ADCore,ADGenICam -e skip_clean=true
-# build everything else
-RUN ansible.sh quadEM -e skip_clean=true
-RUN ansible.sh all -e from_dockerfile=false -e skip_clean=true
 
-# link everything including the kitchen sink into an IOC
+# BUILD_GROUP: comma-separated list of modules to build, set by CI matrix.
+# "core" must be built first if this group depends on it.
+ARG BUILD_GROUP=""
+ARG BUILD_DEPS=""
+
+# Build dependency groups first (comma-separated group names in BUILD_DEPS).
+# Each dep group's modules are resolved from build-groups.yml by the entrypoint.
+# For simplicity, we use a shell script to drive the build.
+COPY _scripts/ci_build_group.sh /tmp/ci_build_group.sh
+RUN chmod +x /tmp/ci_build_group.sh && \
+    /tmp/ci_build_group.sh "${BUILD_DEPS}" "${BUILD_GROUP}"
+
+# link everything into an IOC
 RUN ansible.sh ioc

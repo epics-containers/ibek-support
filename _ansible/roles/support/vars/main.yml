@@ -28,6 +28,12 @@ macro: "{{ module | upper }}"
 # macros to remove from configure/RELEASE unless already built
 remove_macros: []
 
+# extra macros to add to the global configure/RELEASE
+# e.g.
+# extra_release_macros:
+#   AREA_DETECTOR: "$(SUPPORT)"
+extra_release_macros: {}
+
 # compilation options
 make_options: -j{{ ansible_processor_vcpus }}
 
@@ -90,6 +96,14 @@ patch_file:
 #     post_build: true
 #     when: is_linux
 scripts: []
+
+# bash commands to execute after clone or after compilation (post_build=true)
+# e.g.
+# bash:
+#   - cmd: echo "hello"
+#     post_build: true
+#     when: is_linux
+bash: []
 
 # Additional tasks to execute before or after the build
 # e.g.

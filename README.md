@@ -91,6 +91,41 @@ and this
 when it launches. These two files are passed to the generic
 IOC to make it into an IOC instance at container runtime.
 
+## CI Build Groups
+
+CI builds all support modules to verify ibek-support is correct. To keep
+builds fast, modules are split into parallel groups defined in
+[build-groups.yml](build-groups.yml). Each group builds independently in CI.
+
+**New modules are automatically detected.** Any module with a `*.install.yml`
+that is not listed in `build-groups.yml` is added to an "uncategorized" group
+and built automatically. A CI warning will prompt you to assign it to a
+proper group.
+
+### Local testing
+
+Inside the developer container you can build individual groups or all groups:
+
+```bash
+# List available groups
+_scripts/local_build_groups.sh --list
+
+# Build a single group (includes its dependencies)
+_scripts/local_build_groups.sh motor
+
+# Build all groups sequentially
+_scripts/local_build_groups.sh
+
+# Check that all modules are assigned to a group
+python3 _scripts/build_matrix.py --check
+```
+
+### Adding a new support module
+
+1. Create `<module>/<module>.install.yml` as usual
+2. CI will automatically build it in the "uncategorized" group
+3. Add the module to an appropriate group in `build-groups.yml`
+
 ## How to contribute
 
 TODO: mention here how to use submodule in your ioc-xxx repo and how to
@@ -98,7 +133,4 @@ merge changes into ibek-support, also how to add to the CI to keep verifying
 that the head of the repo is not broken for any support module.
 ALSO: TODO point at the main epics-containers docs once updated to this latest
 framework.
-
-
-
 

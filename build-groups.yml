@@ -1,0 +1,76 @@
+# Module build groups for parallel CI builds.
+#
+# Each group builds independently in its own Docker container.
+# Groups must list their modules in dependency order.
+# The "deps" list specifies which other groups must be built first
+# (used for Docker stage dependencies in Dockerfile.ci).
+#
+# Any module with a *.install.yml that is NOT listed in any group
+# is automatically assigned to the "uncategorized" group. This ensures
+# new modules are always tested without manual config updates.
+#
+# Run `python _scripts/build_matrix.py` to see the generated matrix
+# and check for uncategorized modules.
+
+groups:
+  core:
+    desc: "Core EPICS support modules (dependencies for most others)"
+    deps: []
+    modules:
+      - calc
+      - sscan
+      - asyn
+      - busy
+      - autosave
+      - sequencer
+      - std
+      - StreamDevice
+
+  motor:
+    desc: "Motor stack"
+    deps: [core]
+    modules:
+      - motor
+      - motorMotorSim
+      - motorNewport
+      - pmac
+      - optics
+
+  areadetector:
+    desc: "Area detector stack"
+    deps: [core]
+    modules:
+      - ADCore
+      - ADGenICam
+      - ADAravis
+      - ADSimDetector
+      - ADAndor3
+      - ADURL
+      - ADZMQ
+      - ffmpegServer
+      - xspress3
+      - quadEM
+
+  general:
+    desc: "General-purpose modules with few dependencies"
+    deps: [core]
+    modules:
+      - modbus
+      - iocStats
+      - pvxs
+      - pvlogging
+      - opcua
+      - positioner
+
+  fieldbus:
+    desc: "Fieldbus and simple protocol modules"
+    deps: [core]
+    modules:
+      - snmp
+      - ether_ip
+      - FINS
+      - digitelMpc
+      - lakeshore340
+      - mks937a
+      - mks937b
+      - terminalserver

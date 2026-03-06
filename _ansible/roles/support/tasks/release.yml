@@ -34,6 +34,16 @@
         create: true
         mode: "0644"
 
+    - name: Add extra release macros to global configure/RELEASE for {{ module }}
+      ansible.builtin.lineinfile:
+        path: "{{ release_file }}"
+        regexp: "^{{ item.key }} *=.*"
+        line: "{{ item.key }}={{ item.value }}"
+        create: true
+        mode: "0644"
+      loop: "{{ extra_release_macros | dict2items }}"
+      when: extra_release_macros | length > 0
+
     - name: Remove requested macros from configure/RELEASE for {{ module }}
       ansible.builtin.include_tasks: remove_macros.yml
       loop: "{{ remove_macros }}"

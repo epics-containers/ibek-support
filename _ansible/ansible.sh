@@ -33,5 +33,7 @@ pb=${ansible_dir}/playbook.yml
 
 vars=" -e module_name=${module_name}"
 
+export ANSIBLE_CALLBACK_RESULT_FORMAT=yaml
+
 set -x
 ansible-playbook ${pb} -i ${ansible_dir}/hosts.yml ${vars} ${vers} ${args}

@@ -17,3 +17,8 @@ remove_macros:
 comment_out:
   - path: quadEMApp/src/Makefile
     regexp: quadEMTest
+
+patch_lines:
+  - path: configure/RELEASE
+    regexp: AREA_DETECTOR\=
+    line: ""
