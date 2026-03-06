@@ -10,3 +10,8 @@ comment_out:
     regexp: documentation
   - path: Makefile
     regexp: iocs
+
+patch_lines:
+  - path: configure/RELEASE
+    regexp: AREA_DETECTOR\=
+    line: ""
