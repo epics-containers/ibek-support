@@ -2106,7 +2106,22 @@ entity_models:
           NDStatsConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{MAX_BUFFERS}}, {{MAX_MEMORY}}, 0, 0, {{MAX_THREADS}})
 
     sub_entities:
-      - { type: ADCore.NDTimeSeries, P: "{{P}}", R: "{{R}}TS:", PORT: "{{PORT}}_TS", NDARRAY_PORT: "{{PORT}}", NAME: "{{PORT}}_TS", NCHANS: "{{NCHANS}}", TIMEOUT: "{{TIMEOUT}}", ADDR: 0, NDARRAY_ADDR: 1, ENABLED: "{{ENABLED}}", QUEUE: "{{QUEUE}}", BLOCK: "{{BLOCK}}", NSIGNALS: 23 }
+      - {
+          type: ADCore.NDTimeSeries,
+          P: "{{P}}",
+          R: "{{R}}TS:",
+          PORT: "{{PORT}}_TS",
+          NDARRAY_PORT: "{{PORT}}",
+          NAME: "{{PORT}}_TS",
+          NCHANS: "{{NCHANS}}",
+          TIMEOUT: "{{TIMEOUT}}",
+          ADDR: 0,
+          NDARRAY_ADDR: 1,
+          ENABLED: "{{ENABLED}}",
+          QUEUE: "{{QUEUE}}",
+          BLOCK: "{{BLOCK}}",
+          NSIGNALS: 23,
+        }
 
     databases:
       - file: $(ADCORE)/db/NDStats.template
@@ -2290,6 +2305,7 @@ entity_models:
         type: id
         description: |-
           Object name. You do not need to specify this
+        default: "{{ port }}.{{ attrname }}"
 
       attrname:
         type: str

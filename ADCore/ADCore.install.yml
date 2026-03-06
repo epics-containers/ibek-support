@@ -90,6 +90,3 @@ patch_blocks:
 
 remove_macros:
   - SNCSEQ
-
-extra_release_macros:
-  AREA_DETECTOR: "$(SUPPORT)"
