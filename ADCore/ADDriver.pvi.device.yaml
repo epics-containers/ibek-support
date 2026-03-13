@@ -1,7 +1,7 @@
 label: ADDriver
 children:
   - type: Group
-    name: ADSetup
+    name: Info
     layout:
       type: Grid
       labelled: true
@@ -37,7 +37,7 @@ children:
           type: TextRead
 
   - type: Group
-    name: ADReadout
+    name: Readout
     layout:
       type: Grid
       labelled: true
@@ -136,7 +136,7 @@ children:
           type: TextRead
 
   - type: Group
-    name: ADCollect
+    name: Collect
     layout:
       type: Grid
       labelled: true
@@ -252,13 +252,13 @@ children:
     file_name: NDArrayBase
 
   - type: Group
-    name: ADAdvanced
+    name: Advanced
     layout:
       type: SubScreen
       labelled: false
     children:
       - type: Group
-        name: ADShutter
+        name: Shutter
         layout:
           type: Grid
           labelled: true
@@ -324,8 +324,7 @@ children:
               type: LED
 
       - type: Group
-        name: ADDriverMisc
-        label: Advanced
+        name: Advanced
         layout:
           type: Grid
           labelled: true

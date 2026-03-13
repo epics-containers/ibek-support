@@ -6,7 +6,7 @@ children:
   - type: Group
     name: SimDetectorSetup
     layout:
-      type: SubScreen
+      type: Grid
       labelled: false
     children:
       - type: SignalRW

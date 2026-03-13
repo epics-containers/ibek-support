@@ -1,46 +1,46 @@
 label: NDArrayBase
 children:
   - type: Group
-    name: ADCollect
+    name: Info
     layout:
       type: Grid
       labelled: true
     children:
       - type: SignalR
-        name: NumQueuedArrays
-        read_pv: $(P)$(R)NumQueuedArrays
+        name: PortName
+        read_pv: $(P)$(R)PortName_RBV
         read_widget:
           type: TextRead
 
-      - type: IgnoredSignal
-        name: WaitForPlugins
+      - type: IgnoredComponent
+        name: Manufacturer
 
-      - type: IgnoredSignal
-        name: Acquire
+      - type: IgnoredComponent
+        name: Model
 
-      - type: IgnoredSignal
-        name: AcquireBusyCB
+      - type: IgnoredComponent
+        name: SerialNumber
 
-      - type: SignalRW
-        name: ArrayCounter
-        write_pv: $(P)$(R)ArrayCounter
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)ArrayCounter_RBV
+      - type: IgnoredComponent
+        name: FirmwareVersion
+
+      - type: IgnoredComponent
+        name: SDKVersion
+
+      - type: SignalR
+        name: DriverVersion
+        read_pv: $(P)$(R)DriverVersion_RBV
         read_widget:
           type: TextRead
 
-      - type: SignalRW
-        name: ArrayCallbacks
-        write_pv: $(P)$(R)ArrayCallbacks
-        write_widget:
-          type: ToggleButton
-        read_pv: $(P)$(R)ArrayCallbacks_RBV
+      - type: SignalR
+        name: ADCoreVersion
+        read_pv: $(P)$(R)ADCoreVersion_RBV
         read_widget:
-          type: LED
+          type: TextRead
 
   - type: Group
-    name: ADReadout
+    name: Produce
     layout:
       type: Grid
       labelled: true
@@ -54,6 +54,12 @@ children:
       - type: SignalR
         name: ArraySizeY
         read_pv: $(P)$(R)ArraySizeY_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: ArraySizeZ
+        read_pv: $(P)$(R)ArraySizeZ_RBV
         read_widget:
           type: TextRead
 
@@ -81,51 +87,39 @@ children:
         read_widget:
           type: TextRead
 
-  - type: Group
-    name: ADSetup
-    layout:
-      type: Grid
-      labelled: true
-    children:
       - type: SignalR
-        name: PortName
-        read_pv: $(P)$(R)PortName_RBV
+        name: NumQueuedArrays
+        read_pv: $(P)$(R)NumQueuedArrays
         read_widget:
           type: TextRead
 
-      - type: IgnoredSignal
-        name: Manufacturer
+      - type: IgnoredComponent
+        name: WaitForPlugins
 
-      - type: IgnoredSignal
-        name: Model
+      - type: IgnoredComponent
+        name: Acquire
 
-      - type: IgnoredSignal
-        name: SerialNumber
+      - type: IgnoredComponent
+        name: AcquireBusyCB
 
-      - type: IgnoredSignal
-        name: FirmwareVersion
-
-      - type: IgnoredSignal
-        name: SDKVersion
-
-      - type: SignalR
-        name: DriverVersion
-        read_pv: $(P)$(R)DriverVersion_RBV
+      - type: SignalRW
+        name: ArrayCounter
+        write_pv: $(P)$(R)ArrayCounter
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)ArrayCounter_RBV
         read_widget:
           type: TextRead
 
-      - type: SignalR
-        name: ADCoreVersion
-        read_pv: $(P)$(R)ADCoreVersion_RBV
+      - type: SignalRW
+        name: ArrayCallbacks
+        write_pv: $(P)$(R)ArrayCallbacks
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)ArrayCallbacks_RBV
         read_widget:
-          type: TextRead
+          type: LED
 
-  - type: Group
-    name: NDCircularBuff
-    layout:
-      type: Grid
-      labelled: true
-    children:
       - type: SignalRW
         name: NDimensions
         write_pv: $(P)$(R)NDimensions
@@ -168,12 +162,6 @@ children:
         read_widget:
           type: TextRead
 
-  - type: Group
-    name: NDPluginBaseFull
-    layout:
-      type: Grid
-      labelled: true
-    children:
       - type: SignalR
         name: CompressedSize
         read_pv: $(P)$(R)CompressedSize_RBV
@@ -186,26 +174,20 @@ children:
         read_widget:
           type: TextRead
 
-  - type: Group
-    name: NDROI
-    layout:
-      type: Grid
-      labelled: true
-    children:
       - type: SignalR
-        name: ArraySizeZ
-        read_pv: $(P)$(R)ArraySizeZ_RBV
+        name: Codec
+        read_pv: $(P)$(R)Codec_RBV
         read_widget:
           type: TextRead
 
   - type: Group
-    name: ADAdvanced
+    name: Advanced
     layout:
       type: SubScreen
       labelled: false
     children:
       - type: Group
-        name: ADAttrFile
+        name: Attributes
         layout:
           type: Grid
           labelled: true
@@ -231,7 +213,7 @@ children:
               type: TextRead
 
       - type: Group
-        name: ADBuffers
+        name: Buffers
         layout:
           type: Grid
           labelled: true
@@ -286,15 +268,3 @@ children:
             write_pv: $(P)$(R)EmptyFreeList
             write_widget:
               type: ToggleButton
-
-      - type: Group
-        name: ADPlugins
-        layout:
-          type: Grid
-          labelled: true
-        children:
-          - type: SignalR
-            name: Codec
-            read_pv: $(P)$(R)Codec_RBV
-            read_widget:
-              type: TextRead
