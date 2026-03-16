@@ -10,3 +10,11 @@ dbds:
 libs:
   - uvc
   - ADUVC
+
+apt_developer:
+  - libusb-1.0-0-dev
+  - libuvc-dev
+  
+apt_runtime:
+  - libusb-1.0-0
+  - libuvc0
