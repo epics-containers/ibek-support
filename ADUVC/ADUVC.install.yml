@@ -1,11 +1,11 @@
 # yaml-language-server: $schema=../../ibek-support/_scripts/support_install_variables.json
 
 module: ADUVC
-version: 1-6dls1
+version: R2-0
 organization: http://github.com/areaDetector
 
 dbds:
-  - uvcSupport
+  - uvcSupport.dbd
 
 libs:
   - uvc
@@ -14,7 +14,20 @@ libs:
 apt_developer:
   - libusb-1.0-0-dev
   - libuvc-dev
-  
+  - libjpeg-dev
+
 apt_runtime:
   - libusb-1.0-0
   - libuvc0
+  - libjpeg8
+
+# uvcSupport Makefile expects libjpeg.a from ADSupport
+comment_out:
+  - path: uvcSupport/Makefile
+    regexp: "uvc_LIBS \\+= jpeg"
+
+# replace with uvc_SYS_LIBS to link against system libjpeg
+patch_blocks:
+  - path: uvcSupport/Makefile
+    block: |
+      uvc_SYS_LIBS += jpeg
