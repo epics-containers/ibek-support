@@ -100,6 +100,31 @@ entity_models:
 
         default: 1
         
+      
+    - name: xspress3Plugins
+      description: |-
+
+      parameters:
+        DET:
+          type: str
+          description: |-
+
+          default: XSP3.DTC
+        P:
+          type: str
+          description: |-
+            Prefix for PV name
+        PORTPREFIX:
+          type: str
+          description: |-
+
+          default: XSP3
+        name:
+          type: str
+          description: |-
+
+          default: XSP3.PLUG
+
 
     pre_init:
       - value: |
