@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=../../ibek-support/_scripts/support_install_variables.json
+
+module: ADUVC
+version: 1-6dls1
+organization: http://github.com/areaDetector
+
+dbds:
+  - uvcSupport
+
+libs:
+  - uvc
+  - ADUVC
