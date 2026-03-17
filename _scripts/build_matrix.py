@@ -99,11 +99,16 @@ def main():
                         help="Exit 1 if uncategorized modules exist")
     parser.add_argument("--github", action="store_true",
                         help="Output matrix= line for GitHub Actions")
+    parser.add_argument("--uncategorized", action="store_true",
+                        help="Print comma-separated list of uncategorized modules")
     args = parser.parse_args()
 
     matrix, uncategorized = build_matrix(check_mode=args.check)
 
-    if args.github:
+    if args.uncategorized:
+        if uncategorized:
+            print(",".join(uncategorized))
+    elif args.github:
         print(f"matrix={json.dumps(matrix)}")
     else:
         print(json.dumps(matrix, indent=2))

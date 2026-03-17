@@ -59,9 +59,10 @@ fi
 # Build the target group
 if [ -n "$TARGET_GROUP" ]; then
     if [ "$TARGET_GROUP" = "uncategorized" ]; then
-        # Build everything not already built (catches new modules)
-        echo "=== Building uncategorized (all remaining) modules ==="
-        ansible.sh all -e from_dockerfile=false -e skip_clean=true
+        # Build only the modules not assigned to any group
+        echo "=== Building uncategorized modules ==="
+        modules=$(python3 "${REPO_ROOT}/_scripts/build_matrix.py" --uncategorized)
+        build_modules "$modules"
     else
         echo "=== Building target group: $TARGET_GROUP ==="
         modules=$(get_group_modules "$TARGET_GROUP")

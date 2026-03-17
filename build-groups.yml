@@ -50,6 +50,7 @@ groups:
       - ffmpegServer
       - xspress3
       - quadEM
+      - pvaDriver
 
   general:
     desc: "General-purpose modules with few dependencies"
