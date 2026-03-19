@@ -70,6 +70,13 @@ entity_models:
           NDStdArraysConfigure("{{PORT}}.ARR", 2, 0, "{{PORT}}", 0, 0, 0, 0, 0, 1)
 
     databases:
+      - file: $(ADCORE)/db/ADBase.template
+        args:
+          P:
+          R:
+          PORT:
+          TIMEOUT:
+          ADDR:
       - file: $(ADUVC)/db/ADUVC.template
         args:
           P:

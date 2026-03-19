@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../../ibek-support/_scripts/support_install_variables.json
 
 module: ADUVC
-version: R2-0
+version: R1-9
 organization: http://github.com/areaDetector
 
 dbds:
