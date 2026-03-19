@@ -8,3 +8,9 @@ libs:
   - pvaDriver
 
 organization: http://github.com/areaDetector/
+
+patch_blocks:
+  - path: "{{ config_linux_host }}"
+    marker: "# {mark} disable PVAcpp (using PVXS instead) -----------------------"
+    block: |
+      WITH_PVA = NO
