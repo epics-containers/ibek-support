@@ -61,7 +61,7 @@ entity_models:
           Velocity (EGU/s)
 
       PREC:
-        type: str
+        type: int
         description: |-
           Display Precision
 
@@ -69,9 +69,10 @@ entity_models:
         type: str
         description: |-
           Engineering Units
+        default: ''
 
       TWV:
-        type: str
+        type: float
         description: |-
           Tweak Step Size (EGU)
 
@@ -118,30 +119,34 @@ entity_models:
         default: 0
 
       BACC:
-        type: str
+        type: float
         description: |-
           BL Seconds to Veloc.
+        default: 0
 
       DHLM:
-        type: str
+        type: float
         description: |-
           Dial High Limit
+        default: 0
 
       DLLM:
-        type: str
+        type: float
         description: |-
           Dial Low Limit
+        default: 0
 
       HLM:
-        type: str
+        type: float
         description: |-
           User High Limit
+        default: 0
 
       LLM:
-        type: str
+        type: float
         description: |-
           User Low Limit
-
+        default: 0
       HLSV:
         type: str
         description: |-
@@ -153,6 +158,7 @@ entity_models:
         description: |-
           Startup commands
 
+        default: ""
       SREV:
         type: int
         description: |-
@@ -160,20 +166,20 @@ entity_models:
         default: 1000
 
       RRES:
-        type: str
+        type: float
         description: |-
           Readback Step Size (EGU)
-
+        default: 0
       ERES:
-        type: str
+        type: float
         description: |-
           Encoder Step Size (EGU)
-
+        default: 0
       JAR:
-        type: str
+        type: float
         description: |-
           Jog Acceleration (EGU/s^2)
-
+        default: 0
       UEIP:
         type: int
         description: |-
@@ -191,11 +197,13 @@ entity_models:
         description: |-
           Readback Location, set URIP = 1 if you specify this
 
+        default: ""
       RLNK:
         type: str
         description: |-
           Readback output link
 
+        default: ""
       RTRY:
         type: int
         description: |-
@@ -215,10 +223,10 @@ entity_models:
         default: 0
 
       RDBD:
-        type: str
+        type: float
         description: |-
           Retry Deadband (EGU)
-
+        default: 0
       FOFF:
         type: int
         description: |-
@@ -349,6 +357,33 @@ entity_models:
         P:
         M:
 
+  - name: auto_asyn_auto_power
+    description: |-
+      Automatic amplifier power control for asyn model 3 motor drivers.
+      Provides records to enable/disable auto power on/off and set delays.
+    parameters:
+      P:
+        type: str
+        description: Device Prefix
+      M:
+        type: str
+        description: Device Suffix
+      PORT:
+        type: str
+        description: Asyn port
+      ADDR:
+        type: int
+        description: Asyn address
+      FRAC:
+        type: int
+        description: Holding current percentage
+        default: 0
+
+    databases:
+      - file: $(MOTOR)/db/asyn_auto_power.db
+        args:
+          .*:
+
   - name: softMotorForPiezo
     description: |-
       TODO:ADD DESCRIPTION
@@ -388,6 +423,7 @@ entity_models:
         type: str
         description: |-
           Engineering Units
+        default: ''
 
       DHLM:
         type: float
@@ -474,3 +510,32 @@ entity_models:
       - value: |
           drvAsynMotorConfigure("{{}}", "motorSim", {{}}, {{}})
   # TODO - MISSING ARGS:
+
+  - name: NewFocus
+    description: |-
+      New Focus 874X Picomotor controller
+    parameters:
+      name:
+        type: id
+        description: Asyn port name for motor record
+      IP:
+        type: object
+        description: Asyn IP port for communication
+      AXES:
+        type: int
+        description: Number of axes
+      MOVINGPOLL:
+        type: int
+        description: Polling period during move (ms)
+        default: 200
+      IDLEPOLL:
+        type: int
+        description: Polling period when idle (ms)
+        default: 1000
+
+    pre_init:
+      - when: first
+        value: |
+          # New Focus 874X controllers
+      - value: |
+          nf874xCreateController("{{ name }}", "{{ IP }}", {{ AXES }}, {{ MOVINGPOLL }}, {{ IDLEPOLL }})

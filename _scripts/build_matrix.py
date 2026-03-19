@@ -39,17 +39,20 @@ def discover_modules():
     return modules
 
 
-def load_groups():
-    """Load build-groups.yml and return the groups dict."""
+def load_build_config():
+    """Load build-groups.yml and return (groups dict, skip set)."""
     with open(BUILD_GROUPS_FILE) as f:
         data = yaml.safe_load(f)
-    return data.get("groups", {})
+    return data.get("groups", {}), set(data.get("skip", []))
 
 
 def build_matrix(check_mode=False):
     """Build the CI matrix, returning (matrix_dict, uncategorized_modules)."""
     all_modules = discover_modules()
-    groups = load_groups()
+    groups, skip = load_build_config()
+
+    # Remove skipped modules from consideration
+    all_modules -= skip
 
     # Collect all modules assigned to groups
     assigned = set()
@@ -74,19 +77,21 @@ def build_matrix(check_mode=False):
         modules = [m for m in group.get("modules", []) if m in all_modules]
         if not modules:
             continue
-        matrix_entries.append({
+        entry = {
             "group": group_name,
             "desc": group.get("desc", ""),
-            "deps": group.get("deps", []),
             "modules": modules,
-        })
+        }
+        # Groups with base_image override the default ioc-asyn developer image
+        if "base_image" in group:
+            entry["base_image"] = group["base_image"]
+        matrix_entries.append(entry)
 
     # Add uncategorized group if there are any
     if uncategorized:
         matrix_entries.append({
             "group": "uncategorized",
             "desc": "Auto-discovered modules not yet assigned to a group",
-            "deps": ["core"],
             "modules": uncategorized,
         })
 
@@ -99,11 +104,16 @@ def main():
                         help="Exit 1 if uncategorized modules exist")
     parser.add_argument("--github", action="store_true",
                         help="Output matrix= line for GitHub Actions")
+    parser.add_argument("--uncategorized", action="store_true",
+                        help="Print comma-separated list of uncategorized modules")
     args = parser.parse_args()
 
     matrix, uncategorized = build_matrix(check_mode=args.check)
 
-    if args.github:
+    if args.uncategorized:
+        if uncategorized:
+            print(",".join(uncategorized))
+    elif args.github:
         print(f"matrix={json.dumps(matrix)}")
     else:
         print(json.dumps(matrix, indent=2))

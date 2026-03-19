@@ -3,3 +3,4 @@
 schemas/
 **/.ansible
 **/.tmp.install.yml
+.claude/settings.local.json

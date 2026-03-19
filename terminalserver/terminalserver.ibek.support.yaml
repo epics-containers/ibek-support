@@ -59,6 +59,7 @@ entity_models:
         type: str
         description: |-
           PV suffix
+        default: ""
       HOST:
         type: str
         description: |-
@@ -117,6 +118,7 @@ entity_models:
         type: str
         description: |-
           PV suffix
+        default: ""
       HOST:
         type: str
         description: |-
@@ -175,9 +177,9 @@ entity_models:
           R:
           HOST:
 
-  - name: Acs
+  - name: AcsChannel
     description: |-
-      TODO:ADD DESCRIPTION
+      Acs terminal server channel
     parameters:
       name:
         type: id
@@ -191,6 +193,41 @@ entity_models:
         type: str
         description: |-
           PV suffix
+      CHAN:
+        type: int
+        description: |-
+          Channel number
+      HOST:
+        type: str
+        description: |-
+          Host IP address
+
+    databases:
+      - file: $(TERMINALSERVER)/db/AcsChannel.template
+        args:
+          name:
+          P:
+          R:
+          CHAN:
+          HOST:
+
+  - name: Acs16
+    description: |-
+      Acs terminal server with 16 channels
+    parameters:
+      name:
+        type: id
+        description: |-
+          Object name
+      P:
+        type: str
+        description: |-
+          PV prefix
+      R:
+        type: str
+        description: |-
+          PV suffix
+        default: ""
       HOST:
         type: str
         description: |-
@@ -200,24 +237,110 @@ entity_models:
         description: |-
           Number of channels
 
+    sub_entities:
+      - { type: terminalServer.AcsChannel, CHAN: 1, name: "{{name}}_1", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 2, name: "{{name}}_2", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 3, name: "{{name}}_3", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 4, name: "{{name}}_4", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 5, name: "{{name}}_5", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 6, name: "{{name}}_6", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 7, name: "{{name}}_7", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 8, name: "{{name}}_8", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 9, name: "{{name}}_9", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 10, name: "{{name}}_10", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 11, name: "{{name}}_11", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 12, name: "{{name}}_12", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 13, name: "{{name}}_13", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 14, name: "{{name}}_14", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 15, name: "{{name}}_15", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 16, name: "{{name}}_16", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+
     databases:
       - file: $(TERMINALSERVER)/db/TerminalServer16.template
         args:
+          name:
           P:
           R:
-          name:
 
       - file: $(TERMINALSERVER)/db/Acs.template
         args:
+          name: |
+            {{ name + "_top" }}
           P:
           R:
           HOST:
-          name:
 
-      - file: $(TERMINALSERVER)/db/AcsChannel.template
+  - name: Acs32
+    description: |-
+      Acs terminal server with 32 channels
+    parameters:
+      name:
+        type: id
+        description: |-
+          Object name
+      P:
+        type: str
+        description: |-
+          PV prefix
+      R:
+        type: str
+        description: |-
+          PV suffix
+        default: ""
+      HOST:
+        type: str
+        description: |-
+          Host IP address
+      NCHANS:
+        type: int
+        description: |-
+          Number of channels
+
+    sub_entities:
+      - { type: terminalServer.AcsChannel, CHAN: 1, name: "{{name}}_1", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 2, name: "{{name}}_2", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 3, name: "{{name}}_3", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 4, name: "{{name}}_4", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 5, name: "{{name}}_5", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 6, name: "{{name}}_6", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 7, name: "{{name}}_7", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 8, name: "{{name}}_8", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 9, name: "{{name}}_9", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 10, name: "{{name}}_10", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 11, name: "{{name}}_11", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 12, name: "{{name}}_12", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 13, name: "{{name}}_13", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 14, name: "{{name}}_14", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 15, name: "{{name}}_15", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 16, name: "{{name}}_16", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 17, name: "{{name}}_17", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 18, name: "{{name}}_18", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 19, name: "{{name}}_19", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 20, name: "{{name}}_20", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 21, name: "{{name}}_21", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 22, name: "{{name}}_22", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 23, name: "{{name}}_23", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 24, name: "{{name}}_24", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 25, name: "{{name}}_25", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 26, name: "{{name}}_26", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 27, name: "{{name}}_27", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 28, name: "{{name}}_28", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 29, name: "{{name}}_29", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 30, name: "{{name}}_30", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 31, name: "{{name}}_31", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+      - { type: terminalServer.AcsChannel, CHAN: 32, name: "{{name}}_32", P: "{{P}}", R: "{{R}}", HOST: "{{HOST}}" }
+
+    databases:
+      - file: $(TERMINALSERVER)/db/TerminalServer32.template
         args:
+          name:
           P:
           R:
-          CHAN:
+
+      - file: $(TERMINALSERVER)/db/Acs.template
+        args:
+          name: |
+            {{ name + "_top" }}
+          P:
+          R:
           HOST:
-          name:

@@ -2,20 +2,28 @@
 #
 # Each group builds independently in its own Docker container.
 # Groups must list their modules in dependency order.
-# The "deps" list specifies which other groups must be built first
-# (used for Docker stage dependencies in Dockerfile.ci).
+#
+# The "core" group builds from epics-base-developer. All other groups
+# build from ioc-asyn-developer (the Dockerfile.ci default) which already
+# includes core modules. Set "base_image" to a full image reference to
+# override the default base.
 #
 # Any module with a *.install.yml that is NOT listed in any group
 # is automatically assigned to the "uncategorized" group. This ensures
 # new modules are always tested without manual config updates.
 #
+# Modules listed in "skip" are excluded from all CI builds.
+#
 # Run `python _scripts/build_matrix.py` to see the generated matrix
 # and check for uncategorized modules.
+
+skip:
+  - pvaDriver
 
 groups:
   core:
     desc: "Core EPICS support modules (dependencies for most others)"
-    deps: []
+    base_image: ghcr.io/epics-containers/epics-base-developer:7.0.10ec1
     modules:
       - calc
       - sscan
@@ -24,11 +32,9 @@ groups:
       - autosave
       - sequencer
       - std
-      - StreamDevice
 
   motor:
     desc: "Motor stack"
-    deps: [core]
     modules:
       - motor
       - motorMotorSim
@@ -36,11 +42,15 @@ groups:
       - pmac
       - optics
 
-  areadetector:
-    desc: "Area detector stack"
-    deps: [core]
+  adcore:
+    desc: separate verification of ADCore
     modules:
       - ADCore
+
+  areadetector:
+    desc: "Area detector stack"
+    base_image: ghcr.io/epics-containers/ioc-areadetector-developer:3.14ec2
+    modules:
       - ADGenICam
       - ADAravis
       - ADSimDetector
@@ -53,7 +63,6 @@ groups:
 
   general:
     desc: "General-purpose modules with few dependencies"
-    deps: [core]
     modules:
       - modbus
       - iocStats
@@ -64,8 +73,8 @@ groups:
 
   fieldbus:
     desc: "Fieldbus and simple protocol modules"
-    deps: [core]
     modules:
+      - StreamDevice
       - snmp
       - ether_ip
       - FINS

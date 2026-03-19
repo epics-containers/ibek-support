@@ -133,11 +133,13 @@ entity_models:
         type: str
         description: |-
           Input end of string (terminator)
+        default: "\n"
 
       output_eos:
         type: str
         description: |-
           Output end of string (terminator)
+        default: "\n"
 
       priority:
         type: int
@@ -149,21 +151,25 @@ entity_models:
         type: bool
         description: |-
           Set to stop autoconnect
+        default: false
 
       noProcessEos:
         type: bool
         description: |-
           Set to avoid processing end of string
+        default: false
 
       simulation:
         type: str
         description: |-
           IP port to connect to if in simulation mode
+        default: ""
 
       baud:
         type: int
         description: |-
           Baud Rate
+        default: 9600
 
       parity:
         type: enum
@@ -173,6 +179,7 @@ entity_models:
           even:
           none:
           odd:
+        default: none
       crtscts:
         type: enum
         description: |-
@@ -180,6 +187,7 @@ entity_models:
         values:
           Y:
           N:
+        default: "N"
       stop:
         type: enum
         description: |-
@@ -187,6 +195,7 @@ entity_models:
         values:
           "1":
           "2":
+        default: "1"
       disconnectOnReadTimeout:
         type: enum
         description: |-
@@ -194,6 +203,7 @@ entity_models:
         values:
           Y:
           N:
+        default: "Y"
       bits:
         type: enum
         description: |-
@@ -203,6 +213,7 @@ entity_models:
           "5":
           "7":
           "6":
+        default: "8"
     pre_init:
       - value: |
           %sConfigure("%s", "%s", %d, %d, %d)

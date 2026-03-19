@@ -1,0 +1,34 @@
+# Macros:
+# % macro, P, Device Prefix
+# % macro, A1, Output PV for axis 1
+# % macro, A2, Output PV for axis 2
+# % macro, A3, Output PV for axis 3
+# % macro, A4, Output PV for axis 4
+# % macro, A5, Output PV for axis 5
+# % macro, A6, Output PV for axis 6
+# % macro, INPOS1, In-position PV for axis 1
+# % macro, INPOS2, In-position PV for axis 2
+# % macro, INPOS3, In-position PV for axis 3
+# % macro, INPOS4, In-position PV for axis 4
+# % macro, INPOS5, In-position PV for axis 5
+# % macro, INPOS6, In-position PV for axis 6
+# % macro, INPOS_CALC, Calculation for all-safe check
+
+record(fanout, "$(P):MOVE_TO_SAFE") {
+  field(LNK1, "$(A1)")
+  field(LNK2, "$(A2)")
+  field(LNK3, "$(A3)")
+  field(LNK4, "$(A4)")
+  field(LNK5, "$(A5)")
+  field(LNK6, "$(A6)")
+}
+
+record(calc, "$(P):MOVE_TO_SAFE:ALL_SAFE") {
+  field(INPA, "$(INPOS1)")
+  field(INPB, "$(INPOS2)")
+  field(INPC, "$(INPOS3)")
+  field(INPD, "$(INPOS4)")
+  field(INPE, "$(INPOS5)")
+  field(INPF, "$(INPOS6)")
+  field(CALC, "$(INPOS_CALC)")
+}

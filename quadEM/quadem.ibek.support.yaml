@@ -235,7 +235,7 @@ entity_models:
         values: *channels
         entity:
           type: quadEM._NDTimeSeriesN
-          NAME: "{{SERIES}}"
+          NAME: "{{PORT}}.{{SERIES}}"
           P: "{{NDARRAY_PORT.P}}"
           R: "{{NDARRAY_PORT.R}}TS:{{SERIES}}:"
           PORT: "{{PORT}}"
@@ -266,7 +266,7 @@ entity_models:
           type: ADCore.NDStats
           P: "{{NDARRAY_PORT.P}}"
           R: "{{NDARRAY_PORT.R}}FFT:{{SERIES}}:"
-          PORT: "{{PORT}}.TS.FFT{{SERIES_num}}.stats"
+          PORT: "{{PORT}}.FFT{{SERIES_num}}.stats"
           NDARRAY_PORT: "{{PORT}}.FFT{{SERIES_num}}"
           HIST_SIZE: 28
           XSIZE: 128
