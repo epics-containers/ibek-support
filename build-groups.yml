@@ -11,8 +11,13 @@
 # is automatically assigned to the "uncategorized" group. This ensures
 # new modules are always tested without manual config updates.
 #
+# Modules listed in "skip" are excluded from all CI builds.
+#
 # Run `python _scripts/build_matrix.py` to see the generated matrix
 # and check for uncategorized modules.
+
+skip:
+  - pvaDriver
 
 groups:
   core:
@@ -49,7 +54,6 @@ groups:
       - ffmpegServer
       - xspress3
       - quadEM
-      - pvaDriver
 
   general:
     desc: "General-purpose modules with few dependencies"

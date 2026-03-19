@@ -39,17 +39,20 @@ def discover_modules():
     return modules
 
 
-def load_groups():
-    """Load build-groups.yml and return the groups dict."""
+def load_build_config():
+    """Load build-groups.yml and return (groups dict, skip set)."""
     with open(BUILD_GROUPS_FILE) as f:
         data = yaml.safe_load(f)
-    return data.get("groups", {})
+    return data.get("groups", {}), set(data.get("skip", []))
 
 
 def build_matrix(check_mode=False):
     """Build the CI matrix, returning (matrix_dict, uncategorized_modules)."""
     all_modules = discover_modules()
-    groups = load_groups()
+    groups, skip = load_build_config()
+
+    # Remove skipped modules from consideration
+    all_modules -= skip
 
     # Collect all modules assigned to groups
     assigned = set()
