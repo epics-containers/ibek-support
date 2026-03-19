@@ -32,7 +32,6 @@ groups:
       - autosave
       - sequencer
       - std
-      - ADCore
 
   motor:
     desc: "Motor stack"
@@ -42,6 +41,11 @@ groups:
       - motorNewport
       - pmac
       - optics
+
+  adcore:
+    desc: separate verification of ADCore
+    modules:
+      - ADCore
 
   areadetector:
     desc: "Area detector stack"
