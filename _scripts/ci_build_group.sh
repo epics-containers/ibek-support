@@ -1,14 +1,13 @@
 #!/bin/bash
 # Build a specific group of modules for CI.
-# Usage: ci_build_group.sh <dep_groups> <target_group>
+# Usage: ci_build_group.sh <target_group>
 #
 # Reads build-groups.yml to resolve group names to module lists,
-# then calls ansible.sh for each group in order.
+# then calls ansible.sh for the group's modules.
 
 set -e
 
-DEP_GROUPS="$1"
-TARGET_GROUP="$2"
+TARGET_GROUP="$1"
 
 # When run from Dockerfile.ci, the script is copied to /tmp but WORKDIR
 # is the ibek-support directory. When run locally, fall back to deriving
@@ -45,21 +44,9 @@ build_modules() {
     fi
 }
 
-# Build dependency groups first
-if [ -n "$DEP_GROUPS" ]; then
-    IFS=',' read -ra DEPS <<< "$DEP_GROUPS"
-    for dep in "${DEPS[@]}"; do
-        dep=$(echo "$dep" | xargs)  # trim whitespace
-        echo "=== Building dependency group: $dep ==="
-        modules=$(get_group_modules "$dep")
-        build_modules "$modules"
-    done
-fi
-
 # Build the target group
 if [ -n "$TARGET_GROUP" ]; then
     if [ "$TARGET_GROUP" = "uncategorized" ]; then
-        # Build only the modules not assigned to any group
         echo "=== Building uncategorized modules ==="
         modules=$(python3 "${REPO_ROOT}/_scripts/build_matrix.py" --uncategorized)
         build_modules "$modules"

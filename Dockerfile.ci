@@ -1,7 +1,9 @@
+ARG IMAGE_EXT
 
-ARG BASE=7.0.10ec1
 ARG REGISTRY=ghcr.io/epics-containers
-ARG DEVELOPER=${REGISTRY}/epics-base-developer:${BASE}
+# Default base: ioc-asyn already includes core modules.
+# Override DEVELOPER to epics-base for the core group build.
+ARG DEVELOPER=${REGISTRY}/ioc-asyn${IMAGE_EXT}-developer:4.45ec3
 
 ##### build stage ##############################################################
 FROM  ${DEVELOPER} AS developer
@@ -10,7 +12,7 @@ FROM  ${DEVELOPER} AS developer
 # Using the same location here makes devcontainer/runtime differences transparent.
 ENV SOURCE_FOLDER=/epics/generic-source
 # connect ioc source folder to its know location
-COPY ioc /epics/ioc
+RUN ln -s ${SOURCE_FOLDER}/ioc ${IOC}
 
 # Get the current version of ibek
 COPY requirements.txt requirements.txt
@@ -24,17 +26,12 @@ COPY . .
 # get ansible script into path
 ENV PATH=$PATH:${SOURCE_FOLDER}/ibek-support/_ansible
 
-# BUILD_GROUP: comma-separated list of modules to build, set by CI matrix.
-# "core" must be built first if this group depends on it.
+# BUILD_GROUP: the group of modules to build, set by CI matrix.
 ARG BUILD_GROUP=""
-ARG BUILD_DEPS=""
 
-# Build dependency groups first (comma-separated group names in BUILD_DEPS).
-# Each dep group's modules are resolved from build-groups.yml by the entrypoint.
-# For simplicity, we use a shell script to drive the build.
 COPY _scripts/ci_build_group.sh /tmp/ci_build_group.sh
 RUN chmod +x /tmp/ci_build_group.sh && \
-    /tmp/ci_build_group.sh "${BUILD_DEPS}" "${BUILD_GROUP}"
+    /tmp/ci_build_group.sh "${BUILD_GROUP}"
 
 # link everything into an IOC
 RUN ansible.sh ioc

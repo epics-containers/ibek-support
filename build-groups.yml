@@ -2,8 +2,10 @@
 #
 # Each group builds independently in its own Docker container.
 # Groups must list their modules in dependency order.
-# The "deps" list specifies which other groups must be built first
-# (used for Docker stage dependencies in Dockerfile.ci).
+#
+# The "core" group builds from epics-base-developer. All other groups
+# build from ioc-asyn-developer which already includes core modules.
+# Set "base_image" to override the default base (ioc-asyn).
 #
 # Any module with a *.install.yml that is NOT listed in any group
 # is automatically assigned to the "uncategorized" group. This ensures
@@ -15,7 +17,7 @@
 groups:
   core:
     desc: "Core EPICS support modules (dependencies for most others)"
-    deps: []
+    base_image: epics-base
     modules:
       - calc
       - sscan
@@ -28,7 +30,6 @@ groups:
 
   motor:
     desc: "Motor stack"
-    deps: [core]
     modules:
       - motor
       - motorMotorSim
@@ -38,7 +39,6 @@ groups:
 
   areadetector:
     desc: "Area detector stack"
-    deps: [core]
     modules:
       - ADCore
       - ADGenICam
@@ -54,7 +54,6 @@ groups:
 
   general:
     desc: "General-purpose modules with few dependencies"
-    deps: [core]
     modules:
       - modbus
       - iocStats
@@ -65,7 +64,6 @@ groups:
 
   fieldbus:
     desc: "Fieldbus and simple protocol modules"
-    deps: [core]
     modules:
       - snmp
       - ether_ip

@@ -74,19 +74,21 @@ def build_matrix(check_mode=False):
         modules = [m for m in group.get("modules", []) if m in all_modules]
         if not modules:
             continue
-        matrix_entries.append({
+        entry = {
             "group": group_name,
             "desc": group.get("desc", ""),
-            "deps": group.get("deps", []),
             "modules": modules,
-        })
+        }
+        # Groups with base_image override the default ioc-asyn developer image
+        if "base_image" in group:
+            entry["base_image"] = group["base_image"]
+        matrix_entries.append(entry)
 
     # Add uncategorized group if there are any
     if uncategorized:
         matrix_entries.append({
             "group": "uncategorized",
             "desc": "Auto-discovered modules not yet assigned to a group",
-            "deps": ["core"],
             "modules": uncategorized,
         })
 
