@@ -26,7 +26,6 @@ groups:
       - autosave
       - sequencer
       - std
-      - StreamDevice
 
   motor:
     desc: "Motor stack"
@@ -65,6 +64,7 @@ groups:
   fieldbus:
     desc: "Fieldbus and simple protocol modules"
     modules:
+      - StreamDevice
       - snmp
       - ether_ip
       - FINS

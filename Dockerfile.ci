@@ -11,7 +11,8 @@ FROM  ${DEVELOPER} AS developer
 # The devcontainer mounts the project root to /epics/generic-source
 # Using the same location here makes devcontainer/runtime differences transparent.
 ENV SOURCE_FOLDER=/epics/generic-source
-# connect ioc source folder to its know location
+# get ioc source from ioc-asyn and link to expected location
+COPY --from=ghcr.io/epics-containers/ioc-asyn-developer:4.45ec3 /epics/ioc ${SOURCE_FOLDER}/ioc
 RUN ln -s ${SOURCE_FOLDER}/ioc ${IOC}
 
 # Get the current version of ibek
