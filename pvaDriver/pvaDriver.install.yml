@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: pvaDriver
-version: 1-5dls9
+version: fee9e5a240eb4209cd01e24cfc6d5273159a39de
 dbds:
   - pvaDriverSupport.dbd
 libs:
