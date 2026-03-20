@@ -44,6 +44,88 @@ entity_models:
         description: |-
 
 
+      R:
+        type: str
+        description: |-
+          Device Suffix
+        default: ':'
+      
+      base_ip:
+        type: str
+        description: |-
+          IP of xspress3 device
+        default: 192.168.0.1
+      
+      settings_directory:
+        type: str
+        description: |-
+          File path for the xspress3 settings
+
+
+    - name: xspress3DTCPlugin
+      description: |-
+        xspress3DTCPlugin
+      parameters:
+        ENABLED:
+          type: int
+          description: |-
+
+          default: 1
+        NDARRAY_PORT:
+          type: str
+          description: |-
+
+          default: XSP3
+        P:
+          type: str
+          description: |-
+            Prefix for PV name
+        PORT:
+          type: str
+          description: |-
+
+          default: XSP3.DTC
+        QUEUE:
+          type: int
+          description: |-
+
+        R:
+          type: str
+          description: |-
+            Device Suffix
+          default: ':'
+        TIMEOUT:
+          type: int
+        description: |-
+
+        default: 1
+        
+      
+    - name: xspress3Plugins
+      description: |-
+
+      parameters:
+        DET:
+          type: str
+          description: |-
+
+          default: XSP3.DTC
+        P:
+          type: str
+          description: |-
+            Prefix for PV name
+        PORTPREFIX:
+          type: str
+          description: |-
+
+          default: XSP3
+        name:
+          type: str
+          description: |-
+
+          default: XSP3.PLUG
+
+
     pre_init:
       - value: |
           epicsEnvSet ""
