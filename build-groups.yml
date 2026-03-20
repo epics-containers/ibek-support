@@ -47,19 +47,26 @@ groups:
     modules:
       - ADCore
 
-  areadetector:
-    desc: "Area detector stack"
+  # AD modules split in two for better parallelism
+  areadetector1:
+    desc: "Area detector stack 1"
+    base_image: ghcr.io/epics-containers/ioc-areadetector-developer:3.14ec2
+    modules:
+      - ADURL
+      - ADZMQ
+      - ADUVC
+      - ffmpegServer
+      - quadEM
+
+  areadetector2:
+    desc: "Area detector stack 2"
     base_image: ghcr.io/epics-containers/ioc-areadetector-developer:3.14ec2
     modules:
       - ADGenICam
       - ADAravis
       - ADSimDetector
       - ADAndor3
-      - ADURL
-      - ADZMQ
-      - ffmpegServer
       - xspress3
-      - quadEM
 
   general:
     desc: "General-purpose modules with few dependencies"
