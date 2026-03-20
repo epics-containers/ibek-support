@@ -10,7 +10,7 @@ entity_models:
       Linda Pratt 28/09/2009
     parameters:
       device:
-        type: str
+        type: id
         description: |-
           device name
 
@@ -595,7 +595,7 @@ entity_models:
       those in the Img template.
     parameters:
       device:
-        type: str
+        type: id
         description: |-
           device name
 
@@ -862,11 +862,11 @@ entity_models:
         description: |-
           The device's name for gui purposes
 
-      # TODO - when we come to construct screens, how is this going to work?
-      # - type: str
-      #   name: GCTLR
-      #   description: |-
-      #     The gauge controller PV prefix, for gui purposes
+      GCTLR:
+        type: str
+        description: |-
+          The gauge controller PV prefix, for gui purposes
+        default: ""
 
       ctlsp_level:
         type: float
@@ -929,6 +929,34 @@ entity_models:
           ctlsp_drvl:
           ctlsp_hopr:
           ctlsp_lopr:
+          GCTLR:
           ctlsp_desc:
           aitype:
           aiinp:
+
+  - name: auto_mks937aInterlock
+    description: |-
+      Override gauge interlock values. This template should be used AFTER the
+      interlock records have been loaded with default values.
+    parameters:
+      interlock:
+        type: str
+        description: |-
+          Interlock subsystem (device:ILK)
+      level:
+        type: float
+        description: |-
+          Level (mbar)
+      high:
+        type: float
+        description: |-
+          High limit
+      low:
+        type: float
+        description: |-
+          Low limit
+
+    databases:
+      - file: $(MKS937A)/db/mks937aInterlock.template
+        args:
+          .*:

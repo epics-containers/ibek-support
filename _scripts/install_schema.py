@@ -7,8 +7,8 @@ Execute this python script to generate a new schema file.
 """
 
 import json
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Sequence
 
 from pydantic import BaseModel, ConfigDict, Field
 

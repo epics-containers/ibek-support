@@ -42,11 +42,6 @@ entity_models:
         description: |-
           Asyn port name
 
-      simulation:
-        type: str
-        description: |-
-          IP port of simulation device
-
     pre_init:
       - value: |2
 

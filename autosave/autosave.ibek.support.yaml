@@ -89,3 +89,16 @@ entity_models:
       - file: save_restoreStatus.db
         args:
           P:
+
+  - name: auto_save_restoreStatus
+    description: |-
+      Autosave/restore status records providing heartbeat, status and
+      reboot monitoring PVs.
+    parameters:
+      P:
+        type: str
+        description: PV prefix for save/restore status records
+    databases:
+      - file: save_restoreStatus.db
+        args:
+          .*:

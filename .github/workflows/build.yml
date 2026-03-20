@@ -79,7 +79,7 @@ jobs:
           context: .
           build-args: |
             BUILD_GROUP=${{ matrix.group }}
-            BUILD_DEPS=${{ join(matrix.deps, ',') }}
+            ${{ matrix.base_image && format('DEVELOPER={0}', matrix.base_image) || '' }}
           cache-from: type=gha,scope=group-${{ matrix.group }}
           cache-to: type=gha,mode=max,scope=group-${{ matrix.group }}
           tags: ci_test_${{ matrix.group }}
