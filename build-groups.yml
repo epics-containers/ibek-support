@@ -73,7 +73,6 @@ groups:
     modules:
       - modbus
       - iocStats
-      - pvxs
       - pvlogging
       - opcua
       - positioner
