@@ -1,0 +1,97 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.1.2/ibek.support.schema.json
+
+module: ADUVC
+
+entity_models:
+  - name: UVC
+    description: |-
+      Controls a USB Video Class device.
+      Automatically creates an NDStdArrays plugin for array output.
+    parameters:
+      P:
+        type: str
+        description: Device Prefix
+      R:
+        type: str
+        description: Device Suffix
+      PORT:
+        type: id
+        description: Port name for the detector
+      serial:
+        type: str
+        description: Serial number, leave blank if using vendor/productID
+        default: ""
+      productID:
+        type: int
+        description: Product ID, put 0 if using serial number
+        default: 0
+      framerate:
+        type: int
+        description: Framerate at which camera should operate
+        default: 30
+      xsize:
+        type: int
+        description: Width of image
+        default: 640
+      ysize:
+        type: int
+        description: Height of image
+        default: 480
+      maxBuffers:
+        type: int
+        description: Max buffer size for NDArrays
+        default: 0
+      maxMemory:
+        type: int
+        description: Max memory allocated for driver
+        default: 0
+      priority:
+        type: int
+        description: Thread priority for the driver
+        default: 0
+      stackSize:
+        type: int
+        description: Size of the driver on the stack
+        default: 0
+      TIMEOUT:
+        type: int
+        description: Timeout
+        default: 1
+      ADDR:
+        type: int
+        description: Asyn Port address
+        default: 0
+
+    pre_init:
+      - value: |
+          # ADUVCConfig(portName, serial, productID, framerate, xsize, ysize, maxBuffers, maxMemory, priority, stackSize)
+          ADUVCConfig("{{PORT}}", "{{serial}}", {{productID}}, {{framerate}}, {{xsize}}, {{ysize}}, {{maxBuffers}}, {{maxMemory}}, {{priority}}, {{stackSize}})
+          # NDStdArraysConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
+          NDStdArraysConfigure("{{PORT}}.ARR", 2, 0, "{{PORT}}", 0, 0, 0, 0, 0, 1)
+
+    databases:
+      - file: $(ADCORE)/db/ADBase.template
+        args:
+          P:
+          R:
+          PORT:
+          TIMEOUT:
+          ADDR:
+      - file: $(ADUVC)/db/ADUVC.template
+        args:
+          P:
+          R:
+          PORT:
+          TIMEOUT:
+          ADDR:
+      - file: $(ADCORE)/db/NDStdArrays.template
+        args:
+          P:
+          R: ":ARR:"
+          PORT: "{{PORT}}.ARR"
+          NDARRAY_PORT: "{{PORT}}"
+          TYPE: Int16
+          FTVL: SHORT
+          NELEMENTS: "6000000"
+          TIMEOUT: "{{TIMEOUT}}"
+          ADDR: "{{ADDR}}"
