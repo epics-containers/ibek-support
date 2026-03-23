@@ -51,6 +51,12 @@ entity_models:
           # Create IP Port (PortName, IPAddr)
           pmacAsynIPConfigure("{{name}}", "{{IP}}")
 
+    sub_entities:
+      - type: ibek.wait_ip
+        entity_enabled: true
+        device: "{{name}}"
+        address: "{{IP}}"
+
   - name: pmacVmeConfig
     description: |-
       This will create an AsynPort connecting to a PMAC over VME bus
@@ -69,6 +75,12 @@ entity_models:
     pre_init:
       - value: |
           # VME PMAC port placeholder (VME config is handled by hardware setup)
+
+    sub_entities:
+      - type: ibek.wait_ip
+        entity_enabled: true
+        device: "{{name}}"
+        address: "{{IP}}"
 
   - name: PMAC
     description: |-
@@ -196,11 +208,6 @@ entity_models:
           TIMEOUT:
           NAXES:
           PORT: "{{name}}"
-    sub_entities:
-      - type: ibek.wait_ip
-        entity_enabled: true
-        device: "{{name}}"
-        address: "{{IP}}"
 
   - name: GeoBrick
     description: |-
