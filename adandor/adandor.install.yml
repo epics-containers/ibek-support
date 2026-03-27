@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../ibek-support/_scripts/support_install_variables.json
+
+module: ADAndor
+version: e3b7fc8 # Latest commit but no tag yet; required because of need to include PR#18
+organization: http://github.com/areaDetector
+
+dbds:
+  - andorCCDSupport.dbd
+
+libs:
+  - andor
+  - shamrockcif
+  - andorCCD
+
+apt_developer:
+  - libxml2-dev
+  - libusb-dev
+
+apt_runtime:
+  - libxml2
+  - libusb-dev
+
+patch_blocks:
+  - path: "{{ config_linux_host }}"
+    block: |
+      WITH_SHAMROCK   =   NO
+      XML2_INCLUDE    =   /usr/include/libxml2
+      SDK2_PATH       =   /usr/local/andor2
+      USR_INCLUDES    +=  -I$(SDK2_PATH)/include
+      USR_LDFLAGS     +=  -L$(SDK2_PATH)/lib64
+      SDK2_CONFIG_DIR =   $(SDK2_PATH)/etc
+
+# tasks:
+#   - path: adandor_sdk2_task.yml
+
+# # copy the Andor SDK vendor libraries to the runtime stage
+# runtime_files:
+#   - /usr/local/andor2/lib64
