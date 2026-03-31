@@ -6,7 +6,7 @@ entity_models:
 
   - name: andorCCD
     description: |-
-      Creates a andorCCD camera areaDetector driver
+      Creates an areaDetector driver for an Andor CCD camera
     parameters:
       P:
         type: str
@@ -89,7 +89,7 @@ entity_models:
           SCANRATE:
 
     pvi:
-      yaml_path: AndorCCD.pvi.device.yaml
+      yaml_path: ADAndor.pvi.device.yaml
       pv_prefix: "{{ P }}"
       ui_macros:
         P:
