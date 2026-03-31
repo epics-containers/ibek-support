@@ -50,6 +50,12 @@ entity_models:
       - value: |
           # Create IP Port (PortName, IPAddr)
           pmacAsynIPConfigure("{{name}}", "{{IP}}")
+  
+    sub_entities:
+    - type: ibek.wait_ip
+      entity_enabled: true
+      device: "{{name}}"
+      address: "{{IP}}"
 
   - name: pmacVmeConfig
     description: |-
@@ -196,11 +202,6 @@ entity_models:
           TIMEOUT:
           NAXES:
           PORT: "{{name}}"
-    sub_entities:
-      - type: ibek.wait_ip
-        entity_enabled: true
-        device: "{{name}}"
-        address: "{{IP}}"
 
   - name: GeoBrick
     description: |-
