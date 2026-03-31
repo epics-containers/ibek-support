@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Generate the PVI device files needed to make some basic auto-generated GUI for the ADAndor areaDetector plugins.
+
+IBS=$(realpath $(dirname ${0}))
+if [[ ${IBS} != /workspaces/*/ibek-support/ADAndor ]]; then
+    echo "Must be run in ibek-suppport directory inside a container"
+    exit 1
+fi
+
+if ! pvi --version; then
+    echo "pvi not found"
+    echo "please clone pvi into /repos and 'pip install -e /repos/pvi'"
+    exit 1
+fi
+
+set -e
+
+ADANDOR=/epics/support/adandor
+cd ${IBS}
+
+pvi convert device /workspaces/ioc-adandor/ibek-support/ADAndor  \
+    --name ADAndor \
+    --header /epics/support/adandor/andorApp/src/andorCCD.h \
+    --template /epics/support/adandor/andorApp/Db/andorCCD.template \
+    --template /epics/support/adandor/andorApp/Db/shamrock.template
+
+pvi regroup ADAndor.pvi.device.yaml ${ADANDOR}/andorApp/op/adl/*.adl
+
+ibek support generate-links $(pwd)
