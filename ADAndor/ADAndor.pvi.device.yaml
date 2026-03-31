@@ -1,9 +1,9 @@
-label: AndorCCD
+label: ADAndor CCD camera
 parent: ADDriver
 children:
 
 - type: Group
-  name: AndorCCD
+  name: ADAndor
   layout:
     type: Grid
     labelled: true
