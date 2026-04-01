@@ -4,7 +4,7 @@
 
 IBS=$(realpath $(dirname ${0}))
 if [[ ${IBS} != /workspaces/*/ibek-support/ADAndor ]]; then
-    echo "Must be run in ibek-suppport directory inside a container"
+    echo "Must be run in ibek-support directory inside a container"
     exit 1
 fi
 
@@ -16,14 +16,14 @@ fi
 
 set -e
 
-ADANDOR=/epics/support/adandor
+ADANDOR=/epics/support/ADAndor
 cd ${IBS}
 
 pvi convert device /workspaces/ioc-adandor/ibek-support/ADAndor  \
     --name ADAndor \
-    --header /epics/support/adandor/andorApp/src/andorCCD.h \
-    --template /epics/support/adandor/andorApp/Db/andorCCD.template \
-    --template /epics/support/adandor/andorApp/Db/shamrock.template
+    --header /epics/support/ADAndor/andorApp/src/andorCCD.h \
+    --template /epics/support/ADAndor/andorApp/Db/andorCCD.template \
+    --template /epics/support/ADAndor/andorApp/Db/shamrock.template
 
 pvi regroup ADAndor.pvi.device.yaml ${ADANDOR}/andorApp/op/adl/*.adl
 

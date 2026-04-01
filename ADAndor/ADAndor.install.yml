@@ -25,14 +25,3 @@ patch_blocks:
     block: |
       WITH_SHAMROCK   =   NO
       XML2_INCLUDE    =   /usr/include/libxml2
-      SDK2_PATH       =   /usr/local/andor2
-      USR_INCLUDES    +=  -I$(SDK2_PATH)/include
-      USR_LDFLAGS     +=  -L$(SDK2_PATH)/lib64
-      SDK2_CONFIG_DIR =   $(SDK2_PATH)/etc
-
-# tasks:
-#   - path: adandor_sdk2_task.yml
-
-# # copy the Andor SDK vendor libraries to the runtime stage
-# runtime_files:
-#   - /usr/local/andor2/lib64
