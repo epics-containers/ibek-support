@@ -63,7 +63,7 @@ groups:
       - ADURL
       - ADZMQ
       - ADUVC
-      - adandor
+      - ADAndor
       - quadEM
       - slsDetector
 
