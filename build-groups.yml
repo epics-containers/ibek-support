@@ -55,7 +55,7 @@ groups:
       - ADURL
       - ADZMQ
       - ADUVC
-      - adandor
+      - ADAndor
       - ffmpegServer
       - quadEM
 
