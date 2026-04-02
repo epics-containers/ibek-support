@@ -83,6 +83,60 @@ entity_models:
           Pos: 0
           Neg: 1
 
+      EGU:
+        type: str
+        description: |-
+          Engineering Units
+        default: degrees
+
+      VELO:
+        type: int
+        description: |-
+          Velocity
+        default: 1
+
+      VBAS:
+        type: float
+        description: |-
+          Base Velocity (EGU/s)
+        default: 0.1
+
+      ACCL:
+        type: float
+        description: |-
+          Seconds to Velocity
+        default: 0.2
+
+      BDST:
+        type: int
+        description: |-
+          BL Distance (EGU)
+        default: 0
+
+      BVEL:
+        type: int
+        description: |-
+          BL Velocity (EGU/s)
+        default: 1
+
+      BACC:
+        type: float
+        description: |-
+          BL Seconds to Veloc.
+        default: 0.2
+
+      MRES:
+        type: float
+        description: |-
+          Motor Step Size (EGU)
+        default: 0.01
+
+      PREC:
+        type: int
+        description: |-
+          Display precision (EGU)
+        default: 5
+
     pre_init:
       - when: once # TODO this feature is broken as the comment is printed for all axes
         value: |
@@ -106,16 +160,16 @@ entity_models:
           PORT: "{{controller}}"
           ADDR:
           DESC:
-          EGU: degrees
+          EGU:
           DIR:
-          VELO: "1"
-          VBAS: ".1"
-          ACCL: ".2"
-          BDST: "0"
-          BVEL: "1"
-          BACC: ".2"
-          MRES: ".01"
-          PREC: "5"
+          VELO:
+          VBAS:
+          ACCL:
+          BDST:
+          BVEL:
+          BACC:
+          MRES:
+          PREC:
           DHLM:
           DLLM:
           INIT: ""
