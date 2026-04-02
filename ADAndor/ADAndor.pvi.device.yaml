@@ -1,207 +1,166 @@
-label: ADAndor CCD camera
+label: ADAndor
 parent: ADDriver
 children:
+  - type: Group
+    name: Andor
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalW
+        name: AndorShutterMode
+        write_pv: $(P)$(R)AndorShutterMode
+        write_widget:
+          type: ComboBox
 
-- type: Group
-  name: ADAndor
-  layout:
-    type: Grid
-    labelled: true
-  children:
+      - type: SignalW
+        name: AndorShutterExTTL
+        write_pv: $(P)$(R)AndorShutterExTTL
+        write_widget:
+          type: ToggleButton
 
-  - type: SignalW
-    name: DataType
-    write_pv: $(P)$(R)DataType
-    write_widget:
-      type: ComboBox
+      - type: SignalRW
+        name: AndorCooler
+        write_pv: $(P)$(R)AndorCooler
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)AndorCooler_RBV
+        read_widget:
+          type: LED
 
-  - type: SignalW
-    name: AndorShutterMode
-    write_pv: $(P)$(R)AndorShutterMode
-    write_widget:
-      type: ComboBox
+      - type: SignalR
+        name: AndorTempStatus
+        read_pv: $(P)$(R)AndorTempStatus_RBV
+        read_widget:
+          type: TextRead
+          format: string
 
-  - type: SignalW
-    name: AndorShutterExTTL
-    write_pv: $(P)$(R)AndorShutterExTTL
-    write_widget:
-      type: ToggleButton
+      - type: SignalRW
+        name: AndorAccumulatePeriod
+        write_pv: $(P)$(R)AndorAccumulatePeriod
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)AndorAccumulatePeriod_RBV
+        read_widget:
+          type: TextRead
 
-  - type: SignalW
-    name: AndorFanMode
-    write_pv: $(P)$(R)AndorFanMode
-    write_widget:
-      type: ComboBox
+      - type: SignalRW
+        name: PALFilePath
+        write_pv: $(P)$(R)PALFilePath
+        write_widget:
+          type: TextWrite
+          format: string
+        read_pv: $(P)$(R)PALFilePath_RBV
+        read_widget:
+          type: TextRead
+          format: string
 
-  - type: SignalR
-    name: AndorTempStatus
-    read_pv: $(P)$(R)AndorTempStatus_RBV
-    read_widget:
-      type: TextRead
-      format: string
+      - type: SignalRW
+        name: AndorReadOutMode
+        write_pv: $(P)$(R)AndorReadOutMode
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)AndorReadOutMode_RBV
+        read_widget:
+          type: TextRead
 
-  - type: SignalR
-    name: AndorMessage
-    read_pv: $(P)$(R)AndorMessage_RBV
-    read_widget:
-      type: TextRead
-      format: string
+      - type: SignalRW
+        name: AndorPreAmpGain
+        write_pv: $(P)$(R)AndorPreAmpGain
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)AndorPreAmpGain_RBV
+        read_widget:
+          type: TextRead
 
-  - type: SignalR
-    name: AndorFanStatus
-    read_pv: $(P)$(R)AndorFanStatus_RBV
-    read_widget:
-      type: TextRead
-      format: string
+      - type: SignalR
+        name: AndorMessage
+        read_pv: $(P)$(R)AndorMessage_RBV
+        read_widget:
+          type: TextRead
+          format: string
 
-  - type: SignalR
-    name: ReadoutTime
-    read_pv: $(P)$(R)ReadoutTime_RBV
-    read_widget:
-      type: TextRead
+      - type: SignalRW
+        name: AndorEMGain
+        write_pv: $(P)$(R)AndorEMGain
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)AndorEMGain_RBV
+        read_widget:
+          type: TextRead
 
-  - type: SignalRW
-    name: AndorCooler
-    write_pv: $(P)$(R)AndorCooler
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)AndorCooler_RBV
-    read_widget:
-      type: LED
+      - type: SignalRW
+        name: AndorEMGainMode
+        write_pv: $(P)$(R)AndorEMGainMode
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)AndorEMGainMode_RBV
+        read_widget:
+          type: TextRead
 
-  - type: SignalRW
-    name: AndorAccumulatePeriod
-    write_pv: $(P)$(R)AndorAccumulatePeriod
-    write_widget:
-      type: TextWrite
-    read_pv: $(P)$(R)AndorAccumulatePeriod_RBV
-    read_widget:
-      type: TextRead
+      - type: SignalRW
+        name: AndorEMGainAdvanced
+        write_pv: $(P)$(R)AndorEMGainAdvanced
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)AndorEMGainAdvanced_RBV
+        read_widget:
+          type: LED
 
-  - type: SignalRW
-    name: PALFilePath
-    write_pv: $(P)$(R)PALFilePath
-    write_widget:
-      type: TextWrite
-      format: string
-    read_pv: $(P)$(R)PALFilePath_RBV
-    read_widget:
-      type: TextRead
-      format: string
+      - type: SignalRW
+        name: AndorADCSpeed
+        write_pv: $(P)$(R)AndorADCSpeed
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)AndorADCSpeed_RBV
+        read_widget:
+          type: TextRead
 
-  - type: SignalRW
-    name: AndorADCSpeed
-    write_pv: $(P)$(R)AndorADCSpeed
-    write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)AndorADCSpeed_RBV
-    read_widget:
-      type: TextRead
+      - type: SignalW
+        name: DataType
+        write_pv: $(P)$(R)DataType
+        write_widget:
+          type: ComboBox
 
-  - type: SignalRW
-    name: AndorPreAmpGain
-    write_pv: $(P)$(R)AndorPreAmpGain
-    write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)AndorPreAmpGain_RBV
-    read_widget:
-      type: TextRead
+  - type: Group
+    name: ADAndorMisc
+    label: ADAndor Ungrouped
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalRW
+        name: AndorBaselineClamp
+        write_pv: $(P)$(R)AndorBaselineClamp
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)AndorBaselineClamp_RBV
+        read_widget:
+          type: LED
 
-  - type: SignalRW
-    name: AndorVSAmplitude
-    write_pv: $(P)$(R)AndorVSAmplitude
-    write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)AndorVSAmplitude_RBV
-    read_widget:
-      type: TextRead
+      - type: SignalRW
+        name: AndorFTMode
+        write_pv: $(P)$(R)AndorFTMode
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)AndorFTMode_RBV
+        read_widget:
+          type: LED
 
-  - type: SignalRW
-    name: AndorVSAmplitude
-    write_pv: $(P)$(R)AndorVSAmplitude
-    write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)AndorVSAmplitude_RBV
-    read_widget:
-      type: TextRead
+      - type: SignalRW
+        name: AndorVSPeriod
+        write_pv: $(P)$(R)AndorVSPeriod
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)AndorVSPeriod_RBV
+        read_widget:
+          type: TextRead
 
-  - type: SignalRW
-    name: AndorBaselineClamp
-    write_pv: $(P)$(R)AndorBaselineClamp
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)AndorBaselineClamp_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: AndorEMGain
-    write_pv: $(P)$(R)AndorEMGain
-    write_widget:
-      type: TextWrite
-    read_pv: $(P)$(R)AndorEMGain_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: AndorEMGainMode
-    write_pv: $(P)$(R)AndorEMGainMode
-    write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)AndorEMGainMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: AndorEMGainAdvanced
-    write_pv: $(P)$(R)AndorEMGainAdvanced
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)AndorEMGainAdvanced_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: AndorReadOutMode
-    write_pv: $(P)$(R)AndorReadOutMode
-    write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)AndorReadOutMode_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: AndorFTMode
-    write_pv: $(P)$(R)AndorFTMode
-    write_widget:
-      type: ToggleButton
-    read_pv: $(P)$(R)AndorFTMode_RBV
-    read_widget:
-      type: LED
-
-  - type: SignalRW
-    name: AndorVSPeriod
-    write_pv: $(P)$(R)AndorVSPeriod
-    write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)AndorVSPeriod_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: AndorVSAmplitude
-    write_pv: $(P)$(R)AndorVSAmplitude
-    write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)AndorVSAmplitude_RBV
-    read_widget:
-      type: TextRead
-
-  - type: SignalRW
-    name: AndorVSAmplitude
-    write_pv: $(P)$(R)AndorVSAmplitude
-    write_widget:
-      type: ComboBox
-    read_pv: $(P)$(R)AndorVSAmplitude_RBV
-    read_widget:
-      type: TextRead
+      - type: SignalRW
+        name: AndorVSAmplitude
+        write_pv: $(P)$(R)AndorVSAmplitude
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)AndorVSAmplitude_RBV
+        read_widget:
+          type: TextRead
