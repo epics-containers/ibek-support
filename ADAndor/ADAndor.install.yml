@@ -23,5 +23,5 @@ apt_runtime:
 patch_blocks:
   - path: "{{ config_linux_host }}"
     block: |
-      WITH_SHAMROCK   =   NO
+      WITH_SHAMROCK   =   YES
       XML2_INCLUDE    =   /usr/include/libxml2
