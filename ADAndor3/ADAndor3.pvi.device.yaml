@@ -1,0 +1,160 @@
+label: ADAndor3
+children:
+  - type: Group
+    name: Andor3
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalR
+        name: SerialNumber
+        read_pv: $(P)$(R)SerialNumber
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: FirmwareVersion
+        read_pv: $(P)$(R)FirmwareVersion
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: SoftwareVersion
+        read_pv: $(P)$(R)SoftwareVersion
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: ControllerID
+        read_pv: $(P)$(R)ControllerID
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: FrameRate
+        write_pv: $(P)$(R)FrameRate
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)FrameRate_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: TransferRate
+        read_pv: $(P)$(R)TransferRate
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: A3Binning
+        write_pv: $(P)$(R)A3Binning
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)A3Binning_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalW
+        name: SoftwareTrigger
+        write_pv: $(P)$(R)SoftwareTrigger
+        write_widget:
+          type: ToggleButton
+
+      - type: SignalR
+        name: FullAOIControl
+        read_pv: $(P)$(R)FullAOIControl
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: PixelEncoding
+        write_pv: $(P)$(R)PixelEncoding
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)PixelEncoding_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: A3ShutterMode
+        write_pv: $(P)$(R)A3ShutterMode
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)A3ShutterMode_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: PreAmpGain
+        write_pv: $(P)$(R)PreAmpGain
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)PreAmpGain_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: ReadoutRate
+        write_pv: $(P)$(R)ReadoutRate
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)ReadoutRate_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Overlap
+        write_pv: $(P)$(R)Overlap
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)Overlap_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: SensorCooling
+        write_pv: $(P)$(R)SensorCooling
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)SensorCooling_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: NoiseFilter
+        write_pv: $(P)$(R)NoiseFilter
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)NoiseFilter_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: TempControl
+        write_pv: $(P)$(R)TempControl
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)TempControl_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: ReadoutTime
+        read_pv: $(P)$(R)ReadoutTime
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: TempStatus
+        read_pv: $(P)$(R)TempStatus_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: FanSpeed
+        write_pv: $(P)$(R)FanSpeed
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)FanSpeed_RBV
+        read_widget:
+          type: TextRead
