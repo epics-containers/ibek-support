@@ -18,7 +18,7 @@ apt_developer:
 
 apt_runtime:
   - libxml2
-  - libusb-dev
+  - libusb
 
 patch_blocks:
   - path: "{{ config_linux_host }}"
