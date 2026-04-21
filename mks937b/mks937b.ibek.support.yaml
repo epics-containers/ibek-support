@@ -1173,3 +1173,90 @@ entity_models:
           offwarn:
           GCTLR:
           channel:
+
+  - name: mks937bImgMean
+    description: |-
+      Template database to calculate the mean pressure from a number of IMGs
+      Pete Owens - 26/6/06
+    parameters:
+      device:
+        type: str
+        description: |-
+          device name
+
+      current:
+        type: str
+        description: |-
+          beam current
+
+      nimgs:
+        type: int
+        description: |-
+          number of gauges
+
+      img1:
+        type: str
+        description: |-
+          img 1 device name
+
+      img2:
+        type: str
+        description: |-
+          img 2 device name
+
+      img3:
+        type: str
+        description: |-
+          img 3 device name
+
+      img4:
+        type: str
+        description: |-
+          img 4 device name
+
+      img5:
+        type: str
+        description: |-
+          img 5 device name
+
+      img6:
+        type: str
+        description: |-
+          img 6 device name
+
+      img7:
+        type: str
+        description: |-
+          img 7 device name
+
+      img8:
+        type: str
+        description: |-
+          img 8 device name
+
+      img9:
+        type: str
+        description: |-
+          img 9 device name
+
+      img10:
+        type: str
+        description: |-
+          img 10 device name
+
+    databases:
+      - file: $(MKS937B)/db/mks937bImgMean.template
+        args:
+          device:
+          current:
+          nimgs:
+          img1:
+          img2:
+          img3:
+          img4:
+          img5:
+          img6:
+          img7:
+          img8:
+          img9:
+          img10:
