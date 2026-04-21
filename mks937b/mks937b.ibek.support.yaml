@@ -603,6 +603,11 @@ entity_models:
     description: |-
       TODO:ADD DESCRIPTION
     parameters:
+      name:
+        type: id
+        description: |-
+          Device name, used as the gauge record name in mks937bGauge.template.
+
       dom:
         type: str
         description: |-

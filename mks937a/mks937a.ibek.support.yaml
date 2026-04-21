@@ -960,3 +960,24 @@ entity_models:
       - file: $(MKS937A)/db/mks937aInterlock.template
         args:
           .*:
+
+  - name: auto_mks937aPlogADC
+    description: |-
+      Template database to create virtual calibrated ADCs as inputs to :PLOG.
+      Originally targeting use case where EtherCAT ADCs provide a 0..32767 value
+      and to scale this to provide the originating voltage from the MKS controller.
+    parameters:
+      device:
+        type: str
+        description: |-
+          device name
+      plog_adc_pv:
+        type: str
+        description: |-
+          Raw value ADC PV name
+
+    databases:
+      - file: $(MKS937A)/db/mks937aPlogADC.template
+        args:
+          device:
+          plog_adc_pv:
