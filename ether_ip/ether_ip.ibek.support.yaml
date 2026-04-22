@@ -70,7 +70,7 @@ entity_models:
       - value: |
           drvEtherIP_define_PLC("{{port}}", "{{ip}}", 0)
     databases:
-      - file: $(ETHER_IP)/db/ether_ip_plcInfo.template
+      - file: ether_ip_plcInfo.template
         args:
           port:
           device:
