@@ -504,11 +504,6 @@ entity_models:
     description: |-
       TODO:ADD DESCRIPTION
     parameters:
-      name:
-        type: id
-        description: |-
-          Device name
-
       dom:
         type: str
         description: |-
@@ -539,7 +534,6 @@ entity_models:
           id: "{{ '%02d' % id }}"
           c: ""
           s: ""
-          name:
           aitype: Soft Channel
           aiinp: "{{eguInputPV}} CP"
 
