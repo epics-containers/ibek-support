@@ -224,7 +224,8 @@ entity_models:
       id:
         type: int
         description: |-
-          ID number as 2 digit string (e.g. 01)
+          Gauge ID number. Rendered zero-padded to 2 digits in PV
+          substitutions (e.g. 1 -> "01").
 
       plog_adc_pv:
         type: str
@@ -337,7 +338,8 @@ entity_models:
       address:
         type: int
         description: |-
-          Controller address (001 .. 253)
+          Controller address (1..253). Rendered zero-padded to 3 digits
+          in PV substitutions (e.g. 1 -> "001").
 
     databases:
       - file: $(MKS937B)/db/mks937b.template
@@ -616,7 +618,8 @@ entity_models:
       id:
         type: int
         description: |-
-          ID number as 2 digit string (e.g. 01)
+          Gauge ID number. Rendered zero-padded to 2 digits in PV
+          substitutions (e.g. 1 -> "01").
 
       input:
         type: str
