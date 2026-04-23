@@ -92,7 +92,22 @@ entity_models:
 
     databases:
       - file: $(MKS937A)/db/mks937aImgMean.template
-        args: { device: null, current: null, nimgs: null, img1: null, img2: null, img3: null, img4: null, img5: null, img6: null, img7: null, img8: null, img9: null, img10: null }
+        args:
+          {
+            device: null,
+            current: null,
+            nimgs: null,
+            img1: null,
+            img2: null,
+            img3: null,
+            img4: null,
+            img5: null,
+            img6: null,
+            img7: null,
+            img8: null,
+            img9: null,
+            img10: null,
+          }
 
   - name: mks937aImgGroup
     description: |-
@@ -265,7 +280,7 @@ entity_models:
         type: float
         description: |-
           (limits min value of protection setpoint)
-        default: 1.3e-05
+        default: 1.3e-5
 
       prosp_hopr:
         type: float
@@ -277,7 +292,7 @@ entity_models:
         type: float
         description: |-
           (low operator value - helps display set correct range).
-        default: 1.3e-05
+        default: 1.3e-5
 
       prosp_hihi:
         type: float
@@ -289,7 +304,7 @@ entity_models:
         type: float
         description: |-
           The LOLO alarm field on the protection setpoint record.
-        default: 1.2e-05
+        default: 1.2e-5
 
       prosp_high:
         type: float
@@ -313,7 +328,7 @@ entity_models:
         type: float
         description: |-
           The desired relay setpoint value.
-        default: 1e-06
+        default: 1e-6
 
       rlysp_drvh:
         type: float
@@ -355,13 +370,13 @@ entity_models:
         type: float
         description: |-
           The HIGH alarm field on the relay setpoint record.
-        default: 1.1e-06
+        default: 1.1e-6
 
       rlysp_low:
         type: float
         description: |-
           The LOW alarm field on the relay setpoint record.
-        default: 9e-07
+        default: 9e-7
 
       rlysp_desc:
         type: str
@@ -409,13 +424,13 @@ entity_models:
         type: float
         description: |-
           The HIGH alarm field on the second relay setpoint record.
-        default: 1.1e-07
+        default: 1.1e-7
 
       rlasp_low:
         type: float
         description: |-
           The LOW alarm field on the second relay setpoint record.
-        default: 9e-08
+        default: 9e-8
 
       rlasp_desc:
         type: str
@@ -437,7 +452,53 @@ entity_models:
 
     databases:
       - file: $(MKS937A)/db/mks937aImg.template
-        args: { device: null, port: "{{GCTLR.port}}", channel: null, ctlsp_level: null, ctlsp_drvh: null, ctlsp_drvl: null, ctlsp_hopr: null, ctlsp_lopr: null, ctlsp_hihi: null, ctlsp_lolo: null, ctlsp_high: null, ctlsp_low: null, ctlsp_desc: null, prosp_level: null, prosp_drvh: null, prosp_drvl: null, prosp_hopr: null, prosp_lopr: null, prosp_hihi: null, prosp_lolo: null, prosp_high: null, prosp_low: null, prosp_desc: null, rlysp_level: null, rlysp_drvh: null, rlysp_drvl: null, rlysp_hopr: null, rlysp_lopr: null, rlysp_hihi: null, rlysp_lolo: null, rlysp_high: null, rlysp_low: null, rlysp_desc: null, rlasp_drvh: null, rlasp_drvl: null, rlasp_hopr: null, rlasp_lopr: null, rlasp_hihi: null, rlasp_lolo: null, rlasp_high: null, rlasp_low: null, rlasp_desc: null, offwarn: null, ilk_write_access_pv: null }
+        args:
+          {
+            device: null,
+            port: "{{GCTLR.port}}",
+            channel: null,
+            ctlsp_level: null,
+            ctlsp_drvh: null,
+            ctlsp_drvl: null,
+            ctlsp_hopr: null,
+            ctlsp_lopr: null,
+            ctlsp_hihi: null,
+            ctlsp_lolo: null,
+            ctlsp_high: null,
+            ctlsp_low: null,
+            ctlsp_desc: null,
+            prosp_level: null,
+            prosp_drvh: null,
+            prosp_drvl: null,
+            prosp_hopr: null,
+            prosp_lopr: null,
+            prosp_hihi: null,
+            prosp_lolo: null,
+            prosp_high: null,
+            prosp_low: null,
+            prosp_desc: null,
+            rlysp_level: null,
+            rlysp_drvh: null,
+            rlysp_drvl: null,
+            rlysp_hopr: null,
+            rlysp_lopr: null,
+            rlysp_hihi: null,
+            rlysp_lolo: null,
+            rlysp_high: null,
+            rlysp_low: null,
+            rlysp_desc: null,
+            rlasp_drvh: null,
+            rlasp_drvl: null,
+            rlasp_hopr: null,
+            rlasp_lopr: null,
+            rlasp_hihi: null,
+            rlasp_lolo: null,
+            rlasp_high: null,
+            rlasp_low: null,
+            rlasp_desc: null,
+            offwarn: null,
+            ilk_write_access_pv: null,
+          }
 
   - name: mks937aGaugeEGU
     description: |-
@@ -480,7 +541,7 @@ entity_models:
           s: ""
           name:
           aitype: Soft Channel
-          aiinp: "{{eguInputPV}}  CP"
+          aiinp: "{{eguInputPV}} CP"
 
       - file: $(MKS937A)/db/mks937aPlogEGU.template
         args:
@@ -559,7 +620,20 @@ entity_models:
 
     databases:
       - file: $(MKS937A)/db/mks937aGaugeGroup.template
-        args: { device: null, gauge1: null, gauge2: null, gauge3: null, gauge4: null, gauge5: null, gauge6: null, gauge7: null, gauge8: null, SELM: null, SELN: null }
+        args:
+          {
+            device: null,
+            gauge1: null,
+            gauge2: null,
+            gauge3: null,
+            gauge4: null,
+            gauge5: null,
+            gauge6: null,
+            gauge7: null,
+            gauge8: null,
+            SELM: null,
+            SELN: null,
+          }
 
   - name: mks937a
     description: |-
@@ -761,7 +835,23 @@ entity_models:
 
     databases:
       - file: $(MKS937A)/db/mks937aPirg.template
-        args: { device: null, port: "{{GCTLR.port}}", channel: null, rlysp_level: null, rlysp_drvh: null, rlysp_drvl: null, rlysp_hopr: null, rlysp_lopr: null, rlysp_hihi: null, rlysp_lolo: null, rlysp_high: null, rlysp_low: null, rlysp_desc: null, ilk_write_access_pv: null }
+        args:
+          {
+            device: null,
+            port: "{{GCTLR.port}}",
+            channel: null,
+            rlysp_level: null,
+            rlysp_drvh: null,
+            rlysp_drvl: null,
+            rlysp_hopr: null,
+            rlysp_lopr: null,
+            rlysp_hihi: null,
+            rlysp_lolo: null,
+            rlysp_high: null,
+            rlysp_low: null,
+            rlysp_desc: null,
+            ilk_write_access_pv: null,
+          }
 
   - name: mks937aPirgGroup
     description: |-
@@ -822,7 +912,18 @@ entity_models:
 
     databases:
       - file: $(MKS937A)/db/mks937aPirgGroup.template
-        args: { device: null, pirg1: null, pirg2: null, pirg3: null, pirg4: null, pirg5: null, pirg6: null, pirg7: null, pirg8: null }
+        args:
+          {
+            device: null,
+            pirg1: null,
+            pirg2: null,
+            pirg3: null,
+            pirg4: null,
+            pirg5: null,
+            pirg6: null,
+            pirg7: null,
+            pirg8: null,
+          }
 
   - name: mks937aGauge
     description: |-
