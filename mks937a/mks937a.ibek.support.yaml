@@ -512,7 +512,8 @@ entity_models:
       id:
         type: int
         description: |-
-          ID number as 2 digit string (e.g. 01)
+          Gauge ID number. Rendered zero-padded to 2 digits in PV
+          substitutions (e.g. 1 -> "01").
 
       input:
         type: str
@@ -940,7 +941,8 @@ entity_models:
       id:
         type: int
         description: |-
-          ID number as 2 digit string (e.g. 01)
+          Gauge ID number. Rendered zero-padded to 2 digits in PV
+          substitutions (e.g. 1 -> "01").
 
       c:
         type: int
