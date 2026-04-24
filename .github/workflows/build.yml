@@ -16,10 +16,10 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Run schema/ioc instance generation tests
+      - name: Validate combined support schema
         run: |
           pip install -r requirements.txt
-          bash tests/test_generate.sh
+          ibek ioc generate-schema */*.ibek.support.yaml --no-ibek-defs --output /tmp/all.ibek.ioc.schema.json
 
   # Generate the build matrix from build-groups.yml + auto-discovered modules
   generate-matrix:
