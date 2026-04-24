@@ -32,15 +32,6 @@ entity_models:
         description: |-
           Number of bits to write
 
-    databases:
-      - file: $(ETHER_IP)/db/ether_ip_mbboDirect.template
-        args:
-          record:
-          tag:
-          scan:
-          port:
-          nobt:
-
   - name: EtherIPInit
     description: |-
       This creates an IP connection to a plc using the ether_ip driver
@@ -99,13 +90,6 @@ entity_models:
         description: |-
           Tag to address on PLC
 
-    databases:
-      - file: $(ETHER_IP)/db/ether_ip_bi.template
-        args:
-          record:
-          tag:
-          port:
-          scan:
 
   - name: stringin
     description: |-
@@ -131,14 +115,6 @@ entity_models:
         description: |-
           Tag to address on PLC
 
-    databases:
-      - file: $(ETHER_IP)/db/ether_ip_stringin.template
-        args:
-          record:
-          tag:
-          port:
-          scan:
-
   - name: bo
     description: |-
       Simple bo record for ether_ip connection
@@ -162,14 +138,6 @@ entity_models:
         type: str
         description: |-
           Tag to address on PLC
-
-    databases:
-      - file: $(ETHER_IP)/db/ether_ip_bo.template
-        args:
-          record:
-          tag:
-          port:
-          scan:
 
   - name: ao
     description: |-
@@ -195,14 +163,6 @@ entity_models:
         description: |-
           Tag to address on PLC
 
-    databases:
-      - file: $(ETHER_IP)/db/ether_ip_ao.template
-        args:
-          record:
-          tag:
-          port:
-          scan:
-
   - name: ai
     description: |-
       Simple ai record for ether_ip connection
@@ -226,14 +186,6 @@ entity_models:
         type: str
         description: |-
           Tag to address on PLC
-
-    databases:
-      - file: $(ETHER_IP)/db/ether_ip_ai.template
-        args:
-          record:
-          tag:
-          port:
-          scan:
 
   - name: mbbiDirect
     description: |-
@@ -264,11 +216,3 @@ entity_models:
         description: |-
           Number of bits to read
 
-    databases:
-      - file: $(ETHER_IP)/db/ether_ip_mbbiDirect.template
-        args:
-          record:
-          tag:
-          scan:
-          port:
-          nobt:
