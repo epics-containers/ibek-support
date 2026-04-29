@@ -19,12 +19,12 @@ entity_models:
         description: Port name for the detector
       serial:
         type: str
-        description: Serial number, leave blank if using vendor/productID
+        description: Serial number, leave blank if using productID
         default: ""
       productID:
-        type: int
-        description: Product ID, put 0 if using serial number
-        default: 0
+        type: str
+        description: Product ID, leave blank if using serial number
+        default: ""
       framerate:
         type: int
         description: Framerate at which camera should operate
