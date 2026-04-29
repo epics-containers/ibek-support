@@ -64,8 +64,8 @@ entity_models:
 
     pre_init:
       - value: |
-          # ADUVCConfig(portName, serial, productID, framerate, xsize, ysize, maxBuffers, maxMemory, priority, stackSize)
-          ADUVCConfig("{{PORT}}", "{{serial}}", {{productID}}, {{framerate}}, {{xsize}}, {{ysize}}, {{maxBuffers}}, {{maxMemory}}, {{priority}}, {{stackSize}})
+          # ADUVCConfig(portName, serialOrProductID)
+          ADUVCConfig("{{PORT}}", "{% if serial %}{{serial}}{% else %}{{productID}}{% endif %}")
           # NDStdArraysConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDStdArraysConfigure("{{PORT}}.ARR", 2, 0, "{{PORT}}", 0, 0, 0, 0, 0, 1)
 
