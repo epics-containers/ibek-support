@@ -17,7 +17,7 @@ entity_models:
           motorUtilInit("{{ P }}")
 
     databases:
-      - file: $(MOTOR)/db/motorUtil.template
+      - file: $(MOTOR)/db/motorUtil.db
         args:
           P:
 
