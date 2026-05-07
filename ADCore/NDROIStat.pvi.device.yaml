@@ -1,34 +1,1154 @@
 label: NDROIStat
-parent: NDPluginBase
 children:
 
+- type: Include
+  file_name: NDPluginBase
+
 - type: Group
-  name: NDFFTFreqSpectrumPlot
+  name: ROIScreens
+  label: ROI Screens
   layout:
     type: Grid
     labelled: true
   children:
 
-  - type: SignalR
-    name: TSAcquiring
-    read_pv: $(P)$(R)TSAcquiring
-    read_widget:
-      type: LED
+  - type: Group
+    name: ROIDetail
+    label: ROI Detail
+    layout:
+      type: SubScreen
+      labelled: true
+    children:
 
-  - type: SignalW
-    name: TSNumPoints
-    write_pv: $(P)$(R)TSNumPoints
-    write_widget:
-      type: TextWrite
+    - type: Group
+      name: Definition
+      layout:
+        type: Grid
+      children:
 
-  - type: SignalR
-    name: TSCurrentPoint
-    read_pv: $(P)$(R)TSCurrentPoint
-    read_widget:
-      type: TextRead
+      - type: SignalRW
+        name: Use
+        write_pv: $(P)$(R)Use
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)Use_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalW
+        name: Name
+        write_pv: $(P)$(R)Name
+        write_widget:
+          type: TextWrite
+
+      - type: SignalR
+        name: MaxSizeX
+        label: Max Size X
+        read_pv: $(P)$(R)MaxSizeX_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: MaxSizeY
+        label: Max Size Y
+        read_pv: $(P)$(R)MaxSizeY_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: MinX
+        label: Min X
+        write_pv: $(P)$(R)MinX
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)MinX_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: MinY
+        label: Min Y
+        write_pv: $(P)$(R)MinY
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)MinY_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SizeX
+        label: Size X
+        write_pv: $(P)$(R)SizeX
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SizeX_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SizeY
+        label: Size Y
+        write_pv: $(P)$(R)SizeY
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SizeY_RBV
+        read_widget:
+          type: TextRead
+
+    - type: Group
+      name: Statistics
+      layout:
+        type: Grid
+      children:
+
+      - type: SignalRW
+        name: BgdWidth
+        label: Bgd Width
+        write_pv: $(P)$(R)BgdWidth
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)BgdWidth_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: MinValue
+        label: Min
+        read_pv: $(P)$(R)MinValue_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: MaxValue
+        label: Max
+        read_pv: $(P)$(R)MaxValue_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: MeanValue
+        label: Mean
+        read_pv: $(P)$(R)MeanValue_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: Total
+        read_pv: $(P)$(R)Total_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: Net
+        read_pv: $(P)$(R)Net_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalW
+        name: Reset
+        write_pv: $(P)$(R)Reset
+        write_widget:
+          type: ToggleButton
+
+    - type: Group
+      name: TimeSeries
+      label: Time Series
+      layout:
+        type: Grid
+        labelled: true
+      children:
+
+      - type: SignalW
+        name: TSControl
+        label: TS Control
+        write_pv: $(P)$(R)TSControl
+        write_widget:
+          type: ComboBox
+
+      - type: SignalR
+        name: TSAcquiring
+        label: TS Acquiring
+        read_pv: $(P)$(R)TSAcquiring
+        read_widget:
+          type: LED
+
+      - type: SignalW
+        name: TSNumPoints
+        label: TS Num Points
+        write_pv: $(P)$(R)TSNumPoints
+        write_widget:
+          type: TextWrite
+
+      - type: SignalR
+        name: TSCurrentPoint
+        label: TS Current Point
+        read_pv: $(P)$(R)TSCurrentPoint
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: TSReadRate
+        label: TS Read Rate
+        write_pv: $(P)$(R)TSReadRate
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)TSReadRate_RBV
+        read_widget:
+          type: TextRead
+
+
+      - type: Group
+        name: Advanced
+        layout:
+          type: SubScreen
+        children:
+
+        - type: SignalR
+          name: TSTimestamp
+          label: TS Timestamp
+          read_pv: $(P)$(R)TSTimestamp
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: TSMinValue
+          label: TS Min Value
+          read_pv: $(P)$(R)TSMinValue
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: TSMaxValue
+          label: TS Max Value
+          read_pv: $(P)$(R)TSMaxValue
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: TSMeanValue
+          label: TS Mean Value
+          read_pv: $(P)$(R)TSMeanValue
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: TSTotal
+          label: TS Total
+          read_pv: $(P)$(R)TSTotal
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: TSNet
+          label: TS Net
+          read_pv: $(P)$(R)TSNet
+          read_widget:
+            type: TextRead
+
+  - type: Group
+    name: ROIOverview
+    label: ROI Overview
+    layout:
+      type: SubScreen
+      labelled: true
+    children:
+
+    - type: Group
+      name: ROIs
+      layout:
+        type: Grid
+      children:
+
+      - type: Group
+        name: ROI1Row
+        label: ROI 1
+        layout:
+          type: Row
+          header:
+            - Use
+            - Name
+            - Min X
+            - Size X
+            - Min Y
+            - Size Y
+            - Bgd Width
+            - Total
+            - Net
+            - Min
+            - Max
+            - Mean
+            - Detail
+            - Plot
+        children:
+
+        - type: SignalRW
+          name: ROI1Use
+          write_pv: $(P)$(R)1:Use
+          write_widget:
+            type: ToggleButton
+          read_pv: $(P)$(R)1:Use_RBV
+          read_widget:
+            type: LED
+
+        - type: SignalW
+          name: ROI1Name
+          write_pv: $(P)$(R)1:Name
+          write_widget:
+            type: TextWrite
+
+        - type: SignalRW
+          name: ROI1MinX
+          write_pv: $(P)$(R)1:MinX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)1:MinX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI1SizeX
+          write_pv: $(P)$(R)1:SizeX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)1:SizeX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI1MinY
+          write_pv: $(P)$(R)1:MinY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)1:MinY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI1SizeY
+          write_pv: $(P)$(R)1:SizeY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)1:SizeY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI1BgdWidth
+          write_pv: $(P)$(R)1:BgdWidth
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)1:BgdWidth_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI1Total
+          read_pv: $(P)$(R)1:Total_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI1Net
+          read_pv: $(P)$(R)1:Net_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI1MinValue
+          read_pv: $(P)$(R)1:MinValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI1MaxValue
+          read_pv: $(P)$(R)1:MaxValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI1MeanValue
+          read_pv: $(P)$(R)1:MeanValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalX
+          name: ROI1More
+          label: Detail
+          write_pv: $(P)$(R)1:More
+          value: "1"
+
+        - type: SignalX
+          name: ROI1Plot
+          label: Plot
+          write_pv: $(P)$(R)1:Plot
+          value: "1"
+
+      - type: Group
+        name: ROI2Row
+        label: ROI 2
+        layout:
+          type: Row
+        children:
+
+        - type: SignalRW
+          name: ROI2Use
+          write_pv: $(P)$(R)2:Use
+          write_widget:
+            type: ToggleButton
+          read_pv: $(P)$(R)2:Use_RBV
+          read_widget:
+            type: LED
+
+        - type: SignalW
+          name: ROI2Name
+          write_pv: $(P)$(R)2:Name
+          write_widget:
+            type: TextWrite
+
+        - type: SignalRW
+          name: ROI2MinX
+          write_pv: $(P)$(R)2:MinX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)2:MinX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI2SizeX
+          write_pv: $(P)$(R)2:SizeX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)2:SizeX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI2MinY
+          write_pv: $(P)$(R)2:MinY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)2:MinY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI2SizeY
+          write_pv: $(P)$(R)2:SizeY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)2:SizeY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI2BgdWidth
+          write_pv: $(P)$(R)2:BgdWidth
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)2:BgdWidth_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI2Total
+          read_pv: $(P)$(R)2:Total_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI2Net
+          read_pv: $(P)$(R)2:Net_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI2MinValue
+          read_pv: $(P)$(R)2:MinValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI2MaxValue
+          read_pv: $(P)$(R)2:MaxValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI2MeanValue
+          read_pv: $(P)$(R)2:MeanValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalX
+          name: ROI2More
+          label: Detail
+          write_pv: $(P)$(R)2:More
+          value: "1"
+
+        - type: SignalX
+          name: ROI2Plot
+          label: Plot
+          write_pv: $(P)$(R)2:Plot
+          value: "1"
+
+      - type: Group
+        name: ROI3Row
+        label: ROI 3
+        layout:
+          type: Row
+        children:
+
+        - type: SignalRW
+          name: ROI3Use
+          write_pv: $(P)$(R)3:Use
+          write_widget:
+            type: ToggleButton
+          read_pv: $(P)$(R)3:Use_RBV
+          read_widget:
+            type: LED
+
+        - type: SignalW
+          name: ROI3Name
+          write_pv: $(P)$(R)3:Name
+          write_widget:
+            type: TextWrite
+
+        - type: SignalRW
+          name: ROI3MinX
+          write_pv: $(P)$(R)3:MinX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)3:MinX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI3SizeX
+          write_pv: $(P)$(R)3:SizeX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)3:SizeX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI3MinY
+          write_pv: $(P)$(R)3:MinY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)3:MinY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI3SizeY
+          write_pv: $(P)$(R)3:SizeY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)3:SizeY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI3BgdWidth
+          write_pv: $(P)$(R)3:BgdWidth
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)3:BgdWidth_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI3Total
+          read_pv: $(P)$(R)3:Total_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI3Net
+          read_pv: $(P)$(R)3:Net_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI3MinValue
+          read_pv: $(P)$(R)3:MinValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI3MaxValue
+          read_pv: $(P)$(R)3:MaxValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI3MeanValue
+          read_pv: $(P)$(R)3:MeanValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalX
+          name: ROI3More
+          label: Detail
+          write_pv: $(P)$(R)3:More
+          value: "1"
+
+        - type: SignalX
+          name: ROI3Plot
+          label: Plot
+          write_pv: $(P)$(R)3:Plot
+          value: "1"
+
+      - type: Group
+        name: ROI4Row
+        label: ROI 4
+        layout:
+          type: Row
+        children:
+
+        - type: SignalRW
+          name: ROI4Use
+          write_pv: $(P)$(R)4:Use
+          write_widget:
+            type: ToggleButton
+          read_pv: $(P)$(R)4:Use_RBV
+          read_widget:
+            type: LED
+
+        - type: SignalW
+          name: ROI4Name
+          write_pv: $(P)$(R)4:Name
+          write_widget:
+            type: TextWrite
+
+        - type: SignalRW
+          name: ROI4MinX
+          write_pv: $(P)$(R)4:MinX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)4:MinX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI4SizeX
+          write_pv: $(P)$(R)4:SizeX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)4:SizeX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI4MinY
+          write_pv: $(P)$(R)4:MinY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)4:MinY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI4SizeY
+          write_pv: $(P)$(R)4:SizeY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)4:SizeY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI4BgdWidth
+          write_pv: $(P)$(R)4:BgdWidth
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)4:BgdWidth_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI4Total
+          read_pv: $(P)$(R)4:Total_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI4Net
+          read_pv: $(P)$(R)4:Net_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI4MinValue
+          read_pv: $(P)$(R)4:MinValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI4MaxValue
+          read_pv: $(P)$(R)4:MaxValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI4MeanValue
+          read_pv: $(P)$(R)4:MeanValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalX
+          name: ROI4More
+          label: Detail
+          write_pv: $(P)$(R)4:More
+          value: "1"
+
+        - type: SignalX
+          name: ROI4Plot
+          label: Plot
+          write_pv: $(P)$(R)4:Plot
+          value: "1"
+
+      - type: Group
+        name: ROI5Row
+        label: ROI 5
+        layout:
+          type: Row
+        children:
+
+        - type: SignalRW
+          name: ROI5Use
+          write_pv: $(P)$(R)5:Use
+          write_widget:
+            type: ToggleButton
+          read_pv: $(P)$(R)5:Use_RBV
+          read_widget:
+            type: LED
+
+        - type: SignalW
+          name: ROI5Name
+          write_pv: $(P)$(R)5:Name
+          write_widget:
+            type: TextWrite
+
+        - type: SignalRW
+          name: ROI5MinX
+          write_pv: $(P)$(R)5:MinX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)5:MinX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI5SizeX
+          write_pv: $(P)$(R)5:SizeX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)5:SizeX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI5MinY
+          write_pv: $(P)$(R)5:MinY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)5:MinY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI5SizeY
+          write_pv: $(P)$(R)5:SizeY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)5:SizeY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI5BgdWidth
+          write_pv: $(P)$(R)5:BgdWidth
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)5:BgdWidth_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI5Total
+          read_pv: $(P)$(R)5:Total_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI5Net
+          read_pv: $(P)$(R)5:Net_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI5MinValue
+          read_pv: $(P)$(R)5:MinValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI5MaxValue
+          read_pv: $(P)$(R)5:MaxValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI5MeanValue
+          read_pv: $(P)$(R)5:MeanValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalX
+          name: ROI5More
+          label: Detail
+          write_pv: $(P)$(R)5:More
+          value: "1"
+
+        - type: SignalX
+          name: ROI5Plot
+          label: Plot
+          write_pv: $(P)$(R)5:Plot
+          value: "1"
+
+      - type: Group
+        name: ROI6Row
+        label: ROI 6
+        layout:
+          type: Row
+        children:
+
+        - type: SignalRW
+          name: ROI6Use
+          write_pv: $(P)$(R)6:Use
+          write_widget:
+            type: ToggleButton
+          read_pv: $(P)$(R)6:Use_RBV
+          read_widget:
+            type: LED
+
+        - type: SignalW
+          name: ROI6Name
+          write_pv: $(P)$(R)6:Name
+          write_widget:
+            type: TextWrite
+
+        - type: SignalRW
+          name: ROI6MinX
+          write_pv: $(P)$(R)6:MinX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)6:MinX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI6SizeX
+          write_pv: $(P)$(R)6:SizeX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)6:SizeX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI6MinY
+          write_pv: $(P)$(R)6:MinY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)6:MinY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI6SizeY
+          write_pv: $(P)$(R)6:SizeY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)6:SizeY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI6BgdWidth
+          write_pv: $(P)$(R)6:BgdWidth
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)6:BgdWidth_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI6Total
+          read_pv: $(P)$(R)6:Total_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI6Net
+          read_pv: $(P)$(R)6:Net_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI6MinValue
+          read_pv: $(P)$(R)6:MinValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI6MaxValue
+          read_pv: $(P)$(R)6:MaxValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI6MeanValue
+          read_pv: $(P)$(R)6:MeanValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalX
+          name: ROI6More
+          label: Detail
+          write_pv: $(P)$(R)6:More
+          value: "1"
+
+        - type: SignalX
+          name: ROI6Plot
+          label: Plot
+          write_pv: $(P)$(R)6:Plot
+          value: "1"
+
+      - type: Group
+        name: ROI7Row
+        label: ROI 7
+        layout:
+          type: Row
+        children:
+
+        - type: SignalRW
+          name: ROI7Use
+          write_pv: $(P)$(R)7:Use
+          write_widget:
+            type: ToggleButton
+          read_pv: $(P)$(R)7:Use_RBV
+          read_widget:
+            type: LED
+
+        - type: SignalW
+          name: ROI7Name
+          write_pv: $(P)$(R)7:Name
+          write_widget:
+            type: TextWrite
+
+        - type: SignalRW
+          name: ROI7MinX
+          write_pv: $(P)$(R)7:MinX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)7:MinX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI7SizeX
+          write_pv: $(P)$(R)7:SizeX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)7:SizeX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI7MinY
+          write_pv: $(P)$(R)7:MinY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)7:MinY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI7SizeY
+          write_pv: $(P)$(R)7:SizeY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)7:SizeY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI7BgdWidth
+          write_pv: $(P)$(R)7:BgdWidth
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)7:BgdWidth_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI7Total
+          read_pv: $(P)$(R)7:Total_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI7Net
+          read_pv: $(P)$(R)7:Net_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI7MinValue
+          read_pv: $(P)$(R)7:MinValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI7MaxValue
+          read_pv: $(P)$(R)7:MaxValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI7MeanValue
+          read_pv: $(P)$(R)7:MeanValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalX
+          name: ROI7More
+          label: Detail
+          write_pv: $(P)$(R)7:More
+          value: "1"
+
+        - type: SignalX
+          name: ROI7Plot
+          label: Plot
+          write_pv: $(P)$(R)7:Plot
+          value: "1"
+
+      - type: Group
+        name: ROI8Row
+        label: ROI 8
+        layout:
+          type: Row
+        children:
+
+        - type: SignalRW
+          name: ROI8Use
+          write_pv: $(P)$(R)8:Use
+          write_widget:
+            type: ToggleButton
+          read_pv: $(P)$(R)8:Use_RBV
+          read_widget:
+            type: LED
+
+        - type: SignalW
+          name: ROI8Name
+          write_pv: $(P)$(R)8:Name
+          write_widget:
+            type: TextWrite
+
+        - type: SignalRW
+          name: ROI8MinX
+          write_pv: $(P)$(R)8:MinX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)8:MinX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI8SizeX
+          write_pv: $(P)$(R)8:SizeX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)8:SizeX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI8MinY
+          write_pv: $(P)$(R)8:MinY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)8:MinY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI8SizeY
+          write_pv: $(P)$(R)8:SizeY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)8:SizeY_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: ROI8BgdWidth
+          write_pv: $(P)$(R)8:BgdWidth
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)8:BgdWidth_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI8Total
+          read_pv: $(P)$(R)8:Total_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI8Net
+          read_pv: $(P)$(R)8:Net_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI8MinValue
+          read_pv: $(P)$(R)8:MinValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI8MaxValue
+          read_pv: $(P)$(R)8:MaxValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalR
+          name: ROI8MeanValue
+          read_pv: $(P)$(R)8:MeanValue_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalX
+          name: ROI8More
+          label: Detail
+          write_pv: $(P)$(R)8:More
+          value: "1"
+
+        - type: SignalX
+          name: ROI8Plot
+          label: Plot
+          write_pv: $(P)$(R)8:Plot
+          value: "1"
 
 - type: Group
-  name: NDPluginTimeSeriesN
+  name: TimeSeries
+  label: Time Series
   layout:
     type: Grid
     labelled: true
@@ -40,8 +1160,28 @@ children:
     write_widget:
       type: ComboBox
 
+  - type: SignalR
+    name: TSAcquiring
+    read_pv: $(P)$(R)TSAcquiring
+    read_widget:
+      type: LED
+
+  - type: SignalW
+    name: TSNumPoints
+    label: TS Num Points
+    write_pv: $(P)$(R)TSNumPoints
+    write_widget:
+      type: TextWrite
+
+  - type: SignalR
+    name: TSCurrentPoint
+    label: TS Current Point
+    read_pv: $(P)$(R)TSCurrentPoint
+    read_widget:
+      type: TextRead
+
 - type: Group
-  name: NDROIStat
+  name: Reset
   layout:
     type: Grid
     labelled: true
@@ -49,6 +1189,7 @@ children:
 
   - type: SignalW
     name: ResetAll
+    label: Reset All
     write_pv: $(P)$(R)ResetAll
     write_widget:
       type: ToggleButton
