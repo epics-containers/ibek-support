@@ -1,5 +1,4 @@
 label: NDStdArrays
-parent: NDPluginBase
 children:
 
 - type: Group
@@ -15,3 +14,6 @@ children:
     read_pv: $(P)$(R)ArrayData
     read_widget:
       type: TextRead
+
+- type: Include
+  file_name: NDPluginBase

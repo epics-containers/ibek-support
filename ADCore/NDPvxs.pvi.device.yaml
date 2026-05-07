@@ -1,5 +1,4 @@
 label: NDPvxs
-parent: NDPluginBase
 children:
 
 - type: Group
@@ -15,3 +14,6 @@ children:
     read_widget:
       type: TextRead
       format: string
+
+- type: Include
+  file_name: NDPluginBase
