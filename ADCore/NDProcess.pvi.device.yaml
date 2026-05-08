@@ -1,5 +1,4 @@
 label: NDProcess
-parent: NDPluginBase
 children:
 
 - type: Group
@@ -354,3 +353,6 @@ children:
     read_pv: $(P)$(R)DataTypeOut_RBV
     read_widget:
       type: TextRead
+
+- type: Include
+  file_name: NDPluginBase

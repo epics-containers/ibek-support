@@ -1,5 +1,4 @@
 label: NDPluginBase
-parent: NDArrayBase
 children:
 
 - type: Group
@@ -184,3 +183,6 @@ children:
     read_pv: $(P)$(R)DisorderedArrays_RBV
     read_widget:
       type: TextRead
+
+- type: Include
+  file_name: NDArrayBase
