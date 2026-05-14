@@ -1,17 +1,17 @@
 label: NDPvxs
-parent: NDPluginBase
 children:
+  - type: Include
+    file_name: NDPluginBase
 
-- type: Group
-  name: NDPvxs
-  layout:
-    type: Grid
-    labelled: true
-  children:
-
-  - type: SignalR
-    name: PvName
-    read_pv: $(P)$(R)PvName_RBV
-    read_widget:
-      type: TextRead
-      format: string
+  - type: Group
+    name: Info
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalR
+        name: PvName
+        read_pv: $(P)$(R)PvName_RBV
+        read_widget:
+          type: TextRead
+          format: string
