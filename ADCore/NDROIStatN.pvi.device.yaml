@@ -1,0 +1,15 @@
+label: NDROIStatN
+children:
+
+  - type: Group
+    name: Info
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: MaxSizeX
+      label: Max Size X
+      read_pv: $(P)$(R)MaxSizeX_RBV
+      read_widget:
+        type: TextRead
