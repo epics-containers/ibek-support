@@ -51,6 +51,12 @@ entity_models:
           # Create IP Port (PortName, IPAddr)
           pmacAsynIPConfigure("{{name}}", "{{IP}}")
 
+    sub_entities:
+      - type: ibek.wait_ip
+        entity_enabled: true
+        device: "{{name}}"
+        address: "{{IP}}"
+
   - name: pmacVmeConfig
     description: |-
       This will create an AsynPort connecting to a PMAC over VME bus
@@ -69,6 +75,12 @@ entity_models:
     pre_init:
       - value: |
           # VME PMAC port placeholder (VME config is handled by hardware setup)
+
+    sub_entities:
+      - type: ibek.wait_ip
+        entity_enabled: true
+        device: "{{name}}"
+        address: "{{IP}}"
 
   - name: PMAC
     description: |-
@@ -1687,7 +1699,22 @@ entity_models:
 
     databases:
       - file: translated_motor.template
-        args: { P: null, SM: null, DESC: null, VELO: null, VMAX: null, PREC: null, EGU: null, DHLM: null, DLLM: null, M: null, TWV: null, FWD: null, BWD: null }
+        args:
+          {
+            P: null,
+            SM: null,
+            DESC: null,
+            VELO: null,
+            VMAX: null,
+            PREC: null,
+            EGU: null,
+            DHLM: null,
+            DLLM: null,
+            M: null,
+            TWV: null,
+            FWD: null,
+            BWD: null,
+          }
 
   - name: CS_accel_dcm
     description: |-
