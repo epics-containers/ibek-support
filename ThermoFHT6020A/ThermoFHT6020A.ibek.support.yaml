@@ -33,7 +33,7 @@ entity_models:
         default: 3
 
     databases:
-      - file: $(ThermoFHT6020A)/db/FHT6020A.template
+      - file: FHT6020A.template
         # use a regex to say that we want all the parameters in the template
         # this is equivalent to {P: '{{P}}', PORT: '{{PORT}}', ADDR: '{{ADDR}}', SCAN: '{{SCAN}}', TEMPSCAN: '{{TEMPSCAN}}', name: '{{name}}', LOOP: '{{LOOP}}'}
         args:

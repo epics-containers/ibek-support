@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: thermofht6020a
-version: 0-5
-organization: https://gitlab.diamond.ac.uk/controls/support
+version: 0-6
+organization: https://github.com/epics-containers
 
 protocol_files:
   - ThermoFHT6020AApp/protocol/FHT6020A.proto
