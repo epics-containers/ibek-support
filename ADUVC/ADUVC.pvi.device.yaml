@@ -1,0 +1,16 @@
+label: ADUVC Camera
+children:
+  - type: Include
+    file_name: ADDriver
+
+  - type: Group
+    name: ADUVC
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalR
+        name: ADCoreVersion
+        read_pv: $(P)$(R)ADCoreVersion_RBV
+        read_widget:
+          type: TextRead
