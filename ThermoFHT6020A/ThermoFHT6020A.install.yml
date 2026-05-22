@@ -2,7 +2,7 @@
 
 module: thermofht6020a
 version: 0-6
-organization: https://github.com/epics-containers
+organization: https://github.com/diamondlightsource/
 
 protocol_files:
   - ThermoFHT6020AApp/protocol/FHT6020A.proto
