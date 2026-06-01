@@ -42,98 +42,138 @@ children:
       type: Grid
       labelled: true
     children:
-      - type: SignalR
-        name: MaxSizeX
-        read_pv: $(P)$(R)MaxSizeX_RBV
-        read_widget:
-          type: TextRead
 
-      - type: SignalR
-        name: MaxSizeY
-        read_pv: $(P)$(R)MaxSizeY_RBV
-        read_widget:
-          type: TextRead
+      - type: Group
+        name: MaxSizeRow
+        label: Max Size
+        layout:
+          type: Row
+          header:
+            - X
+            - Y
+        children:
 
-      - type: SignalRW
-        name: BinX
-        write_pv: $(P)$(R)BinX
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)BinX_RBV
-        read_widget:
-          type: TextRead
+        - type: SignalR
+          name: MaxSizeXTable
+          label: Max Size X
+          read_pv: $(P)$(R)MaxSizeX_RBV
+          read_widget:
+            type: TextRead
 
-      - type: SignalRW
-        name: BinY
-        write_pv: $(P)$(R)BinY
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)BinY_RBV
-        read_widget:
-          type: TextRead
+        - type: SignalR
+          name: MaxSizeYTable
+          label: Max Size Y
+          read_pv: $(P)$(R)MaxSizeY_RBV
+          read_widget:
+            type: TextRead
 
-      - type: SignalRW
-        name: MinY
-        write_pv: $(P)$(R)MinY
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)MinY_RBV
-        read_widget:
-          type: TextRead
+      - type: Group
+        name: BinRow
+        label: Bin
+        layout:
+          type: Row
+        children:
 
-      - type: SignalRW
-        name: MinX
-        write_pv: $(P)$(R)MinX
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)MinX_RBV
-        read_widget:
-          type: TextRead
+        - type: SignalRW
+          name: BinXTable
+          label: Bin X
+          write_pv: $(P)$(R)BinX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)BinX_RBV
+          read_widget:
+            type: TextRead
 
-      - type: SignalRW
-        name: ReverseX
-        write_pv: $(P)$(R)ReverseX
-        write_widget:
-          type: ToggleButton
-        read_pv: $(P)$(R)ReverseX_RBV
-        read_widget:
-          type: LED
+        - type: SignalRW
+          name: BinYTable
+          label: Bin Y
+          write_pv: $(P)$(R)BinY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)BinY_RBV
+          read_widget:
+            type: TextRead
 
-      - type: SignalRW
-        name: ReverseY
-        write_pv: $(P)$(R)ReverseY
-        write_widget:
-          type: ToggleButton
-        read_pv: $(P)$(R)ReverseY_RBV
-        read_widget:
-          type: LED
+      - type: Group
+        name: MinRow
+        label: Min
+        layout:
+          type: Row
+        children:
 
-      - type: SignalRW
-        name: SizeX
-        write_pv: $(P)$(R)SizeX
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)SizeX_RBV
-        read_widget:
-          type: TextRead
+        - type: SignalRW
+          name: MinXTable
+          label: Min X
+          write_pv: $(P)$(R)MinX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)MinX_RBV
+          read_widget:
+            type: TextRead
 
-      - type: SignalRW
-        name: SizeY
-        write_pv: $(P)$(R)SizeY
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)SizeY_RBV
-        read_widget:
-          type: TextRead
+        - type: SignalRW
+          name: MinYTable
+          label: Min Y
+          write_pv: $(P)$(R)MinY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)MinY_RBV
+          read_widget:
+            type: TextRead
 
-      - type: SignalRW
-        name: Gain
-        write_pv: $(P)$(R)Gain
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)Gain_RBV
-        read_widget:
-          type: TextRead
+      - type: Group
+        name: ReverseRow
+        label: Reverse
+        layout:
+          type: Row
+        children:
+
+        - type: SignalRW
+          name: ReverseXTable
+          label: Reverse X
+          write_pv: $(P)$(R)ReverseX
+          write_widget:
+            type: ToggleButton
+          read_pv: $(P)$(R)ReverseX_RBV
+          read_widget:
+            type: LED
+
+        - type: SignalRW
+          name: ReverseYTable
+          label: Reverse Y
+          write_pv: $(P)$(R)ReverseY
+          write_widget:
+            type: ToggleButton
+          read_pv: $(P)$(R)ReverseY_RBV
+          read_widget:
+            type: LED
+
+      - type: Group
+        name: SizeRow
+        label: Size
+        layout:
+          type: Row
+        children:
+
+        - type: SignalRW
+          name: SizeXTable
+          label: Size X
+          write_pv: $(P)$(R)SizeX
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)SizeX_RBV
+          read_widget:
+            type: TextRead
+
+        - type: SignalRW
+          name: SizeYTable
+          label: Size Y
+          write_pv: $(P)$(R)SizeY
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)SizeY_RBV
+          read_widget:
+            type: TextRead
 
   - type: Group
     name: Collect
@@ -178,6 +218,15 @@ children:
         write_widget:
           type: TextWrite
         read_pv: $(P)$(R)AcquirePeriod_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Gain
+        write_pv: $(P)$(R)Gain
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)Gain_RBV
         read_widget:
           type: TextRead
 
