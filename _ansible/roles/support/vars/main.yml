@@ -23,8 +23,7 @@ git_repo: "{{ organization.rstrip('/') }}/{{ module }}"
 protocol_files: []
 
 # the macro used in configure/RELEASE for this module
-macro: "{{ module | upper }}"
-
+macro: "{{ module | replace('-', '_') | upper }}"
 # macros to remove from configure/RELEASE unless already built
 remove_macros: []
 

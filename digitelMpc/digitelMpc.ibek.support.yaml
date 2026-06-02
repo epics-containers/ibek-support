@@ -3,13 +3,13 @@
 module: digitelMpc
 
 entity_models:
-  - name: digitelMpcqT
+  - name: digitelMpcqTsp
     description: |-
       Template database for digitel MPCq - Titanium Sublimation Pump
       Pete Owens - January 2020
     parameters:
       device:
-        type: str
+        type: id
         description: |-
           device name
 
@@ -57,14 +57,9 @@ entity_models:
           "24":
           "01":
       ctlsrc:
-        type: str
+        type: int
         description: |-
           control source (0 = service, 1 = Ion Pump 1, 2 = Ion Pump 2)
-
-      name:
-        type: id
-        description: |-
-          Object name and gui association name
 
       protocol:
         type: str
@@ -133,8 +128,8 @@ entity_models:
           Protocol file to use
         default: digitelMpc.proto
         values:
-          '"digitelMpc.proto"':
-          '"digitelMpcq.proto"':
+          digitelMpc.proto:
+          digitelMpcq.proto:
     databases:
       - file: $(DIGITELMPC)/db/digitelMpc.template
         args: { device: null, port: null, unit: null, proto: null }
@@ -222,7 +217,7 @@ entity_models:
 
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcIonp.template
-        args: { device: null, port: "{{MPC.port}}", unit: "{{MPC.unit}}", pump: null, size: null, sp1on: null, sp1off: null, sp2on: null, sp2off: null, alh: null, text: null, proto: null, disptext: null }
+        args: { device: null, port: "{{MPC.port}}", unit: "{{MPC.unit}}", pump: null, size: null, sp1on: null, sp1off: null, sp2on: null, sp2off: null, alh: null, text: null, proto: "{{MPC.proto}}", disptext: null }
 
   - name: digitelMpcTspGroup
     description: |-

@@ -11,52 +11,30 @@ entity_models:
       P:
         type: str
         description: Device Prefix
+
       R:
         type: str
         description: Device Suffix
+
       PORT:
         type: id
         description: Port name for the detector
+
       serial:
         type: str
-        description: Serial number, leave blank if using vendor/productID
+        description: Serial number, leave blank if using productID
         default: ""
+
       productID:
-        type: int
-        description: Product ID, put 0 if using serial number
-        default: 0
-      framerate:
-        type: int
-        description: Framerate at which camera should operate
-        default: 30
-      xsize:
-        type: int
-        description: Width of image
-        default: 640
-      ysize:
-        type: int
-        description: Height of image
-        default: 480
-      maxBuffers:
-        type: int
-        description: Max buffer size for NDArrays
-        default: 0
-      maxMemory:
-        type: int
-        description: Max memory allocated for driver
-        default: 0
-      priority:
-        type: int
-        description: Thread priority for the driver
-        default: 0
-      stackSize:
-        type: int
-        description: Size of the driver on the stack
-        default: 0
+        type: str
+        description: Product ID, leave blank if using serial number
+        default: ""
+
       TIMEOUT:
         type: int
         description: Timeout
         default: 1
+
       ADDR:
         type: int
         description: Asyn Port address
@@ -64,8 +42,9 @@ entity_models:
 
     pre_init:
       - value: |
-          # ADUVCConfig(portName, serial, productID, framerate, xsize, ysize, maxBuffers, maxMemory, priority, stackSize)
-          ADUVCConfig("{{PORT}}", "{{serial}}", {{productID}}, {{framerate}}, {{xsize}}, {{ysize}}, {{maxBuffers}}, {{maxMemory}}, {{priority}}, {{stackSize}})
+          # ADUVCConfig(portName, serialOrProductID)
+          ADUVCConfig("{{PORT}}", "{% if serial %}{{serial}}{% else %}{{productID}}{% endif %}")
+
           # NDStdArraysConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDStdArraysConfigure("{{PORT}}.ARR", 2, 0, "{{PORT}}", 0, 0, 0, 0, 0, 1)
 
@@ -77,6 +56,7 @@ entity_models:
           PORT:
           TIMEOUT:
           ADDR:
+
       - file: $(ADUVC)/db/ADUVC.template
         args:
           P:
@@ -84,6 +64,7 @@ entity_models:
           PORT:
           TIMEOUT:
           ADDR:
+          
       - file: $(ADCORE)/db/NDStdArrays.template
         args:
           P:

@@ -1,59 +1,356 @@
-# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.1.2/ibek.support.schema.json
 
-module: xspress3
+module: Xspress3
 
 entity_models:
-  - name: xspress3
+  - name: Xspress3
     description: |-
-      xspress3
+      Creates an Xspress3 areaDetector driver with per-channel and per-card
+      sub-templates. Loads xspress3_base.template (which includes ADBase),
+      plus xspress3_channel.template per channel and xspress3_card.template
+      per card.
     parameters:
+      PORT:
+        type: id
+        description: Asyn port name for the Xspress3 driver
       P:
         type: str
-        description: |-
-          Prefix for PV name
-
-      PORT:
+        description: Device prefix
+      R:
         type: str
-        description: |-
-          Bus/Port Address
-
-      ADDR:
+        description: Device suffix
+      num_channels:
         type: int
-        description: |-
-          Address on the bus
+        description: Number of channels in the Xspress3
+        default: 1
+      num_cards:
+        type: int
+        description: Number of Xspress3 devices in the chain
+        default: 1
+      base_IP:
+        type: str
+        description: Xspress3 base address
+        default: 192.168.0.1
+      use_resgrades:
+        type: str
+        description: Toggle collection of resgrade data
+        default: "False"
+      readout_MCA:
+        type: str
+        description: Toggle collection of MCA data
+        default: "True"
+      use_odin:
+        type: str
+        description: Use ODIN instead of AD for readout
+        default: "False"
+      num_receivers:
+        type: int
+        description: Number of frame receiver processes (if using ODIN)
         default: 0
-
-      TIMEOUT:
+      max_buffers:
         type: int
-        description: |-
-
-        default: 5
-
+        description: Number of NDArray buffers to allocate
+        default: 4096
+      max_memory:
+        type: int
+        description: Memory to allocate for driver and plugins
+        default: -1
+      settings_directory:
+        type: str
+        description: Path to the Xspress3 settings to upload to the device
+        default: ""
+      debug:
+        type: int
+        description: Turn on support library debugging
+        default: 0
       MAX_SPECTRA:
         type: int
-        description: |-
-
-
+        description: The maximum size of each spectra (eg. 4096) in a scan
       MAX_FRAMES:
         type: int
-        description: |-
-
-
-      SCAN_RATE:
+        description: The maximum number of frames that can be acquired in one acquisition (eg. 16384)
+      TIMEOUT:
         type: int
-        description: |-
-
+        description: Asyn timeout
+        default: 1
+      ADDR:
+        type: int
+        description: Asyn address (set to zero)
+        default: 0
 
     pre_init:
       - value: |
-          epicsEnvSet ""
+          # xspress3Config(portName, numChannels, numCards, baseIP, useResgrades, readoutMCA, useOdin, numReceivers, maxFrames, maxSpectra, maxBuffers, maxMemory, debug)
+          xspress3Config("{{PORT}}", {{num_channels}}, {{num_cards}}, "{{base_IP}}", {% if use_resgrades in ["True", "true", "1"] %}1{% else %}0{% endif %}, {% if readout_MCA in ["True", "true", "1"] %}1{% else %}0{% endif %}, {% if use_odin in ["True", "true", "1"] %}1{% else %}0{% endif %}, {{num_receivers}}, {{MAX_FRAMES}}, {{MAX_SPECTRA}}, {{max_buffers}}, {{max_memory}}, {{debug}})
 
     databases:
-      - file: $(XSPRESS3)/db/xspress3.template
+      - file: $(XSPRESS3)/db/xspress3_base.template
+        args:
+          P:
+          R:
+          PORT:
+          ADDR:
+          TIMEOUT:
+          MAX_SPECTRA:
+          MAX_FRAMES:
+
+    post_init:
+      - value: |
+          dbpf("{{P}}{{R}}NumImages", "1")
+          dbpf("{{P}}{{R}}CONFIG_PATH", "{{settings_directory}}")
+
+  - name: Xspress3DTCPlugin
+    description: |-
+      Creates an Xspress3 dead-time correction plugin. Loads
+      xspress3_dtc_plugin.template (which includes NDPluginBase),
+      xspress3_dtc_factors.template, and xspress3_dtc_channel.template
+      per channel.
+    parameters:
+      PORT:
+        type: id
+        description: Port name for the Xspress3 DTC plugin
+      NDARRAY_PORT:
+        type: object
+        description: Input array port (the Xspress3 detector port)
+      P:
+        type: str
+        description: Device prefix
+      R:
+        type: str
+        description: Device suffix
+      num_channels:
+        type: int
+        description: Number of channels in the Xspress3
+        default: 1
+      QUEUE:
+        type: int
+        description: Input array queue size
+        default: 2
+      BLOCK:
+        type: int
+        description: Blocking callbacks?
+        default: 0
+      NDARRAY_ADDR:
+        type: int
+        description: Input array port address
+        default: 0
+      TIMEOUT:
+        type: int
+        description: Timeout
+        default: 1
+      ADDR:
+        type: int
+        description: Asyn port address
+        default: 0
+      ENABLED:
+        type: int
+        description: Plugin enabled at startup?
+        default: 0
+      SCANRATE:
+        type: str
+        description: Specified scan rate for cpu intensive PVs
+        default: I/O Intr
+
+    pre_init:
+      - value: |
+          # xspress3DTCConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, numChannels, NDArrayAddr, maxBuffers, maxMemory)
+          xspress3DTCConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{num_channels}}, {{NDARRAY_ADDR}}, 0, 0)
+
+    databases:
+      - file: $(XSPRESS3)/db/xspress3_dtc_plugin.template
+        args:
+          P:
+          R: "{{R}}DTC:"
+          PORT:
+          TIMEOUT:
+          ADDR:
+          NUM_CHANNELS: "{{num_channels}}"
+
+  - name: Xspress3Plugins
+    description: |-
+      Creates common plugins for use with the Xspress3: a processing plugin
+      for summing and ROI plugins for each channel. This entity creates
+      ADCore plugin entities (NDProcess, NDROI, NDStdArrays, NDAttribute)
+      programmatically.
+    parameters:
+      DET:
+        type: str
+        description: Asyn port of the Xspress3 detector
+      PORTPREFIX:
+        type: str
+        description: Prefix for the asyn ports of the generated plugins
+      P:
+        type: str
+        description: PV prefix
+      num_channels:
+        type: int
+        description: Number of channels in the Xspress3
+        default: 1
+      max_buffers:
+        type: int
+        description: Number of NDArray buffers to allocate
+        default: 4096
+
+    post_init:
+      - value: |
+          dbpf("{{P}}:PROC:EnableCallbacks", "Enable")
+          dbpf("{{P}}:PROC:FilterType", "Sum")
+          dbpf("{{P}}:PROC:EnableFilter", "Enable")
+          {% for chan in range(num_channels) %}
+          {% for scaler in range(9) %}
+          dbpf("{{P}}:C{{ chan + 1 }}_SCAS:{{ scaler + 1 }}:AttrName", "Chan{{ '%02d' % (chan + 1) }}Sca{{ scaler }}")
+          {% endfor %}
+          dbpf("{{P}}:ROI{{ chan + 1 }}:BinY", "100000")
+          dbpf("{{P}}:ROI{{ chan + 1 }}:MinZ", "{{ chan }}")
+          dbpf("{{P}}:ROI{{ chan + 1 }}:SizeZ", "1")
+          dbpf("{{P}}:ROISUM{{ chan + 1 }}:BinY", "100000")
+          dbpf("{{P}}:ROISUM{{ chan + 1 }}:MinZ", "{{ chan }}")
+          dbpf("{{P}}:ROISUM{{ chan + 1 }}:SizeZ", "1")
+          {% endfor %}
+
+  - name: auto_xspress3Channel
+    description: |-
+      Per-channel template for Xspress3 detector. Auto-generated by
+      Xspress3 entity for each channel.
+    parameters:
+      PORT:
+        type: str
+        description: Asyn port name of the parent Xspress3
+      P:
+        type: str
+        description: Device prefix
+      R:
+        type: str
+        description: Device suffix
+      TIMEOUT:
+        type: int
+        description: Asyn timeout
+      CHAN_NUM:
+        type: int
+        description: The number of the channel (1-based)
+      CHAN_IND:
+        type: int
+        description: The index of the channel (0-based, = CHAN_NUM - 1)
+      CHAN_GRP:
+        type: str
+        description: The range (i.e. 1-8, 9-16 etc) the current number lies within
+        default: ""
+
+    databases:
+      - file: $(XSPRESS3)/db/xspress3_channel.template
         args:
           .*:
-          # P: "{{P + ':' + name + ':'}}"
 
-    
+  - name: auto_xspress3Card
+    description: |-
+      Per-card template for Xspress3 detector. Auto-generated by
+      Xspress3 entity for each card.
+    parameters:
+      PORT:
+        type: str
+        description: Asyn port name of the parent Xspress3
+      P:
+        type: str
+        description: Device prefix
+      R:
+        type: str
+        description: Device suffix
+      TIMEOUT:
+        type: int
+        description: Asyn timeout
+      CARD_NUM:
+        type: int
+        description: The number of the card
 
-      
+    databases:
+      - file: $(XSPRESS3)/db/xspress3_card.template
+        args:
+          .*:
+
+  - name: auto_xspress3DTCGuiHeader
+    description: |-
+      DTC GUI header template. Auto-generated by Xspress3 entity
+      for each channel group.
+    parameters:
+      PORT:
+        type: str
+        description: Asyn port name of the parent Xspress3
+      CHAN_GRP:
+        type: str
+        description: Channel group range string
+        default: ""
+
+    databases:
+      - file: $(XSPRESS3)/db/xspress3_dtc_gui_header.template
+        args:
+          PORT:
+          CHAN_GRP:
+
+  - name: auto_xspress3DTCFactors
+    description: |-
+      DTC factors template. Auto-generated by Xspress3DTCPlugin entity.
+    parameters:
+      PORT:
+        type: str
+        description: Asyn port name of the parent DTC plugin
+      P:
+        type: str
+        description: Device prefix
+      R:
+        type: str
+        description: Device suffix
+      TIMEOUT:
+        type: int
+        description: Asyn timeout
+      NUM_CHANNELS:
+        type: int
+        description: Total number of channels
+
+    databases:
+      - file: $(XSPRESS3)/db/xspress3_dtc_factors.template
+        args:
+          .*:
+
+  - name: auto_xspress3DTCChannel
+    description: |-
+      Per-channel DTC template. Auto-generated by Xspress3DTCPlugin entity.
+    parameters:
+      PORT:
+        type: str
+        description: Asyn port name of the parent DTC plugin
+      P:
+        type: str
+        description: Device prefix
+      R:
+        type: str
+        description: Device suffix
+      TIMEOUT:
+        type: int
+        description: Asyn timeout
+      CHAN_IND:
+        type: int
+        description: Zero-based channel index
+      CHAN_NUM:
+        type: int
+        description: Channel index + 1
+
+    databases:
+      - file: $(XSPRESS3)/db/xspress3_dtc_channel.template
+        args:
+          .*:
+
+  - name: auto_xspress3PluginsChannel
+    description: |-
+      Per-channel plugins template. Auto-generated by Xspress3Plugins entity.
+    parameters:
+      P:
+        type: str
+        description: Device prefix
+      CHAN:
+        type: int
+        description: The number of the channel
+
+    databases:
+      - file: $(XSPRESS3)/db/xspress3_plugins_channel.template
+        args:
+          .*:
