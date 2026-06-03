@@ -4,13 +4,257 @@ children:
     file_name: ADDriver
 
   - type: Group
-    name: ADUVC
+    name: Info
     layout:
       type: Grid
       labelled: true
     children:
-      - type: SignalR
-        name: ADCoreVersion
-        read_pv: $(P)$(R)ADCoreVersion_RBV
+      - type: SignalRW
+        name: UVCComplianceLevel
+        label: UVC Compliance
+        write_pv: $(P)$(R)UVCComplianceLevel
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)UVCComplianceLevel_RBV
         read_widget:
           type: TextRead
+
+      - type: SignalRW
+        name: UVCReferenceCount
+        label: Reference Count
+        write_pv: $(P)$(R)UVCReferenceCount
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)UVCReferenceCount_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: UVCLogLevel
+        label: Log Level
+        write_pv: $(P)$(R)UVCLogLevel
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)UVCLogLevel_RBV
+        read_widget:
+          type: TextRead
+
+  - type: Group
+    name: Collect
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalRW
+        name: UVCFramerate
+        label: Frame Rate
+        write_pv: $(P)$(R)UVCFramerate
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)UVCFramerate_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: UVCGamma
+        label: Gamma
+        write_pv: $(P)$(R)UVCGamma
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)UVCGamma_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: UVCBacklightCompensation
+        label: Backlight Comp
+        write_pv: $(P)$(R)UVCBacklightCompensation
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)UVCBacklightCompensation_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: UVCBrightness
+        label: Brightness
+        write_pv: $(P)$(R)UVCBrightness
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)UVCBrightness_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: UVCContrast
+        label: Contrast
+        write_pv: $(P)$(R)UVCContrast
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)UVCContrast_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: UVCPowerLine
+        label: Power Line Freq
+        write_pv: $(P)$(R)UVCPowerLine
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)UVCPowerLine_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: UVCHue
+        label: Hue
+        write_pv: $(P)$(R)UVCHue
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)UVCHue_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: UVCSaturation
+        label: Saturation
+        write_pv: $(P)$(R)UVCSaturation
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)UVCSaturation_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: UVCSharpness
+        label: Sharpness
+        write_pv: $(P)$(R)UVCSharpness
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)UVCSharpness_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: UVCAutoAdjust
+        label: Auto Adjust
+        write_pv: $(P)$(R)UVCAutoAdjust
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)UVCAutoAdjust_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: UVCImageFormat
+        label: Image Format
+        write_pv: $(P)$(R)UVCImageFormat
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)UVCImageFormat_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: UVCCameraFormat
+        label: Camera Format
+        write_pv: $(P)$(R)UVCCameraFormat
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)UVCCameraFormat_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: UVCFormatDescription
+        label: Format Description
+        read_pv: $(P)$(R)UVCFormatDescription_RBV
+        read_widget:
+          type: TextRead
+          format: string
+
+      - type: SignalW
+        name: UVCApplyFormat
+        label: Apply Format
+        write_pv: $(P)$(R)UVCApplyFormat
+        write_widget:
+          type: ToggleButton
+
+  - type: Group
+    name: PanTiltZoom
+    label: Pan Tilt Zoom
+    layout:
+      type: Grid
+      labelled: true
+    children:
+      - type: SignalW
+        name: UVCPanLeft
+        label: Pan Left
+        write_pv: $(P)$(R)UVCPanLeft
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: UVCPanRight
+        label: Pan Right
+        write_pv: $(P)$(R)UVCPanRight
+        write_widget:
+          type: TextWrite
+
+      - type: SignalRW
+        name: UVCPanSpeed
+        label: Pan Speed
+        write_pv: $(P)$(R)UVCPanSpeed
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)UVCPanSpeed_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalW
+        name: UVCTiltUp
+        label: Tilt Up
+        write_pv: $(P)$(R)UVCTiltUp
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: UVCTiltDown
+        label: Tilt Down
+        write_pv: $(P)$(R)UVCTiltDown
+        write_widget:
+          type: TextWrite
+
+      - type: SignalRW
+        name: UVCTiltSpeed
+        label: Tilt Speed
+        write_pv: $(P)$(R)UVCTiltSpeed
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)UVCTiltSpeed_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: UVCPanTiltStep
+        label: Pan/Tilt Step
+        write_pv: $(P)$(R)UVCPanTiltStep
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)UVCPanTiltStep_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalW
+        name: UVCZoomIn
+        label: Zoom In
+        write_pv: $(P)$(R)UVCZoomIn
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: UVCZoomOut
+        label: Zoom Out
+        write_pv: $(P)$(R)UVCZoomOut
+        write_widget:
+          type: TextWrite
