@@ -32,231 +32,166 @@ children:
         read_widget:
           type: TextRead
 
-      - type: Group
+      - type: SignalR
         name: CentroidTotal
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: CentroidTotal
-            read_pv: $(P)$(R)CentroidTotal_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSCentroidTotal
-            read_pv: $(P)$(R)TSCentroidTotal
-            read_widget:
-              type: ArrayTrace
-              axis: Centroid Total
+        read_pv: $(P)$(R)CentroidTotal_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSCentroidTotal
+        read_pv: $(P)$(R)TSCentroidTotal
+        read_widget:
+          type: ArrayTrace
+          axis: Centroid Total
 
-      - type: Group
+      - type: SignalR
         name: CentroidX
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: CentroidX
-            read_pv: $(P)$(R)CentroidX_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSCentroidX
-            label: Centroid X
-            read_pv: $(P)$(R)TSCentroidX
-            read_widget:
-              type: ArrayTrace
-              axis: Centroid X
+        read_pv: $(P)$(R)CentroidX_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSCentroidX
+        label: Centroid X
+        read_pv: $(P)$(R)TSCentroidX
+        read_widget:
+          type: ArrayTrace
+          axis: Centroid X
 
-      - type: Group
+      - type: SignalR
         name: CentroidY
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: CentroidY
-            read_pv: $(P)$(R)CentroidY_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSCentroidY
-            label: Centroid Y
-            read_pv: $(P)$(R)TSCentroidY
-            read_widget:
-              type: ArrayTrace
-              axis: Centroid Y
+        read_pv: $(P)$(R)CentroidY_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSCentroidY
+        label: Centroid Y
+        read_pv: $(P)$(R)TSCentroidY
+        read_widget:
+          type: ArrayTrace
+          axis: Centroid Y
 
-      - type: Group
+      - type: SignalR
         name: SigmaX
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: SigmaX
-            read_pv: $(P)$(R)SigmaX_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSSigmaX
-            label: Sigma X
-            read_pv: $(P)$(R)TSSigmaX
-            read_widget:
-              type: ArrayTrace
-              axis: Sigma X
+        read_pv: $(P)$(R)SigmaX_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSSigmaX
+        label: Sigma X
+        read_pv: $(P)$(R)TSSigmaX
+        read_widget:
+          type: ArrayTrace
+          axis: Sigma X
 
-      - type: Group
+      - type: SignalR
         name: SigmaY
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: SigmaY
-            read_pv: $(P)$(R)SigmaY_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSSigmaY
-            label: Sigma Y
-            read_pv: $(P)$(R)TSSigmaY
-            read_widget:
-              type: ArrayTrace
-              axis: Sigma Y
+        read_pv: $(P)$(R)SigmaY_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSSigmaY
+        label: Sigma Y
+        read_pv: $(P)$(R)TSSigmaY
+        read_widget:
+          type: ArrayTrace
+          axis: Sigma Y
 
-      - type: Group
+      - type: SignalR
         name: SkewX
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: SkewX
-            read_pv: $(P)$(R)SkewX_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSSkewX
-            read_pv: $(P)$(R)TSSkewX
-            read_widget:
-              type: ArrayTrace
-              axis: Skew X
+        read_pv: $(P)$(R)SkewX_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSSkewX
+        read_pv: $(P)$(R)TSSkewX
+        read_widget:
+          type: ArrayTrace
+          axis: Skew X
 
-      - type: Group
+      - type: SignalR
         name: SkewY
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: SkewY
-            read_pv: $(P)$(R)SkewY_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSSkewY
-            read_pv: $(P)$(R)TSSkewY
-            read_widget:
-              type: ArrayTrace
-              axis: Skew Y
+        read_pv: $(P)$(R)SkewY_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSSkewY
+        read_pv: $(P)$(R)TSSkewY
+        read_widget:
+          type: ArrayTrace
+          axis: Skew Y
 
-      - type: Group
+      - type: SignalR
         name: KurtosisX
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: KurtosisX
-            read_pv: $(P)$(R)KurtosisX_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSKurtosisX
-            read_pv: $(P)$(R)TSKurtosisX
-            read_widget:
-              type: ArrayTrace
-              axis: Kurtosis X
+        read_pv: $(P)$(R)KurtosisX_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSKurtosisX
+        read_pv: $(P)$(R)TSKurtosisX
+        read_widget:
+          type: ArrayTrace
+          axis: Kurtosis X
 
-      - type: Group
+      - type: SignalR
         name: KurtosisY
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: KurtosisY
-            read_pv: $(P)$(R)KurtosisY_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSKurtosisY
-            read_pv: $(P)$(R)TSKurtosisY
-            read_widget:
-              type: ArrayTrace
-              axis: Kurtosis Y
+        read_pv: $(P)$(R)KurtosisY_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSKurtosisY
+        read_pv: $(P)$(R)TSKurtosisY
+        read_widget:
+          type: ArrayTrace
+          axis: Kurtosis Y
 
-      - type: Group
+      - type: SignalR
         name: SigmaXY
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: SigmaXY
-            read_pv: $(P)$(R)SigmaXY_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSSigmaXY
-            label: Sigma XY
-            read_pv: $(P)$(R)TSSigmaXY
-            read_widget:
-              type: ArrayTrace
-              axis: Sigma XY
+        read_pv: $(P)$(R)SigmaXY_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSSigmaXY
+        label: Sigma XY
+        read_pv: $(P)$(R)TSSigmaXY
+        read_widget:
+          type: ArrayTrace
+          axis: Sigma XY
 
-      - type: Group
-        name: Sigma
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: SigmaValue
-            read_pv: $(P)$(R)Sigma_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSSigma
-            read_pv: $(P)$(R)TSSigma
-            read_widget:
-              type: ArrayTrace
-              axis: Sigma Value
+      - type: SignalR
+        name: SigmaValue
+        read_pv: $(P)$(R)Sigma_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSSigma
+        read_pv: $(P)$(R)TSSigma
+        read_widget:
+          type: ArrayTrace
+          axis: Sigma Value
 
-      - type: Group
+      - type: SignalR
         name: Eccentricity
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: Eccentricity
-            read_pv: $(P)$(R)Eccentricity_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSEccentricity
-            read_pv: $(P)$(R)TSEccentricity
-            read_widget:
-              type: ArrayTrace
-              axis: Eccentricity
+        read_pv: $(P)$(R)Eccentricity_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSEccentricity
+        read_pv: $(P)$(R)TSEccentricity
+        read_widget:
+          type: ArrayTrace
+          axis: Eccentricity
 
-      - type: Group
+      - type: SignalR
         name: Orientation
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: Orientation
-            read_pv: $(P)$(R)Orientation_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSOrientation
-            read_pv: $(P)$(R)TSOrientation
-            read_widget:
-              type: ArrayTrace
-              axis: Orientation
+        read_pv: $(P)$(R)Orientation_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSOrientation
+        read_pv: $(P)$(R)TSOrientation
+        read_widget:
+          type: ArrayTrace
+          axis: Orientation
 
   - type: Group
     name: Profiles
@@ -474,160 +409,115 @@ children:
         read_widget:
           type: TextRead
 
-      - type: Group
+      - type: SignalR
         name: Total
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: Total
-            read_pv: $(P)$(R)Total_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSTotal
-            read_pv: $(P)$(R)TSTotal
-            read_widget:
-              type: ArrayTrace
-              axis: Total
+        read_pv: $(P)$(R)Total_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSTotal
+        read_pv: $(P)$(R)TSTotal
+        read_widget:
+          type: ArrayTrace
+          axis: Total
 
-      - type: Group
+      - type: SignalR
         name: MeanValue
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: MeanValue
-            read_pv: $(P)$(R)MeanValue_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSMeanValue
-            read_pv: $(P)$(R)TSMeanValue
-            read_widget:
-              type: ArrayTrace
-              axis: Mean Value
+        read_pv: $(P)$(R)MeanValue_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSMeanValue
+        read_pv: $(P)$(R)TSMeanValue
+        read_widget:
+          type: ArrayTrace
+          axis: Mean Value
 
-      - type: Group
+      - type: SignalR
         name: Net
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: Net
-            read_pv: $(P)$(R)Net_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSNet
-            read_pv: $(P)$(R)TSNet
-            read_widget:
-              type: ArrayTrace
-              axis: Net
+        read_pv: $(P)$(R)Net_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSNet
+        read_pv: $(P)$(R)TSNet
+        read_widget:
+          type: ArrayTrace
+          axis: Net
 
-      - type: Group
-        name: Minimum
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: MinValue
-            label: Minimum
-            read_pv: $(P)$(R)MinValue_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSMinValue
-            read_pv: $(P)$(R)TSMinValue
-            read_widget:
-              type: ArrayTrace
-              axis: Minimum
+      - type: SignalR
+        name: MinValue
+        label: Minimum
+        read_pv: $(P)$(R)MinValue_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSMinValue
+        read_pv: $(P)$(R)TSMinValue
+        read_widget:
+          type: ArrayTrace
+          axis: Minimum
 
-      - type: Group
-        name: Maximum
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: MaxValue
-            label: Maximum
-            read_pv: $(P)$(R)MaxValue_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSMaxValue
-            read_pv: $(P)$(R)TSMaxValue
-            read_widget:
-              type: ArrayTrace
-              axis: Maximum
+      - type: SignalR
+        name: MaxValue
+        label: Maximum
+        read_pv: $(P)$(R)MaxValue_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSMaxValue
+        read_pv: $(P)$(R)TSMaxValue
+        read_widget:
+          type: ArrayTrace
+          axis: Maximum
 
-      - type: Group
+      - type: SignalR
         name: MaxY
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: MaxY
-            read_pv: $(P)$(R)MaxY_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSMaxY
-            read_pv: $(P)$(R)TSMaxY
-            read_widget:
-              type: ArrayTrace
-              axis: Max Y
+        read_pv: $(P)$(R)MaxY_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSMaxY
+        read_pv: $(P)$(R)TSMaxY
+        read_widget:
+          type: ArrayTrace
+          axis: Max Y
 
-      - type: Group
+      - type: SignalR
         name: MinY
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: MinY
-            read_pv: $(P)$(R)MinY_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSMinY
-            read_pv: $(P)$(R)TSMinY
-            read_widget:
-              type: ArrayTrace
-              axis: Min Y
+        read_pv: $(P)$(R)MinY_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSMinY
+        read_pv: $(P)$(R)TSMinY
+        read_widget:
+          type: ArrayTrace
+          axis: Min Y
 
-      - type: Group
+      - type: SignalR
         name: MaxX
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: MaxX
-            read_pv: $(P)$(R)MaxX_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSMaxX
-            read_pv: $(P)$(R)TSMaxX
-            read_widget:
-              type: ArrayTrace
-              axis: Max X
+        read_pv: $(P)$(R)MaxX_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSMaxX
+        read_pv: $(P)$(R)TSMaxX
+        read_widget:
+          type: ArrayTrace
+          axis: Max X
 
-      - type: Group
+      - type: SignalR
         name: MinX
-        layout:
-          type: Row
-        children:
-          - type: SignalR
-            name: MinX
-            read_pv: $(P)$(R)MinX_RBV
-            read_widget:
-              type: TextRead
-          - type: SignalR
-            name: TSMinX
-            read_pv: $(P)$(R)TSMinX
-            read_widget:
-              type: ArrayTrace
-              axis: Min X
+        read_pv: $(P)$(R)MinX_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TSMinX
+        read_pv: $(P)$(R)TSMinX
+        read_widget:
+          type: ArrayTrace
+          axis: Min X
 
   - type: Include
     file_name: NDTimeSeries
