@@ -31,7 +31,7 @@ entity_models:
         default: ""
 
       TIMEOUT:
-        type: int
+        type: int 
         description: Timeout
         default: 1
 
@@ -76,3 +76,11 @@ entity_models:
           NELEMENTS: "6000000"
           TIMEOUT: "{{TIMEOUT}}"
           ADDR: "{{ADDR}}"
+
+    pvi:
+      yaml_path: ADUVC.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)
