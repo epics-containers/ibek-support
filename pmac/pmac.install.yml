@@ -27,6 +27,10 @@ comment_out:
 # parallel builds not supported
 make_options: ""
 
+bash:
+  - cmd: sed -i '/^\s*#\s*%/d' db/*.template
+    post_build: true
+
 patch_blocks:
   - path: "{{ config_linux_target }}"
     block: |
