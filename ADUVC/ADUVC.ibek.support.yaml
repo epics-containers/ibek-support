@@ -31,7 +31,7 @@ entity_models:
         default: ""
 
       TIMEOUT:
-        type: int 
+        type: int
         description: Timeout
         default: 1
 
