@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../../ibek-support/_scripts/support_install_variables.json
 
 module: ADAndor
-version: e3b7fc8 # Latest commit but no tag yet; required because of need to include PR#18
+version: e3b7fc8 # Latest commit but no tag yet (must include PR#18)
 organization: http://github.com/areaDetector
 
 dbds:
