@@ -1,12 +1,18 @@
 label: ADAndor
-parent: ADDriver
 children:
   - type: Group
-    name: Andor
+    name: AndorCCD
     layout:
       type: Grid
       labelled: true
+      stacked: false
     children:
+      - type: SignalW
+        name: DataType
+        write_pv: $(P)$(R)DataType
+        write_widget:
+          type: ComboBox
+
       - type: SignalW
         name: AndorShutterMode
         write_pv: $(P)$(R)AndorShutterMode
@@ -19,6 +25,20 @@ children:
         write_widget:
           type: ToggleButton
 
+      - type: SignalR
+        name: AndorTempStatus
+        read_pv: $(P)$(R)AndorTempStatus_RBV
+        read_widget:
+          type: TextRead
+          format: string
+
+      - type: SignalR
+        name: AndorMessage
+        read_pv: $(P)$(R)AndorMessage_RBV
+        read_widget:
+          type: TextRead
+          format: string
+
       - type: SignalRW
         name: AndorCooler
         write_pv: $(P)$(R)AndorCooler
@@ -27,13 +47,6 @@ children:
         read_pv: $(P)$(R)AndorCooler_RBV
         read_widget:
           type: LED
-
-      - type: SignalR
-        name: AndorTempStatus
-        read_pv: $(P)$(R)AndorTempStatus_RBV
-        read_widget:
-          type: TextRead
-          format: string
 
       - type: SignalRW
         name: AndorAccumulatePeriod
@@ -56,11 +69,11 @@ children:
           format: string
 
       - type: SignalRW
-        name: AndorReadOutMode
-        write_pv: $(P)$(R)AndorReadOutMode
+        name: AndorADCSpeed
+        write_pv: $(P)$(R)AndorADCSpeed
         write_widget:
           type: ComboBox
-        read_pv: $(P)$(R)AndorReadOutMode_RBV
+        read_pv: $(P)$(R)AndorADCSpeed_RBV
         read_widget:
           type: TextRead
 
@@ -73,12 +86,14 @@ children:
         read_widget:
           type: TextRead
 
-      - type: SignalR
-        name: AndorMessage
-        read_pv: $(P)$(R)AndorMessage_RBV
+      - type: SignalRW
+        name: AndorBaselineClamp
+        write_pv: $(P)$(R)AndorBaselineClamp
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)AndorBaselineClamp_RBV
         read_widget:
-          type: TextRead
-          format: string
+          type: LED
 
       - type: SignalRW
         name: AndorEMGain
@@ -108,35 +123,13 @@ children:
           type: LED
 
       - type: SignalRW
-        name: AndorADCSpeed
-        write_pv: $(P)$(R)AndorADCSpeed
+        name: AndorReadOutMode
+        write_pv: $(P)$(R)AndorReadOutMode
         write_widget:
           type: ComboBox
-        read_pv: $(P)$(R)AndorADCSpeed_RBV
+        read_pv: $(P)$(R)AndorReadOutMode_RBV
         read_widget:
           type: TextRead
-
-      - type: SignalW
-        name: DataType
-        write_pv: $(P)$(R)DataType
-        write_widget:
-          type: ComboBox
-
-  - type: Group
-    name: ADAndorMisc
-    label: ADAndor Ungrouped
-    layout:
-      type: Grid
-      labelled: true
-    children:
-      - type: SignalRW
-        name: AndorBaselineClamp
-        write_pv: $(P)$(R)AndorBaselineClamp
-        write_widget:
-          type: ToggleButton
-        read_pv: $(P)$(R)AndorBaselineClamp_RBV
-        read_widget:
-          type: LED
 
       - type: SignalRW
         name: AndorFTMode
@@ -164,3 +157,7 @@ children:
         read_pv: $(P)$(R)AndorVSAmplitude_RBV
         read_widget:
           type: TextRead
+
+  - type: Include
+    file_name: ADDriver
+    in_subscreen: false
