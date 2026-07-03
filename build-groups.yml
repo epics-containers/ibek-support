@@ -66,6 +66,7 @@ groups:
       - ADGenICam
       - ADAravis
       - ADSimDetector
+      - ADAndor
       - ADAndor3
       - xspress3
 
