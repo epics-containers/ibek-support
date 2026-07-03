@@ -90,6 +90,7 @@ entity_models:
 
     pvi:
       yaml_path: ADAndor.pvi.device.yaml
+      pv: true
       pv_prefix: $(P)$(R)
       ui_macros:
         P:
