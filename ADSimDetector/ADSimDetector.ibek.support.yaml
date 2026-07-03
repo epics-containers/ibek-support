@@ -4,8 +4,7 @@ module: ADSimDetector
 
 entity_models:
   - name: simDetector
-    description: |-
-      Creates a simulation detector
+    description: Creates a simulation detector
     parameters:
       P:
         type: str
@@ -17,12 +16,12 @@ entity_models:
         type: id
         description: Port name for the detector
       TIMEOUT:
-        type: int
+        type: str
+        default: "1"
         description: Timeout
-        default: 1
       ADDR:
-        type: int
-        default: 0
+        type: str
+        default: "0"
         description: Asyn Port address
       WIDTH:
         type: int
@@ -34,16 +33,22 @@ entity_models:
         description: Image Height
       DATATYPE:
         type: int
-        description: Datatype
         default: 1
+        description: Datatype
       BUFFERS:
         type: int
-        description: Maximum number of NDArray buffers to be created for plugin callbacks
         default: 50
+        description: Maximum number of NDArray buffers for plugin callbacks
       MEMORY:
         type: int
-        description: Max memory to allocate, should be maxw*maxh*nbuffer for driver and all attached plugins
         default: 0
+        description: Max memory to allocate (0 = unlimited)
+
+    post_init:
+      - type: text
+        value: |
+          # THIS IOC WAS GENERATED AS PART OF AN epics-container TUTORIAL
+          # SEE https://epics-containers.github.io/main/tutorials/generic_ioc.html
 
     pre_init:
       - type: text
@@ -52,7 +57,7 @@ entity_models:
           simDetectorConfig("{{PORT}}", {{WIDTH}}, {{HEIGHT}}, {{DATATYPE}}, {{BUFFERS}}, {{MEMORY}})
 
     databases:
-      - file: $(ADSIMDETECTOR)/db/simDetector.template
+      - file: simDetector.template
         args:
           P:
           R:
