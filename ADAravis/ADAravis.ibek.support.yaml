@@ -182,7 +182,7 @@ entity_models:
         description: the aravisCamera object to create settings for
 
     pvi:
-      yaml_path: "{{ 'auto-' ~ camera.ID if camera.CLASS=='AutoADGenICam' else camera.CLASS }}.pvi.device.yaml"
+      yaml_path: "{{ 'ADAravis-' ~ camera.P if camera.CLASS=='AutoADGenICam' else camera.CLASS }}.pvi.device.yaml"
       ui_macros:
         P: "{{ camera.P }}"
         R: "{{ camera.R }}"
@@ -190,7 +190,7 @@ entity_models:
       pv_prefix: "{{ camera.P }}{{ camera.R }}"
 
     databases:
-      - file: "{{ 'auto-' ~ camera.ID if camera.CLASS=='AutoADGenICam' else camera.CLASS }}.template"
+      - file: "{{ 'ADAravis-' ~ camera.P if camera.CLASS=='AutoADGenICam' else camera.CLASS }}.template"
         args:
           P: "{{ camera.P }}"
           R: "{{ camera.R }}"
