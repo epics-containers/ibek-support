@@ -196,8 +196,8 @@ entity_models:
     databases:
       # If CLASS=='AutoADGenICam', the template will be named similarly to
       # pvi device yaml. If not, the name is CLASS.template, which is intended
-      # to be a pre-created template files, ie, in this case the format is 
-      # different from that of pvi device yaml
+      # to reference predefine template file (so the template name's format is 
+      # different from that of pvi device yaml)
       - file: "{{ 'ADAravis-' ~ camera.P if camera.CLASS=='AutoADGenICam' else camera.CLASS }}.template"
         args:
           P: "{{ camera.P }}"
