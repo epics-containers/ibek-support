@@ -182,7 +182,11 @@ entity_models:
         description: the aravisCamera object to create settings for
 
     pvi:
-      yaml_path: "{{ 'ADAravis-' ~ camera.P if camera.CLASS=='AutoADGenICam' else camera.CLASS }}.pvi.device.yaml"
+      # Following discussion with Tom Kane et al on Slack on 3/7/26,
+      # pvi device yaml will be named ADAravis-{{ P }}.pvi.device.yaml
+      # whether CLASS=='AutoADGenICam' or not. This keeps things simple
+      # for techui-support.
+      yaml_path: "{{ 'ADAravis-' ~ camera.P }}.pvi.device.yaml"
       ui_macros:
         P: "{{ camera.P }}"
         R: "{{ camera.R }}"
@@ -190,6 +194,10 @@ entity_models:
       pv_prefix: "{{ camera.P }}{{ camera.R }}"
 
     databases:
+      # If CLASS=='AutoADGenICam', the template will be named similarly to
+      # pvi device yaml. If not, the name is CLASS.template, which is intended
+      # to be a pre-created template files, ie, in this case the format is 
+      # different from that of pvi device yaml
       - file: "{{ 'ADAravis-' ~ camera.P if camera.CLASS=='AutoADGenICam' else camera.CLASS }}.template"
         args:
           P: "{{ camera.P }}"
