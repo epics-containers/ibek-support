@@ -1,4 +1,5 @@
-$(P)$(M):FERRORMAX.VAL$(P)$(M).DIR
+$(P)$(M):FERRORMAX.VAL
+$(P)$(M).DIR
 $(P)$(M).DHLM
 $(P)$(M).DLLM
 $(P)$(M).TWV
