@@ -22,9 +22,10 @@
 # The .vdb files carry their own '#! DBD("...")' header naming the dbd to
 # load, and VisualDCT resolves that path relative to the .vdb file, so no dbd
 # argument is needed here. That dbd is usually built by the module's own src
-# directory, so under make -j the Db directory must be made to wait for it -
-# either set VDB_DEPS in the Db Makefile or add a <Db>_DEPEND_DIRS entry in
-# the parent App Makefile.
+# directory, so under make -j the Db directory must be made to wait for it.
+# CONFIG_VDCT arranges that for every module automatically - see the build
+# ordering section there. VDB_DEPS remains available for a module that needs
+# extra prerequisites beyond its sibling source directories.
 
 $(COMMON_DIR)/%.template: %.vdb $(VDB_DEPS)
 	$(ECHO) "Flattening $< to produce $(notdir $@)"
