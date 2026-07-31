@@ -1,0 +1,48 @@
+# Rules to flatten VDCT .vdb files into msi compatible .template files.
+#
+# Adapted from the Diamond Light Source rule in <base>/configure/RULES.Dls,
+# reduced to just the .vdb rules. EPICS base includes <top>/cfg/RULES* for
+# every top named in a module's configure/RELEASE (see base
+# configure/RULES_FILE_TYPE, "Include <top>/cfg/RULES* files from tops defined
+# in RELEASE* files"). EPICS_BASE is always such a top, so installing this
+# file into <base>/cfg makes the rules available to every module - no patching
+# of base's configure folder and no patching of the support modules.
+#
+# A module needs no changes at all to use these: keep the .vdb files and list
+# the generated templates in the Db Makefile as usual, e.g.
+#
+#     DB += myThing.template     # built from myThing.vdb
+#
+# NOTE '.template' is spelt literally rather than as $(TEMPL_SUFFIX). This
+# file is included from RULES_FILE_TYPE, which base includes two lines before
+# RULES.Db sets TEMPL_SUFFIX ?= .template - so the variable is still empty
+# here. $(COMMON_DIR) and $(DEP) are both safe, they come from CONFIG_COMMON
+# during the config phase.
+#
+# The .vdb files carry their own '#! DBD("...")' header naming the dbd to
+# load, and VisualDCT resolves that path relative to the .vdb file, so no dbd
+# argument is needed here. That dbd is usually built by the module's own src
+# directory, so under make -j the Db directory must be made to wait for it -
+# either set VDB_DEPS in the Db Makefile or add a <Db>_DEPEND_DIRS entry in
+# the parent App Makefile.
+
+$(COMMON_DIR)/%.template: %.vdb $(VDB_DEPS)
+	$(ECHO) "Flattening $< to produce $(notdir $@)"
+	@$(RM) $(notdir $@)
+	$(FLATDB) $(FLATDB_FLAGS) $< $(notdir $@)
+	@$(MV) $(notdir $@) $@
+
+$(COMMON_DIR)/%.template: ../%.vdb
+	$(ECHO) "Flattening $< to produce $(notdir $@)"
+	@$(RM) $(notdir $@)
+	$(FLATDB) $(FLATDB_FLAGS) $< $(notdir $@)
+	@$(MV) $(notdir $@) $@
+
+# stub dependency files - base wants a .d alongside every generated template
+%.template$(DEP): %.vdb
+	@$(RM) $@
+	$(ECHO) "$<: \\" > $@
+
+%.template$(DEP): ../%.vdb
+	@$(RM) $@
+	$(ECHO) "$<: \\" > $@

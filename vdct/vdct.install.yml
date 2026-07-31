@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+# VisualDCT - https://github.com/epics-extensions/VisualDCT
+#
+# This is a build time only TOOL, not a support module: there is nothing to
+# clone and nothing to make. Install it with the system and pre_build_tasks
+# tags only:
+#
+#   COPY ibek-support/vdct/ vdct
+#   RUN ansible.sh vdct --tags system,pre_build_tasks
+#
+# It provides 'flatdb', which flattens VDCT .vdb files into msi compatible
+# .template files, plus the EPICS build rules that invoke it. Any support
+# module holding .vdb files can then be built from pristine upstream sources
+# instead of a pre-converted fork.
+#
+# The JRE and the jar are declared in apt_developer / installed under
+# /usr/local, so they live in the developer stage only. Nothing here is
+# registered as a runtime asset, so the runtime image is unchanged.
+
+module: vdct
+version: 2.8.4
+
+apt_developer:
+  - openjdk-21-jre-headless
+
+download_extras:
+  - url: https://github.com/epics-extensions/VisualDCT/releases/download/v{{ version }}/VisualDCT-{{ version }}-distribution.tar.gz
+    dest: /tmp/VisualDCT-distribution.tar.gz
+
+tasks:
+  - path: vdct-tasks.yml

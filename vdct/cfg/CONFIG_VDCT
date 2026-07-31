@@ -1,0 +1,10 @@
+# Settings for flattening VDCT .vdb files into .template files.
+#
+# EPICS base includes <top>/cfg/CONFIG* for every top named in a module's
+# configure/RELEASE (see base configure/CONFIG, "Include <top>/cfg/CONFIG*
+# definitions from tops defined in RELEASE* files"). EPICS_BASE is always
+# such a top, so installing this file into <base>/cfg makes these settings
+# visible to every module.
+
+FLATDB = flatdb
+FLATDB_FLAGS += --disable-macro-warnings
