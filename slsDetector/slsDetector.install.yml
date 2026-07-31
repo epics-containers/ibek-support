@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: slsDetector
-organization: https://github.com/paulscherrerinstitute
-version: v10.0.0
+organization: https://gitlab.diamond.ac.uk/controls/support
+version: rhel8mythen
 libs:
   - SlsSupport
   - SlsDetector
