@@ -11,6 +11,10 @@
       update-alternatives --install /usr/bin/cmake3 cmake /usr/bin/cmake 100
 
       ./cmk.sh -bsj9 -l/epics/slsdetectorpackage
+      # Copy detid_mythen3.txt from downloaded slsDetectorPackage build to /epics/slsdetectorpackage/bin/
+      # because mythen3DetectorServer_virtual expects it there but something in slsDetectorPackage's CMake
+      # means it's not copied there
+      cp ./build/bin/detid_mythen3.txt /epics/slsdetectorpackage/bin/
 
       echo ''/epics/slsdetectorpackage/bin/slsMultiReceiver 1954 $1'' > /epics/scripts/start_sls_receiver.sh
 
