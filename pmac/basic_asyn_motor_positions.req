@@ -1,2 +1,8 @@
+# NOTE: .DHLM/.DLLM are restored at pass 0 (positions) rather than pass 1
+# (settings), so the soft limits reach the brick before record init. This
+# deviates from basic_asyn_motor.template's `#% autosave 1` hint, so
+# `builder2ibek autosave` will revert it -- reapply after any regeneration.
+$(P)$(M).DHLM
+$(P)$(M).DLLM
 $(P)$(M).DVAL
 $(P)$(M).OFF
