@@ -1,0 +1,53 @@
+# Install VisualDCT's flat database generator plus the EPICS build rules that
+# use it. Everything here is developer stage only.
+
+- name: VisualDCT install block
+  vars:
+    vdct_home: /usr/local/lib/vdct
+    vdct_archive: /tmp/VisualDCT-distribution.tar.gz
+    epics_base: "{{ lookup('ansible.builtin.env', 'EPICS_BASE') | default('/epics/epics-base', true) }}"
+  block:
+
+    - name: Create the VisualDCT install folder
+      ansible.builtin.file:
+        path: "{{ vdct_home }}"
+        state: directory
+        mode: "0755"
+
+    # the distribution archive is mostly javadoc and a source jar - we only
+    # want the 1MB binary jar
+    - name: Unpack VisualDCT.jar from the distribution archive
+      ansible.builtin.unarchive:
+        src: "{{ vdct_archive }}"
+        dest: "{{ vdct_home }}"
+        remote_src: true
+        extra_opts:
+          - --strip-components=1
+          - --no-same-owner
+          - --wildcards
+          - "*/VisualDCT.jar"
+
+    - name: Install the flatdb wrapper script
+      ansible.builtin.copy:
+        src: "{{ ibek_support_folder }}/flatdb"
+        dest: /usr/local/bin/flatdb
+        mode: "0755"
+
+    # EPICS base includes <top>/cfg/CONFIG* and <top>/cfg/RULES* for every top
+    # named in a module's configure/RELEASE, and EPICS_BASE is always one of
+    # them. So dropping these two files into base/cfg makes the vdb rules
+    # available to every module built afterwards, with no patching of either
+    # base's configure folder or the support modules themselves.
+    - name: Install the vdb build rules into the EPICS base cfg folder
+      ansible.builtin.copy:
+        src: "{{ ibek_support_folder }}/cfg/{{ item }}"
+        dest: "{{ epics_base }}/cfg/{{ item }}"
+        mode: "0644"
+      loop:
+        - CONFIG_VDCT
+        - RULES_VDCT
+
+    - name: Remove the downloaded archive
+      ansible.builtin.file:
+        path: "{{ vdct_archive }}"
+        state: absent

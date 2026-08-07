@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# VisualDCT flat database generator.
+#
+# Deliberately NOT the flatdb.sh shipped in the VisualDCT distribution: that
+# script declares #!/bin/sh but uses the bash only (( )) construct, so on
+# distributions where /bin/sh is dash it silently fails to set CLASSPATH and
+# java then cannot find the main class.
+
+java -cp "${VDCT_HOME:-/usr/local/lib/vdct}/VisualDCT.jar" \
+    com.cosylab.vdct.GenerateFlatDatabase "$@" || exit $?
+
+# GenerateFlatDatabase exits 0 even when it gives up - a missing or unreadable
+# dbd just prints "No DBD loaded! Exiting..." on stderr. Without this check the
+# build limps on to the next rule and reports the useless secondary error
+# "mv: cannot stat '<x>.template'", hiding the real cause.
+output=${*: -1}
+if [ ! -s "${output}" ]; then
+    echo "flatdb: VisualDCT wrote no output for '${output}' - see errors above" >&2
+    exit 1
+fi
