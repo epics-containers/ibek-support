@@ -19,6 +19,11 @@
 
 skip:
   - pvaDriver
+  # vdct is a build time tool, not a support module: there is no repo to
+  # clone and no make to run, so the standard role must not run against it.
+  # It is installed with 'ansible.sh vdct --tags system,pre_build_tasks' by
+  # the generic IOCs that need it. See vdct/README.md.
+  - vdct
 
 groups:
   core:
