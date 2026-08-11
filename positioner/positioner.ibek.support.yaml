@@ -138,6 +138,10 @@ entity_models:
         type: str
         description: |-
           Device suffix
+      PS:
+        type: str
+        description: |-
+          Positioner number
       DESC:
         type: str
         description: |-
