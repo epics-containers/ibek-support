@@ -18,3 +18,5 @@ remove_macros:
 comment_out:
   - path: mks937bApp/Makefile
     regexp: opi
+  - path: configure/CONFIG
+    regexp: CROSS_COMPILER_TARGET_ARCHS
