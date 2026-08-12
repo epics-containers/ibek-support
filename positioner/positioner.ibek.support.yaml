@@ -142,7 +142,7 @@ entity_models:
         type: str
         description: |-
           Positioner number suffix
-        default: :P1
+        default: ""
       DESC:
         type: str
         description: |-
