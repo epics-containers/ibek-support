@@ -27,11 +27,17 @@
           - --wildcards
           - "*/VisualDCT.jar"
 
-    - name: Install the flatdb wrapper script
+    # check-db is installed beside flatdb because flatdb runs it on its own
+    # output, and because it is useful on its own as a build final sweep over
+    # the installed database tree - see the notes in check-db.
+    - name: Install the flatdb wrapper script and the database checker
       ansible.builtin.copy:
-        src: "{{ ibek_support_folder }}/flatdb"
-        dest: /usr/local/bin/flatdb
+        src: "{{ ibek_support_folder }}/{{ item }}"
+        dest: /usr/local/bin/{{ item }}
         mode: "0755"
+      loop:
+        - flatdb
+        - check-db
 
     # EPICS base includes <top>/cfg/CONFIG* and <top>/cfg/RULES* for every top
     # named in a module's configure/RELEASE, and EPICS_BASE is always one of
