@@ -14,6 +14,17 @@
 # module holding .vdb files can then be built from pristine upstream sources
 # instead of a pre-converted fork.
 #
+# It also provides 'check-db', which flatdb runs on its own output and which
+# is worth running again over the installed database tree at the end of a
+# container build:
+#
+#   RUN check-db /epics/support/*/db/*.template /epics/support/*/db/*.db
+#
+# A build can damage a database file after flatdb has finished with it - a
+# dlsPLC build once shipped a template truncated at 48KiB and a second one at
+# zero bytes - and a partial template still expands cleanly through msi, so
+# the fault only surfaces as a half populated IOC at dbLoadRecords time.
+#
 # The JRE and the jar are declared in apt_developer / installed under
 # /usr/local, so they live in the developer stage only. Nothing here is
 # registered as a runtime asset, so the runtime image is unchanged.

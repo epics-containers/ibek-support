@@ -1,10 +1,16 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: ADCore
-# version: R3-14
-version: pvxs
-# pointing at DLS fork for pvxs support until merged upstream
-git_repo: https://github.com/DiamondLightSource/ADCore
+# The pvxs support that motivated the DLS fork is now merged upstream, so this
+# points back at areaDetector. It is a SHA rather than a tag because upstream
+# has cut no release since R3-14 (Dec 2024), which predates all of the pvxs
+# work (merged from Oct 2025 onwards). Upstream is a strict superset of the old
+# DLS fork branch 'pvxs': NDPluginPvxs is identical, ntndArrayConverterPvxs has
+# later fixes, and pvxsIoc is wired into commonLibraryMakefile (which the fork
+# lacked). Replace with a tag as soon as one is cut.
+# SHA is master @ 2026-07-20, recorded 2026-08-13.
+version: ee039d24c9e89e70b31fd383b4817a40db5d6395
+git_repo: https://github.com/areaDetector/ADCore
 
 dbds:
   - NDPluginPvxs.dbd

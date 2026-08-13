@@ -6,16 +6,55 @@
 # script declares #!/bin/sh but uses the bash only (( )) construct, so on
 # distributions where /bin/sh is dash it silently fails to set CLASSPATH and
 # java then cannot find the main class.
+#
+# GenerateFlatDatabase cannot be trusted to report its own failures. It exits
+# 0 when it gives up - a missing or unreadable dbd just prints "No DBD
+# loaded! Exiting..." on stderr - so the output file is the only reliable
+# evidence that the run worked, and it has to be inspected properly. A
+# dlsPLC build once shipped NX102_vacValveDebounce.template cut off at
+# exactly 48KiB, mid 'field(FLNK,'. msi expanded the fragment for all 19
+# valve/shutter/absorber instances, dbLoadRecords rejected the malformed
+# field, and the live vacuum IOC came up missing every record past that
+# point. Nothing before iocInit noticed.
+#
+# So: generate to a temporary file, prove it is structurally complete, and
+# only then put it where make will find it. A failed run leaves no output at
+# all, which keeps make honest on the next pass.
 
-java -cp "${VDCT_HOME:-/usr/local/lib/vdct}/VisualDCT.jar" \
-    com.cosylab.vdct.GenerateFlatDatabase "$@" || exit $?
+set -u
 
-# GenerateFlatDatabase exits 0 even when it gives up - a missing or unreadable
-# dbd just prints "No DBD loaded! Exiting..." on stderr. Without this check the
-# build limps on to the next rule and reports the useless secondary error
-# "mv: cannot stat '<x>.template'", hiding the real cause.
-output=${*: -1}
-if [ ! -s "${output}" ]; then
-    echo "flatdb: VisualDCT wrote no output for '${output}' - see errors above" >&2
+if [ $# -lt 2 ]; then
+    echo "usage: ${0##*/} [flatdb options] <input.vdb> <output.template>" >&2
+    exit 2
+fi
+
+# the last argument is the output file - swap it for a temporary of our own
+args=("$@")
+last=$(( ${#args[@]} - 1 ))
+output=${args[${last}]}
+partial="${output}.flatdb-part"
+args[${last}]=${partial}
+
+trap 'rm -f "${partial}"' EXIT
+
+# -XX:+ExitOnOutOfMemoryError turns a heap exhaustion into a non-zero exit
+# instead of a caught error and a half written file. No -Xmx here on purpose:
+# the JVM default is a fraction of container memory and is already ample for
+# the largest .vdb, so pinning it could only ever create an OOM that does not
+# otherwise happen. Override the lot with VDCT_JAVA_OPTS if a module needs to.
+read -r -a java_opts <<<"${VDCT_JAVA_OPTS:--XX:+ExitOnOutOfMemoryError}"
+
+java "${java_opts[@]}" -cp "${VDCT_HOME:-/usr/local/lib/vdct}/VisualDCT.jar" \
+    com.cosylab.vdct.GenerateFlatDatabase "${args[@]}" || exit $?
+
+# check-db is installed alongside this script; prefer that copy over PATH so a
+# developer running flatdb out of a checkout gets the matching checker.
+checker="$(dirname "$(readlink -f "$0")")/check-db"
+[ -x "${checker}" ] || checker=check-db
+
+if ! "${checker}" "${partial}"; then
+    echo "flatdb: VisualDCT produced incomplete output for '${output}' - see errors above" >&2
     exit 1
 fi
+
+mv -f "${partial}" "${output}"
