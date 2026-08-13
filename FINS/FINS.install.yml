@@ -1,7 +1,30 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: FINS
-version: rtems-epics-7
+# 3-12ec1, 3-12 and the tip of 'main' are all the same commit (e51c660).
+#
+# We previously built the 'rtems-epics-7' branch, which forked at 3-10 (2020)
+# and was never merged back, so it missed ~4 years of main: an 847 line FINS.c
+# rewrite, the asyn 4-41dls2 update and the LICENSE file. We are not doing
+# RTEMS container builds at present, so pin the release instead.
+#
+# That branch is still in the repo for when RTEMS builds return. It carries two
+# things that are NOT on main:
+#   * a 3 line '#ifndef errno' guard, needed only for RTEMS 6 (verified
+#     unnecessary on glibc, so it costs us nothing here)
+#   * a cast fix in FINS.c (commit titled "aliasing" but it is really
+#     -Wcast-align), still unapplied on main at the two
+#     'BSWAP32(((unsigned int *) pdrvPvt->message)[FINS_MODE_ERROR])' sites.
+#     Costs us nothing today: gcc only reports it on strict-alignment targets
+#     such as RTEMS-beatnik (PowerPC), never on linux-x86_64 even at -O3
+#     -Wall, and we set no -Werror (base promotes only
+#     implicit-function-declaration). It is also a false positive - message
+#     comes from callocMustSucceed, so it is suitably aligned; the (void *)
+#     cast only silences the diagnostic.
+#
+# TODO: cherry-pick the aliasing fix onto main and cut a new tag; add the errno
+# guard too when RTEMS container builds resume.
+version: 3-12ec1
 dbds:
   - FINS.dbd
 libs:
