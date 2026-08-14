@@ -8,15 +8,39 @@
         mode: "0644"
         force: false
 
-    - name: Ensure that configure/RELEASE includes RELEASE.local for {{ module }}
-      ansible.builtin.lineinfile:
-        path: "{{ local_path }}/configure/RELEASE"
-        regexp: "include.*TOP./configure/RELEASE.local"
-        line: "-include $(TOP)/configure/RELEASE.local"
+    # RELEASE.local carries the container's paths, so it only wins if it is
+    # included LAST. Two things stop that happening on their own:
+    #
+    #  - a module may already include RELEASE.local partway through its own
+    #    configure/RELEASE, and define EPICS_BASE below that point - upstream
+    #    files often say "EPICS_BASE usually appears last so other apps can
+    #    override stuff". A lineinfile keyed on the include would match that
+    #    early line and edit it in place, leaving the DLS EPICS_BASE to win.
+    #    blockinfile with its own marker always appends at the end instead.
+    #
+    #  - configure/CONFIG reads the arch specific RELEASE files AFTER
+    #    configure/RELEASE, so a module shipping RELEASE.<host arch>.Common
+    #    with its own SUPPORT and EPICS_BASE overrides everything in RELEASE,
+    #    RELEASE.local included. Those files get the same treatment.
+    #
+    # RELEASE.local itself is deliberately absent from the list below: it is a
+    # symlink to the global configure/RELEASE, so appending to it would make
+    # that file include itself for every module.
+    - name: Ensure RELEASE.local is included last for {{ module }}
+      ansible.builtin.blockinfile:
+        path: "{{ local_path }}/configure/{{ item }}"
+        marker: "# {mark} ibek-support - the container's paths must win"
+        block: -include $(TOP)/configure/RELEASE.local
         insertafter: EOF
-
-        create: true
+        create: "{{ (item == 'RELEASE') | bool }}"
         mode: "0644"
+      when: item == "RELEASE" or
+            (local_path ~ "/configure/" ~ item) is exists
+      loop:
+        - RELEASE
+        - RELEASE.{{ host_arch }}.Common
+        - RELEASE.Common.{{ target_arch }}
+        - RELEASE.{{ host_arch }}.{{ target_arch }}
 
     - name: Insert the global RELEASE as link to RELEASE.local for {{ module }}
       ansible.builtin.file:
