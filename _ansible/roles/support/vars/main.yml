@@ -33,8 +33,18 @@ remove_macros: []
 #   AREA_DETECTOR: "$(SUPPORT)"
 extra_release_macros: {}
 
-# compilation options
-make_options: -j{{ ansible_processor_vcpus }}
+# compilation options.
+#
+# ansible_processor_vcpus is read from /proc/cpuinfo, which shows a container
+# every core on the node whether or not its cgroup allows it to use them - a
+# build in a pod limited to one core of a 96 core node still runs make -j96,
+# and spends its day context switching. Nothing inside the container can see
+# the limit reliably, so whoever launches it says: EPICS_BUILD_JOBS. Unset, the
+# node's core count remains the answer, which is right for a VM or a developer
+# machine. An install.yml naming its own make_options still wins over both.
+make_options: >-
+  -j{{ lookup('ansible.builtin.env', 'EPICS_BUILD_JOBS')
+  | default(ansible_processor_vcpus, true) }}
 
 # packages to install in developer target
 apt_developer: []
