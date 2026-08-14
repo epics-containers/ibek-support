@@ -1,12 +1,23 @@
 - name: Release block
   tags: [release]
   block:
-    - name: Ensure that the global configure/RELEASE exists
-      ansible.builtin.copy:
-        src: "{{ ansible_root }}/RELEASE.global"
-        dest: "{{ release_file }}"
+    # Not a copy with force: false. That only ever writes the file once, in
+    # whichever image first created /epics/support/configure/RELEASE, so an
+    # image built against an older RELEASE.global never sees a change to it -
+    # the task reports 'ok' forever and the new setting silently does nothing.
+    # A marked block is applied every time and rewritten when it changes, so a
+    # container gets the current RELEASE.global however old its /epics/support
+    # is. At the top of the file because the module macros below it are the
+    # more specific setting, and because the -include lines here must stay
+    # ahead of them to keep meaning what they meant.
+    - name: Ensure the global configure/RELEASE holds the container's settings
+      ansible.builtin.blockinfile:
+        path: "{{ release_file }}"
+        marker: "# {mark} ibek-support - settings shared by every module"
+        block: "{{ lookup('ansible.builtin.file', ansible_root + '/RELEASE.global') }}"
+        insertbefore: BOF
+        create: true
         mode: "0644"
-        force: false
 
     # RELEASE.local carries the container's paths, so it only wins if it is
     # included LAST. Two things stop that happening on their own:
