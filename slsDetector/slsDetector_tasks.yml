@@ -31,6 +31,6 @@
 - name: Patch slsDetector.cpp to allow switching threshold energy mode
   ansible.builtin.shell:
     cmd: |
-    cd {{local_path}}
+      cd {{local_path}}
 
-    git apply /epics/generic-source/ibek-support/slsDetector/threshold_mode_patch.diff
+      git apply /epics/generic-source/ibek-support/slsDetector/threshold_mode_patch.diff
