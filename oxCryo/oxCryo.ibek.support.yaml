@@ -1,9 +1,52 @@
-# yaml-language-server: $schema=../schemas/ibek.support.schema.json
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
 
-module: OXCryo
+# Imported from DLS production support module: OXCryo 1-4
+# Source: /dls_sw/prod/R3.14.12.7/support/OXCryo/1-4
+# Pristine copy of the StreamDevice protocol + EPICS db/template from that release.
+# To check for updates: diff this pattern's files against that path, or against the
+# newest /dls_sw/prod/*/support/OXCryo/ release.
+
+module: oxCryo
 
 entity_models:
-  - name: OXCS1000
+  - name: OXPH700
+    description: |-
+      Control for Oxford cryostream 700 series (Phenix)
+    parameters:
+      P:
+        type: str
+        description: |-
+          Device Prefix
+      Q:
+        type: str
+        description: |-
+          Device suffix
+        default: ""
+      PORT:
+        type: str
+        description: |-
+          Asyn port to connect to
+      CTEMP_MIN:
+        type: float
+        description: |-
+          macro to set minimum target temperature
+        default: 80.0
+      CTEMP_MAX:
+        type: float
+        description: |-
+          macro to set maximum target temperature
+        default: 327.67
+      DISABLE_COMMS:
+        type: int
+        description: |-
+          Optional macro to control whether comms are disabled (1) or not (0) on startup. Defaults to disabled
+        default: 1
+    databases:
+      - file: OXPH700.template
+        args:
+          .*:
+
+  - name: OXCS700
     description: |-
       Control for Oxford cryostream 700 series
     parameters:
@@ -20,15 +63,11 @@ entity_models:
         type: str
         description: |-
           Asyn port to connect to
-      name:
-        type: id
-        description: |-
-          Object and gui association name
       CTEMP_MIN:
-        type: int
+        type: float
         description: |-
           macro to set minimum target temperature
-        default: 80
+        default: 80.0
       CTEMP_MAX:
         type: float
         description: |-
@@ -39,15 +78,14 @@ entity_models:
         description: |-
           Optional macro to control whether comms are disabled (1) or not (0) on startup. Defaults to disabled
         default: 1
-
     databases:
-      - file: $(OXCRYO)/db/OXCS1000.template
+      - file: OXCS700.template
         args:
           .*:
 
-  - name: OXNH700
+  - name: OXCB700
     description: |-
-      Control for Oxford Cryostream 800 series (Cobra)
+      Control for Oxford Cryostream 700 series (Cobra)
     parameters:
       P:
         type: str
@@ -63,27 +101,59 @@ entity_models:
         description: |-
           Asyn port to connect to
       CTEMP_MIN:
-        type: int
+        type: float
         description: |-
           macro to set minimum target temperature
-        default: 20
+        default: 80.0
       CTEMP_MAX:
         type: float
         description: |-
           macro to set maximum target temperature
         default: 327.67
-      name:
-        type: id
-        description: |-
-          Object and gui association name
       DISABLE_COMMS:
         type: int
         description: |-
           Optional macro to control whether comms are disabled (1) or not (0) on startup. Defaults to disabled
         default: 1
-
     databases:
-      - file: $(OXCRYO)/db/OXNH700.template
+      - file: OXCB700.template
+        args:
+          .*:
+
+  - name: OXNH700
+    description: |-
+      Control for Oxford N-Helix 700 series
+    parameters:
+      P:
+        type: str
+        description: |-
+          Device Prefix
+      Q:
+        type: str
+        description: |-
+          Device suffix
+        default: ""
+      PORT:
+        type: str
+        description: |-
+          Asyn port to connect to
+      CTEMP_MIN:
+        type: float
+        description: |-
+          macro to set minimum target temperature
+        default: 20.0
+      CTEMP_MAX:
+        type: float
+        description: |-
+          macro to set maximum target temperature
+        default: 327.67
+      DISABLE_COMMS:
+        type: int
+        description: |-
+          Optional macro to control whether comms are disabled (1) or not (0) on startup. Defaults to disabled
+        default: 1
+    databases:
+      - file: OXNH700.template
         args:
           .*:
 
@@ -105,56 +175,10 @@ entity_models:
         description: |-
           Asyn port to connect to
       CTEMP_MIN:
-        type: int
-        description: |-
-          macro to set minimum target temperature
-        default: 80
-      CTEMP_MAX:
         type: float
         description: |-
-          macro to set maximum target temperature
-        default: 327.67
-      name:
-        type: id
-        description: |-
-          Object and gui association name
-      DISABLE_COMMS:
-        type: int
-        description: |-
-          Optional macro to control whether comms are disabled (1) or not (0) on startup. Defaults to disabled
-        default: 1
-
-    databases:
-      - file: $(OXCRYO)/db/OXCB800.template
-        args:
-          .*:
-
-  - name: OXPH700
-    description: |-
-      Control for Oxford cryostream 700 series (Phenix)
-    parameters:
-      P:
-        type: str
-        description: |-
-          Device Prefix
-      Q:
-        type: str
-        description: |-
-          Device suffix
-        default: ""
-      PORT:
-        type: str
-        description: |-
-          Asyn port to connect to
-      name:
-        type: id
-        description: |-
-          Object and gui association name
-      CTEMP_MIN:
-        type: int
-        description: |-
           macro to set minimum target temperature
-        default: 80
+        default: 80.0
       CTEMP_MAX:
         type: float
         description: |-
@@ -165,92 +189,7 @@ entity_models:
         description: |-
           Optional macro to control whether comms are disabled (1) or not (0) on startup. Defaults to disabled
         default: 1
-
     databases:
-      - file: $(OXCRYO)/db/OXPH700.template
-        args:
-          .*:
-
-  - name: OXCB700
-    description: |-
-      Control for Oxford Cryostream 800 series (Cobra)
-    parameters:
-      P:
-        type: str
-        description: |-
-          Device Prefix
-      Q:
-        type: str
-        description: |-
-          Device suffix
-        default: ""
-      PORT:
-        type: str
-        description: |-
-          Asyn port to connect to
-      CTEMP_MIN:
-        type: int
-        description: |-
-          macro to set minimum target temperature
-        default: 80
-      CTEMP_MAX:
-        type: float
-        description: |-
-          macro to set maximum target temperature
-        default: 327.67
-      name:
-        type: id
-        description: |-
-          Object and gui association name
-      DISABLE_COMMS:
-        type: int
-        description: |-
-          Optional macro to control whether comms are disabled (1) or not (0) on startup. Defaults to disabled
-        default: 1
-
-    databases:
-      - file: $(OXCRYO)/db/OXCB700.template
-        args:
-          .*:
-
-  - name: OXCS700
-    description: |-
-      Control for Oxford cryostream 700 series
-    parameters:
-      P:
-        type: str
-        description: |-
-          Device Prefix
-      Q:
-        type: str
-        description: |-
-          Device suffix
-        default: ""
-      PORT:
-        type: str
-        description: |-
-          Asyn port to connect to
-      name:
-        type: id
-        description: |-
-          Object and gui association name
-      CTEMP_MIN:
-        type: int
-        description: |-
-          macro to set minimum target temperature
-        default: 80
-      CTEMP_MAX:
-        type: float
-        description: |-
-          macro to set maximum target temperature
-        default: 327.67
-      DISABLE_COMMS:
-        type: int
-        description: |-
-          Optional macro to control whether comms are disabled (1) or not (0) on startup. Defaults to disabled
-        default: 1
-
-    databases:
-      - file: $(OXCRYO)/db/OXCS700.template
+      - file: OXCB800.template
         args:
           .*:
