@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: motorNewport
-version: R1-2-1
+version: R1-3
 organization: http://github.com/epics-motor/
 
 dbds:

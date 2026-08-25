@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: quadEM
-version: R9-5
+version: R9-6
 # organization: https://github.com/epics-modules
 
 dbds:
