@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: oxCryo
+version: 2026.8.6
+
+organization: https://github.com/diamondlightsource
