@@ -1,6 +1,13 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: oxCryo
-version: 2026.8.8
+version: 2026.8.9
 
 organization: https://github.com/diamondlightsource
+
+protocol_files:
+  - oxCryoApp/protocol/OXCB700.proto
+  - oxCryoApp/protocol/OXCB800.proto
+  - oxCryoApp/protocol/OXCS700.proto
+  - oxCryoApp/protocol/OXNH700.proto
+  - oxCryoApp/protocol/OXcommon.proto
