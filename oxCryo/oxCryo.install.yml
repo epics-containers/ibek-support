@@ -4,3 +4,10 @@ module: oxCryo
 version: 2026.8.8
 
 organization: https://github.com/diamondlightsource
+
+protocol_files:
+  - oxCryoApp/protocol/OXCB700.proto
+  - oxCryoApp/protocol/OXCB800.proto
+  - oxCryoApp/protocol/OXCS700.proto
+  - oxCryoApp/protocol/OXNH700.proto
+  - oxCryoApp/protocol/OXcommon.proto
