@@ -6,10 +6,10 @@ organization: https://github.com/diamondlightsource
 
 dbds:
   - oxCryo.dbd
-  - oxCryoSupport.dbd
+  # - oxCryoSupport.dbd
 libs:
   - oxCryo
-  - oxCryoSupport
+  # - oxCryoSupport
 
 protocol_files:
   - oxCryoApp/protocol/OXCB700.proto
