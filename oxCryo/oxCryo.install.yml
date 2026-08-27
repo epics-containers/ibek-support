@@ -2,8 +2,14 @@
 
 module: oxCryo
 version: main
-
 organization: https://github.com/diamondlightsource
+
+dbds:
+  - oxCryo.dbd
+  - oxCryoSupport.dbd
+libs:
+  - oxCryo
+  - oxCryoSupport
 
 protocol_files:
   - oxCryoApp/protocol/OXCB700.proto
