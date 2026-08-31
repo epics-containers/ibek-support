@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../schemas/ibek.support.schema.json
+
+module: fw102
+
+entity_models:
+
+  - name: fw102
+    description: |-
+      Create an fw102 device
+    parameters:
+      name:
+        type: str
+        description: |-
+          Name of the device
+      P:
+        type: str
+        description: |-
+          Device prefix
+      R:
+        type: str
+        description: |-
+          Device suffix
+      PORT:
+        type: str
+        description: |-
+          asyn port name
+      FILTER1:
+        type: str
+        description: |-
+          Filter in slot 1
+        default: ''
+      FILTER2:
+        type: str
+        description: |-
+          Filter in slot 2
+        default: ''
+      FILTER3:
+        type: str
+        description: |-
+          Filter in slot 3
+        default: ''
+      FILTER4:
+        type: str
+        description: |-
+          Filter in slot 4
+        default: ''
+      FILTER5:
+        type: str
+        description: |-
+          Filter in slot 5
+        default: ''
+      FILTER6:
+        type: str
+        description: |-
+          Filter in slot 6
+        default: ''
+
+    databases:
+
+      - file: $(FW102)/db/fw102.template
+        args:
+          .*:
