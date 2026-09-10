@@ -42,7 +42,6 @@ children:
               - Max
               - Mean
               - Detail
-              - Plot
           children:
 
           - type: SignalRW
@@ -151,70 +150,70 @@ children:
 
                 - type: SignalRW
                   name: Use
-                  write_pv: $(P)$(R)Use
+                  write_pv: $(P)$(R)1:Use
                   write_widget:
                     type: ToggleButton
-                  read_pv: $(P)$(R)Use_RBV
+                  read_pv: $(P)$(R)1:Use_RBV
                   read_widget:
                     type: LED
 
                 - type: SignalW
                   name: Name
-                  write_pv: $(P)$(R)Name
+                  write_pv: $(P)$(R)1:Name
                   write_widget:
                     type: TextWrite
 
                 - type: SignalR
                   name: MaxSizeX
                   label: Max Size X
-                  read_pv: $(P)$(R)MaxSizeX_RBV
+                  read_pv: $(P)$(R)1:MaxSizeX_RBV
                   read_widget:
                     type: TextRead
 
                 - type: SignalR
                   name: MaxSizeY
                   label: Max Size Y
-                  read_pv: $(P)$(R)MaxSizeY_RBV
+                  read_pv: $(P)$(R)1:MaxSizeY_RBV
                   read_widget:
                     type: TextRead
 
                 - type: SignalRW
                   name: MinX
                   label: Min X
-                  write_pv: $(P)$(R)MinX
+                  write_pv: $(P)$(R)1:MinX
                   write_widget:
                     type: TextWrite
-                  read_pv: $(P)$(R)MinX_RBV
+                  read_pv: $(P)$(R)1:MinX_RBV
                   read_widget:
                     type: TextRead
 
                 - type: SignalRW
                   name: MinY
                   label: Min Y
-                  write_pv: $(P)$(R)MinY
+                  write_pv: $(P)$(R)1:MinY
                   write_widget:
                     type: TextWrite
-                  read_pv: $(P)$(R)MinY_RBV
+                  read_pv: $(P)$(R)1:MinY_RBV
                   read_widget:
                     type: TextRead
 
                 - type: SignalRW
                   name: SizeX
                   label: Size X
-                  write_pv: $(P)$(R)SizeX
+                  write_pv: $(P)$(R)1:SizeX
                   write_widget:
                     type: TextWrite
-                  read_pv: $(P)$(R)SizeX_RBV
+                  read_pv: $(P)$(R)1:SizeX_RBV
                   read_widget:
                     type: TextRead
 
                 - type: SignalRW
                   name: SizeY
                   label: Size Y
-                  write_pv: $(P)$(R)SizeY
+                  write_pv: $(P)$(R)1:SizeY
                   write_widget:
                     type: TextWrite
-                  read_pv: $(P)$(R)SizeY_RBV
+                  read_pv: $(P)$(R)1:SizeY_RBV
                   read_widget:
                     type: TextRead
 
@@ -227,49 +226,49 @@ children:
                 - type: SignalRW
                   name: BgdWidth
                   label: Bgd Width
-                  write_pv: $(P)$(R)BgdWidth
+                  write_pv: $(P)$(R)1:BgdWidth
                   write_widget:
                     type: TextWrite
-                  read_pv: $(P)$(R)BgdWidth_RBV
+                  read_pv: $(P)$(R)1:BgdWidth_RBV
                   read_widget:
                     type: TextRead
 
                 - type: SignalR
                   name: MinValue
                   label: Min
-                  read_pv: $(P)$(R)MinValue_RBV
+                  read_pv: $(P)$(R)1:MinValue_RBV
                   read_widget:
                     type: TextRead
 
                 - type: SignalR
                   name: MaxValue
                   label: Max
-                  read_pv: $(P)$(R)MaxValue_RBV
+                  read_pv: $(P)$(R)1:MaxValue_RBV
                   read_widget:
                     type: TextRead
 
                 - type: SignalR
                   name: MeanValue
                   label: Mean
-                  read_pv: $(P)$(R)MeanValue_RBV
+                  read_pv: $(P)$(R)1:MeanValue_RBV
                   read_widget:
                     type: TextRead
 
                 - type: SignalR
                   name: Total
-                  read_pv: $(P)$(R)Total_RBV
+                  read_pv: $(P)$(R)1:Total_RBV
                   read_widget:
                     type: TextRead
 
                 - type: SignalR
                   name: Net
-                  read_pv: $(P)$(R)Net_RBV
+                  read_pv: $(P)$(R)1:Net_RBV
                   read_widget:
                     type: TextRead
 
                 - type: SignalW
                   name: Reset
-                  write_pv: $(P)$(R)Reset
+                  write_pv: $(P)$(R)1:Reset
                   write_widget:
                     type: ToggleButton
 
@@ -309,16 +308,6 @@ children:
                   read_widget:
                     type: TextRead
 
-                - type: SignalRW
-                  name: TSReadRate
-                  label: TS Read Rate
-                  write_pv: $(P)$(R)TSReadRate
-                  write_widget:
-                    type: TextWrite
-                  read_pv: $(P)$(R)TSReadRate_RBV
-                  read_widget:
-                    type: TextRead
-
 
                 - type: Group
                   name: Advanced
@@ -329,51 +318,46 @@ children:
                   - type: SignalR
                     name: TSTimestamp
                     label: TS Timestamp
-                    read_pv: $(P)$(R)TSTimestamp
+                    read_pv: $(P)$(R)1:TSTimestamp
                     read_widget:
                       type: TextRead
 
                   - type: SignalR
                     name: TSMinValue
                     label: TS Min Value
-                    read_pv: $(P)$(R)TSMinValue
+                    read_pv: $(P)$(R)1:TSMinValue
                     read_widget:
                       type: TextRead
 
                   - type: SignalR
                     name: TSMaxValue
                     label: TS Max Value
-                    read_pv: $(P)$(R)TSMaxValue
+                    read_pv: $(P)$(R)1:TSMaxValue
                     read_widget:
                       type: TextRead
 
                   - type: SignalR
                     name: TSMeanValue
                     label: TS Mean Value
-                    read_pv: $(P)$(R)TSMeanValue
+                    read_pv: $(P)$(R)1:TSMeanValue
                     read_widget:
                       type: TextRead
 
                   - type: SignalR
                     name: TSTotal
                     label: TS Total
-                    read_pv: $(P)$(R)TSTotal
+                    read_pv: $(P)$(R)1:TSTotal
                     read_widget:
                       type: TextRead
 
                   - type: SignalR
                     name: TSNet
                     label: TS Net
-                    read_pv: $(P)$(R)TSNet
+                    read_pv: $(P)$(R)1:TSNet
                     read_widget:
                       type: TextRead
 
 
-          - type: SignalX
-            name: ROI1Plot
-            label: Plot
-            write_pv: $(P)$(R)1:Plot
-            value: "1"
 
         - type: Group
           name: ROI2Row
@@ -472,17 +456,7 @@ children:
             read_widget:
               type: TextRead
 
-          - type: SignalX
-            name: ROI2Detail
-            label: Detail
-            write_pv: $(P)$(R)2:Detail
-            value: "1"
 
-          - type: SignalX
-            name: ROI2Plot
-            label: Plot
-            write_pv: $(P)$(R)2:Plot
-            value: "1"
 
         - type: Group
           name: ROI3Row
@@ -581,17 +555,7 @@ children:
             read_widget:
               type: TextRead
 
-          - type: SignalX
-            name: ROI3Detail
-            label: Detail
-            write_pv: $(P)$(R)3:Detail
-            value: "1"
 
-          - type: SignalX
-            name: ROI3Plot
-            label: Plot
-            write_pv: $(P)$(R)3:Plot
-            value: "1"
 
         - type: Group
           name: ROI4Row
@@ -690,17 +654,7 @@ children:
             read_widget:
               type: TextRead
 
-          - type: SignalX
-            name: ROI4Detail
-            label: Detail
-            write_pv: $(P)$(R)4:Detail
-            value: "1"
 
-          - type: SignalX
-            name: ROI4Plot
-            label: Plot
-            write_pv: $(P)$(R)4:Plot
-            value: "1"
 
         - type: Group
           name: ROI5Row
@@ -799,17 +753,7 @@ children:
             read_widget:
               type: TextRead
 
-          - type: SignalX
-            name: ROI5Detail
-            label: Detail
-            write_pv: $(P)$(R)5:Detail
-            value: "1"
 
-          - type: SignalX
-            name: ROI5Plot
-            label: Plot
-            write_pv: $(P)$(R)5:Plot
-            value: "1"
 
         - type: Group
           name: ROI6Row
@@ -908,17 +852,7 @@ children:
             read_widget:
               type: TextRead
 
-          - type: SignalX
-            name: ROI6Detail
-            label: Detail
-            write_pv: $(P)$(R)6:Detail
-            value: "1"
 
-          - type: SignalX
-            name: ROI6Plot
-            label: Plot
-            write_pv: $(P)$(R)6:Plot
-            value: "1"
 
         - type: Group
           name: ROI7Row
@@ -1017,17 +951,7 @@ children:
             read_widget:
               type: TextRead
 
-          - type: SignalX
-            name: ROI7Detail
-            label: Detail
-            write_pv: $(P)$(R)7:Detail
-            value: "1"
 
-          - type: SignalX
-            name: ROI7Plot
-            label: Plot
-            write_pv: $(P)$(R)7:Plot
-            value: "1"
 
         - type: Group
           name: ROI8Row
@@ -1126,17 +1050,7 @@ children:
             read_widget:
               type: TextRead
 
-          - type: SignalX
-            name: ROI8Detail
-            label: Detail
-            write_pv: $(P)$(R)8:Detail
-            value: "1"
 
-          - type: SignalX
-            name: ROI8Plot
-            label: Plot
-            write_pv: $(P)$(R)8:Plot
-            value: "1"
 
 
 - type: Group
