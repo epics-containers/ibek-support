@@ -95,3 +95,19 @@ entity_models:
       - value: |
           # finsTCPInit(asyn_port, ip_addr)
           finsTCPInit("{{name}}", "{{ip}}")
+
+  - name: FINSWrite
+    description: DM area write record
+    parameters:
+      P:
+        type: str
+        description: Device prefix
+      PORT:
+        type: id
+        description: asyn port name
+      ADDR:
+        type: int
+        description: DM area address
+    databases:
+      - file: FINSWrite.template
+        args: { P: null, PORT: null, ADDR: null }
