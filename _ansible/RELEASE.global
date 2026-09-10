@@ -9,4 +9,24 @@ SUPPORT=/epics/support
 EPICS_BASE=/epics/epics-base
 PVXS=/epics/support/pvxs
 
+# DLS modules define WORK, naming the /dls_sw work area that unreleased
+# support modules are built in. Nothing in a container can reach it, but the
+# value still has to be consistent: convertRelease.pl checkRelease compares
+# every macro across a module and the modules it references, so two modules
+# defining WORK for different EPICS versions - which is common, these are the
+# work areas of whichever release the module was cut against - fail the build
+# of the module that references them:
+#
+#   Definition of WORK conflicts with OXCS700ASYN support.
+#   Here: WORK = /dls_sw/work/R7.0.7/support
+#   OXCS700ASYN: WORK = /dls_sw/work/R3.14.12.7/support
+#
+# Defining it here gives every module the same value, since RELEASE.local is
+# included last. The path deliberately does not exist: checkRelease compares
+# values without requiring them to resolve, and of 92 DLS module source trees
+# checked, none reads $(WORK) during its own build - the only references are
+# in example IOC RELEASE files and in shipped configure/RELEASE.local files,
+# which are replaced by the symlink to this file.
+WORK=/epics/work-area-not-available-in-container
+
 # Additional Support Modules for individual IOCs will be added below this line

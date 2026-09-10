@@ -626,21 +626,6 @@ entity_models:
         description: |-
           PV providing gauge reading in mbar
 
-      device:
-        type: str
-        description: |-
-          device name
-
-      p_egu_pv:
-        type: str
-        description: |-
-          Raw value ADC PV name
-
-      plog_adc_pv:
-        type: str
-        description: |-
-          or (if using Hy8401 VME IP) mks937bHy8401.template
-
       GCTLR:
         type: str
         description: |-
@@ -692,18 +677,28 @@ entity_models:
       plog_calc:
         type: str
         description: |-
-          Template argument
-        default: 10.0*A/32767.0/0.6 - 12.0
+          The EGU variant feeds mks937bGauge from the PLOG_CALC PV that
+          mks937bPlogEGU.template already converted to mbar, so the gauge's
+          own conversion is a straight pass-through.
+        default: A
+
+    post_defines:
+      eguInputPV:
+        type: str
+        description: |-
+          Name of the PV providing the gauge reading in mbar
+        value: |-
+          {{ dom }}-VA-GAUGE-{{ "%02d" | format(id) }}:PLOG_CALC
 
     databases:
       - file: $(MKS937B)/db/mks937bPlogEGU.template
         args:
-          device:
-          p_egu_pv:
+          device: "{{ eguInputPV }}"
+          p_egu_pv: "{{ input }}"
 
       - file: $(MKS937B)/db/mks937bGauge.template
         args:
-          plog_adc_pv:
+          plog_adc_pv: "{{ eguInputPV }}"
           ctlsp_drvl:
           name:
           ctlsp_lopr:
