@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: fw102
+version: 2.1.0
+
+organization: http://github.com/DiamondLightSource/
+
+dbds:
+  - fw102.dbd
