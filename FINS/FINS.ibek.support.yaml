@@ -103,7 +103,7 @@ entity_models:
         type: str
         description: Device prefix
       PORT:
-        type: id
+        type: object
         description: asyn port name
       ADDR:
         type: int
