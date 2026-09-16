@@ -10,3 +10,6 @@ protocol_files:
 comment_out:
   - path: Makefile
     regexp: documentation
+  # asyn R4-46 builds VXI11 only when DRV_VXI11=YES, and we do not need it
+  - path: lakeshore340App/src/Makefile
+    regexp: drvVxi11
