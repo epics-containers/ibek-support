@@ -6,11 +6,13 @@ entity_models:
   - name: SnmpConfig
     description: |-
       Process-wide configuration for the devSnmp driver. Instantiate at most
-      once per IOC.
+      once per IOC (if repeated, the last instance in ioc.yaml wins).
 
-      terminalServer entities already emit snmpMaxVarsPerMsg(30). If you use
-      this entity to choose a different value, put it after those entities in
-      ioc.yaml: the last call wins.
+      terminalServer entities already emit snmpMaxVarsPerMsg(30) before
+      iocInit. This entity sets max_vars_per_msg both before iocInit and
+      again after it, so its value applies to all polling after iocInit
+      wherever it appears in ioc.yaml. Place it after the terminalServer
+      entities if the value must also apply to the reads made during iocInit.
     parameters:
       max_vars_per_msg:
         type: int
@@ -37,9 +39,16 @@ entity_models:
         default: 0
 
     pre_init:
-      - when: first
+      - when: every
         value: |
           # devSnmp configuration is process-wide
           snmpMaxVarsPerMsg({{ max_vars_per_msg }})
           SNMP_DRV_DEBUG({{ drv_debug }})
           SNMP_DEV_DEBUG({{ dev_debug }})
+
+    post_init:
+      # devSnmp reads snmpMaxVarsPerMsg on every poll, so re-asserting it here
+      # overrides any value set by other entities before iocInit
+      - when: every
+        value: |
+          snmpMaxVarsPerMsg({{ max_vars_per_msg }})

@@ -72,9 +72,7 @@ entity_models:
     pre_init:
       - when: first
         value: |
-          # devSnmp batches this many OIDs into one SNMP GET. The upstream
-          # default of 60 is more than terminal server agents can answer
-          # (DLS snmp 1-03dls10 compiled in 30). Process-wide global.
+          # devSnmp default of 60 OIDs per GET is too many for terminal servers
           snmpMaxVarsPerMsg(30)
 
     sub_entities:
@@ -134,9 +132,7 @@ entity_models:
     pre_init:
       - when: first
         value: |
-          # devSnmp batches this many OIDs into one SNMP GET. The upstream
-          # default of 60 is more than terminal server agents can answer
-          # (DLS snmp 1-03dls10 compiled in 30). Process-wide global.
+          # devSnmp default of 60 OIDs per GET is too many for terminal servers
           snmpMaxVarsPerMsg(30)
 
     sub_entities:
@@ -230,9 +226,7 @@ entity_models:
     pre_init:
       - when: first
         value: |
-          # devSnmp batches this many OIDs into one SNMP GET. The upstream
-          # default of 60 is more than terminal server agents can answer
-          # (DLS snmp 1-03dls10 compiled in 30). Process-wide global.
+          # devSnmp default of 60 OIDs per GET is too many for terminal servers
           snmpMaxVarsPerMsg(30)
 
     sub_entities:
@@ -292,9 +286,7 @@ entity_models:
     pre_init:
       - when: first
         value: |
-          # devSnmp batches this many OIDs into one SNMP GET. The upstream
-          # default of 60 is more than terminal server agents can answer
-          # (DLS snmp 1-03dls10 compiled in 30). Process-wide global.
+          # devSnmp default of 60 OIDs per GET is too many for terminal servers
           snmpMaxVarsPerMsg(30)
 
     sub_entities:
