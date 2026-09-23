@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../schemas/ibek.support.schema.json
+
+module: snmp
+
+entity_models:
+  - name: SnmpConfig
+    description: |-
+      Process-wide configuration for the devSnmp driver. Instantiate at most
+      once per IOC.
+
+      terminalServer entities already emit snmpMaxVarsPerMsg(30). If you use
+      this entity to choose a different value, put it after those entities in
+      ioc.yaml: the last call wins.
+    parameters:
+      max_vars_per_msg:
+        type: int
+        description: |-
+          Maximum number of variables devSnmp packs into a single SNMP GET.
+          Must be no larger than the least capable agent this IOC queries.
+          The upstream compiled-in default of 60 is too many for Moxa/ACS
+          terminal servers: requests past the agent's limit fail with
+          SNMP_REQUEST_QRY_NOANS (0x00060000). DLS snmp 1-03dls10 used 30.
+        default: 30
+
+      drv_debug:
+        type: int
+        description: |-
+          devSnmp driver debug level (SNMP_DRV_DEBUG). At 3 or above it logs
+          how many requests go into each message, which helps when tuning
+          max_vars_per_msg.
+        default: 0
+
+      dev_debug:
+        type: int
+        description: |-
+          devSnmp device support debug level (SNMP_DEV_DEBUG).
+        default: 0
+
+    pre_init:
+      - when: first
+        value: |
+          # devSnmp configuration is process-wide
+          snmpMaxVarsPerMsg({{ max_vars_per_msg }})
+          SNMP_DRV_DEBUG({{ drv_debug }})
+          SNMP_DEV_DEBUG({{ dev_debug }})

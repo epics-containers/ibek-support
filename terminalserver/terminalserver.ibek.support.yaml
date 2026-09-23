@@ -69,6 +69,14 @@ entity_models:
         description: |-
           Number of channels
 
+    pre_init:
+      - when: first
+        value: |
+          # devSnmp batches this many OIDs into one SNMP GET. The upstream
+          # default of 60 is more than terminal server agents can answer
+          # (DLS snmp 1-03dls10 compiled in 30). Process-wide global.
+          snmpMaxVarsPerMsg(30)
+
     sub_entities:
       # one channel per NCHANS; see the module's NCHANS parameter
       - type: ibek.repeat
@@ -122,6 +130,14 @@ entity_models:
         type: int
         description: |-
           Number of channels
+
+    pre_init:
+      - when: first
+        value: |
+          # devSnmp batches this many OIDs into one SNMP GET. The upstream
+          # default of 60 is more than terminal server agents can answer
+          # (DLS snmp 1-03dls10 compiled in 30). Process-wide global.
+          snmpMaxVarsPerMsg(30)
 
     sub_entities:
       # one channel per NCHANS; see the module's NCHANS parameter
@@ -211,6 +227,14 @@ entity_models:
         description: |-
           Number of channels
 
+    pre_init:
+      - when: first
+        value: |
+          # devSnmp batches this many OIDs into one SNMP GET. The upstream
+          # default of 60 is more than terminal server agents can answer
+          # (DLS snmp 1-03dls10 compiled in 30). Process-wide global.
+          snmpMaxVarsPerMsg(30)
+
     sub_entities:
       # one channel per NCHANS; see the module's NCHANS parameter
       - type: ibek.repeat
@@ -264,6 +288,14 @@ entity_models:
         type: int
         description: |-
           Number of channels
+
+    pre_init:
+      - when: first
+        value: |
+          # devSnmp batches this many OIDs into one SNMP GET. The upstream
+          # default of 60 is more than terminal server agents can answer
+          # (DLS snmp 1-03dls10 compiled in 30). Process-wide global.
+          snmpMaxVarsPerMsg(30)
 
     sub_entities:
       # one channel per NCHANS; see the module's NCHANS parameter
