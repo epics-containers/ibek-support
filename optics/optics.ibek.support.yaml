@@ -24,13 +24,13 @@ entity_models:
       mXp:
         type: str
         description: |-
-          Motor record (after P) driving the positive blade
-          (top for a vertical slit, outboard for a horizontal slit)
+          Motor record (after P) driving the "+" (xp) blade;
+          which physical blade is "+" is a site convention
 
       mXn:
         type: str
         description: |-
-          Motor record (after P) driving the negative blade
+          Motor record (after P) driving the "-" (xn) blade
 
       RELTOCENTER:
         type: enum
@@ -175,13 +175,17 @@ entity_models:
       yOffLo:
         type: float
         description: |-
-          Low limit for the beam offset (mm)
+          Low drive limit (DRVL) of the beam offset ao (mm).
+          The default suits geometry 1; geometry 2 typically needs a
+          wider range, e.g. 4
         default: 17.4999
 
       yOffHi:
         type: float
         description: |-
-          High limit for the beam offset (mm)
+          High drive limit (DRVH) of the beam offset ao (mm).
+          The default suits geometry 1; geometry 2 typically needs a
+          wider range, e.g. 36
         default: 17.5001
 
     databases:
