@@ -50,10 +50,8 @@ NDOverlay
 NDOverlayN,None
 NDPosPlugin
 NDProcess
-NDPva
 NDROI
 NDROIStat
-NDROIStat8,None
 NDROIStatN,None
 NDScatter
 NDStats
@@ -63,10 +61,17 @@ NDTimeSeriesN,None
 NDTransform
 "
 
-# These device files were regrouped by hand in #158 and are now the source of
-# truth, so they must not be regenerated. `pvi reconvert` adds PVs from a new or
-# updated template to an existing device file without touching its grouping.
-hand_grouped=" ADDriver NDArrayBase NDPluginBase NDFile NDFileHDF5 "
+# These device files have been edited by hand since they were last generated
+# (regrouped in #158 and its follow-up commits; NDPvxs added in 654c18a) and are
+# now the source of truth, so they must not be regenerated with convert+regroup.
+#
+# `pvi reconvert` keeps the existing children untouched and appends one group,
+# named after the template, holding every template signal it could not match
+# against a top-level group child. That is the genuinely new PVs, but ALSO
+# duplicates of any signal the hand edit moved into a nested group (SubScreen,
+# Row) or renamed, so the appended group must be reconciled by hand afterwards.
+hand_grouped=" ADDriver NDArrayBase NDPluginBase NDFile NDFileHDF5 NDProcess NDPvxs"
+hand_grouped+=" NDROI NDROIStat NDROIStatN NDStats NDStdArrays NDTimeSeries "
 
 # make_device <name> <template> [<extra pvi convert args> ...]
 make_device() {
@@ -78,6 +83,8 @@ make_device() {
             set -x
             pvi reconvert ${name}.pvi.device.yaml --template ${template}
         )
+        echo "NOTE: ${name}.pvi.device.yaml is hand maintained: reconcile the" \
+             "group appended by pvi reconvert by hand (see comment above)" >&2
         return
     fi
 
@@ -107,6 +114,9 @@ for template_set in $template_sets; do
     make_device ${name} ${ADCORE}/db/${name}.template ${parent}
 
 done
+
+# NDPluginPvxs is driven by NDPva.template, so its name does not match the template
+make_device NDPvxs ${ADCORE}/db/NDPva.template
 
 # restore the original STDArrays template
 mv ${ADCORE}/db/NDStdArraysOriginal.template ${ADCORE}/db/NDStdArrays.template
