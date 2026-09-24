@@ -63,14 +63,36 @@ NDTimeSeriesN,None
 NDTransform
 "
 
-pvi convert device --name ADDriver --parent NDArrayBase --template ${ADCORE}/db/ADBase.template .
-pvi regroup ADDriver.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
+# These device files were regrouped by hand in #158 and are now the source of
+# truth, so they must not be regenerated. `pvi reconvert` adds PVs from a new or
+# updated template to an existing device file without touching its grouping.
+hand_grouped=" ADDriver NDArrayBase NDPluginBase NDFile NDFileHDF5 "
 
-pvi convert device --name NDArrayBase --template ${ADCORE}/db/NDArrayBase.template .
-pvi regroup NDArrayBase.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
+# make_device <name> <template> [<extra pvi convert args> ...]
+make_device() {
+    local name=$1 template=$2
+    shift 2
 
-pvi convert device --name NDPluginBase --parent NDArrayBase --template ${ADCORE}/db/NDPluginBase.template .
-pvi regroup NDPluginBase.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
+    if [[ ${hand_grouped} == *" ${name} "* && -f ${name}.pvi.device.yaml ]]; then
+        (
+            set -x
+            pvi reconvert ${name}.pvi.device.yaml --template ${template}
+        )
+        return
+    fi
+
+    (
+        set -x
+        pvi convert device --name ${name} \
+          --template ${template} \
+          "$@" .
+    )
+    pvi regroup ${name}.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
+}
+
+make_device ADDriver ${ADCORE}/db/ADBase.template --parent NDArrayBase
+make_device NDArrayBase ${ADCORE}/db/NDArrayBase.template
+make_device NDPluginBase ${ADCORE}/db/NDPluginBase.template --parent NDArrayBase
 
 for template_set in $template_sets; do
 
@@ -82,13 +104,7 @@ for template_set in $template_sets; do
         parent="--parent ${templates[1]:-NDPluginBase}"
     fi
 
-    (
-        set -x
-        pvi convert device --name ${name} \
-          --template ${ADCORE}/db/${name}.template \
-          ${parent} .
-    )
-    pvi regroup ${name}.pvi.device.yaml ${ADCORE}/ADApp/op/adl/*.adl
+    make_device ${name} ${ADCORE}/db/${name}.template ${parent}
 
 done
 
