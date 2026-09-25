@@ -69,6 +69,12 @@ entity_models:
         description: |-
           Number of channels
 
+    pre_init:
+      - when: first
+        value: |
+          # devSnmp default of 60 OIDs per GET is too many for terminal servers
+          snmpMaxVarsPerMsg(30)
+
     sub_entities:
       # one channel per NCHANS; see the module's NCHANS parameter
       - type: ibek.repeat
@@ -122,6 +128,12 @@ entity_models:
         type: int
         description: |-
           Number of channels
+
+    pre_init:
+      - when: first
+        value: |
+          # devSnmp default of 60 OIDs per GET is too many for terminal servers
+          snmpMaxVarsPerMsg(30)
 
     sub_entities:
       # one channel per NCHANS; see the module's NCHANS parameter
@@ -211,6 +223,12 @@ entity_models:
         description: |-
           Number of channels
 
+    pre_init:
+      - when: first
+        value: |
+          # devSnmp default of 60 OIDs per GET is too many for terminal servers
+          snmpMaxVarsPerMsg(30)
+
     sub_entities:
       # one channel per NCHANS; see the module's NCHANS parameter
       - type: ibek.repeat
@@ -264,6 +282,12 @@ entity_models:
         type: int
         description: |-
           Number of channels
+
+    pre_init:
+      - when: first
+        value: |
+          # devSnmp default of 60 OIDs per GET is too many for terminal servers
+          snmpMaxVarsPerMsg(30)
 
     sub_entities:
       # one channel per NCHANS; see the module's NCHANS parameter
