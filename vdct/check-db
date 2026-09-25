@@ -1,0 +1,86 @@
+#!/bin/bash
+#
+# Structural sanity check for generated EPICS .template / .db files.
+#
+# This exists because a build can produce a file that is *plausible* rather
+# than complete. A partially written template is still a run of valid records
+# right up to the cut, so msi expands it happily and the damage only surfaces
+# at dbLoadRecords time - in production, as a silently half populated IOC.
+# See the notes in flatdb for how one reached a live vacuum IOC.
+#
+# Deliberately conservative: it only rejects files that cannot be valid, so it
+# is safe to run over a whole tree and fail a build on the result:
+#
+#   check-db /epics/support/*/db/*.template /epics/support/*/db/*.db
+#
+# Checks:
+#   - the file is not empty
+#   - braces balance, and never close more than they open
+#   - the file does not end inside an unterminated quoted value
+#
+# What it deliberately does NOT check:
+#   - a trailing newline. 32 of the 693 database files in a current build lack
+#     one and are perfectly valid, so this is not a truncation signal.
+#   - the presence of any record(). Several shipped templates hold only gui
+#     annotations or aliases.
+
+usage() {
+    echo "usage: ${0##*/} <file>..." >&2
+    exit 2
+}
+
+[ $# -gt 0 ] || usage
+
+# Quote state is carried across lines on purpose: EPICS database strings may
+# legally span newlines - see iocStats iocCluster.db, which writes
+# field(INP, "@clust_<newline><newline>    info $(P) $(S) 0"). Braces and '#'
+# inside such a string must not be counted, or valid files get rejected.
+read -r -d '' check_prog <<'AWK'
+{
+    lines++
+    n = length($0)
+    for (i = 1; i <= n; i++) {
+        c = substr($0, i, 1)
+        if (inq) {
+            if (c == "\\") { i++; continue }
+            if (c == "\"") inq = 0
+            continue
+        }
+        if (c == "\"") { inq = 1; quoteline = NR; continue }
+        if (c == "#") break
+        if (c == "{") depth++
+        else if (c == "}") {
+            if (--depth < 0) {
+                printf "unmatched '}' at line %d\n", NR
+                exit 1
+            }
+        }
+    }
+}
+END {
+    if (lines == 0) { print "file is empty"; exit 1 }
+    if (inq) {
+        printf "unterminated string from line %d - file ends mid value\n", quoteline
+        exit 1
+    }
+    if (depth > 0) {
+        printf "%d unclosed '{' - file ends inside a record\n", depth
+        exit 1
+    }
+}
+AWK
+
+status=0
+for db in "$@"; do
+    if [ ! -f "${db}" ]; then
+        echo "check-db: ${db}: not a file" >&2
+        status=1
+        continue
+    fi
+    if ! fault=$(awk "${check_prog}" "${db}"); then
+        echo "check-db: ${db}: ${fault}" >&2
+        status=1
+    fi
+done
+
+exit ${status}

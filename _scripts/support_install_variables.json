@@ -1,5 +1,29 @@
 {
     "$defs": {
+        "Bash": {
+            "additionalProperties": false,
+            "properties": {
+                "cmd": {
+                    "title": "Cmd",
+                    "type": "string"
+                },
+                "when": {
+                    "default": true,
+                    "title": "When",
+                    "type": "boolean"
+                },
+                "post_build": {
+                    "default": false,
+                    "title": "Post Build",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "cmd"
+            ],
+            "title": "Bash",
+            "type": "object"
+        },
         "CommentOut": {
             "additionalProperties": false,
             "properties": {
@@ -329,11 +353,7 @@
             "type": "array"
         },
         "patch_file": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/PatchFile"
-                }
-            ],
+            "$ref": "#/$defs/PatchFile",
             "default": [],
             "description": "Apply a patch file to the repo. Optionally specify a commit to apply the patch to"
         },
@@ -353,6 +373,33 @@
                 "$ref": "#/$defs/Task"
             },
             "title": "Tasks",
+            "type": "array"
+        },
+        "bash": {
+            "default": [],
+            "description": "List of bash commands to execute. The working directory is the support module folder e.g. /epics/support/snmp",
+            "items": {
+                "$ref": "#/$defs/Bash"
+            },
+            "title": "Bash",
+            "type": "array"
+        },
+        "extra_release_macros": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "default": {},
+            "description": "Extra macros to add to the global configure/RELEASE",
+            "title": "Extra Release Macros",
+            "type": "object"
+        },
+        "remove_files_prebuild": {
+            "default": [],
+            "description": "A list project relative files to remove pre build.",
+            "items": {
+                "type": "string"
+            },
+            "title": "Remove Files Prebuild",
             "type": "array"
         }
     },

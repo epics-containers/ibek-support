@@ -84,6 +84,7 @@ entity_models:
         type: str
         description: |-
           Path to the Andor3 SDK
+        default: /dls_sw/prod/tools/RHEL7-x86_64/andor-sdk3/1-5
 
     databases:
       - file: $(ADANDOR3)/db/andor3.template

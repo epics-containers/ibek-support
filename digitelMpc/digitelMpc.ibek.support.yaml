@@ -3,13 +3,13 @@
 module: digitelMpc
 
 entity_models:
-  - name: digitelMpcqT
+  - name: digitelMpcqTsp
     description: |-
       Template database for digitel MPCq - Titanium Sublimation Pump
       Pete Owens - January 2020
     parameters:
       device:
-        type: str
+        type: id
         description: |-
           device name
 
@@ -57,14 +57,9 @@ entity_models:
           "24":
           "01":
       ctlsrc:
-        type: str
+        type: int
         description: |-
           control source (0 = service, 1 = Ion Pump 1, 2 = Ion Pump 2)
-
-      name:
-        type: id
-        description: |-
-          Object name and gui association name
 
       protocol:
         type: str
@@ -104,7 +99,7 @@ entity_models:
         values: *id001
   - name: &digitelMpcPump digitelMpc
     description: |-
-      TODO:ADD DESCRIPTION
+      digitel MPC controller/head unit
     parameters:
       name:
         type: id
@@ -119,7 +114,7 @@ entity_models:
       port:
         type: object
         description: |-
-          Asyn port
+          Asyn port object
 
       unit:
         type: enum
@@ -133,11 +128,11 @@ entity_models:
           Protocol file to use
         default: digitelMpc.proto
         values:
-          '"digitelMpc.proto"':
-          '"digitelMpcq.proto"':
+          digitelMpc.proto:
+          digitelMpcq.proto:
     databases:
       - file: $(DIGITELMPC)/db/digitelMpc.template
-        args: { device: null, port: null, unit: null, proto: null, name: null }
+        args: { device: null, port: null, unit: null, proto: null }
 
   - name: digitelMpcIonp
     description: |-
@@ -222,7 +217,7 @@ entity_models:
 
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcIonp.template
-        args: { device: null, port: "{{MPC.port}}", unit: "{{MPC.unit}}", pump: null, size: null, sp1on: null, sp1off: null, sp2on: null, sp2off: null, alh: null, text: null, proto: null, disptext: null }
+        args: { device: null, port: "{{MPC.port}}", unit: "{{MPC.unit}}", pump: null, size: null, sp1on: null, sp1off: null, sp2on: null, sp2off: null, alh: null, text: null, proto: "{{MPC.proto}}", disptext: null }
 
   - name: digitelMpcTspGroup
     description: |-
@@ -351,7 +346,7 @@ entity_models:
       Malcolm Walters - 02/08/2006
     parameters:
       device:
-        type: str
+        type: id
         description: |-
           device name
 

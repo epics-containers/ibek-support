@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: motorMotorSim
-version: R1-2
+version: R1-3
 
 dbds:
   - motorSimSupport.dbd

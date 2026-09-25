@@ -17,12 +17,12 @@ entity_models:
         type: id
         description: Port name for the detector
       TIMEOUT:
-        type: str
+        type: int
         description: Timeout
-        default: "1"
+        default: 1
       ADDR:
-        type: str
-        default: "0"
+        type: int
+        default: 0
         description: Asyn Port address
       WIDTH:
         type: int

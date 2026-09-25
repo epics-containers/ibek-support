@@ -4,3 +4,8 @@ module: positioner
 version: 2024.10.1
 
 organization: https://github.com/diamondlightsource
+
+bash:
+  - cmd: sed -i '/^\s*#\s*%/d' db/*.template
+    post_build: true
+

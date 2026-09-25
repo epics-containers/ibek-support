@@ -1,10 +1,12 @@
 label: NDStdArrays
-parent: NDPluginBase
 children:
+
+- type: Include
+  file_name: NDPluginBase
 
 - type: Group
   name: NDStdArraysMisc
-  label: NDStdArrays Ungrouped
+  label: Array
   layout:
     type: Grid
     labelled: true

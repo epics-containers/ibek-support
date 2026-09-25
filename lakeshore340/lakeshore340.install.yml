@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: lakeshore340
-version: 2-6-3
+version: 2-6-4
 organization: https://github.com/DiamondLightSource/
 
 protocol_files:
@@ -10,3 +10,6 @@ protocol_files:
 comment_out:
   - path: Makefile
     regexp: documentation
+  # asyn R4-46 builds VXI11 only when DRV_VXI11=YES, and we do not need it
+  - path: lakeshore340App/src/Makefile
+    regexp: drvVxi11

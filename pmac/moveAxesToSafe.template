@@ -1,0 +1,27 @@
+# Macros:
+# % macro, P, Device Prefix
+# % macro, N, Axis number (1-6)
+# % macro, AXIS, Axis PV
+# % macro, POSITION, Safe Position
+# % macro, THRESHOLD, In safe position threshold in EGUs
+
+record(ai, "$(P):POS$(N)_STORE") {
+  field(VAL, "$(POSITION)")
+}
+
+record(ai, "$(P):POS$(N)_THRESHOLD") {
+  field(VAL, "$(THRESHOLD)")
+}
+
+record(ao, "$(P):POS$(N)_OUT") {
+  field(DOL, "$(P):POS$(N)_STORE")
+  field(OMSL, "closed_loop")
+  field(OUT, "$(AXIS) PP NMS")
+}
+
+record(calc, "$(P):POS$(N)_SAFE") {
+  field(INPA, "$(AXIS).RBV CP")
+  field(INPB, "$(P):POS$(N)_STORE CP")
+  field(INPC, "$(P):POS$(N)_THRESHOLD CP")
+  field(CALC, "(A>(B-C))&&(A<(B+C))")
+}

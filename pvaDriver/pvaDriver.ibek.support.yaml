@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
+
+module: pvaDriver
+
+entity_models:
+  - name: pvaDetector
+    description: |-
+      Creates a pvAccess detector
+    parameters:
+      P:
+        type: str
+        description: Device Prefix
+      R:
+        type: str
+        description: Device Suffix
+      PORT:
+        type: id
+        description: Port name for the detector
+      PVNAME:
+        type: str
+        description: PV Name
+      BUFFERS:
+        type: int
+        description: Maximum number of NDArray buffers to be created for plugin callbacks
+        default: 50
+      MEMORY:
+        type: int
+        description: Max memory to allocate, should be maxw*maxh*nbuffer for driver and all attached plugins
+        default: 0
+      PRIORITY:
+        type: int
+        description: Max buffers to allocate
+        default: 0
+      STACKSIZE:
+        type: int
+        description: Max buffers to allocate
+        default: 0
+      TIMEOUT:
+        type: int
+        description: Timeout
+        default: 1
+      ADDR:
+        type: int
+        description: Asyn Port address
+        default: 0
+
+    pre_init:
+      - value: |
+          # pvaDriverConfig(portName, pvName, maxBuffers, maxMemory, priority, stackSize)
+          pvaDriverConfig("{{PORT}}", {{PVNAME}}, {{BUFFERS}}, {{MEMORY}}, {{PRIORITY}}, {{STACKSIZE}})
+
+    databases:
+      - file: $(PVADRIVER)/db/pvaDriver.template
+        args:
+          P:
+          R:
+          PORT:
+          TIMEOUT:
+          ADDR:

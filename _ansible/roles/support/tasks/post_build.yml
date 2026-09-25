@@ -78,10 +78,19 @@
       loop: "{{ patch_lines }}"
       when: item.when | default(true) and (item.post_build | default(false) | bool)
 
-    - name: Call prebuild ad hoc scripts for {{ module }}
+    - name: Call postbuild ad hoc scripts for {{ module }}
       ansible.builtin.command: "bash {{ ibek_support_folder }}/{{ item.path }}"
       args:
         chdir: "{{ local_path }}"
       loop: "{{ scripts }}"
       when: (item.post_build | default(false)) | bool
+      changed_when: true
+
+    - name: Run postbuild bash commands for {{ module }}
+      ansible.builtin.shell: "{{ item.cmd }}"
+      args:
+        chdir: "{{ local_path }}"
+        executable: /bin/bash
+      loop: "{{ bash }}"
+      when: (item.when | default(true)) | bool and (item.post_build | default(false)) | bool
       changed_when: true

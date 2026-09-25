@@ -54,3 +54,12 @@
       loop: "{{ scripts }}"
       when: not (item.post_build | default(false)) | bool
       changed_when: true
+
+    - name: Run prebuild bash commands for {{ module }}
+      ansible.builtin.shell: "{{ item.cmd }}"
+      args:
+        chdir: "{{ local_path }}"
+        executable: /bin/bash
+      loop: "{{ bash }}"
+      when: (item.when | default(true)) | bool and not (item.post_build | default(false)) | bool
+      changed_when: true
