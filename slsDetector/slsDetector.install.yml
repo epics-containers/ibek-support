@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: slsDetector
+organization: https://github.com/paulscherrerinstitute
+version: v10.0.0
+libs:
+  - SlsSupport
+  - SlsDetector
+  - slsDetectorDriver
+
+dbds:
+  - slsDetectorSupport.dbd
+
+apt_developer:
+  - cmake
+
+make_options: ""
+
+# don't need to build jungfrau example IOC
+comment_out:
+  - path: Makefile
+    regexp: wildcard iocs
+
+tasks:
+  - path: slsDetector_tasks.yml
