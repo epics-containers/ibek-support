@@ -56,6 +56,7 @@ entity_models:
     pvi:
       yaml_path: lakeshore340.pvi.device.yaml
       ui_macros:
+        P:
         lakeshore340: "{{ P }}{{ name }}"
       pv: true
       pv_prefix: $(lakeshore340)
