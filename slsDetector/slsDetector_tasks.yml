@@ -1,0 +1,29 @@
+- name: Build slsDetectorPackage
+  ansible.builtin.shell:
+    cmd: 'cd /tmp
+
+      wget https://github.com/slsdetectorgroup/slsDetectorPackage/archive/refs/tags/10.0.0.tar.gz
+
+      tar zxvf 10.0.0.tar.gz
+
+      cd slsDetectorPackage-10.0.0
+
+      update-alternatives --install /usr/bin/cmake3 cmake /usr/bin/cmake 100
+
+      ./cmk.sh -bsj9 -l/epics/slsdetectorpackage
+
+      echo ''/epics/slsdetectorpackage/bin/slsMultiReceiver 1954 $1'' > /epics/scripts/start_sls_receiver.sh
+
+      chmod +x /epics/scripts/start_sls_receiver.sh'
+
+- name: Point to libraries built inside container instead of vendor bundled .so files
+  ansible.builtin.replace:
+    path: "{{ local_path }}/slsDetectorApp/slsDetectorSupport/Makefile"
+    regexp: "../os/linux-x86_64/"
+    replace: "/epics/slsdetectorpackage/lib/"
+
+- name: Patch slsDetector.cpp to allow switching threshold energy mode
+  ansible.builtin.shell:
+    cmd: 'cd {{local_path}}
+
+    git apply /epics/generic-source/ibek-support/slsDetector/threshold_mode_patch.diff'
