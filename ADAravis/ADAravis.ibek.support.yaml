@@ -10,11 +10,15 @@ entity_models:
       name:
         type: str
         description: |-
-          Name of the network interface to use for camera discovery (e.g. em1, p2p1, ...)
+          Name of the network interface to use for camera discovery (e.g. em1, p2p1, ...).
+          Leave empty to search all interfaces.
+        default: ""
     pre_init:
       - value: |
+          {% if name %}
           # aravisInterfaceName(const char *interfaceName)
           aravisInterfaceName("{{name}}")
+          {% endif %}
 
   - name: aravisCamera
     description: |-
