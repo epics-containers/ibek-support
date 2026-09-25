@@ -57,6 +57,7 @@ groups:
       - ADUVC
       - ffmpegServer
       - quadEM
+      - slsDetector
 
   areadetector2:
     desc: "Area detector stack 2"
