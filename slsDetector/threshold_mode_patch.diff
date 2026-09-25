@@ -1,0 +1,56 @@
+diff --git a/slsDetectorApp/slsDetectorSrc/slsDetectorDriver.cpp b/slsDetectorApp/slsDetectorSrc/slsDetectorDriver.cpp
+index 2b501ca..c6d69ad 100644
+--- a/slsDetectorApp/slsDetectorSrc/slsDetectorDriver.cpp
++++ b/slsDetectorApp/slsDetectorSrc/slsDetectorDriver.cpp
+@@ -69,6 +69,7 @@ static const char *jsonFrameModes[] = {
+ #define SDCounter1ThresholdString      "SD_CNT1_THRESHOLD"
+ #define SDCounter2ThresholdString      "SD_CNT2_THRESHOLD"
+ #define SDCounter3ThresholdString      "SD_CNT3_THRESHOLD"
++#define SDCounter1OnlyString            "SD_CNT1_ONLY"
+ #define SDJsonDetectorModeString       "SD_JSON_DETECTORMODE"
+ #define SDJsonFrameModeString          "SD_JSON_FRAMEMODE"
+ #define SDSetupFileString       "SD_SETUP_FILE"
+@@ -138,6 +139,7 @@ public:
+     int SDCounter1Threshold;
+     int SDCounter2Threshold;
+     int SDCounter3Threshold;
++    int SDCounter1Only;
+     int SDJsonDetectorMode;
+     int SDJsonFrameMode;
+     int SDSetupFile;
+@@ -637,12 +639,14 @@ asynStatus slsDetectorDriver::writeInt32(asynUser *pasynUser, epicsInt32 value)
+         auto detectorType = pDetector->getDetectorType().squash(slsDetectorDefs::GENERIC);
+         if (detectorType == slsDetectorDefs::EIGER || detectorType == slsDetectorDefs::MYTHEN3) {
+             int threshold, threshold1, threshold2, threshold3;
++            int counter1Only;
+             int setting;
+             int trimbits;
+             getIntegerParam(SDThreshold, &threshold);
+             getIntegerParam(SDCounter1Threshold, &threshold1);
+             getIntegerParam(SDCounter2Threshold, &threshold2);
+             getIntegerParam(SDCounter3Threshold, &threshold3);
++            getIntegerParam(SDCounter1Only, &counter1Only);
+             getIntegerParam(SDSetting, &setting);
+             getIntegerParam(SDTrimbits, &trimbits);
+ 
+@@ -654,8 +658,10 @@ asynStatus slsDetectorDriver::writeInt32(asynUser *pasynUser, epicsInt32 value)
+                 SetDetectorParam(SDThreshold, Integer, pDetector->getThresholdEnergy());
+             } else if (detectorType == slsDetectorDefs::MYTHEN3) {
+                 std::array<int, 3> thresholds = {threshold1, threshold2, threshold3};
+-                if (threshold != -1 && (function == SDEnergy || function == SDThreshold))
+-                    thresholds.fill(threshold);
++                if (threshold != -1 && (function == SDEnergy || function == SDThreshold)) {
++                    if (counter1Only) thresholds[0] = threshold;
++                    else thresholds.fill(threshold);
++                }
+                 pDetector->setThresholdEnergy(thresholds, slsDetectorDefs::detectorSettings(setting), trimbits, positions);
+                 /* Read back */
+                 {
+@@ -1070,6 +1076,7 @@ slsDetectorDriver::slsDetectorDriver(const char *portName, const char *configFil
+     createParam(SDCounter1ThresholdString, asynParamInt32, &SDCounter1Threshold);
+     createParam(SDCounter2ThresholdString, asynParamInt32, &SDCounter2Threshold);
+     createParam(SDCounter3ThresholdString, asynParamInt32, &SDCounter3Threshold);
++    createParam(SDCounter1OnlyString,      asynParamInt32, &SDCounter1Only);
+     createParam(SDJsonDetectorModeString,  asynParamInt32, &SDJsonDetectorMode);
+     createParam(SDJsonFrameModeString,     asynParamInt32, &SDJsonFrameMode);
+     createParam(SDSetupFileString,      asynParamOctet,  &SDSetupFile);
