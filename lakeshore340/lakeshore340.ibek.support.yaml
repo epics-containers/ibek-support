@@ -58,4 +58,4 @@ entity_models:
       ui_macros:
         lakeshore340: "{{ P }}{{ name }}"
       pv: true
-      pv_prefix: "{{ P }}{{ name }}"
+      pv_prefix: $(lakeshore340)
