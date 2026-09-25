@@ -112,6 +112,11 @@ entity_models:
         description: |-
           Positioner value for position 16
         default: 0
+      pos:
+        type: str
+        description: |-
+          Positioner letter (A..H)
+        default: A
 
     databases:
       - file: $(POSITIONER)/db/motorpositioner.template
@@ -133,6 +138,11 @@ entity_models:
         type: str
         description: |-
           Device suffix
+      PS:
+        type: str
+        description: |-
+          Positioner number suffix
+        default: ""
       DESC:
         type: str
         description: |-
@@ -386,6 +396,11 @@ entity_models:
         description: |-
           Positioner value for position 16
         default: 0
+      pos:
+        type: str
+        description: |-
+          Positioner letter (A..H)
+        default: A
 
     databases:
       - file: $(POSITIONER)/db/positioner.template
@@ -417,3 +432,4 @@ entity_models:
           VALN:
           VALO:
           VALP:
+          pos:

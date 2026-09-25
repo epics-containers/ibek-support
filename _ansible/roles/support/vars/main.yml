@@ -23,8 +23,7 @@ git_repo: "{{ organization.rstrip('/') }}/{{ module }}"
 protocol_files: []
 
 # the macro used in configure/RELEASE for this module
-macro: "{{ module | upper }}"
-
+macro: "{{ module | replace('-', '_') | upper }}"
 # macros to remove from configure/RELEASE unless already built
 remove_macros: []
 
@@ -121,6 +120,9 @@ skip_clean: false
 # useful for debugging a build as it speeds up second builds massively
 # use `ansible.sh all -e skip_apt=true` to skip all the apt installs
 skip_apt: false
+# an apt index refreshed less than this many minutes ago is reused rather
+# than updated again (see tasks/system.yml)
+apt_cache_valid_minutes: 120
 
 # List of files to remove before the build
 # Can be useful where the repo includes configure/*.local files (which is should not!)

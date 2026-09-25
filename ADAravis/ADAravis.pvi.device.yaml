@@ -1,6 +1,8 @@
 label: ADAravis Camera
-parent: ADDriver
 children:
+  - type: Include
+    file_name: ADDriver
+
   - type: Group
     name: ADAravis
     layout:
@@ -88,13 +90,6 @@ children:
         read_widget:
           type: TextRead
 
-  - type: Group
-    name: ArvFeatureMisc
-    label: arvFeature Ungrouped
-    layout:
-      type: Grid
-      labelled: true
-    children:
       - type: SignalW
         name: ARConnectCamera
         write_pv: $(P)$(R)ARConnectCamera

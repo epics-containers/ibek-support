@@ -224,7 +224,8 @@ entity_models:
       id:
         type: int
         description: |-
-          ID number as 2 digit string (e.g. 01)
+          Gauge ID number. Rendered zero-padded to 2 digits in PV
+          substitutions (e.g. 1 -> "01").
 
       plog_adc_pv:
         type: str
@@ -337,7 +338,8 @@ entity_models:
       address:
         type: int
         description: |-
-          Controller address (001 .. 253)
+          Controller address (1..253). Rendered zero-padded to 3 digits
+          in PV substitutions (e.g. 1 -> "001").
 
     databases:
       - file: $(MKS937B)/db/mks937b.template
@@ -603,6 +605,11 @@ entity_models:
     description: |-
       TODO:ADD DESCRIPTION
     parameters:
+      name:
+        type: id
+        description: |-
+          Device name, used as the gauge record name in mks937bGauge.template.
+
       dom:
         type: str
         description: |-
@@ -611,27 +618,13 @@ entity_models:
       id:
         type: int
         description: |-
-          ID number as 2 digit string (e.g. 01)
+          Gauge ID number. Rendered zero-padded to 2 digits in PV
+          substitutions (e.g. 1 -> "01").
 
       input:
         type: str
         description: |-
           PV providing gauge reading in mbar
-
-      device:
-        type: str
-        description: |-
-          device name
-
-      p_egu_pv:
-        type: str
-        description: |-
-          Raw value ADC PV name
-
-      plog_adc_pv:
-        type: str
-        description: |-
-          or (if using Hy8401 VME IP) mks937bHy8401.template
 
       GCTLR:
         type: str
@@ -684,18 +677,28 @@ entity_models:
       plog_calc:
         type: str
         description: |-
-          Template argument
-        default: 10.0*A/32767.0/0.6 - 12.0
+          The EGU variant feeds mks937bGauge from the PLOG_CALC PV that
+          mks937bPlogEGU.template already converted to mbar, so the gauge's
+          own conversion is a straight pass-through.
+        default: A
+
+    post_defines:
+      eguInputPV:
+        type: str
+        description: |-
+          Name of the PV providing the gauge reading in mbar
+        value: |-
+          {{ dom }}-VA-GAUGE-{{ "%02d" | format(id) }}:PLOG_CALC
 
     databases:
       - file: $(MKS937B)/db/mks937bPlogEGU.template
         args:
-          device:
-          p_egu_pv:
+          device: "{{ eguInputPV }}"
+          p_egu_pv: "{{ input }}"
 
       - file: $(MKS937B)/db/mks937bGauge.template
         args:
-          plog_adc_pv:
+          plog_adc_pv: "{{ eguInputPV }}"
           ctlsp_drvl:
           name:
           ctlsp_lopr:
@@ -1168,3 +1171,90 @@ entity_models:
           offwarn:
           GCTLR:
           channel:
+
+  - name: mks937bImgMean
+    description: |-
+      Template database to calculate the mean pressure from a number of IMGs
+      Pete Owens - 26/6/06
+    parameters:
+      device:
+        type: str
+        description: |-
+          device name
+
+      current:
+        type: str
+        description: |-
+          beam current
+
+      nimgs:
+        type: int
+        description: |-
+          number of gauges
+
+      img1:
+        type: str
+        description: |-
+          img 1 device name
+
+      img2:
+        type: str
+        description: |-
+          img 2 device name
+
+      img3:
+        type: str
+        description: |-
+          img 3 device name
+
+      img4:
+        type: str
+        description: |-
+          img 4 device name
+
+      img5:
+        type: str
+        description: |-
+          img 5 device name
+
+      img6:
+        type: str
+        description: |-
+          img 6 device name
+
+      img7:
+        type: str
+        description: |-
+          img 7 device name
+
+      img8:
+        type: str
+        description: |-
+          img 8 device name
+
+      img9:
+        type: str
+        description: |-
+          img 9 device name
+
+      img10:
+        type: str
+        description: |-
+          img 10 device name
+
+    databases:
+      - file: $(MKS937B)/db/mks937bImgMean.template
+        args:
+          device:
+          current:
+          nimgs:
+          img1:
+          img2:
+          img3:
+          img4:
+          img5:
+          img6:
+          img7:
+          img8:
+          img9:
+          img10:

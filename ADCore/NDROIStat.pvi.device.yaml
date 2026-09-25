@@ -1,34 +1,12 @@
 label: NDROIStat
-parent: NDPluginBase
 children:
 
-- type: Group
-  name: NDFFTFreqSpectrumPlot
-  layout:
-    type: Grid
-    labelled: true
-  children:
-
-  - type: SignalR
-    name: TSAcquiring
-    read_pv: $(P)$(R)TSAcquiring
-    read_widget:
-      type: LED
-
-  - type: SignalW
-    name: TSNumPoints
-    write_pv: $(P)$(R)TSNumPoints
-    write_widget:
-      type: TextWrite
-
-  - type: SignalR
-    name: TSCurrentPoint
-    read_pv: $(P)$(R)TSCurrentPoint
-    read_widget:
-      type: TextRead
+- type: Include
+  file_name: NDPluginBase
 
 - type: Group
-  name: NDPluginTimeSeriesN
+  name: TimeSeries
+  label: Time Series
   layout:
     type: Grid
     labelled: true
@@ -40,8 +18,28 @@ children:
     write_widget:
       type: ComboBox
 
+  - type: SignalR
+    name: TSAcquiring
+    read_pv: $(P)$(R)TSAcquiring
+    read_widget:
+      type: LED
+
+  - type: SignalW
+    name: TSNumPoints
+    label: TS Num Points
+    write_pv: $(P)$(R)TSNumPoints
+    write_widget:
+      type: TextWrite
+
+  - type: SignalR
+    name: TSCurrentPoint
+    label: TS Current Point
+    read_pv: $(P)$(R)TSCurrentPoint
+    read_widget:
+      type: TextRead
+
 - type: Group
-  name: NDROIStat
+  name: Reset
   layout:
     type: Grid
     labelled: true
@@ -49,6 +47,7 @@ children:
 
   - type: SignalW
     name: ResetAll
+    label: Reset All
     write_pv: $(P)$(R)ResetAll
     write_widget:
       type: ToggleButton

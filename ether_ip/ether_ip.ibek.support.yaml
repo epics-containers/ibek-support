@@ -3,44 +3,6 @@
 module: ether_ip
 
 entity_models:
-  - name: mbboDirect
-    description: |-
-      Simple mbboDirect record for ether_ip connection
-    parameters:
-      record:
-        type: str
-        description: |-
-          Record Name
-
-      port:
-        type: str
-        description: |-
-          Ether_IP Port Name
-
-      scan:
-        type: str
-        description: |-
-          Scan Time
-
-      tag:
-        type: str
-        description: |-
-          Tag to address on PLC
-
-      nobt:
-        type: str
-        description: |-
-          Number of bits to write
-
-    databases:
-      - file: $(ETHER_IP)/db/ether_ip_mbboDirect.template
-        args:
-          record:
-          tag:
-          scan:
-          port:
-          nobt:
-
   - name: EtherIPInit
     description: |-
       This creates an IP connection to a plc using the ether_ip driver
@@ -70,14 +32,14 @@ entity_models:
       - value: |
           drvEtherIP_define_PLC("{{port}}", "{{ip}}", 0)
     databases:
-      - file: $(ETHER_IP)/db/ether_ip_plcInfo.template
+      - file: ether_ip_plcInfo.template
         args:
           port:
           device:
 
-  - name: bi
+  - name: ai
     description: |-
-      Simple bi record for ether_ip connection
+      A single ai record reading one tag from a PLC over ether_ip
     parameters:
       record:
         type: str
@@ -87,93 +49,30 @@ entity_models:
       port:
         type: str
         description: |-
-          Ether_IP Port Name
-
-      scan:
-        type: str
-        description: |-
-          Scan Time
+          Ether_IP Port Name - the port of a companion ether_ip.EtherIPInit
 
       tag:
         type: str
         description: |-
           Tag to address on PLC
 
-    databases:
-      - file: $(ETHER_IP)/db/ether_ip_bi.template
-        args:
-          record:
-          tag:
-          port:
-          scan:
-
-  - name: stringin
-    description: |-
-      Simple stringin record for ether_ip connection
-    parameters:
-      record:
-        type: str
-        description: |-
-          Record Name
-
-      port:
-        type: str
-        description: |-
-          Ether_IP Port Name
-
       scan:
         type: str
         description: |-
           Scan Time
-
-      tag:
-        type: str
-        description: |-
-          Tag to address on PLC
+        default: 1 second
 
     databases:
-      - file: $(ETHER_IP)/db/ether_ip_stringin.template
+      - file: ether_ip_ai.template
         args:
           record:
-          tag:
           port:
           scan:
-
-  - name: bo
-    description: |-
-      Simple bo record for ether_ip connection
-    parameters:
-      record:
-        type: str
-        description: |-
-          Record Name
-
-      port:
-        type: str
-        description: |-
-          Ether_IP Port Name
-
-      scan:
-        type: str
-        description: |-
-          Scan Time
-
-      tag:
-        type: str
-        description: |-
-          Tag to address on PLC
-
-    databases:
-      - file: $(ETHER_IP)/db/ether_ip_bo.template
-        args:
-          record:
           tag:
-          port:
-          scan:
 
   - name: ao
     description: |-
-      Simple ao record for ether_ip connection
+      A single ao record writing one tag to a PLC over ether_ip
     parameters:
       record:
         type: str
@@ -183,29 +82,30 @@ entity_models:
       port:
         type: str
         description: |-
-          Ether_IP Port Name
-
-      scan:
-        type: str
-        description: |-
-          Scan Time
+          Ether_IP Port Name - the port of a companion ether_ip.EtherIPInit
 
       tag:
         type: str
         description: |-
           Tag to address on PLC
 
+      scan:
+        type: str
+        description: |-
+          Scan Time
+        default: 1 second
+
     databases:
-      - file: $(ETHER_IP)/db/ether_ip_ao.template
+      - file: ether_ip_ao.template
         args:
           record:
-          tag:
           port:
           scan:
+          tag:
 
-  - name: ai
+  - name: bi
     description: |-
-      Simple ai record for ether_ip connection
+      A single bi record reading one tag from a PLC over ether_ip
     parameters:
       record:
         type: str
@@ -215,29 +115,64 @@ entity_models:
       port:
         type: str
         description: |-
-          Ether_IP Port Name
-
-      scan:
-        type: str
-        description: |-
-          Scan Time
+          Ether_IP Port Name - the port of a companion ether_ip.EtherIPInit
 
       tag:
         type: str
         description: |-
           Tag to address on PLC
 
+      scan:
+        type: str
+        description: |-
+          Scan Time
+        default: 1 second
+
     databases:
-      - file: $(ETHER_IP)/db/ether_ip_ai.template
+      - file: ether_ip_bi.template
         args:
           record:
-          tag:
           port:
           scan:
+          tag:
+
+  - name: bo
+    description: |-
+      A single bo record writing one tag to a PLC over ether_ip
+    parameters:
+      record:
+        type: str
+        description: |-
+          Record Name
+
+      port:
+        type: str
+        description: |-
+          Ether_IP Port Name - the port of a companion ether_ip.EtherIPInit
+
+      tag:
+        type: str
+        description: |-
+          Tag to address on PLC
+
+      scan:
+        type: str
+        description: |-
+          Scan Time
+        default: 1 second
+
+    databases:
+      - file: ether_ip_bo.template
+        args:
+          record:
+          port:
+          scan:
+          tag:
 
   - name: mbbiDirect
     description: |-
-      Simple mbbiDirect record for ether_ip connection
+      A single mbbiDirect record reading a group of bits from a PLC tag
+      over ether_ip
     parameters:
       record:
         type: str
@@ -247,12 +182,7 @@ entity_models:
       port:
         type: str
         description: |-
-          Ether_IP Port Name
-
-      scan:
-        type: str
-        description: |-
-          Scan Time
+          Ether_IP Port Name - the port of a companion ether_ip.EtherIPInit
 
       tag:
         type: str
@@ -260,15 +190,94 @@ entity_models:
           Tag to address on PLC
 
       nobt:
-        type: str
+        type: int
         description: |-
           Number of bits to read
 
+      scan:
+        type: str
+        description: |-
+          Scan Time
+        default: 1 second
+
     databases:
-      - file: $(ETHER_IP)/db/ether_ip_mbbiDirect.template
+      - file: ether_ip_mbbiDirect.template
         args:
           record:
-          tag:
-          scan:
           port:
+          scan:
+          tag:
           nobt:
+
+  - name: mbboDirect
+    description: |-
+      A single mbboDirect record writing a group of bits to a PLC tag
+      over ether_ip
+    parameters:
+      record:
+        type: str
+        description: |-
+          Record Name
+
+      port:
+        type: str
+        description: |-
+          Ether_IP Port Name - the port of a companion ether_ip.EtherIPInit
+
+      tag:
+        type: str
+        description: |-
+          Tag to address on PLC
+
+      nobt:
+        type: int
+        description: |-
+          Number of bits to write
+
+      scan:
+        type: str
+        description: |-
+          Scan Time
+        default: 1 second
+
+    databases:
+      - file: ether_ip_mbboDirect.template
+        args:
+          record:
+          port:
+          scan:
+          tag:
+          nobt:
+
+  - name: stringin
+    description: |-
+      A single stringin record reading one tag from a PLC over ether_ip
+    parameters:
+      record:
+        type: str
+        description: |-
+          Record Name
+
+      port:
+        type: str
+        description: |-
+          Ether_IP Port Name - the port of a companion ether_ip.EtherIPInit
+
+      tag:
+        type: str
+        description: |-
+          Tag to address on PLC
+
+      scan:
+        type: str
+        description: |-
+          Scan Time
+        default: 1 second
+
+    databases:
+      - file: ether_ip_stringin.template
+        args:
+          record:
+          port:
+          scan:
+          tag:

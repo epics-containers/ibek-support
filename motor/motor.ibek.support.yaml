@@ -17,7 +17,7 @@ entity_models:
           motorUtilInit("{{ P }}")
 
     databases:
-      - file: $(MOTOR)/db/motorUtil.template
+      - file: $(MOTOR)/db/motorUtil.db
         args:
           P:
 
@@ -352,7 +352,7 @@ entity_models:
 
     pvi:
       yaml_path: asynMotorAxis.pvi.device.yaml
-      pv_prefix: "{{ P }}{{ M }}"
+      pv_prefix: $(P)$(M)
       ui_macros:
         P:
         M:

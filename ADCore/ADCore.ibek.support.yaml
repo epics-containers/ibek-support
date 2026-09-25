@@ -471,6 +471,7 @@ entity_models:
         P:
         R:
       pv: true
+      pv_prefix: $(P)$(R)
 
   - name: NDOverlay
     description: |-
@@ -2725,6 +2726,7 @@ entity_models:
         P:
         R:
       pv: true
+      pv_prefix: $(P)$(R)
 
   - name: NDROIStat
     description: |-
@@ -2865,6 +2867,7 @@ entity_models:
         P:
         R:
       pv: true
+      pv_prefix: $(P)$(R)
 
   - name: NDFileNetCDF
     description: |-

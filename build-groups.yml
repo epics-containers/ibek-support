@@ -19,6 +19,11 @@
 
 skip:
   - pvaDriver
+  # vdct is a build time tool, not a support module: there is no repo to
+  # clone and no make to run, so the standard role must not run against it.
+  # It is installed with 'ansible.sh vdct --tags system,pre_build_tasks' by
+  # the generic IOCs that need it. See vdct/README.md.
+  - vdct
 
 groups:
   core:
@@ -47,26 +52,32 @@ groups:
     modules:
       - ADCore
 
-  areadetector:
-    desc: "Area detector stack"
+  # AD modules split in two for better parallelism
+  areadetector1:
+    desc: "Area detector stack 1"
+    base_image: ghcr.io/epics-containers/ioc-areadetector-developer:3.14ec2
+    modules:
+      - ADURL
+      - ADZMQ
+      - ADUVC
+      - ffmpegServer
+      - quadEM
+
+  areadetector2:
+    desc: "Area detector stack 2"
     base_image: ghcr.io/epics-containers/ioc-areadetector-developer:3.14ec2
     modules:
       - ADGenICam
       - ADAravis
       - ADSimDetector
       - ADAndor3
-      - ADURL
-      - ADZMQ
-      - ffmpegServer
       - xspress3
-      - quadEM
 
   general:
     desc: "General-purpose modules with few dependencies"
     modules:
       - modbus
       - iocStats
-      - pvxs
       - pvlogging
       - opcua
       - positioner
@@ -82,4 +93,5 @@ groups:
       - lakeshore340
       - mks937a
       - mks937b
+      - oxCryo
       - terminalserver

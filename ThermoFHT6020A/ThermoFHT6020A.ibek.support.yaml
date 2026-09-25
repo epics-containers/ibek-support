@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
+
+module: ThermoFHT6020A
+
+entity_models:
+  - name: ThermoFHT6020A
+    description: |-
+      ThermoFHT6020A radiation monitor
+    parameters:
+      device:
+        type: str
+        description: |-
+          Prefix for PV name
+
+      port:
+        type: str
+        description: |-
+          Bus/Port Address (eg. ASYN Port).
+
+      high:
+        type: float
+        description: High limit for dose
+        default: 10
+
+      hihi:
+        type: float
+        description: High high limit for dose
+        default: 20
+
+      prec:
+        type: int
+        description: precision for floating point values
+        default: 3
+
+    databases:
+      - file: FHT6020A.template
+        # use a regex to say that we want all the parameters in the template
+        # this is equivalent to {P: '{{P}}', PORT: '{{PORT}}', ADDR: '{{ADDR}}', SCAN: '{{SCAN}}', TEMPSCAN: '{{TEMPSCAN}}', name: '{{name}}', LOOP: '{{LOOP}}'}
+        args:
+          .*:

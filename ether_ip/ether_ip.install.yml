@@ -9,3 +9,10 @@ dbds:
 
 libs:
   - ether_ip
+
+bash:
+  # The ether_ip_*.template files are DLS additions not yet in upstream
+  # ether_ip; copy them into the module's db/ so msi finds them via
+  # EPICS_DB_INCLUDE_PATH.
+  - cmd: cp {{ ibek_support_folder }}/ether_ip_*.template db/
+    post_build: true
