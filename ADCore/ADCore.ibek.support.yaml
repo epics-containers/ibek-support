@@ -471,6 +471,7 @@ entity_models:
         P:
         R:
       pv: true
+      pv_prefix: $(P)$(R)
 
   - name: NDOverlay
     description: |-
