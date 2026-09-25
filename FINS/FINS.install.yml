@@ -24,7 +24,7 @@ module: FINS
 #
 # TODO: cherry-pick the aliasing fix onto main and cut a new tag; add the errno
 # guard too when RTEMS container builds resume.
-version: 3-12ec1
+version: 3-13
 dbds:
   - FINS.dbd
 libs:

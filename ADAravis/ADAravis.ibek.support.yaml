@@ -191,7 +191,7 @@ entity_models:
         P: "{{ camera.P }}"
         R: "{{ camera.R }}"
       pv: true
-      pv_prefix: "{{ camera.P }}{{ camera.R }}"
+      pv_prefix: $(P)$(R)
 
     databases:
       # If CLASS=='AutoADGenICam', the template will be named similarly to

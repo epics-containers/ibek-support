@@ -30,11 +30,11 @@ libs:
   - pvxsIoc
 
 download_extras:
-  - url: "http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-103-1t64_1.10.10+repack-3.1ubuntu4_amd64.deb"
+  - url: "https://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-103-1t64_1.10.10+repack-3.1ubuntu4_amd64.deb"
     dest: /tmp/libhdf5-103.deb
-  - url: "http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-cpp-103-1t64_1.10.10+repack-3.1ubuntu4_amd64.deb"
+  - url: "https://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-cpp-103-1t64_1.10.10+repack-3.1ubuntu4_amd64.deb"
     dest: /tmp/libhdf5-cpp-103.deb
-  - url: "http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-dev_1.10.10+repack-3.1ubuntu4_amd64.deb"
+  - url: "https://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-dev_1.10.10+repack-3.1ubuntu4_amd64.deb"
     dest: /tmp/libhdf5-dev-1.deb
 
 apt_developer:

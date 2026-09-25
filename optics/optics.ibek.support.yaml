@@ -1,0 +1,203 @@
+# yaml-language-server: $schema=../schemas/ibek.support.schema.json
+
+module: optics
+
+# A starter set of entity models for the most commonly used optics databases.
+# See iocBoot/iocAny/st.cmd in epics-modules/optics for the full set.
+
+entity_models:
+  - name: slit2
+    description: |-
+      A pair of slit blades driven by two motor records (2slit.db).
+      Provides gap/centre (size/center) and individual blade PVs.
+    parameters:
+      P:
+        type: str
+        description: |-
+          PV prefix, also the prefix of the two motor records
+
+      SLIT:
+        type: str
+        description: |-
+          Slit name, appended to P, e.g. Slit1H or Slit1V
+
+      mXp:
+        type: str
+        description: |-
+          Motor record (after P) driving the "+" (xp) blade;
+          which physical blade is "+" is a site convention
+
+      mXn:
+        type: str
+        description: |-
+          Motor record (after P) driving the "-" (xn) blade
+
+      RELTOCENTER:
+        type: enum
+        description: |-
+          Initial coordinate system for the blade positions
+        default: Lab
+        values:
+          Lab: 0
+          RelToCenter: 1
+
+    databases:
+      - file: $(OPTICS)/db/2slit.db
+        args:
+          P:
+          SLIT:
+          mXp:
+          mXn:
+          RELTOCENTER:
+
+  - name: table
+    description: |-
+      An optical table driven by six motor records via the table record
+      (table.db)
+    parameters:
+      P:
+        type: str
+        description: |-
+          PV prefix, also the prefix of the six motor records
+
+      Q:
+        type: str
+        description: |-
+          Table name for the user PVs, e.g. Table1
+
+      T:
+        type: str
+        description: |-
+          Name of the table record, e.g. table1
+
+      M0X:
+        type: str
+        description: |-
+          Motor record (after P) for the X motor on leg 0
+
+      M0Y:
+        type: str
+        description: |-
+          Motor record (after P) for the Y motor on leg 0
+
+      M1Y:
+        type: str
+        description: |-
+          Motor record (after P) for the Y motor on leg 1
+
+      M2X:
+        type: str
+        description: |-
+          Motor record (after P) for the X motor on leg 2
+
+      M2Y:
+        type: str
+        description: |-
+          Motor record (after P) for the Y motor on leg 2
+
+      M2Z:
+        type: str
+        description: |-
+          Motor record (after P) for the Z motor on leg 2
+
+      GEOM:
+        type: enum
+        description: |-
+          Table geometry
+        default: SRI
+        values:
+          SRI:
+          GEOCARS:
+          NEWPORT:
+          PNC:
+
+      ANGLE_UNITS:
+        type: enum
+        description: |-
+          Units for the table angles
+        default: degrees
+        values:
+          degrees:
+          ur:
+
+    databases:
+      - file: $(OPTICS)/db/table.db
+        args:
+          P:
+          Q:
+          T:
+          M0X:
+          M0Y:
+          M1Y:
+          M2X:
+          M2Y:
+          M2Z:
+          GEOM:
+          ANGLE_UNITS:
+
+  - name: kohzuMono
+    description: |-
+      Kohzu or PSL double crystal monochromator (kohzuSeq.db), with the
+      kohzuCtl sequence program that converts between energy/Bragg angle
+      and the theta, Y and Z motors
+    parameters:
+      P:
+        type: str
+        description: |-
+          PV prefix, also the prefix of the three motor records
+
+      M_THETA:
+        type: str
+        description: |-
+          Motor record (after P) for the Bragg angle theta
+
+      M_Y:
+        type: str
+        description: |-
+          Motor record (after P) for the Y translation
+
+      M_Z:
+        type: str
+        description: |-
+          Motor record (after P) for the Z translation. For geometry 2 this
+          is usually the same motor as M_Y
+
+      GEOM:
+        type: enum
+        description: |-
+          Monochromator geometry: 1 = standard (Y and Z motors),
+          2 = modified geometry
+        default: "1"
+        values:
+          "1":
+          "2":
+
+      yOffLo:
+        type: float
+        description: |-
+          Low drive limit (DRVL) of the beam offset ao (mm).
+          The default suits geometry 1; geometry 2 typically needs a
+          wider range, e.g. 4
+        default: 17.4999
+
+      yOffHi:
+        type: float
+        description: |-
+          High drive limit (DRVH) of the beam offset ao (mm).
+          The default suits geometry 1; geometry 2 typically needs a
+          wider range, e.g. 36
+        default: 17.5001
+
+    databases:
+      - file: $(OPTICS)/db/kohzuSeq.db
+        args:
+          P:
+          M_THETA:
+          M_Y:
+          M_Z:
+          yOffLo:
+          yOffHi:
+
+    post_init:
+      - value: |
+          seq kohzuCtl, "P={{P}}, M_THETA={{M_THETA}}, M_Y={{M_Y}}, M_Z={{M_Z}}, GEOM={{GEOM}}"
