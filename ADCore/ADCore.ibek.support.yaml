@@ -79,7 +79,7 @@ shared:
         type: int
         description: |-
           Number of elements of the ND attributes xml waveform record
-        default: 1024
+        default: 256
 
   - &NDArrayBase-threads
       MAX_THREADS:
@@ -520,6 +520,16 @@ entity_models:
     parameters:
       <<: *NDArrayBase-model-parameters
 
+      PORT:
+        type: str
+        description: |-
+          Asyn Port name
+
+      NDARRAY_PORT:
+        type: str
+        description: |-
+          Input Array Port
+
       PRECOUNT:
         type: int
         description: |-
@@ -569,6 +579,12 @@ entity_models:
       This plugin provides a pre and post external trigger frame capture buffer
     parameters:
       <<: *NDArrayBase-model-parameters
+
+      PRECOUNT:
+        type: int
+        description: |-
+          Pre-trigger frame count
+        default: 100
 
       ENABLED:
         type: int
@@ -714,6 +730,11 @@ entity_models:
       This plugin is used to gather NDArrays from multiple upstream plugins and merge them into a single stream
     parameters:
       <<: *NDArrayBase-model-parameters
+
+      NDARRAY_PORT:
+        type: str
+        description: |-
+          Input Array Port
 
       MAX_PORTS:
         type: int
@@ -1111,6 +1132,11 @@ entity_models:
     parameters:
       <<: *NDArrayBase-model-parameters
 
+      NDARRAY_PORT:
+        type: str
+        description: |-
+          Input Array Port
+
       N:
         type: str
         description: |-
@@ -1196,6 +1222,12 @@ entity_models:
       This plugin calculates statistics of ROIs
     parameters:
       <<: [*NDArrayBase-model-parameters, *NDArrayBase-threads]
+
+      XMLSIZE:
+        type: int
+        description: |-
+          Number of elements of the ND attributes xml waveform record
+        default: 1024
 
       MAX_ROIS:
         type: int
