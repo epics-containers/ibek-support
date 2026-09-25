@@ -417,6 +417,12 @@ entity_models:
     parameters:
       <<: *NDArrayBase-model-parameters
 
+      XMLSIZE:
+        type: int
+        description: |-
+          Number of elements of the XML layout waveform record
+        default: 2048
+
     pre_init:
       - value: |
           # NDFileHDF5Configure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
@@ -514,6 +520,16 @@ entity_models:
     parameters:
       <<: *NDArrayBase-model-parameters
 
+      PORT:
+        type: str
+        description: |-
+          Asyn Port name
+
+      NDARRAY_PORT:
+        type: str
+        description: |-
+          Input Array Port
+
       PRECOUNT:
         type: int
         description: |-
@@ -564,6 +580,18 @@ entity_models:
     parameters:
       <<: *NDArrayBase-model-parameters
 
+      ENABLED:
+        type: int
+        description: |-
+          Plugin Enabled at startup?
+        default: 1
+
+      PRECOUNT:
+        type: int
+        description: |-
+          Pre-trigger frame count
+        default: 100
+
       POSTCOUNT:
         type: int
         description: |-
@@ -613,6 +641,12 @@ entity_models:
       TODO:ADD DESCRIPTION
     parameters:
       <<: *NDArrayBase-model-parameters
+
+      QUEUE:
+        type: int
+        description: |-
+          Input array queue size
+        default: 10000
 
       N_CACHE:
         type: int
@@ -696,6 +730,11 @@ entity_models:
       This plugin is used to gather NDArrays from multiple upstream plugins and merge them into a single stream
     parameters:
       <<: *NDArrayBase-model-parameters
+
+      NDARRAY_PORT:
+        type: str
+        description: |-
+          Input Array Port
 
       MAX_PORTS:
         type: int
@@ -1092,6 +1131,11 @@ entity_models:
       This plugin is used to gather NDArrays from multiple upstream plugins and merge them into a single stream
     parameters:
       <<: *NDArrayBase-model-parameters
+
+      NDARRAY_PORT:
+        type: str
+        description: |-
+          Input Array Port
 
       N:
         type: str
