@@ -1,4 +1,4 @@
 # Supported ibek range for generic IOCs that build from this module set.
 # Matches the range ioc-template pins in its own template/requirements.txt,
 # so this repo's CI tests the same floor/ceiling that generic IOC builds use.
-ibek>=4.8.0,<5
+ibek>=4.8.2,<5
