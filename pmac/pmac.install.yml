@@ -15,7 +15,7 @@ organization: http://github.com/diamondlightsource
 apt_developer:
   - libssh2-1-dev
 apt_runtime:
-  - libssh2-1
+  - libssh2-1t64
 
 tasks:
   - path: pmac-tasks.yml
@@ -41,5 +41,5 @@ patch_blocks:
       BOOST_INCLUDE   = -I/usr/include
 
       SSH             = /usr
-      SSH_LIB         = /usr/lib/x86_64-linux-gnu
+      SSH_LIB         = /usr/lib/{{ multiarch_triplet }}
       SSH_INCLUDE     = -I/usr/include
