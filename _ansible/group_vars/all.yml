@@ -24,9 +24,10 @@ pvi_defs_folder: /epics/pvi-defs
 autosave_folder: /epics/autosave
 protocol_folder: /epics/support/configure/protocol
 
-# files relative to support module root
-config_linux_host: configure/CONFIG_SITE.linux-x86_64.Common
-config_linux_target: configure/CONFIG_SITE.Common.linux-x86_64
+# files relative to support module root, named for the native linux arch
+# (linux-x86_64 or linux-aarch64) that the image is built on
+config_linux_host: "configure/CONFIG_SITE.{{ host_arch }}.Common"
+config_linux_target: "configure/CONFIG_SITE.Common.{{ host_arch }}"
 
 # quick access to the target architecture
 target_arch: "{{ lookup('ansible.builtin.env', 'EPICS_TARGET_ARCH') }}"
