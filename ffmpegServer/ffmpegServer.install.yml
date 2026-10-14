@@ -16,9 +16,9 @@ apt_developer:
   - libavformat-dev
 
 apt_runtime:
-  - libavcodec60
-  - libswscale7
-  - libavformat60
+  - libavcodec62
+  - libswscale9
+  - libavformat62
 
 comment_out:
   # don't build the vendor libraries

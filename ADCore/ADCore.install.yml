@@ -48,10 +48,10 @@ apt_runtime:
   - libtiff6
   - libsz2
   - libblosc1
-  - libxml2
-  - libhdf5-103-1
-  - libnetcdf19
-  - libgraphicsmagick++-q16-12
+  - libxml2-16
+  - libhdf5-310
+  - libnetcdf22
+  - libgraphicsmagick++-q16-12t64
 
 patch_blocks:
   - path: "{{ config_linux_host }}"
