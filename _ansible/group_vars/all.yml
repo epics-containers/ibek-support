@@ -37,7 +37,7 @@ host_arch: "{{ lookup('ansible.builtin.env', 'EPICS_HOST_ARCH') }}"
 # the Debian multiarch triplet for host_arch, which names the arch specific
 # lib folders e.g. /usr/lib/aarch64-linux-gnu
 multiarch_triplet: "{{ {'linux-x86_64': 'x86_64-linux-gnu', 'linux-aarch64': 'aarch64-linux-gnu'}[host_arch] }}"
-is_rtems:"{{ 'RTEMS' in target_arch }}"
+is_rtems: "{{ 'RTEMS' in target_arch }}"
 is_linux: "{{ 'linux' in target_arch }}"
 
 # force rebuild
