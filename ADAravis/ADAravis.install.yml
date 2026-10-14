@@ -23,8 +23,8 @@ apt_developer:
 
 apt_runtime:
   - libglib2.0-bin
-  - libusb-1.0
-  - libxml2
+  - libusb-1.0-0
+  - libxml2-16
   - aravis-tools-cli
 
   # incorrecly placed macro does not get overriden by RELEASE.local. Remove it.
