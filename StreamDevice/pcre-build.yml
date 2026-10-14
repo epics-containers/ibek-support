@@ -1,7 +1,13 @@
+# PCRE (v1) is not packaged for RTEMS, nor for Ubuntu resolute (26.04) and
+# later, where libpcre3 was removed. StreamDevice 2.8.26 only supports PCRE v1
+# (not PCRE2), so build a static PCRE library from source into
+# /epics/support/PCRE for all targets.
+
 - name: Get the PCRE source
   ansible.builtin.get_url:
     url: https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.gz
     dest: /epics/support/StreamDevice/pcre-8.45.tar.gz
+    checksum: sha256:4e6ce03e0336e8b4a3d6c2b70b1c5e18590a5673a98186da90d4f33c23defc09
 
 - name: Extract the PCRE source
   ansible.builtin.unarchive:
@@ -9,6 +15,7 @@
     dest: /epics/support/StreamDevice
 
 - name: Build PCRE vendor library for RTEMS
+  when: is_rtems | bool
   ansible.builtin.shell:
     cmd: |
       set -e
@@ -28,16 +35,41 @@
     chdir: /epics/support/StreamDevice/pcre-8.45
     creates: /epics/support/PCRE/lib/libpcre.a
 
+- name: Build PCRE static library for Linux
+  when: is_linux | bool
+  ansible.builtin.shell:
+    cmd: |
+      set -e
+
+      # static and position independent so that it is linked into
+      # libstream.so and nothing extra is needed at runtime.
+      # gnu17 because PCRE 8.45 predates the GCC 15 default of C23.
+      ./configure --prefix=${SUPPORT}/PCRE \
+          --disable-shared --enable-static --with-pic --disable-cpp \
+          CFLAGS="-O2 -std=gnu17"
+
+      make -j $(nproc) libpcre.la
+      make install-libLTLIBRARIES install-includeHEADERS \
+          install-nodist_includeHEADERS
+      make clean
+    executable: /bin/bash
+    chdir: /epics/support/StreamDevice/pcre-8.45
+    creates: /epics/support/PCRE/lib/libpcre.a
+
+- name: EPICS arch whose StreamDevice lib folder gets libpcre.a
+  ansible.builtin.set_fact:
+    pcre_epics_arch: "{{ 'RTEMS-beatnik' if is_rtems | bool else host_arch }}"
+
 - name: Create lib folder for /epics/support/StreamDevice
   ansible.builtin.file:
-    dest: /epics/support/StreamDevice/lib/RTEMS-beatnik/
+    dest: "/epics/support/StreamDevice/lib/{{ pcre_epics_arch }}/"
     state: directory
     mode: "0755"
 
 - name: Make the pcre library available to IOC link stage
   ansible.builtin.file:
     src: /epics/support/PCRE/lib/libpcre.a
-    dest: /epics/support/StreamDevice/lib/RTEMS-beatnik/libpcre.a
+    dest: "/epics/support/StreamDevice/lib/{{ pcre_epics_arch }}/libpcre.a"
     state: link
     mode: "0644"
 

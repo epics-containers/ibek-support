@@ -12,3 +12,12 @@ libs:
 
 runtime_files:
   - /epics/support/pvlogging/src/access.acf
+
+patch_lines:
+  # GCC 14+ makes incompatible pointer types an error. pvlogging assigns
+  # asTrapWriteMessage.serverSpecific (a struct dbChannel * in EPICS 7) to a
+  # dbAddr *, which GCC 13 (noble) only warned about. Keep that behaviour
+  # rather than patching the source.
+  - path: src/Makefile
+    regexp: incompatible-pointer-types
+    line: USR_CFLAGS += -Wno-error=incompatible-pointer-types

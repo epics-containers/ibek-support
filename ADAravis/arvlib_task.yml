@@ -4,7 +4,7 @@
       setopt -e
       git clone -b "0.8.35" --depth 1 https://github.com/AravisProject/aravis
       cd aravis
-      meson build
+      meson setup build
       cd build
       ninja
       ninja install

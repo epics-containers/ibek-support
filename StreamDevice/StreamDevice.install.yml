@@ -10,11 +10,8 @@ libs:
 
 organization: https://github.com/paulscherrerinstitute
 
-apt_developer:
-  - libpcre3-dev
-
-apt_runtime:
-  - libpcre3
+# PCRE (v1) is built from source by pcre-build.yml: libpcre3 no longer exists
+# in Ubuntu resolute (26.04) and StreamDevice does not support PCRE2.
 
 remove_macros:
   - CALC
@@ -22,16 +19,10 @@ remove_macros:
 patch_lines:
   - path: "{{ config_linux_host }}"
     regexp: PCRE_LIB
-    line: PCRE_LIB=/usr/lib/x86_64-linux-gnu
-    when: "{{ is_linux }}"
-  - path: "{{ config_linux_host }}"
-    regexp: PCRE_LIB
     line: PCRE_LIB=/epics/support/PCRE/lib
-    when: "{{ is_rtems }}"
   - path: "{{ config_linux_host }}"
     regexp: PCRE_INCLUDE
     line: PCRE_INCLUDE=/epics/support/PCRE/include
-    when: "{{ is_rtems }}"
 
 comment_out:
   - path: Makefile
@@ -41,4 +32,3 @@ comment_out:
 
 tasks:
   - path: pcre-build.yml
-    when: "{{ is_rtems }}"
