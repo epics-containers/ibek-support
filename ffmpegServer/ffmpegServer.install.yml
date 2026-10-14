@@ -32,3 +32,9 @@ patch_lines:
   - path: ffmpegServerApp/src/Makefile
     regexp: LIB_LIBS \+= avdevice
     line: ffmpegServer_SYS_LIBS += avformat avcodec swresample swscale avutil
+  # FFmpeg 7+ removed AV_INPUT_BUFFER_MIN_SIZE, which ffmpegServer.cpp uses
+  # as the smallest image to encode. Supply its old value (16384) rather than
+  # patching the source.
+  - path: ffmpegServerApp/src/Makefile
+    regexp: AV_INPUT_BUFFER_MIN_SIZE
+    line: USR_CPPFLAGS += -DAV_INPUT_BUFFER_MIN_SIZE=16384
