@@ -24,6 +24,12 @@ comment_out:
   - path: pmacApp/Makefile
     regexp: Tests
 
+# upstream CONFIG_SITE hard codes BUILD_ARCHS = linux-x86_64
+patch_lines:
+  - path: configure/CONFIG_SITE
+    regexp: ^BUILD_ARCHS\s*=
+    line: BUILD_ARCHS = {{ host_arch }}
+
 # parallel builds not supported
 make_options: ""
 
