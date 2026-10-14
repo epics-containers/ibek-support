@@ -29,14 +29,6 @@ libs:
   - pvxs
   - pvxsIoc
 
-download_extras:
-  - url: "https://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-103-1t64_1.10.10+repack-3.1ubuntu4_amd64.deb"
-    dest: /tmp/libhdf5-103.deb
-  - url: "https://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-cpp-103-1t64_1.10.10+repack-3.1ubuntu4_amd64.deb"
-    dest: /tmp/libhdf5-cpp-103.deb
-  - url: "https://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-dev_1.10.10+repack-3.1ubuntu4_amd64.deb"
-    dest: /tmp/libhdf5-dev-1.deb
-
 apt_developer:
   - libaec-dev
   - libblosc-dev
@@ -50,9 +42,7 @@ apt_developer:
   - libz-dev
   - libnetcdf-dev
   - libgraphicsmagick++1-dev
-  - /tmp/libhdf5-103.deb
-  - /tmp/libhdf5-cpp-103.deb
-  - /tmp/libhdf5-dev-1.deb
+  - libhdf5-dev
 
 apt_runtime:
   - libtiff6
@@ -74,7 +64,7 @@ patch_blocks:
       GRAPHICSMAGICK_INCLUDE = /usr/include/GraphicsMagick/
       WITH_HDF5           = YES
       HDF5_EXTERNAL       = YES
-      HDF5_LIB            = /usr/lib/x86_64-linux-gnu/hdf5/serial/
+      HDF5_LIB            = /usr/lib/$(shell gcc -dumpmachine)/hdf5/serial/
       HDF5_INCLUDE        = /usr/include/hdf5/serial/
       WITH_SZIP           = YES
       SZIP_EXTERNAL       = YES
