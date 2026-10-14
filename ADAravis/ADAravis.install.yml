@@ -39,14 +39,16 @@ patch_blocks:
       AREA_DETECTOR=/epics/support
       CROSS_COMPILER_TARGET_ARCHS =
       GLIBPREFIX=/usr
+      GLIB_MULTIARCH := $(shell gcc -dumpmachine)
       USR_INCLUDES += -I$(GLIBPREFIX)/include/glib-2.0
-      USR_INCLUDES += -I$(GLIBPREFIX)/lib/x86_64-linux-gnu/glib-2.0/include/
-      glib-2.0_DIR = $(GLIBPREFIX)/lib/x86_64-linux-gnu
+      USR_INCLUDES += -I$(GLIBPREFIX)/lib/$(GLIB_MULTIARCH)/glib-2.0/include/
+      glib-2.0_DIR = $(GLIBPREFIX)/lib/$(GLIB_MULTIARCH)
       ARAVIS_INCLUDE  = /usr/local/include/aravis-0.8/
 
 tasks:
   - path: arvlib_task.yml
 
-# copy the aravis library built above to the runtime stage
+# copy the aravis library built above to the runtime stage (meson installs
+# it under the Debian multiarch libdir, e.g. /usr/local/lib/aarch64-linux-gnu)
 runtime_files:
-  - /usr/local/lib/x86_64-linux-gnu
+  - "/usr/local/lib/{{ multiarch_triplet }}"
