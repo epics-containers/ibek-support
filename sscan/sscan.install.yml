@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: sscan
-version: R2-11-6
+version: R2-12
 dbds:
   - sscan.dbd
 libs:

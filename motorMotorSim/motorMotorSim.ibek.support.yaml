@@ -176,7 +176,7 @@ entity_models:
 
     pvi:
       yaml_path: asynMotorAxis.pvi.device.yaml
-      pv_prefix: "{{ controller.P }}{{ M }}"
+      pv_prefix: $(P)$(M)
       ui_macros:
         P: "{{controller.P}}"
         M:

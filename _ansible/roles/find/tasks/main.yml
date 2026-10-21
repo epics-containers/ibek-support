@@ -39,3 +39,23 @@
     - name: Read in the support module vars for {{ module }}
       ansible.builtin.include_vars:
         file: "{{ ansible_root }}/vars/.tmp.install.yml"
+
+    # Without this, an install.yml that names no module leaves module empty,
+    # so local_path becomes {{ support_folder }} itself. The clone is then
+    # skipped - that folder exists - and the release tasks append
+    # '-include $(TOP)/configure/RELEASE.local' to the GLOBAL
+    # configure/RELEASE. Every module built afterwards symlinks its own
+    # RELEASE.local to that file, so make includes it recursively until it
+    # runs out of file descriptors: 'configure/RELEASE.local:4: *** Too many
+    # open files'. In a build of many modules one bad install.yml therefore
+    # breaks every module behind it, and the error names neither the culprit
+    # nor the real fault.
+    - name: Check that the install.yml for {{ module }} names a module and a version
+      ansible.builtin.assert:
+        that:
+          - module | default("", true) | string | length > 0
+          - version | default("", true) | string | length > 0
+        fail_msg: >-
+          {{ ibek_support_folder }} must set both 'module' and 'version' in its
+          install.yml
+        quiet: true

@@ -62,7 +62,7 @@ entity_models:
 
     pvi:
       yaml_path: drvQuadEM.pvi.device.yaml
-      pv_prefix: "{{ P }}"
+      pv_prefix: $(P)
       ui_macros:
         P:
         R:

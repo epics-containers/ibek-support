@@ -30,6 +30,9 @@ config_linux_target: configure/CONFIG_SITE.Common.linux-x86_64
 
 # quick access to the target architecture
 target_arch: "{{ lookup('ansible.builtin.env', 'EPICS_TARGET_ARCH') }}"
+# the arch this is building ON, which names the arch specific RELEASE and
+# CONFIG_SITE files that configure/CONFIG reads after the plain ones
+host_arch: "{{ lookup('ansible.builtin.env', 'EPICS_HOST_ARCH') }}"
 is_rtems: "{{ 'RTEMS' in target_arch }}"
 is_linux: "{{ 'linux' in target_arch }}"
 

@@ -4,17 +4,28 @@
   tags: [system]
   when: not skip_apt
   block:
-    - name: Check for apt cache sentinel
-      ansible.builtin.stat:
-        path: /tmp/.apt_cache_updated
-      register: apt_cache_updated_sentinel
+    # Refresh the apt index at most once per container build. The sentinel
+    # alone is not enough: a generic IOC built FROM another generic IOC
+    # (e.g. ioc-pmac from ioc-asyn) inherits the base image's sentinel and
+    # its stale index, and Ubuntu removes superseded package versions,
+    # giving 404s. So also refresh if the sentinel is older than
+    # apt_cache_valid_minutes or the package lists have been cleaned.
+    - name: Check whether the apt package index is fresh
+      ansible.builtin.shell: >
+        find /tmp/.apt_cache_updated -mmin -{{ apt_cache_valid_minutes }} |
+        grep -q . &&
+        ls /var/lib/apt/lists | grep -q Packages
+      register: apt_cache_fresh
+      changed_when: false
+      failed_when: false
+      when: is_linux
 
     - name: Update apt cache once per container build
       ansible.builtin.apt:
         update_cache: true
       when:
         - is_linux
-        - not apt_cache_updated_sentinel.stat.exists
+        - apt_cache_fresh.rc != 0
 
     - name: Create apt cache sentinel
       ansible.builtin.file:
@@ -23,7 +34,7 @@
         mode: "0644"
       when:
         - is_linux
-        - not apt_cache_updated_sentinel.stat.exists
+        - apt_cache_fresh.rc != 0
       changed_when: false
 
     - name: Download additional files for {{ module }}

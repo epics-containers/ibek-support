@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: digitelMPC
-version: 6-21
+version: 6-23ec1
 dbds:
   - digitelMpc.dbd
 libs:

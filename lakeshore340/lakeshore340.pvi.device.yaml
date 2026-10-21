@@ -1,0 +1,215 @@
+label: lakeshore340
+children:
+
+- type: Group
+  name: Status
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: Disable
+    write_pv: $(P):DISABLE
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P):DISABLE
+    read_widget:
+      type: LED
+
+  - type: SignalR
+    name: ID
+    read_pv: $(P):ID
+    read_widget:
+      type: TextRead
+      format: string
+
+  - type: SignalR
+    name: TuneStatus
+    read_pv: $(P):TUNEST
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: Temperature
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: Krdg0
+    read_pv: $(P):KRDG0
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: Krdg1
+    read_pv: $(P):KRDG1
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: Krdg2
+    read_pv: $(P):KRDG2
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: Krdg3
+    read_pv: $(P):KRDG3
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: Srdg0
+    read_pv: $(P):SRDG0
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: Srdg1
+    read_pv: $(P):SRDG1
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: Srdg2
+    read_pv: $(P):SRDG2
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: Srdg3
+    read_pv: $(P):SRDG3
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: Setpoint
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: Setp
+    write_pv: $(P):SETP_S
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):SETP
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Ramp
+    write_pv: $(P):RAMP_S
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):RAMP
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: RampStatus
+    write_pv: $(P):RAMPST_S
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P):RAMPST
+    read_widget:
+      type: LED
+
+- type: Group
+  name: Heater
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: Htr
+    read_pv: $(P):HTR
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Range
+    write_pv: $(P):RANGE_S
+    write_widget:
+      type: ComboBox
+    read_pv: $(P):RANGE
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Mout
+    write_pv: $(P):MOUT_S
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):MOUT
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: Aout1
+    read_pv: $(P):AOUT1
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: Aout2
+    read_pv: $(P):AOUT2
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: PID
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalRW
+    name: Loop
+    write_pv: $(P):LOOP
+    write_widget:
+      type: ComboBox
+    read_pv: $(P):LOOP
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: Cmode
+    write_pv: $(P):CMODE_S
+    write_widget:
+      type: ComboBox
+    read_pv: $(P):CMODE
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: P
+    write_pv: $(P):P_S
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):P
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: I
+    write_pv: $(P):I_S
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):I
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: D
+    write_pv: $(P):D_S
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):D
+    read_widget:
+      type: TextRead
