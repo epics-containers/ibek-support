@@ -1,134 +1,223 @@
 label: drvQuadEM
-parent: NDArrayBase
 children:
   - type: Group
-    name: AH401B
+    name: QuadEM
     layout:
       type: Grid
       labelled: true
+      stacked: false
     children:
-      - type: SignalRW
-        name: IntegrationTime
-        write_pv: $(P)$(R)IntegrationTime
+      - type: SignalW
+        name: Reset
+        write_pv: $(P)$(R)Reset
+        write_widget:
+          type: ToggleButton
+
+      - type: SignalW
+        name: ReadStatus
+        write_pv: $(P)$(R)ReadStatus
+        write_widget:
+          type: ToggleButton
+
+      - type: SignalW
+        name: CurrentOffset1
+        write_pv: $(P)$(R)CurrentOffset1
         write_widget:
           type: TextWrite
-        read_pv: $(P)$(R)IntegrationTime_RBV
-        read_widget:
-          type: TextRead
 
-      - type: SignalRW
-        name: ReadFormat
-        write_pv: $(P)$(R)ReadFormat
-        write_widget:
-          type: ToggleButton
-        read_pv: $(P)$(R)ReadFormat_RBV
-        read_widget:
-          type: LED
-
-      - type: SignalRW
-        name: PingPong
-        write_pv: $(P)$(R)PingPong
-        write_widget:
-          type: ComboBox
-        read_pv: $(P)$(R)PingPong_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: TriggerMode
-        write_pv: $(P)$(R)TriggerMode
-        write_widget:
-          type: ComboBox
-        read_pv: $(P)$(R)TriggerMode_RBV
-        read_widget:
-          type: TextRead
-
-  - type: Group
-    name: AH501
-    layout:
-      type: Grid
-      labelled: true
-    children:
-      - type: SignalRW
-        name: NumChannels
-        write_pv: $(P)$(R)NumChannels
-        write_widget:
-          type: ComboBox
-        read_pv: $(P)$(R)NumChannels_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: Resolution
-        write_pv: $(P)$(R)Resolution
-        write_widget:
-          type: ComboBox
-        read_pv: $(P)$(R)Resolution_RBV
-        read_widget:
-          type: TextRead
-
-  - type: Group
-    name: AH501C
-    layout:
-      type: Grid
-      labelled: true
-    children:
-      - type: SignalRW
-        name: BiasState
-        write_pv: $(P)$(R)BiasState
-        write_widget:
-          type: ToggleButton
-        read_pv: $(P)$(R)BiasState_RBV
-        read_widget:
-          type: LED
-
-      - type: SignalRW
-        name: BiasVoltage
-        write_pv: $(P)$(R)BiasVoltage
+      - type: SignalW
+        name: CurrentOffset2
+        write_pv: $(P)$(R)CurrentOffset2
         write_widget:
           type: TextWrite
-        read_pv: $(P)$(R)BiasVoltage_RBV
-        read_widget:
-          type: TextRead
 
-  - type: Group
-    name: TetrAMM
-    layout:
-      type: Grid
-      labelled: true
-    children:
-      - type: SignalRW
-        name: TriggerPolarity
-        write_pv: $(P)$(R)TriggerPolarity
+      - type: SignalW
+        name: CurrentOffset3
+        write_pv: $(P)$(R)CurrentOffset3
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: CurrentOffset4
+        write_pv: $(P)$(R)CurrentOffset4
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: CurrentScale1
+        write_pv: $(P)$(R)CurrentScale1
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: CurrentScale2
+        write_pv: $(P)$(R)CurrentScale2
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: CurrentScale3
+        write_pv: $(P)$(R)CurrentScale3
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: CurrentScale4
+        write_pv: $(P)$(R)CurrentScale4
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightXsum1
+        write_pv: $(P)$(R)WeightXsum1
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightXsum2
+        write_pv: $(P)$(R)WeightXsum2
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightXsum3
+        write_pv: $(P)$(R)WeightXsum3
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightXsum4
+        write_pv: $(P)$(R)WeightXsum4
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightYsum1
+        write_pv: $(P)$(R)WeightYsum1
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightYsum2
+        write_pv: $(P)$(R)WeightYsum2
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightYsum3
+        write_pv: $(P)$(R)WeightYsum3
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightYsum4
+        write_pv: $(P)$(R)WeightYsum4
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightXdelta1
+        write_pv: $(P)$(R)WeightXdelta1
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightXdelta2
+        write_pv: $(P)$(R)WeightXdelta2
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightXdelta3
+        write_pv: $(P)$(R)WeightXdelta3
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightXdelta4
+        write_pv: $(P)$(R)WeightXdelta4
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightYdelta1
+        write_pv: $(P)$(R)WeightYdelta1
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightYdelta2
+        write_pv: $(P)$(R)WeightYdelta2
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightYdelta3
+        write_pv: $(P)$(R)WeightYdelta3
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: WeightYdelta4
+        write_pv: $(P)$(R)WeightYdelta4
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: PositionOffsetX
+        write_pv: $(P)$(R)PositionOffsetX
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: PositionOffsetY
+        write_pv: $(P)$(R)PositionOffsetY
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: PositionScaleX
+        write_pv: $(P)$(R)PositionScaleX
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: PositionScaleY
+        write_pv: $(P)$(R)PositionScaleY
+        write_widget:
+          type: TextWrite
+
+      - type: SignalW
+        name: ReadData
+        write_pv: $(P)$(R)ReadData
         write_widget:
           type: ToggleButton
-        read_pv: $(P)$(R)TriggerPolarity_RBV
-        read_widget:
-          type: LED
 
-      - type: SignalRW
-        name: BiasInterlock
-        write_pv: $(P)$(R)BiasInterlock
+      - type: SignalW
+        name: NDAttributesFile
+        write_pv: $(P)$(R)NDAttributesFile
         write_widget:
-          type: ToggleButton
-        read_pv: $(P)$(R)BiasInterlock_RBV
-        read_widget:
-          type: LED
+          type: TextWrite
+          format: string
 
-      - type: SignalRW
-        name: Range
-        write_pv: $(P)$(R)Range
-        write_widget:
-          type: ComboBox
-        read_pv: $(P)$(R)Range_RBV
+      - type: SignalR
+        name: Model
+        read_pv: $(P)$(R)Model
         read_widget:
           type: TextRead
 
       - type: SignalR
-        name: InterlockStatus
-        read_pv: $(P)$(R)InterlockStatus_RBV
+        name: Firmware
+        read_pv: $(P)$(R)Firmware
         read_widget:
-          type: LED
+          type: TextRead
+          format: string
+
+      - type: SignalR
+        name: SampleTime
+        read_pv: $(P)$(R)SampleTime_RBV
+        read_widget:
+          type: TextRead
 
       - type: SignalR
         name: HVSReadback
@@ -154,23 +243,27 @@ children:
         read_widget:
           type: TextRead
 
-  - type: Group
-    name: QuadEM
-    label: quadEM
-    layout:
-      type: Grid
-      labelled: true
-    children:
       - type: SignalR
-        name: Firmware
-        read_pv: $(P)$(R)Firmware
+        name: NumAcquired
+        read_pv: $(P)$(R)NumAcquired
         read_widget:
           type: TextRead
-          format: string
 
       - type: SignalR
-        name: SampleTime
-        read_pv: $(P)$(R)SampleTime_RBV
+        name: NumAverage
+        read_pv: $(P)$(R)NumAverage_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: NumAveraged
+        read_pv: $(P)$(R)NumAveraged_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: RingOverflows
+        read_pv: $(P)$(R)RingOverflows
         read_widget:
           type: TextRead
 
@@ -198,102 +291,6 @@ children:
         read_widget:
           type: TextRead
 
-      - type: SignalRW
-        name: AcquireMode
-        write_pv: $(P)$(R)AcquireMode
-        write_widget:
-          type: ComboBox
-        read_pv: $(P)$(R)AcquireMode_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalW
-        name: CurrentOffset1
-        write_pv: $(P)$(R)CurrentOffset1
-        write_widget:
-          type: TextWrite
-
-      - type: SignalW
-        name: CurrentOffset2
-        write_pv: $(P)$(R)CurrentOffset2
-        write_widget:
-          type: TextWrite
-
-      - type: SignalW
-        name: CurrentOffset3
-        write_pv: $(P)$(R)CurrentOffset3
-        write_widget:
-          type: TextWrite
-
-      - type: SignalW
-        name: CurrentOffset4
-        write_pv: $(P)$(R)CurrentOffset4
-        write_widget:
-          type: TextWrite
-
-      - type: SignalRW
-        name: Geometry
-        write_pv: $(P)$(R)Geometry
-        write_widget:
-          type: ComboBox
-        read_pv: $(P)$(R)Geometry_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: ValuesPerRead
-        write_pv: $(P)$(R)ValuesPerRead
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)ValuesPerRead_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalW
-        name: CurrentScale1
-        write_pv: $(P)$(R)CurrentScale1
-        write_widget:
-          type: TextWrite
-
-      - type: SignalW
-        name: CurrentScale2
-        write_pv: $(P)$(R)CurrentScale2
-        write_widget:
-          type: TextWrite
-
-      - type: SignalW
-        name: CurrentScale3
-        write_pv: $(P)$(R)CurrentScale3
-        write_widget:
-          type: TextWrite
-
-      - type: SignalW
-        name: CurrentScale4
-        write_pv: $(P)$(R)CurrentScale4
-        write_widget:
-          type: TextWrite
-
-      - type: SignalR
-        name: FastAverageScan
-        read_pv: $(P)$(R)FastAverageScan
-        read_widget:
-          type: TextRead
-
-      - type: SignalRW
-        name: AveragingTime
-        write_pv: $(P)$(R)AveragingTime
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)AveragingTime_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: NumAcquired
-        read_pv: $(P)$(R)NumAcquired
-        read_widget:
-          type: TextRead
-
       - type: SignalR
         name: SumXAve
         read_pv: $(P)$(R)SumXAve
@@ -312,33 +309,6 @@ children:
         read_widget:
           type: TextRead
 
-      - type: SignalRW
-        name: NumAcquire
-        write_pv: $(P)$(R)NumAcquire
-        write_widget:
-          type: TextWrite
-        read_pv: $(P)$(R)NumAcquire_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalW
-        name: ReadData
-        write_pv: $(P)$(R)ReadData
-        write_widget:
-          type: ToggleButton
-
-      - type: SignalR
-        name: NumAverage
-        read_pv: $(P)$(R)NumAverage_RBV
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: NumAveraged
-        read_pv: $(P)$(R)NumAveraged_RBV
-        read_widget:
-          type: TextRead
-
       - type: SignalR
         name: DiffXAve
         read_pv: $(P)$(R)DiffXAve
@@ -348,12 +318,6 @@ children:
       - type: SignalR
         name: DiffYAve
         read_pv: $(P)$(R)DiffYAve
-        read_widget:
-          type: TextRead
-
-      - type: SignalR
-        name: Model
-        read_pv: $(P)$(R)Model
         read_widget:
           type: TextRead
 
@@ -369,44 +333,372 @@ children:
         read_widget:
           type: TextRead
 
-      - type: SignalW
-        name: PositionOffsetX
-        write_pv: $(P)$(R)PositionOffsetX
-        write_widget:
-          type: TextWrite
-
-      - type: SignalW
-        name: PositionOffsetY
-        write_pv: $(P)$(R)PositionOffsetY
-        write_widget:
-          type: TextWrite
-
-      - type: SignalW
-        name: PositionScaleX
-        write_pv: $(P)$(R)PositionScaleX
-        write_widget:
-          type: TextWrite
-
-      - type: SignalW
-        name: PositionScaleY
-        write_pv: $(P)$(R)PositionScaleY
-        write_widget:
-          type: TextWrite
-
-      - type: SignalW
-        name: Reset
-        write_pv: $(P)$(R)Reset
-        write_widget:
-          type: ToggleButton
-
       - type: SignalR
-        name: RingOverflows
-        read_pv: $(P)$(R)RingOverflows
+        name: FastAverageScan
+        read_pv: $(P)$(R)FastAverageScan
         read_widget:
           type: TextRead
 
-      - type: SignalW
-        name: ReadStatus
-        write_pv: $(P)$(R)ReadStatus
+      - type: SignalRW
+        name: AcquireMode
+        write_pv: $(P)$(R)AcquireMode
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)AcquireMode_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range
+        write_pv: $(P)$(R)Range
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range1
+        write_pv: $(P)$(R)Range1
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range2
+        write_pv: $(P)$(R)Range2
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range3
+        write_pv: $(P)$(R)Range3
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range4
+        write_pv: $(P)$(R)Range4
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range
+        write_pv: $(P)$(R)Range
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range1_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range1
+        write_pv: $(P)$(R)Range1
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range1_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range2
+        write_pv: $(P)$(R)Range2
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range1_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range3
+        write_pv: $(P)$(R)Range3
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range1_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range4
+        write_pv: $(P)$(R)Range4
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range1_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range
+        write_pv: $(P)$(R)Range
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range2_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range1
+        write_pv: $(P)$(R)Range1
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range2_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range2
+        write_pv: $(P)$(R)Range2
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range2_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range3
+        write_pv: $(P)$(R)Range3
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range2_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range4
+        write_pv: $(P)$(R)Range4
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range2_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range
+        write_pv: $(P)$(R)Range
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range3_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range1
+        write_pv: $(P)$(R)Range1
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range3_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range2
+        write_pv: $(P)$(R)Range2
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range3_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range3
+        write_pv: $(P)$(R)Range3
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range3_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range4
+        write_pv: $(P)$(R)Range4
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range3_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range
+        write_pv: $(P)$(R)Range
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range4_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range1
+        write_pv: $(P)$(R)Range1
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range4_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range2
+        write_pv: $(P)$(R)Range2
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range4_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range3
+        write_pv: $(P)$(R)Range3
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range4_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Range4
+        write_pv: $(P)$(R)Range4
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Range4_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: PingPong
+        write_pv: $(P)$(R)PingPong
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)PingPong_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: IntegrationTime
+        write_pv: $(P)$(R)IntegrationTime
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)IntegrationTime_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: TriggerMode
+        write_pv: $(P)$(R)TriggerMode
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)TriggerMode_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: TriggerPolarity
+        write_pv: $(P)$(R)TriggerPolarity
         write_widget:
           type: ToggleButton
+        read_pv: $(P)$(R)TriggerPolarity_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: NumChannels
+        write_pv: $(P)$(R)NumChannels
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)NumChannels_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Resolution
+        write_pv: $(P)$(R)Resolution
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Resolution_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: BiasState
+        write_pv: $(P)$(R)BiasState
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)BiasState_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: BiasVoltage
+        write_pv: $(P)$(R)BiasVoltage
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)BiasVoltage_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: BiasInterlock
+        write_pv: $(P)$(R)BiasInterlock
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)BiasInterlock_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: ValuesPerRead
+        write_pv: $(P)$(R)ValuesPerRead
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)ValuesPerRead_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: NumAcquire
+        write_pv: $(P)$(R)NumAcquire
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)NumAcquire_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: ReadFormat
+        write_pv: $(P)$(R)ReadFormat
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)ReadFormat_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: AveragingTime
+        write_pv: $(P)$(R)AveragingTime
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)AveragingTime_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Geometry
+        write_pv: $(P)$(R)Geometry
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Geometry_RBV
+        read_widget:
+          type: TextRead
+
+  - type: Include
+    file_name: NDArrayBase
+    in_subscreen: false

@@ -61,8 +61,8 @@ entity_models:
           PORT:
 
     pvi:
-      yaml_path: drvQuadEM.pvi.device.yaml
-      pv_prefix: $(P)
+      yaml_path: drvTetrAMM.pvi.device.yaml
+      pv_prefix: $(P)$(R)
       ui_macros:
         P:
         R:
