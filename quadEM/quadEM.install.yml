@@ -1,22 +1,24 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: quadEM
-version: R9-6
+version: R9-7
 # organization: https://github.com/epics-modules
 
+# currently building TetrAMM driver only
 dbds:
   - drvTetrAMM.dbd
 
 libs:
+  - caenQuadEM
   - quadEM
 
-remove_macros:
-  - IPUNIDIG
-
-# don't make test app (VxWorks only)
+# don't make test app (it links against ffmpegServer's static libs)
 comment_out:
-  - path: quadEMApp/src/Makefile
-    regexp: quadEMTest
+  - path: Makefile
+    regexp: quadEMTestApp
+  # keep only quadEMSrc and caenSrc (TetrAMM); comments extra DIRS and their _DEPEND_DIRS lines
+  - path: quadEMApp/Makefile
+    regexp: nslsSrc|FX4Src|sensicSrc|sydorSrc
 
 patch_lines:
   - path: configure/RELEASE
