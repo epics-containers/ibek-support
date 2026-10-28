@@ -11,7 +11,7 @@
 
       update-alternatives --install /usr/bin/cmake3 cmake /usr/bin/cmake 100
 
-      ./cmk.sh -c -h -d /dls_sw/apps/hdf5/
+      ./cmk.sh -c -h -d /dls_sw/apps/hdf5/ -l/epics/slsdetectorpackage
 
       # Copy detid_mythen3.txt from downloaded slsDetectorPackage build to /epics/slsdetectorpackage/bin/
       # because mythen3DetectorServer_virtual expects it there but something in slsDetectorPackage CMake
