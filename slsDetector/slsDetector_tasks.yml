@@ -21,7 +21,7 @@
       cat > /epics/scripts/start_sls_receiver.sh <<'EOF'
       #!/bin/bash
       set -e
-      exec /epics/slsdetectorpackage/bin/slsMultiReceiver 1954 "$1"
+      exec /epics/slsdetectorpackage/bin/slsMultiReceiver -p 1954 -n "$1"
       EOF
 
       chmod +x /epics/scripts/start_sls_receiver.sh
