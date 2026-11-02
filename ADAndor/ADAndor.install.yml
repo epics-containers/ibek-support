@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: ADAndor
+version: e3b7fc8 # Latest commit but no tag yet (must include PR#18)
+organization: http://github.com/areaDetector
+
+dbds:
+  - andorCCDSupport.dbd
+
+libs:
+  - andor
+  - shamrockcif
+  - andorCCD
+
+apt_developer:
+  - libxml2-dev
+  - libusb-dev
+
+apt_runtime:
+  - libxml2-16
+  - libusb-dev
+
+patch_blocks:
+  - path: "{{ config_linux_host }}"
+    block: |
+      WITH_SHAMROCK   =   YES
+      XML2_INCLUDE    =   /usr/include/libxml2
