@@ -2,7 +2,7 @@ ARG REGISTRY=ghcr.io/epics-containers
 # Default base for every group. A group's 'deps' in build-groups.yml are built
 # on top of it, so no parent generic IOC image is needed.
 # A group's 'base_image' overrides DEVELOPER.
-ARG DEVELOPER=${REGISTRY}/epics-base-developer:7.0.10ec4-beta.2
+ARG DEVELOPER=${REGISTRY}/epics-base-developer:7.0.10ec6
 
 ##### build stage ##############################################################
 FROM  ${DEVELOPER} AS developer
