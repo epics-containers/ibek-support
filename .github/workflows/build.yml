@@ -105,11 +105,6 @@ jobs:
           - os: ubuntu-latest
             epics-target: linux-x86_64
             platform: linux/amd64
-          # Each IOC is cloned from branch 'resolute' unless an entry here names
-          # another. Once the IOCs have merged their resolute work, this should
-          # default to main.
-          - repo: ioc-adaravis
-            branch: resolute-multiarch
 
     runs-on: ${{ matrix.os }}
 
@@ -136,7 +131,7 @@ jobs:
         # and its associated version of ibek
         env:
           REPO: ${{ matrix.repo }}
-          BRANCH: ${{ matrix.branch || 'resolute' }}
+          BRANCH: ${{ matrix.branch || 'main' }}
         run: |
           git clone --branch "${BRANCH}" https://github.com/epics-containers/${REPO} /tmp/generic_ioc
           cp -r . /tmp/generic_ioc/ibek-support
