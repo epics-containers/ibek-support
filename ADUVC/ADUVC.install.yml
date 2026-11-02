@@ -31,3 +31,13 @@ patch_blocks:
   - path: uvcSupport/Makefile
     block: |
       uvc_SYS_LIBS += jpeg
+
+  # upstream only builds the bundled libuvc for linux-x86_64 and linux-arm;
+  # build it for every Linux host arch (e.g. linux-aarch64)
+  - path: uvcSupport/Makefile
+    insertafter: "^SRC_DIRS"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK all linux arches"
+    block: |
+      ifeq ($(OS_CLASS), Linux)
+      LIBRARY = uvc
+      endif

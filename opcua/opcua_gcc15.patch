@@ -1,0 +1,31 @@
+gcc-15 mangles variables inside namespaces even if they are declared extern "C",
+which causes undefined references to pvar_func_opcuaIocshRegister and
+pvar_rset_opcuaItemRSET at link time.
+
+Backport of https://github.com/epics-modules/opcua/commit/485922c1e9b5bcce34d87be7bc5a6545209f8986
+Remove this patch when moving to a release after v0.11.2 that includes it.
+
+--- a/devOpcuaSup/iocshIntegration.cpp
++++ b/devOpcuaSup/iocshIntegration.cpp
+@@ -1106,8 +1106,6 @@ void opcuaIocshRegister ()
+     iocshRegister(&opcuaShowDataFuncDef, opcuaShowDataCallFunc);
+ }
+ 
+-extern "C" {
+-epicsExportRegistrar(opcuaIocshRegister);
+-}
+-
+ } // namespace
++
++extern "C" { epicsExportRegistrar(opcuaIocshRegister); }
+--- a/devOpcuaSup/opcuaItemRecord.cpp
++++ b/devOpcuaSup/opcuaItemRecord.cpp
+@@ -203,6 +203,7 @@ rset opcuaItemRSET = {
+     get_control_double,
+     get_alarm_double
+ };
+-extern "C" { epicsExportAddress(rset, opcuaItemRSET); }
+ 
+ } // namespace
++
++extern "C" { epicsExportAddress(rset, opcuaItemRSET); }
