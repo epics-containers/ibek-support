@@ -18,7 +18,7 @@ apt_developer:
   - libssl-dev
 
 apt_runtime:
-  - libxml2
+  - libxml2-16
 
 tasks:
   - path: opcua_task.yml
