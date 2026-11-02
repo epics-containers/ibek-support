@@ -12,7 +12,7 @@ libs:
 apt_developer:
   - libtirpc-dev
 apt_runtime:
-  - libtirpc3
+  - libtirpc3t64
 
 patch_lines:
   - path: "{{ config_linux_host }}"

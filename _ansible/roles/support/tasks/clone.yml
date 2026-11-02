@@ -12,7 +12,7 @@
         dest: "{{ local_path }}"
         version: "{{ version }}"
         recursive: "{{ recursive | default(false) | bool }}"
-        depth: "{{ 0 if patch_file.when | default(false) | bool else 1 }}"
+        depth: "{{ 0 if patch_file.when | default(false, true) | bool else 1 }}"
       when:
         - not stat_result.stat.exists
 
@@ -24,7 +24,7 @@
         version: "{{ patch_file.commit }}"
         force: true
       when:
-        - patch_file.when | default(false) | bool
+        - patch_file.when | default(false, true) | bool
         - patch_file.commit is defined
         - not stat_result.stat.exists
 
@@ -33,5 +33,5 @@
         git apply "{{ ibek_support_folder }}/{{ patch_file.path }}"
       args:
         chdir: "{{ local_path }}"
-      when: patch_file.when | default(false) and not stat_result.stat.exists | bool
+      when: (patch_file.when | default(false, true) | bool) and not stat_result.stat.exists
       changed_when: true
