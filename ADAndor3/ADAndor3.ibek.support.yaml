@@ -96,6 +96,14 @@ entity_models:
           ADDR:
           SCANRATE:
 
+    pvi:
+      yaml_path: ADAndor3.pvi.device.yaml
+      pv: true
+      pv_prefix: $(P)$(R)
+      ui_macros:
+        P:
+        R:
+
     pre_init:
       - value: |
           # Set LD library path and BitFlow install dir variables to built Andor SDK3
