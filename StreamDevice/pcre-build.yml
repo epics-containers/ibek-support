@@ -1,7 +1,7 @@
 # PCRE (v1) is not packaged for RTEMS, nor for Ubuntu resolute (26.04) and
-# later, where libpcre3 was removed. StreamDevice 2.8.26 only supports PCRE v1
-# (not PCRE2), so build a static PCRE library from source into
-# /epics/support/PCRE for all targets.
+# later, where libpcre3 was removed. StreamDevice only supports PCRE v1 (not
+# PCRE2), so build a static PCRE library from source into /epics/support/PCRE
+# for all targets.
 
 - name: Get the PCRE source
   ansible.builtin.get_url:
