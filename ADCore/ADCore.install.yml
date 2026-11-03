@@ -8,8 +8,8 @@ module: ADCore
 # DLS fork branch 'pvxs': NDPluginPvxs is identical, ntndArrayConverterPvxs has
 # later fixes, and pvxsIoc is wired into commonLibraryMakefile (which the fork
 # lacked). Replace with a tag as soon as one is cut.
-# SHA is master @ 2026-07-20, recorded 2026-08-13.
-version: ee039d24c9e89e70b31fd383b4817a40db5d6395
+# SHA is master @ 2026-10-13, recorded 2026-11-03.
+version: 36840e14b683079a8eb8423278eef41f371b1914
 git_repo: https://github.com/areaDetector/ADCore
 
 dbds:

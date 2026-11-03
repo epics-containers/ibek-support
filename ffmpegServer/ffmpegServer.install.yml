@@ -1,14 +1,16 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: ffmpegServer
-# JSouter's fix to bypass scaling skip for mono 8 bit images
-version: 3d192ed
+# master @ 2026-09-04. A SHA rather than a tag because R3-2, the latest release,
+# predates JSouter's fix to bypass scaling skip for mono 8 bit images.
+# Replace with a tag as soon as one is cut.
+version: de5d7f947388026ed5220019c34dc38703c4f85d
 dbds:
   - ffmpegServer.dbd
 libs:
   - ffmpegServer
 
-organization: http://github.com/DiamondLightSource
+organization: https://github.com/areaDetector
 
 apt_developer:
   - libavcodec-dev
@@ -20,17 +22,17 @@ apt_runtime:
   - libswscale9
   - libavformat62
 
+# FFMPEG_EXTERNAL is left unset, which selects upstream's system ffmpeg build
+# and skips the vendor libraries.
 comment_out:
-  # don't build the vendor libraries
-  - path: Makefile
-    regexp: vendor
+  # the system headers are on the default path, and an empty -I eats the next flag
   - path: ffmpegServerApp/src/Makefile
-    regexp: vendor\/ffmpeg
+    regexp: FFMPEG_INCLUDE
 
 patch_lines:
-  # use external ffmpeg libraries
+  # upstream's list includes avdevice, which isn't installed or used
   - path: ffmpegServerApp/src/Makefile
-    regexp: LIB_LIBS \+= avdevice
+    regexp: LIB_SYS_LIBS \+= avdevice
     line: ffmpegServer_SYS_LIBS += avformat avcodec swresample swscale avutil
   # FFmpeg 7+ removed AV_INPUT_BUFFER_MIN_SIZE, which ffmpegServer.cpp uses
   # as the smallest image to encode. Supply its old value (16384) rather than

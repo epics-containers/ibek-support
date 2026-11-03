@@ -2,11 +2,11 @@
   ansible.builtin.shell:
     cmd: 'cd /tmp
 
-      wget https://github.com/slsdetectorgroup/slsDetectorPackage/archive/refs/tags/10.0.0.tar.gz
+      wget https://github.com/slsdetectorgroup/slsDetectorPackage/archive/refs/tags/10.0.1.tar.gz
 
-      tar zxvf 10.0.0.tar.gz
+      tar zxvf 10.0.1.tar.gz
 
-      cd slsDetectorPackage-10.0.0
+      cd slsDetectorPackage-10.0.1
 
       update-alternatives --install /usr/bin/cmake3 cmake /usr/bin/cmake 100
 
