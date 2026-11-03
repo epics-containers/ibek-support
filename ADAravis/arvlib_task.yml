@@ -1,7 +1,7 @@
 - name: Build aravis vendor library
   ansible.builtin.shell:
     cmd: |
-      setopt -e
+      set -e
       git clone -b "0.8.36" --depth 1 https://github.com/AravisProject/aravis
       cd aravis
       meson setup build
