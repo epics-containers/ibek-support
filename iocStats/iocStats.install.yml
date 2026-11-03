@@ -17,6 +17,22 @@ patch_file:
   commit: 4226b12
   when: "{{ is_rtems | bool }}"
 
+# EPICS base 7.0.11 stops at 'msi -D' on the generated dbs in the iocAdmin
+# substitutions unless they are built first. Backport of upstream's fix for
+# https://github.com/epics-modules/iocStats/issues/78, plus epicsEnvVars.db which
+# 3.2.0 still uses. Not for RTEMS, which is on 4226b12 and has no such references.
+# Remove at the next iocStats bump: 4.0.1 has the fix and no epicsEnvVars.db,
+# so this block would break it.
+patch_blocks:
+  - path: iocAdmin/Db/Makefile
+    marker: "# {mark} msi -D needs generated dbs, see iocStats#78"
+    when: "{{ not (is_rtems | bool) }}"
+    block: |
+      SUBST_DEPS = $(COMMON_DIR)/iocAdminScanMon.db $(COMMON_DIR)/epicsEnvVars.db $(COMMON_DIR)/siteEnvVars.db
+      iocAdminRTEMS.db$(DEP):   $(SUBST_DEPS)
+      iocAdminSoft.db$(DEP):    $(SUBST_DEPS)
+      iocAdminVxWorks.db$(DEP): $(SUBST_DEPS)
+
 remove_macros:
   - SNCSEQ
   - IPAC
