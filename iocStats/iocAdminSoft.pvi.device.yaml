@@ -266,10 +266,10 @@ children:
       type: Row
       header:
       - Used
-      - Used (%)
+      - Used %
       - Peak
-      - Peak (%)
-      - Overruns
+      - Peak %
+      - Over
     children:
     - type: SignalR
       name: ScanOnceQueueUsed
@@ -298,7 +298,7 @@ children:
         type: TextRead
   - type: Group
     name: CbLowQueue
-    label: Callback Low
+    label: CB Low
     layout:
       type: Row
     children:
@@ -329,7 +329,7 @@ children:
         type: TextRead
   - type: Group
     name: CbMediumQueue
-    label: Callback Medium
+    label: CB Med
     layout:
       type: Row
     children:
@@ -360,7 +360,7 @@ children:
         type: TextRead
   - type: Group
     name: CbHighQueue
-    label: Callback High
+    label: CB High
     layout:
       type: Row
     children:
