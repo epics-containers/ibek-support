@@ -1,0 +1,4430 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# Upstream DiamondLightSource/zebra at 84b69db, its default branch HEAD: this support has no
+# install.yml to fix a version. zebra.template with its zebraRegisterWrite* templates and
+# ADBase.template; signals read a demand record and its readback where the template has both.
+
+label: zebra
+children:
+- type: Group
+  name: Status
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Connected
+    label: Connected
+    read_pv: $(P)$(Q):CONNECTED
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: InitialPollDone
+    label: Initial Poll Done
+    read_pv: $(P)$(Q):INITIAL_POLL_DONE
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: SysVer
+    label: Firmware Version
+    read_pv: $(P)$(Q):SYS_VER
+    read_widget:
+      type: TextRead
+  - type: Group
+    name: RowSysStat1lo
+    label: Bus Status 1 (Lo, Hi)
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: SysStat1lo
+      read_pv: $(P)$(Q):SYS_STAT1LO
+      read_widget:
+        type: TextRead
+        format: hexadecimal
+    - type: SignalR
+      name: SysStat1hi
+      read_pv: $(P)$(Q):SYS_STAT1HI
+      read_widget:
+        type: TextRead
+        format: hexadecimal
+  - type: Group
+    name: RowSysStat2lo
+    label: Bus Status 2 (Lo, Hi)
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: SysStat2lo
+      read_pv: $(P)$(Q):SYS_STAT2LO
+      read_widget:
+        type: TextRead
+        format: hexadecimal
+    - type: SignalR
+      name: SysStat2hi
+      read_pv: $(P)$(Q):SYS_STAT2HI
+      read_widget:
+        type: TextRead
+        format: hexadecimal
+
+- type: Group
+  name: PositionCompare
+  label: Position Compare
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalW
+    name: PcArm
+    label: Arm
+    write_pv: $(P)$(Q):PC_ARM
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Arm: '1'
+  - type: SignalW
+    name: PcDisarm
+    label: Disarm
+    write_pv: $(P)$(Q):PC_DISARM
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Disarm: '1'
+  - type: SignalR
+    name: PcArmOut
+    label: Arm Status
+    read_pv: $(P)$(Q):PC_ARM_OUT
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: ArmBusy
+    label: Arm Busy
+    read_pv: $(P)$(Q):ARM_BUSY
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ArrayAcq
+    label: Download
+    read_pv: $(P)$(Q):ARRAY_ACQ
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: PcNumCap
+    label: Points Captured
+    read_pv: $(P)$(Q):PC_NUM_CAP
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: PcNumDown
+    label: Points Downloaded
+    read_pv: $(P)$(Q):PC_NUM_DOWN
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: SoftInputs
+  label: Soft Inputs
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalRW
+    name: SoftInB0
+    label: Soft In 1
+    write_pv: $(P)$(Q):SOFT_IN:B0
+    write_widget:
+      type: CheckBox
+  - type: SignalRW
+    name: SoftInB1
+    label: Soft In 2
+    write_pv: $(P)$(Q):SOFT_IN:B1
+    write_widget:
+      type: CheckBox
+  - type: SignalRW
+    name: SoftInB2
+    label: Soft In 3
+    write_pv: $(P)$(Q):SOFT_IN:B2
+    write_widget:
+      type: CheckBox
+  - type: SignalRW
+    name: SoftInB3
+    label: Soft In 4
+    write_pv: $(P)$(Q):SOFT_IN:B3
+    write_widget:
+      type: CheckBox
+
+- type: Group
+  name: Errors
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: SysStaterr
+    label: Error State
+    read_pv: $(P)$(Q):SYS_STATERR
+    read_widget:
+      type: TextRead
+      format: hexadecimal
+  - type: SignalR
+    name: SysStaterrB0
+    label: PULSE1 Trig While Active
+    read_pv: $(P)$(Q):SYS_STATERR.B0
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: SysStaterrB1
+    label: PULSE2 Trig While Active
+    read_pv: $(P)$(Q):SYS_STATERR.B1
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: SysStaterrB2
+    label: PULSE3 Trig While Active
+    read_pv: $(P)$(Q):SYS_STATERR.B2
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: SysStaterrB3
+    label: PULSE4 Trig While Active
+    read_pv: $(P)$(Q):SYS_STATERR.B3
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: SysStaterrB4
+    label: PC Buffer Overflow
+    read_pv: $(P)$(Q):SYS_STATERR.B4
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: SysStaterrB5
+    label: Err 5
+    read_pv: $(P)$(Q):SYS_STATERR.B5
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: SysStaterrB6
+    label: Err 6
+    read_pv: $(P)$(Q):SYS_STATERR.B6
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: SysStaterrB7
+    label: Err 7
+    read_pv: $(P)$(Q):SYS_STATERR.B7
+    read_widget:
+      type: LED
+
+- type: Group
+  name: Setup
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: Group
+    name: ZebraPc
+    label: Position Compare
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: Arm
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: PcArmSel
+        label: Trig Source
+        write_pv: $(P)$(Q):PC_ARM_SEL
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(Q):PC_ARM_SEL:RBV
+        read_widget:
+          type: TextRead
+      - type: Group
+        name: RowPcArmInp
+        label: Arm Input
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: PcArmInp
+          write_pv: $(P)$(Q):PC_ARM_INP
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: PcArmInpStr
+          read_pv: $(P)$(Q):PC_ARM_INP:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: PcArmInpSta
+          read_pv: $(P)$(Q):PC_ARM_INP:STA
+          read_widget:
+            type: LED
+      - type: SignalW
+        name: PcArmPc
+        label: Arm
+        write_pv: $(P)$(Q):PC_ARM
+        write_widget:
+          type: ButtonPanel
+          actions:
+            Arm: '1'
+      - type: SignalW
+        name: PcDisarmPc
+        label: Disarm
+        write_pv: $(P)$(Q):PC_DISARM
+        write_widget:
+          type: ButtonPanel
+          actions:
+            Disarm: '1'
+      - type: SignalR
+        name: PcArmOutPc
+        label: Arm Status
+        read_pv: $(P)$(Q):PC_ARM_OUT
+        read_widget:
+          type: LED
+    - type: Group
+      name: General2
+      label: Setup
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: PcEnc
+        label: Posn Trig
+        write_pv: $(P)$(Q):PC_ENC
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(Q):PC_ENC:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: PcDir
+        label: Posn Dir
+        write_pv: $(P)$(Q):PC_DIR
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(Q):PC_DIR:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: PcTspre2
+        label: Time Units
+        write_pv: $(P)$(Q):PC_TSPRE
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(Q):PC_TSPRE:RBV
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: Capture
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: PcBitCapB0
+        label: Enc1
+        write_pv: $(P)$(Q):PC_BIT_CAP:B0
+        write_widget:
+          type: CheckBox
+      - type: SignalRW
+        name: PcBitCapB1
+        label: Enc2
+        write_pv: $(P)$(Q):PC_BIT_CAP:B1
+        write_widget:
+          type: CheckBox
+      - type: SignalRW
+        name: PcBitCapB2
+        label: Enc3
+        write_pv: $(P)$(Q):PC_BIT_CAP:B2
+        write_widget:
+          type: CheckBox
+      - type: SignalRW
+        name: PcBitCapB3
+        label: Enc4
+        write_pv: $(P)$(Q):PC_BIT_CAP:B3
+        write_widget:
+          type: CheckBox
+      - type: SignalRW
+        name: PcBitCapB4
+        label: Sys1
+        write_pv: $(P)$(Q):PC_BIT_CAP:B4
+        write_widget:
+          type: CheckBox
+      - type: SignalRW
+        name: PcBitCapB5
+        label: Sys2
+        write_pv: $(P)$(Q):PC_BIT_CAP:B5
+        write_widget:
+          type: CheckBox
+      - type: SignalRW
+        name: PcBitCapB6
+        label: Div1
+        write_pv: $(P)$(Q):PC_BIT_CAP:B6
+        write_widget:
+          type: CheckBox
+      - type: SignalRW
+        name: PcBitCapB7
+        label: Div2
+        write_pv: $(P)$(Q):PC_BIT_CAP:B7
+        write_widget:
+          type: CheckBox
+      - type: SignalRW
+        name: PcBitCapB8
+        label: Div3
+        write_pv: $(P)$(Q):PC_BIT_CAP:B8
+        write_widget:
+          type: CheckBox
+      - type: SignalRW
+        name: PcBitCapB9
+        label: Div4
+        write_pv: $(P)$(Q):PC_BIT_CAP:B9
+        write_widget:
+          type: CheckBox
+    - type: Group
+      name: Gate
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: PcGateSel
+        label: Trig Source
+        write_pv: $(P)$(Q):PC_GATE_SEL
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(Q):PC_GATE_SEL:RBV
+        read_widget:
+          type: TextRead
+      - type: Group
+        name: RowPcGateInp
+        label: Gate Input
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: PcGateInp
+          write_pv: $(P)$(Q):PC_GATE_INP
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: PcGateInpStr
+          read_pv: $(P)$(Q):PC_GATE_INP:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: PcGateInpSta
+          read_pv: $(P)$(Q):PC_GATE_INP:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PcGateStart
+        label: Gate Start
+        write_pv: $(P)$(Q):PC_GATE_START
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PC_GATE_START:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: PcGateWid
+        label: Gate Width
+        write_pv: $(P)$(Q):PC_GATE_WID
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PC_GATE_WID:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: PcGateNgate
+        label: Num Gates
+        write_pv: $(P)$(Q):PC_GATE_NGATE
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PC_GATE_NGATE:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: PcGateStep
+        label: Gate Step
+        write_pv: $(P)$(Q):PC_GATE_STEP
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PC_GATE_STEP:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: PcGateOut
+        label: Gate Status
+        read_pv: $(P)$(Q):PC_GATE_OUT
+        read_widget:
+          type: LED
+    - type: Group
+      name: Pulse
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: PcPulseSel
+        label: Trig Source
+        write_pv: $(P)$(Q):PC_PULSE_SEL
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(Q):PC_PULSE_SEL:RBV
+        read_widget:
+          type: TextRead
+      - type: Group
+        name: RowPcPulseInp
+        label: Pulse Input
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: PcPulseInp
+          write_pv: $(P)$(Q):PC_PULSE_INP
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: PcPulseInpStr
+          read_pv: $(P)$(Q):PC_PULSE_INP:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: PcPulseInpSta
+          read_pv: $(P)$(Q):PC_PULSE_INP:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PcPulseStart
+        label: Pulse Start
+        write_pv: $(P)$(Q):PC_PULSE_START
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PC_PULSE_START:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: PcPulseWid
+        label: Pulse Width
+        write_pv: $(P)$(Q):PC_PULSE_WID
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PC_PULSE_WID:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: PcPulseStep
+        label: Pulse Step
+        write_pv: $(P)$(Q):PC_PULSE_STEP
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PC_PULSE_STEP:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: PcPulseDly
+        label: Capt Delay
+        write_pv: $(P)$(Q):PC_PULSE_DLY
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PC_PULSE_DLY:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: PcPulseMax
+        label: Max Pulses
+        write_pv: $(P)$(Q):PC_PULSE_MAX
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PC_PULSE_MAX:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: PcPulseOut
+        label: Pulse Status
+        read_pv: $(P)$(Q):PC_PULSE_OUT
+        read_widget:
+          type: LED
+    - type: Group
+      name: PcCaptured
+      label: Captured
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: Plot
+        label: Captured Data
+        layout:
+          type: SubScreen
+          labelled: false
+        children:
+        - type: Group
+          name: General
+          label: Last Values
+          layout:
+            type: Grid
+            labelled: true
+          children:
+          - type: Group
+            name: RowPcEnc1Last
+            label: Enc1 Last Val
+            layout:
+              type: Row
+            children:
+            - type: SignalR
+              name: PcEnc1Last
+              read_pv: $(P)$(Q):PC_ENC1_LAST
+              read_widget:
+                type: TextRead
+            - type: SignalR
+              name: M1Egu
+              read_pv: $(P)$(Q):M1:EGU
+              read_widget:
+                type: TextRead
+                format: string
+          - type: Group
+            name: RowPcEnc2Last
+            label: Enc2 Last Val
+            layout:
+              type: Row
+            children:
+            - type: SignalR
+              name: PcEnc2Last
+              read_pv: $(P)$(Q):PC_ENC2_LAST
+              read_widget:
+                type: TextRead
+            - type: SignalR
+              name: M2Egu
+              read_pv: $(P)$(Q):M2:EGU
+              read_widget:
+                type: TextRead
+                format: string
+          - type: Group
+            name: RowPcEnc3Last
+            label: Enc3 Last Val
+            layout:
+              type: Row
+            children:
+            - type: SignalR
+              name: PcEnc3Last
+              read_pv: $(P)$(Q):PC_ENC3_LAST
+              read_widget:
+                type: TextRead
+            - type: SignalR
+              name: M3Egu
+              read_pv: $(P)$(Q):M3:EGU
+              read_widget:
+                type: TextRead
+                format: string
+          - type: Group
+            name: RowPcEnc4Last
+            label: Enc4 Last Val
+            layout:
+              type: Row
+            children:
+            - type: SignalR
+              name: PcEnc4Last
+              read_pv: $(P)$(Q):PC_ENC4_LAST
+              read_widget:
+                type: TextRead
+            - type: SignalR
+              name: M4Egu
+              read_pv: $(P)$(Q):M4:EGU
+              read_widget:
+                type: TextRead
+                format: string
+          - type: SignalR
+            name: PcDiv1Last
+            label: Div1 Last Val
+            read_pv: $(P)$(Q):PC_DIV1_LAST
+            read_widget:
+              type: TextRead
+          - type: SignalR
+            name: PcDiv2Last
+            label: Div2 Last Val
+            read_pv: $(P)$(Q):PC_DIV2_LAST
+            read_widget:
+              type: TextRead
+          - type: SignalR
+            name: PcDiv3Last
+            label: Div3 Last Val
+            read_pv: $(P)$(Q):PC_DIV3_LAST
+            read_widget:
+              type: TextRead
+          - type: SignalR
+            name: PcDiv4Last
+            label: Div4 Last Val
+            read_pv: $(P)$(Q):PC_DIV4_LAST
+            read_widget:
+              type: TextRead
+          - type: Group
+            name: RowPcFiltsel1
+            label: SysFilt1
+            layout:
+              type: Row
+            children:
+            - type: SignalW
+              name: PcFiltsel1
+              write_pv: $(P)$(Q):PC_FILTSEL1
+              write_widget:
+                type: TextWrite
+            - type: SignalR
+              name: PcFiltsel1Str
+              read_pv: $(P)$(Q):PC_FILTSEL1:STR
+              read_widget:
+                type: TextRead
+                format: string
+            - type: SignalR
+              name: PcFiltsel1Sta
+              read_pv: $(P)$(Q):PC_FILTSEL1:STA
+              read_widget:
+                type: LED
+          - type: Group
+            name: RowPcFiltsel2
+            label: SysFilt2
+            layout:
+              type: Row
+            children:
+            - type: SignalW
+              name: PcFiltsel2
+              write_pv: $(P)$(Q):PC_FILTSEL2
+              write_widget:
+                type: TextWrite
+            - type: SignalR
+              name: PcFiltsel2Str
+              read_pv: $(P)$(Q):PC_FILTSEL2:STR
+              read_widget:
+                type: TextRead
+                format: string
+            - type: SignalR
+              name: PcFiltsel2Sta
+              read_pv: $(P)$(Q):PC_FILTSEL2:STA
+              read_widget:
+                type: LED
+          - type: Group
+            name: RowPcFiltsel3
+            label: SysFilt3
+            layout:
+              type: Row
+            children:
+            - type: SignalW
+              name: PcFiltsel3
+              write_pv: $(P)$(Q):PC_FILTSEL3
+              write_widget:
+                type: TextWrite
+            - type: SignalR
+              name: PcFiltsel3Str
+              read_pv: $(P)$(Q):PC_FILTSEL3:STR
+              read_widget:
+                type: TextRead
+                format: string
+            - type: SignalR
+              name: PcFiltsel3Sta
+              read_pv: $(P)$(Q):PC_FILTSEL3:STA
+              read_widget:
+                type: LED
+          - type: Group
+            name: RowPcFiltsel4
+            label: SysFilt4
+            layout:
+              type: Row
+            children:
+            - type: SignalW
+              name: PcFiltsel4
+              write_pv: $(P)$(Q):PC_FILTSEL4
+              write_widget:
+                type: TextWrite
+            - type: SignalR
+              name: PcFiltsel4Str
+              read_pv: $(P)$(Q):PC_FILTSEL4:STR
+              read_widget:
+                type: TextRead
+                format: string
+            - type: SignalR
+              name: PcFiltsel4Sta
+              read_pv: $(P)$(Q):PC_FILTSEL4:STA
+              read_widget:
+                type: LED
+          - type: SignalR
+            name: PcNumCapPc
+            label: Points Captured
+            read_pv: $(P)$(Q):PC_NUM_CAP
+            read_widget:
+              type: TextRead
+          - type: SignalR
+            name: PcNumDownPc
+            label: Points Downloaded
+            read_pv: $(P)$(Q):PC_NUM_DOWN
+            read_widget:
+              type: TextRead
+          - type: SignalW
+            name: ArrayUpdateScan
+            label: Update Rate
+            write_pv: $(P)$(Q):ARRAY_UPDATE.SCAN
+            write_widget:
+              type: ComboBox
+        - type: Group
+          name: Traces
+          layout:
+            type: Grid
+            labelled: true
+          children:
+          - type: SignalR
+            name: PcEnc1
+            label: Enc1
+            read_pv: $(P)$(Q):PC_ENC1
+            read_widget:
+              type: ArrayTrace
+              axis: Enc1
+          - type: SignalR
+            name: PcEnc2
+            label: Enc2
+            read_pv: $(P)$(Q):PC_ENC2
+            read_widget:
+              type: ArrayTrace
+              axis: Enc2
+          - type: SignalR
+            name: PcEnc3
+            label: Enc3
+            read_pv: $(P)$(Q):PC_ENC3
+            read_widget:
+              type: ArrayTrace
+              axis: Enc3
+          - type: SignalR
+            name: PcEnc4
+            label: Enc4
+            read_pv: $(P)$(Q):PC_ENC4
+            read_widget:
+              type: ArrayTrace
+              axis: Enc4
+          - type: SignalR
+            name: PcDiv1
+            label: Div1
+            read_pv: $(P)$(Q):PC_DIV1
+            read_widget:
+              type: ArrayTrace
+              axis: Div1
+          - type: SignalR
+            name: PcDiv2
+            label: Div2
+            read_pv: $(P)$(Q):PC_DIV2
+            read_widget:
+              type: ArrayTrace
+              axis: Div2
+          - type: SignalR
+            name: PcDiv3
+            label: Div3
+            read_pv: $(P)$(Q):PC_DIV3
+            read_widget:
+              type: ArrayTrace
+              axis: Div3
+          - type: SignalR
+            name: PcDiv4
+            label: Div4
+            read_pv: $(P)$(Q):PC_DIV4
+            read_widget:
+              type: ArrayTrace
+              axis: Div4
+          - type: SignalR
+            name: PcSys1
+            label: Sys1
+            read_pv: $(P)$(Q):PC_SYS1
+            read_widget:
+              type: ArrayTrace
+              axis: Sys1
+          - type: SignalR
+            name: PcSys2
+            label: Sys2
+            read_pv: $(P)$(Q):PC_SYS2
+            read_widget:
+              type: ArrayTrace
+              axis: Sys2
+          - type: SignalR
+            name: PcFilt1
+            label: Filt1
+            read_pv: $(P)$(Q):PC_FILT1
+            read_widget:
+              type: ArrayTrace
+              axis: Filt1
+          - type: SignalR
+            name: PcFilt2
+            label: Filt2
+            read_pv: $(P)$(Q):PC_FILT2
+            read_widget:
+              type: ArrayTrace
+              axis: Filt2
+          - type: SignalR
+            name: PcFilt3
+            label: Filt3
+            read_pv: $(P)$(Q):PC_FILT3
+            read_widget:
+              type: ArrayTrace
+              axis: Filt3
+          - type: SignalR
+            name: PcFilt4
+            label: Filt4
+            read_pv: $(P)$(Q):PC_FILT4
+            read_widget:
+              type: ArrayTrace
+              axis: Filt4
+          - type: SignalR
+            name: PcTime
+            label: Time
+            read_pv: $(P)$(Q):PC_TIME
+            read_widget:
+              type: ArrayTrace
+              axis: Time
+  - type: Group
+    name: AndorAnd
+    label: AND
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: And1
+      label: AND1
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowAnd1EnaB0
+        label: INP1
+        layout:
+          type: Row
+          header:
+          - Use
+          - Source
+          - Name
+          - Status
+          - Invert
+        children:
+        - type: SignalRW
+          name: And1EnaB0
+          write_pv: $(P)$(Q):AND1_ENA:B0
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And1Inp1
+          write_pv: $(P)$(Q):AND1_INP1
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And1Inp1Str
+          read_pv: $(P)$(Q):AND1_INP1:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And1Inp1Sta
+          read_pv: $(P)$(Q):AND1_INP1:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And1InvB0
+          write_pv: $(P)$(Q):AND1_INV:B0
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowAnd1EnaB1
+        label: INP2
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: And1EnaB1
+          write_pv: $(P)$(Q):AND1_ENA:B1
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And1Inp2
+          write_pv: $(P)$(Q):AND1_INP2
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And1Inp2Str
+          read_pv: $(P)$(Q):AND1_INP2:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And1Inp2Sta
+          read_pv: $(P)$(Q):AND1_INP2:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And1InvB1
+          write_pv: $(P)$(Q):AND1_INV:B1
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowAnd1EnaB2
+        label: INP3
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: And1EnaB2
+          write_pv: $(P)$(Q):AND1_ENA:B2
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And1Inp3
+          write_pv: $(P)$(Q):AND1_INP3
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And1Inp3Str
+          read_pv: $(P)$(Q):AND1_INP3:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And1Inp3Sta
+          read_pv: $(P)$(Q):AND1_INP3:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And1InvB2
+          write_pv: $(P)$(Q):AND1_INV:B2
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowAnd1EnaB3
+        label: INP4
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: And1EnaB3
+          write_pv: $(P)$(Q):AND1_ENA:B3
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And1Inp4
+          write_pv: $(P)$(Q):AND1_INP4
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And1Inp4Str
+          read_pv: $(P)$(Q):AND1_INP4:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And1Inp4Sta
+          read_pv: $(P)$(Q):AND1_INP4:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And1InvB3
+          write_pv: $(P)$(Q):AND1_INV:B3
+          write_widget:
+            type: CheckBox
+      - type: SignalR
+        name: And1Out
+        label: OUT
+        read_pv: $(P)$(Q):AND1_OUT
+        read_widget:
+          type: LED
+    - type: Group
+      name: And2
+      label: AND2
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowAnd2EnaB0
+        label: INP1
+        layout:
+          type: Row
+          header:
+          - Use
+          - Source
+          - Name
+          - Status
+          - Invert
+        children:
+        - type: SignalRW
+          name: And2EnaB0
+          write_pv: $(P)$(Q):AND2_ENA:B0
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And2Inp1
+          write_pv: $(P)$(Q):AND2_INP1
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And2Inp1Str
+          read_pv: $(P)$(Q):AND2_INP1:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And2Inp1Sta
+          read_pv: $(P)$(Q):AND2_INP1:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And2InvB0
+          write_pv: $(P)$(Q):AND2_INV:B0
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowAnd2EnaB1
+        label: INP2
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: And2EnaB1
+          write_pv: $(P)$(Q):AND2_ENA:B1
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And2Inp2
+          write_pv: $(P)$(Q):AND2_INP2
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And2Inp2Str
+          read_pv: $(P)$(Q):AND2_INP2:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And2Inp2Sta
+          read_pv: $(P)$(Q):AND2_INP2:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And2InvB1
+          write_pv: $(P)$(Q):AND2_INV:B1
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowAnd2EnaB2
+        label: INP3
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: And2EnaB2
+          write_pv: $(P)$(Q):AND2_ENA:B2
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And2Inp3
+          write_pv: $(P)$(Q):AND2_INP3
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And2Inp3Str
+          read_pv: $(P)$(Q):AND2_INP3:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And2Inp3Sta
+          read_pv: $(P)$(Q):AND2_INP3:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And2InvB2
+          write_pv: $(P)$(Q):AND2_INV:B2
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowAnd2EnaB3
+        label: INP4
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: And2EnaB3
+          write_pv: $(P)$(Q):AND2_ENA:B3
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And2Inp4
+          write_pv: $(P)$(Q):AND2_INP4
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And2Inp4Str
+          read_pv: $(P)$(Q):AND2_INP4:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And2Inp4Sta
+          read_pv: $(P)$(Q):AND2_INP4:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And2InvB3
+          write_pv: $(P)$(Q):AND2_INV:B3
+          write_widget:
+            type: CheckBox
+      - type: SignalR
+        name: And2Out
+        label: OUT
+        read_pv: $(P)$(Q):AND2_OUT
+        read_widget:
+          type: LED
+    - type: Group
+      name: And3
+      label: AND3
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowAnd3EnaB0
+        label: INP1
+        layout:
+          type: Row
+          header:
+          - Use
+          - Source
+          - Name
+          - Status
+          - Invert
+        children:
+        - type: SignalRW
+          name: And3EnaB0
+          write_pv: $(P)$(Q):AND3_ENA:B0
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And3Inp1
+          write_pv: $(P)$(Q):AND3_INP1
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And3Inp1Str
+          read_pv: $(P)$(Q):AND3_INP1:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And3Inp1Sta
+          read_pv: $(P)$(Q):AND3_INP1:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And3InvB0
+          write_pv: $(P)$(Q):AND3_INV:B0
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowAnd3EnaB1
+        label: INP2
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: And3EnaB1
+          write_pv: $(P)$(Q):AND3_ENA:B1
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And3Inp2
+          write_pv: $(P)$(Q):AND3_INP2
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And3Inp2Str
+          read_pv: $(P)$(Q):AND3_INP2:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And3Inp2Sta
+          read_pv: $(P)$(Q):AND3_INP2:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And3InvB1
+          write_pv: $(P)$(Q):AND3_INV:B1
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowAnd3EnaB2
+        label: INP3
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: And3EnaB2
+          write_pv: $(P)$(Q):AND3_ENA:B2
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And3Inp3
+          write_pv: $(P)$(Q):AND3_INP3
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And3Inp3Str
+          read_pv: $(P)$(Q):AND3_INP3:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And3Inp3Sta
+          read_pv: $(P)$(Q):AND3_INP3:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And3InvB2
+          write_pv: $(P)$(Q):AND3_INV:B2
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowAnd3EnaB3
+        label: INP4
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: And3EnaB3
+          write_pv: $(P)$(Q):AND3_ENA:B3
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And3Inp4
+          write_pv: $(P)$(Q):AND3_INP4
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And3Inp4Str
+          read_pv: $(P)$(Q):AND3_INP4:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And3Inp4Sta
+          read_pv: $(P)$(Q):AND3_INP4:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And3InvB3
+          write_pv: $(P)$(Q):AND3_INV:B3
+          write_widget:
+            type: CheckBox
+      - type: SignalR
+        name: And3Out
+        label: OUT
+        read_pv: $(P)$(Q):AND3_OUT
+        read_widget:
+          type: LED
+    - type: Group
+      name: And4
+      label: AND4
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowAnd4EnaB0
+        label: INP1
+        layout:
+          type: Row
+          header:
+          - Use
+          - Source
+          - Name
+          - Status
+          - Invert
+        children:
+        - type: SignalRW
+          name: And4EnaB0
+          write_pv: $(P)$(Q):AND4_ENA:B0
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And4Inp1
+          write_pv: $(P)$(Q):AND4_INP1
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And4Inp1Str
+          read_pv: $(P)$(Q):AND4_INP1:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And4Inp1Sta
+          read_pv: $(P)$(Q):AND4_INP1:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And4InvB0
+          write_pv: $(P)$(Q):AND4_INV:B0
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowAnd4EnaB1
+        label: INP2
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: And4EnaB1
+          write_pv: $(P)$(Q):AND4_ENA:B1
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And4Inp2
+          write_pv: $(P)$(Q):AND4_INP2
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And4Inp2Str
+          read_pv: $(P)$(Q):AND4_INP2:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And4Inp2Sta
+          read_pv: $(P)$(Q):AND4_INP2:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And4InvB1
+          write_pv: $(P)$(Q):AND4_INV:B1
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowAnd4EnaB2
+        label: INP3
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: And4EnaB2
+          write_pv: $(P)$(Q):AND4_ENA:B2
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And4Inp3
+          write_pv: $(P)$(Q):AND4_INP3
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And4Inp3Str
+          read_pv: $(P)$(Q):AND4_INP3:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And4Inp3Sta
+          read_pv: $(P)$(Q):AND4_INP3:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And4InvB2
+          write_pv: $(P)$(Q):AND4_INV:B2
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowAnd4EnaB3
+        label: INP4
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: And4EnaB3
+          write_pv: $(P)$(Q):AND4_ENA:B3
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: And4Inp4
+          write_pv: $(P)$(Q):AND4_INP4
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: And4Inp4Str
+          read_pv: $(P)$(Q):AND4_INP4:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: And4Inp4Sta
+          read_pv: $(P)$(Q):AND4_INP4:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: And4InvB3
+          write_pv: $(P)$(Q):AND4_INV:B3
+          write_widget:
+            type: CheckBox
+      - type: SignalR
+        name: And4Out
+        label: OUT
+        read_pv: $(P)$(Q):AND4_OUT
+        read_widget:
+          type: LED
+  - type: Group
+    name: AndorOr
+    label: OR
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: Or1
+      label: OR1
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowOr1EnaB0
+        label: INP1
+        layout:
+          type: Row
+          header:
+          - Use
+          - Source
+          - Name
+          - Status
+          - Invert
+        children:
+        - type: SignalRW
+          name: Or1EnaB0
+          write_pv: $(P)$(Q):OR1_ENA:B0
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or1Inp1
+          write_pv: $(P)$(Q):OR1_INP1
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or1Inp1Str
+          read_pv: $(P)$(Q):OR1_INP1:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or1Inp1Sta
+          read_pv: $(P)$(Q):OR1_INP1:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or1InvB0
+          write_pv: $(P)$(Q):OR1_INV:B0
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowOr1EnaB1
+        label: INP2
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: Or1EnaB1
+          write_pv: $(P)$(Q):OR1_ENA:B1
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or1Inp2
+          write_pv: $(P)$(Q):OR1_INP2
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or1Inp2Str
+          read_pv: $(P)$(Q):OR1_INP2:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or1Inp2Sta
+          read_pv: $(P)$(Q):OR1_INP2:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or1InvB1
+          write_pv: $(P)$(Q):OR1_INV:B1
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowOr1EnaB2
+        label: INP3
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: Or1EnaB2
+          write_pv: $(P)$(Q):OR1_ENA:B2
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or1Inp3
+          write_pv: $(P)$(Q):OR1_INP3
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or1Inp3Str
+          read_pv: $(P)$(Q):OR1_INP3:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or1Inp3Sta
+          read_pv: $(P)$(Q):OR1_INP3:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or1InvB2
+          write_pv: $(P)$(Q):OR1_INV:B2
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowOr1EnaB3
+        label: INP4
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: Or1EnaB3
+          write_pv: $(P)$(Q):OR1_ENA:B3
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or1Inp4
+          write_pv: $(P)$(Q):OR1_INP4
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or1Inp4Str
+          read_pv: $(P)$(Q):OR1_INP4:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or1Inp4Sta
+          read_pv: $(P)$(Q):OR1_INP4:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or1InvB3
+          write_pv: $(P)$(Q):OR1_INV:B3
+          write_widget:
+            type: CheckBox
+      - type: SignalR
+        name: Or1Out
+        label: OUT
+        read_pv: $(P)$(Q):OR1_OUT
+        read_widget:
+          type: LED
+    - type: Group
+      name: Or2
+      label: OR2
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowOr2EnaB0
+        label: INP1
+        layout:
+          type: Row
+          header:
+          - Use
+          - Source
+          - Name
+          - Status
+          - Invert
+        children:
+        - type: SignalRW
+          name: Or2EnaB0
+          write_pv: $(P)$(Q):OR2_ENA:B0
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or2Inp1
+          write_pv: $(P)$(Q):OR2_INP1
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or2Inp1Str
+          read_pv: $(P)$(Q):OR2_INP1:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or2Inp1Sta
+          read_pv: $(P)$(Q):OR2_INP1:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or2InvB0
+          write_pv: $(P)$(Q):OR2_INV:B0
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowOr2EnaB1
+        label: INP2
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: Or2EnaB1
+          write_pv: $(P)$(Q):OR2_ENA:B1
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or2Inp2
+          write_pv: $(P)$(Q):OR2_INP2
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or2Inp2Str
+          read_pv: $(P)$(Q):OR2_INP2:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or2Inp2Sta
+          read_pv: $(P)$(Q):OR2_INP2:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or2InvB1
+          write_pv: $(P)$(Q):OR2_INV:B1
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowOr2EnaB2
+        label: INP3
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: Or2EnaB2
+          write_pv: $(P)$(Q):OR2_ENA:B2
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or2Inp3
+          write_pv: $(P)$(Q):OR2_INP3
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or2Inp3Str
+          read_pv: $(P)$(Q):OR2_INP3:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or2Inp3Sta
+          read_pv: $(P)$(Q):OR2_INP3:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or2InvB2
+          write_pv: $(P)$(Q):OR2_INV:B2
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowOr2EnaB3
+        label: INP4
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: Or2EnaB3
+          write_pv: $(P)$(Q):OR2_ENA:B3
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or2Inp4
+          write_pv: $(P)$(Q):OR2_INP4
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or2Inp4Str
+          read_pv: $(P)$(Q):OR2_INP4:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or2Inp4Sta
+          read_pv: $(P)$(Q):OR2_INP4:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or2InvB3
+          write_pv: $(P)$(Q):OR2_INV:B3
+          write_widget:
+            type: CheckBox
+      - type: SignalR
+        name: Or2Out
+        label: OUT
+        read_pv: $(P)$(Q):OR2_OUT
+        read_widget:
+          type: LED
+    - type: Group
+      name: Or3
+      label: OR3
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowOr3EnaB0
+        label: INP1
+        layout:
+          type: Row
+          header:
+          - Use
+          - Source
+          - Name
+          - Status
+          - Invert
+        children:
+        - type: SignalRW
+          name: Or3EnaB0
+          write_pv: $(P)$(Q):OR3_ENA:B0
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or3Inp1
+          write_pv: $(P)$(Q):OR3_INP1
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or3Inp1Str
+          read_pv: $(P)$(Q):OR3_INP1:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or3Inp1Sta
+          read_pv: $(P)$(Q):OR3_INP1:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or3InvB0
+          write_pv: $(P)$(Q):OR3_INV:B0
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowOr3EnaB1
+        label: INP2
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: Or3EnaB1
+          write_pv: $(P)$(Q):OR3_ENA:B1
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or3Inp2
+          write_pv: $(P)$(Q):OR3_INP2
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or3Inp2Str
+          read_pv: $(P)$(Q):OR3_INP2:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or3Inp2Sta
+          read_pv: $(P)$(Q):OR3_INP2:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or3InvB1
+          write_pv: $(P)$(Q):OR3_INV:B1
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowOr3EnaB2
+        label: INP3
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: Or3EnaB2
+          write_pv: $(P)$(Q):OR3_ENA:B2
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or3Inp3
+          write_pv: $(P)$(Q):OR3_INP3
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or3Inp3Str
+          read_pv: $(P)$(Q):OR3_INP3:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or3Inp3Sta
+          read_pv: $(P)$(Q):OR3_INP3:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or3InvB2
+          write_pv: $(P)$(Q):OR3_INV:B2
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowOr3EnaB3
+        label: INP4
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: Or3EnaB3
+          write_pv: $(P)$(Q):OR3_ENA:B3
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or3Inp4
+          write_pv: $(P)$(Q):OR3_INP4
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or3Inp4Str
+          read_pv: $(P)$(Q):OR3_INP4:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or3Inp4Sta
+          read_pv: $(P)$(Q):OR3_INP4:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or3InvB3
+          write_pv: $(P)$(Q):OR3_INV:B3
+          write_widget:
+            type: CheckBox
+      - type: SignalR
+        name: Or3Out
+        label: OUT
+        read_pv: $(P)$(Q):OR3_OUT
+        read_widget:
+          type: LED
+    - type: Group
+      name: Or4
+      label: OR4
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowOr4EnaB0
+        label: INP1
+        layout:
+          type: Row
+          header:
+          - Use
+          - Source
+          - Name
+          - Status
+          - Invert
+        children:
+        - type: SignalRW
+          name: Or4EnaB0
+          write_pv: $(P)$(Q):OR4_ENA:B0
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or4Inp1
+          write_pv: $(P)$(Q):OR4_INP1
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or4Inp1Str
+          read_pv: $(P)$(Q):OR4_INP1:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or4Inp1Sta
+          read_pv: $(P)$(Q):OR4_INP1:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or4InvB0
+          write_pv: $(P)$(Q):OR4_INV:B0
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowOr4EnaB1
+        label: INP2
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: Or4EnaB1
+          write_pv: $(P)$(Q):OR4_ENA:B1
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or4Inp2
+          write_pv: $(P)$(Q):OR4_INP2
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or4Inp2Str
+          read_pv: $(P)$(Q):OR4_INP2:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or4Inp2Sta
+          read_pv: $(P)$(Q):OR4_INP2:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or4InvB1
+          write_pv: $(P)$(Q):OR4_INV:B1
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowOr4EnaB2
+        label: INP3
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: Or4EnaB2
+          write_pv: $(P)$(Q):OR4_ENA:B2
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or4Inp3
+          write_pv: $(P)$(Q):OR4_INP3
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or4Inp3Str
+          read_pv: $(P)$(Q):OR4_INP3:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or4Inp3Sta
+          read_pv: $(P)$(Q):OR4_INP3:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or4InvB2
+          write_pv: $(P)$(Q):OR4_INV:B2
+          write_widget:
+            type: CheckBox
+      - type: Group
+        name: RowOr4EnaB3
+        label: INP4
+        layout:
+          type: Row
+        children:
+        - type: SignalRW
+          name: Or4EnaB3
+          write_pv: $(P)$(Q):OR4_ENA:B3
+          write_widget:
+            type: CheckBox
+        - type: SignalW
+          name: Or4Inp4
+          write_pv: $(P)$(Q):OR4_INP4
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Or4Inp4Str
+          read_pv: $(P)$(Q):OR4_INP4:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Or4Inp4Sta
+          read_pv: $(P)$(Q):OR4_INP4:STA
+          read_widget:
+            type: LED
+        - type: SignalRW
+          name: Or4InvB3
+          write_pv: $(P)$(Q):OR4_INV:B3
+          write_widget:
+            type: CheckBox
+      - type: SignalR
+        name: Or4Out
+        label: OUT
+        read_pv: $(P)$(Q):OR4_OUT
+        read_widget:
+          type: LED
+  - type: Group
+    name: ZebraGate
+    label: Gates
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: Gate1
+      label: GATE1
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowGate1Inp1
+        label: INP1 (set)
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Gate1Inp1
+          write_pv: $(P)$(Q):GATE1_INP1
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Gate1Inp1Str
+          read_pv: $(P)$(Q):GATE1_INP1:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Gate1Inp1Sta
+          read_pv: $(P)$(Q):GATE1_INP1:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityB0
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:B0
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:B0
+        read_widget:
+          type: LED
+      - type: Group
+        name: RowGate1Inp2
+        label: INP2 (reset)
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Gate1Inp2
+          write_pv: $(P)$(Q):GATE1_INP2
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Gate1Inp2Str
+          read_pv: $(P)$(Q):GATE1_INP2:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Gate1Inp2Sta
+          read_pv: $(P)$(Q):GATE1_INP2:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityB4
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:B4
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:B4
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Gate1Out
+        label: OUT
+        read_pv: $(P)$(Q):GATE1_OUT
+        read_widget:
+          type: LED
+    - type: Group
+      name: Gate2
+      label: GATE2
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowGate2Inp1
+        label: INP1 (set)
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Gate2Inp1
+          write_pv: $(P)$(Q):GATE2_INP1
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Gate2Inp1Str
+          read_pv: $(P)$(Q):GATE2_INP1:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Gate2Inp1Sta
+          read_pv: $(P)$(Q):GATE2_INP1:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityB1
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:B1
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:B1
+        read_widget:
+          type: LED
+      - type: Group
+        name: RowGate2Inp2
+        label: INP2 (reset)
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Gate2Inp2
+          write_pv: $(P)$(Q):GATE2_INP2
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Gate2Inp2Str
+          read_pv: $(P)$(Q):GATE2_INP2:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Gate2Inp2Sta
+          read_pv: $(P)$(Q):GATE2_INP2:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityB5
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:B5
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:B5
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Gate2Out
+        label: OUT
+        read_pv: $(P)$(Q):GATE2_OUT
+        read_widget:
+          type: LED
+    - type: Group
+      name: Gate3
+      label: GATE3
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowGate3Inp1
+        label: INP1 (set)
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Gate3Inp1
+          write_pv: $(P)$(Q):GATE3_INP1
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Gate3Inp1Str
+          read_pv: $(P)$(Q):GATE3_INP1:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Gate3Inp1Sta
+          read_pv: $(P)$(Q):GATE3_INP1:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityB2
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:B2
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:B2
+        read_widget:
+          type: LED
+      - type: Group
+        name: RowGate3Inp2
+        label: INP2 (reset)
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Gate3Inp2
+          write_pv: $(P)$(Q):GATE3_INP2
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Gate3Inp2Str
+          read_pv: $(P)$(Q):GATE3_INP2:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Gate3Inp2Sta
+          read_pv: $(P)$(Q):GATE3_INP2:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityB6
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:B6
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:B6
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Gate3Out
+        label: OUT
+        read_pv: $(P)$(Q):GATE3_OUT
+        read_widget:
+          type: LED
+    - type: Group
+      name: Gate4
+      label: GATE4
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowGate4Inp1
+        label: INP1 (set)
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Gate4Inp1
+          write_pv: $(P)$(Q):GATE4_INP1
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Gate4Inp1Str
+          read_pv: $(P)$(Q):GATE4_INP1:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Gate4Inp1Sta
+          read_pv: $(P)$(Q):GATE4_INP1:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityB3
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:B3
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:B3
+        read_widget:
+          type: LED
+      - type: Group
+        name: RowGate4Inp2
+        label: INP2 (reset)
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Gate4Inp2
+          write_pv: $(P)$(Q):GATE4_INP2
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Gate4Inp2Str
+          read_pv: $(P)$(Q):GATE4_INP2:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Gate4Inp2Sta
+          read_pv: $(P)$(Q):GATE4_INP2:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityB7
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:B7
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:B7
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Gate4Out
+        label: OUT
+        read_pv: $(P)$(Q):GATE4_OUT
+        read_widget:
+          type: LED
+  - type: Group
+    name: ZebraDiv
+    label: Dividers
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: Div1
+      label: DIV1
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowDiv1Inp
+        label: Input (INP)
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Div1Inp
+          write_pv: $(P)$(Q):DIV1_INP
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Div1InpStr
+          read_pv: $(P)$(Q):DIV1_INP:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Div1InpSta
+          read_pv: $(P)$(Q):DIV1_INP:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityB8
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:B8
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:B8
+        read_widget:
+          type: LED
+      - type: SignalRW
+        name: Div1Div
+        label: Divisor (DIV)
+        write_pv: $(P)$(Q):DIV1_DIV
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):DIV1_DIV:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: DivFirstB0
+        label: First Pulse
+        write_pv: $(P)$(Q):DIV_FIRST:B0
+        write_widget:
+          type: ButtonPanel
+          actions:
+            Outn: '0'
+            Outd: '1'
+        read_pv: $(P)$(Q):DIV_FIRST:B0
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Div1Outd
+        label: Every Dth Pulse (OUTD)
+        read_pv: $(P)$(Q):DIV1_OUTD
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Div1Outn
+        label: Every Other Pulse (OUTN)
+        read_pv: $(P)$(Q):DIV1_OUTN
+        read_widget:
+          type: LED
+    - type: Group
+      name: Div2
+      label: DIV2
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowDiv2Inp
+        label: Input (INP)
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Div2Inp
+          write_pv: $(P)$(Q):DIV2_INP
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Div2InpStr
+          read_pv: $(P)$(Q):DIV2_INP:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Div2InpSta
+          read_pv: $(P)$(Q):DIV2_INP:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityB9
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:B9
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:B9
+        read_widget:
+          type: LED
+      - type: SignalRW
+        name: Div2Div
+        label: Divisor (DIV)
+        write_pv: $(P)$(Q):DIV2_DIV
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):DIV2_DIV:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: DivFirstB1
+        label: First Pulse
+        write_pv: $(P)$(Q):DIV_FIRST:B1
+        write_widget:
+          type: ButtonPanel
+          actions:
+            Outn: '0'
+            Outd: '1'
+        read_pv: $(P)$(Q):DIV_FIRST:B1
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Div2Outd
+        label: Every Dth Pulse (OUTD)
+        read_pv: $(P)$(Q):DIV2_OUTD
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Div2Outn
+        label: Every Other Pulse (OUTN)
+        read_pv: $(P)$(Q):DIV2_OUTN
+        read_widget:
+          type: LED
+    - type: Group
+      name: Div3
+      label: DIV3
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowDiv3Inp
+        label: Input (INP)
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Div3Inp
+          write_pv: $(P)$(Q):DIV3_INP
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Div3InpStr
+          read_pv: $(P)$(Q):DIV3_INP:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Div3InpSta
+          read_pv: $(P)$(Q):DIV3_INP:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityBa
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:BA
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:BA
+        read_widget:
+          type: LED
+      - type: SignalRW
+        name: Div3Div
+        label: Divisor (DIV)
+        write_pv: $(P)$(Q):DIV3_DIV
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):DIV3_DIV:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: DivFirstB2
+        label: First Pulse
+        write_pv: $(P)$(Q):DIV_FIRST:B2
+        write_widget:
+          type: ButtonPanel
+          actions:
+            Outn: '0'
+            Outd: '1'
+        read_pv: $(P)$(Q):DIV_FIRST:B2
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Div3Outd
+        label: Every Dth Pulse (OUTD)
+        read_pv: $(P)$(Q):DIV3_OUTD
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Div3Outn
+        label: Every Other Pulse (OUTN)
+        read_pv: $(P)$(Q):DIV3_OUTN
+        read_widget:
+          type: LED
+    - type: Group
+      name: Div4
+      label: DIV4
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowDiv4Inp
+        label: Input (INP)
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Div4Inp
+          write_pv: $(P)$(Q):DIV4_INP
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Div4InpStr
+          read_pv: $(P)$(Q):DIV4_INP:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Div4InpSta
+          read_pv: $(P)$(Q):DIV4_INP:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityBb
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:BB
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:BB
+        read_widget:
+          type: LED
+      - type: SignalRW
+        name: Div4Div
+        label: Divisor (DIV)
+        write_pv: $(P)$(Q):DIV4_DIV
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):DIV4_DIV:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: DivFirstB3
+        label: First Pulse
+        write_pv: $(P)$(Q):DIV_FIRST:B3
+        write_widget:
+          type: ButtonPanel
+          actions:
+            Outn: '0'
+            Outd: '1'
+        read_pv: $(P)$(Q):DIV_FIRST:B3
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Div4Outd
+        label: Every Dth Pulse (OUTD)
+        read_pv: $(P)$(Q):DIV4_OUTD
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Div4Outn
+        label: Every Other Pulse (OUTN)
+        read_pv: $(P)$(Q):DIV4_OUTN
+        read_widget:
+          type: LED
+  - type: Group
+    name: ZebraPulse
+    label: Pulses
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: Pulse1
+      label: PULSE1
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowPulse1Inp
+        label: Input
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Pulse1Inp
+          write_pv: $(P)$(Q):PULSE1_INP
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Pulse1InpStr
+          read_pv: $(P)$(Q):PULSE1_INP:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Pulse1InpSta
+          read_pv: $(P)$(Q):PULSE1_INP:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityBc
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:BC
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:BC
+        read_widget:
+          type: LED
+      - type: SignalRW
+        name: Pulse1Dly
+        label: Delay Before
+        write_pv: $(P)$(Q):PULSE1_DLY
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PULSE1_DLY:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Pulse1Wid
+        label: Pulse Width
+        write_pv: $(P)$(Q):PULSE1_WID
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PULSE1_WID:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Pulse1Pre
+        label: Time Units
+        write_pv: $(P)$(Q):PULSE1_PRE
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(Q):PULSE1_PRE:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: Pulse1TrigWhileActive
+        label: Trig While Active
+        read_pv: $(P)$(Q):SYS_STATERR.B0
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Pulse1Out
+        label: Output Pulse
+        read_pv: $(P)$(Q):PULSE1_OUT
+        read_widget:
+          type: LED
+    - type: Group
+      name: Pulse2
+      label: PULSE2
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowPulse2Inp
+        label: Input
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Pulse2Inp
+          write_pv: $(P)$(Q):PULSE2_INP
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Pulse2InpStr
+          read_pv: $(P)$(Q):PULSE2_INP:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Pulse2InpSta
+          read_pv: $(P)$(Q):PULSE2_INP:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityBd
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:BD
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:BD
+        read_widget:
+          type: LED
+      - type: SignalRW
+        name: Pulse2Dly
+        label: Delay Before
+        write_pv: $(P)$(Q):PULSE2_DLY
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PULSE2_DLY:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Pulse2Wid
+        label: Pulse Width
+        write_pv: $(P)$(Q):PULSE2_WID
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PULSE2_WID:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Pulse2Pre
+        label: Time Units
+        write_pv: $(P)$(Q):PULSE2_PRE
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(Q):PULSE2_PRE:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: Pulse2TrigWhileActive
+        label: Trig While Active
+        read_pv: $(P)$(Q):SYS_STATERR.B1
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Pulse2Out
+        label: Output Pulse
+        read_pv: $(P)$(Q):PULSE2_OUT
+        read_widget:
+          type: LED
+    - type: Group
+      name: Pulse3
+      label: PULSE3
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowPulse3Inp
+        label: Input
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Pulse3Inp
+          write_pv: $(P)$(Q):PULSE3_INP
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Pulse3InpStr
+          read_pv: $(P)$(Q):PULSE3_INP:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Pulse3InpSta
+          read_pv: $(P)$(Q):PULSE3_INP:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityBe
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:BE
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:BE
+        read_widget:
+          type: LED
+      - type: SignalRW
+        name: Pulse3Dly
+        label: Delay Before
+        write_pv: $(P)$(Q):PULSE3_DLY
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PULSE3_DLY:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Pulse3Wid
+        label: Pulse Width
+        write_pv: $(P)$(Q):PULSE3_WID
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PULSE3_WID:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Pulse3Pre
+        label: Time Units
+        write_pv: $(P)$(Q):PULSE3_PRE
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(Q):PULSE3_PRE:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: Pulse3TrigWhileActive
+        label: Trig While Active
+        read_pv: $(P)$(Q):SYS_STATERR.B2
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Pulse3Out
+        label: Output Pulse
+        read_pv: $(P)$(Q):PULSE3_OUT
+        read_widget:
+          type: LED
+    - type: Group
+      name: Pulse4
+      label: PULSE4
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowPulse4Inp
+        label: Input
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Pulse4Inp
+          write_pv: $(P)$(Q):PULSE4_INP
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Pulse4InpStr
+          read_pv: $(P)$(Q):PULSE4_INP:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Pulse4InpSta
+          read_pv: $(P)$(Q):PULSE4_INP:STA
+          read_widget:
+            type: LED
+      - type: SignalRW
+        name: PolarityBf
+        label: Trigger On
+        write_pv: $(P)$(Q):POLARITY:BF
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RisingEdge: '0'
+            FallingEdge: '1'
+        read_pv: $(P)$(Q):POLARITY:BF
+        read_widget:
+          type: LED
+      - type: SignalRW
+        name: Pulse4Dly
+        label: Delay Before
+        write_pv: $(P)$(Q):PULSE4_DLY
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PULSE4_DLY:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Pulse4Wid
+        label: Pulse Width
+        write_pv: $(P)$(Q):PULSE4_WID
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):PULSE4_WID:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Pulse4Pre
+        label: Time Units
+        write_pv: $(P)$(Q):PULSE4_PRE
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(Q):PULSE4_PRE:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: Pulse4TrigWhileActive
+        label: Trig While Active
+        read_pv: $(P)$(Q):SYS_STATERR.B3
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: Pulse4Out
+        label: Output Pulse
+        read_pv: $(P)$(Q):PULSE4_OUT
+        read_widget:
+          type: LED
+  - type: Group
+    name: ZebraEnc
+    label: Encoders
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: Pos1
+      label: POS1
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalR
+        name: M1
+        label: Motor
+        read_pv: $(P)$(Q):M1
+        read_widget:
+          type: TextRead
+          format: string
+      - type: SignalR
+        name: M1Desc
+        label: Description
+        read_pv: $(P)$(Q):M1:DESC
+        read_widget:
+          type: TextRead
+          format: string
+      - type: Group
+        name: RowM1Rbv
+        label: Motor Current Pos
+        layout:
+          type: Row
+        children:
+        - type: SignalR
+          name: M1Rbv
+          read_pv: $(P)$(Q):M1:RBV
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: M1EguEnc
+          read_pv: $(P)$(Q):M1:EGU
+          read_widget:
+            type: TextRead
+            format: string
+      - type: SignalRW
+        name: Pos1Set
+        label: Set Zebra Pos
+        write_pv: $(P)$(Q):POS1_SET
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):POS1_SET:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalW
+        name: M1SetposProc
+        label: Copy Motor Pos to Zebra
+        write_pv: $(P)$(Q):M1:SETPOS.PROC
+        write_widget:
+          type: ButtonPanel
+          actions:
+            Copy: '1'
+    - type: Group
+      name: Pos2
+      label: POS2
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalR
+        name: M2
+        label: Motor
+        read_pv: $(P)$(Q):M2
+        read_widget:
+          type: TextRead
+          format: string
+      - type: SignalR
+        name: M2Desc
+        label: Description
+        read_pv: $(P)$(Q):M2:DESC
+        read_widget:
+          type: TextRead
+          format: string
+      - type: Group
+        name: RowM2Rbv
+        label: Motor Current Pos
+        layout:
+          type: Row
+        children:
+        - type: SignalR
+          name: M2Rbv
+          read_pv: $(P)$(Q):M2:RBV
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: M2EguEnc
+          read_pv: $(P)$(Q):M2:EGU
+          read_widget:
+            type: TextRead
+            format: string
+      - type: SignalRW
+        name: Pos2Set
+        label: Set Zebra Pos
+        write_pv: $(P)$(Q):POS2_SET
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):POS2_SET:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalW
+        name: M2SetposProc
+        label: Copy Motor Pos to Zebra
+        write_pv: $(P)$(Q):M2:SETPOS.PROC
+        write_widget:
+          type: ButtonPanel
+          actions:
+            Copy: '1'
+    - type: Group
+      name: Pos3
+      label: POS3
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalR
+        name: M3
+        label: Motor
+        read_pv: $(P)$(Q):M3
+        read_widget:
+          type: TextRead
+          format: string
+      - type: SignalR
+        name: M3Desc
+        label: Description
+        read_pv: $(P)$(Q):M3:DESC
+        read_widget:
+          type: TextRead
+          format: string
+      - type: Group
+        name: RowM3Rbv
+        label: Motor Current Pos
+        layout:
+          type: Row
+        children:
+        - type: SignalR
+          name: M3Rbv
+          read_pv: $(P)$(Q):M3:RBV
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: M3EguEnc
+          read_pv: $(P)$(Q):M3:EGU
+          read_widget:
+            type: TextRead
+            format: string
+      - type: SignalRW
+        name: Pos3Set
+        label: Set Zebra Pos
+        write_pv: $(P)$(Q):POS3_SET
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):POS3_SET:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalW
+        name: M3SetposProc
+        label: Copy Motor Pos to Zebra
+        write_pv: $(P)$(Q):M3:SETPOS.PROC
+        write_widget:
+          type: ButtonPanel
+          actions:
+            Copy: '1'
+    - type: Group
+      name: Pos4
+      label: POS4
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalR
+        name: M4
+        label: Motor
+        read_pv: $(P)$(Q):M4
+        read_widget:
+          type: TextRead
+          format: string
+      - type: SignalR
+        name: M4Desc
+        label: Description
+        read_pv: $(P)$(Q):M4:DESC
+        read_widget:
+          type: TextRead
+          format: string
+      - type: Group
+        name: RowM4Rbv
+        label: Motor Current Pos
+        layout:
+          type: Row
+        children:
+        - type: SignalR
+          name: M4Rbv
+          read_pv: $(P)$(Q):M4:RBV
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: M4EguEnc
+          read_pv: $(P)$(Q):M4:EGU
+          read_widget:
+            type: TextRead
+            format: string
+      - type: SignalRW
+        name: Pos4Set
+        label: Set Zebra Pos
+        write_pv: $(P)$(Q):POS4_SET
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):POS4_SET:RBV
+        read_widget:
+          type: TextRead
+      - type: SignalW
+        name: M4SetposProc
+        label: Copy Motor Pos to Zebra
+        write_pv: $(P)$(Q):M4:SETPOS.PROC
+        write_widget:
+          type: ButtonPanel
+          actions:
+            Copy: '1'
+    - type: Group
+      name: Quad
+      label: QUAD
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowQuadStep
+        label: STEP
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: QuadStep
+          write_pv: $(P)$(Q):QUAD_STEP
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: QuadStepStr
+          read_pv: $(P)$(Q):QUAD_STEP:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: QuadStepSta
+          read_pv: $(P)$(Q):QUAD_STEP:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowQuadDir
+        label: DIR
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: QuadDir
+          write_pv: $(P)$(Q):QUAD_DIR
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: QuadDirStr
+          read_pv: $(P)$(Q):QUAD_DIR:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: QuadDirSta
+          read_pv: $(P)$(Q):QUAD_DIR:STA
+          read_widget:
+            type: LED
+      - type: SignalR
+        name: QuadOuta
+        label: OUTA
+        read_pv: $(P)$(Q):QUAD_OUTA
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: QuadOutb
+        label: OUTB
+        read_pv: $(P)$(Q):QUAD_OUTB
+        read_widget:
+          type: LED
+  - type: Group
+    name: ZebraSys
+    label: System
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: FrontPanelOutputs
+      label: Front Panel Outputs
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowOut1Ttl
+        label: OUT1 TTL
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Out1Ttl
+          write_pv: $(P)$(Q):OUT1_TTL
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out1TtlStr
+          read_pv: $(P)$(Q):OUT1_TTL:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out1TtlSta
+          read_pv: $(P)$(Q):OUT1_TTL:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut1Nim
+        label: OUT1 NIM
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out1Nim
+          write_pv: $(P)$(Q):OUT1_NIM
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out1NimStr
+          read_pv: $(P)$(Q):OUT1_NIM:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out1NimSta
+          read_pv: $(P)$(Q):OUT1_NIM:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut1Lvds
+        label: OUT1 LVDS
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out1Lvds
+          write_pv: $(P)$(Q):OUT1_LVDS
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out1LvdsStr
+          read_pv: $(P)$(Q):OUT1_LVDS:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out1LvdsSta
+          read_pv: $(P)$(Q):OUT1_LVDS:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut2Ttl
+        label: OUT2 TTL
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out2Ttl
+          write_pv: $(P)$(Q):OUT2_TTL
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out2TtlStr
+          read_pv: $(P)$(Q):OUT2_TTL:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out2TtlSta
+          read_pv: $(P)$(Q):OUT2_TTL:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut2Nim
+        label: OUT2 NIM
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out2Nim
+          write_pv: $(P)$(Q):OUT2_NIM
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out2NimStr
+          read_pv: $(P)$(Q):OUT2_NIM:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out2NimSta
+          read_pv: $(P)$(Q):OUT2_NIM:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut2Lvds
+        label: OUT2 LVDS
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out2Lvds
+          write_pv: $(P)$(Q):OUT2_LVDS
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out2LvdsStr
+          read_pv: $(P)$(Q):OUT2_LVDS:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out2LvdsSta
+          read_pv: $(P)$(Q):OUT2_LVDS:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut3Ttl
+        label: OUT3 TTL
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out3Ttl
+          write_pv: $(P)$(Q):OUT3_TTL
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out3TtlStr
+          read_pv: $(P)$(Q):OUT3_TTL:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out3TtlSta
+          read_pv: $(P)$(Q):OUT3_TTL:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut3Oc
+        label: OUT3 OC
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out3Oc
+          write_pv: $(P)$(Q):OUT3_OC
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out3OcStr
+          read_pv: $(P)$(Q):OUT3_OC:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out3OcSta
+          read_pv: $(P)$(Q):OUT3_OC:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut3Lvds
+        label: OUT3 LVDS
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out3Lvds
+          write_pv: $(P)$(Q):OUT3_LVDS
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out3LvdsStr
+          read_pv: $(P)$(Q):OUT3_LVDS:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out3LvdsSta
+          read_pv: $(P)$(Q):OUT3_LVDS:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut4Ttl
+        label: OUT4 TTL
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out4Ttl
+          write_pv: $(P)$(Q):OUT4_TTL
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out4TtlStr
+          read_pv: $(P)$(Q):OUT4_TTL:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out4TtlSta
+          read_pv: $(P)$(Q):OUT4_TTL:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut4Nim
+        label: OUT4 NIM
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out4Nim
+          write_pv: $(P)$(Q):OUT4_NIM
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out4NimStr
+          read_pv: $(P)$(Q):OUT4_NIM:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out4NimSta
+          read_pv: $(P)$(Q):OUT4_NIM:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut4Pecl
+        label: OUT4 PECL
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out4Pecl
+          write_pv: $(P)$(Q):OUT4_PECL
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out4PeclStr
+          read_pv: $(P)$(Q):OUT4_PECL:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out4PeclSta
+          read_pv: $(P)$(Q):OUT4_PECL:STA
+          read_widget:
+            type: LED
+    - type: Group
+      name: RearPanelOutputs
+      label: Rear Panel Outputs
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowOut5Enca
+        label: OUT5 ENCA
+        layout:
+          type: Row
+          header:
+          - Source
+          - Name
+          - Status
+        children:
+        - type: SignalW
+          name: Out5Enca
+          write_pv: $(P)$(Q):OUT5_ENCA
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out5EncaStr
+          read_pv: $(P)$(Q):OUT5_ENCA:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out5EncaSta
+          read_pv: $(P)$(Q):OUT5_ENCA:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut5Encb
+        label: OUT5 ENCB
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out5Encb
+          write_pv: $(P)$(Q):OUT5_ENCB
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out5EncbStr
+          read_pv: $(P)$(Q):OUT5_ENCB:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out5EncbSta
+          read_pv: $(P)$(Q):OUT5_ENCB:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut5Encz
+        label: OUT5 ENCZ
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out5Encz
+          write_pv: $(P)$(Q):OUT5_ENCZ
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out5EnczStr
+          read_pv: $(P)$(Q):OUT5_ENCZ:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out5EnczSta
+          read_pv: $(P)$(Q):OUT5_ENCZ:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut5Conn
+        label: OUT5 CONN
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out5Conn
+          write_pv: $(P)$(Q):OUT5_CONN
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out5ConnStr
+          read_pv: $(P)$(Q):OUT5_CONN:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out5ConnSta
+          read_pv: $(P)$(Q):OUT5_CONN:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut6Enca
+        label: OUT6 ENCA
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out6Enca
+          write_pv: $(P)$(Q):OUT6_ENCA
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out6EncaStr
+          read_pv: $(P)$(Q):OUT6_ENCA:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out6EncaSta
+          read_pv: $(P)$(Q):OUT6_ENCA:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut6Encb
+        label: OUT6 ENCB
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out6Encb
+          write_pv: $(P)$(Q):OUT6_ENCB
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out6EncbStr
+          read_pv: $(P)$(Q):OUT6_ENCB:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out6EncbSta
+          read_pv: $(P)$(Q):OUT6_ENCB:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut6Encz
+        label: OUT6 ENCZ
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out6Encz
+          write_pv: $(P)$(Q):OUT6_ENCZ
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out6EnczStr
+          read_pv: $(P)$(Q):OUT6_ENCZ:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out6EnczSta
+          read_pv: $(P)$(Q):OUT6_ENCZ:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut6Conn
+        label: OUT6 CONN
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out6Conn
+          write_pv: $(P)$(Q):OUT6_CONN
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out6ConnStr
+          read_pv: $(P)$(Q):OUT6_CONN:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out6ConnSta
+          read_pv: $(P)$(Q):OUT6_CONN:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut7Enca
+        label: OUT7 ENCA
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out7Enca
+          write_pv: $(P)$(Q):OUT7_ENCA
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out7EncaStr
+          read_pv: $(P)$(Q):OUT7_ENCA:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out7EncaSta
+          read_pv: $(P)$(Q):OUT7_ENCA:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut7Encb
+        label: OUT7 ENCB
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out7Encb
+          write_pv: $(P)$(Q):OUT7_ENCB
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out7EncbStr
+          read_pv: $(P)$(Q):OUT7_ENCB:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out7EncbSta
+          read_pv: $(P)$(Q):OUT7_ENCB:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut7Encz
+        label: OUT7 ENCZ
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out7Encz
+          write_pv: $(P)$(Q):OUT7_ENCZ
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out7EnczStr
+          read_pv: $(P)$(Q):OUT7_ENCZ:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out7EnczSta
+          read_pv: $(P)$(Q):OUT7_ENCZ:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut7Conn
+        label: OUT7 CONN
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out7Conn
+          write_pv: $(P)$(Q):OUT7_CONN
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out7ConnStr
+          read_pv: $(P)$(Q):OUT7_CONN:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out7ConnSta
+          read_pv: $(P)$(Q):OUT7_CONN:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut8Enca
+        label: OUT8 ENCA
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out8Enca
+          write_pv: $(P)$(Q):OUT8_ENCA
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out8EncaStr
+          read_pv: $(P)$(Q):OUT8_ENCA:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out8EncaSta
+          read_pv: $(P)$(Q):OUT8_ENCA:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut8Encb
+        label: OUT8 ENCB
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out8Encb
+          write_pv: $(P)$(Q):OUT8_ENCB
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out8EncbStr
+          read_pv: $(P)$(Q):OUT8_ENCB:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out8EncbSta
+          read_pv: $(P)$(Q):OUT8_ENCB:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut8Encz
+        label: OUT8 ENCZ
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out8Encz
+          write_pv: $(P)$(Q):OUT8_ENCZ
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out8EnczStr
+          read_pv: $(P)$(Q):OUT8_ENCZ:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out8EnczSta
+          read_pv: $(P)$(Q):OUT8_ENCZ:STA
+          read_widget:
+            type: LED
+      - type: Group
+        name: RowOut8Conn
+        label: OUT8 CONN
+        layout:
+          type: Row
+        children:
+        - type: SignalW
+          name: Out8Conn
+          write_pv: $(P)$(Q):OUT8_CONN
+          write_widget:
+            type: TextWrite
+        - type: SignalR
+          name: Out8ConnStr
+          read_pv: $(P)$(Q):OUT8_CONN:STR
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Out8ConnSta
+          read_pv: $(P)$(Q):OUT8_CONN:STA
+          read_widget:
+            type: LED
+    - type: Group
+      name: WriteRegsToFile
+      label: Write Regs to File
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalW
+        name: ConfigFile
+        label: Config File
+        write_pv: $(P)$(Q):CONFIG_FILE
+        write_widget:
+          type: TextWrite
+          format: string
+      - type: SignalW
+        name: ConfigWriteProc
+        label: Write Regs to File
+        write_pv: $(P)$(Q):CONFIG_WRITE.PROC
+        write_widget:
+          type: ButtonPanel
+          actions:
+            StoreToFile: '1'
+      - type: SignalR
+        name: ConfigStatus
+        label: Config Status
+        read_pv: $(P)$(Q):CONFIG_STATUS
+        read_widget:
+          type: TextRead
+          format: string
+      - type: Group
+        name: SysBusKey
+        label: System Bus Key
+        layout:
+          type: SubScreen
+          labelled: false
+        children:
+        - type: Group
+          name: SysBusKeys
+          label: System Bus Key
+          layout:
+            type: Grid
+            labelled: true
+          children:
+          - type: SignalR
+            name: SysBus1
+            label: Bus 1
+            read_pv: $(P)$(Q):SYS_BUS1
+            read_widget:
+              type: TextRead
+              format: string
+              lines: 32
+          - type: SignalR
+            name: SysBus2
+            label: Bus 2
+            read_pv: $(P)$(Q):SYS_BUS2
+            read_widget:
+              type: TextRead
+              format: string
+              lines: 32
+  - type: Group
+    name: ZebraDetector
+    label: Detector
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: Information
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalR
+        name: PortName
+        label: Port Name
+        read_pv: $(P)$(Q):PortName_RBV
+        read_widget:
+          type: TextRead
+          format: string
+      - type: SignalR
+        name: Manufacturer
+        read_pv: $(P)$(Q):Manufacturer_RBV
+        read_widget:
+          type: TextRead
+          format: string
+      - type: SignalR
+        name: Model
+        read_pv: $(P)$(Q):Model_RBV
+        read_widget:
+          type: TextRead
+          format: string
+      - type: SignalR
+        name: FirmwareVersion
+        label: Firmware Version
+        read_pv: $(P)$(Q):FirmwareVersion_RBV
+        read_widget:
+          type: TextRead
+          format: string
+      - type: SignalR
+        name: DriverVersion
+        label: Driver Version
+        read_pv: $(P)$(Q):DriverVersion_RBV
+        read_widget:
+          type: TextRead
+          format: string
+      - type: SignalR
+        name: ADCoreVersion
+        label: ADCore Version
+        read_pv: $(P)$(Q):ADCoreVersion_RBV
+        read_widget:
+          type: TextRead
+          format: string
+    - type: Group
+      name: Collect
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: Acquire
+        label: Acquire
+        write_pv: $(P)$(Q):Acquire
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(Q):Acquire_RBV
+        read_widget:
+          type: LED
+      - type: SignalR
+        name: AcquireBusy
+        label: Acquire Busy
+        read_pv: $(P)$(Q):AcquireBusy
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: DetectorState
+        label: Detector State
+        read_pv: $(P)$(Q):DetectorState_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: StatusMessage
+        label: Status Message
+        read_pv: $(P)$(Q):StatusMessage_RBV
+        read_widget:
+          type: TextRead
+          format: string
+      - type: SignalRW
+        name: ImageMode
+        label: Image Mode
+        write_pv: $(P)$(Q):ImageMode
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(Q):ImageMode_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: NumImages
+        label: Num Images
+        write_pv: $(P)$(Q):NumImages
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):NumImages_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: NumImagesCounter
+        label: Num Images Counter
+        read_pv: $(P)$(Q):NumImagesCounter_RBV
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: ArrayProps
+      label: Array Props
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalR
+        name: NDimensions
+        label: Num Dimensions
+        read_pv: $(P)$(Q):NDimensions_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: ArraySize0
+        label: Dim0 Size
+        read_pv: $(P)$(Q):ArraySize0_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: ArraySize1
+        label: Dim1 Size
+        read_pv: $(P)$(Q):ArraySize1_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: ArraySize2
+        label: Dim2 Size
+        read_pv: $(P)$(Q):ArraySize2_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: ArraySizeX
+        label: Size X
+        read_pv: $(P)$(Q):ArraySizeX_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: ArraySizeY
+        label: Size Y
+        read_pv: $(P)$(Q):ArraySizeY_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: ArraySize
+        label: Array Size (bytes)
+        read_pv: $(P)$(Q):ArraySize_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: DataType
+        label: Data Type
+        read_pv: $(P)$(Q):DataType_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: ColorMode
+        label: Colour Mode
+        read_pv: $(P)$(Q):ColorMode_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: BayerPattern
+        label: Bayer Pattern
+        read_pv: $(P)$(Q):BayerPattern_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: UniqueId
+        label: Unique ID
+        read_pv: $(P)$(Q):UniqueId_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: TimeStamp
+        label: Time Stamp
+        read_pv: $(P)$(Q):TimeStamp_RBV
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: Counters
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: ArrayCounter
+        label: Arrays
+        write_pv: $(P)$(Q):ArrayCounter
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(Q):ArrayCounter_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: ArrayRate
+        label: Array Rate (fps)
+        read_pv: $(P)$(Q):ArrayRate_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: ArrayCallbacks
+        label: Array Callbacks
+        write_pv: $(P)$(Q):ArrayCallbacks
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(Q):ArrayCallbacks_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: NumQueuedArrays
+        label: Queued Arrays
+        read_pv: $(P)$(Q):NumQueuedArrays
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: PoolUsedBuffers
+        label: Pool Used Buffers
+        read_pv: $(P)$(Q):PoolUsedBuffers
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: PoolUsedMem
+        label: Pool Used Mem
+        read_pv: $(P)$(Q):PoolUsedMem
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: PoolAllocBuffers
+        label: Pool Alloc Buffers
+        read_pv: $(P)$(Q):PoolAllocBuffers
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: PoolFreeBuffers
+        label: Pool Free Buffers
+        read_pv: $(P)$(Q):PoolFreeBuffers
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: PoolMaxMem
+        label: Pool Max Mem
+        read_pv: $(P)$(Q):PoolMaxMem
+        read_widget:
+          type: TextRead
+      - type: SignalW
+        name: NDAttributesFile
+        label: Attributes File
+        write_pv: $(P)$(Q):NDAttributesFile
+        write_widget:
+          type: TextWrite
+          format: string
+      - type: SignalR
+        name: NDAttributesStatus
+        label: Attributes Status
+        read_pv: $(P)$(Q):NDAttributesStatus
+        read_widget:
+          type: TextRead
+  - type: Group
+    name: ProtectedControls
+    label: Protected Controls
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: ProtectedRegisters
+      label: Registers
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalW
+        name: BlockState
+        label: Reset Block State
+        description: Resets the logic blocks, disarms and clears the capture buffers
+        write_pv: $(P)$(Q):SYS_RESET.PROC
+        write_widget:
+          type: ButtonPanel
+          actions:
+            Reset: '1'
+      - type: SignalW
+        name: ConfigReadProc
+        label: Restore Regs from File
+        description: Overwrites all registers from the config file
+        write_pv: $(P)$(Q):CONFIG_READ.PROC
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RestoreFromFile: '1'
+      - type: SignalW
+        name: RestoreProc
+        label: Restore Regs from Flash
+        description: Overwrites all registers from flash
+        write_pv: $(P)$(Q):RESTORE.PROC
+        write_widget:
+          type: ButtonPanel
+          actions:
+            RestoreFromFlash: '1'
+      - type: SignalW
+        name: StoreProc
+        label: Store Regs to Flash
+        description: Overwrites the configuration held in flash
+        write_pv: $(P)$(Q):STORE.PROC
+        write_widget:
+          type: ButtonPanel
+          actions:
+            StoreToFlash: '1'

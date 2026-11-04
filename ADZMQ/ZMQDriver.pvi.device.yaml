@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# Upstream paulscherrerinstitute/ADZMQ at 1.4.3: ZMQDriver creates no parameters of its
+# own, so all its records are ADBase.template: the shared ADDriver device, plus the
+# readbacks that device does not show.
+
+label: ZMQDriver
+children:
+- type: Include
+  file_name: ADDriver
+
+- type: Group
+  name: ArrayProps
+  label: Array Props
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: ArrayRate
+    label: Array Rate (fps)
+    read_pv: $(P)$(R)ArrayRate_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ArraySize0
+    label: Dim0 Size
+    read_pv: $(P)$(R)ArraySize0_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ArraySize1
+    label: Dim1 Size
+    read_pv: $(P)$(R)ArraySize1_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ArraySize2
+    label: Dim2 Size
+    read_pv: $(P)$(R)ArraySize2_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: PoolUsedBuffers
+    label: Pool Used Buffers
+    read_pv: $(P)$(R)PoolUsedBuffers
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: AcquireBusy
+    label: Acquire Busy
+    read_pv: $(P)$(R)AcquireBusy
+    read_widget:
+      type: TextRead

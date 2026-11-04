@@ -1,0 +1,109 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# A capacitance manometer on an MKS 937B, from mks937bCap.template at mks937b 3-1-0.
+
+label: mks937bCap
+children:
+- type: Group
+  name: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: P
+    label: Pressure (mbar)
+    read_pv: $(device):P
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Sta
+    label: Status
+    read_pv: $(device):STA
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: GetType
+    label: Type
+    read_pv: $(device):GET_TYPE
+    read_widget:
+      type: TextRead
+- type: Group
+  name: MoreDetails
+  label: More Details
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Details2
+    label: Details
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Plog
+      label: Log Pressure
+      read_pv: $(device):PLOG
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: GetRange
+      label: Full Scale Range
+      read_pv: $(device):GET_RANGE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Offwarn
+      label: Off Warning
+      read_pv: $(device):OFFWARN
+      read_widget:
+        type: LED
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Scaling
+    label: Gauge Scaling
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: SetType
+      label: Type
+      write_pv: $(device):SET_TYPE
+      write_widget:
+        type: ComboBox
+      read_pv: $(device):GET_TYPE
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: SetRange
+      label: Full Scale Range
+      write_pv: $(device):SET_RANGE
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):GET_RANGE
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: Zeroing
+    label: Zeroing shifts the pressure this gauge reports
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: Zero
+      label: Zero Manometer
+      write_pv: $(device):ZERO
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Zero: '1'

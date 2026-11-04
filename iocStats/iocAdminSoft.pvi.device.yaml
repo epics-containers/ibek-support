@@ -1,0 +1,765 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# IOC statistics from upstream iocStats iocAdminSoft.substitutions, built against the
+# CONFIG_ENV and CONFIG_SITE_ENV of EPICS base. PVs are the records themselves, never the
+# deprecated aliases of siteEnvVarAliases.template. No field PVs, which leaves `pv: true`
+# open wherever every record exists: RTEMS builds lack the environment records named here.
+
+label: IOC Stats
+children:
+- type: Group
+  name: IocInfo
+  label: IOC Info
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: StartTime
+    read_pv: $(IOC):STARTTOD
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: CurrentTime
+    read_pv: $(IOC):TOD
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: UpTime
+    read_pv: $(IOC):UPTIME
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Heartbeat
+    read_pv: $(IOC):HEARTBEAT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: StartCount
+    read_pv: $(IOC):START_CNT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: HostName
+    read_pv: $(IOC):HOSTNAME
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Engineer
+    read_pv: $(IOC):ENGINEER
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Location
+    read_pv: $(IOC):LOCATION
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ProcessId
+    label: Process ID
+    read_pv: $(IOC):PROCESS_ID
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ParentProcessId
+    label: Parent Process ID
+    read_pv: $(IOC):PARENT_ID
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: EpicsVersion
+    label: EPICS Version
+    read_pv: $(IOC):EPICS_VERSION
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: KernelVersion
+    read_pv: $(IOC):KERNEL_VERS
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ApplicationDirectory
+    read_pv: $(IOC):APP_DIR
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: StartupScript
+    read_pv: $(IOC):ST_SCRIPT
+    read_widget:
+      type: TextRead
+      format: string
+
+- type: Group
+  name: LoadAndCpu
+  label: Load and CPU
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: IocCpuLoad
+    label: IOC CPU Load
+    read_pv: $(IOC):IOC_CPU_LOAD
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: SystemCpuLoad
+    label: System CPU Load
+    read_pv: $(IOC):SYS_CPU_LOAD
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: CpuCount
+    label: CPU Count
+    read_pv: $(IOC):CPU_CNT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: SuspendedTasks
+    read_pv: $(IOC):SUSP_TASK_CNT
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: Memory
+  label: Memory
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: MemoryUsed
+    read_pv: $(IOC):MEM_USED
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: MemoryFree
+    read_pv: $(IOC):MEM_FREE
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: MemoryMax
+    read_pv: $(IOC):MEM_MAX
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: FileDescriptors
+  label: File Descriptors
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: FdUsed
+    label: Allocated
+    read_pv: $(IOC):FD_CNT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: FdFree
+    label: Free
+    read_pv: $(IOC):FD_FREE
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: FdMax
+    label: Max
+    read_pv: $(IOC):FD_MAX
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: ChannelAccess
+  label: CA and Channels
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: CaClients
+    label: CA Clients
+    read_pv: $(IOC):CA_CLNT_CNT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: CaConnections
+    label: CA Connections
+    read_pv: $(IOC):CA_CONN_CNT
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: RecordsAndScanRates
+  label: Records and Scan Rates
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: RecordCount
+    read_pv: $(IOC):RECORD_CNT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ScanMonSeverity
+    label: Worst Scan Severity
+    read_pv: $(IOC):SCANMON_SEVR
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ScanPeriod10Hz
+    label: 10 Hz Scan Period
+    read_pv: $(IOC):10HZ_UPD_TIME
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ScanPeriod5Hz
+    label: 5 Hz Scan Period
+    read_pv: $(IOC):5HZ_UPD_TIME
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ScanPeriod2Hz
+    label: 2 Hz Scan Period
+    read_pv: $(IOC):2HZ_UPD_TIME
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ScanPeriod1Hz
+    label: 1 Hz Scan Period
+    read_pv: $(IOC):1HZ_UPD_TIME
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ScanPeriod05Hz
+    label: 0.5 Hz Scan Period
+    read_pv: $(IOC):05HZ_UPD_TIME
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ScanPeriod02Hz
+    label: 0.2 Hz Scan Period
+    read_pv: $(IOC):02HZ_UPD_TIME
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ScanPeriod01Hz
+    label: 0.1 Hz Scan Period
+    read_pv: $(IOC):01HZ_UPD_TIME
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: Queues
+  label: Queues
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: Group
+    name: ScanOnceQueue
+    label: scanOnce
+    layout:
+      type: Row
+      header:
+      - Used
+      - Used (%)
+      - Peak
+      - Peak (%)
+      - Overruns
+    children:
+    - type: SignalR
+      name: ScanOnceQueueUsed
+      read_pv: $(IOC):SCANONCE_Q_USED
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ScanOnceQueueUsedPercent
+      read_pv: $(IOC):SCANONCE_Q_USEDPER
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ScanOnceQueuePeak
+      read_pv: $(IOC):SCANONCE_Q_HIGH
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ScanOnceQueuePeakPercent
+      read_pv: $(IOC):SCANONCE_Q_HIGHPER
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ScanOnceQueueOverruns
+      read_pv: $(IOC):SCANONCE_Q_OVERRUNS
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: CbLowQueue
+    label: Callback Low
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: CbLowQueueUsed
+      read_pv: $(IOC):CBLOW_Q_USED
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CbLowQueueUsedPercent
+      read_pv: $(IOC):CBLOW_Q_USEDPER
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CbLowQueuePeak
+      read_pv: $(IOC):CBLOW_Q_HIGH
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CbLowQueuePeakPercent
+      read_pv: $(IOC):CBLOW_Q_HIGHPER
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CbLowQueueOverruns
+      read_pv: $(IOC):CBLOW_Q_OVERRUNS
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: CbMediumQueue
+    label: Callback Medium
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: CbMediumQueueUsed
+      read_pv: $(IOC):CBMEDIUM_Q_USED
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CbMediumQueueUsedPercent
+      read_pv: $(IOC):CBMEDIUM_Q_USEDPER
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CbMediumQueuePeak
+      read_pv: $(IOC):CBMEDIUM_Q_HIGH
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CbMediumQueuePeakPercent
+      read_pv: $(IOC):CBMEDIUM_Q_HIGHPER
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CbMediumQueueOverruns
+      read_pv: $(IOC):CBMEDIUM_Q_OVERRUNS
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: CbHighQueue
+    label: Callback High
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: CbHighQueueUsed
+      read_pv: $(IOC):CBHIGH_Q_USED
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CbHighQueueUsedPercent
+      read_pv: $(IOC):CBHIGH_Q_USEDPER
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CbHighQueuePeak
+      read_pv: $(IOC):CBHIGH_Q_HIGH
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CbHighQueuePeakPercent
+      read_pv: $(IOC):CBHIGH_Q_HIGHPER
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CbHighQueueOverruns
+      read_pv: $(IOC):CBHIGH_Q_OVERRUNS
+      read_widget:
+        type: TextRead
+  - type: SignalR
+    name: ScanOnceQueueSize
+    label: scanOnce Queue Size
+    read_pv: $(IOC):SCANONCE_Q_SIZE
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: CallbackQueueSize
+    label: Callback Queue Size
+    read_pv: $(IOC):CB_Q_SIZE
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: GeneralTime
+  label: General Time
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: TimeCurrentProvider
+    label: Current Provider
+    read_pv: $(IOC):GTIM_CUR_SRC
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: TimeEventProvider
+    label: Event Provider
+    read_pv: $(IOC):GTIM_EVT_SRC
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: TimeHighestProvider
+    label: Highest Provider
+    read_pv: $(IOC):GTIM_HI_SRC
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: TimeSeconds
+    label: Seconds since 1990
+    read_pv: $(IOC):GTIM_TIME
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: TimeErrorCount
+    label: Error Count
+    read_pv: $(IOC):GTIM_ERR_CNT
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: EpicsEnvironment
+  label: EPICS Environment
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: EnvChannelAccess
+    label: Channel Access Client
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: EnvCaAddrList
+      label: EPICS_CA_ADDR_LIST
+      read_pv: $(IOC):CA_ADDR_LIST
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCaAutoAddrList
+      label: EPICS_CA_AUTO_ADDR_LIST
+      read_pv: $(IOC):CA_AUTO_ADDR_LIST
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCaNameServers
+      label: EPICS_CA_NAME_SERVERS
+      read_pv: $(IOC):CA_NAME_SERVERS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCaConnTmo
+      label: EPICS_CA_CONN_TMO
+      read_pv: $(IOC):CA_CONN_TMO
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCaRepeaterPort
+      label: EPICS_CA_REPEATER_PORT
+      read_pv: $(IOC):CA_REPEATER_PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCaServerPort
+      label: EPICS_CA_SERVER_PORT
+      read_pv: $(IOC):CA_SERVER_PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCaMaxArrayBytes
+      label: EPICS_CA_MAX_ARRAY_BYTES
+      read_pv: $(IOC):CA_MAX_ARRAY_BYTES
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCaAutoArrayBytes
+      label: EPICS_CA_AUTO_ARRAY_BYTES
+      read_pv: $(IOC):CA_AUTO_ARRAY_BYTES
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCaBeaconPeriod
+      label: EPICS_CA_BEACON_PERIOD
+      read_pv: $(IOC):CA_BEACON_PERIOD
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCaMaxSearchPeriod
+      label: EPICS_CA_MAX_SEARCH_PERIOD
+      read_pv: $(IOC):CA_MAX_SEARCH_PERIOD
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCaMcastTtl
+      label: EPICS_CA_MCAST_TTL
+      read_pv: $(IOC):CA_MCAST_TTL
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: EnvChannelAccessServer
+    label: Channel Access Server
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: EnvCasBeaconPeriod
+      label: EPICS_CAS_BEACON_PERIOD
+      read_pv: $(IOC):CAS_BEACON_PERIOD
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCasBeaconPort
+      label: EPICS_CAS_BEACON_PORT
+      read_pv: $(IOC):CAS_BEACON_PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCasAutoBeaconAddrList
+      label: EPICS_CAS_AUTO_BEACON_ADDR_LIST
+      read_pv: $(IOC):CAS_AUTO_BEACON_ADDR_LIST
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCasBeaconAddrList
+      label: EPICS_CAS_BEACON_ADDR_LIST
+      read_pv: $(IOC):CAS_BEACON_ADDR_LIST
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCasServerPort
+      label: EPICS_CAS_SERVER_PORT
+      read_pv: $(IOC):CAS_SERVER_PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCasIntfAddrList
+      label: EPICS_CAS_INTF_ADDR_LIST
+      read_pv: $(IOC):CAS_INTF_ADDR_LIST
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvCasIgnoreAddrList
+      label: EPICS_CAS_IGNORE_ADDR_LIST
+      read_pv: $(IOC):CAS_IGNORE_ADDR_LIST
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvIocIgnoreServers
+      label: EPICS_IOC_IGNORE_SERVERS
+      read_pv: $(IOC):IOC_IGNORE_SERVERS
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: EnvLogAndSite
+    label: Logging and Site
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: EnvIocLogInet
+      label: EPICS_IOC_LOG_INET
+      read_pv: $(IOC):IOC_LOG_INET
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvIocLogPort
+      label: EPICS_IOC_LOG_PORT
+      read_pv: $(IOC):IOC_LOG_PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvIocLogFileName
+      label: EPICS_IOC_LOG_FILE_NAME
+      read_pv: $(IOC):IOC_LOG_FILE_NAME
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvIocLogFileCommand
+      label: EPICS_IOC_LOG_FILE_COMMAND
+      read_pv: $(IOC):IOC_LOG_FILE_COMMAND
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvIocLogFileLimit
+      label: EPICS_IOC_LOG_FILE_LIMIT
+      read_pv: $(IOC):IOC_LOG_FILE_LIMIT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvTz
+      label: EPICS_TZ
+      read_pv: $(IOC):TZ
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvTsNtpInet
+      label: EPICS_TS_NTP_INET
+      read_pv: $(IOC):TS_NTP_INET
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvAbortOnAssert
+      label: EPICS_ABORT_ON_ASSERT
+      read_pv: $(IOC):ABORT_ON_ASSERT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: EnvAllowPosixThreadPriorityScheduling
+      label: EPICS_ALLOW_POSIX_THREAD_PRIORITY_SCHEDULING
+      read_pv: $(IOC):ALLOW_POSIX_THREAD_PRIORITY_SCHEDULING
+      read_widget:
+        type: TextRead
+
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: IocControl
+    label: IOC Control
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalX
+      name: RestartIoc
+      label: Restart IOC
+      write_pv: $(IOC):SYSRESET
+      value: "1"
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Restart: "1"
+    - type: SignalX
+      name: ReloadAccessSecurity
+      label: Reload Access Security File
+      write_pv: $(IOC):READACF
+      value: "1"
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Reload: "1"
+    - type: SignalRW
+      name: AccessMode
+      write_pv: $(IOC):ACCESS
+      write_widget:
+        type: ComboBox
+    - type: SignalX
+      name: TimeErrorReset
+      label: Reset Time Errors
+      write_pv: $(IOC):GTIM_RESET
+      value: "1"
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Reset: "1"
+  - type: Group
+    name: UpdatePeriods
+    label: Update Periods (s)
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: CaUpdatePeriod
+      label: CA
+      write_pv: $(IOC):CA_UPD_TIME
+      write_widget:
+        type: TextWrite
+    - type: SignalRW
+      name: FdUpdatePeriod
+      label: File Descriptors
+      write_pv: $(IOC):FD_UPD_TIME
+      write_widget:
+        type: TextWrite
+    - type: SignalRW
+      name: LoadUpdatePeriod
+      label: CPU Load
+      write_pv: $(IOC):LOAD_UPD_TIME
+      write_widget:
+        type: TextWrite
+    - type: SignalRW
+      name: MemoryUpdatePeriod
+      label: Memory
+      write_pv: $(IOC):MEM_UPD_TIME
+      write_widget:
+        type: TextWrite
+  - type: Group
+    name: ScanModes
+    label: Scan Modes
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: ScanMode10Hz
+      label: 10 Hz Scan Mode
+      write_pv: $(IOC):10HZ_MODE
+      write_widget:
+        type: ComboBox
+    - type: SignalRW
+      name: ScanMode5Hz
+      label: 5 Hz Scan Mode
+      write_pv: $(IOC):5HZ_MODE
+      write_widget:
+        type: ComboBox
+    - type: SignalRW
+      name: ScanMode2Hz
+      label: 2 Hz Scan Mode
+      write_pv: $(IOC):2HZ_MODE
+      write_widget:
+        type: ComboBox
+    - type: SignalRW
+      name: ScanMode1Hz
+      label: 1 Hz Scan Mode
+      write_pv: $(IOC):1HZ_MODE
+      write_widget:
+        type: ComboBox
+    - type: SignalRW
+      name: ScanMode05Hz
+      label: 0.5 Hz Scan Mode
+      write_pv: $(IOC):05HZ_MODE
+      write_widget:
+        type: ComboBox
+    - type: SignalRW
+      name: ScanMode02Hz
+      label: 0.2 Hz Scan Mode
+      write_pv: $(IOC):02HZ_MODE
+      write_widget:
+        type: ComboBox
+    - type: SignalRW
+      name: ScanMode01Hz
+      label: 0.1 Hz Scan Mode
+      write_pv: $(IOC):01HZ_MODE
+      write_widget:
+        type: ComboBox

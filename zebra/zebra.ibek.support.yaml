@@ -36,6 +36,14 @@ entity_models:
           DIV:
           name:
 
+    pvi:
+      yaml_path: zebraLastDivDiff.pvi.device.yaml
+      ui_macros:
+        DIV:
+        P:
+        Q:
+      pv_prefix: "$(P)$(Q):PC_DIV$(DIV)_"
+
   - name: zebra
     description: |-
       Controls the zebra signal converter box
@@ -254,3 +262,10 @@ entity_models:
           M3DIR:
           M1MULT:
           M2DIR:
+
+    pvi:
+      yaml_path: zebra.pvi.device.yaml
+      ui_macros:
+        P:
+        Q:
+      pv_prefix: "$(P)$(Q):"

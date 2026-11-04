@@ -1,0 +1,269 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# An inverted magnetron gauge on an MKS 937A, from mks937aImg.template at mks937a 3-0.
+# Turning off a gauge while the beamline is open to the front end can trip the machine.
+
+label: mks937aImg
+children:
+- type: Group
+  name: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: P
+    label: Pressure (mbar)
+    read_pv: $(device):P
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Sta
+    label: Status
+    read_pv: $(device):STA
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ProSp
+    label: IMG Overpressure
+    read_pv: $(device):PRO:SP
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: RlySp
+    label: Valve Interlock
+    read_pv: $(device):RLY:SP
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: RlaSp
+    label: MPS Interlock
+    read_pv: $(device):RLA:SP
+    read_widget:
+      type: TextRead
+- type: Group
+  name: Control
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: CchvState
+    label: Cold Cathode
+    read_pv: $(device):CCHV
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: Switching
+    label: Switching
+    read_pv: $(device):SWITCHING
+    read_widget:
+      type: LED
+- type: Group
+  name: Interlocks
+  label: Interlocks
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Details2
+    label: IMG Enable
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: CtlSp
+      label: IMG Enable
+      read_pv: $(device):CTL:SP
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CtlGetdis
+      label: IMG Enable Mode
+      read_pv: $(device):CTL:GETDIS
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: Details3
+    label: Setpoint Write Inhibit
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: CtlIlksetspNowrite
+      label: IMG Enable
+      read_pv: $(device):CTL:ILKSETSP:NOWRITE
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: ProIlksetspNowrite
+      label: IMG Overpressure
+      read_pv: $(device):PRO:ILKSETSP:NOWRITE
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: RlyIlksetspNowrite
+      label: Valve Interlock
+      read_pv: $(device):RLY:ILKSETSP:NOWRITE
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: RlaIlksetspNowrite
+      label: MPS Interlock
+      read_pv: $(device):RLA:ILKSETSP:NOWRITE
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: RlaExists
+      label: MPS Relay Exists
+      read_pv: $(device):RLA:EXISTS
+      read_widget:
+        type: LED
+- type: Group
+  name: MoreDetails
+  label: More Details
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Details4
+    label: Details
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Plog
+      label: Log Pressure
+      read_pv: $(device):PLOG
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Pmax
+      label: Max Pressure
+      read_pv: $(device):PMAX
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Pmin
+      label: Min Pressure
+      read_pv: $(device):PMIN
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Error
+      label: Last Error
+      read_pv: $(device):ERROR
+      read_widget:
+        type: TextRead
+        format: string
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: ColdCathode
+    label: Off trips the machine if open to the Front End
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: Cchv
+      label: Cold Cathode
+      write_pv: $(device):CCHV
+      write_widget:
+        type: ToggleButton
+      read_pv: $(device):CCHV
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: Offwarn
+      label: Off Warning
+      read_pv: $(device):OFFWARN
+      read_widget:
+        type: LED
+  - type: Group
+    name: Setpoints
+    label: Interlock Setpoints
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: CtlSetsp
+      label: IMG Enable
+      write_pv: $(device):CTL:SETSP
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):CTL:SP
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: ProSetsp
+      label: IMG Overpressure
+      write_pv: $(device):PRO:SETSP
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):PRO:SP
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: RlySetsp
+      label: Valve Interlock
+      write_pv: $(device):RLY:SETSP
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):RLY:SP
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: RlaSetsp
+      label: MPS Interlock
+      write_pv: $(device):RLA:SETSP
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):RLA:SP
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: Enables
+    label: Interlock Enables
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: CtlEnable
+      label: IMG Enable
+      write_pv: $(device):CTL:ENABLE
+      write_widget:
+        type: ComboBox
+      read_pv: $(device):CTL:GETDIS
+      read_widget:
+        type: TextRead
+    - type: SignalW
+      name: ProEnable
+      label: IMG Overpressure
+      write_pv: $(device):PRO:ENABLE
+      write_widget:
+        type: ComboBox
+    - type: SignalW
+      name: RlyEnable
+      label: Valve Interlock
+      write_pv: $(device):RLY:ENABLE
+      write_widget:
+        type: ComboBox
+    - type: SignalW
+      name: RlaEnable
+      label: MPS Interlock
+      write_pv: $(device):RLA:ENABLE
+      write_widget:
+        type: ComboBox

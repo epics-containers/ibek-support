@@ -57,3 +57,10 @@ entity_models:
           PORT:
           TIMEOUT:
           ADDR:
+
+    pvi:
+      yaml_path: pvaDriver.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv_prefix: "$(P)$(R)"

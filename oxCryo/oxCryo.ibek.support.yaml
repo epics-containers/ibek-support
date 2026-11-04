@@ -46,6 +46,13 @@ entity_models:
         args:
           .*:
 
+    pvi:
+      yaml_path: oxCryo_OXPH700.pvi.device.yaml
+      ui_macros:
+        P:
+        Q:
+      pv_prefix: "$(P)$(Q):"
+
   - name: OXCS700
     description: |-
       Control for Oxford cryostream 700 series
@@ -82,6 +89,13 @@ entity_models:
       - file: OXCS700.template
         args:
           .*:
+
+    pvi:
+      yaml_path: oxCryo_OXCS700.pvi.device.yaml
+      ui_macros:
+        P:
+        Q:
+      pv_prefix: "$(P)$(Q):"
 
   - name: OXCB700
     description: |-
@@ -120,6 +134,13 @@ entity_models:
         args:
           .*:
 
+    pvi:
+      yaml_path: OXCB700.pvi.device.yaml
+      ui_macros:
+        P:
+        Q:
+      pv_prefix: "$(P)$(Q):"
+
   - name: OXNH700
     description: |-
       Control for Oxford N-Helix 700 series
@@ -157,6 +178,13 @@ entity_models:
         args:
           .*:
 
+    pvi:
+      yaml_path: oxCryo_OXNH700.pvi.device.yaml
+      ui_macros:
+        P:
+        Q:
+      pv_prefix: "$(P)$(Q):"
+
   - name: OXCB800
     description: |-
       Control for Oxford Cryostream 800 series (Cobra)
@@ -193,3 +221,10 @@ entity_models:
       - file: OXCB800.template
         args:
           .*:
+
+    pvi:
+      yaml_path: OXCB800.pvi.device.yaml
+      ui_macros:
+        P:
+        Q:
+      pv_prefix: "$(P)$(Q):"

@@ -1,0 +1,193 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+# Grouped from the DLS EDM screen xspress_mca.edl (xspress3 3-2-1).
+# Generated from that screen. Hand edits may be overwritten by regeneration.
+
+label: xspress3_channel
+children:
+- type: Group
+  name: XspressSca
+  label: xspress_sca
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: ChannelChanScalerData
+    label: Channel $(CHAN_NUM) Scaler Data
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: Group
+      name: RowSca5Value
+      label: 5 Window 1
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: Sca5Value
+        read_pv: $(P)$(R)C$(CHAN_NUM)_SCA5:Value_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Sca5Llm
+        write_pv: $(P)$(R)C$(CHAN_NUM)_SCA5_LLM
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)C$(CHAN_NUM)_SCA5_LLM_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Sca5Hlm
+        write_pv: $(P)$(R)C$(CHAN_NUM)_SCA5_HLM
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)C$(CHAN_NUM)_SCA5_HLM_RBV
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: RowSca6Value
+      label: 6 Window 2
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: Sca6Value
+        read_pv: $(P)$(R)C$(CHAN_NUM)_SCA6:Value_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Sca6Llm
+        write_pv: $(P)$(R)C$(CHAN_NUM)_SCA6_LLM
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)C$(CHAN_NUM)_SCA6_LLM_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Sca6Hlm
+        write_pv: $(P)$(R)C$(CHAN_NUM)_SCA6_HLM
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)C$(CHAN_NUM)_SCA6_HLM_RBV
+        read_widget:
+          type: TextRead
+    - type: SignalR
+      name: Sca0Value
+      label: 0 Time
+      read_pv: $(P)$(R)C$(CHAN_NUM)_SCA0:Value_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Sca8Value
+      label: 8 Total Time
+      read_pv: $(P)$(R)C$(CHAN_NUM)_SCA8:Value_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Sca1Value
+      label: 1 Reset Ticks
+      read_pv: $(P)$(R)C$(CHAN_NUM)_SCA1:Value_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Sca2Value
+      label: 2 Reset Count
+      read_pv: $(P)$(R)C$(CHAN_NUM)_SCA2:Value_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Sca3Value
+      label: 3 All Event
+      read_pv: $(P)$(R)C$(CHAN_NUM)_SCA3:Value_RBV
+      read_widget:
+        type: TextRead
+    - type: Group
+      name: RowSca4Value
+      label: 4 All Good
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: Sca4Value
+        read_pv: $(P)$(R)C$(CHAN_NUM)_SCA4:Value_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Sca4Threshold
+        write_pv: $(P)$(R)C$(CHAN_NUM)_SCA4_THRESHOLD
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)C$(CHAN_NUM)_SCA4_THRESHOLD_RBV
+        read_widget:
+          type: TextRead
+    - type: SignalR
+      name: Sca7Value
+      label: 7 Pileup
+      read_pv: $(P)$(R)C$(CHAN_NUM)_SCA7:Value_RBV
+      read_widget:
+        type: TextRead
+- type: Group
+  name: XspressDtc1chan
+  label: xspress_dtc_1chan
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: General
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: Group
+      name: RowDtcFlags
+      label: DtcFlags
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: DtcFlags
+        read_pv: $(P)$(R)C$(CHAN_NUM)_DTC_FLAGS_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: DtcAeg
+        read_pv: $(P)$(R)C$(CHAN_NUM)_DTC_AEG_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: DtcAeo
+        read_pv: $(P)$(R)C$(CHAN_NUM)_DTC_AEO_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: DtcIwg
+        read_pv: $(P)$(R)C$(CHAN_NUM)_DTC_IWG_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: DtcIwo
+        read_pv: $(P)$(R)C$(CHAN_NUM)_DTC_IWO_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: DtcAerg
+        read_pv: $(P)$(R)C$(CHAN_NUM)_DTC_AERG_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: DtcAero
+        read_pv: $(P)$(R)C$(CHAN_NUM)_DTC_AERO_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: DtcIwrg
+        read_pv: $(P)$(R)C$(CHAN_NUM)_DTC_IWRG_RBV
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: DtcIwro
+        read_pv: $(P)$(R)C$(CHAN_NUM)_DTC_IWRO_RBV
+        read_widget:
+          type: TextRead

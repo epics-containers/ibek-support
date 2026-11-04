@@ -1,0 +1,85 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# A Pirani gauge on an MKS 937B, from mks937bPirg.template at mks937b 3-1-0.
+
+label: mks937bPirg
+children:
+- type: Group
+  name: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: P
+    label: Pressure (mbar)
+    read_pv: $(device):P
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Sta
+    label: Status
+    read_pv: $(device):STA
+    read_widget:
+      type: TextRead
+- type: Group
+  name: Control
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Isenabled
+    label: Pirg filament
+    read_pv: $(device):ISENABLED
+    read_widget:
+      type: TextRead
+- type: Group
+  name: MoreDetails
+  label: More Details
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Details2
+    label: Details
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Plog
+      label: Log Pressure
+      read_pv: $(device):PLOG
+      read_widget:
+        type: TextRead
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Filament
+    label: Off could trip the beam
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: Enable
+      label: Pirg filament
+      write_pv: $(device):ENABLE
+      write_widget:
+        type: ComboBox
+      read_pv: $(device):ISENABLED
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Offwarn
+      label: Off Warning
+      read_pv: $(device):OFFWARN
+      read_widget:
+        type: LED

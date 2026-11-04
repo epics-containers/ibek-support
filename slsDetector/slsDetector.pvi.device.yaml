@@ -64,7 +64,8 @@ children:
       type: TextRead
 
   - type: SignalRW
-    name: Threshold energy mode
+    name: Thr1Only
+    label: Threshold energy mode
     write_pv: $(P)$(R)Thr1Only
     write_widget:
       type: ComboBox
