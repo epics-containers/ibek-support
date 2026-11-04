@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# Upstream paulscherrerinstitute/ADZMQ at 1.4.3: NDPluginZMQ creates no parameters of its
+# own, so all its records are NDPluginBase.template: the shared NDPluginBase device, plus
+# the readbacks that device does not show.
+
+label: NDPluginZMQ
+children:
+- type: Include
+  file_name: NDPluginBase
+
+- type: Group
+  name: ArrayProps
+  label: Array Props
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: ArrayRate
+    label: Array Rate (fps)
+    read_pv: $(P)$(R)ArrayRate_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ArraySize0
+    label: Dim0 Size
+    read_pv: $(P)$(R)ArraySize0_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ArraySize1
+    label: Dim1 Size
+    read_pv: $(P)$(R)ArraySize1_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ArraySize2
+    label: Dim2 Size
+    read_pv: $(P)$(R)ArraySize2_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: PoolUsedBuffers
+    label: Pool Used Buffers
+    read_pv: $(P)$(R)PoolUsedBuffers
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: QueueUse
+    label: Queue Use
+    read_pv: $(P)$(R)QueueUse
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: MaxArrayRate
+    label: Max Array Rate (fps)
+    write_pv: $(P)$(R)MaxArrayRate
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)MaxArrayRate_RBV
+    read_widget:
+      type: TextRead

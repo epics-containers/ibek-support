@@ -1,0 +1,1414 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# An optical table, from upstream optics R2-14 table.db and tableRecord.dbd, with groups from
+# upstream's table_full.adl, table_limits.adl and table_fixedPoints.adl screens. The motor
+# records themselves belong to their own devices, so this shows the table record's copy of them.
+
+label: table
+children:
+- type: Group
+  name: Axes
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: Group
+    name: AxisX
+    label: X
+    layout:
+      type: Row
+      header:
+      - Demand
+      - Encoder
+      - Low Limit
+      - High Limit
+    children:
+    - type: SignalW
+      name: FieldX
+      write_pv: $(P)$(T).X
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: FieldEx
+      read_pv: $(P)$(T).EX
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: FieldLlx
+      read_pv: $(P)$(T).LLX
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: FieldHlx
+      read_pv: $(P)$(T).HLX
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: AxisY
+    label: Y
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: FieldY
+      write_pv: $(P)$(T).Y
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: FieldEy
+      read_pv: $(P)$(T).EY
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: FieldLly
+      read_pv: $(P)$(T).LLY
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: FieldHly
+      read_pv: $(P)$(T).HLY
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: AxisZ
+    label: Z
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: FieldZ
+      write_pv: $(P)$(T).Z
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: FieldEz
+      read_pv: $(P)$(T).EZ
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: FieldLlz
+      read_pv: $(P)$(T).LLZ
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: FieldHlz
+      read_pv: $(P)$(T).HLZ
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: AxisAx
+    label: X Angle
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: FieldAx
+      write_pv: $(P)$(T).AX
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: FieldEax
+      read_pv: $(P)$(T).EAX
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: FieldLlax
+      read_pv: $(P)$(T).LLAX
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: FieldHlax
+      read_pv: $(P)$(T).HLAX
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: AxisAy
+    label: Y Angle
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: FieldAy
+      write_pv: $(P)$(T).AY
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: FieldEay
+      read_pv: $(P)$(T).EAY
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: FieldLlay
+      read_pv: $(P)$(T).LLAY
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: FieldHlay
+      read_pv: $(P)$(T).HLAY
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: AxisAz
+    label: Z Angle
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: FieldAz
+      write_pv: $(P)$(T).AZ
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: FieldEaz
+      read_pv: $(P)$(T).EAZ
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: FieldLlaz
+      read_pv: $(P)$(T).LLAZ
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: FieldHlaz
+      read_pv: $(P)$(T).HLAZ
+      read_widget:
+        type: TextRead
+- type: Group
+  name: General
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalW
+    name: Stop
+    label: Stop
+    write_pv: $(P)$(Q):stop
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Stop: '1'
+  - type: SignalR
+    name: Done
+    label: Done
+    read_pv: $(P)$(Q):done
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: FieldLvio
+    label: Limit Violation
+    read_pv: $(P)$(T).LVIO
+    read_widget:
+      type: LED
+  - type: SignalW
+    name: FpSelect
+    label: Fixed Point
+    write_pv: $(P)$(Q)fpSelect
+    write_widget:
+      type: ComboBox
+  - type: SignalW
+    name: FieldSet
+    label: Set/Use
+    write_pv: $(P)$(T).SET
+    write_widget:
+      type: ComboBox
+  - type: SignalW
+    name: FieldSync
+    label: Sync With Motors
+    write_pv: $(P)$(T).SYNC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Sync: '1'
+  - type: SignalW
+    name: FieldInit
+    label: Init Table
+    write_pv: $(P)$(T).INIT
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Init: '1'
+  - type: SignalW
+    name: FieldZero
+    label: Zero Table
+    write_pv: $(P)$(T).ZERO
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Zero: '1'
+- type: Group
+  name: Tweak
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: TweakX
+    label: X Tweak
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: XTweakVal
+      label: Step
+      write_pv: $(P)$(Q):x_tweakVal
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: XTweakForward
+      label: Forward
+      write_pv: $(P)$(Q):x_tweak.A
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Forward: '1'
+    - type: SignalW
+      name: XTweakReverse
+      label: Reverse
+      write_pv: $(P)$(Q):x_tweak.B
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Reverse: '1'
+  - type: Group
+    name: TweakY
+    label: Y Tweak
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: YTweakVal
+      label: Step
+      write_pv: $(P)$(Q):y_tweakVal
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: YTweakForward
+      label: Forward
+      write_pv: $(P)$(Q):y_tweak.A
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Forward: '1'
+    - type: SignalW
+      name: YTweakReverse
+      label: Reverse
+      write_pv: $(P)$(Q):y_tweak.B
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Reverse: '1'
+  - type: Group
+    name: TweakZ
+    label: Z Tweak
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: ZTweakVal
+      label: Step
+      write_pv: $(P)$(Q):z_tweakVal
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: ZTweakForward
+      label: Forward
+      write_pv: $(P)$(Q):z_tweak.A
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Forward: '1'
+    - type: SignalW
+      name: ZTweakReverse
+      label: Reverse
+      write_pv: $(P)$(Q):z_tweak.B
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Reverse: '1'
+  - type: Group
+    name: TweakAx
+    label: X Angle Tweak
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: AxTweakVal
+      label: Step
+      write_pv: $(P)$(Q):ax_tweakVal
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: AxTweakForward
+      label: Forward
+      write_pv: $(P)$(Q):ax_tweak.A
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Forward: '1'
+    - type: SignalW
+      name: AxTweakReverse
+      label: Reverse
+      write_pv: $(P)$(Q):ax_tweak.B
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Reverse: '1'
+  - type: Group
+    name: TweakAy
+    label: Y Angle Tweak
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: AyTweakVal
+      label: Step
+      write_pv: $(P)$(Q):ay_tweakVal
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: AyTweakForward
+      label: Forward
+      write_pv: $(P)$(Q):ay_tweak.A
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Forward: '1'
+    - type: SignalW
+      name: AyTweakReverse
+      label: Reverse
+      write_pv: $(P)$(Q):ay_tweak.B
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Reverse: '1'
+  - type: Group
+    name: TweakAz
+    label: Z Angle Tweak
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: AzTweakVal
+      label: Step
+      write_pv: $(P)$(Q):az_tweakVal
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: AzTweakForward
+      label: Forward
+      write_pv: $(P)$(Q):az_tweak.A
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Forward: '1'
+    - type: SignalW
+      name: AzTweakReverse
+      label: Reverse
+      write_pv: $(P)$(Q):az_tweak.B
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Reverse: '1'
+- type: Group
+  name: Setup
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Geometry
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: FieldGeom
+      label: Geometry
+      write_pv: $(P)$(T).GEOM
+      write_widget:
+        type: ComboBox
+    - type: SignalW
+      name: FieldAunit
+      label: Angle Units
+      write_pv: $(P)$(T).AUNIT
+      write_widget:
+        type: ComboBox
+    - type: SignalW
+      name: FieldLx
+      label: Wheelbase X
+      write_pv: $(P)$(T).LX
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: FieldLz
+      label: Wheelbase Z
+      write_pv: $(P)$(T).LZ
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: FieldYang
+      label: Orientation Angle
+      write_pv: $(P)$(T).YANG
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: FieldLegu
+      label: Linear Units
+      read_pv: $(P)$(T).LEGU
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: FieldAegu
+      label: Angular Units
+      read_pv: $(P)$(T).AEGU
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: Points
+    label: Fixed and Reference Points
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: Group
+      name: FixedPoint
+      label: Fixed Point
+      layout:
+        type: Row
+        header:
+        - X
+        - Y
+        - Z
+      children:
+      - type: SignalW
+        name: FieldSx
+        write_pv: $(P)$(T).SX
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldSy
+        write_pv: $(P)$(T).SY
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldSz
+        write_pv: $(P)$(T).SZ
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: ReferencePoint
+      label: Reference Point
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: FieldRx
+        write_pv: $(P)$(T).RX
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldRy
+        write_pv: $(P)$(T).RY
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldRz
+        write_pv: $(P)$(T).RZ
+        write_widget:
+          type: TextWrite
+  - type: Group
+    name: Record
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: FieldDesc
+      label: Description
+      read_pv: $(P)$(T).DESC
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: FieldVers
+      label: Code Version
+      read_pv: $(P)$(T).VERS
+      read_widget:
+        type: TextRead
+- type: Group
+  name: FixedPoints
+  label: Fixed Points
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Details
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: Group
+      name: Fp0
+      label: Fixed Point 0
+      layout:
+        type: Row
+        header:
+        - Name
+        - X
+        - Y
+        - Z
+      children:
+      - type: SignalW
+        name: Fp0Name
+        write_pv: $(P)$(Q)fp0Name
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp0Do2
+        write_pv: $(P)$(Q)fp0.DO2
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp0Do3
+        write_pv: $(P)$(Q)fp0.DO3
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp0Do4
+        write_pv: $(P)$(Q)fp0.DO4
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: Fp1
+      label: Fixed Point 1
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: Fp1Name
+        write_pv: $(P)$(Q)fp1Name
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp1Do2
+        write_pv: $(P)$(Q)fp1.DO2
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp1Do3
+        write_pv: $(P)$(Q)fp1.DO3
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp1Do4
+        write_pv: $(P)$(Q)fp1.DO4
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: Fp2
+      label: Fixed Point 2
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: Fp2Name
+        write_pv: $(P)$(Q)fp2Name
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp2Do2
+        write_pv: $(P)$(Q)fp2.DO2
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp2Do3
+        write_pv: $(P)$(Q)fp2.DO3
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp2Do4
+        write_pv: $(P)$(Q)fp2.DO4
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: Fp3
+      label: Fixed Point 3
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: Fp3Name
+        write_pv: $(P)$(Q)fp3Name
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp3Do2
+        write_pv: $(P)$(Q)fp3.DO2
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp3Do3
+        write_pv: $(P)$(Q)fp3.DO3
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp3Do4
+        write_pv: $(P)$(Q)fp3.DO4
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: Fp4
+      label: Fixed Point 4
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: Fp4Name
+        write_pv: $(P)$(Q)fp4Name
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp4Do2
+        write_pv: $(P)$(Q)fp4.DO2
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp4Do3
+        write_pv: $(P)$(Q)fp4.DO3
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp4Do4
+        write_pv: $(P)$(Q)fp4.DO4
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: Fp5
+      label: Fixed Point 5
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: Fp5Name
+        write_pv: $(P)$(Q)fp5Name
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp5Do2
+        write_pv: $(P)$(Q)fp5.DO2
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp5Do3
+        write_pv: $(P)$(Q)fp5.DO3
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp5Do4
+        write_pv: $(P)$(Q)fp5.DO4
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: Fp6
+      label: Fixed Point 6
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: Fp6Name
+        write_pv: $(P)$(Q)fp6Name
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp6Do2
+        write_pv: $(P)$(Q)fp6.DO2
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp6Do3
+        write_pv: $(P)$(Q)fp6.DO3
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp6Do4
+        write_pv: $(P)$(Q)fp6.DO4
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: Fp7
+      label: Fixed Point 7
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: Fp7Name
+        write_pv: $(P)$(Q)fp7Name
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp7Do2
+        write_pv: $(P)$(Q)fp7.DO2
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp7Do3
+        write_pv: $(P)$(Q)fp7.DO3
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp7Do4
+        write_pv: $(P)$(Q)fp7.DO4
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: Fp8
+      label: Fixed Point 8
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: Fp8Name
+        write_pv: $(P)$(Q)fp8Name
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp8Do2
+        write_pv: $(P)$(Q)fp8.DO2
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp8Do3
+        write_pv: $(P)$(Q)fp8.DO3
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp8Do4
+        write_pv: $(P)$(Q)fp8.DO4
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: Fp9
+      label: Fixed Point 9
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: Fp9Name
+        write_pv: $(P)$(Q)fp9Name
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp9Do2
+        write_pv: $(P)$(Q)fp9.DO2
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp9Do3
+        write_pv: $(P)$(Q)fp9.DO3
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: Fp9Do4
+        write_pv: $(P)$(Q)fp9.DO4
+        write_widget:
+          type: TextWrite
+- type: Group
+  name: UserLimits
+  label: User Limits
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Absolute
+    label: Absolute
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: Group
+      name: AbsX
+      label: X
+      layout:
+        type: Row
+        header:
+        - Low
+        - High
+      children:
+      - type: SignalW
+        name: FieldUlx
+        write_pv: $(P)$(T).ULX
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldUhx
+        write_pv: $(P)$(T).UHX
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: AbsY
+      label: Y
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: FieldUly
+        write_pv: $(P)$(T).ULY
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldUhy
+        write_pv: $(P)$(T).UHY
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: AbsZ
+      label: Z
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: FieldUlz
+        write_pv: $(P)$(T).ULZ
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldUhz
+        write_pv: $(P)$(T).UHZ
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: AbsAx
+      label: X Angle
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: FieldUlax
+        write_pv: $(P)$(T).ULAX
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldUhax
+        write_pv: $(P)$(T).UHAX
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: AbsAy
+      label: Y Angle
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: FieldUlay
+        write_pv: $(P)$(T).ULAY
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldUhay
+        write_pv: $(P)$(T).UHAY
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: AbsAz
+      label: Z Angle
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: FieldUlaz
+        write_pv: $(P)$(T).ULAZ
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldUhaz
+        write_pv: $(P)$(T).UHAZ
+        write_widget:
+          type: TextWrite
+  - type: Group
+    name: Relative
+    label: Relative
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: Group
+      name: RelX
+      label: X
+      layout:
+        type: Row
+        header:
+        - Low
+        - High
+      children:
+      - type: SignalW
+        name: FieldUlxr
+        write_pv: $(P)$(T).ULXR
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldUhxr
+        write_pv: $(P)$(T).UHXR
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: RelY
+      label: Y
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: FieldUlyr
+        write_pv: $(P)$(T).ULYR
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldUhyr
+        write_pv: $(P)$(T).UHYR
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: RelZ
+      label: Z
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: FieldUlzr
+        write_pv: $(P)$(T).ULZR
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldUhzr
+        write_pv: $(P)$(T).UHZR
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: RelAx
+      label: X Angle
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: FieldUlaxr
+        write_pv: $(P)$(T).ULAXR
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldUhaxr
+        write_pv: $(P)$(T).UHAXR
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: RelAy
+      label: Y Angle
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: FieldUlayr
+        write_pv: $(P)$(T).ULAYR
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldUhayr
+        write_pv: $(P)$(T).UHAYR
+        write_widget:
+          type: TextWrite
+    - type: Group
+      name: RelAz
+      label: Z Angle
+      layout:
+        type: Row
+      children:
+      - type: SignalW
+        name: FieldUlazr
+        write_pv: $(P)$(T).ULAZR
+        write_widget:
+          type: TextWrite
+      - type: SignalW
+        name: FieldUhazr
+        write_pv: $(P)$(T).UHAZR
+        write_widget:
+          type: TextWrite
+- type: Group
+  name: Diagnostics
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: AxisDetail
+    label: Axis Detail
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: Group
+      name: DetailX
+      label: X
+      layout:
+        type: Row
+        header:
+        - True Value
+        - Readback
+        - Offset
+      children:
+      - type: SignalR
+        name: FieldXL
+        read_pv: $(P)$(T).XL
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldXRb
+        read_pv: $(P)$(T).XRB
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldX0
+        read_pv: $(P)$(T).X0
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: DetailY
+      label: Y
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: FieldYL
+        read_pv: $(P)$(T).YL
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldYRb
+        read_pv: $(P)$(T).YRB
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldY0
+        read_pv: $(P)$(T).Y0
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: DetailZ
+      label: Z
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: FieldZL
+        read_pv: $(P)$(T).ZL
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldZRb
+        read_pv: $(P)$(T).ZRB
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldZ0
+        read_pv: $(P)$(T).Z0
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: DetailAx
+      label: X Angle
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: FieldAxL
+        read_pv: $(P)$(T).AXL
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldAxRb
+        read_pv: $(P)$(T).AXRB
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldAx0
+        read_pv: $(P)$(T).AX0
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: DetailAy
+      label: Y Angle
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: FieldAyL
+        read_pv: $(P)$(T).AYL
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldAyRb
+        read_pv: $(P)$(T).AYRB
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldAy0
+        read_pv: $(P)$(T).AY0
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: DetailAz
+      label: Z Angle
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: FieldAzL
+        read_pv: $(P)$(T).AZL
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldAzRb
+        read_pv: $(P)$(T).AZRB
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldAz0
+        read_pv: $(P)$(T).AZ0
+        read_widget:
+          type: TextRead
+  - type: Group
+    name: Motors
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: Group
+      name: Motor0X
+      label: Motor 0X
+      layout:
+        type: Row
+        header:
+        - Demand
+        - Readback
+        - Encoder
+        - Speed
+        - Low Limit
+        - High Limit
+      children:
+      - type: SignalR
+        name: FieldM0X
+        read_pv: $(P)$(T).M0X
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldR0X
+        read_pv: $(P)$(T).R0X
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldE0X
+        read_pv: $(P)$(T).E0X
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldV0X
+        read_pv: $(P)$(T).V0X
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldL0X
+        read_pv: $(P)$(T).L0X
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldH0X
+        read_pv: $(P)$(T).H0X
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: Motor0Y
+      label: Motor 0Y
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: FieldM0Y
+        read_pv: $(P)$(T).M0Y
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldR0Y
+        read_pv: $(P)$(T).R0Y
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldE0Y
+        read_pv: $(P)$(T).E0Y
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldV0Y
+        read_pv: $(P)$(T).V0Y
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldL0Y
+        read_pv: $(P)$(T).L0Y
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldH0Y
+        read_pv: $(P)$(T).H0Y
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: Motor1Y
+      label: Motor 1Y
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: FieldM1Y
+        read_pv: $(P)$(T).M1Y
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldR1Y
+        read_pv: $(P)$(T).R1Y
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldE1Y
+        read_pv: $(P)$(T).E1Y
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldV1Y
+        read_pv: $(P)$(T).V1Y
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldL1Y
+        read_pv: $(P)$(T).L1Y
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldH1Y
+        read_pv: $(P)$(T).H1Y
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: Motor2X
+      label: Motor 2X
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: FieldM2X
+        read_pv: $(P)$(T).M2X
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldR2X
+        read_pv: $(P)$(T).R2X
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldE2X
+        read_pv: $(P)$(T).E2X
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldV2X
+        read_pv: $(P)$(T).V2X
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldL2X
+        read_pv: $(P)$(T).L2X
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldH2X
+        read_pv: $(P)$(T).H2X
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: Motor2Y
+      label: Motor 2Y
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: FieldM2Y
+        read_pv: $(P)$(T).M2Y
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldR2Y
+        read_pv: $(P)$(T).R2Y
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldE2Y
+        read_pv: $(P)$(T).E2Y
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldV2Y
+        read_pv: $(P)$(T).V2Y
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldL2Y
+        read_pv: $(P)$(T).L2Y
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldH2Y
+        read_pv: $(P)$(T).H2Y
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: Motor2Z
+      label: Motor 2Z
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: FieldM2Z
+        read_pv: $(P)$(T).M2Z
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldR2Z
+        read_pv: $(P)$(T).R2Z
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldE2Z
+        read_pv: $(P)$(T).E2Z
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldV2Z
+        read_pv: $(P)$(T).V2Z
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldL2Z
+        read_pv: $(P)$(T).L2Z
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: FieldH2Z
+        read_pv: $(P)$(T).H2Z
+        read_widget:
+          type: TextRead

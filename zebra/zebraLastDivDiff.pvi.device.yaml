@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# Upstream DiamondLightSource/zebra at 84b69db, its default branch HEAD: this support has no
+# install.yml to fix a version. zebraLastDivDiff.template.
+
+label: zebraLastDivDiff
+children:
+- type: Group
+  name: General
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Diff
+    label: Last Div Difference
+    read_pv: $(P)$(Q):PC_DIV$(DIV)_DIFF
+    read_widget:
+      type: TextRead

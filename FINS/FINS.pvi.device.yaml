@@ -1,0 +1,416 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# FINS PLC diagnostics, from FINS.template at FINS 3-13.
+# START values are BCD, so they display as hex. The error bits follow the comments in the
+# template: the bit names against CPU:FATAL are the fatal ones.
+
+label: FINS
+children:
+- type: Group
+  name: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: ModelCpu
+    label: CPU Model
+    read_pv: $(device):MODEL:CPU
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: ModelEtn
+    label: Eth Model
+    read_pv: $(device):MODEL:ETN
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: Mode
+    label: Mode
+    read_pv: $(device):MODE
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Plctype
+    label: PLC Type
+    read_pv: $(device):PLCTYPE
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: CpuFatal
+    label: Fatal Errors
+    read_pv: $(device):CPU:FATAL
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: CpuNonfatal
+    label: Non Fatal Errors
+    read_pv: $(device):CPU:NONFATAL
+    read_widget:
+      type: TextRead
+  - type: SignalW
+    name: ModelCpuProc
+    label: Read CPU Model
+    write_pv: $(device):MODEL:CPU.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Update: '1'
+- type: Group
+  name: CycleTime
+  label: Cycle Time
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: CycleMean
+    label: Cycle Mean
+    read_pv: $(device):CYCLE:MEAN
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: CycleMax
+    label: Cycle Max
+    read_pv: $(device):CYCLE:MAX
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: CycleMin
+    label: Cycle Min
+    read_pv: $(device):CYCLE:MIN
+    read_widget:
+      type: TextRead
+  - type: SignalW
+    name: CycleReset
+    label: Reset Statistics
+    write_pv: $(device):CYCLE:RESET
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Reset: '1'
+- type: Group
+  name: PlcDetails
+  label: PLC Details
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Identity
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Serialid
+      label: 'Serial #'
+      read_pv: $(device):SERIALID
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Software
+      label: 'Software #'
+      read_pv: $(device):SOFTWARE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Revision
+      label: Software Revision
+      read_pv: $(device):REVISION
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Units
+      label: I/O Units
+      read_pv: $(device):UNITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CpuStatus
+      label: CPU Status
+      read_pv: $(device):CPU:STATUS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Echotest
+      label: Echo Test Node
+      read_pv: $(device):ECHOTEST
+      read_widget:
+        type: TextRead
+    - type: SignalW
+      name: EchotestProc
+      label: Run Echo Test
+      write_pv: $(device):ECHOTEST.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Run: '1'
+  - type: Group
+    name: Clock
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: Group
+      name: RowClockYear
+      label: Date
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: ClockYear
+        read_pv: $(device):CLOCK:YEAR
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: ClockMon
+        read_pv: $(device):CLOCK:MON
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: ClockDay
+        read_pv: $(device):CLOCK:DAY
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: RowClockHour
+      label: Time
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: ClockHour
+        read_pv: $(device):CLOCK:HOUR
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: ClockMin
+        read_pv: $(device):CLOCK:MIN
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: ClockSec
+        read_pv: $(device):CLOCK:SEC
+        read_widget:
+          type: TextRead
+  - type: Group
+    name: Power
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: StartDays
+      label: Start Day
+      read_pv: $(device):START:DAYS
+      read_widget:
+        type: TextRead
+        format: hexadecimal
+    - type: Group
+      name: RowStartHour
+      label: Start Time
+      layout:
+        type: Row
+      children:
+      - type: SignalR
+        name: StartHour
+        read_pv: $(device):START:HOUR
+        read_widget:
+          type: TextRead
+          format: hexadecimal
+      - type: SignalR
+        name: StartMins
+        read_pv: $(device):START:MINS
+        read_widget:
+          type: TextRead
+          format: hexadecimal
+      - type: SignalR
+        name: StartSecs
+        read_pv: $(device):START:SECS
+        read_widget:
+          type: TextRead
+          format: hexadecimal
+    - type: SignalR
+      name: Powerints
+      label: Power Trips
+      read_pv: $(device):POWERINTS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Poweron
+      label: Power On
+      read_pv: $(device):POWERON
+      read_widget:
+        type: TextRead
+- type: Group
+  name: CpuErrors
+  label: CPU Errors
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: FatalErrors
+    label: Fatal Errors
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: FatalFals
+      label: FALS
+      read_pv: $(device):CPU:FATAL.B6
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: FatalCycleTime
+      label: Cycle Time
+      read_pv: $(device):CPU:FATAL.B8
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: FatalProgram
+      label: Program
+      read_pv: $(device):CPU:FATAL.B9
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: FatalIoSetting
+      label: I/O Setting
+      read_pv: $(device):CPU:FATAL.BA
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: FatalIoPoint
+      label: I/O Point
+      read_pv: $(device):CPU:FATAL.BB
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: FatalInnerBoard
+      label: Inner Board
+      read_pv: $(device):CPU:FATAL.BC
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: FatalDuplication
+      label: Duplication
+      read_pv: $(device):CPU:FATAL.BD
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: FatalIoBus
+      label: I/O Bus
+      read_pv: $(device):CPU:FATAL.BE
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: FatalMemory
+      label: Memory
+      read_pv: $(device):CPU:FATAL.BF
+      read_widget:
+        type: LED
+  - type: Group
+    name: NonFatalErrors
+    label: Non Fatal Errors
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: NonFatalSpecialIoSetting
+      label: Special I/O Setting
+      read_pv: $(device):CPU:NONFATAL.B2
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: NonFatalCs1CpuBus
+      label: CS1 CPU Bus Setting
+      read_pv: $(device):CPU:NONFATAL.B3
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: NonFatalBattery
+      label: Battery
+      read_pv: $(device):CPU:NONFATAL.B4
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: NonFatalSysmacBus
+      label: SYSMAC Bus
+      read_pv: $(device):CPU:NONFATAL.B5
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: NonFatalSpecialIo
+      label: Special I/O
+      read_pv: $(device):CPU:NONFATAL.B6
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: NonFatalCpuBusUnit
+      label: CPU Bus Unit
+      read_pv: $(device):CPU:NONFATAL.B7
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: NonFatalInnerBoard
+      label: Inner Board
+      read_pv: $(device):CPU:NONFATAL.B8
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: NonFatalIoVerification
+      label: I/O Verification
+      read_pv: $(device):CPU:NONFATAL.B9
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: NonFatalPcSetup
+      label: PC Setup
+      read_pv: $(device):CPU:NONFATAL.BA
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: NonFatalBasicIo
+      label: Basic I/O
+      read_pv: $(device):CPU:NONFATAL.BC
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: NonFatalInterruptTask
+      label: Interrupt Task
+      read_pv: $(device):CPU:NONFATAL.BD
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: NonFatalFal
+      label: FAL
+      read_pv: $(device):CPU:NONFATAL.BF
+      read_widget:
+        type: LED
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: ForcedBits
+    label: Forced Bits
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: ForcedBitsReset
+      label: Clear All Forced Bits
+      write_pv: $(device):FORCE:RESET.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Reset: '1'

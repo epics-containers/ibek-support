@@ -1,0 +1,401 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# Oxford Cryostream 800 series (Cobra), from upstream oxCryo 2026.9.1 OXCB800.template and OXCB800.proto.
+# Records the protocol never fills are left out, as are the byte-splitting calcouts.
+
+label: OXCB800
+children:
+- type: Group
+  name: Status
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Temp
+    label: Gas Temperature
+    read_pv: $(P)$(Q):TEMP
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Setpoint
+    label: Gas Setpoint
+    read_pv: $(P)$(Q):SETPOINT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Error
+    label: Gas Error
+    read_pv: $(P)$(Q):ERROR
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Targettemp
+    label: Target Temperature
+    read_pv: $(P)$(Q):TARGETTEMP
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Runmode
+    label: Run Mode
+    read_pv: $(P)$(Q):RUNMODE
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Phase
+    label: Phase
+    read_pv: $(P)$(Q):PHASE
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Ramprate
+    label: Ramp Rate
+    read_pv: $(P)$(Q):RAMPRATE
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Remaining
+    label: Time Remaining in Phase
+    read_pv: $(P)$(Q):REMAINING
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Gasflow
+    label: Gas Flow
+    read_pv: $(P)$(Q):GASFLOW
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Gasheat
+    label: Gas Heater
+    read_pv: $(P)$(Q):GASHEAT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: AlarmVala
+    label: Alarm Status
+    read_pv: $(P)$(Q):ALARM.VALA
+    read_widget:
+      type: TextRead
+      format: string
+- type: Group
+  name: Control
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalRW
+    name: Disable
+    label: Serial Comms
+    write_pv: $(P)$(Q):DISABLE
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(Q):DISABLE
+    read_widget:
+      type: TextRead
+  - type: SignalW
+    name: RestartProc
+    label: Start/Restart Program
+    write_pv: $(P)$(Q):RESTART.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Restart: '1'
+  - type: SignalW
+    name: Rtemp
+    label: Target Ramp Temperature
+    write_pv: $(P)$(Q):RTEMP
+    write_widget:
+      type: TextWrite
+  - type: SignalW
+    name: Rrate
+    label: Ramp Rate
+    write_pv: $(P)$(Q):RRATE
+    write_widget:
+      type: TextWrite
+  - type: SignalW
+    name: RampProc
+    label: Ramp
+    write_pv: $(P)$(Q):RAMP.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Ramp: '1'
+  - type: SignalW
+    name: Ctemp
+    label: Target Cool Temperature
+    write_pv: $(P)$(Q):CTEMP
+    write_widget:
+      type: TextWrite
+  - type: SignalW
+    name: CoolProc
+    label: Cool
+    write_pv: $(P)$(Q):COOL.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Cool: '1'
+  - type: SignalW
+    name: Ptime
+    label: Plat Time
+    write_pv: $(P)$(Q):PTIME
+    write_widget:
+      type: TextWrite
+  - type: SignalW
+    name: PlatProc
+    label: Plat
+    write_pv: $(P)$(Q):PLAT.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Plat: '1'
+  - type: SignalW
+    name: HoldProc
+    label: Hold
+    write_pv: $(P)$(Q):HOLD.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Hold: '1'
+  - type: SignalW
+    name: PauseProc
+    label: Pause
+    write_pv: $(P)$(Q):PAUSE.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Pause: '1'
+  - type: SignalW
+    name: ResumeProc
+    label: Resume
+    write_pv: $(P)$(Q):RESUME.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Resume: '1'
+  - type: SignalW
+    name: StopProc
+    label: Stop Program
+    write_pv: $(P)$(Q):STOP.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Stop: '1'
+  - type: SignalW
+    name: Erate
+    label: End Rate
+    write_pv: $(P)$(Q):ERATE
+    write_widget:
+      type: TextWrite
+  - type: SignalRW
+    name: Turbo
+    label: Turbo
+    write_pv: $(P)$(Q):TURBO
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(Q):TURBOMODE
+    read_widget:
+      type: TextRead
+- type: Group
+  name: Details
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Cooling
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Refrtemp
+      label: Coldhead Temperature
+      read_pv: $(P)$(Q):REFRTEMP
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Refrheat
+      label: Coldhead Heater
+      read_pv: $(P)$(Q):REFRHEAT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Gasheatavg
+      label: Gas Heater Average
+      read_pv: $(P)$(Q):GASHEATAVG
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Backpress
+      label: Back Pressure
+      read_pv: $(P)$(Q):BACKPRESS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Supplypres
+      label: Supplied Gas Pressure
+      read_pv: $(P)$(Q):SUPPLYPRES
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Vacgauge
+      label: Vacuum Gauge
+      read_pv: $(P)$(Q):VACGAUGE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Vacgaugepwr
+      label: Vacuum Gauge Power
+      read_pv: $(P)$(Q):VACGAUGEPWR
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: Cryodrive
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Cryostatus
+      label: Cryodrive Status
+      read_pv: $(P)$(Q):CRYOSTATUS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Cryospeed
+      label: Cryodrive Speed
+      read_pv: $(P)$(Q):CRYOSPEED
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Cryoadjust
+      label: Cryodrive Speed Boost
+      read_pv: $(P)$(Q):CRYOADJUST
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Suspended
+      label: Suspended
+      read_pv: $(P)$(Q):SUSPENDED
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Watertemp
+      label: Cryodrive Water Temperature
+      read_pv: $(P)$(Q):WATERTEMP
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Retpress
+      label: Cryodrive He Pressure
+      read_pv: $(P)$(Q):RETPRESS
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: Hardware
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Model
+      read_pv: $(P)$(Q):MODEL
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Series
+      read_pv: $(P)$(Q):SERIES
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Cryoshutter
+      label: Cryoshutter
+      read_pv: $(P)$(Q):CRYOSHUTTER
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Hardwaretype
+      label: Hardware Type (raw)
+      read_pv: $(P)$(Q):HARDWARETYPE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Ctrlnum
+      label: Controller Number
+      read_pv: $(P)$(Q):CTRLNUM
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Ver
+      label: Software Version
+      read_pv: $(P)$(Q):VER
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Runtime
+      label: Pump Uptime
+      read_pv: $(P)$(Q):RUNTIME
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Hours
+      label: Time Running
+      read_pv: $(P)$(Q):HOURS
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: Comms
+    label: Communications
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Type
+      label: Status Packet Type
+      read_pv: $(P)$(Q):TYPE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Status
+      label: Status Poll
+      read_pv: $(P)$(Q):STATUS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Alarmi
+      label: Alarm Number
+      read_pv: $(P)$(Q):ALARMI
+      read_widget:
+        type: TextRead
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: ProtectedControl
+    label: Control
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: EndProc
+      label: End (Controlled Shutdown)
+      write_pv: $(P)$(Q):END.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          End: '1'
+    - type: SignalW
+      name: PurgeProc
+      label: Purge/Warm
+      write_pv: $(P)$(Q):PURGE.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Purge: '1'

@@ -135,6 +135,14 @@ entity_models:
           GEOM:
           ANGLE_UNITS:
 
+    pvi:
+      yaml_path: table.pvi.device.yaml
+      ui_macros:
+        P:
+        Q:
+        T:
+      pv_prefix: "$(P)"
+
   - name: kohzuMono
     description: |-
       Kohzu or PSL double crystal monochromator (kohzuSeq.db), with the

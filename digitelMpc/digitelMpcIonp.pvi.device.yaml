@@ -1,0 +1,260 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# A digitel MPC ion pump, from digitelMpcIonp.template at digitelMPC 6-23ec1.
+
+label: digitelMpcIonp
+children:
+- type: Group
+  name: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: P
+    label: Pressure
+    read_pv: $(device):P
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Sta
+    label: Status
+    read_pv: $(device):STA
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Err
+    label: Error Code
+    read_pv: $(device):ERR
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: V
+    label: Voltage
+    read_pv: $(device):V
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: I
+    label: Current
+    read_pv: $(device):I
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Comms
+    label: Comms
+    read_pv: $(device):COMMS
+    read_widget:
+      type: TextRead
+- type: Group
+  name: State
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Starting
+    label: Starting
+    read_pv: $(device):STARTING
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: Sp1state
+    label: Setpoint 1
+    read_pv: $(device):SP1STATE
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: Sp2state
+    label: Setpoint 2
+    read_pv: $(device):SP2STATE
+    read_widget:
+      type: LED
+- type: Group
+  name: Settings
+  label: Settings
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: PumpSettings
+    label: Pump
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Size
+      label: Pump Size
+      read_pv: $(device):SIZE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Cal
+      label: Calibration
+      read_pv: $(device):CAL
+      read_widget:
+        type: TextRead
+    - type: SignalW
+      name: Settext
+      label: Display Text
+      write_pv: $(device):SETTEXT
+      write_widget:
+        type: TextWrite
+        format: string
+  - type: Group
+    name: Setpoints
+    label: Setpoints
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Sp1on
+      label: Setpoint 1 On
+      read_pv: $(device):SP1ON
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Sp1off
+      label: Setpoint 1 Off
+      read_pv: $(device):SP1OFF
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Sp2on
+      label: Setpoint 2 On
+      read_pv: $(device):SP2ON
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Sp2off
+      label: Setpoint 2 Off
+      read_pv: $(device):SP2OFF
+      read_widget:
+        type: TextRead
+- type: Group
+  name: MoreDetails
+  label: More Details
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Details2
+    label: Details
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Plog
+      label: Log Pressure
+      read_pv: $(device):PLOG
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Hv
+      label: Strapping
+      read_pv: $(device):HV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Error
+      label: Last Error
+      read_pv: $(device):ERROR
+      read_widget:
+        type: TextRead
+        format: string
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: ProtectedPump
+    label: Pump
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: Setsize
+      label: Pump Size
+      write_pv: $(device):SETSIZE
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):SIZE
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: Setcal
+      label: Calibration
+      write_pv: $(device):SETCAL
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):CAL
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: InterlockSetpoints
+    label: Interlock Setpoints
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: Setsp1on
+      label: Setpoint 1 On
+      write_pv: $(device):SETSP1ON
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):SP1ON
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: Setsp1off
+      label: Setpoint 1 Off
+      write_pv: $(device):SETSP1OFF
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):SP1OFF
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: Setsp2on
+      label: Setpoint 2 On
+      write_pv: $(device):SETSP2ON
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):SP2ON
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: Setsp2off
+      label: Setpoint 2 Off
+      write_pv: $(device):SETSP2OFF
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):SP2OFF
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ProtectedControl
+    label: Control
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: Start
+      label: HV On/Off
+      write_pv: $(device):START
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Start: Start
+          Stop: Stop

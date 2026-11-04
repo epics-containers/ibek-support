@@ -1,0 +1,334 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# Wraps a motor as a positioner, from upstream positioner 2024.10.1 motorpositioner.template.
+# Names of the positions belong to the multipositioner this device reports to, so they are not here.
+
+label: motorpositioner
+children:
+- type: Group
+  name: PositionerCurrentValues
+  label: Positioner Current Values
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: SelDesc
+    label: Description
+    read_pv: $(P)$(Q):SEL.DESC
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: Devname
+    label: Device
+    read_pv: $(P)$(Q):DEVNAME
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: Sel
+    label: Selected Position
+    read_pv: $(P)$(Q):SEL
+    read_widget:
+      type: TextRead
+  - type: SignalW
+    name: Setvalue2
+    label: Demand
+    write_pv: $(P)$(Q):SETVALUE2
+    write_widget:
+      type: TextWrite
+  - type: SignalR
+    name: UpdD
+    label: Readback
+    read_pv: $(P)$(Q):UPD.D
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Inpos
+    label: In Position
+    read_pv: $(P)$(Q):INPOS
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: Dmov
+    label: Done Moving
+    read_pv: $(P)$(Q):DMOV
+    read_widget:
+      type: LED
+  - type: SignalW
+    name: StopProc
+    label: Stop
+    description: Stops the motor
+    write_pv: $(P)$(Q):STOP.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Stop: '1'
+- type: Group
+  name: PositionValues
+  label: Position Values
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Values
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: Vala
+      label: Position 1
+      write_pv: $(P)$(Q):VALA
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Valb
+      label: Position 2
+      write_pv: $(P)$(Q):VALB
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Valc
+      label: Position 3
+      write_pv: $(P)$(Q):VALC
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Vald
+      label: Position 4
+      write_pv: $(P)$(Q):VALD
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Vale
+      label: Position 5
+      write_pv: $(P)$(Q):VALE
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Valf
+      label: Position 6
+      write_pv: $(P)$(Q):VALF
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Valg
+      label: Position 7
+      write_pv: $(P)$(Q):VALG
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Valh
+      label: Position 8
+      write_pv: $(P)$(Q):VALH
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Vali
+      label: Position 9
+      write_pv: $(P)$(Q):VALI
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Valj
+      label: Position 10
+      write_pv: $(P)$(Q):VALJ
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Valk
+      label: Position 11
+      write_pv: $(P)$(Q):VALK
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Vall
+      label: Position 12
+      write_pv: $(P)$(Q):VALL
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Valm
+      label: Position 13
+      write_pv: $(P)$(Q):VALM
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Valn
+      label: Position 14
+      write_pv: $(P)$(Q):VALN
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Valo
+      label: Position 15
+      write_pv: $(P)$(Q):VALO
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Valp
+      label: Position 16
+      write_pv: $(P)$(Q):VALP
+      write_widget:
+        type: TextWrite
+  - type: Group
+    name: SetFromReadback
+    label: Set From Readback
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: SetaProc
+      label: Position 1
+      write_pv: $(P)$(Q):SETA.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+    - type: SignalW
+      name: SetbProc
+      label: Position 2
+      write_pv: $(P)$(Q):SETB.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+    - type: SignalW
+      name: SetcProc
+      label: Position 3
+      write_pv: $(P)$(Q):SETC.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+    - type: SignalW
+      name: SetdProc
+      label: Position 4
+      write_pv: $(P)$(Q):SETD.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+    - type: SignalW
+      name: SeteProc
+      label: Position 5
+      write_pv: $(P)$(Q):SETE.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+    - type: SignalW
+      name: SetfProc
+      label: Position 6
+      write_pv: $(P)$(Q):SETF.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+    - type: SignalW
+      name: SetgProc
+      label: Position 7
+      write_pv: $(P)$(Q):SETG.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+    - type: SignalW
+      name: SethProc
+      label: Position 8
+      write_pv: $(P)$(Q):SETH.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+    - type: SignalW
+      name: SetiProc
+      label: Position 9
+      write_pv: $(P)$(Q):SETI.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+    - type: SignalW
+      name: SetjProc
+      label: Position 10
+      write_pv: $(P)$(Q):SETJ.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+    - type: SignalW
+      name: SetkProc
+      label: Position 11
+      write_pv: $(P)$(Q):SETK.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+    - type: SignalW
+      name: SetlProc
+      label: Position 12
+      write_pv: $(P)$(Q):SETL.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+    - type: SignalW
+      name: SetmProc
+      label: Position 13
+      write_pv: $(P)$(Q):SETM.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+    - type: SignalW
+      name: SetnProc
+      label: Position 14
+      write_pv: $(P)$(Q):SETN.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+    - type: SignalW
+      name: SetoProc
+      label: Position 15
+      write_pv: $(P)$(Q):SETO.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+    - type: SignalW
+      name: SetpProc
+      label: Position 16
+      write_pv: $(P)$(Q):SETP.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Set: '1'
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: ProtectedPosition
+    label: Position
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: MoveToSelectedPosition
+      label: Move to Selected Position
+      description: Sends the value of the selected position to the device, which moves it
+      write_pv: $(P)$(Q):SEL.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Move: '1'

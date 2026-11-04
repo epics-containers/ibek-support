@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# PLC status of ether_ip, from ether_ip_plcInfo.template. Upstream ether_ip-3-10 has no such
+# template: install.yml copies it into db/. It is the same file in the Diamond fork, so this
+# device and the support yaml are the same for both builds.
+
+label: ether_ip_plcInfo
+children:
+- type: Group
+  name: PlcStatus
+  label: PLC Status
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Plcname
+    label: PLC Name
+    read_pv: $(device):PLCNAME
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: Plcstatus
+    label: PLC Status
+    read_pv: $(device):PLCSTATUS
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: Plchealthy
+    label: PLC Healthy
+    read_pv: $(device):PLCHEALTHY
+    read_widget:
+      type: LED

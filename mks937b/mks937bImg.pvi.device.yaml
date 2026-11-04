@@ -1,0 +1,242 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# An inverted magnetron gauge on an MKS 937B, from mks937bImg.template at mks937b 3-1-0.
+# The relay setpoints belong to mks937bRelays and mks937bFastRelay, so they are not here.
+# CTL:SETSP is left to CTL:OUTSP, whose preconditions run first.
+
+label: mks937bImg
+children:
+- type: Group
+  name: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: P
+    label: Pressure (mbar)
+    read_pv: $(device):P
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Sta
+    label: Status
+    read_pv: $(device):STA
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ProSp
+    label: IMG Overpressure
+    read_pv: $(device):PRO:SP
+    read_widget:
+      type: TextRead
+- type: Group
+  name: Control
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Isenabled
+    label: Cold Cathode
+    read_pv: $(device):ISENABLED
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Switching
+    label: Switching
+    read_pv: $(device):SWITCHING
+    read_widget:
+      type: LED
+- type: Group
+  name: Interlocks
+  label: Interlocks
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Details2
+    label: Details
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: CtlSp
+      label: IMG Enable
+      read_pv: $(device):CTL:SP
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CtlHyst
+      label: IMG Enable Off
+      read_pv: $(device):CTL:HYST
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CtlMode
+      label: IMG Enable Mode
+      read_pv: $(device):CTL:MODE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CtlCcs
+      label: Controlling Gauge
+      read_pv: $(device):CTL:CCS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ProIlksetspNowrite
+      label: IMG Overpressure Write Inhibit
+      read_pv: $(device):PRO:ILKSETSP:NOWRITE
+      read_widget:
+        type: LED
+- type: Group
+  name: MoreDetails
+  label: More Details
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Details3
+    label: Details
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Plog
+      label: Log Pressure
+      read_pv: $(device):PLOG
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Pmax
+      label: Max Pressure
+      read_pv: $(device):PMAX
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Pmin
+      label: Min Pressure
+      read_pv: $(device):PMIN
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Errornum
+      label: Last Error Code
+      read_pv: $(device):ERRORNUM
+      read_widget:
+        type: TextRead
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: ColdCathode
+    label: Off trips the machine if open to the Front End
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: Cchv
+      label: Cold Cathode
+      write_pv: $(device):CCHV
+      write_widget:
+        type: ToggleButton
+      read_pv: $(device):ISENABLED
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Offwarn
+      label: Off Warning
+      read_pv: $(device):OFFWARN
+      read_widget:
+        type: LED
+  - type: Group
+    name: Setpoints
+    label: Setpoints
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: ProOutsp
+      label: IMG Overpressure
+      write_pv: $(device):PRO:OUTSP
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):PRO:SP
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: CtlOutsp
+      label: IMG Enable
+      write_pv: $(device):CTL:OUTSP
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):CTL:SP
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: CtlSethyst
+      label: IMG Enable Off
+      write_pv: $(device):CTL:SETHYST
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):CTL:HYST
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: Override
+    label: Override
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: CtlCcs2
+      label: Controlling Gauge
+      write_pv: $(device):CTL:SETCCS
+      write_widget:
+        type: ComboBox
+      read_pv: $(device):CTL:CCS
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: CtlMode2
+      label: IMG Enable Mode
+      write_pv: $(device):CTL:SETMODE
+      write_widget:
+        type: ComboBox
+      read_pv: $(device):CTL:MODE
+      read_widget:
+        type: TextRead
+    - type: SignalW
+      name: CtlSetextrange
+      label: Extended Setpoint Range
+      write_pv: $(device):CTL:SETEXTRANGE
+      write_widget:
+        type: ComboBox
+    - type: SignalW
+      name: ProDis
+      label: Disable IMG Overpressure
+      write_pv: $(device):PRO:DIS
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Disable: '1'
+    - type: SignalW
+      name: CtlDis
+      label: Disable IMG Enable
+      write_pv: $(device):CTL:DIS
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Disable: '1'
