@@ -1,0 +1,440 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# Upstream DiamondLightSource/terminalserver at 2-7: Moxa.template and TerminalServer16.template
+# for the server, with one MoxaChannel screen per channel. A server with fewer than 16
+# channels (NCHANS) shows the rest disconnected, as its templates hold 16.
+
+label: TerminalServer16
+children:
+- type: Include
+  file_name: TerminalServerInfo
+
+- type: Group
+  name: Channels
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: Group
+    name: Channel1
+    label: Channel 1
+    layout:
+      type: Row
+      header:
+      - Alias
+      - Match
+      - Edit
+    children:
+    - type: SignalR
+      name: Alias1
+      read_pv: $(P)$(R):1:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match1
+      read_pv: $(P)$(R):1:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '1'
+  - type: Group
+    name: Channel2
+    label: Channel 2
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Alias2
+      read_pv: $(P)$(R):2:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match2
+      read_pv: $(P)$(R):2:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit2
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '2'
+  - type: Group
+    name: Channel3
+    label: Channel 3
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Alias3
+      read_pv: $(P)$(R):3:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match3
+      read_pv: $(P)$(R):3:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit3
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '3'
+  - type: Group
+    name: Channel4
+    label: Channel 4
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Alias4
+      read_pv: $(P)$(R):4:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match4
+      read_pv: $(P)$(R):4:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit4
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '4'
+  - type: Group
+    name: Channel5
+    label: Channel 5
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Alias5
+      read_pv: $(P)$(R):5:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match5
+      read_pv: $(P)$(R):5:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit5
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '5'
+  - type: Group
+    name: Channel6
+    label: Channel 6
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Alias6
+      read_pv: $(P)$(R):6:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match6
+      read_pv: $(P)$(R):6:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit6
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '6'
+  - type: Group
+    name: Channel7
+    label: Channel 7
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Alias7
+      read_pv: $(P)$(R):7:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match7
+      read_pv: $(P)$(R):7:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit7
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '7'
+  - type: Group
+    name: Channel8
+    label: Channel 8
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Alias8
+      read_pv: $(P)$(R):8:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match8
+      read_pv: $(P)$(R):8:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit8
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '8'
+  - type: Group
+    name: Channel9
+    label: Channel 9
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Alias9
+      read_pv: $(P)$(R):9:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match9
+      read_pv: $(P)$(R):9:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit9
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '9'
+  - type: Group
+    name: Channel10
+    label: Channel 10
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Alias10
+      read_pv: $(P)$(R):10:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match10
+      read_pv: $(P)$(R):10:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit10
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '10'
+  - type: Group
+    name: Channel11
+    label: Channel 11
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Alias11
+      read_pv: $(P)$(R):11:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match11
+      read_pv: $(P)$(R):11:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit11
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '11'
+  - type: Group
+    name: Channel12
+    label: Channel 12
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Alias12
+      read_pv: $(P)$(R):12:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match12
+      read_pv: $(P)$(R):12:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit12
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '12'
+  - type: Group
+    name: Channel13
+    label: Channel 13
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Alias13
+      read_pv: $(P)$(R):13:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match13
+      read_pv: $(P)$(R):13:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit13
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '13'
+  - type: Group
+    name: Channel14
+    label: Channel 14
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Alias14
+      read_pv: $(P)$(R):14:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match14
+      read_pv: $(P)$(R):14:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit14
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '14'
+  - type: Group
+    name: Channel15
+    label: Channel 15
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Alias15
+      read_pv: $(P)$(R):15:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match15
+      read_pv: $(P)$(R):15:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit15
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '15'
+  - type: Group
+    name: Channel16
+    label: Channel 16
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Alias16
+      read_pv: $(P)$(R):16:ALIAS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Match16
+      read_pv: $(P)$(R):16:MATCH
+      read_widget:
+        type: LED
+    - type: DeviceRef
+      name: Edit16
+      label: Edit
+      pv: $(P)$(R):PVI
+      ui: MoxaChannel.pvi.bob
+      macros:
+        P: $(P)$(R)
+        R: ''
+        CHAN: '16'
+
+- type: Include
+  file_name: TerminalServerDetails16

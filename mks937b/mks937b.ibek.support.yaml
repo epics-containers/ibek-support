@@ -315,6 +315,14 @@ entity_models:
           ctlsp_desc:
           id: "{{ '%02d' % id }}"
 
+    pvi:
+      yaml_path: mks937bGauge.pvi.device.yaml
+      ui_macros:
+        GCTLR:
+        dom:
+        id: "{{ '%02d' % id }}"
+      pv_prefix: "$(dom)-VA-GAUGE-$(id):"
+
   - name: mks937b
     description: |-
       Template database for an MKS937B Multi-Sensor System
@@ -347,6 +355,12 @@ entity_models:
           device:
           port:
           address: "{{ '%03d' % address }}"
+
+    pvi:
+      yaml_path: mks937b.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
 
   - name: mks937bPirgDummy
     description: |-
@@ -504,6 +518,12 @@ entity_models:
           offwarn:
           channel:
 
+    pvi:
+      yaml_path: mks937bCap.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
+
   - name: mks937bImgGroup
     description: |-
       Template database for a group of up to 8 IMGs
@@ -601,6 +621,16 @@ entity_models:
           mpsIlRelay1:
           img4:
 
+    pvi:
+      yaml_path: mks937bImgGroup.pvi.device.yaml
+      ui_macros:
+        device:
+        valveIlRelay:
+        mpsIlRelay1:
+        mpsIlRelay2:
+        rgaIlRelay:
+      pv_prefix: "$(device):"
+
   - name: mks937bGaugeEGU
     description: |-
       TODO:ADD DESCRIPTION
@@ -625,21 +655,6 @@ entity_models:
         type: str
         description: |-
           PV providing gauge reading in mbar
-
-      device:
-        type: str
-        description: |-
-          device name
-
-      p_egu_pv:
-        type: str
-        description: |-
-          Raw value ADC PV name
-
-      plog_adc_pv:
-        type: str
-        description: |-
-          or (if using Hy8401 VME IP) mks937bHy8401.template
 
       GCTLR:
         type: str
@@ -692,18 +707,28 @@ entity_models:
       plog_calc:
         type: str
         description: |-
-          Template argument
-        default: 10.0*A/32767.0/0.6 - 12.0
+          The EGU variant feeds mks937bGauge from the PLOG_CALC PV that
+          mks937bPlogEGU.template already converted to mbar, so the gauge's
+          own conversion is a straight pass-through.
+        default: A
+
+    post_defines:
+      eguInputPV:
+        type: str
+        description: |-
+          Name of the PV providing the gauge reading in mbar
+        value: |-
+          {{ dom }}-VA-GAUGE-{{ "%02d" | format(id) }}:PLOG_CALC
 
     databases:
       - file: $(MKS937B)/db/mks937bPlogEGU.template
         args:
-          device:
-          p_egu_pv:
+          device: "{{ eguInputPV }}"
+          p_egu_pv: "{{ input }}"
 
       - file: $(MKS937B)/db/mks937bGauge.template
         args:
-          plog_adc_pv:
+          plog_adc_pv: "{{ eguInputPV }}"
           ctlsp_drvl:
           name:
           ctlsp_lopr:
@@ -716,6 +741,14 @@ entity_models:
           plog_calc:
           ctlsp_desc:
           id: "{{ '%02d' % id }}"
+
+    pvi:
+      yaml_path: mks937bGauge.pvi.device.yaml
+      ui_macros:
+        GCTLR:
+        dom:
+        id: "{{ '%02d' % id }}"
+      pv_prefix: "$(dom)-VA-GAUGE-$(id):"
 
   - name: mks937bImg
     description: |-
@@ -940,6 +973,12 @@ entity_models:
           ctlhyst_lopr:
           ctl_channel:
 
+    pvi:
+      yaml_path: mks937bImg.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
+
   - name: mks937bImgDummy
     description: |-
       Template database for a dummy inverted magnetron gauge
@@ -1098,6 +1137,13 @@ entity_models:
           device:
           pirg8:
 
+    pvi:
+      yaml_path: mks937bPirgGroup.pvi.device.yaml
+      ui_macros:
+        device:
+        ionPumpIlRelay:
+      pv_prefix: "$(device):"
+
   - name: mks937bHy8401
     description: |-
       Template database for an Hy8401 VME ADC instance
@@ -1176,6 +1222,12 @@ entity_models:
           offwarn:
           GCTLR:
           channel:
+
+    pvi:
+      yaml_path: mks937bPirg.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
 
   - name: mks937bImgMean
     description: |-

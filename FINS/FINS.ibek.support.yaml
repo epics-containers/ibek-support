@@ -27,6 +27,12 @@ entity_models:
       - file: FINS.template
         args: { device: null, port: null, etn: "{{ etn | int }}" }
 
+    pvi:
+      yaml_path: FINS.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
+
   - name: FINSUDPInit
     description: |-
       This creates an asyn port which communicates with a FINS device over
@@ -95,3 +101,19 @@ entity_models:
       - value: |
           # finsTCPInit(asyn_port, ip_addr)
           finsTCPInit("{{name}}", "{{ip}}")
+
+  - name: FINSWrite
+    description: DM area write record
+    parameters:
+      P:
+        type: str
+        description: Device prefix
+      PORT:
+        type: object
+        description: asyn port name
+      ADDR:
+        type: int
+        description: DM area address
+    databases:
+      - file: FINSWrite.template
+        args: { P: null, PORT: null, ADDR: null }

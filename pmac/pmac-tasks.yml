@@ -3,8 +3,8 @@
     path: "{{ item }}"
     state: absent
   with_items:
-    - /epics/support/pmac/configure/CONFIG_SITE.linux-x86_64.Common
-    - /epics/support/pmac/configure/RELEASE.linux-x86_64.Common
+    - /epics/support/pmac/configure/CONFIG_SITE.{{ host_arch }}.Common
+    - /epics/support/pmac/configure/RELEASE.{{ host_arch }}.Common
 
 - name: Add linux specific libraries
   ansible.builtin.lineinfile:

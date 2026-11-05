@@ -1034,7 +1034,7 @@ entity_models:
 
     pvi:
       yaml_path: pmacAxis.pvi.device.yaml
-      pv_prefix: "{{ P }}{{ M }}"
+      pv_prefix: $(P)$(M)
       ui_macros:
         P:
         M:

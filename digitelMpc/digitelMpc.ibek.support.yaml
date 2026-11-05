@@ -97,6 +97,12 @@ entity_models:
           Unit number for multi drop serial
         default: "01"
         values: *id001
+
+    pvi:
+      yaml_path: digitelMpcqTsp.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
   - name: &digitelMpcPump digitelMpc
     description: |-
       digitel MPC controller/head unit
@@ -133,6 +139,12 @@ entity_models:
     databases:
       - file: $(DIGITELMPC)/db/digitelMpc.template
         args: { device: null, port: null, unit: null, proto: null }
+
+    pvi:
+      yaml_path: digitelMpc.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
 
   - name: digitelMpcIonp
     description: |-
@@ -218,6 +230,12 @@ entity_models:
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcIonp.template
         args: { device: null, port: "{{MPC.port}}", unit: "{{MPC.unit}}", pump: null, size: null, sp1on: null, sp1off: null, sp2on: null, sp2off: null, alh: null, text: null, proto: "{{MPC.proto}}", disptext: null }
+
+    pvi:
+      yaml_path: digitelMpcIonp.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
 
   - name: digitelMpcTspGroup
     description: |-
@@ -407,3 +425,9 @@ entity_models:
     databases:
       - file: $(DIGITELMPC)/db/digitelMpcTsp.template
         args: { device: null, port: null, unit: null, ctlsrc: null, protocol: null, totmax: null, tcmax: null }
+
+    pvi:
+      yaml_path: digitelMpcTsp.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"

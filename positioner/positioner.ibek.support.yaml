@@ -126,6 +126,13 @@ entity_models:
           MP: "{{MP.MP}}"
           motor: "{{motor}}"
 
+    pvi:
+      yaml_path: motorpositioner.pvi.device.yaml
+      ui_macros:
+        P: "{{MP.P}}"
+        Q:
+      pv_prefix: "$(P)$(Q):"
+
   - name: multipositioner
     description: |-
       Template for controlling many positioners mapping a list of names onto pv values and/or motorpositioners mapping the list of names onto a list of motor positions
@@ -138,6 +145,11 @@ entity_models:
         type: str
         description: |-
           Device suffix
+      PS:
+        type: str
+        description: |-
+          Positioner number suffix
+        default: ""
       DESC:
         type: str
         description: |-
@@ -428,3 +440,10 @@ entity_models:
           VALO:
           VALP:
           pos:
+
+    pvi:
+      yaml_path: positioner.pvi.device.yaml
+      ui_macros:
+        P: "{{MP.P}}"
+        Q:
+      pv_prefix: "$(P)$(Q):"

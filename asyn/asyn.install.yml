@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: asyn
-version: R4-45
+version: R4-46
 dbds:
   - drvAsynIPPort.dbd
   - drvAsynSerialPort.dbd
@@ -12,7 +12,7 @@ libs:
 apt_developer:
   - libtirpc-dev
 apt_runtime:
-  - libtirpc3
+  - libtirpc3t64
 
 patch_lines:
   - path: "{{ config_linux_host }}"

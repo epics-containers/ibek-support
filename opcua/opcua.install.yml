@@ -18,7 +18,12 @@ apt_developer:
   - libssl-dev
 
 apt_runtime:
-  - libxml2
+  - libxml2-16
+
+# gcc-15 needs the fix for the extern "C" exports, not yet in a release
+patch_file:
+  path: opcua_gcc15.patch
+  when: true
 
 tasks:
   - path: opcua_task.yml

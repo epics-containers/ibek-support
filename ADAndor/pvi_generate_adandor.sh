@@ -25,6 +25,6 @@ pvi convert device /workspaces/ioc-adandor/ibek-support/ADAndor  \
     --template /epics/support/ADAndor/andorApp/Db/andorCCD.template \
     --template /epics/support/ADAndor/andorApp/Db/shamrock.template \
 
-pvi regroup ADAndor.pvi.device.yaml ${ADANDOR}/andorApp/op/adl/*.adl
+pvi regroup ADAndor/ADAndor.pvi.device.yaml ${ADANDOR}/andorApp/op/adl/*.adl
 
 ibek support generate-links $(pwd)

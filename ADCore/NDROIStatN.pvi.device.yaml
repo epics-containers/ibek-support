@@ -1,15 +1,182 @@
 label: NDROIStatN
 children:
 
-  - type: Group
-    name: Info
-    layout:
-      type: Grid
-      labelled: true
-    children:
-    - type: SignalR
-      name: MaxSizeX
-      label: Max Size X
-      read_pv: $(P)$(R)MaxSizeX_RBV
-      read_widget:
-        type: TextRead
+- type: Group
+  name: Definition
+  layout:
+    type: Grid
+  children:
+
+  - type: SignalRW
+    name: Use
+    write_pv: $(P)$(R)Use
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)Use_RBV
+    read_widget:
+      type: LED
+
+  - type: SignalW
+    name: Name
+    write_pv: $(P)$(R)Name
+    write_widget:
+      type: TextWrite
+
+  - type: SignalR
+    name: MaxSizeX
+    label: Max Size X
+    read_pv: $(P)$(R)MaxSizeX_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: MaxSizeY
+    label: Max Size Y
+    read_pv: $(P)$(R)MaxSizeY_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: MinX
+    label: Min X
+    write_pv: $(P)$(R)MinX
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)MinX_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: MinY
+    label: Min Y
+    write_pv: $(P)$(R)MinY
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)MinY_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: SizeX
+    label: Size X
+    write_pv: $(P)$(R)SizeX
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)SizeX_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalRW
+    name: SizeY
+    label: Size Y
+    write_pv: $(P)$(R)SizeY
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)SizeY_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: Statistics
+  layout:
+    type: Grid
+  children:
+
+  - type: SignalRW
+    name: BgdWidth
+    label: Bgd Width
+    write_pv: $(P)$(R)BgdWidth
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)BgdWidth_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: MinValue
+    label: Min
+    read_pv: $(P)$(R)MinValue_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: MaxValue
+    label: Max
+    read_pv: $(P)$(R)MaxValue_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: MeanValue
+    label: Mean
+    read_pv: $(P)$(R)MeanValue_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: Total
+    read_pv: $(P)$(R)Total_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: Net
+    read_pv: $(P)$(R)Net_RBV
+    read_widget:
+      type: TextRead
+
+  - type: SignalW
+    name: Reset
+    write_pv: $(P)$(R)Reset
+    write_widget:
+      type: ToggleButton
+
+- type: Group
+  name: TimeSeries
+  label: Time Series
+  layout:
+    type: Grid
+    labelled: true
+  children:
+
+  - type: SignalR
+    name: TSTimestamp
+    label: TS Timestamp
+    read_pv: $(P)$(R)TSTimestamp
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: TSMinValue
+    label: TS Min Value
+    read_pv: $(P)$(R)TSMinValue
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: TSMaxValue
+    label: TS Max Value
+    read_pv: $(P)$(R)TSMaxValue
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: TSMeanValue
+    label: TS Mean Value
+    read_pv: $(P)$(R)TSMeanValue
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: TSTotal
+    label: TS Total
+    read_pv: $(P)$(R)TSTotal
+    read_widget:
+      type: TextRead
+
+  - type: SignalR
+    name: TSNet
+    label: TS Net
+    read_pv: $(P)$(R)TSNet
+    read_widget:
+      type: TextRead

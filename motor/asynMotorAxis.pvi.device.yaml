@@ -245,6 +245,7 @@ children:
         write_pv: $(P)$(M).VELO
       - type: SignalW
         name: Acceleration
+        label: Acceleration Time
         write_pv: $(P)$(M).ACCL
       - type: SignalW
         name: JogVelocity

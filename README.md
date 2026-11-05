@@ -54,10 +54,23 @@ Each support module folder contains:-
 An important aspect of ibek-support is that it will
 retain backward compatibility with older versions of support modules going
 forward from inception in October 2023. The install.sh script will be told
-which version of the support moduel to build and will be able to detect which
-OS and EPICS base version it is being built upon. The install.sh script will
-be able to use this information to adjust any configuration that is required
-by the environment.
+which version of the support module to build. It does not detect the OS or
+EPICS base version: each release of ibek-support targets one base image, so
+pick the release that matches the epics-base your IOC is built on.
+
+### 4.x: Ubuntu 26.04 (resolute)
+
+ibek-support 4.x targets Ubuntu 26.04 (resolute). Within that series, 4.0.x
+targets epics-base 7.0.10ec6, and 4.1 onwards targets 7.0.11ec2. All of 4.x is
+a breaking change for Generic IOCs still built on Ubuntu 24.04 (noble): the
+runtime package names have moved on, and some do not exist on noble. These are
+`libxml2-16` (ADCore, ADAravis, opcua), `libhdf5-310` and `libnetcdf22`
+(ADCore), and `libavcodec62`, `libswscale9` and `libavformat62`
+(ffmpegServer). Modules built on ADCore fail on noble as a result.
+
+A Generic IOC that needs those modules on noble should stay on the last 3.x
+release of ibek-support. epics-base and ibek-support must be bumped together
+on an IOC, so move both to resolute at the same time.
 
 
 ## How to use

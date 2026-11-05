@@ -1,0 +1,91 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
+
+module: slsDetector
+
+entity_models:
+  - name: slsDetectorConfigure
+    description: |-
+      Configure slsDetector
+    parameters:
+      P:
+        type: str
+        description: |-
+          Device Prefix
+
+      R:
+        type: str
+        description: |-
+          Device Suffix
+
+      PORT:
+        type: id
+        description: |-
+          Port name for the sls detector
+
+      TIMEOUT:
+        type: int
+        description: |-
+          Timeout
+        default: 1
+
+      ADDR:
+        type: int
+        description: |-
+          Asyn Port address
+        default: 0
+
+      configFile:
+        type: str
+        description: |-
+          Config file to read detector settings from
+
+      detectorIndex:
+        type: int
+        description: |-
+          Detector index number
+
+      numModules:
+        type: int
+        description: |-
+          Number of detector modules
+
+      BUFFERS:
+        type: int
+        description: |-
+          Maximum number of NDArray buffers to be created for plugin callbacks
+
+      MEMORY:
+        type: int
+        description: |-
+          Max memory to allocate, should be maxw*maxh*nbuffer for driver and all attached plugins
+
+    pre_init:
+      - value: |
+          # slsDetectorConfig(portName, configFileName, detectorId, numModules, maxBuffers, maxMemory)
+          slsDetectorConfig("{{PORT}}", "{{configFile}}", {{detectorIndex}}, {{numModules}}, {{BUFFERS}}, {{MEMORY}})
+
+    databases:
+      - file: $(SLSDETECTOR)/db/slsDetector.template
+        args:
+          ADDR:
+          P:
+          R:
+          TIMEOUT:
+          PORT:
+
+      # is there a better way to do this?
+      - file: /epics/generic-source/ibek-support/slsDetector/extra.db
+        args:
+          ADDR:
+          P:
+          R:
+          TIMEOUT:
+          PORT:
+
+    pvi:
+      yaml_path: slsDetector.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv: true
+      pv_prefix: $(P)$(R)

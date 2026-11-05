@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../../ibek-support/_scripts/support_install_variables.json
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: ADAndor
 version: e3b7fc8 # Latest commit but no tag yet (must include PR#18)
@@ -17,7 +17,7 @@ apt_developer:
   - libusb-dev
 
 apt_runtime:
-  - libxml2
+  - libxml2-16
   - libusb-dev
 
 patch_blocks:

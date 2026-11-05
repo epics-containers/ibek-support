@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: calc
-version: R3-7-5
+version: R3-8
 dbds:
   - calcSupport.dbd
 libs:

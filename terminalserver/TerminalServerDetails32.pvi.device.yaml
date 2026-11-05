@@ -1,0 +1,2159 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# Upstream DiamondLightSource/terminalserver at 2-7: the current settings of each of 32
+# channels, read from MoxaChannel.template or AcsChannel.template. Included by the server
+# screens.
+
+label: TerminalServerDetails32
+children:
+- type: Group
+  name: ChannelConnections
+  label: Channel Connections
+  layout:
+    type: SubScreen
+    labelled: true
+  children:
+  - type: Group
+    name: ChannelConnections1
+    label: Channel 1
+    layout:
+      type: Row
+      header:
+      - Application
+      - Port
+      - Connected IP
+      - Tx Count
+      - Rx Count
+    children:
+    - type: SignalR
+      name: Application1
+      read_pv: $(P)$(R):1:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port1
+      read_pv: $(P)$(R):1:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip1
+      read_pv: $(P)$(R):1:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount1
+      read_pv: $(P)$(R):1:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount1
+      read_pv: $(P)$(R):1:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections2
+    label: Channel 2
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application2
+      read_pv: $(P)$(R):2:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port2
+      read_pv: $(P)$(R):2:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip2
+      read_pv: $(P)$(R):2:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount2
+      read_pv: $(P)$(R):2:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount2
+      read_pv: $(P)$(R):2:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections3
+    label: Channel 3
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application3
+      read_pv: $(P)$(R):3:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port3
+      read_pv: $(P)$(R):3:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip3
+      read_pv: $(P)$(R):3:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount3
+      read_pv: $(P)$(R):3:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount3
+      read_pv: $(P)$(R):3:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections4
+    label: Channel 4
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application4
+      read_pv: $(P)$(R):4:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port4
+      read_pv: $(P)$(R):4:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip4
+      read_pv: $(P)$(R):4:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount4
+      read_pv: $(P)$(R):4:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount4
+      read_pv: $(P)$(R):4:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections5
+    label: Channel 5
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application5
+      read_pv: $(P)$(R):5:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port5
+      read_pv: $(P)$(R):5:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip5
+      read_pv: $(P)$(R):5:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount5
+      read_pv: $(P)$(R):5:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount5
+      read_pv: $(P)$(R):5:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections6
+    label: Channel 6
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application6
+      read_pv: $(P)$(R):6:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port6
+      read_pv: $(P)$(R):6:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip6
+      read_pv: $(P)$(R):6:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount6
+      read_pv: $(P)$(R):6:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount6
+      read_pv: $(P)$(R):6:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections7
+    label: Channel 7
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application7
+      read_pv: $(P)$(R):7:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port7
+      read_pv: $(P)$(R):7:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip7
+      read_pv: $(P)$(R):7:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount7
+      read_pv: $(P)$(R):7:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount7
+      read_pv: $(P)$(R):7:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections8
+    label: Channel 8
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application8
+      read_pv: $(P)$(R):8:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port8
+      read_pv: $(P)$(R):8:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip8
+      read_pv: $(P)$(R):8:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount8
+      read_pv: $(P)$(R):8:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount8
+      read_pv: $(P)$(R):8:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections9
+    label: Channel 9
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application9
+      read_pv: $(P)$(R):9:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port9
+      read_pv: $(P)$(R):9:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip9
+      read_pv: $(P)$(R):9:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount9
+      read_pv: $(P)$(R):9:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount9
+      read_pv: $(P)$(R):9:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections10
+    label: Channel 10
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application10
+      read_pv: $(P)$(R):10:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port10
+      read_pv: $(P)$(R):10:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip10
+      read_pv: $(P)$(R):10:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount10
+      read_pv: $(P)$(R):10:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount10
+      read_pv: $(P)$(R):10:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections11
+    label: Channel 11
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application11
+      read_pv: $(P)$(R):11:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port11
+      read_pv: $(P)$(R):11:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip11
+      read_pv: $(P)$(R):11:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount11
+      read_pv: $(P)$(R):11:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount11
+      read_pv: $(P)$(R):11:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections12
+    label: Channel 12
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application12
+      read_pv: $(P)$(R):12:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port12
+      read_pv: $(P)$(R):12:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip12
+      read_pv: $(P)$(R):12:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount12
+      read_pv: $(P)$(R):12:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount12
+      read_pv: $(P)$(R):12:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections13
+    label: Channel 13
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application13
+      read_pv: $(P)$(R):13:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port13
+      read_pv: $(P)$(R):13:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip13
+      read_pv: $(P)$(R):13:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount13
+      read_pv: $(P)$(R):13:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount13
+      read_pv: $(P)$(R):13:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections14
+    label: Channel 14
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application14
+      read_pv: $(P)$(R):14:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port14
+      read_pv: $(P)$(R):14:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip14
+      read_pv: $(P)$(R):14:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount14
+      read_pv: $(P)$(R):14:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount14
+      read_pv: $(P)$(R):14:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections15
+    label: Channel 15
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application15
+      read_pv: $(P)$(R):15:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port15
+      read_pv: $(P)$(R):15:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip15
+      read_pv: $(P)$(R):15:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount15
+      read_pv: $(P)$(R):15:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount15
+      read_pv: $(P)$(R):15:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections16
+    label: Channel 16
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application16
+      read_pv: $(P)$(R):16:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port16
+      read_pv: $(P)$(R):16:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip16
+      read_pv: $(P)$(R):16:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount16
+      read_pv: $(P)$(R):16:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount16
+      read_pv: $(P)$(R):16:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections17
+    label: Channel 17
+    layout:
+      type: Row
+      header:
+      - Application
+      - Port
+      - Connected IP
+      - Tx Count
+      - Rx Count
+    children:
+    - type: SignalR
+      name: Application17
+      read_pv: $(P)$(R):17:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port17
+      read_pv: $(P)$(R):17:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip17
+      read_pv: $(P)$(R):17:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount17
+      read_pv: $(P)$(R):17:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount17
+      read_pv: $(P)$(R):17:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections18
+    label: Channel 18
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application18
+      read_pv: $(P)$(R):18:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port18
+      read_pv: $(P)$(R):18:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip18
+      read_pv: $(P)$(R):18:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount18
+      read_pv: $(P)$(R):18:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount18
+      read_pv: $(P)$(R):18:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections19
+    label: Channel 19
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application19
+      read_pv: $(P)$(R):19:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port19
+      read_pv: $(P)$(R):19:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip19
+      read_pv: $(P)$(R):19:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount19
+      read_pv: $(P)$(R):19:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount19
+      read_pv: $(P)$(R):19:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections20
+    label: Channel 20
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application20
+      read_pv: $(P)$(R):20:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port20
+      read_pv: $(P)$(R):20:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip20
+      read_pv: $(P)$(R):20:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount20
+      read_pv: $(P)$(R):20:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount20
+      read_pv: $(P)$(R):20:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections21
+    label: Channel 21
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application21
+      read_pv: $(P)$(R):21:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port21
+      read_pv: $(P)$(R):21:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip21
+      read_pv: $(P)$(R):21:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount21
+      read_pv: $(P)$(R):21:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount21
+      read_pv: $(P)$(R):21:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections22
+    label: Channel 22
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application22
+      read_pv: $(P)$(R):22:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port22
+      read_pv: $(P)$(R):22:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip22
+      read_pv: $(P)$(R):22:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount22
+      read_pv: $(P)$(R):22:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount22
+      read_pv: $(P)$(R):22:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections23
+    label: Channel 23
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application23
+      read_pv: $(P)$(R):23:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port23
+      read_pv: $(P)$(R):23:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip23
+      read_pv: $(P)$(R):23:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount23
+      read_pv: $(P)$(R):23:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount23
+      read_pv: $(P)$(R):23:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections24
+    label: Channel 24
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application24
+      read_pv: $(P)$(R):24:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port24
+      read_pv: $(P)$(R):24:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip24
+      read_pv: $(P)$(R):24:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount24
+      read_pv: $(P)$(R):24:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount24
+      read_pv: $(P)$(R):24:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections25
+    label: Channel 25
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application25
+      read_pv: $(P)$(R):25:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port25
+      read_pv: $(P)$(R):25:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip25
+      read_pv: $(P)$(R):25:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount25
+      read_pv: $(P)$(R):25:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount25
+      read_pv: $(P)$(R):25:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections26
+    label: Channel 26
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application26
+      read_pv: $(P)$(R):26:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port26
+      read_pv: $(P)$(R):26:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip26
+      read_pv: $(P)$(R):26:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount26
+      read_pv: $(P)$(R):26:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount26
+      read_pv: $(P)$(R):26:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections27
+    label: Channel 27
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application27
+      read_pv: $(P)$(R):27:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port27
+      read_pv: $(P)$(R):27:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip27
+      read_pv: $(P)$(R):27:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount27
+      read_pv: $(P)$(R):27:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount27
+      read_pv: $(P)$(R):27:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections28
+    label: Channel 28
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application28
+      read_pv: $(P)$(R):28:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port28
+      read_pv: $(P)$(R):28:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip28
+      read_pv: $(P)$(R):28:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount28
+      read_pv: $(P)$(R):28:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount28
+      read_pv: $(P)$(R):28:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections29
+    label: Channel 29
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application29
+      read_pv: $(P)$(R):29:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port29
+      read_pv: $(P)$(R):29:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip29
+      read_pv: $(P)$(R):29:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount29
+      read_pv: $(P)$(R):29:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount29
+      read_pv: $(P)$(R):29:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections30
+    label: Channel 30
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application30
+      read_pv: $(P)$(R):30:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port30
+      read_pv: $(P)$(R):30:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip30
+      read_pv: $(P)$(R):30:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount30
+      read_pv: $(P)$(R):30:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount30
+      read_pv: $(P)$(R):30:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections31
+    label: Channel 31
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application31
+      read_pv: $(P)$(R):31:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port31
+      read_pv: $(P)$(R):31:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip31
+      read_pv: $(P)$(R):31:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount31
+      read_pv: $(P)$(R):31:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount31
+      read_pv: $(P)$(R):31:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: ChannelConnections32
+    label: Channel 32
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Application32
+      read_pv: $(P)$(R):32:APPLICATION
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Port32
+      read_pv: $(P)$(R):32:PORT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Remoteip32
+      read_pv: $(P)$(R):32:REMOTEIP
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Txtotalcount32
+      read_pv: $(P)$(R):32:TXTOTALCOUNT
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Rxtotalcount32
+      read_pv: $(P)$(R):32:RXTOTALCOUNT
+      read_widget:
+        type: TextRead
+
+- type: Group
+  name: ChannelSerial
+  label: Channel Serial Settings
+  layout:
+    type: SubScreen
+    labelled: true
+  children:
+  - type: Group
+    name: ChannelSerial1
+    label: Channel 1
+    layout:
+      type: Row
+      header:
+      - Baud Rate
+      - Data Bits
+      - Stop Bits
+      - Parity
+      - Flow Control
+    children:
+    - type: SignalR
+      name: Baudrate1
+      read_pv: $(P)$(R):1:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits1
+      read_pv: $(P)$(R):1:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits1
+      read_pv: $(P)$(R):1:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity1
+      read_pv: $(P)$(R):1:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol1
+      read_pv: $(P)$(R):1:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial2
+    label: Channel 2
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate2
+      read_pv: $(P)$(R):2:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits2
+      read_pv: $(P)$(R):2:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits2
+      read_pv: $(P)$(R):2:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity2
+      read_pv: $(P)$(R):2:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol2
+      read_pv: $(P)$(R):2:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial3
+    label: Channel 3
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate3
+      read_pv: $(P)$(R):3:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits3
+      read_pv: $(P)$(R):3:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits3
+      read_pv: $(P)$(R):3:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity3
+      read_pv: $(P)$(R):3:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol3
+      read_pv: $(P)$(R):3:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial4
+    label: Channel 4
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate4
+      read_pv: $(P)$(R):4:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits4
+      read_pv: $(P)$(R):4:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits4
+      read_pv: $(P)$(R):4:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity4
+      read_pv: $(P)$(R):4:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol4
+      read_pv: $(P)$(R):4:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial5
+    label: Channel 5
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate5
+      read_pv: $(P)$(R):5:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits5
+      read_pv: $(P)$(R):5:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits5
+      read_pv: $(P)$(R):5:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity5
+      read_pv: $(P)$(R):5:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol5
+      read_pv: $(P)$(R):5:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial6
+    label: Channel 6
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate6
+      read_pv: $(P)$(R):6:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits6
+      read_pv: $(P)$(R):6:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits6
+      read_pv: $(P)$(R):6:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity6
+      read_pv: $(P)$(R):6:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol6
+      read_pv: $(P)$(R):6:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial7
+    label: Channel 7
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate7
+      read_pv: $(P)$(R):7:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits7
+      read_pv: $(P)$(R):7:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits7
+      read_pv: $(P)$(R):7:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity7
+      read_pv: $(P)$(R):7:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol7
+      read_pv: $(P)$(R):7:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial8
+    label: Channel 8
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate8
+      read_pv: $(P)$(R):8:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits8
+      read_pv: $(P)$(R):8:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits8
+      read_pv: $(P)$(R):8:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity8
+      read_pv: $(P)$(R):8:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol8
+      read_pv: $(P)$(R):8:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial9
+    label: Channel 9
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate9
+      read_pv: $(P)$(R):9:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits9
+      read_pv: $(P)$(R):9:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits9
+      read_pv: $(P)$(R):9:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity9
+      read_pv: $(P)$(R):9:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol9
+      read_pv: $(P)$(R):9:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial10
+    label: Channel 10
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate10
+      read_pv: $(P)$(R):10:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits10
+      read_pv: $(P)$(R):10:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits10
+      read_pv: $(P)$(R):10:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity10
+      read_pv: $(P)$(R):10:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol10
+      read_pv: $(P)$(R):10:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial11
+    label: Channel 11
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate11
+      read_pv: $(P)$(R):11:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits11
+      read_pv: $(P)$(R):11:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits11
+      read_pv: $(P)$(R):11:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity11
+      read_pv: $(P)$(R):11:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol11
+      read_pv: $(P)$(R):11:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial12
+    label: Channel 12
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate12
+      read_pv: $(P)$(R):12:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits12
+      read_pv: $(P)$(R):12:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits12
+      read_pv: $(P)$(R):12:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity12
+      read_pv: $(P)$(R):12:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol12
+      read_pv: $(P)$(R):12:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial13
+    label: Channel 13
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate13
+      read_pv: $(P)$(R):13:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits13
+      read_pv: $(P)$(R):13:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits13
+      read_pv: $(P)$(R):13:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity13
+      read_pv: $(P)$(R):13:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol13
+      read_pv: $(P)$(R):13:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial14
+    label: Channel 14
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate14
+      read_pv: $(P)$(R):14:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits14
+      read_pv: $(P)$(R):14:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits14
+      read_pv: $(P)$(R):14:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity14
+      read_pv: $(P)$(R):14:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol14
+      read_pv: $(P)$(R):14:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial15
+    label: Channel 15
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate15
+      read_pv: $(P)$(R):15:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits15
+      read_pv: $(P)$(R):15:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits15
+      read_pv: $(P)$(R):15:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity15
+      read_pv: $(P)$(R):15:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol15
+      read_pv: $(P)$(R):15:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial16
+    label: Channel 16
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate16
+      read_pv: $(P)$(R):16:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits16
+      read_pv: $(P)$(R):16:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits16
+      read_pv: $(P)$(R):16:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity16
+      read_pv: $(P)$(R):16:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol16
+      read_pv: $(P)$(R):16:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial17
+    label: Channel 17
+    layout:
+      type: Row
+      header:
+      - Baud Rate
+      - Data Bits
+      - Stop Bits
+      - Parity
+      - Flow Control
+    children:
+    - type: SignalR
+      name: Baudrate17
+      read_pv: $(P)$(R):17:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits17
+      read_pv: $(P)$(R):17:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits17
+      read_pv: $(P)$(R):17:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity17
+      read_pv: $(P)$(R):17:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol17
+      read_pv: $(P)$(R):17:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial18
+    label: Channel 18
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate18
+      read_pv: $(P)$(R):18:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits18
+      read_pv: $(P)$(R):18:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits18
+      read_pv: $(P)$(R):18:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity18
+      read_pv: $(P)$(R):18:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol18
+      read_pv: $(P)$(R):18:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial19
+    label: Channel 19
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate19
+      read_pv: $(P)$(R):19:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits19
+      read_pv: $(P)$(R):19:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits19
+      read_pv: $(P)$(R):19:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity19
+      read_pv: $(P)$(R):19:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol19
+      read_pv: $(P)$(R):19:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial20
+    label: Channel 20
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate20
+      read_pv: $(P)$(R):20:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits20
+      read_pv: $(P)$(R):20:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits20
+      read_pv: $(P)$(R):20:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity20
+      read_pv: $(P)$(R):20:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol20
+      read_pv: $(P)$(R):20:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial21
+    label: Channel 21
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate21
+      read_pv: $(P)$(R):21:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits21
+      read_pv: $(P)$(R):21:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits21
+      read_pv: $(P)$(R):21:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity21
+      read_pv: $(P)$(R):21:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol21
+      read_pv: $(P)$(R):21:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial22
+    label: Channel 22
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate22
+      read_pv: $(P)$(R):22:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits22
+      read_pv: $(P)$(R):22:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits22
+      read_pv: $(P)$(R):22:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity22
+      read_pv: $(P)$(R):22:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol22
+      read_pv: $(P)$(R):22:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial23
+    label: Channel 23
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate23
+      read_pv: $(P)$(R):23:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits23
+      read_pv: $(P)$(R):23:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits23
+      read_pv: $(P)$(R):23:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity23
+      read_pv: $(P)$(R):23:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol23
+      read_pv: $(P)$(R):23:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial24
+    label: Channel 24
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate24
+      read_pv: $(P)$(R):24:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits24
+      read_pv: $(P)$(R):24:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits24
+      read_pv: $(P)$(R):24:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity24
+      read_pv: $(P)$(R):24:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol24
+      read_pv: $(P)$(R):24:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial25
+    label: Channel 25
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate25
+      read_pv: $(P)$(R):25:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits25
+      read_pv: $(P)$(R):25:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits25
+      read_pv: $(P)$(R):25:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity25
+      read_pv: $(P)$(R):25:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol25
+      read_pv: $(P)$(R):25:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial26
+    label: Channel 26
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate26
+      read_pv: $(P)$(R):26:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits26
+      read_pv: $(P)$(R):26:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits26
+      read_pv: $(P)$(R):26:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity26
+      read_pv: $(P)$(R):26:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol26
+      read_pv: $(P)$(R):26:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial27
+    label: Channel 27
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate27
+      read_pv: $(P)$(R):27:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits27
+      read_pv: $(P)$(R):27:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits27
+      read_pv: $(P)$(R):27:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity27
+      read_pv: $(P)$(R):27:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol27
+      read_pv: $(P)$(R):27:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial28
+    label: Channel 28
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate28
+      read_pv: $(P)$(R):28:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits28
+      read_pv: $(P)$(R):28:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits28
+      read_pv: $(P)$(R):28:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity28
+      read_pv: $(P)$(R):28:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol28
+      read_pv: $(P)$(R):28:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial29
+    label: Channel 29
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate29
+      read_pv: $(P)$(R):29:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits29
+      read_pv: $(P)$(R):29:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits29
+      read_pv: $(P)$(R):29:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity29
+      read_pv: $(P)$(R):29:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol29
+      read_pv: $(P)$(R):29:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial30
+    label: Channel 30
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate30
+      read_pv: $(P)$(R):30:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits30
+      read_pv: $(P)$(R):30:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits30
+      read_pv: $(P)$(R):30:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity30
+      read_pv: $(P)$(R):30:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol30
+      read_pv: $(P)$(R):30:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial31
+    label: Channel 31
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate31
+      read_pv: $(P)$(R):31:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits31
+      read_pv: $(P)$(R):31:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits31
+      read_pv: $(P)$(R):31:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity31
+      read_pv: $(P)$(R):31:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol31
+      read_pv: $(P)$(R):31:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ChannelSerial32
+    label: Channel 32
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Baudrate32
+      read_pv: $(P)$(R):32:BAUDRATE
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Databits32
+      read_pv: $(P)$(R):32:DATABITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Stopbits32
+      read_pv: $(P)$(R):32:STOPBITS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Parity32
+      read_pv: $(P)$(R):32:PARITY
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Flowcontrol32
+      read_pv: $(P)$(R):32:FLOWCONTROL
+      read_widget:
+        type: TextRead
+        format: string
