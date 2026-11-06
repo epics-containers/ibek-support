@@ -158,6 +158,319 @@ children:
         read_widget:
           type: TextRead
 
+  - type: Group
+    name: Shamrock
+    layout:
+      type: Grid
+      labelled: true
+      stacked: false
+    children:
+      - type: SignalR
+        name: GratingExists1
+        read_pv: $(P)$(R)GratingExists1
+        read_widget:
+          type: LED
+
+      - type: SignalR
+        name: GratingExists2
+        read_pv: $(P)$(R)GratingExists2
+        read_widget:
+          type: LED
+
+      - type: SignalR
+        name: GratingExists3
+        read_pv: $(P)$(R)GratingExists3
+        read_widget:
+          type: LED
+
+      - type: SignalR
+        name: MinWavelength
+        read_pv: $(P)$(R)MinWavelength
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: MaxWavelength
+        read_pv: $(P)$(R)MaxWavelength
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: MinWavelength1
+        read_pv: $(P)$(R)MinWavelength1
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: MaxWavelength1
+        read_pv: $(P)$(R)MaxWavelength1
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: MinWavelength2
+        read_pv: $(P)$(R)MinWavelength2
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: MaxWavelength2
+        read_pv: $(P)$(R)MaxWavelength2
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: MinWavelength3
+        read_pv: $(P)$(R)MinWavelength3
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: MaxWavelength3
+        read_pv: $(P)$(R)MaxWavelength3
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: SlitExists1
+        read_pv: $(P)$(R)SlitExists1
+        read_widget:
+          type: LED
+
+      - type: SignalR
+        name: SlitExists2
+        read_pv: $(P)$(R)SlitExists2
+        read_widget:
+          type: LED
+
+      - type: SignalR
+        name: SlitExists3
+        read_pv: $(P)$(R)SlitExists3
+        read_widget:
+          type: LED
+
+      - type: SignalR
+        name: SlitExists4
+        read_pv: $(P)$(R)SlitExists4
+        read_widget:
+          type: LED
+
+      - type: SignalR
+        name: Calibration
+        read_pv: $(P)$(R)Calibration
+        read_widget:
+          type: TextRead
+
+      - type: SignalR
+        name: FlipperMirrorExists1
+        read_pv: $(P)$(R)FlipperMirrorExists1
+        read_widget:
+          type: LED
+
+      - type: SignalR
+        name: FlipperMirrorExists2
+        read_pv: $(P)$(R)FlipperMirrorExists2
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: Grating
+        write_pv: $(P)$(R)Grating
+        write_widget:
+          type: ComboBox
+        read_pv: $(P)$(R)Grating_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: Wavelength
+        write_pv: $(P)$(R)Wavelength
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)Wavelength_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize1
+        write_pv: $(P)$(R)SlitSize1
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize1_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize2
+        write_pv: $(P)$(R)SlitSize2
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize1_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize3
+        write_pv: $(P)$(R)SlitSize3
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize1_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize4
+        write_pv: $(P)$(R)SlitSize4
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize1_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize1
+        write_pv: $(P)$(R)SlitSize1
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize2_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize2
+        write_pv: $(P)$(R)SlitSize2
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize2_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize3
+        write_pv: $(P)$(R)SlitSize3
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize2_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize4
+        write_pv: $(P)$(R)SlitSize4
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize2_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize1
+        write_pv: $(P)$(R)SlitSize1
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize3_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize2
+        write_pv: $(P)$(R)SlitSize2
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize3_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize3
+        write_pv: $(P)$(R)SlitSize3
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize3_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize4
+        write_pv: $(P)$(R)SlitSize4
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize3_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize1
+        write_pv: $(P)$(R)SlitSize1
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize4_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize2
+        write_pv: $(P)$(R)SlitSize2
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize4_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize3
+        write_pv: $(P)$(R)SlitSize3
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize4_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: SlitSize4
+        write_pv: $(P)$(R)SlitSize4
+        write_widget:
+          type: TextWrite
+        read_pv: $(P)$(R)SlitSize4_RBV
+        read_widget:
+          type: TextRead
+
+      - type: SignalRW
+        name: FlipperMirror1
+        write_pv: $(P)$(R)FlipperMirror1
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)FlipperMirror1_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: FlipperMirror2
+        write_pv: $(P)$(R)FlipperMirror2
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)FlipperMirror1_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: FlipperMirror1
+        write_pv: $(P)$(R)FlipperMirror1
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)FlipperMirror2_RBV
+        read_widget:
+          type: LED
+
+      - type: SignalRW
+        name: FlipperMirror2
+        write_pv: $(P)$(R)FlipperMirror2
+        write_widget:
+          type: ToggleButton
+        read_pv: $(P)$(R)FlipperMirror2_RBV
+        read_widget:
+          type: LED
+
   - type: Include
     file_name: ADDriver
     in_subscreen: false
