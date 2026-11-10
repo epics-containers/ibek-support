@@ -76,10 +76,32 @@ entity_models:
           Stack size if ASYN_CANBLOCK is set
         default: 0
 
+      ATTRIBUTES_FILE:
+        type: str
+        description: |-
+          NDAttributes XML to attach to each NDArray. A file name in the IOC
+          instance's config folder, an absolute path, or the XML inline (at most
+          255 characters). Empty sets nothing. See ADCore.NDAttributesConfig.
+        default: ""
+
+      ATTRIBUTES_MACROS:
+        type: str
+        description: |-
+          Macro substitutions for the NDAttributes XML, e.g. "P=BL01T-EA-DET-01:,R=CAM:".
+          Empty sets nothing. See ADCore.NDAttributesConfig.
+        default: ""
+
     pre_init:
       - value: |
           # ffmpegFileConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, priority, stackSize)
           ffmpegFileConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{PRIORITY}}, {{STACKSIZE}})
+
+    sub_entities:
+      - type: ADCore.NDAttributesConfig
+        P: "{{ P }}"
+        R: "{{ R }}"
+        ATTRIBUTES_FILE: "{{ ATTRIBUTES_FILE }}"
+        ATTRIBUTES_MACROS: "{{ ATTRIBUTES_MACROS }}"
 
     databases:
       - file: $(FFMPEGSERVER)/db/ffmpegFile.template
@@ -217,6 +239,21 @@ entity_models:
           Stack size if ASYN_CANBLOCK is set
         default: 0
 
+      ATTRIBUTES_FILE:
+        type: str
+        description: |-
+          NDAttributes XML to attach to each NDArray. A file name in the IOC
+          instance's config folder, an absolute path, or the XML inline (at most
+          255 characters). Empty sets nothing. See ADCore.NDAttributesConfig.
+        default: ""
+
+      ATTRIBUTES_MACROS:
+        type: str
+        description: |-
+          Macro substitutions for the NDAttributes XML, e.g. "P=BL01T-EA-DET-01:,R=CAM:".
+          Empty sets nothing. See ADCore.NDAttributesConfig.
+        default: ""
+
     pre_init:
       - when: first
         value: |
@@ -224,6 +261,13 @@ entity_models:
       - value: |
           # ffmpegStreamConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize)
           ffmpegStreamConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{BUFFERS}}, {{MEMORY}}, {{PRIORITY}}, {{STACKSIZE}})
+
+    sub_entities:
+      - type: ADCore.NDAttributesConfig
+        P: "{{ P }}"
+        R: "{{ R }}"
+        ATTRIBUTES_FILE: "{{ ATTRIBUTES_FILE }}"
+        ATTRIBUTES_MACROS: "{{ ATTRIBUTES_MACROS }}"
 
     databases:
       - file: $(FFMPEGSERVER)/db/ffmpegStream.template

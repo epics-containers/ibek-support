@@ -44,10 +44,32 @@ entity_models:
         description: Asyn Port address
         default: 0
 
+      ATTRIBUTES_FILE:
+        type: str
+        description: |-
+          NDAttributes XML to attach to each NDArray. A file name in the IOC
+          instance's config folder, an absolute path, or the XML inline (at most
+          255 characters). Empty sets nothing. See ADCore.NDAttributesConfig.
+        default: ""
+
+      ATTRIBUTES_MACROS:
+        type: str
+        description: |-
+          Macro substitutions for the NDAttributes XML, e.g. "P=BL01T-EA-DET-01:,R=CAM:".
+          Empty sets nothing. See ADCore.NDAttributesConfig.
+        default: ""
+
     pre_init:
       - value: |
           # pvaDriverConfig(portName, pvName, maxBuffers, maxMemory, priority, stackSize)
           pvaDriverConfig("{{PORT}}", {{PVNAME}}, {{BUFFERS}}, {{MEMORY}}, {{PRIORITY}}, {{STACKSIZE}})
+
+    sub_entities:
+      - type: ADCore.NDAttributesConfig
+        P: "{{ P }}"
+        R: "{{ R }}"
+        ATTRIBUTES_FILE: "{{ ATTRIBUTES_FILE }}"
+        ATTRIBUTES_MACROS: "{{ ATTRIBUTES_MACROS }}"
 
     databases:
       - file: $(PVADRIVER)/db/pvaDriver.template
