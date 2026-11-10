@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: motorSmarAct
+version: R2-1-2
+organization: https://github.com/epics-motor/
+
+# iocs is only added to DIRS when BUILD_IOCS = YES, so the example IOCs are
+# not built and nothing needs removing.
+
+dbds:
+  - devSmarActMCSMotor.dbd
+  - devSmarActMCS2Motor.dbd
+  - devSmarActSCUMotor.dbd
+
+libs:
+  - smarActMotor

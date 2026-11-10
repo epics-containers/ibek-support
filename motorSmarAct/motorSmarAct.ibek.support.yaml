@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.1.2/ibek.support.schema.json
+
+module: motorSmarAct
+
+entity_models:
+  - name: SmaractMcs2Controller
+    description: |-
+      Smaract MCS2 controller configuration.
+      Creates an asyn motor controller for SmarAct MCS2 piezo stages.
+    parameters:
+      name:
+        type: id
+        description: Controller name and asyn port name
+      asynPort:
+        type: object
+        description: Asyn IP port for communication with the controller
+      maxNoAxes:
+        type: int
+        description: Maximum number of axes
+      movePollPeriod:
+        type: int
+        description: Poll period (ms) when moving
+      notMovePollPeriod:
+        type: int
+        description: Poll period (ms) when not moving
+
+    pre_init:
+      - when: first
+        value: |
+          # SmarAct MCS2 controller support
+      - value: |
+          MCS2CreateController("{{ name }}", "{{ asynPort }}", {{ maxNoAxes }}, {{ movePollPeriod }}, {{ notMovePollPeriod }})
+
+  - name: smaractMcs2ExtraTemplate
+    description: |-
+      Extra per-axis database for SmarAct MCS2 motors.
+      Provides calibration, MCL frequency, positioner type, and reference status.
+    parameters:
+      P:
+        type: str
+        description: Device prefix
+      M:
+        type: str
+        description: Device suffix
+      PORT:
+        type: str
+        description: Asyn port name
+      ADDR:
+        type: int
+        description: Asyn address
+      TIMEOUT:
+        type: int
+        description: Asyn timeout
+        default: 1
+
+    databases:
+      - file: $(MOTORSMARACT)/db/MCS2_Extra.db
+        args:
+          .*:
