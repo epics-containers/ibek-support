@@ -36,10 +36,12 @@ entity_models:
       Extra per-axis database for SmarAct MCS2 motors.
       Provides calibration, MCL frequency, positioner type, and reference status.
       Also sets the channel's hold time at iocInit, forever by default.
-      The driver writes the hold time only when the setHoldTime record is
-      processed. Unlike the Diamond 2-1dls1 driver, it does not write it
-      again when an axis is homed, so if the controller loses the setting,
-      for example on a power cycle, process setHoldTime or restart the IOC.
+      Only axes with this entity get a hold time: the Diamond 2-1dls1 driver
+      sent it to every axis it created. The driver writes the hold time only
+      when the setHoldTime record is processed. The Diamond driver also sent
+      it at the start of each home, before the reference move; this driver
+      does not, so if the controller loses the setting, for example on a
+      power cycle, process setHoldTime or restart the IOC.
     parameters:
       P:
         type: str
