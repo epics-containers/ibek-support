@@ -1,0 +1,16 @@
+record (bo, "$(P)$(R)Thr1Only") {
+    field (DESC, "Which counters to adjust")
+    field (DTYP, "asynInt32")
+    field (OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT)) SD_CNT1_ONLY")
+    field (ZNAM, "Adjust all counters")
+    field (ONAM, "Adjust counter 1 only")
+}
+
+record (bi, "$(P)$(R)Thr1Only_RBV") {
+    field (DESC, "Which counters to adjust")
+    field (DTYP, "asynInt32")
+    field (INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT)) SD_CNT1_ONLY")
+    field (ZNAM, "Adjust all counters")
+    field (ONAM, "Adjust counter 1 only")
+    field (SCAN, "I/O Intr")
+}

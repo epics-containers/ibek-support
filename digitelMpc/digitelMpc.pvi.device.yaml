@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# The digitel MPC controller, from digitelMpc.template at digitelMPC 6-23ec1.
+
+label: digitelMpc
+children:
+- type: Group
+  name: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Model
+    label: Model
+    read_pv: $(device):MODEL
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Version
+    label: Version
+    read_pv: $(device):VERSION
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: Comms
+    label: Comms
+    read_pv: $(device):COMMS
+    read_widget:
+      type: TextRead
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: ResetController
+    label: This action can cause all settings to be reset
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: Reset
+      label: Reset Software
+      write_pv: $(device):RESET
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Reset: '1'

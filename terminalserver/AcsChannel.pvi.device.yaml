@@ -1,0 +1,164 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# Upstream DiamondLightSource/terminalserver at 2-7: AcsChannel.template. Desired settings write only to
+# the IOC until "Write Desired to Device". Standalone channel: SNMPBUSY lives on the server
+# device, as a channel entity need not have one.
+
+label: AcsChannel
+children:
+- type: Group
+  name: General
+  label: Settings (Desired, Current)
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalRW
+    name: Alias
+    label: Alias
+    write_pv: $(P)$(R):$(CHAN):ALIASCFG
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R):$(CHAN):ALIAS
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalRW
+    name: Application
+    label: Application
+    write_pv: $(P)$(R):$(CHAN):APPLICATIONCFG
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R):$(CHAN):APPLICATION
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalRW
+    name: Port
+    label: Port
+    write_pv: $(P)$(R):$(CHAN):PORTCFG
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R):$(CHAN):PORT
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: Baudrate
+    label: Baud Rate
+    write_pv: $(P)$(R):$(CHAN):BAUDRATECFG
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R):$(CHAN):BAUDRATE
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: Databits
+    label: Data Bits
+    write_pv: $(P)$(R):$(CHAN):DATABITSCFG
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R):$(CHAN):DATABITS
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: Stopbits
+    label: Stop Bits
+    write_pv: $(P)$(R):$(CHAN):STOPBITSCFG
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R):$(CHAN):STOPBITS
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: Parity
+    label: Parity
+    write_pv: $(P)$(R):$(CHAN):PARITYCFG
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R):$(CHAN):PARITY
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalRW
+    name: Flowcontrol
+    label: Flow Control
+    write_pv: $(P)$(R):$(CHAN):FLOWCONTROLCFG
+    write_widget:
+      type: ComboBox
+    read_pv: $(P)$(R):$(CHAN):FLOWCONTROL
+    read_widget:
+      type: TextRead
+      format: string
+
+- type: Group
+  name: Status
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Match
+    label: Desired Matches Current
+    read_pv: $(P)$(R):$(CHAN):MATCH
+    read_widget:
+      type: LED
+  - type: SignalW
+    name: PollProc
+    label: Read From Device
+    write_pv: $(P)$(R):$(CHAN):POLL.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Refresh: '1'
+  - type: SignalW
+    name: DoreadProc
+    label: Copy Current to Desired
+    write_pv: $(P)$(R):$(CHAN):DOREAD.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Copy: '1'
+  - type: SignalR
+    name: Remoteip
+    label: Connected IP
+    read_pv: $(P)$(R):$(CHAN):REMOTEIP
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: Txtotalcount
+    label: Tx Count
+    read_pv: $(P)$(R):$(CHAN):TXTOTALCOUNT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Rxtotalcount
+    label: Rx Count
+    read_pv: $(P)$(R):$(CHAN):RXTOTALCOUNT
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: ProtectedChannel
+    label: Write to Device
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: DowriteProc
+      label: Write Desired to Device
+      description: 'Writes all desired settings, then saves and restarts the whole terminal server: every channel drops'
+      write_pv: $(P)$(R):$(CHAN):DOWRITE.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Write: '1'

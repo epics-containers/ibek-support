@@ -1,0 +1,118 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# Upstream DiamondLightSource/terminalserver at 2-7: Moxa.template and Acs.template, which
+# hold the same PVs, and TerminalServer16.template. Included by the server screens.
+
+label: TerminalServerInfo
+children:
+- type: Group
+  name: General
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Modelname
+    label: Model
+    read_pv: $(P)$(R):MODELNAME
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: Servername
+    label: Name
+    read_pv: $(P)$(R):SERVERNAME
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: Serialnumber
+    label: Serial Number
+    read_pv: $(P)$(R):SERIALNUMBER
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Serverloc
+    label: Location
+    read_pv: $(P)$(R):SERVERLOC
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: Fwversion
+    label: Firmware Version
+    read_pv: $(P)$(R):FWVERSION
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: Ipaddress
+    label: IP Address
+    read_pv: $(P)$(R):IPADDRESS
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: Snmpbusy
+    label: SNMP Busy
+    read_pv: $(P)$(R):SNMPBUSY
+    read_widget:
+      type: LED
+  - type: SignalW
+    name: PollProc
+    label: Read From Device
+    write_pv: $(P)$(R):POLL.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Refresh: '1'
+  - type: SignalW
+    name: CopyCurrentIntoDesired
+    label: Copy Current into Desired
+    write_pv: $(P)$(R):DOREAD.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Copy: '1'
+
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: ProtectedServer
+    label: Save and Restart
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: SaveAndRestart
+      label: Save and Restart
+      description: 'Saves the configuration and restarts the terminal server: every channel drops'
+      write_pv: $(P)$(R):SAVEANDRESTART.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          SaveAndRestart: '1'
+    - type: SignalW
+      name: Dosave
+      label: Save Configuration
+      description: 'Blocks the SNMP agent for up to 30 s. Save and Restart also pauses polling meanwhile'
+      write_pv: $(P)$(R):DOSAVE
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Save: '1'
+    - type: SignalW
+      name: Dorestart
+      label: Restart Device
+      description: 'Restarts the terminal server: every channel drops'
+      write_pv: $(P)$(R):DORESTART
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Restart: '1'

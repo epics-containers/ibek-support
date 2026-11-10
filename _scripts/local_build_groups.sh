@@ -48,7 +48,7 @@ if [ -z "$1" ]; then
     echo
     get_all_groups | while IFS='|' read -r name deps desc; do
         echo ">>> Group: $name ($desc)"
-        bash "$BUILD_SCRIPT" "$deps" "$name"
+        bash "$BUILD_SCRIPT" "$name"
         echo
     done
     echo "=== All groups built ==="
@@ -71,5 +71,5 @@ else:
         exit 1
     fi
     echo "=== Building group: $GROUP ==="
-    bash "$BUILD_SCRIPT" "$DEPS" "$GROUP"
+    bash "$BUILD_SCRIPT" "$GROUP"
 fi

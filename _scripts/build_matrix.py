@@ -82,7 +82,7 @@ def build_matrix(check_mode=False):
             "desc": group.get("desc", ""),
             "modules": modules,
         }
-        # Groups with base_image override the default ioc-asyn developer image
+        # Groups with base_image override the Dockerfile.ci default base image
         if "base_image" in group:
             entry["base_image"] = group["base_image"]
         matrix_entries.append(entry)
@@ -98,6 +98,25 @@ def build_matrix(check_mode=False):
     return {"include": matrix_entries}, uncategorized
 
 
+def group_build_list(group_name):
+    """Return the modules to build for a group: its deps first, then its own."""
+    groups, _ = load_build_config()
+
+    if group_name == "uncategorized":
+        _, uncategorized = build_matrix()
+        deps, own = ["core"], uncategorized
+    elif group_name in groups:
+        group = groups[group_name]
+        deps, own = group.get("deps", []), group.get("modules", [])
+    else:
+        sys.exit(f"ERROR: group '{group_name}' not found")
+
+    modules = []
+    for dep in deps:
+        modules += group_build_list(dep)
+    return modules + own
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true",
@@ -106,7 +125,14 @@ def main():
                         help="Output matrix= line for GitHub Actions")
     parser.add_argument("--uncategorized", action="store_true",
                         help="Print comma-separated list of uncategorized modules")
+    parser.add_argument("--modules", metavar="GROUP",
+                        help="Print comma-separated list of modules to build for "
+                             "GROUP, including its deps")
     args = parser.parse_args()
+
+    if args.modules:
+        print(",".join(group_build_list(args.modules)))
+        return
 
     matrix, uncategorized = build_matrix(check_mode=args.check)
 

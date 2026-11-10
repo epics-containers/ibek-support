@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# The MKS 937B gauge controller, from mks937b.template at mks937b 3-1-0.
+# The communications version is read on request: upstream does not scan it.
+
+label: mks937b
+children:
+- type: Group
+  name: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Unit
+    label: Pressure Unit
+    read_pv: $(device):UNIT
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: Ctlv
+    label: Controller Version
+    read_pv: $(device):CTLV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Comv
+    label: Comms Version
+    read_pv: $(device):COMV
+    read_widget:
+      type: TextRead
+  - type: SignalW
+    name: ComvProc
+    label: Read Comms Version
+    write_pv: $(device):COMV.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Read: '1'
+  - type: SignalR
+    name: Mcc
+    label: Slot CC
+    read_pv: $(device):MCC
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Ma
+    label: Slot A
+    read_pv: $(device):MA
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Mb
+    label: Slot B
+    read_pv: $(device):MB
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Comms
+    label: Comms
+    read_pv: $(device):COMMS
+    read_widget:
+      type: TextRead

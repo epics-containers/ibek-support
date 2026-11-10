@@ -1,16 +1,16 @@
 # Module build groups for parallel CI builds.
 #
-# Each group builds independently in its own Docker container.
-# Groups must list their modules in dependency order.
+# Each group builds independently in its own Docker container, FROM the
+# Dockerfile.ci default base (epics-base-developer). Groups must list their
+# modules in dependency order.
 #
-# The "core" group builds from epics-base-developer. All other groups
-# build from ioc-asyn-developer (the Dockerfile.ci default) which already
-# includes core modules. Set "base_image" to a full image reference to
-# override the default base.
+# "deps" names groups whose modules are built first, in the same container.
+# "base_image" is a full image reference that overrides the default base.
 #
 # Any module with a *.install.yml that is NOT listed in any group
-# is automatically assigned to the "uncategorized" group. This ensures
-# new modules are always tested without manual config updates.
+# is automatically assigned to the "uncategorized" group, which builds on
+# "core". This ensures new modules are always tested without manual config
+# updates.
 #
 # Modules listed in "skip" are excluded from all CI builds.
 #
@@ -28,18 +28,19 @@ skip:
 groups:
   core:
     desc: "Core EPICS support modules (dependencies for most others)"
-    base_image: ghcr.io/epics-containers/epics-base-developer:7.0.10ec1
     modules:
-      - calc
+      - iocStats
+      - sequencer
       - sscan
+      - calc
       - asyn
       - busy
       - autosave
-      - sequencer
-      - std
+      - pvlogging
 
   motor:
     desc: "Motor stack"
+    deps: [core]
     modules:
       - motor
       - motorMotorSim
@@ -48,42 +49,46 @@ groups:
       - optics
 
   adcore:
-    desc: separate verification of ADCore
+    desc: "ADCore and the plugins most area detector IOCs use"
+    deps: [core]
     modules:
       - ADCore
+      - ffmpegServer
 
   # AD modules split in two for better parallelism
   areadetector1:
     desc: "Area detector stack 1"
-    base_image: ghcr.io/epics-containers/ioc-areadetector-developer:3.14ec2
+    deps: [adcore]
     modules:
       - ADURL
       - ADZMQ
       - ADUVC
-      - ffmpegServer
       - quadEM
+      - slsDetector
 
   areadetector2:
     desc: "Area detector stack 2"
-    base_image: ghcr.io/epics-containers/ioc-areadetector-developer:3.14ec2
+    deps: [adcore]
     modules:
       - ADGenICam
       - ADAravis
       - ADSimDetector
+      - ADAndor
       - ADAndor3
       - xspress3
 
   general:
     desc: "General-purpose modules with few dependencies"
+    deps: [core]
     modules:
+      - std
       - modbus
-      - iocStats
-      - pvlogging
       - opcua
       - positioner
 
   fieldbus:
     desc: "Fieldbus and simple protocol modules"
+    deps: [core]
     modules:
       - StreamDevice
       - snmp

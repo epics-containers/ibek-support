@@ -73,6 +73,13 @@ entity_models:
           # ZMQDriverConfig(portName, serverHost, maxBuffers, maxMemory, priority, stackSize)
           ZMQDriverConfig("{{PORT}}", "{{SOURCE_ADDR}}", 0, 0, 0, 0)
 
+    pvi:
+      yaml_path: ZMQDriver.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv_prefix: "$(P)$(R)"
+
   # - name: ZMQControlledDriver
   #   description: |-
   #     TODO:ADD DESCRIPTION
@@ -261,6 +268,13 @@ entity_models:
     pre_init:
       - {}
 
+    pvi:
+      yaml_path: ZMQDriver.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv_prefix: "$(P)$(R)"
+
   - name: NDZMQPlugin
     description: |-
       TODO:ADD DESCRIPTION
@@ -366,3 +380,10 @@ entity_models:
 
     pre_init:
       - {}
+
+    pvi:
+      yaml_path: NDPluginZMQ.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv_prefix: "$(P)$(R)"

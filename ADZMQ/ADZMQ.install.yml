@@ -9,3 +9,17 @@ dbds:
   - ADZMQSupport.dbd
 libs:
   - ADZMQ
+
+# ADZMQ vendors a prebuilt static libzmq for linux-x86_64 only (installed by
+# zmqApp/zmqSrc). Point the zmq library at the system libzmq so that other
+# architectures (e.g. linux-aarch64) link against the distro package.
+apt_developer:
+  - libzmq3-dev
+
+apt_runtime:
+  - libzmq5
+
+patch_blocks:
+  - path: "{{ config_linux_host }}"
+    block: |
+      zmq_DIR = /usr/lib/$(shell gcc -dumpmachine)

@@ -17,6 +17,13 @@ entity_models:
         args:
           IOC:
 
+    pvi:
+      yaml_path: iocAdminVxWorks.pvi.device.yaml
+      ui_macros:
+        IOC:
+      # no pv: true: a record absent at the RTEMS commit stops the rest of ioc.db loading
+      pv_prefix: "$(IOC):"
+
   - name: iocAdminScanMon
     description: |-
       Create some records for reading IOC statistics and details.
@@ -30,6 +37,12 @@ entity_models:
       - file: $(IOCSTATS)/db/iocAdminScanMon.db
         args:
           IOC:
+
+    pvi:
+      yaml_path: iocAdminScanMon.pvi.device.yaml
+      ui_macros:
+        IOC:
+      pv_prefix: "$(IOC):"
 
   - name: iocAdminSoft
     description: |-
@@ -48,3 +61,10 @@ entity_models:
       - file: $(IOCSTATS)/db/iocAdminScanMon.db
         args:
           IOC:
+
+    pvi:
+      yaml_path: iocAdminSoft.pvi.device.yaml
+      ui_macros:
+        IOC:
+      # no pv: true: a record absent at the RTEMS commit stops the rest of ioc.db loading
+      pv_prefix: "$(IOC):"

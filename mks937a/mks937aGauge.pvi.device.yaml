@@ -1,0 +1,131 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# A combined gauge, from mks937aGauge.template at mks937a 3-0.
+# The template also carries the IMG Enable setpoints, in the name of the Pirani gauge.
+
+label: mks937aGauge
+children:
+- type: Group
+  name: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: P
+    label: Pressure (mbar)
+    read_pv: $(dom)-VA-GAUGE-$(id):P
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Gauge
+    label: Gauge
+    read_pv: $(dom)-VA-GAUGE-$(id):GAUGE
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: IlksetspInhibit
+    label: Setpoint Write Inhibit
+    read_pv: $(dom)-VA-GAUGE-$(id):ILKSETSP:NOWRITE
+    read_widget:
+      type: LED
+- type: Group
+  name: General
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: DeviceRef
+    name: Gctlr
+    label: Controller
+    pv: $(GCTLR):PVI
+    ui: mks937a.pvi.bob
+    macros:
+      device: $(GCTLR)
+  - type: DeviceRef
+    name: Pirani
+    label: Pirani
+    pv: $(dom)-VA-PIRG-$(id):PVI
+    ui: mks937aPirg.pvi.bob
+    macros:
+      device: $(dom)-VA-PIRG-$(id)
+  - type: DeviceRef
+    name: Img
+    label: IMG
+    pv: $(dom)-VA-IMG-$(id):PVI
+    ui: mks937aImg.pvi.bob
+    macros:
+      device: $(dom)-VA-IMG-$(id)
+- type: Group
+  name: MoreDetails
+  label: More Details
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Details2
+    label: Details
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Plog
+      label: Log Pressure
+      read_pv: $(dom)-VA-GAUGE-$(id):PLOG
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CtlSp
+      label: IMG Enable
+      read_pv: $(dom)-VA-PIRG-$(id):CTL:SP
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CtlGetenable
+      label: IMG Enable Mode
+      read_pv: $(dom)-VA-PIRG-$(id):CTL:GETENABLE
+      read_widget:
+        type: TextRead
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Setpoints
+    label: Setpoints
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: IlksetspNowrite
+      label: Setpoint overwrite
+      write_pv: $(dom)-VA-GAUGE-$(id):ILKSETSP:NOWRITE
+      write_widget:
+        type: ToggleButton
+      read_pv: $(dom)-VA-GAUGE-$(id):ILKSETSP:NOWRITE
+      read_widget:
+        type: LED
+    - type: SignalRW
+      name: CtlSetsp
+      label: IMG Enable
+      write_pv: $(dom)-VA-PIRG-$(id):CTL:SETSP
+      write_widget:
+        type: TextWrite
+      read_pv: $(dom)-VA-PIRG-$(id):CTL:SP
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: CtlEnable
+      label: IMG Enable Mode
+      write_pv: $(dom)-VA-PIRG-$(id):CTL:ENABLE
+      write_widget:
+        type: ComboBox
+      read_pv: $(dom)-VA-PIRG-$(id):CTL:GETENABLE
+      read_widget:
+        type: TextRead
