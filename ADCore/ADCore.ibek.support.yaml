@@ -138,7 +138,8 @@ shared:
       SCANRATE:
       QUEUE:
       BLOCK:
-      # at least the length of inline XML in ATTRIBUTES_FILE, plus its NUL
+      # at least the length of ATTRIBUTES_FILE as inline XML or a resolved
+      # path, plus its NUL
       XMLSIZE: "{{ [XMLSIZE, ((ATTRIBUTES_FILE.split() | join(' ')) if '<Attributes>' in ATTRIBUTES_FILE else (ATTRIBUTES_FILE | trim) if (ATTRIBUTES_FILE | trim).startswith('/') or not (ATTRIBUTES_FILE | trim) else '/epics/ioc/config/' ~ (ATTRIBUTES_FILE | trim)).encode('utf-8') | length + 1] | max }}"
 
 
@@ -1096,6 +1097,9 @@ entity_models:
       plugin after iocInit, so they win over autosave restore. Every ADCore
       plugin and the areaDetector drivers create one of these from their own
       ATTRIBUTES_FILE and ATTRIBUTES_MACROS, so it is rarely needed directly.
+      Used directly, it does not grow the NDAttributesFile record's XMLSIZE:
+      inline XML or a path longer than 255 bytes needs XMLSIZE set to fit by
+      the entity that loads the template holding the record.
       Emits nothing when both are empty.
     parameters:
       P:
@@ -1191,6 +1195,7 @@ entity_models:
           R:
           PORT:
           TIMEOUT:
+          XMLSIZE: "{{ [XMLSIZE, ((ATTRIBUTES_FILE.split() | join(' ')) if '<Attributes>' in ATTRIBUTES_FILE else (ATTRIBUTES_FILE | trim) if (ATTRIBUTES_FILE | trim).startswith('/') or not (ATTRIBUTES_FILE | trim) else '/epics/ioc/config/' ~ (ATTRIBUTES_FILE | trim)).encode('utf-8') | length + 1] | max }}"
 
     pre_init:
       - value: |
