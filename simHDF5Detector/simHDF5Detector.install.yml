@@ -24,8 +24,10 @@ comment_out:
     regexp: 'DIRS\), (\$\(wildcard )?(etc|iocs)\)+$'
 
 patch_lines:
-  # The module points HDF5_INCLUDE at an HDF5 under /dls_sw. Use the Debian
-  # libhdf5-dev headers that ADCore installs instead.
-  - path: configure/CONFIG_SITE.linux-x86_64.Common
+  # The module's CONFIG_SITE.linux-x86_64.Common points HDF5_INCLUDE at an
+  # HDF5 under /dls_sw. Use the Debian libhdf5-dev headers that ADCore
+  # installs instead. config_linux_host is that file for the build host's
+  # arch, so other arches get the setting too (lineinfile creates the file).
+  - path: "{{ config_linux_host }}"
     regexp: '^HDF5_INCLUDE *='
     line: HDF5_INCLUDE = -I/usr/include/hdf5/serial
