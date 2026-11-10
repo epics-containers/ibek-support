@@ -1,0 +1,80 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
+
+module: simHDF5Detector
+
+entity_models:
+  - name: SimHDF5Detector
+    description: |-
+      Create a SimHDF5Detector detector driver
+    parameters:
+      PORT:
+        type: id
+        description: |-
+          Port name for the detector
+
+      P:
+        type: str
+        description: |-
+          Device Prefix
+
+      R:
+        type: str
+        description: |-
+          Device Suffix
+
+      ADDR:
+        type: int
+        description: |-
+          Asyn Port address
+        default: 0
+
+      TIMEOUT:
+        type: int
+        description: |-
+          Timeout
+        default: 1
+
+      MEMORY:
+        type: int
+        description: |-
+          Max memory to allocate, should be maxw*maxh*nbuffer for driver and all attached plugins
+        default: 0
+
+      SCANRATE:
+        type: enum
+        description: |-
+          Specified scan rate for cpu intensive PVs
+        default: I/O Intr
+        values:
+          .1 second:
+          1 second:
+          10 second:
+          5 second:
+          Passive:
+          2 second:
+          .2 second:
+          .5 second:
+          Event:
+          I/O Intr:
+
+    pre_init:
+      - value: |
+          # SimHDF5DetectorConfig(portName, maxBuffers, maxMemory)
+          SimHDF5DetectorConfig("{{PORT}}", 0, {{MEMORY}})
+
+    databases:
+      - file: $(SIMHDF5DETECTOR)/db/simHDF5Detector.template
+        args:
+          P:
+          R:
+          PORT:
+          ADDR:
+          TIMEOUT:
+          SCANRATE:
+
+    pvi:
+      yaml_path: simHDF5Detector.pvi.device.yaml
+      ui_macros:
+        P:
+        R:
+      pv_prefix: "$(P)$(R)"

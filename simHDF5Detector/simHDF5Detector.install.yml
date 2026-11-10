@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: simHDF5Detector
+# 0-6 is the newest tag on GitHub and is the same commit as master. The Diamond
+# 0-7 and 0-8 change only configure/RELEASE.
+version: 0-6
+
+organization: https://github.com/DiamondLightSource
+
+dbds:
+  - simHDF5Support.dbd
+libs:
+  - simHDF5Detector
+
+comment_out:
+  # etc/makeIocs and iocs only build example IOCs and doxygen docs, using the
+  # DLS build system (dls-xml-iocbuilder.py) which is not in the container.
+  # This Makefile adds both to DIRS twice, literally and through $(wildcard),
+  # so the directories cannot simply be removed - make would stop with
+  # 'etc: No such file or directory'. Comment out those four DIRS lines only.
+  # The pattern is anchored to them: a bare 'etc' also matches the
+  # 'ifeq ($(wildcard etc),etc)' line and leaves its endif unmatched.
+  - path: Makefile
+    regexp: 'DIRS\), (\$\(wildcard )?(etc|iocs)\)+$'
+
+patch_lines:
+  # The module points HDF5_INCLUDE at an HDF5 under /dls_sw. Use the Debian
+  # libhdf5-dev headers that ADCore installs instead.
+  - path: configure/CONFIG_SITE.linux-x86_64.Common
+    regexp: '^HDF5_INCLUDE *='
+    line: HDF5_INCLUDE = -I/usr/include/hdf5/serial

@@ -66,6 +66,7 @@ groups:
       - ADUVC
       - quadEM
       - slsDetector
+      - simHDF5Detector
 
   areadetector2:
     desc: "Area detector stack 2"
