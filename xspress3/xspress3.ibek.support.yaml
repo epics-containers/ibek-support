@@ -203,7 +203,7 @@ entity_models:
     sub_entities:
       - type: ADCore.NDAttributesConfig
         P: "{{ P }}"
-        R: "{{ R }}"
+        R: "{{ R }}DTC:"
         ATTRIBUTES_FILE: "{{ ATTRIBUTES_FILE }}"
         ATTRIBUTES_MACROS: "{{ ATTRIBUTES_MACROS }}"
 
