@@ -150,22 +150,16 @@ entity_models:
       ATTRIBUTES_FILE:
         type: str
         description: |-
-          NDAttributes XML that lists the attributes to attach to each NDArray.
-          Leave empty to set nothing at startup.
-          Usually a file name: put the file in the IOC instance's config folder
-          and give its name, which resolves to /epics/ioc/config/<name>. A path
-          starting with / is used as given.
-          A value containing <Attributes> is passed inline as the XML itself.
-          Inline XML must fit in 255 characters, the size of the NDAttributesFile waveform.
-          Setting this overrides the autosaved NDAttributesFile at each IOC start.
+          NDAttributes XML to attach to each NDArray. A file name in the IOC
+          instance's config folder, an absolute path, or the XML inline (at most
+          255 characters). Empty sets nothing. See ADCore.NDAttributesConfig.
         default: ""
 
       ATTRIBUTES_MACROS:
         type: str
         description: |-
-          Macro substitutions applied to the NDAttributes XML, e.g. "P=BL01T-EA-DET-01:,R=CAM:".
-          Leave empty to set nothing at startup. Limited to 255 characters.
-          Setting this overrides the autosaved NDAttributesMacros at each IOC start.
+          Macro substitutions for the NDAttributes XML, e.g. "P=BL01T-EA-DET-01:,R=CAM:".
+          Empty sets nothing. See ADCore.NDAttributesConfig.
         default: ""
 
     pre_init:
@@ -173,23 +167,12 @@ entity_models:
           # aravisConfig(portName, cameraName, enableCaching, maxMemory, priority, stackSize)
           aravisConfig("{{PORT}}", "{{ID}}", {{CACHING | int}}, {{MEMORY}}, 0, 1)
 
-    post_init:
-      # NDAttributes settings, after iocInit so they win over autosave.
-      # Each " in a value becomes "'"'" because iocsh ignores backslashes in quotes.
-      - value: |
-          {%- set dq = '"' ~ "'" ~ '"' ~ "'" ~ '"' %}
-          {%- if ATTRIBUTES_MACROS %}
-          dbpf "{{ P }}{{ R }}NDAttributesMacros", "{{ ATTRIBUTES_MACROS | replace('"', dq) }}"
-          {%- endif %}
-          {%- if ATTRIBUTES_FILE %}
-          {%- if '<Attributes>' in ATTRIBUTES_FILE %}
-          dbpf "{{ P }}{{ R }}NDAttributesFile", "{{ ATTRIBUTES_FILE | replace('\n', ' ') | replace('"', dq) }}"
-          {%- elif ATTRIBUTES_FILE.startswith('/') %}
-          dbpf "{{ P }}{{ R }}NDAttributesFile", "{{ ATTRIBUTES_FILE }}"
-          {%- else %}
-          dbpf "{{ P }}{{ R }}NDAttributesFile", "/epics/ioc/config/{{ ATTRIBUTES_FILE }}"
-          {%- endif %}
-          {%- endif %}
+    sub_entities:
+      - type: ADCore.NDAttributesConfig
+        P: "{{ P }}"
+        R: "{{ R }}"
+        ATTRIBUTES_FILE: "{{ ATTRIBUTES_FILE }}"
+        ATTRIBUTES_MACROS: "{{ ATTRIBUTES_MACROS }}"
 
     databases:
       - file: $(ADARAVIS)/db/aravisCamera.template
