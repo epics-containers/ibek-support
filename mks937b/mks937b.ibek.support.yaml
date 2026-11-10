@@ -508,6 +508,8 @@ entity_models:
     databases:
       - file: $(MKS937B)/db/mks937bCap.template
         args:
+          address: "{{ '%03d' % GCTLR.address }}"
+          port: "{{ GCTLR.port }}"
           ctlsp_drvl:
           name:
           ctlsp_lopr:
