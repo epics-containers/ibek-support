@@ -6,14 +6,14 @@ shared:
         type: str
         description: |-
           NDAttributes XML that lists the attributes to attach to each NDArray.
+          Preferred: the XML itself, inline. Any value containing <Attributes>
+          is inline XML; each run of whitespace collapses to one space and
+          XMLSIZE grows to fit it, so a YAML | block can be used.
+          Alternative: a file name such as attrs.xml, for a file in the IOC
+          instance's config folder (it resolves to /epics/ioc/config/attrs.xml),
+          or a path starting with /. The path must fit in XMLSIZE - 1
+          characters.
           Empty (or only whitespace) sets nothing at startup.
-          A file name such as attrs.xml: put the file in the IOC instance's
-          config folder; the name resolves to /epics/ioc/config/attrs.xml.
-          A path starting with / is used as given.
-          A value containing <Attributes> is the XML itself, passed inline with
-          each run of whitespace collapsed to one space. It must then fit in
-          XMLSIZE - 1 characters: XMLSIZE defaults to 256 (NDFileHDF5 2048,
-          NDROIStat 1024), and drivers have the default.
           Setting this overrides the autosaved NDAttributesFile at each IOC start.
         default: ""
 
@@ -22,8 +22,8 @@ shared:
         description: |-
           Macro substitutions applied to the NDAttributes XML when ADCore reads
           it, e.g. "P=BL01T-EA-DET-01:,R=CAM:" for source="$(P)$(R)Temp".
-          Runs of whitespace collapse to one space. Empty sets nothing at
-          startup. At most 255 characters.
+          Runs of whitespace collapse to one space. The result must fit in 255
+          characters, or the render fails. Empty sets nothing at startup.
           Setting this overrides the autosaved NDAttributesMacros at each IOC start.
         default: ""
 
@@ -113,8 +113,9 @@ shared:
       XMLSIZE:
         type: int
         description: |-
-          Number of characters in the NDAttributesFile waveform record, which
-          limits the file path or inline XML in ATTRIBUTES_FILE to XMLSIZE - 1.
+          Number of characters in the NDAttributesFile waveform record.
+          Grown automatically to fit inline XML in ATTRIBUTES_FILE; a larger
+          value given here wins.
         default: 256
 
   - &NDArrayBase-threads
@@ -136,7 +137,8 @@ shared:
       SCANRATE:
       QUEUE:
       BLOCK:
-      XMLSIZE:
+      # at least the length of inline XML in ATTRIBUTES_FILE, plus its NUL
+      XMLSIZE: "{{ [XMLSIZE, ATTRIBUTES_FILE.split() | join(' ') | length + 1 if '<Attributes>' in ATTRIBUTES_FILE else 0] | max }}"
 
 
 module: ADCore
@@ -470,7 +472,8 @@ entity_models:
         type: int
         description: |-
           Number of characters in the XMLFileName (HDF5 layout) and
-          NDAttributesFile waveform records
+          NDAttributesFile waveform records. Grown automatically to fit inline
+          XML in ATTRIBUTES_FILE; a larger value given here wins.
         default: 2048
 
     pre_init:
@@ -1105,6 +1108,12 @@ entity_models:
 
       <<: *NDAttributes-parameters
 
+    validate:
+      - assert: ATTRIBUTES_MACROS.split() | join(' ') | length <= 255
+        message: >-
+          ATTRIBUTES_MACROS for {{ P }}{{ R }} is longer than the 255 characters
+          that NDAttributesMacros holds
+
     # iocsh expands $(...) macros everywhere except inside single quotes, so
     # values go in single quotes, and each ' is written as '"'"' (close the
     # quote, a double-quoted ', reopen). Macros come first: ADCore re-reads
@@ -1292,8 +1301,9 @@ entity_models:
       XMLSIZE:
         type: int
         description: |-
-          Number of characters in the NDAttributesFile waveform record, which
-          limits the file path or inline XML in ATTRIBUTES_FILE to XMLSIZE - 1.
+          Number of characters in the NDAttributesFile waveform record.
+          Grown automatically to fit inline XML in ATTRIBUTES_FILE; a larger
+          value given here wins.
         default: 1024
 
       MAX_ROIS:

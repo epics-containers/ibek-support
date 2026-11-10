@@ -150,17 +150,26 @@ entity_models:
       ATTRIBUTES_FILE:
         type: str
         description: |-
-          NDAttributes XML to attach to each NDArray. A file name in the IOC
-          instance's config folder, an absolute path, or the XML inline (at most
-          255 characters). Empty sets nothing. See ADCore.NDAttributesConfig.
+          NDAttributes XML to attach to each NDArray. Preferred: the XML itself,
+          inline (XMLSIZE grows to fit it). Alternative: a file name in the IOC
+          instance's config folder, or an absolute path. Empty sets nothing.
+          See ADCore.NDAttributesConfig.
         default: ""
 
       ATTRIBUTES_MACROS:
         type: str
         description: |-
           Macro substitutions for the NDAttributes XML, e.g. "P=BL01T-EA-DET-01:,R=CAM:".
-          Empty sets nothing. See ADCore.NDAttributesConfig.
+          At most 255 characters. Empty sets nothing. See ADCore.NDAttributesConfig.
         default: ""
+
+      XMLSIZE:
+        type: int
+        description: |-
+          Number of characters in the NDAttributesFile waveform record.
+          Grown automatically to fit inline XML in ATTRIBUTES_FILE; a larger
+          value given here wins.
+        default: 256
 
     pre_init:
       - value: |
@@ -176,7 +185,13 @@ entity_models:
 
     databases:
       - file: $(ADARAVIS)/db/aravisCamera.template
-        args: { P, R, PORT, TIMEOUT, ADDR }
+        args:
+          XMLSIZE: "{{ [XMLSIZE, ATTRIBUTES_FILE.split() | join(' ') | length + 1 if '<Attributes>' in ATTRIBUTES_FILE else 0] | max }}"
+          P:
+          R:
+          PORT:
+          TIMEOUT:
+          ADDR:
 
     pvi:
       yaml_path: ADAravis.pvi.device.yaml
