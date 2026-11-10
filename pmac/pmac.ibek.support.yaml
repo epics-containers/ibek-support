@@ -784,11 +784,13 @@ entity_models:
         type: float
         description: |-
           Dial High Limit
+        default: 0
 
       DLLM:
         type: float
         description: |-
           Dial Low Limit
+        default: 0
 
       HLM:
         type: float
