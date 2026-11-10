@@ -1,0 +1,226 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+# Grouped from the DLS EDM screen simHDF5Detector.edl (simHDF5Detector 0-8).
+# Generated from that screen. Hand edits may be overwritten by regeneration.
+
+label: simHDF5Detector
+children:
+- type: Group
+  name: NdPluginBase
+  label: NDPluginBase
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Information
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: PortName
+      label: Port Name
+      read_pv: $(P)$(R)PortName_RBV
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ArrayProps
+    label: Array Props
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: NDimensions
+      label: '# dimensions'
+      read_pv: $(P)$(R)NDimensions_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ArraySize0
+      label: Dim0 Size
+      read_pv: $(P)$(R)ArraySize0_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ArraySize1
+      label: Dim1 Size
+      read_pv: $(P)$(R)ArraySize1_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ArraySize2
+      label: Dim2 Size
+      read_pv: $(P)$(R)ArraySize2_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: DataType
+      label: Data Type
+      read_pv: $(P)$(R)DataType_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ColorMode
+      label: Colour Mode
+      read_pv: $(P)$(R)ColorMode_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: BayerPattern
+      label: Bayer Pattern
+      read_pv: $(P)$(R)BayerPattern_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: UniqueId
+      label: Unique ID
+      read_pv: $(P)$(R)UniqueId_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: TimeStamp
+      label: Time Stamp
+      read_pv: $(P)$(R)TimeStamp_RBV
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: Counters
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: ArrayCounter
+      label: Arrays
+      write_pv: $(P)$(R)ArrayCounter
+      write_widget:
+        type: TextWrite
+      read_pv: $(P)$(R)ArrayCounter_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ArrayRate
+      label: Array Rate (fps)
+      read_pv: $(P)$(R)ArrayRate_RBV
+      read_widget:
+        type: TextRead
+- type: Group
+  name: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: Group
+    name: RowFilename
+    label: Filename
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Filename
+      read_pv: $(P)$(R)Filename_RBV
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: FileValid
+      read_pv: $(P)$(R)FileValid_RBV
+      read_widget:
+        type: LED
+  - type: SignalW
+    name: Filename2
+    write_pv: $(P)$(R)Filename
+    write_widget:
+      type: TextWrite
+      format: string
+  - type: SignalR
+    name: NoOfDatasets
+    label: No Of Datasets
+    read_pv: $(P)$(R)NoOfDatasets_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: DatasetIndex
+    label: Dataset Index
+    write_pv: $(P)$(R)DatasetIndex
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)DatasetIndex_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: DatasetName
+    read_pv: $(P)$(R)DatasetName_RBV
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: Dimension1
+    label: Dim 1 Size
+    read_pv: $(P)$(R)Dimension1_RBV
+    read_widget:
+      type: TextRead
+  - type: Group
+    name: RowDimension2
+    label: Dim 2 Size
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Dimension2
+      read_pv: $(P)$(R)Dimension2_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: XDimension
+      write_pv: $(P)$(R)XDimension
+      write_widget:
+        type: TextWrite
+      read_pv: $(P)$(R)XDimension_RBV
+      read_widget:
+        type: TextRead
+  - type: SignalR
+    name: Dimension3
+    label: Dim 3 Size
+    read_pv: $(P)$(R)Dimension3_RBV
+    read_widget:
+      type: TextRead
+  - type: Group
+    name: RowDimension4
+    label: Dim 4 Size
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Dimension4
+      read_pv: $(P)$(R)Dimension4_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: YDimension
+      write_pv: $(P)$(R)YDimension
+      write_widget:
+        type: TextWrite
+      read_pv: $(P)$(R)YDimension_RBV
+      read_widget:
+        type: TextRead
+  - type: SignalR
+    name: Dimension5
+    label: Dim 5 Size
+    read_pv: $(P)$(R)Dimension5_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Dimension6
+    label: Dim 6 Size
+    read_pv: $(P)$(R)Dimension6_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: NoOfDimensions
+    label: Dataset Dimensions
+    read_pv: $(P)$(R)NoOfDimensions_RBV
+    read_widget:
+      type: TextRead

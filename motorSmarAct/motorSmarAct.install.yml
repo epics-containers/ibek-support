@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: motorSmarAct
+version: R2-1-2
+organization: https://github.com/epics-motor/
+
+# iocs is only added to DIRS when BUILD_IOCS = YES, so the example IOCs are
+# not built and nothing needs removing.
+
+dbds:
+  - devSmarActMCSMotor.dbd
+  - devSmarActMCS2Motor.dbd
+  - devSmarActSCUMotor.dbd
+
+libs:
+  - smarActMotor
+
+bash:
+  # MCS2_Hold.template sets each channel's hold time at iocInit, which the
+  # module's own databases do not; copy it into the module's db/ so the
+  # entity model finds it with the module's templates.
+  - cmd: cp {{ ibek_support_folder }}/MCS2_Hold.template db/
+    post_build: true

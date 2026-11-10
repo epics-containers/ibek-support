@@ -1,0 +1,84 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.1.2/ibek.support.schema.json
+
+module: motorSmarAct
+
+entity_models:
+  - name: SmaractMcs2Controller
+    description: |-
+      Smaract MCS2 controller configuration.
+      Creates an asyn motor controller for SmarAct MCS2 piezo stages.
+    parameters:
+      name:
+        type: id
+        description: Controller name and asyn port name
+      asynPort:
+        type: object
+        description: Asyn IP port for communication with the controller
+      maxNoAxes:
+        type: int
+        description: Maximum number of axes
+      movePollPeriod:
+        type: int
+        description: Poll period (ms) when moving
+      notMovePollPeriod:
+        type: int
+        description: Poll period (ms) when not moving
+
+    pre_init:
+      - when: first
+        value: |
+          # SmarAct MCS2 controller support
+      - value: |
+          MCS2CreateController("{{ name }}", "{{ asynPort }}", {{ maxNoAxes }}, {{ movePollPeriod }}, {{ notMovePollPeriod }})
+
+  - name: smaractMcs2ExtraTemplate
+    description: |-
+      Extra per-axis database for SmarAct MCS2 motors.
+      Provides calibration, MCL frequency, positioner type, and reference status.
+      Also sets the channel's hold time at iocInit, forever by default.
+      Only axes with this entity get a hold time: the Diamond 2-1dls1 driver
+      sent it to every axis it created. The driver writes the hold time only
+      when the setHoldTime record is processed. The Diamond driver also sent
+      it at the start of each home, before the reference move; this driver
+      does not, so if the controller loses the setting, for example on a
+      power cycle, process setHoldTime or restart the IOC.
+    parameters:
+      P:
+        type: str
+        description: Device prefix
+      M:
+        type: str
+        description: Device suffix
+      PORT:
+        type: str
+        description: Asyn port name
+      ADDR:
+        type: int
+        description: Asyn address
+      TIMEOUT:
+        type: int
+        description: Asyn timeout
+        default: 1
+      HOLD:
+        type: int
+        description: |-
+          Hold time in ms after a closed loop move: how long the controller
+          keeps the position actively controlled. -1 holds it forever.
+        default: -1
+
+    databases:
+      - file: $(MOTORSMARACT)/db/MCS2_Extra.db
+        args:
+          P:
+          M:
+          PORT:
+          ADDR:
+          TIMEOUT:
+      - file: $(MOTORSMARACT)/db/MCS2_Hold.template
+        args:
+          P:
+          M:
+          PORT:
+          ADDR:
+          TIMEOUT:
+          HOLD:

@@ -45,6 +45,7 @@ groups:
       - motor
       - motorMotorSim
       - motorNewport
+      - motorSmarAct
       - pmac
       - optics
 
@@ -65,6 +66,7 @@ groups:
       - ADUVC
       - quadEM
       - slsDetector
+      - simHDF5Detector
 
   areadetector2:
     desc: "Area detector stack 2"
