@@ -1,15 +1,19 @@
 - name: Release block
   tags: [release]
   block:
-    # Not a copy with force: false. That only ever writes the file once, in
-    # whichever image first created /epics/support/configure/RELEASE, so an
-    # image built against an older RELEASE.global never sees a change to it -
-    # the task reports 'ok' forever and the new setting silently does nothing.
-    # A marked block is applied every time and rewritten when it changes, so a
-    # container gets the current RELEASE.global however old its /epics/support
-    # is. At the top of the file because the module macros below it are the
+    # Not a copy with force: false. That writes the file only when it does not
+    # exist, so a configure/RELEASE that is already there never sees a change
+    # to RELEASE.global - the task reports 'ok' and the setting does nothing.
+    # A marked block is applied every time and rewritten when it changes. It
+    # sits at the top of the file because the module macros below it are the
     # more specific setting, and because the -include lines here must stay
-    # ahead of them to keep meaning what they meant.
+    # ahead of them to keep meaning what they mean.
+    #
+    # make takes the last definition of a macro, so anything below the block
+    # that defines the same macro still wins: a module line, or an unmarked
+    # copy of RELEASE.global that a configure/RELEASE written without this
+    # block carries. A macro defined only in the block, such as WORK, takes
+    # effect wherever the block is applied.
     - name: Ensure the global configure/RELEASE holds the container's settings
       ansible.builtin.blockinfile:
         path: "{{ release_file }}"
