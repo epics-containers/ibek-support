@@ -7,12 +7,13 @@ shared:
         description: |-
           NDAttributes XML that lists the attributes to attach to each NDArray.
           Preferred: the XML itself, inline. Any value containing <Attributes>
-          is inline XML; each run of whitespace collapses to one space and
-          XMLSIZE grows to fit it, so a YAML | block can be used.
+          is inline XML, and each run of whitespace in it collapses to one
+          space, so a YAML | block can be used. The <Attributes> tag must be
+          written exactly so, without attributes of its own.
           Alternative: a file name such as attrs.xml, for a file in the IOC
           instance's config folder (it resolves to /epics/ioc/config/attrs.xml),
-          or a path starting with /. The path must fit in XMLSIZE - 1
-          characters.
+          or a path starting with /.
+          XMLSIZE grows to fit the inline XML or the resolved path.
           Empty (or only whitespace) sets nothing at startup.
           Setting this overrides the autosaved NDAttributesFile at each IOC start.
         default: ""
@@ -23,7 +24,7 @@ shared:
           Macro substitutions applied to the NDAttributes XML when ADCore reads
           it, e.g. "P=BL01T-EA-DET-01:,R=CAM:" for source="$(P)$(R)Temp".
           Runs of whitespace collapse to one space. The result must fit in 255
-          characters, or the render fails. Empty sets nothing at startup.
+          bytes of UTF-8, or the render fails. Empty sets nothing at startup.
           Setting this overrides the autosaved NDAttributesMacros at each IOC start.
         default: ""
 
@@ -113,9 +114,9 @@ shared:
       XMLSIZE:
         type: int
         description: |-
-          Number of characters in the NDAttributesFile waveform record.
-          Grown automatically to fit inline XML in ATTRIBUTES_FILE; a larger
-          value given here wins.
+          Number of bytes in the NDAttributesFile waveform record. Grown
+          automatically to fit ATTRIBUTES_FILE (the inline XML or the resolved
+          path, in UTF-8, plus a NUL); a larger value given here wins.
         default: 256
 
   - &NDArrayBase-threads
@@ -138,7 +139,7 @@ shared:
       QUEUE:
       BLOCK:
       # at least the length of inline XML in ATTRIBUTES_FILE, plus its NUL
-      XMLSIZE: "{{ [XMLSIZE, ATTRIBUTES_FILE.split() | join(' ') | length + 1 if '<Attributes>' in ATTRIBUTES_FILE else 0] | max }}"
+      XMLSIZE: "{{ [XMLSIZE, ((ATTRIBUTES_FILE.split() | join(' ')) if '<Attributes>' in ATTRIBUTES_FILE else (ATTRIBUTES_FILE | trim) if (ATTRIBUTES_FILE | trim).startswith('/') or not (ATTRIBUTES_FILE | trim) else '/epics/ioc/config/' ~ (ATTRIBUTES_FILE | trim)).encode('utf-8') | length + 1] | max }}"
 
 
 module: ADCore
@@ -471,9 +472,10 @@ entity_models:
       XMLSIZE:
         type: int
         description: |-
-          Number of characters in the XMLFileName (HDF5 layout) and
-          NDAttributesFile waveform records. Grown automatically to fit inline
-          XML in ATTRIBUTES_FILE; a larger value given here wins.
+          Number of bytes in the XMLFileName (HDF5 layout) and NDAttributesFile
+          waveform records. Grown automatically to fit ATTRIBUTES_FILE (the
+          inline XML or the resolved path, in UTF-8, plus a NUL); a larger
+          value given here wins.
         default: 2048
 
     pre_init:
@@ -1109,10 +1111,15 @@ entity_models:
       <<: *NDAttributes-parameters
 
     validate:
-      - assert: ATTRIBUTES_MACROS.split() | join(' ') | length <= 255
+      - assert: (ATTRIBUTES_MACROS.split() | join(' ')).encode('utf-8') | length <= 255
         message: >-
-          ATTRIBUTES_MACROS for {{ P }}{{ R }} is longer than the 255 characters
+          ATTRIBUTES_MACROS for {{ P }}{{ R }} is longer than the 255 bytes
           that NDAttributesMacros holds
+      - assert: "'<' not in ATTRIBUTES_FILE or '<Attributes>' in ATTRIBUTES_FILE"
+        message: >-
+          ATTRIBUTES_FILE for {{ P }}{{ R }} contains '<' but not '<Attributes>',
+          so it would be taken as a file name. Inline XML must contain the
+          <Attributes> tag written exactly so, without attributes such as xmlns
 
     # iocsh expands $(...) macros everywhere except inside single quotes, so
     # values go in single quotes, and each ' is written as '"'"' (close the
@@ -1301,9 +1308,9 @@ entity_models:
       XMLSIZE:
         type: int
         description: |-
-          Number of characters in the NDAttributesFile waveform record.
-          Grown automatically to fit inline XML in ATTRIBUTES_FILE; a larger
-          value given here wins.
+          Number of bytes in the NDAttributesFile waveform record. Grown
+          automatically to fit ATTRIBUTES_FILE (the inline XML or the resolved
+          path, in UTF-8, plus a NUL); a larger value given here wins.
         default: 1024
 
       MAX_ROIS:

@@ -43,8 +43,8 @@ entity_models:
         type: str
         description: |-
           NDAttributes XML to attach to each NDArray. Preferred: the XML itself,
-          inline (XMLSIZE grows to fit it). Alternative: a file name in the IOC
-          instance's config folder, or an absolute path. Empty sets nothing.
+          inline. Alternative: a file name in the IOC instance's config folder,
+          or an absolute path. XMLSIZE grows to fit either. Empty sets nothing.
           See ADCore.NDAttributesConfig.
         default: ""
 
@@ -52,15 +52,15 @@ entity_models:
         type: str
         description: |-
           Macro substitutions for the NDAttributes XML, e.g. "P=BL01T-EA-DET-01:,R=CAM:".
-          At most 255 characters. Empty sets nothing. See ADCore.NDAttributesConfig.
+          At most 255 bytes. Empty sets nothing. See ADCore.NDAttributesConfig.
         default: ""
 
       XMLSIZE:
         type: int
         description: |-
-          Number of characters in the NDAttributesFile waveform record.
-          Grown automatically to fit inline XML in ATTRIBUTES_FILE; a larger
-          value given here wins.
+          Number of bytes in the NDAttributesFile waveform record. Grown
+          automatically to fit ATTRIBUTES_FILE (the inline XML or the resolved
+          path, in UTF-8, plus a NUL); a larger value given here wins.
         default: 256
 
     pre_init:
@@ -87,7 +87,7 @@ entity_models:
     databases:
       - file: $(QUADEM)/db/TetrAMM.template
         args:
-          XMLSIZE: "{{ [XMLSIZE, ATTRIBUTES_FILE.split() | join(' ') | length + 1 if '<Attributes>' in ATTRIBUTES_FILE else 0] | max }}"
+          XMLSIZE: "{{ [XMLSIZE, ((ATTRIBUTES_FILE.split() | join(' ')) if '<Attributes>' in ATTRIBUTES_FILE else (ATTRIBUTES_FILE | trim) if (ATTRIBUTES_FILE | trim).startswith('/') or not (ATTRIBUTES_FILE | trim) else '/epics/ioc/config/' ~ (ATTRIBUTES_FILE | trim)).encode('utf-8') | length + 1] | max }}"
           P:
           R:
           PORT:
