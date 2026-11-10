@@ -746,9 +746,10 @@ entity_models:
       - value: |
           NDAttrPlotConfig("{{PORT}}", {{N_ATTRS}}, {{N_CACHE}},
 
-    # TODO - MISSING ARGS: N_ATTRS
     sub_entities:
       - *NDAttributes-config
+
+    # TODO - MISSING ARGS: N_ATTRS
 
     databases:
       - file: $(ADCORE)/db/NDAttrPlotAttr.template
@@ -1472,6 +1473,7 @@ entity_models:
       - value: |
           # NDScatterConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDScatterConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
+
     sub_entities:
       - *NDAttributes-config
 
