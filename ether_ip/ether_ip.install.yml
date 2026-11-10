@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: ether_ip
-version: ether_ip-3-3
+version: ether_ip-3-10
 # organization: https://github.com/epics-modules
 
 dbds:

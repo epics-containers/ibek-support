@@ -500,6 +500,12 @@ entity_models:
             ilk_write_access_pv: null,
           }
 
+    pvi:
+      yaml_path: mks937aImg.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
+
   - name: mks937aGaugeEGU
     description: |-
       TODO:ADD DESCRIPTION
@@ -654,6 +660,12 @@ entity_models:
         args:
           device:
           port:
+
+    pvi:
+      yaml_path: mks937a.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
 
   - name: mks937aImgDummy
     description: |-
@@ -848,6 +860,12 @@ entity_models:
             ilk_write_access_pv: null,
           }
 
+    pvi:
+      yaml_path: mks937aPirg.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
+
   - name: mks937aPirgGroup
     description: |-
       Template database for a group of up to 8 Pirani Gauges
@@ -1030,6 +1048,14 @@ entity_models:
           ctlsp_desc:
           aitype:
           aiinp:
+
+    pvi:
+      yaml_path: mks937aGauge.pvi.device.yaml
+      ui_macros:
+        GCTLR:
+        dom:
+        id: "{{ '%02d' % id }}"
+      pv_prefix: "$(dom)-VA-GAUGE-$(id):"
 
   - name: auto_mks937aInterlock
     description: |-

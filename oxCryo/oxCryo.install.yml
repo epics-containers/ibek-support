@@ -15,3 +15,9 @@ protocol_files:
   - oxCryoApp/protocol/OXCS700.proto
   - oxCryoApp/protocol/OXNH700.proto
   - oxCryoApp/protocol/OXcommon.proto
+
+# upstream CONFIG_SITE hard codes BUILD_ARCHS = linux-x86_64
+patch_lines:
+  - path: configure/CONFIG_SITE
+    regexp: ^BUILD_ARCHS\s*=
+    line: BUILD_ARCHS = {{ host_arch }}

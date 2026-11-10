@@ -1,0 +1,98 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# A Pirani gauge on an MKS 937A, from mks937aPirg.template at mks937a 3-0.
+
+label: mks937aPirg
+children:
+- type: Group
+  name: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: P
+    label: Pressure (mbar)
+    read_pv: $(device):P
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Sta
+    label: Status
+    read_pv: $(device):STA
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: RlySp
+    label: Ion Pump I/L
+    read_pv: $(device):RLY:SP
+    read_widget:
+      type: TextRead
+- type: Group
+  name: MoreDetails
+  label: More Details
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Details2
+    label: Details
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Plog
+      label: Log Pressure
+      read_pv: $(device):PLOG
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: CtlIlksetspNowrite
+      label: IMG Enable Write Inhibit
+      read_pv: $(device):CTL:ILKSETSP:NOWRITE
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: RlyIlksetspNowrite
+      label: Ion Pump I/L Write Inhibit
+      read_pv: $(device):RLY:ILKSETSP:NOWRITE
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: Error
+      label: Last Error
+      read_pv: $(device):ERROR
+      read_widget:
+        type: TextRead
+        format: string
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Interlocks
+    label: Interlocks
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: RlySetsp
+      label: Ion Pump I/L
+      write_pv: $(device):RLY:SETSP
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):RLY:SP
+      read_widget:
+        type: TextRead
+    - type: SignalW
+      name: RlyEnable
+      label: Ion Pump I/L Enable
+      write_pv: $(device):RLY:ENABLE
+      write_widget:
+        type: ComboBox

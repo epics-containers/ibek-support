@@ -1,0 +1,95 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# A group of Pirani gauges, from mks937bPirgGroup.template at mks937b 3-1-0.
+# The relay number comes from the entity's macro, as in the template.
+
+label: mks937bPirgGroup
+children:
+- type: Group
+  name: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: P
+    label: Pressure (mbar)
+    read_pv: $(device):P
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Sta
+    label: Status
+    read_pv: $(device):STA
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: CtlSp
+    label: IMG Enable
+    read_pv: $(device):CTL:SP
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: RlySp
+    label: Ion Pump I/L
+    read_pv: $(device):RLY$(ionPumpIlRelay):SP
+    read_widget:
+      type: TextRead
+- type: Group
+  name: MoreDetails
+  label: More Details
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Details2
+    label: Details
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Plog
+      label: Log Pressure
+      read_pv: $(device):PLOG
+      read_widget:
+        type: TextRead
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Interlocks
+    label: Interlocks
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: CtlSetsp
+      label: IMG Enable
+      write_pv: $(device):CTL:SETSP
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):CTL:SP
+      read_widget:
+        type: TextRead
+    - type: SignalW
+      name: CtlEnable
+      label: IMG Enable Mode
+      write_pv: $(device):CTL:ENABLE
+      write_widget:
+        type: ComboBox
+    - type: SignalRW
+      name: RlySetsp
+      label: Ion Pump I/L
+      write_pv: $(device):RLY$(ionPumpIlRelay):SETSP
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):RLY$(ionPumpIlRelay):SP
+      read_widget:
+        type: TextRead

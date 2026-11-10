@@ -1,0 +1,132 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+# Grouped from the DLS EDM screen xspress_card.edl (xspress3 3-2-1).
+# Generated from that screen. Hand edits may be overwritten by regeneration.
+
+label: xspress3_card
+children:
+- type: Group
+  name: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: NumChannels
+    label: Num Channels connected
+    read_pv: $(P)$(R)FEM$(CARD_NUM):NUM_CHANNELS
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: C0FramesReadout
+    label: '0'
+    read_pv: $(P)$(R)FEM$(CARD_NUM):C0_FRAMES_READOUT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: C2FramesReadout
+    label: '2'
+    read_pv: $(P)$(R)FEM$(CARD_NUM):C2_FRAMES_READOUT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: C4FramesReadout
+    label: '4'
+    read_pv: $(P)$(R)FEM$(CARD_NUM):C4_FRAMES_READOUT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: C6FramesReadout
+    label: '6'
+    read_pv: $(P)$(R)FEM$(CARD_NUM):C6_FRAMES_READOUT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: C8FramesReadout
+    label: '8'
+    read_pv: $(P)$(R)FEM$(CARD_NUM):C8_FRAMES_READOUT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: DroppedFrames
+    label: Frames dropped (all channels)
+    read_pv: $(P)$(R)FEM$(CARD_NUM):DROPPED_FRAMES
+    read_widget:
+      type: TextRead
+  - type: Group
+    name: RowTemp0
+    label: Temp0
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Temp0
+      read_pv: $(P)$(R)FEM$(CARD_NUM):TEMP_0
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Temp1
+      read_pv: $(P)$(R)FEM$(CARD_NUM):TEMP_1
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowTemp2
+    label: Temp2
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Temp2
+      read_pv: $(P)$(R)FEM$(CARD_NUM):TEMP_2
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Temp3
+      read_pv: $(P)$(R)FEM$(CARD_NUM):TEMP_3
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowTemp4
+    label: Temp4
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Temp4
+      read_pv: $(P)$(R)FEM$(CARD_NUM):TEMP_4
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Temp5
+      read_pv: $(P)$(R)FEM$(CARD_NUM):TEMP_5
+      read_widget:
+        type: TextRead
+  - type: SignalR
+    name: C1FramesReadout
+    label: '1'
+    read_pv: $(P)$(R)FEM$(CARD_NUM):C1_FRAMES_READOUT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: C3FramesReadout
+    label: '3'
+    read_pv: $(P)$(R)FEM$(CARD_NUM):C3_FRAMES_READOUT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: C5FramesReadout
+    label: '5'
+    read_pv: $(P)$(R)FEM$(CARD_NUM):C5_FRAMES_READOUT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: C7FramesReadout
+    label: '7'
+    read_pv: $(P)$(R)FEM$(CARD_NUM):C7_FRAMES_READOUT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: C9FramesReadout
+    label: '9'
+    read_pv: $(P)$(R)FEM$(CARD_NUM):C9_FRAMES_READOUT
+    read_widget:
+      type: TextRead

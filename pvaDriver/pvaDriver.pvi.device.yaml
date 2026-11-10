@@ -1,0 +1,87 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# Upstream areaDetector/pvaDriver at fee9e5a: pvaDriver.template adds these records to
+# ADBase.template: the shared ADDriver device, plus the readbacks that device does not show.
+
+label: pvaDriver
+children:
+- type: Include
+  file_name: ADDriver
+
+- type: Group
+  name: Details
+  label: PV Source
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalRW
+    name: PvName
+    label: PV Name
+    write_pv: $(P)$(R)PvName
+    write_widget:
+      type: TextWrite
+      format: string
+    read_pv: $(P)$(R)PvName_RBV
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: PvConnection
+    label: PV Connection
+    read_pv: $(P)$(R)PvConnection_RBV
+    read_widget:
+      type: LED
+  - type: SignalRW
+    name: OverrunCounter
+    label: Overrun Counter
+    write_pv: $(P)$(R)OverrunCounter
+    write_widget:
+      type: TextWrite
+    read_pv: $(P)$(R)OverrunCounter_RBV
+    read_widget:
+      type: TextRead
+
+- type: Group
+  name: ArrayProps
+  label: Array Props
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: ArrayRate
+    label: Array Rate (fps)
+    read_pv: $(P)$(R)ArrayRate_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ArraySize0
+    label: Dim0 Size
+    read_pv: $(P)$(R)ArraySize0_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ArraySize1
+    label: Dim1 Size
+    read_pv: $(P)$(R)ArraySize1_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: ArraySize2
+    label: Dim2 Size
+    read_pv: $(P)$(R)ArraySize2_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: PoolUsedBuffers
+    label: Pool Used Buffers
+    read_pv: $(P)$(R)PoolUsedBuffers
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: AcquireBusy
+    label: Acquire Busy
+    read_pv: $(P)$(R)AcquireBusy
+    read_widget:
+      type: TextRead

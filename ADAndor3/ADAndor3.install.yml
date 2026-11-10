@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: ADAndor3
-version: R2-2
+version: 8d250fd # Latest commit but no tag yet
 organization: http://github.com/areaDetector
 
 dbds:
@@ -17,13 +17,14 @@ apt_developer:
 apt_runtime:
   - libnuma-dev
 
-patch_blocks:
-  - path: "{{ config_linux_host }}"
-    block: |
-      SZIP_LIB       = /usr/lib/x86_64-linux-gnu/
-      SZIP_INCLUDE   = -I/usr/include
-      HDF5_LIB      = /usr/lib/x86_64-linux-gnu/hdf5/serial/
-      HDF5_INCLUDE  = /usr/include/hdf5/serial/
+# patch_blocks:
+#   - path: "{{ config_linux_host }}"
+#     block: |
+#       XML2_INCLUDE    =   /usr/include/libxml2
+#       SZIP_LIB       = /usr/lib/x86_64-linux-gnu/
+#       SZIP_INCLUDE   = -I/usr/include
+#       HDF5_LIB      = /usr/lib/x86_64-linux-gnu/hdf5/serial/
+#       HDF5_INCLUDE  = /usr/include/hdf5/serial/
 
-tasks:
-  - path: ADAndor3-tasks.yml
+# tasks:
+#   - path: ADAndor3-tasks.yml

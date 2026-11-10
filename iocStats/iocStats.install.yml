@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../_scripts/support_install_variables.json
 
 module: iocStats
-version: 3.2.0
+version: 4.0.1
 dbds:
   - devIocStats.dbd
 libs:
@@ -10,7 +10,7 @@ libs:
 apt_developer:
   - libtirpc-dev
 apt_runtime:
-  - libtirpc3
+  - libtirpc3t64
 
 patch_file:
   path: iocStats.patch

@@ -84,7 +84,7 @@ entity_models:
         type: str
         description: |-
           Path to the Andor3 SDK
-        default: /dls_sw/prod/tools/RHEL7-x86_64/andor-sdk3/1-5
+        default: /usr/local/andor3
 
     databases:
       - file: $(ADANDOR3)/db/andor3.template
@@ -96,9 +96,17 @@ entity_models:
           ADDR:
           SCANRATE:
 
+    pvi:
+      yaml_path: ADAndor3.pvi.device.yaml
+      pv: true
+      pv_prefix: $(P)$(R)
+      ui_macros:
+        P:
+        R:
+
     pre_init:
       - value: |
-          # Set LD library path and BitFlow install dir variables to built Andor3 SDK
+          # Set LD library path and BitFlow install dir variables to built Andor SDK3
           epicsEnvSet "LD_LIBRARY_PATH", "{{ANDOR_SDK3}}/prefix/lib"
           epicsEnvSet "BITFLOW_INSTALL_DIRS", "{{ANDOR_SDK3}}/prefix/bf"
           # andor3Config(portName, cameraID, maxBuffers, maxMemory, priority, stackSize, maxFrames)

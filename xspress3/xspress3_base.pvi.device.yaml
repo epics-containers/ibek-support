@@ -1,0 +1,381 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+# Grouped from the DLS EDM screen xspress_ad_det.edl (xspress3 3-2-1).
+# Generated from that screen. Hand edits may be overwritten by regeneration.
+
+label: xspress3_base
+children:
+- type: Group
+  name: NdPluginBase
+  label: NDPluginBase
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Information
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: PortName
+      label: Port Name
+      read_pv: $(P)$(R)PortName_RBV
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: ArrayProps
+    label: Array Props
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: NDimensions
+      label: '# dimensions'
+      read_pv: $(P)$(R)NDimensions_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ArraySize0
+      label: Dim0 Size
+      read_pv: $(P)$(R)ArraySize0_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ArraySize1
+      label: Dim1 Size
+      read_pv: $(P)$(R)ArraySize1_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ArraySize2
+      label: Dim2 Size
+      read_pv: $(P)$(R)ArraySize2_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: DataType
+      label: Data Type
+      read_pv: $(P)$(R)DataType_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ColorMode
+      label: Colour Mode
+      read_pv: $(P)$(R)ColorMode_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: BayerPattern
+      label: Bayer Pattern
+      read_pv: $(P)$(R)BayerPattern_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: UniqueId
+      label: Unique ID
+      read_pv: $(P)$(R)UniqueId_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: TimeStamp
+      label: Time Stamp
+      read_pv: $(P)$(R)TimeStamp_RBV
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: Counters
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: ArrayCounter
+      label: Arrays
+      write_pv: $(P)$(R)ArrayCounter
+      write_widget:
+        type: TextWrite
+      read_pv: $(P)$(R)ArrayCounter_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ArrayRate
+      label: Array Rate (fps)
+      read_pv: $(P)$(R)ArrayRate_RBV
+      read_widget:
+        type: TextRead
+- type: Group
+  name: Xspress3Driver
+  label: Xspress3 Driver
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Connected
+    label: Connected
+    read_pv: $(P)$(R)CONNECTED
+    read_widget:
+      type: LED
+  - type: SignalW
+    name: UpdateArrays
+    write_pv: $(P)$(R)UPDATE_ARRAYS
+    write_widget:
+      type: ButtonPanel
+      actions:
+        UpdateArrays: '1'
+  - type: SignalRW
+    name: ArrayCallbacks
+    label: Driver NDArray Callbacks
+    write_pv: $(P)$(R)ArrayCallbacks
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P)$(R)ArrayCallbacks_RBV
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: NumFramesBuffered
+    label: Frames read into buffer
+    read_pv: $(P)$(R)NUM_FRAMES_BUFFERED
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: BufferFramerate
+    label: Detector readout rate
+    read_pv: $(P)$(R)BUFFER_FRAMERATE
+    read_widget:
+      type: TextRead
+- type: Group
+  name: Xspress
+  label: xspress
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: AcqusitionControlAndStatus
+    label: Acqusition Control And Status
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: Acquire
+      write_pv: $(P)$(R)Acquire
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Start: '1'
+          Stop: '0'
+    - type: SignalR
+      name: StatusMessage
+      read_pv: $(P)$(R)StatusMessage_RBV
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalRW
+      name: NumImages
+      label: Num Frames
+      write_pv: $(P)$(R)NumImages
+      write_widget:
+        type: TextWrite
+      read_pv: $(P)$(R)NumImages_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: DtcEnergy
+      label: DTC energy / keV
+      write_pv: $(P)$(R)DTC_ENERGY
+      write_widget:
+        type: TextWrite
+      read_pv: $(P)$(R)DTC_ENERGY_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: TriggerMode
+      label: Trigger Mode
+      write_pv: $(P)$(R)TriggerMode
+      write_widget:
+        type: ComboBox
+      read_pv: $(P)$(R)TriggerMode_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: AcquireTime
+      label: Exp time
+      write_pv: $(P)$(R)AcquireTime
+      write_widget:
+        type: TextWrite
+      read_pv: $(P)$(R)AcquireTime_RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Acquire2
+      label: Busy
+      read_pv: $(P)$(R)Acquire_RBV
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: DetectorState
+      label: Status
+      read_pv: $(P)$(R)DetectorState_RBV
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: DataDisplaysAndDetailedScreens
+    label: Data Displays and Detailed Screens
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: Group
+      name: SystemConfiguration2
+      label: System Configuration
+      layout:
+        type: SubScreen
+        labelled: false
+      children:
+      - type: Group
+        name: SystemConfiguration
+        label: System Configuration
+        layout:
+          type: Grid
+          labelled: true
+        children:
+        - type: SignalRW
+          name: NumChannels
+          label: Num Channels
+          write_pv: $(P)$(R)NUM_CHANNELS
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)NUM_CHANNELS_RBV
+          read_widget:
+            type: TextRead
+        - type: SignalRW
+          name: NumFramesConfig
+          label: Buffer Length
+          write_pv: $(P)$(R)NUM_FRAMES_CONFIG
+          write_widget:
+            type: TextWrite
+          read_pv: $(P)$(R)NUM_FRAMES_CONFIG_RBV
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: NumCards
+          label: Num Cards
+          read_pv: $(P)$(R)NUM_CARDS_RBV
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: MaxSpectra
+          label: Max MCA Elements
+          read_pv: $(P)$(R)MAX_SPECTRA_RBV
+          read_widget:
+            type: TextRead
+        - type: SignalRW
+          name: RunFlags
+          write_pv: $(P)$(R)RUN_FLAGS
+          write_widget:
+            type: ComboBox
+          read_pv: $(P)$(R)RUN_FLAGS_RBV
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: MaxNumChannels
+          label: Max Channels
+          read_pv: $(P)$(R)MAX_NUM_CHANNELS_RBV
+          read_widget:
+            type: TextRead
+        - type: SignalRW
+          name: Collectresgrades
+          label: Collect Resgrades
+          write_pv: $(P)$(R)COLLECTRESGRADES
+          write_widget:
+            type: ComboBox
+          read_pv: $(P)$(R)COLLECTRESGRADES_RBV
+          read_widget:
+            type: TextRead
+      - type: Group
+        name: SaveAndRestorePathsForConfigFiles
+        label: Save And Restore Paths For Config Files
+        layout:
+          type: Grid
+          labelled: true
+        children:
+        - type: SignalW
+          name: ConfigPath
+          label: Path To Restore From
+          write_pv: $(P)$(R)CONFIG_PATH
+          write_widget:
+            type: TextWrite
+            format: string
+        - type: SignalR
+          name: ConfigPath2
+          read_pv: $(P)$(R)CONFIG_PATH_RBV
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalW
+          name: ConfigSavePath
+          label: Path To Save To
+          write_pv: $(P)$(R)CONFIG_SAVE_PATH
+          write_widget:
+            type: TextWrite
+            format: string
+        - type: SignalR
+          name: ConfigSavePath2
+          read_pv: $(P)$(R)CONFIG_SAVE_PATH_RBV
+          read_widget:
+            type: TextRead
+            format: string
+      - type: Group
+        name: NdAttributesXmlFileForHdfFileSaving
+        label: NDAttributes XML File For HDF File Saving
+        layout:
+          type: Grid
+          labelled: true
+        children:
+        - type: SignalW
+          name: NdAttributesFile
+          label: Path/File
+          write_pv: $(P)$(R)NDAttributesFile
+          write_widget:
+            type: TextWrite
+            format: string
+      - type: Group
+        name: ConnectionControlToXspress3
+        label: Connection Control To Xspress3
+        layout:
+          type: Grid
+          labelled: true
+        children:
+        - type: SignalW
+          name: Connect
+          write_pv: $(P)$(R)CONNECT
+          write_widget:
+            type: ButtonPanel
+            actions:
+              Connect: '1'
+      - type: Group
+        name: SaveAndRestoreConfig
+        label: Save And Restore Config
+        layout:
+          type: Grid
+          labelled: true
+        children:
+        - type: SignalW
+          name: SaveSettings
+          write_pv: $(P)$(R)SAVE_SETTINGS
+          write_widget:
+            type: ButtonPanel
+            actions:
+              Save: '1'
+        - type: SignalW
+          name: RestoreSettings
+          write_pv: $(P)$(R)RESTORE_SETTINGS
+          write_widget:
+            type: ButtonPanel
+            actions:
+              Restore: '1'

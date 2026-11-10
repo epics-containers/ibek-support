@@ -315,6 +315,14 @@ entity_models:
           ctlsp_desc:
           id: "{{ '%02d' % id }}"
 
+    pvi:
+      yaml_path: mks937bGauge.pvi.device.yaml
+      ui_macros:
+        GCTLR:
+        dom:
+        id: "{{ '%02d' % id }}"
+      pv_prefix: "$(dom)-VA-GAUGE-$(id):"
+
   - name: mks937b
     description: |-
       Template database for an MKS937B Multi-Sensor System
@@ -347,6 +355,12 @@ entity_models:
           device:
           port:
           address: "{{ '%03d' % address }}"
+
+    pvi:
+      yaml_path: mks937b.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
 
   - name: mks937bPirgDummy
     description: |-
@@ -494,6 +508,8 @@ entity_models:
     databases:
       - file: $(MKS937B)/db/mks937bCap.template
         args:
+          address: "{{ '%03d' % GCTLR.address }}"
+          port: "{{ GCTLR.port }}"
           ctlsp_drvl:
           name:
           ctlsp_lopr:
@@ -503,6 +519,12 @@ entity_models:
           device:
           offwarn:
           channel:
+
+    pvi:
+      yaml_path: mks937bCap.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
 
   - name: mks937bImgGroup
     description: |-
@@ -600,6 +622,16 @@ entity_models:
           mpsIlRelay2:
           mpsIlRelay1:
           img4:
+
+    pvi:
+      yaml_path: mks937bImgGroup.pvi.device.yaml
+      ui_macros:
+        device:
+        valveIlRelay:
+        mpsIlRelay1:
+        mpsIlRelay2:
+        rgaIlRelay:
+      pv_prefix: "$(device):"
 
   - name: mks937bGaugeEGU
     description: |-
@@ -711,6 +743,14 @@ entity_models:
           plog_calc:
           ctlsp_desc:
           id: "{{ '%02d' % id }}"
+
+    pvi:
+      yaml_path: mks937bGauge.pvi.device.yaml
+      ui_macros:
+        GCTLR:
+        dom:
+        id: "{{ '%02d' % id }}"
+      pv_prefix: "$(dom)-VA-GAUGE-$(id):"
 
   - name: mks937bImg
     description: |-
@@ -935,6 +975,12 @@ entity_models:
           ctlhyst_lopr:
           ctl_channel:
 
+    pvi:
+      yaml_path: mks937bImg.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
+
   - name: mks937bImgDummy
     description: |-
       Template database for a dummy inverted magnetron gauge
@@ -1093,6 +1139,13 @@ entity_models:
           device:
           pirg8:
 
+    pvi:
+      yaml_path: mks937bPirgGroup.pvi.device.yaml
+      ui_macros:
+        device:
+        ionPumpIlRelay:
+      pv_prefix: "$(device):"
+
   - name: mks937bHy8401
     description: |-
       Template database for an Hy8401 VME ADC instance
@@ -1171,6 +1224,12 @@ entity_models:
           offwarn:
           GCTLR:
           channel:
+
+    pvi:
+      yaml_path: mks937bPirg.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
 
   - name: mks937bImgMean
     description: |-

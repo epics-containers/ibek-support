@@ -37,6 +37,12 @@ entity_models:
           port:
           device:
 
+    pvi:
+      yaml_path: ether_ip_plcInfo.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"
+
   - name: ai
     description: |-
       A single ai record reading one tag from a PLC over ether_ip

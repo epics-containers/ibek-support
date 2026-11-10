@@ -1,0 +1,283 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+
+# A digitel MPC titanium sublimation pump, from digitelMpcTsp.template at digitelMPC 6-23ec1.
+
+label: digitelMpcTsp
+children:
+- type: Group
+  name: Status
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Power
+    label: Power
+    read_pv: $(device):POWER
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Mode
+    label: Mode
+    read_pv: $(device):MODE
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Sta
+    label: Status
+    read_pv: $(device):STA
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Fil
+    label: Active Filament
+    read_pv: $(device):FIL
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Timcount
+    label: Cycles Left
+    read_pv: $(device):TIMCOUNT
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Timcount2
+    label: Next Cycle
+    read_pv: $(device):TIMCOUNT2
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Comms
+    label: Comms
+    read_pv: $(device):COMMS
+    read_widget:
+      type: TextRead
+- type: Group
+  name: Filaments
+  label: Filaments
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: FilamentControl
+    label: Filament
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: Fil2
+      label: Active Filament
+      write_pv: $(device):SETFIL
+      write_widget:
+        type: ComboBox
+      read_pv: $(device):FIL
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Left
+      label: Cycles Left on Filament
+      read_pv: $(device):LEFT
+      read_widget:
+        type: TextRead
+    - type: SignalW
+      name: ClearFilaments
+      label: Clear Filaments
+      write_pv: $(device):CLEAR
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Clear: Clear
+  - type: Group
+    name: Used
+    label: Used
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Fil1Used
+      label: Filament 1 (minutes)
+      read_pv: $(device):FIL1:USED
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Fil2Used
+      label: Filament 2 (minutes)
+      read_pv: $(device):FIL2:USED
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Fil3Used
+      label: Filament 3 (minutes)
+      read_pv: $(device):FIL3:USED
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: FilamentStatus
+    label: Filament Status
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Fil1Sta
+      label: Filament 1
+      read_pv: $(device):FIL1:STA
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Fil2Sta
+      label: Filament 2
+      read_pv: $(device):FIL2:STA
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Fil3Sta
+      label: Filament 3
+      read_pv: $(device):FIL3:STA
+      read_widget:
+        type: TextRead
+- type: Group
+  name: Settings
+  label: Settings
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Configuration
+    label: Configuration
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: Setpower
+      label: Power (W)
+      write_pv: $(device):SETPOWER
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Ramprate
+      label: Ramp Rate (W/s)
+      write_pv: $(device):RAMPRATE
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Relay
+      label: Output Relay
+      write_pv: $(device):RELAY
+      write_widget:
+        type: ComboBox
+    - type: SignalR
+      name: Config
+      label: TSP Configuration
+      read_pv: $(device):CONFIG
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: DegasSettings
+    label: Degas Settings
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: Dgsontime
+      label: On Time (s)
+      write_pv: $(device):DGSONTIME
+      write_widget:
+        type: TextWrite
+    - type: SignalRW
+      name: Setautofil
+      label: Auto Advance
+      write_pv: $(device):SETAUTOFIL
+      write_widget:
+        type: ToggleButton
+      read_pv: $(device):SETAUTOFIL
+      read_widget:
+        type: LED
+  - type: Group
+    name: TimedSettings
+    label: Timed Settings
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: Timontime
+      label: On Time (s)
+      write_pv: $(device):TIMONTIME
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Timofftime
+      label: Off Time (min)
+      write_pv: $(device):TIMOFFTIME
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Timcycles
+      label: Number of Cycles
+      write_pv: $(device):TIMCYCLES
+      write_widget:
+        type: TextWrite
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: ProtectedControl
+    label: Control
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: Setmode
+      label: Mode
+      description: Timed, Continuous and Degas fire the filaments
+      write_pv: $(device):SETMODE
+      write_widget:
+        type: ButtonPanel
+        actions:
+          'Off': 'Off'
+          Timed: Timed
+          Cont: Continuous
+          Degas: Degas
+  - type: Group
+    name: PressureInterlock
+    label: Pressure Interlock
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: Ctlsrc
+      label: Control Source
+      write_pv: $(device):CTLSRC
+      write_widget:
+        type: ComboBox
+    - type: SignalRW
+      name: Setupperpthr
+      label: Upper Threshold
+      write_pv: $(device):SETUPPERPTHR
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):UPPERPTHR
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: Setlowerpthr
+      label: Lower Threshold
+      write_pv: $(device):SETLOWERPTHR
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):LOWERPTHR
+      read_widget:
+        type: TextRead

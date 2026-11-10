@@ -1,16 +1,17 @@
 - name: Build aravis vendor library
   ansible.builtin.shell:
     cmd: |
-      setopt -e
-      git clone -b "0.8.35" --depth 1 https://github.com/AravisProject/aravis
+      set -e
+      rm -rf aravis
+      git clone -b "0.8.36" --depth 1 https://github.com/AravisProject/aravis
       cd aravis
-      meson build
+      meson setup build
       cd build
       ninja
       ninja install
       rm -fr /usr/local/aravis
       echo /usr/local/lib64 > /etc/ld.so.conf.d/usr.conf
-      cd
+      cd /
       ldconfig
     executable: /bin/bash
     chdir: /usr/local

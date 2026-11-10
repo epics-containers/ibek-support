@@ -3,11 +3,11 @@
     cmd: |
       cd /tmp
 
-      wget https://github.com/slsdetectorgroup/slsDetectorPackage/archive/refs/tags/10.0.0.tar.gz
+      wget https://github.com/slsdetectorgroup/slsDetectorPackage/archive/refs/tags/10.0.1.tar.gz
 
-      tar zxvf 10.0.0.tar.gz
+      tar zxvf 10.0.1.tar.gz
 
-      cd slsDetectorPackage-10.0.0
+      cd slsDetectorPackage-10.0.1
 
       update-alternatives --install /usr/bin/cmake3 cmake /usr/bin/cmake 100
 
@@ -31,6 +31,12 @@
     path: "{{ local_path }}/slsDetectorApp/slsDetectorSupport/Makefile"
     regexp: "../os/linux-x86_64/"
     replace: "/epics/slsdetectorpackage/lib/"
+
+- name: Install the libraries built inside the container on any architecture
+  ansible.builtin.replace:
+    path: "{{ local_path }}/slsDetectorApp/slsDetectorSupport/Makefile"
+    regexp: 'ifeq \(\$\(ARCH_CLASS\), x86_64\)'
+    replace: "ifeq ($(OS_CLASS), Linux)"
 
 - name: Patch slsDetector.cpp to allow switching threshold energy mode
   ansible.builtin.shell:
