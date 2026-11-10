@@ -1,7 +1,43 @@
 # yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
 
 shared:
+  - &NDAttributes-parameters
+      ATTRIBUTES_FILE:
+        type: str
+        description: |-
+          NDAttributes XML that lists the attributes to attach to each NDArray.
+          Preferred: the XML itself, inline. Any value containing <Attributes>
+          is inline XML, and each run of whitespace in it collapses to one
+          space, so a YAML | block can be used. The <Attributes> tag must be
+          written exactly so, without attributes of its own.
+          Alternative: a file name such as attrs.xml, for a file in the IOC
+          instance's config folder (it resolves to /epics/ioc/config/attrs.xml),
+          or a path starting with /.
+          XMLSIZE grows to fit the inline XML or the resolved path.
+          Empty (or only whitespace) sets nothing at startup.
+          Setting this overrides the autosaved NDAttributesFile at each IOC start.
+        default: ""
+
+      ATTRIBUTES_MACROS:
+        type: str
+        description: |-
+          Macro substitutions applied to the NDAttributes XML when ADCore reads
+          it, e.g. "P=BL01T-EA-DET-01:,R=CAM:" for source="$(P)$(R)Temp".
+          Runs of whitespace collapse to one space. The result must fit in 255
+          bytes of UTF-8, or the render fails. Empty sets nothing at startup.
+          Setting this overrides the autosaved NDAttributesMacros at each IOC start.
+        default: ""
+
+  - &NDAttributes-config
+    type: ADCore.NDAttributesConfig
+    P: "{{ P }}"
+    R: "{{ R }}"
+    ATTRIBUTES_FILE: "{{ ATTRIBUTES_FILE }}"
+    ATTRIBUTES_MACROS: "{{ ATTRIBUTES_MACROS }}"
+
   - &NDArrayBase-model-parameters
+      <<: *NDAttributes-parameters
+
       P:
         type: str
         description: |-
@@ -78,7 +114,9 @@ shared:
       XMLSIZE:
         type: int
         description: |-
-          Number of elements of the ND attributes xml waveform record
+          Number of bytes in the NDAttributesFile waveform record. Grown
+          automatically to fit ATTRIBUTES_FILE (the inline XML or the resolved
+          path, in UTF-8, plus a NUL); a larger value given here wins.
         default: 256
 
   - &NDArrayBase-threads
@@ -100,7 +138,9 @@ shared:
       SCANRATE:
       QUEUE:
       BLOCK:
-      XMLSIZE:
+      # at least the length of ATTRIBUTES_FILE as inline XML or a resolved
+      # path, plus its NUL
+      XMLSIZE: "{{ [XMLSIZE, ((ATTRIBUTES_FILE.split() | join(' ')) if '<Attributes>' in ATTRIBUTES_FILE else (ATTRIBUTES_FILE | trim) if (ATTRIBUTES_FILE | trim).startswith('/') or not (ATTRIBUTES_FILE | trim) else '/epics/ioc/config/' ~ (ATTRIBUTES_FILE | trim)).encode('utf-8') | length + 1] | max }}"
 
 
 module: ADCore
@@ -116,6 +156,9 @@ entity_models:
       - value: |
           # NDFileNexusConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDFileNexusConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
+
+    sub_entities:
+      - *NDAttributes-config
 
     databases:
       - file: $(ADCORE)/db/NDFileNexus.template
@@ -179,6 +222,9 @@ entity_models:
       - value: |
           NDFFTConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}}, {{MAX_THREADS}})
 
+    sub_entities:
+      - *NDAttributes-config
+
     databases:
       - file: $(ADCORE)/db/NDFFT.template
         args:
@@ -217,6 +263,9 @@ entity_models:
       - value: |
           # NDPosPluginConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize)
           NDPosPluginConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}})
+
+    sub_entities:
+      - *NDAttributes-config
 
     databases:
       - file: $(ADCORE)/db/NDPosPlugin.template
@@ -386,6 +435,7 @@ entity_models:
           ADDR: "{{ idx | int }}"
           TIMEOUT: "{{ TIMEOUT }}"
           SHAPE: 1
+      - *NDAttributes-config
 
   - name: NDColorConvert
     description: |-
@@ -397,6 +447,9 @@ entity_models:
       - value: |
           # NDColorConvertConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDColorConvertConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
+
+    sub_entities:
+      - *NDAttributes-config
 
     databases:
       - file: $(ADCORE)/db/NDColorConvert.template
@@ -420,13 +473,19 @@ entity_models:
       XMLSIZE:
         type: int
         description: |-
-          Number of elements of the XML layout waveform record
+          Number of bytes in the XMLFileName (HDF5 layout) and NDAttributesFile
+          waveform records. Grown automatically to fit ATTRIBUTES_FILE (the
+          inline XML or the resolved path, in UTF-8, plus a NUL); a larger
+          value given here wins.
         default: 2048
 
     pre_init:
       - value: |
           # NDFileHDF5Configure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDFileHDF5Configure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
+
+    sub_entities:
+      - *NDAttributes-config
 
     databases:
       - file: $(ADCORE)/db/NDFileHDF5.template
@@ -451,6 +510,9 @@ entity_models:
       - value: |
           # NDFileNullConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDFileNullConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
+
+    sub_entities:
+      - *NDAttributes-config
 
     databases:
       - file: $(ADCORE)/db/NDFileNull.template
@@ -498,6 +560,9 @@ entity_models:
       - value: |
           NDStdArraysConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
 
+    sub_entities:
+      - *NDAttributes-config
+
     databases:
       - file: $(ADCORE)/db/NDStdArrays.template
         args:
@@ -542,6 +607,9 @@ entity_models:
           Post-trigger frame count
         default: 100
 
+    sub_entities:
+      - *NDAttributes-config
+
     databases:
       - file: $(ADCORE)/db/NDCircularBuff.template
         args:
@@ -560,6 +628,9 @@ entity_models:
       - value: |
           # NDFileMagickConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDFileMagickConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
+
+    sub_entities:
+      - *NDAttributes-config
 
     databases:
       - file: $(ADCORE)/db/NDFileMagick.template
@@ -621,6 +692,9 @@ entity_models:
           # NDCircularBuffConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory)
           NDCircularBuffConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{MAX_BUFFERS}}, {{MAX_MEMORY}})
 
+    sub_entities:
+      - *NDAttributes-config
+
     databases:
       - file: $(ADCORE)/db/NDCircularBuff.template
         args:
@@ -678,7 +752,11 @@ entity_models:
       - value: |
           NDAttrPlotConfig("{{PORT}}", {{N_ATTRS}}, {{N_CACHE}},
 
+    sub_entities:
+      - *NDAttributes-config
+
     # TODO - MISSING ARGS: N_ATTRS
+
     databases:
       - file: $(ADCORE)/db/NDAttrPlotAttr.template
         args:
@@ -711,6 +789,9 @@ entity_models:
       - value: |
           # NDCodecConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDCodecConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
+
+    sub_entities:
+      - *NDAttributes-config
 
     databases:
       - file: $(ADCORE)/db/NDCodec.template
@@ -747,6 +828,9 @@ entity_models:
           # NDGatherConfigure(portName, queueSize, blockingCallbacks, maxPorts)
           NDGatherConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{MAX_PORTS}}")
 
+    sub_entities:
+      - *NDAttributes-config
+
     databases:
       - file: $(ADCORE)/db/NDGather.template
         args:
@@ -772,6 +856,9 @@ entity_models:
       - value: |
           # NDROIConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDROIConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
+
+    sub_entities:
+      - *NDAttributes-config
 
     databases:
       - file: $(ADCORE)/db/NDROI.template
@@ -822,6 +909,9 @@ entity_models:
           # NDTimeSeriesConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxSignals)
           NDTimeSeriesConfigure("{{PORT}}_TS", {{QUEUE}}, {{BLOCK}}, "{{PORT}}", 1, {{MAX_ATTRIBUTES}})
           # Load time series records
+
+    sub_entities:
+      - *NDAttributes-config
 
     databases:
       - file: $(ADCORE)/db/NDAttributeN.template
@@ -919,6 +1009,7 @@ entity_models:
           BLOCK: "{{BLOCK}}",
           NSIGNALS: 23,
         }
+      - *NDAttributes-config
 
     databases:
       - file: $(ADCORE)/db/NDStats.template
@@ -987,6 +1078,9 @@ entity_models:
       - value: |
           NDTimeSeriesConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{NSIGNALS}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}})
 
+    sub_entities:
+      - *NDAttributes-config
+
     databases:
       - file: $(ADCORE)/db/NDTimeSeries.template
         args:
@@ -997,77 +1091,60 @@ entity_models:
       - file: $(ADCORE)/db/NDTimeSeriesN.template
         args: { NAME, P, R, PORT, ADDR, TIMEOUT, NCHANS }
 
-  - name: NDAttributes
+  - name: NDAttributesConfig
     description: |-
-      Add an attribute to the NDAttributes file for a particular ADDriver or
-          NDPlugin, and associate it with the NDAttributes file
+      Sets NDAttributesMacros and NDAttributesFile on an areaDetector driver or
+      plugin after iocInit, so they win over autosave restore. Every ADCore
+      plugin and the areaDetector drivers create one of these from their own
+      ATTRIBUTES_FILE and ATTRIBUTES_MACROS, so it is rarely needed directly.
+      Used directly, it does not grow the NDAttributesFile record's XMLSIZE:
+      inline XML or a path longer than 255 bytes needs XMLSIZE set to fit by
+      the entity that loads the template holding the record.
+      Emits nothing when both are empty.
     parameters:
-      port:
-        type: object
-        description: |-
-          ADDriver or NDPlugin to attach xml file to
-
-      source:
+      P:
         type: str
         description: |-
-          The EPICS PV (if type=EPICS_PV) or attribute name (if type=PARAM)
+          Device Prefix of the driver or plugin
 
-      name:
-        type: id
-        description: |-
-          Object name. You do not need to specify this
-        default: "{{ port }}.{{ attrname }}"
-
-      attrname:
+      R:
         type: str
         description: |-
-          Name of the attribute. If you leave this blank it defaults to <source>
+          Device Suffix of the driver or plugin
 
-      type:
-        type: enum
-        description: |-
-          Where the data should be picked up from
-        default: EPICS_PV
-        values:
-          EPICS_PV:
-          PARAM:
-      dbrtype:
-        type: enum
-        description: |-
-          DBR type (only used if type=EPICS_PV)
-        default: DBR_NATIVE
-        values:
-          DBR_STRING:
-          DBR_INT:
-          DBR_NATIVE:
-          DBR_SHORT:
-          DBR_CHAR:
-          DBR_ENUM:
-          DBR_LONG:
-          DBR_FLOAT:
-      datatype:
-        type: enum
-        description: |-
-          Data type (only used if type=PARAM)
-        default: INT
-        values:
-          INT:
-          DOUBLE:
-          STRING:
-      description:
-        type: str
-        description: |-
-          Description of the attribute
+      <<: *NDAttributes-parameters
 
-      addr:
-        type: int
-        description: |-
-          Asyn address of the parameter (only used if type=PARAM)
-        default: 0
+    validate:
+      - assert: (ATTRIBUTES_MACROS.split() | join(' ')).encode('utf-8') | length <= 255
+        message: >-
+          ATTRIBUTES_MACROS for {{ P }}{{ R }} is longer than the 255 bytes
+          that NDAttributesMacros holds
+      - assert: "'<' not in ATTRIBUTES_FILE or '<Attributes>' in ATTRIBUTES_FILE"
+        message: >-
+          ATTRIBUTES_FILE for {{ P }}{{ R }} contains '<' but not '<Attributes>',
+          so it would be taken as a file name. Inline XML must contain the
+          <Attributes> tag written exactly so, without attributes such as xmlns
 
+    # iocsh expands $(...) macros everywhere except inside single quotes, so
+    # values go in single quotes, and each ' is written as '"'"' (close the
+    # quote, a double-quoted ', reopen). Macros come first: ADCore re-reads
+    # the XML on either write and expands the macros as it does.
     post_init:
       - value: |
-          dbpf %s%sNDAttributesFile, %s/%s.xml
+          {%- set sq = "'" ~ '"' ~ "'" ~ '"' ~ "'" %}
+          {%- set macros = ATTRIBUTES_MACROS.split() | join(' ') %}
+          {%- set file = ATTRIBUTES_FILE | trim %}
+          {%- if macros %}
+          dbpf "{{ P }}{{ R }}NDAttributesMacros", '{{ macros | replace("'", sq) }}'
+          {%- endif %}
+          {%- if file %}
+          {%- if '<Attributes>' in file %}
+          {%- set file = file.split() | join(' ') %}
+          {%- elif not file.startswith('/') %}
+          {%- set file = '/epics/ioc/config/' ~ file %}
+          {%- endif %}
+          dbpf "{{ P }}{{ R }}NDAttributesFile", '{{ file | replace("'", sq) }}'
+          {%- endif %}
 
   - name: NDProcess
     description: |-
@@ -1080,6 +1157,9 @@ entity_models:
       - value: |
           # NDProcessConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDProcessConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
+
+    sub_entities:
+      - *NDAttributes-config
 
     databases:
       - file: $(ADCORE)/db/NDProcess.template
@@ -1100,6 +1180,9 @@ entity_models:
     parameters:
       <<: *NDArrayBase-model-parameters
 
+    sub_entities:
+      - *NDAttributes-config
+
     databases:
       - file: $(ADCORE)/db/NDFileTIFF.template
         args:
@@ -1112,6 +1195,7 @@ entity_models:
           R:
           PORT:
           TIMEOUT:
+          XMLSIZE: "{{ [XMLSIZE, ((ATTRIBUTES_FILE.split() | join(' ')) if '<Attributes>' in ATTRIBUTES_FILE else (ATTRIBUTES_FILE | trim) if (ATTRIBUTES_FILE | trim).startswith('/') or not (ATTRIBUTES_FILE | trim) else '/epics/ioc/config/' ~ (ATTRIBUTES_FILE | trim)).encode('utf-8') | length + 1] | max }}"
 
     pre_init:
       - value: |
@@ -1146,6 +1230,9 @@ entity_models:
         type: str
         description: |-
           Maximum number ports
+
+    sub_entities:
+      - *NDAttributes-config
 
     databases:
       - file: $(ADCORE)/db/NDGatherN.template
@@ -1226,7 +1313,9 @@ entity_models:
       XMLSIZE:
         type: int
         description: |-
-          Number of elements of the ND attributes xml waveform record
+          Number of bytes in the NDAttributesFile waveform record. Grown
+          automatically to fit ATTRIBUTES_FILE (the inline XML or the resolved
+          path, in UTF-8, plus a NUL); a larger value given here wins.
         default: 1024
 
       MAX_ROIS:
@@ -1257,6 +1346,7 @@ entity_models:
           ADDR: "{{ index }}"
           TIMEOUT: "{{ TIMEOUT }}"
           NCHANS: "{{ NCHANS }}"
+      - *NDAttributes-config
 
     databases:
       - file: $(ADCORE)/db/NDROIStat.template
@@ -1282,6 +1372,9 @@ entity_models:
       - value: |
           # NDFileNetCDFConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDFileNetCDFConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
+
+    sub_entities:
+      - *NDAttributes-config
 
     databases:
       - file: $(ADCORE)/db/NDFileNetCDF.template
@@ -1316,6 +1409,9 @@ entity_models:
           # NDPvxsConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, pvName, maxBuffers, maxMemory, priority, stackSize)
           NDPvxsConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, {{PVNAME}}, 0, 0, {{PRIORITY}}, {{STACKSIZE}})
 
+    sub_entities:
+      - *NDAttributes-config
+
     databases:
       - file: $(ADCORE)/db/NDPva.template
         args:
@@ -1340,6 +1436,9 @@ entity_models:
           # NDTransformConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr, maxBuffers, maxMemory, priority, stackSize, maxThreads)
           NDTransformConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}}, 0, 0, 0, 0, {{MAX_THREADS}})
 
+    sub_entities:
+      - *NDAttributes-config
+
     databases:
       - file: $(ADCORE)/db/NDTransform.template
         args:
@@ -1363,6 +1462,9 @@ entity_models:
       - value: |
           # NDFileJPEGConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDFileJPEGConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
+
+    sub_entities:
+      - *NDAttributes-config
 
     databases:
       - file: $(ADCORE)/db/NDFileJPEG.template
@@ -1393,6 +1495,10 @@ entity_models:
       - value: |
           # NDScatterConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, NDArrayAddr)
           NDScatterConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{NDARRAY_ADDR}})
+
+    sub_entities:
+      - *NDAttributes-config
+
     databases:
       - file: $(ADCORE)/db/NDScatter.template
         args:

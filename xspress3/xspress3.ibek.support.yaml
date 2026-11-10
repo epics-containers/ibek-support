@@ -78,14 +78,46 @@ entity_models:
         description: Asyn address (set to zero)
         default: 0
 
+      ATTRIBUTES_FILE:
+        type: str
+        description: |-
+          NDAttributes XML to attach to each NDArray. Preferred: the XML itself,
+          inline. Alternative: a file name in the IOC instance's config folder,
+          or an absolute path. XMLSIZE grows to fit either. Empty sets nothing.
+          See ADCore.NDAttributesConfig.
+        default: ""
+
+      ATTRIBUTES_MACROS:
+        type: str
+        description: |-
+          Macro substitutions for the NDAttributes XML, e.g. "P=BL01T-EA-DET-01:,R=CAM:".
+          At most 255 bytes. Empty sets nothing. See ADCore.NDAttributesConfig.
+        default: ""
+
+      XMLSIZE:
+        type: int
+        description: |-
+          Number of bytes in the NDAttributesFile waveform record. Grown
+          automatically to fit ATTRIBUTES_FILE (the inline XML or the resolved
+          path, in UTF-8, plus a NUL); a larger value given here wins.
+        default: 256
+
     pre_init:
       - value: |
           # xspress3Config(portName, numChannels, numCards, baseIP, useResgrades, readoutMCA, useOdin, numReceivers, maxFrames, maxSpectra, maxBuffers, maxMemory, debug)
           xspress3Config("{{PORT}}", {{num_channels}}, {{num_cards}}, "{{base_IP}}", {% if use_resgrades in ["True", "true", "1"] %}1{% else %}0{% endif %}, {% if readout_MCA in ["True", "true", "1"] %}1{% else %}0{% endif %}, {% if use_odin in ["True", "true", "1"] %}1{% else %}0{% endif %}, {{num_receivers}}, {{MAX_FRAMES}}, {{MAX_SPECTRA}}, {{max_buffers}}, {{max_memory}}, {{debug}})
 
+    sub_entities:
+      - type: ADCore.NDAttributesConfig
+        P: "{{ P }}"
+        R: "{{ R }}"
+        ATTRIBUTES_FILE: "{{ ATTRIBUTES_FILE }}"
+        ATTRIBUTES_MACROS: "{{ ATTRIBUTES_MACROS }}"
+
     databases:
       - file: $(XSPRESS3)/db/xspress3_base.template
         args:
+          XMLSIZE: "{{ [XMLSIZE, ((ATTRIBUTES_FILE.split() | join(' ')) if '<Attributes>' in ATTRIBUTES_FILE else (ATTRIBUTES_FILE | trim) if (ATTRIBUTES_FILE | trim).startswith('/') or not (ATTRIBUTES_FILE | trim) else '/epics/ioc/config/' ~ (ATTRIBUTES_FILE | trim)).encode('utf-8') | length + 1] | max }}"
           P:
           R:
           PORT:
@@ -158,14 +190,46 @@ entity_models:
         description: Specified scan rate for cpu intensive PVs
         default: I/O Intr
 
+      ATTRIBUTES_FILE:
+        type: str
+        description: |-
+          NDAttributes XML to attach to each NDArray. Preferred: the XML itself,
+          inline. Alternative: a file name in the IOC instance's config folder,
+          or an absolute path. XMLSIZE grows to fit either. Empty sets nothing.
+          See ADCore.NDAttributesConfig.
+        default: ""
+
+      ATTRIBUTES_MACROS:
+        type: str
+        description: |-
+          Macro substitutions for the NDAttributes XML, e.g. "P=BL01T-EA-DET-01:,R=CAM:".
+          At most 255 bytes. Empty sets nothing. See ADCore.NDAttributesConfig.
+        default: ""
+
+      XMLSIZE:
+        type: int
+        description: |-
+          Number of bytes in the NDAttributesFile waveform record. Grown
+          automatically to fit ATTRIBUTES_FILE (the inline XML or the resolved
+          path, in UTF-8, plus a NUL); a larger value given here wins.
+        default: 256
+
     pre_init:
       - value: |
           # xspress3DTCConfigure(portName, queueSize, blockingCallbacks, NDArrayPort, numChannels, NDArrayAddr, maxBuffers, maxMemory)
           xspress3DTCConfigure("{{PORT}}", {{QUEUE}}, {{BLOCK}}, "{{NDARRAY_PORT}}", {{num_channels}}, {{NDARRAY_ADDR}}, 0, 0)
 
+    sub_entities:
+      - type: ADCore.NDAttributesConfig
+        P: "{{ P }}"
+        R: "{{ R }}DTC:"
+        ATTRIBUTES_FILE: "{{ ATTRIBUTES_FILE }}"
+        ATTRIBUTES_MACROS: "{{ ATTRIBUTES_MACROS }}"
+
     databases:
       - file: $(XSPRESS3)/db/xspress3_dtc_plugin.template
         args:
+          XMLSIZE: "{{ [XMLSIZE, ((ATTRIBUTES_FILE.split() | join(' ')) if '<Attributes>' in ATTRIBUTES_FILE else (ATTRIBUTES_FILE | trim) if (ATTRIBUTES_FILE | trim).startswith('/') or not (ATTRIBUTES_FILE | trim) else '/epics/ioc/config/' ~ (ATTRIBUTES_FILE | trim)).encode('utf-8') | length + 1] | max }}"
           P:
           R: "{{R}}DTC:"
           PORT:
