@@ -1,0 +1,21 @@
+# Holding time of one MCS2 channel, written to the controller at iocInit.
+#
+# The driver's HOLD asyn parameter sends ":CHAN<ADDR>:HOLD <value>" from
+# writeInt32. The value is in milliseconds; -1 (0xFFFFFFFF, SmarAct's
+# HOLD_FOREVER) holds the position forever.
+#
+# Macros:
+#   P, M     record name prefix and suffix, as for MCS2_Extra.db
+#   PORT     MCS2 controller asyn port
+#   ADDR     channel (axis) number
+#   TIMEOUT  asyn timeout
+#   HOLD     hold time in ms, -1 for forever (default)
+
+record(longout, "$(P)$(M)setHoldTime") {
+    field(DESC, "Hold time, -1 = forever")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))HOLD")
+    field(VAL,  "$(HOLD=-1)")
+    field(EGU,  "ms")
+    field(PINI, "YES")
+}

@@ -35,6 +35,11 @@ entity_models:
     description: |-
       Extra per-axis database for SmarAct MCS2 motors.
       Provides calibration, MCL frequency, positioner type, and reference status.
+      Also sets the channel's hold time at iocInit, forever by default.
+      The driver writes the hold time only when the setHoldTime record is
+      processed. Unlike the Diamond 2-1dls1 driver, it does not write it
+      again when an axis is homed, so if the controller loses the setting,
+      for example on a power cycle, process setHoldTime or restart the IOC.
     parameters:
       P:
         type: str
@@ -52,8 +57,26 @@ entity_models:
         type: int
         description: Asyn timeout
         default: 1
+      HOLD:
+        type: int
+        description: |-
+          Hold time in ms after a closed loop move: how long the controller
+          keeps the position actively controlled. -1 holds it forever.
+        default: -1
 
     databases:
       - file: $(MOTORSMARACT)/db/MCS2_Extra.db
         args:
-          .*:
+          P:
+          M:
+          PORT:
+          ADDR:
+          TIMEOUT:
+      - file: $(MOTORSMARACT)/db/MCS2_Hold.template
+        args:
+          P:
+          M:
+          PORT:
+          ADDR:
+          TIMEOUT:
+          HOLD:
