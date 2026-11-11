@@ -18,7 +18,8 @@ entity_models:
       motor:
         type: str
         description: |-
-          Motor record pv
+          Motor record suffix, appended to the parent multipositioner's P
+          to make the motor PV $(P)$(motor)
       DESC:
         type: str
         description: |-
@@ -130,6 +131,136 @@ entity_models:
       yaml_path: motorpositioner.pvi.device.yaml
       ui_macros:
         P: "{{MP.P}}"
+        Q:
+      pv_prefix: "$(P)$(Q):"
+
+  - name: motorpositioner_external_motor
+    description: |-
+      Template for wrapping a motor as a positioner. This allows it to be controlled by a multipositioner, mapping a list of names onto a list of motor positions.
+      Use this instead of motorpositioner when the motor is not defined in this IOC: P, MP, motor, EGU and pos are given explicitly rather than taken from a parent multipositioner and motor entity.
+    parameters:
+      P:
+        type: str
+        description: |-
+          Device prefix, must match P of multipositioner
+      Q:
+        type: str
+        description: |-
+          Device suffix
+      MP:
+        type: str
+        description: |-
+          Multipositioner suffix, must match MP of multipositioner
+      motor:
+        type: str
+        description: |-
+          Motor record suffix, appended to P to make the motor PV $(P)$(motor)
+      DESC:
+        type: str
+        description: |-
+          Positioner description
+      EGU:
+        type: str
+        description: |-
+          Engineering units
+      PREC:
+        type: int
+        description: |-
+          Precision to display to
+      VALA:
+        type: float
+        description: |-
+          Positioner value for position 1
+        default: 0
+      VALB:
+        type: float
+        description: |-
+          Positioner value for position 2
+        default: 0
+      VALC:
+        type: float
+        description: |-
+          Positioner value for position 3
+        default: 0
+      VALD:
+        type: float
+        description: |-
+          Positioner value for position 4
+        default: 0
+      VALE:
+        type: float
+        description: |-
+          Positioner value for position 5
+        default: 0
+      VALF:
+        type: float
+        description: |-
+          Positioner value for position 6
+        default: 0
+      VALG:
+        type: float
+        description: |-
+          Positioner value for position 7
+        default: 0
+      VALH:
+        type: float
+        description: |-
+          Positioner value for position 8
+        default: 0
+      VALI:
+        type: float
+        description: |-
+          Positioner value for position 9
+        default: 0
+      VALJ:
+        type: float
+        description: |-
+          Positioner value for position 10
+        default: 0
+      VALK:
+        type: float
+        description: |-
+          Positioner value for position 11
+        default: 0
+      VALL:
+        type: float
+        description: |-
+          Positioner value for position 12
+        default: 0
+      VALM:
+        type: float
+        description: |-
+          Positioner value for position 13
+        default: 0
+      VALN:
+        type: float
+        description: |-
+          Positioner value for position 14
+        default: 0
+      VALO:
+        type: float
+        description: |-
+          Positioner value for position 15
+        default: 0
+      VALP:
+        type: float
+        description: |-
+          Positioner value for position 16
+        default: 0
+      pos:
+        type: str
+        description: |-
+          Positioner letter (A..H): this positioner's slot in the multipositioner
+
+    databases:
+      - file: $(POSITIONER)/db/motorpositioner.template
+        args:
+          .*:
+
+    pvi:
+      yaml_path: motorpositioner.pvi.device.yaml
+      ui_macros:
+        P:
         Q:
       pv_prefix: "$(P)$(Q):"
 
