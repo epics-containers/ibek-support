@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+# Grouped from the DLS EDM screen mcaCalibration.edl (mca 7-8dls4).
+# Generated from that screen. Hand edits may be overwritten by regeneration.
+
+label: simple_mca
+children:
+- type: Group
+  name: General
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalW
+    name: FieldCalo
+    label: Offset
+    write_pv: $(P)$(M).CALO
+    write_widget:
+      type: TextWrite
+  - type: SignalW
+    name: FieldCals
+    label: Slope
+    write_pv: $(P)$(M).CALS
+    write_widget:
+      type: TextWrite
+  - type: SignalW
+    name: FieldCalq
+    label: Quadratic
+    write_pv: $(P)$(M).CALQ
+    write_widget:
+      type: TextWrite
+  - type: SignalW
+    name: FieldEgu
+    label: Units
+    write_pv: $(P)$(M).EGU
+    write_widget:
+      type: TextWrite
+      format: string
+  - type: SignalW
+    name: FieldTth
+    label: Two-theta
+    write_pv: $(P)$(M).TTH
+    write_widget:
+      type: TextWrite

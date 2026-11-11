@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: eurothermModbus
+# 3-2-15 is the Diamond release (GitLab master 342e9f2). The module only
+# installs templates for the modbus driver, so it has no dbds or libs.
+version: 3-2-15
+
+organization: https://github.com/DiamondLightSource
+
+# etc and iocs only build example IOCs and docs with the Diamond builder
+# (dls-xml-iocbuilder.py), which is not in the container. The top Makefile adds
+# both through $(wildcard), so removing them is enough.
+remove_files_prebuild:
+  - etc
+  - iocs

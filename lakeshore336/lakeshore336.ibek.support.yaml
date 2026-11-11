@@ -1,0 +1,88 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.1.2/ibek.support.schema.json
+
+module: lakeshore336
+
+entity_models:
+  - name: lakeshore336
+    description: |-
+      Lakeshore 336 temperature controller.
+      Loads lakeshore336.template which provides temperature/voltage readings
+      for 4 input channels (A-D), control for 4 output channels, identification,
+      and disable/enable functionality via StreamDevice protocol.
+    parameters:
+      PORT:
+        type: object
+        description: |-
+          Asyn port for StreamDevice communication.
+          Must match a companion asyn.AsynIP entity.
+      P:
+        type: str
+        description: PV prefix, e.g. "BL01T-EA-LSHORE-01"
+      ADDR:
+        type: int
+        description: Address on the bus.
+      TEMPSCAN:
+        type: str
+        description: SCAN rate for the temperature/voltage readings.
+      SCAN:
+        type: str
+        description: SCAN rate for non-temperature/voltage parameters.
+      DESC:
+        type: str
+        description: Lakeshore336 controller description (GUI only).
+        default: ""
+      DISABLED:
+        type: int
+        description: Disabled by default? 0=enabled, 1=disabled.
+        default: 0
+      lakeshore336Path:
+        type: str
+        description: Path to lakeshore336 documentation directory.
+        default: ""
+      Description:
+        type: str
+        description: Main use of this device.
+        default: Temperature Controller
+      CH0_label:
+        type: str
+        description: Label for channel 0.
+        default: Channel 0
+      CH1_label:
+        type: str
+        description: Label for channel 1.
+        default: Channel 1
+      CH2_label:
+        type: str
+        description: Label for channel 2.
+        default: Channel 2
+      CH3_label:
+        type: str
+        description: Label for channel 3.
+        default: Channel 3
+      OUT1_label:
+        type: str
+        description: Label for output channel 1 control.
+        default: Output 1 Control
+      OUT2_label:
+        type: str
+        description: Label for output channel 2 control.
+        default: Output 2 Control
+      OUT3_label:
+        type: str
+        description: Label for output channel 3 control.
+        default: Output 3 Control
+      OUT4_label:
+        type: str
+        description: Label for output channel 4 control.
+        default: Output 4 Control
+
+    databases:
+      - file: $(LAKESHORE336)/db/lakeshore336.template
+        args:
+          .*:
+
+    pvi:
+      yaml_path: lakeshore336.pvi.device.yaml
+      ui_macros:
+        P:
+      pv_prefix: "$(P):"

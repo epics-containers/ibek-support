@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: lakeshore336
+# 2-19-1ec1 is GitHub main (e9460b6): the Diamond 2-19-1 driver, db and
+# protocol imported unchanged, plus an autosave req file, container-friendly
+# configure/RELEASE files and a top Makefile that skips etc and iocs.
+version: 2-19-1ec1
+
+organization: https://github.com/DiamondLightSource
+
+dbds:
+  - lakeshore336Support.dbd
+libs:
+  - lakeshore336
+
+protocol_files:
+  - lakeshore336App/protocol/lakeshore336.proto
+
+remove_files_prebuild:
+  # The top Makefile adds documentation through $(wildcard), but it holds
+  # only manuals and no Makefile.
+  - documentation
+  # Sets SUPPORT and EPICS_BASE under /dls_sw; the container's RELEASE.local
+  # supplies both.
+  - configure/RELEASE.local.linux-x86_64
+
+comment_out:
+  # opi/opi's Makefile runs the Diamond tool build_run_css, which is not in the
+  # container. The screens are not used in the container.
+  - path: lakeshore336App/Makefile
+    regexp: wildcard \*opi\*

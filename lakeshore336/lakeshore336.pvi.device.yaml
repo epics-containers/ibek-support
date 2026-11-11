@@ -1,0 +1,871 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+# Grouped from the DLS EDM screen lakeshore336.edl (lakeshore336 2-19-1).
+# Generated from that screen. Hand edits may be overwritten by regeneration.
+
+label: lakeshore336
+children:
+- type: Group
+  name: InputValues
+  label: Input Values
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: Group
+    name: RowKrdg0label
+    label: Channel 0
+    layout:
+      type: Row
+      header:
+      - ' '
+      - Temperature
+      - Voltage
+    children:
+    - type: SignalR
+      name: Krdg0label
+      read_pv: $(P):KRDG0LABEL
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Krdg0
+      read_pv: $(P):KRDG0
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Srdg0
+      read_pv: $(P):SRDG0
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowKrdg1label
+    label: Channel 1
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Krdg1label
+      read_pv: $(P):KRDG1LABEL
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Krdg1
+      read_pv: $(P):KRDG1
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Srdg1
+      read_pv: $(P):SRDG1
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowKrdg2label
+    label: Channel 2
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Krdg2label
+      read_pv: $(P):KRDG2LABEL
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Krdg2
+      read_pv: $(P):KRDG2
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Srdg2
+      read_pv: $(P):SRDG2
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowKrdg3label
+    label: Channel 3
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Krdg3label
+      read_pv: $(P):KRDG3LABEL
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Krdg3
+      read_pv: $(P):KRDG3
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Srdg3
+      read_pv: $(P):SRDG3
+      read_widget:
+        type: TextRead
+- type: Group
+  name: Device
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Id
+    label: ID String
+    read_pv: $(P):ID
+    read_widget:
+      type: TextRead
+      format: string
+  - type: SignalR
+    name: FirmwareVersion
+    label: Firmware Ver
+    read_pv: $(P):FIRMWARE:VERSION
+    read_widget:
+      type: TextRead
+      format: string
+- type: Group
+  name: General2
+  label: General
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Description
+    read_pv: $(P):DESCRIPTION
+    read_widget:
+      type: TextRead
+      format: string
+  - type: Group
+    name: Output1Control
+    label: Output 1 Control
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: General
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalR
+        name: Out1label
+        read_pv: $(P):OUT1LABEL
+        read_widget:
+          type: TextRead
+          format: string
+    - type: Group
+      name: SetpointControl
+      label: Setpoint Control
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: Setp1
+        label: Setpoint Temp
+        write_pv: $(P):SETP_S1
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):SETP1
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Range1
+        label: Heater Range
+        write_pv: $(P):RANGE_S1
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):RANGE1
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Ramp1
+        label: Ramp Rate
+        write_pv: $(P):RAMP_S1
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):RAMP1
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Rampst1
+        label: Ramp Enable (1=On, 0=Off)
+        write_pv: $(P):RAMPST_S1
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):RAMPST1
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: OutputModeControl
+      label: Output Mode Control
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: Ommode1
+        label: Mode
+        write_pv: $(P):OMMODE_S1
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):OMMODE1
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Ominput1
+        label: Input
+        write_pv: $(P):OMINPUT_S1
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):OMINPUT1
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Ompe1
+        label: Powerup Enable
+        write_pv: $(P):OMPE_S1
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):OMPE1
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: Outputs
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalR
+        name: Htr1
+        label: Heater output
+        read_pv: $(P):HTR1
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: PidControl
+      label: PID Control
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: Mout1
+        label: Manual Output
+        write_pv: $(P):MOUT_S1
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):MOUT1
+        read_widget:
+          type: TextRead
+      - type: SignalW
+        name: MoutTrackcl1
+        label: Track closed_loop heater output
+        write_pv: $(P):MOUT:TRACKCL1
+        write_widget:
+          type: ComboBox
+      - type: SignalRW
+        name: P1
+        label: P
+        write_pv: $(P):P_S1
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):P1
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: I1
+        label: I
+        write_pv: $(P):I_S1
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):I1
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: D1
+        label: D
+        write_pv: $(P):D_S1
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):D1
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: AutoTune
+      label: Auto Tune
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalW
+        name: TunemodeS1
+        label: Tuning Mode
+        write_pv: $(P):TUNEMODE_S1
+        write_widget:
+          type: ComboBox
+      - type: SignalW
+        name: Tunestart1
+        write_pv: $(P):TUNESTART1
+        write_widget:
+          type: ButtonPanel
+          actions:
+            StartTune: '1'
+      - type: Group
+        name: RowTunest
+        label: Tuning Status TUNEST
+        layout:
+          type: Row
+        children:
+        - type: SignalR
+          name: Tunest
+          read_pv: $(P):TUNEST
+          read_widget:
+            type: TextRead
+            format: string
+        - type: SignalR
+          name: Tunestsuccess
+          read_pv: $(P):TUNESTSUCCESS
+          read_widget:
+            type: LED
+  - type: Group
+    name: Output2Control
+    label: Output 2 Control
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: General
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalR
+        name: Out2label
+        read_pv: $(P):OUT2LABEL
+        read_widget:
+          type: TextRead
+          format: string
+    - type: Group
+      name: SetpointControl
+      label: Setpoint Control
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: Setp2
+        label: Setpoint Temp
+        write_pv: $(P):SETP_S2
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):SETP2
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Range2
+        label: Heater Range
+        write_pv: $(P):RANGE_S2
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):RANGE2
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Ramp2
+        label: Ramp Rate
+        write_pv: $(P):RAMP_S2
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):RAMP2
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Rampst2
+        label: Ramp Enable (1=On, 0=Off)
+        write_pv: $(P):RAMPST_S2
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):RAMPST2
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: OutputModeControl
+      label: Output Mode Control
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: Ommode2
+        label: Mode
+        write_pv: $(P):OMMODE_S2
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):OMMODE2
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Ominput2
+        label: Input
+        write_pv: $(P):OMINPUT_S2
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):OMINPUT2
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Ompe2
+        label: Powerup Enable
+        write_pv: $(P):OMPE_S2
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):OMPE2
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: Outputs
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalR
+        name: Htr2
+        label: Heater output
+        read_pv: $(P):HTR2
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: PidControl
+      label: PID Control
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: Mout2
+        label: Manual Output
+        write_pv: $(P):MOUT_S2
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):MOUT2
+        read_widget:
+          type: TextRead
+      - type: SignalW
+        name: MoutTrackcl2
+        label: Track closed_loop heater output
+        write_pv: $(P):MOUT:TRACKCL2
+        write_widget:
+          type: ComboBox
+      - type: SignalRW
+        name: P2
+        label: P
+        write_pv: $(P):P_S2
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):P2
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: I2
+        label: I
+        write_pv: $(P):I_S2
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):I2
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: D2
+        label: D
+        write_pv: $(P):D_S2
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):D2
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: AutoTune
+      label: Auto Tune
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalW
+        name: TunemodeS2
+        label: Tuning Mode
+        write_pv: $(P):TUNEMODE_S2
+        write_widget:
+          type: ComboBox
+      - type: SignalW
+        name: Tunestart2
+        write_pv: $(P):TUNESTART2
+        write_widget:
+          type: ButtonPanel
+          actions:
+            StartTune: '1'
+  - type: Group
+    name: Output3Control
+    label: Output 3 Control
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: General
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalR
+        name: Out3label
+        read_pv: $(P):OUT3LABEL
+        read_widget:
+          type: TextRead
+          format: string
+    - type: Group
+      name: SetpointControl
+      label: Setpoint Control
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: Setp3
+        label: Setpoint Temp
+        write_pv: $(P):SETP_S3
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):SETP3
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Range3
+        label: Heater Range
+        write_pv: $(P):RANGE_S3
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):RANGE3
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Ramp3
+        label: Ramp Rate
+        write_pv: $(P):RAMP_S3
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):RAMP3
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Rampst3
+        label: Ramp Enable (1=On, 0=Off)
+        write_pv: $(P):RAMPST_S3
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):RAMPST3
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: OutputModeControl
+      label: Output Mode Control
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: Ommode3
+        label: Mode
+        write_pv: $(P):OMMODE_S3
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):OMMODE3
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Ominput3
+        label: Input
+        write_pv: $(P):OMINPUT_S3
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):OMINPUT3
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Ompe3
+        label: Powerup Enable
+        write_pv: $(P):OMPE_S3
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):OMPE3
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: Outputs
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalR
+        name: Htr3
+        label: Heater output
+        read_pv: $(P):HTR3
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: PidControl
+      label: PID Control
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: Mout3
+        label: Manual Output
+        write_pv: $(P):MOUT_S3
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):MOUT3
+        read_widget:
+          type: TextRead
+      - type: SignalW
+        name: MoutTrackcl3
+        label: Track closed_loop heater output
+        write_pv: $(P):MOUT:TRACKCL3
+        write_widget:
+          type: ComboBox
+      - type: SignalRW
+        name: P3
+        label: P
+        write_pv: $(P):P_S3
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):P3
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: I3
+        label: I
+        write_pv: $(P):I_S3
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):I3
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: D3
+        label: D
+        write_pv: $(P):D_S3
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):D3
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: AutoTune
+      label: Auto Tune
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalW
+        name: TunemodeS3
+        label: Tuning Mode
+        write_pv: $(P):TUNEMODE_S3
+        write_widget:
+          type: ComboBox
+      - type: SignalW
+        name: Tunestart3
+        write_pv: $(P):TUNESTART3
+        write_widget:
+          type: ButtonPanel
+          actions:
+            StartTune: '1'
+  - type: Group
+    name: Output4Control
+    label: Output 4 Control
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: General
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalR
+        name: Out4label
+        read_pv: $(P):OUT4LABEL
+        read_widget:
+          type: TextRead
+          format: string
+    - type: Group
+      name: SetpointControl
+      label: Setpoint Control
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: Setp4
+        label: Setpoint Temp
+        write_pv: $(P):SETP_S4
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):SETP4
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Range4
+        label: Heater Range
+        write_pv: $(P):RANGE_S4
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):RANGE4
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Ramp4
+        label: Ramp Rate
+        write_pv: $(P):RAMP_S4
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):RAMP4
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Rampst4
+        label: Ramp Enable (1=On, 0=Off)
+        write_pv: $(P):RAMPST_S4
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):RAMPST4
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: OutputModeControl
+      label: Output Mode Control
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: Ommode4
+        label: Mode
+        write_pv: $(P):OMMODE_S4
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):OMMODE4
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Ominput4
+        label: Input
+        write_pv: $(P):OMINPUT_S4
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):OMINPUT4
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: Ompe4
+        label: Powerup Enable
+        write_pv: $(P):OMPE_S4
+        write_widget:
+          type: ComboBox
+        read_pv: $(P):OMPE4
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: Outputs
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalR
+        name: Htr4
+        label: Heater output
+        read_pv: $(P):HTR4
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: PidControl
+      label: PID Control
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalRW
+        name: Mout4
+        label: Manual Output
+        write_pv: $(P):MOUT_S4
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):MOUT4
+        read_widget:
+          type: TextRead
+      - type: SignalW
+        name: MoutTrackcl4
+        label: Track closed_loop heater output
+        write_pv: $(P):MOUT:TRACKCL4
+        write_widget:
+          type: ComboBox
+      - type: SignalRW
+        name: P4
+        label: P
+        write_pv: $(P):P_S4
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):P4
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: I4
+        label: I
+        write_pv: $(P):I_S4
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):I4
+        read_widget:
+          type: TextRead
+      - type: SignalRW
+        name: D4
+        label: D
+        write_pv: $(P):D_S4
+        write_widget:
+          type: TextWrite
+        read_pv: $(P):D4
+        read_widget:
+          type: TextRead
+    - type: Group
+      name: AutoTune
+      label: Auto Tune
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalW
+        name: TunemodeS4
+        label: Tuning Mode
+        write_pv: $(P):TUNEMODE_S4
+        write_widget:
+          type: ComboBox
+      - type: SignalW
+        name: Tunestart4
+        write_pv: $(P):TUNESTART4
+        write_widget:
+          type: ButtonPanel
+          actions:
+            StartTune: '1'
+  - type: SignalRW
+    name: Disable
+    write_pv: $(P):DISABLE
+    write_widget:
+      type: ToggleButton
+    read_pv: $(P):DISABLE
+    read_widget:
+      type: LED

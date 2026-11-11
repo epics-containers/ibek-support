@@ -1,0 +1,2382 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+# Grouped from the DLS EDM screen rga.edl (rgamv2 1-2).
+# Generated from that screen. Hand edits may be overwritten by regeneration.
+
+label: rgamv2
+children:
+- type: Group
+  name: General2
+  label: General
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Data
+    label: Current Data
+    read_pv: $(device):DATA
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Det
+    label: Detector Setting
+    read_pv: $(device):DET
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Totp
+    label: Total Pressure
+    read_pv: $(device):TOTP
+    read_widget:
+      type: TextRead
+  - type: Group
+    name: RowBarM2
+    label: '2'
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: BarM2
+      read_pv: $(device):BAR:M2
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: LogM2
+      read_pv: $(device):LOG:M2
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowBarM4
+    label: '4'
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: BarM4
+      read_pv: $(device):BAR:M4
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: LogM4
+      read_pv: $(device):LOG:M4
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowBarM14
+    label: '14'
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: BarM14
+      read_pv: $(device):BAR:M14
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: LogM14
+      read_pv: $(device):LOG:M14
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowBarM15
+    label: '15'
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: BarM15
+      read_pv: $(device):BAR:M15
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: LogM15
+      read_pv: $(device):LOG:M15
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowBarM16
+    label: '16'
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: BarM16
+      read_pv: $(device):BAR:M16
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: LogM16
+      read_pv: $(device):LOG:M16
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowBarM18
+    label: '18'
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: BarM18
+      read_pv: $(device):BAR:M18
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: LogM18
+      read_pv: $(device):LOG:M18
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowBarM28
+    label: '28'
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: BarM28
+      read_pv: $(device):BAR:M28
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: LogM28
+      read_pv: $(device):LOG:M28
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowBarM32
+    label: '32'
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: BarM32
+      read_pv: $(device):BAR:M32
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: LogM32
+      read_pv: $(device):LOG:M32
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowBarM40
+    label: '40'
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: BarM40
+      read_pv: $(device):BAR:M40
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: LogM40
+      read_pv: $(device):LOG:M40
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowBarM44
+    label: '44'
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: BarM44
+      read_pv: $(device):BAR:M44
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: LogM44
+      read_pv: $(device):LOG:M44
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowBarM69
+    label: '69'
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: BarM69
+      read_pv: $(device):BAR:M69
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: LogM69
+      read_pv: $(device):LOG:M69
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowCon
+    label: Head Status
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: Con
+      write_pv: $(device):CON
+      write_widget:
+        type: ComboBox
+    - type: SignalR
+      name: Headsta
+      read_pv: $(device):HEADSTA
+      read_widget:
+        type: TextRead
+    - type: SignalRW
+      name: Scan
+      write_pv: $(device):SETSCAN
+      write_widget:
+        type: ToggleButton
+      read_pv: $(device):SCAN
+      read_widget:
+        type: LED
+  - type: Group
+    name: RowFil
+    label: Fil
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Fil
+      read_pv: $(device):FIL
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: Filcon
+      read_pv: $(device):FILCON
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: Filsta
+      read_pv: $(device):FILSTA
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Mltcon
+      read_pv: $(device):MLTCON
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Mltsta
+      read_pv: $(device):MLTSTA
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: BarChart
+    label: Bar Chart
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: General
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowCon
+        label: Con
+        layout:
+          type: Row
+        children:
+        - type: SignalR
+          name: Sta
+          read_pv: $(device):STA
+          read_widget:
+            type: TextRead
+        - type: SignalRW
+          name: Sel
+          write_pv: $(device):SEL
+          write_widget:
+            type: ToggleButton
+          read_pv: $(device):SEL
+          read_widget:
+            type: LED
+      - type: SignalR
+        name: Sump
+        label: Sum of Peaks
+        read_pv: $(device):SUMP
+        read_widget:
+          type: TextRead
+      - type: SignalR
+        name: Ilk
+        label: IMG Interlock
+        read_pv: $(device):ILK
+        read_widget:
+          type: LED
+    - type: Group
+      name: Details
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowLogM1
+        label: LogM1
+        layout:
+          type: Row
+        children:
+        - type: SignalR
+          name: LogM1
+          read_pv: $(device):LOG:M1
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM3
+          read_pv: $(device):LOG:M3
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM5
+          read_pv: $(device):LOG:M5
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM6
+          read_pv: $(device):LOG:M6
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM7
+          read_pv: $(device):LOG:M7
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM8
+          read_pv: $(device):LOG:M8
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM9
+          read_pv: $(device):LOG:M9
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM10
+          read_pv: $(device):LOG:M10
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM11
+          read_pv: $(device):LOG:M11
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM12
+          read_pv: $(device):LOG:M12
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM13
+          read_pv: $(device):LOG:M13
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM17
+          read_pv: $(device):LOG:M17
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM19
+          read_pv: $(device):LOG:M19
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM20
+          read_pv: $(device):LOG:M20
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM21
+          read_pv: $(device):LOG:M21
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM22
+          read_pv: $(device):LOG:M22
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM23
+          read_pv: $(device):LOG:M23
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM24
+          read_pv: $(device):LOG:M24
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM25
+          read_pv: $(device):LOG:M25
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM26
+          read_pv: $(device):LOG:M26
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM27
+          read_pv: $(device):LOG:M27
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM29
+          read_pv: $(device):LOG:M29
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM30
+          read_pv: $(device):LOG:M30
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM31
+          read_pv: $(device):LOG:M31
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM33
+          read_pv: $(device):LOG:M33
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM34
+          read_pv: $(device):LOG:M34
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM35
+          read_pv: $(device):LOG:M35
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM36
+          read_pv: $(device):LOG:M36
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM37
+          read_pv: $(device):LOG:M37
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM38
+          read_pv: $(device):LOG:M38
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM39
+          read_pv: $(device):LOG:M39
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM41
+          read_pv: $(device):LOG:M41
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM42
+          read_pv: $(device):LOG:M42
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM43
+          read_pv: $(device):LOG:M43
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM45
+          read_pv: $(device):LOG:M45
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM46
+          read_pv: $(device):LOG:M46
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM47
+          read_pv: $(device):LOG:M47
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM48
+          read_pv: $(device):LOG:M48
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM49
+          read_pv: $(device):LOG:M49
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM50
+          read_pv: $(device):LOG:M50
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM51
+          read_pv: $(device):LOG:M51
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM52
+          read_pv: $(device):LOG:M52
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM53
+          read_pv: $(device):LOG:M53
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM54
+          read_pv: $(device):LOG:M54
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM55
+          read_pv: $(device):LOG:M55
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM56
+          read_pv: $(device):LOG:M56
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM57
+          read_pv: $(device):LOG:M57
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM58
+          read_pv: $(device):LOG:M58
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM59
+          read_pv: $(device):LOG:M59
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM60
+          read_pv: $(device):LOG:M60
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM61
+          read_pv: $(device):LOG:M61
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM62
+          read_pv: $(device):LOG:M62
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM63
+          read_pv: $(device):LOG:M63
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM64
+          read_pv: $(device):LOG:M64
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM65
+          read_pv: $(device):LOG:M65
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM66
+          read_pv: $(device):LOG:M66
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM67
+          read_pv: $(device):LOG:M67
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM68
+          read_pv: $(device):LOG:M68
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM70
+          read_pv: $(device):LOG:M70
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM71
+          read_pv: $(device):LOG:M71
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM72
+          read_pv: $(device):LOG:M72
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM73
+          read_pv: $(device):LOG:M73
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM74
+          read_pv: $(device):LOG:M74
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM75
+          read_pv: $(device):LOG:M75
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM76
+          read_pv: $(device):LOG:M76
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM77
+          read_pv: $(device):LOG:M77
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM78
+          read_pv: $(device):LOG:M78
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM79
+          read_pv: $(device):LOG:M79
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM80
+          read_pv: $(device):LOG:M80
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM81
+          read_pv: $(device):LOG:M81
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM82
+          read_pv: $(device):LOG:M82
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM83
+          read_pv: $(device):LOG:M83
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM84
+          read_pv: $(device):LOG:M84
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM85
+          read_pv: $(device):LOG:M85
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM86
+          read_pv: $(device):LOG:M86
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM87
+          read_pv: $(device):LOG:M87
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM88
+          read_pv: $(device):LOG:M88
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM89
+          read_pv: $(device):LOG:M89
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM90
+          read_pv: $(device):LOG:M90
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM91
+          read_pv: $(device):LOG:M91
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM92
+          read_pv: $(device):LOG:M92
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM93
+          read_pv: $(device):LOG:M93
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM94
+          read_pv: $(device):LOG:M94
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM95
+          read_pv: $(device):LOG:M95
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM96
+          read_pv: $(device):LOG:M96
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM97
+          read_pv: $(device):LOG:M97
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM98
+          read_pv: $(device):LOG:M98
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM99
+          read_pv: $(device):LOG:M99
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM100
+          read_pv: $(device):LOG:M100
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM101
+          read_pv: $(device):LOG:M101
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM102
+          read_pv: $(device):LOG:M102
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM103
+          read_pv: $(device):LOG:M103
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM104
+          read_pv: $(device):LOG:M104
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM105
+          read_pv: $(device):LOG:M105
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM106
+          read_pv: $(device):LOG:M106
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM107
+          read_pv: $(device):LOG:M107
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM108
+          read_pv: $(device):LOG:M108
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM109
+          read_pv: $(device):LOG:M109
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM110
+          read_pv: $(device):LOG:M110
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM111
+          read_pv: $(device):LOG:M111
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM112
+          read_pv: $(device):LOG:M112
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM113
+          read_pv: $(device):LOG:M113
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM114
+          read_pv: $(device):LOG:M114
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM115
+          read_pv: $(device):LOG:M115
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM116
+          read_pv: $(device):LOG:M116
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM117
+          read_pv: $(device):LOG:M117
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM118
+          read_pv: $(device):LOG:M118
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM119
+          read_pv: $(device):LOG:M119
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM120
+          read_pv: $(device):LOG:M120
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM121
+          read_pv: $(device):LOG:M121
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM122
+          read_pv: $(device):LOG:M122
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM123
+          read_pv: $(device):LOG:M123
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM124
+          read_pv: $(device):LOG:M124
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM125
+          read_pv: $(device):LOG:M125
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM126
+          read_pv: $(device):LOG:M126
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM127
+          read_pv: $(device):LOG:M127
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM128
+          read_pv: $(device):LOG:M128
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM129
+          read_pv: $(device):LOG:M129
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM130
+          read_pv: $(device):LOG:M130
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM131
+          read_pv: $(device):LOG:M131
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM132
+          read_pv: $(device):LOG:M132
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM133
+          read_pv: $(device):LOG:M133
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM134
+          read_pv: $(device):LOG:M134
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM135
+          read_pv: $(device):LOG:M135
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM136
+          read_pv: $(device):LOG:M136
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM137
+          read_pv: $(device):LOG:M137
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM138
+          read_pv: $(device):LOG:M138
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM139
+          read_pv: $(device):LOG:M139
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM140
+          read_pv: $(device):LOG:M140
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM151
+          read_pv: $(device):LOG:M151
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM152
+          read_pv: $(device):LOG:M152
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM153
+          read_pv: $(device):LOG:M153
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM154
+          read_pv: $(device):LOG:M154
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM155
+          read_pv: $(device):LOG:M155
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM156
+          read_pv: $(device):LOG:M156
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM157
+          read_pv: $(device):LOG:M157
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM158
+          read_pv: $(device):LOG:M158
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM159
+          read_pv: $(device):LOG:M159
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM160
+          read_pv: $(device):LOG:M160
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM161
+          read_pv: $(device):LOG:M161
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM162
+          read_pv: $(device):LOG:M162
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM163
+          read_pv: $(device):LOG:M163
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM164
+          read_pv: $(device):LOG:M164
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM165
+          read_pv: $(device):LOG:M165
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM166
+          read_pv: $(device):LOG:M166
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM167
+          read_pv: $(device):LOG:M167
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM168
+          read_pv: $(device):LOG:M168
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM169
+          read_pv: $(device):LOG:M169
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM170
+          read_pv: $(device):LOG:M170
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM171
+          read_pv: $(device):LOG:M171
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM172
+          read_pv: $(device):LOG:M172
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM173
+          read_pv: $(device):LOG:M173
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM174
+          read_pv: $(device):LOG:M174
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM175
+          read_pv: $(device):LOG:M175
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM176
+          read_pv: $(device):LOG:M176
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM177
+          read_pv: $(device):LOG:M177
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM178
+          read_pv: $(device):LOG:M178
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM179
+          read_pv: $(device):LOG:M179
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM180
+          read_pv: $(device):LOG:M180
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM181
+          read_pv: $(device):LOG:M181
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM182
+          read_pv: $(device):LOG:M182
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM183
+          read_pv: $(device):LOG:M183
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM184
+          read_pv: $(device):LOG:M184
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM185
+          read_pv: $(device):LOG:M185
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM186
+          read_pv: $(device):LOG:M186
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM187
+          read_pv: $(device):LOG:M187
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM188
+          read_pv: $(device):LOG:M188
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM189
+          read_pv: $(device):LOG:M189
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM190
+          read_pv: $(device):LOG:M190
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM191
+          read_pv: $(device):LOG:M191
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM192
+          read_pv: $(device):LOG:M192
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM193
+          read_pv: $(device):LOG:M193
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM194
+          read_pv: $(device):LOG:M194
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM195
+          read_pv: $(device):LOG:M195
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM196
+          read_pv: $(device):LOG:M196
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM197
+          read_pv: $(device):LOG:M197
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM198
+          read_pv: $(device):LOG:M198
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM199
+          read_pv: $(device):LOG:M199
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: LogM200
+          read_pv: $(device):LOG:M200
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM1
+          label: Mass 1
+          read_pv: $(device):BAR:M1
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM3
+          label: Mass 3
+          read_pv: $(device):BAR:M3
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM5
+          label: Mass 5
+          read_pv: $(device):BAR:M5
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM6
+          label: Mass 6
+          read_pv: $(device):BAR:M6
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM7
+          label: Mass 7
+          read_pv: $(device):BAR:M7
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM8
+          label: Mass 8
+          read_pv: $(device):BAR:M8
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM9
+          label: Mass 9
+          read_pv: $(device):BAR:M9
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM10
+          label: Mass 10
+          read_pv: $(device):BAR:M10
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM11
+          label: Mass 11
+          read_pv: $(device):BAR:M11
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM12
+          label: Mass 12
+          read_pv: $(device):BAR:M12
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM13
+          label: Mass 13
+          read_pv: $(device):BAR:M13
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM17
+          label: Mass 17
+          read_pv: $(device):BAR:M17
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM19
+          label: Mass 19
+          read_pv: $(device):BAR:M19
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM20
+          label: Mass 20
+          read_pv: $(device):BAR:M20
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM21
+          label: Mass 21
+          read_pv: $(device):BAR:M21
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM22
+          label: Mass 22
+          read_pv: $(device):BAR:M22
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM23
+          label: Mass 23
+          read_pv: $(device):BAR:M23
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM24
+          label: Mass 24
+          read_pv: $(device):BAR:M24
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM25
+          label: Mass 25
+          read_pv: $(device):BAR:M25
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM26
+          label: Mass 26
+          read_pv: $(device):BAR:M26
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM27
+          label: Mass 27
+          read_pv: $(device):BAR:M27
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM29
+          label: Mass 29
+          read_pv: $(device):BAR:M29
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM30
+          label: Mass 30
+          read_pv: $(device):BAR:M30
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM31
+          label: Mass 31
+          read_pv: $(device):BAR:M31
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM33
+          label: Mass 33
+          read_pv: $(device):BAR:M33
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM34
+          label: Mass 34
+          read_pv: $(device):BAR:M34
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM35
+          label: Mass 35
+          read_pv: $(device):BAR:M35
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM36
+          label: Mass 36
+          read_pv: $(device):BAR:M36
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM37
+          label: Mass 37
+          read_pv: $(device):BAR:M37
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM38
+          label: Mass 38
+          read_pv: $(device):BAR:M38
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM39
+          label: Mass 39
+          read_pv: $(device):BAR:M39
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM41
+          label: Mass 41
+          read_pv: $(device):BAR:M41
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM42
+          label: Mass 42
+          read_pv: $(device):BAR:M42
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM43
+          label: Mass 43
+          read_pv: $(device):BAR:M43
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM45
+          label: Mass 45
+          read_pv: $(device):BAR:M45
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM46
+          label: Mass 46
+          read_pv: $(device):BAR:M46
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM47
+          label: Mass 47
+          read_pv: $(device):BAR:M47
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM48
+          label: Mass 48
+          read_pv: $(device):BAR:M48
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM49
+          label: Mass 49
+          read_pv: $(device):BAR:M49
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM50
+          label: Mass 50
+          read_pv: $(device):BAR:M50
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM51
+          label: Mass 51
+          read_pv: $(device):BAR:M51
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM52
+          label: Mass 52
+          read_pv: $(device):BAR:M52
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM53
+          label: Mass 53
+          read_pv: $(device):BAR:M53
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM54
+          label: Mass 54
+          read_pv: $(device):BAR:M54
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM55
+          label: Mass 55
+          read_pv: $(device):BAR:M55
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM56
+          label: Mass 56
+          read_pv: $(device):BAR:M56
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM57
+          label: Mass 57
+          read_pv: $(device):BAR:M57
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM58
+          label: Mass 58
+          read_pv: $(device):BAR:M58
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM59
+          label: Mass 59
+          read_pv: $(device):BAR:M59
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM60
+          label: Mass 60
+          read_pv: $(device):BAR:M60
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM61
+          label: Mass 61
+          read_pv: $(device):BAR:M61
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM62
+          label: Mass 62
+          read_pv: $(device):BAR:M62
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM63
+          label: Mass 63
+          read_pv: $(device):BAR:M63
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM64
+          label: Mass 64
+          read_pv: $(device):BAR:M64
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM65
+          label: Mass 65
+          read_pv: $(device):BAR:M65
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM66
+          label: Mass 66
+          read_pv: $(device):BAR:M66
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM67
+          label: Mass 67
+          read_pv: $(device):BAR:M67
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM68
+          label: Mass 68
+          read_pv: $(device):BAR:M68
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM70
+          label: Mass 70
+          read_pv: $(device):BAR:M70
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM71
+          label: Mass 71
+          read_pv: $(device):BAR:M71
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM72
+          label: Mass 72
+          read_pv: $(device):BAR:M72
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM73
+          label: Mass 73
+          read_pv: $(device):BAR:M73
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM74
+          label: Mass 74
+          read_pv: $(device):BAR:M74
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM75
+          label: Mass 75
+          read_pv: $(device):BAR:M75
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM76
+          label: Mass 76
+          read_pv: $(device):BAR:M76
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM77
+          label: Mass 77
+          read_pv: $(device):BAR:M77
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM78
+          label: Mass 78
+          read_pv: $(device):BAR:M78
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM79
+          label: Mass 79
+          read_pv: $(device):BAR:M79
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM80
+          label: Mass 80
+          read_pv: $(device):BAR:M80
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM81
+          label: Mass 81
+          read_pv: $(device):BAR:M81
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM82
+          label: Mass 82
+          read_pv: $(device):BAR:M82
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM83
+          label: Mass 83
+          read_pv: $(device):BAR:M83
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM84
+          label: Mass 84
+          read_pv: $(device):BAR:M84
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM85
+          label: Mass 85
+          read_pv: $(device):BAR:M85
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM86
+          label: Mass 86
+          read_pv: $(device):BAR:M86
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM87
+          label: Mass 87
+          read_pv: $(device):BAR:M87
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM88
+          label: Mass 88
+          read_pv: $(device):BAR:M88
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM89
+          label: Mass 89
+          read_pv: $(device):BAR:M89
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM90
+          label: Mass 90
+          read_pv: $(device):BAR:M90
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM91
+          label: Mass 91
+          read_pv: $(device):BAR:M91
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM92
+          label: Mass 92
+          read_pv: $(device):BAR:M92
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM93
+          label: Mass 93
+          read_pv: $(device):BAR:M93
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM94
+          label: Mass 94
+          read_pv: $(device):BAR:M94
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM95
+          label: Mass 95
+          read_pv: $(device):BAR:M95
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM96
+          label: Mass 96
+          read_pv: $(device):BAR:M96
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM97
+          label: Mass 97
+          read_pv: $(device):BAR:M97
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM98
+          label: Mass 98
+          read_pv: $(device):BAR:M98
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM99
+          label: Mass 99
+          read_pv: $(device):BAR:M99
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM100
+          label: Mass 100
+          read_pv: $(device):BAR:M100
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM101
+          label: Mass 101
+          read_pv: $(device):BAR:M101
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM102
+          label: Mass 102
+          read_pv: $(device):BAR:M102
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM103
+          label: Mass 103
+          read_pv: $(device):BAR:M103
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM104
+          label: Mass 104
+          read_pv: $(device):BAR:M104
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM105
+          label: Mass 105
+          read_pv: $(device):BAR:M105
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM106
+          label: Mass 106
+          read_pv: $(device):BAR:M106
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM107
+          label: Mass 107
+          read_pv: $(device):BAR:M107
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM108
+          label: Mass 108
+          read_pv: $(device):BAR:M108
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM109
+          label: Mass 109
+          read_pv: $(device):BAR:M109
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM110
+          label: Mass 110
+          read_pv: $(device):BAR:M110
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM111
+          label: Mass 111
+          read_pv: $(device):BAR:M111
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM112
+          label: Mass 112
+          read_pv: $(device):BAR:M112
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM113
+          label: Mass 113
+          read_pv: $(device):BAR:M113
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM114
+          label: Mass 114
+          read_pv: $(device):BAR:M114
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM115
+          label: Mass 115
+          read_pv: $(device):BAR:M115
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM116
+          label: Mass 116
+          read_pv: $(device):BAR:M116
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM117
+          label: Mass 117
+          read_pv: $(device):BAR:M117
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM118
+          label: Mass 118
+          read_pv: $(device):BAR:M118
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM119
+          label: Mass 119
+          read_pv: $(device):BAR:M119
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM120
+          label: Mass 120
+          read_pv: $(device):BAR:M120
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM121
+          label: Mass 121
+          read_pv: $(device):BAR:M121
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM122
+          label: Mass 122
+          read_pv: $(device):BAR:M122
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM123
+          label: Mass 123
+          read_pv: $(device):BAR:M123
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM124
+          label: Mass 124
+          read_pv: $(device):BAR:M124
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM125
+          label: Mass 125
+          read_pv: $(device):BAR:M125
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM126
+          label: Mass 126
+          read_pv: $(device):BAR:M126
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM127
+          label: Mass 127
+          read_pv: $(device):BAR:M127
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM128
+          label: Mass 128
+          read_pv: $(device):BAR:M128
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM129
+          label: Mass 129
+          read_pv: $(device):BAR:M129
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM130
+          label: Mass 130
+          read_pv: $(device):BAR:M130
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM131
+          label: Mass 131
+          read_pv: $(device):BAR:M131
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM132
+          label: Mass 132
+          read_pv: $(device):BAR:M132
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM133
+          label: Mass 133
+          read_pv: $(device):BAR:M133
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM134
+          label: Mass 134
+          read_pv: $(device):BAR:M134
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM135
+          label: Mass 135
+          read_pv: $(device):BAR:M135
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM136
+          label: Mass 136
+          read_pv: $(device):BAR:M136
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM137
+          label: Mass 137
+          read_pv: $(device):BAR:M137
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM138
+          label: Mass 138
+          read_pv: $(device):BAR:M138
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM139
+          label: Mass 139
+          read_pv: $(device):BAR:M139
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM140
+          label: Mass 140
+          read_pv: $(device):BAR:M140
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM141
+          label: Mass 141
+          read_pv: $(device):BAR:M141
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM142
+          label: Mass 142
+          read_pv: $(device):BAR:M142
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM143
+          label: Mass 143
+          read_pv: $(device):BAR:M143
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM144
+          label: Mass 144
+          read_pv: $(device):BAR:M144
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM145
+          label: Mass 145
+          read_pv: $(device):BAR:M145
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM146
+          label: Mass 146
+          read_pv: $(device):BAR:M146
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM147
+          label: Mass 147
+          read_pv: $(device):BAR:M147
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM148
+          label: Mass 148
+          read_pv: $(device):BAR:M148
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM149
+          label: Mass 149
+          read_pv: $(device):BAR:M149
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM150
+          label: Mass 150
+          read_pv: $(device):BAR:M150
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM151
+          label: Mass 151
+          read_pv: $(device):BAR:M151
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM152
+          label: Mass 152
+          read_pv: $(device):BAR:M152
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM153
+          label: Mass 153
+          read_pv: $(device):BAR:M153
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM154
+          label: Mass 154
+          read_pv: $(device):BAR:M154
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM155
+          label: Mass 155
+          read_pv: $(device):BAR:M155
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM156
+          label: Mass 156
+          read_pv: $(device):BAR:M156
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM157
+          label: Mass 157
+          read_pv: $(device):BAR:M157
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM158
+          label: Mass 158
+          read_pv: $(device):BAR:M158
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM159
+          label: Mass 159
+          read_pv: $(device):BAR:M159
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM160
+          label: Mass 160
+          read_pv: $(device):BAR:M160
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM161
+          label: Mass 161
+          read_pv: $(device):BAR:M161
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM162
+          label: Mass 162
+          read_pv: $(device):BAR:M162
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM163
+          label: Mass 163
+          read_pv: $(device):BAR:M163
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM164
+          label: Mass 164
+          read_pv: $(device):BAR:M164
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM165
+          label: Mass 165
+          read_pv: $(device):BAR:M165
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM166
+          label: Mass 166
+          read_pv: $(device):BAR:M166
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM167
+          label: Mass 167
+          read_pv: $(device):BAR:M167
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM168
+          label: Mass 168
+          read_pv: $(device):BAR:M168
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM169
+          label: Mass 169
+          read_pv: $(device):BAR:M169
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM170
+          label: Mass 170
+          read_pv: $(device):BAR:M170
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM171
+          label: Mass 171
+          read_pv: $(device):BAR:M171
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM172
+          label: Mass 172
+          read_pv: $(device):BAR:M172
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM173
+          label: Mass 173
+          read_pv: $(device):BAR:M173
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM174
+          label: Mass 174
+          read_pv: $(device):BAR:M174
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM175
+          label: Mass 175
+          read_pv: $(device):BAR:M175
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM176
+          label: Mass 176
+          read_pv: $(device):BAR:M176
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM177
+          label: Mass 177
+          read_pv: $(device):BAR:M177
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM178
+          label: Mass 178
+          read_pv: $(device):BAR:M178
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM179
+          label: Mass 179
+          read_pv: $(device):BAR:M179
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM180
+          label: Mass 180
+          read_pv: $(device):BAR:M180
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM181
+          label: Mass 181
+          read_pv: $(device):BAR:M181
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM182
+          label: Mass 182
+          read_pv: $(device):BAR:M182
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM183
+          label: Mass 183
+          read_pv: $(device):BAR:M183
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM184
+          label: Mass 184
+          read_pv: $(device):BAR:M184
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM185
+          label: Mass 185
+          read_pv: $(device):BAR:M185
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM186
+          label: Mass 186
+          read_pv: $(device):BAR:M186
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM187
+          label: Mass 187
+          read_pv: $(device):BAR:M187
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM188
+          label: Mass 188
+          read_pv: $(device):BAR:M188
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM189
+          label: Mass 189
+          read_pv: $(device):BAR:M189
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM190
+          label: Mass 190
+          read_pv: $(device):BAR:M190
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM191
+          label: Mass 191
+          read_pv: $(device):BAR:M191
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM192
+          label: Mass 192
+          read_pv: $(device):BAR:M192
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM193
+          label: Mass 193
+          read_pv: $(device):BAR:M193
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM194
+          label: Mass 194
+          read_pv: $(device):BAR:M194
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM195
+          label: Mass 195
+          read_pv: $(device):BAR:M195
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM196
+          label: Mass 196
+          read_pv: $(device):BAR:M196
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM197
+          label: Mass 197
+          read_pv: $(device):BAR:M197
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM198
+          label: Mass 198
+          read_pv: $(device):BAR:M198
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM199
+          label: Mass 199
+          read_pv: $(device):BAR:M199
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: BarM200
+          label: Mass 200
+          read_pv: $(device):BAR:M200
+          read_widget:
+            type: TextRead
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: ProtectedGeneral
+    label: General
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: Fil
+      label: Fil
+      write_pv: $(device):SETFIL
+      write_widget:
+        type: ToggleButton
+    - type: SignalRW
+      name: Filcon
+      label: Filcon
+      write_pv: $(device):FILCON
+      write_widget:
+        type: ToggleButton
+      read_pv: $(device):FILCON
+      read_widget:
+        type: LED
+    - type: SignalW
+      name: Mltcon
+      label: Mltcon
+      write_pv: $(device):MLTCON
+      write_widget:
+        type: ComboBox

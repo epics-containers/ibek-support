@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: rgamv2
+# 1-2 is the Diamond release that the Diamond IOCs build, and is the same
+# commit (d5914b2) as GitHub master.
+version: 1-2
+
+organization: https://github.com/DiamondLightSource
+
+dbds:
+  - rgamv2Include.dbd
+
+libs:
+  - rgamv2
+
+# etc and iocs only build example IOCs and docs with the Diamond builder, which
+# is not in the container. The top Makefile adds both through $(wildcard), so
+# removing them is enough.
+remove_files_prebuild:
+  - etc
+  - iocs
+
+comment_out:
+  # opi/edl's Makefile defines 'clean' with both : and ::, so 'make clean'
+  # stops there. The screens are not used in the container.
+  - path: rgamv2App/Makefile
+    regexp: wildcard \*opi\*

@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: mca
+version: R7-10
+# organization: https://github.com/epics-modules
+
+# SIS38XXSupport.dbd is not listed: the SIS38XX library it registers is only
+# built for vxWorks and RTEMS, so a Linux IOC that included the dbd would fail
+# to link.
+dbds:
+  - mcaSupport.dbd
+
+libs:
+  - mca
+
+# iocBoot holds example IOCs only.
+remove_files_prebuild:
+  - iocBoot
+
+patch_lines:
+  # The Canberra AIM (libnet, libpcap) and Amptek (libusb) drivers are not
+  # used by the entity models, so do not build them or pull in their
+  # libraries.
+  - path: configure/CONFIG_SITE
+    regexp: ^LINUX_NET_INSTALLED *=
+    line: LINUX_NET_INSTALLED = NO
+  - path: configure/CONFIG_SITE
+    regexp: ^LINUX_LIBUSB-1.0_INSTALLED *=
+    line: LINUX_LIBUSB-1.0_INSTALLED = NO

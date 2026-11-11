@@ -85,8 +85,11 @@ groups:
     modules:
       - std
       - modbus
+      - eurothermModbus
       - opcua
       - positioner
+      - scaler
+      - mca
 
   fieldbus:
     desc: "Fieldbus and simple protocol modules"
@@ -97,8 +100,10 @@ groups:
       - ether_ip
       - FINS
       - digitelMpc
+      - lakeshore336
       - lakeshore340
       - mks937a
       - mks937b
       - oxCryo
+      - rgamv2
       - terminalserver
