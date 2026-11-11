@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+# Builds after devlib2 (2.8 or later), which supplies the PCI access and the
+# epicspci and epicsvme dbds and libs.
+#
+# The EVR also needs the mrf kernel module (mrmShared/linux) loaded on the
+# host. It is not built here.
+
+module: mrfioc2
+version: 2.7.2
+# organization: https://github.com/epics-modules
+
+# The component dbds, not mrf.dbd: mrf.dbd is the dbd of the module's own
+# example IOC and pulls in base, devIocStats, autosave, caPutLog and qsrv.
+# drvemSupport.dbd includes evrSupport.dbd and mrfCommon.dbd; evgInit.dbd
+# includes mrmShared.dbd.
+dbds:
+  - drvemSupport.dbd
+  - evrSupportBase7.dbd
+  - evgInit.dbd
+
+libs:
+  - evgmrm
+  - evrMrm
+  - mrmShared
+  - evr
+  - mrfCommon
+
+patch_lines:
+  # Build the libraries only: mrfApp is the example IOC, evrFRIBApp is FRIB's
+  # own EVR, and testApp and iocBoot are tests and examples.
+  - path: Makefile
+    regexp: '^DIRS := configure '
+    line: DIRS := configure mrfCommon evrApp mrmShared evgMrmApp evrMrmApp
+
+bash:
+  # defaultPCIe.template is the Diamond EVR template for the PCIe-300DC and
+  # IFB-300 (from the Diamond mrfioc2 2-2-0dls6, minus its CDR records). Copy it
+  # into the module's db/ so the entity model finds it with the module's own
+  # templates.
+  - cmd: cp {{ ibek_support_folder }}/defaultPCIe.template db/
+    post_build: true

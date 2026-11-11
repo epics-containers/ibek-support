@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.0.1/ibek.support.schema.json
+
+module: mrfioc2
+
+entity_models:
+  - name: mrfioc2
+    description: |-
+      MRF EVR PCIe driver initialisation.
+      Calls mrmEvrSetupPCI once to configure the EVR hardware on the given
+      PCIe slot. Must be instantiated before any defaultPCIe entity that
+      references this EVR name.
+    parameters:
+      evrname:
+        type: id
+        description: EVR name used by the driver (cross-referenced by defaultPCIe.evr)
+
+      slot:
+        type: str
+        description: |-
+          PCI address as bus:device.function in hex (e.g. 5:0.0 - check lspci
+          output), or slot=<n> for a physical slot label
+        default: "5:0.0"
+
+    pre_init:
+      - when: first
+        value: |
+          # /sbin/lspci identifies the bus number of device 1204:ec30 (1a3e:172c)
+          # 5:0.0 should be correct if the EVR is installed in the standard slot
+      - value: |
+          mrmEvrSetupPCI("{{ evrname }}", "{{ slot }}")
+
+  - name: defaultPCIe
+    description: |-
+      Default template for the PCIe MRM-EVR-300 and IFB-300.
+      Provides link status, enable, clock, PLL, pulse generators, inputs,
+      outputs, SFP diagnostics, and timing records.
+    parameters:
+      device:
+        type: str
+        description: Standard DLS device name, probably including EVR-0n
+
+      evr:
+        type: object
+        description: Name defined in the mrmEvrSetupPCI() function (references mrfioc2.evrname)
+
+    databases:
+      - file: $(MRFIOC2)/db/defaultPCIe.template
+        args:
+          .*:
+
+    pvi:
+      yaml_path: defaultPCIe.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"

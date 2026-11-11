@@ -1,0 +1,463 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+# Grouped from the DLS EDM screen defaultIFB300.edl (mrfioc2 2-2-0dls6).
+# Generated from that screen. Hand edits may be overwritten by regeneration.
+
+label: defaultPCIe
+children:
+- type: Group
+  name: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalR
+    name: Linkstat
+    read_pv: $(device):LINKSTAT
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: Rxerr
+    label: RX Error count
+    read_pv: $(device):RXERR
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Linkerr
+    label: Link Error count
+    read_pv: $(device):LINKERR
+    read_widget:
+      type: TextRead
+  - type: Group
+    name: RowEventClock
+    label: Event Clk (MHz)
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: EventClock
+      read_pv: $(device):EVENT:CLOCK
+      read_widget:
+        type: TextRead
+    - type: SignalW
+      name: EventClockS
+      write_pv: $(device):EVENT:CLOCK:S
+      write_widget:
+        type: TextWrite
+  - type: SignalRW
+    name: LinkRxmodeS
+    label: Link type
+    write_pv: $(device):LINK:RXMODE:S
+    write_widget:
+      type: ToggleButton
+    read_pv: $(device):LINK:RXMODE:S
+    read_widget:
+      type: LED
+  - type: Group
+    name: RowModels
+    label: Model / FW
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Models
+      read_pv: $(device):MODELS
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: Firmware
+      read_pv: $(device):FIRMWARE
+      read_widget:
+        type: TextRead
+        format: string
+  - type: Group
+    name: RowTimevalid
+    label: Time
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: Timevalid
+      read_pv: $(device):TIMEVALID
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: Time
+      read_pv: $(device):TIME
+      read_widget:
+        type: TextRead
+        format: string
+  - type: SignalW
+    name: TimeSrcselS
+    label: Time Source
+    write_pv: $(device):TIME:SRCSEL:S
+    write_widget:
+      type: ComboBox
+  - type: SignalR
+    name: TimeClock
+    label: Tick Rate (MHz)
+    read_pv: $(device):TIME:CLOCK
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Pllstat
+    label: Link Status
+    read_pv: $(device):PLLSTAT
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: Fifoerr
+    label: FIFO Error count
+    read_pv: $(device):FIFOERR
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: FifoerrRate
+    label: FIFO Error rate
+    read_pv: $(device):FIFOERR:RATE
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: TimeDiv
+    label: Time Divider
+    read_pv: $(device):TIME:DIV
+    read_widget:
+      type: TextRead
+  - type: Group
+    name: RowEnableS
+    label: PLL Status
+    layout:
+      type: Row
+    children:
+    - type: SignalRW
+      name: EnableS
+      write_pv: $(device):ENABLE:S
+      write_widget:
+        type: ToggleButton
+      read_pv: $(device):ENABLE:S
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: Enable
+      read_pv: $(device):ENABLE
+      read_widget:
+        type: LED
+- type: Group
+  name: Details2
+  label: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: Group
+    name: RowInput0EventS
+    label: Input 0 Event
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: Input0EventS
+      write_pv: $(device):INPUT0:EVENT:S
+      write_widget:
+        type: TextWrite
+    - type: SignalRW
+      name: Input0EdgeS
+      write_pv: $(device):INPUT0:EDGE:S
+      write_widget:
+        type: ToggleButton
+      read_pv: $(device):INPUT0:EDGE:S
+      read_widget:
+        type: LED
+  - type: Group
+    name: RowInput1EventS
+    label: Input 1 Event
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: Input1EventS
+      write_pv: $(device):INPUT1:EVENT:S
+      write_widget:
+        type: TextWrite
+    - type: SignalRW
+      name: Input1EdgeS
+      write_pv: $(device):INPUT1:EDGE:S
+      write_widget:
+        type: ToggleButton
+      read_pv: $(device):INPUT1:EDGE:S
+      read_widget:
+        type: LED
+- type: Group
+  name: Details3
+  label: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: Group
+    name: RowPul0EnableS
+    label: Pulse 0
+    layout:
+      type: Row
+    children:
+    - type: SignalRW
+      name: Pul0EnableS
+      write_pv: $(device):PUL0:ENABLE:S
+      write_widget:
+        type: ToggleButton
+      read_pv: $(device):PUL0:ENABLE:S
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: Pul0Enable
+      read_pv: $(device):PUL0:ENABLE
+      read_widget:
+        type: LED
+    - type: SignalRW
+      name: Pul0PolarityS
+      write_pv: $(device):PUL0:POLARITY:S
+      write_widget:
+        type: ToggleButton
+      read_pv: $(device):PUL0:POLARITY:S
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: Pul0Polarity
+      read_pv: $(device):PUL0:POLARITY
+      read_widget:
+        type: LED
+  - type: Group
+    name: RowPul0DelayS
+    label: Delay (us)
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: Pul0DelayS
+      write_pv: $(device):PUL0:DELAY:S
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: Pul0Delay
+      read_pv: $(device):PUL0:DELAY
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Pul0Rdelay
+      read_pv: $(device):PUL0:RDELAY
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowPul0WidthS
+    label: Width (us)
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: Pul0WidthS
+      write_pv: $(device):PUL0:WIDTH:S
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: Pul0Width
+      read_pv: $(device):PUL0:WIDTH
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Pul0Rwidth
+      read_pv: $(device):PUL0:RWIDTH
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowPul0PresS
+    label: Prescaler
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: Pul0PresS
+      write_pv: $(device):PUL0:PRES:S
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: Pul0Pres
+      read_pv: $(device):PUL0:PRES
+      read_widget:
+        type: TextRead
+- type: Group
+  name: Details4
+  label: Details
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: Group
+    name: RowPul1EnableS
+    label: Pulse 1
+    layout:
+      type: Row
+    children:
+    - type: SignalRW
+      name: Pul1EnableS
+      write_pv: $(device):PUL1:ENABLE:S
+      write_widget:
+        type: ToggleButton
+      read_pv: $(device):PUL1:ENABLE:S
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: Pul1Enable
+      read_pv: $(device):PUL1:ENABLE
+      read_widget:
+        type: LED
+    - type: SignalRW
+      name: Pul1PolarityS
+      write_pv: $(device):PUL1:POLARITY:S
+      write_widget:
+        type: ToggleButton
+      read_pv: $(device):PUL1:POLARITY:S
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: Pul1Polarity
+      read_pv: $(device):PUL1:POLARITY
+      read_widget:
+        type: LED
+  - type: Group
+    name: RowPul1DelayS
+    label: Delay (us)
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: Pul1DelayS
+      write_pv: $(device):PUL1:DELAY:S
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: Pul1Delay
+      read_pv: $(device):PUL1:DELAY
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Pul1Rdelay
+      read_pv: $(device):PUL1:RDELAY
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowPul1WidthS
+    label: Width (us)
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: Pul1WidthS
+      write_pv: $(device):PUL1:WIDTH:S
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: Pul1Width
+      read_pv: $(device):PUL1:WIDTH
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Pul1Rwidth
+      read_pv: $(device):PUL1:RWIDTH
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowPul1PresS
+    label: Prescaler
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: Pul1PresS
+      write_pv: $(device):PUL1:PRES:S
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: Pul1Pres
+      read_pv: $(device):PUL1:PRES
+      read_widget:
+        type: TextRead
+- type: Group
+  name: SfpInfo
+  label: SFP Info
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: TransceiverStatus
+    label: Transceiver Status
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: SfpTemp
+      label: Temperature (C)
+      read_pv: $(device):SFP:TEMP
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: SfpTxpow
+      label: Tx Power (uW)
+      read_pv: $(device):SFP:TXPOW
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: SfpRxpow
+      label: Rx Power (uW)
+      read_pv: $(device):SFP:RXPOW
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: SfpSpeed
+      label: Link Speed (MB/s)
+      read_pv: $(device):SFP:SPEED
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: TransceiverInformation
+    label: Transceiver Information
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: SfpVendor
+      label: Vendor
+      read_pv: $(device):SFP:VENDOR
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: SfpPart
+      label: Model
+      read_pv: $(device):SFP:PART
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: SfpRev
+      label: Revision
+      read_pv: $(device):SFP:REV
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: SfpDate
+      label: Manufacture
+      read_pv: $(device):SFP:DATE
+      read_widget:
+        type: TextRead
+        format: string
+    - type: SignalR
+      name: SfpSerial
+      label: Serial
+      read_pv: $(device):SFP:SERIAL
+      read_widget:
+        type: TextRead
+        format: string

@@ -90,6 +90,8 @@ groups:
       - positioner
       - scaler
       - mca
+      - devlib2
+      - mrfioc2
 
   fieldbus:
     desc: "Fieldbus and simple protocol modules"

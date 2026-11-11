@@ -1,0 +1,890 @@
+# Diamond EVR template for the PCIe MRM-EVR-300 and IFB-300, from the Diamond
+# mrfioc2 2-2-0dls6 (evrMrmApp/Db/defaultPCIe.template). The two CDR:ENABLE
+# records are left out: they used the "CDR Enable" property that only the
+# Diamond fork's driver has.
+#
+# default template for the PCIe MRM-EVR-300 and IFB-300
+
+# macros:
+# % macro, device, standard DLS device name, probably including EVR-0n
+# % macro, evr,    name defined in the mrmEvrSetupPCI() function
+
+record(bi, "$(device):LINKSTAT")
+{
+	field(DTYP, "Obj Prop bool")
+	field(INP,  "@OBJ=$(evr), PROP=Link Status")
+	field(DESC, "Status of event link")
+	field(SCAN, "1 second")
+	field(ZNAM, "Fail")
+	field(ONAM, "OK")
+	field(ZSV,  "MAJOR")
+}
+
+record(longin, "$(device):LINKERR")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(INP,  "@OBJ=$(evr), PROP=HB Timeout Count")
+	field(SCAN, "I/O Intr")
+	field(DESC, "# of heartbeat timeout")
+}
+
+record(longin, "$(device):RXERR")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(DESC, "Receive Error Count")
+	field(INP,  "@OBJ=$(evr), PROP=Receive Error Count")
+	field(SCAN, "1 second")
+}
+
+record(longin, "$(device):FIFOERR")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(DESC, "FIFO Hw Overflow Count")
+	field(INP,  "@OBJ=$(evr), PROP=FIFO Overflow Count")
+	field(SCAN, "1 second")
+}
+
+record(longin, "$(device):FIFOERR:RATE")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(DESC, "FIFO Sw Overrate Count")
+	field(INP , "@OBJ=$(evr), PROP=FIFO Over rate")
+	field(TSEL, "$(device):RXERR.TIME")
+	field(SCAN, "1 second")
+}
+
+record(bo, "$(device):ENABLE:S")
+{
+	field(DTYP, "Obj Prop bool")
+	field(OUT,  "@OBJ=$(evr), PROP=Enable")
+	field(DESC, "Master enable for EVR device")
+	field(MASK, "1")
+	field(ZNAM, "Disabled")
+	field(ONAM, "Enabled")
+}
+
+record(bi, "$(device):ENABLE")
+{
+	field(DTYP, "Obj Prop bool")
+	field(INP,  "@OBJ=$(evr), PROP=Enable")
+	field(DESC, "Master enable for EVR device")
+	field(MASK, "1")
+	field(ZNAM, "Disabled")
+	field(ONAM, "Enabled")
+	field(SCAN, "1 second")
+}
+
+# Detect the first time the event link is online. Then set master enable.
+
+record(calcout, "$(device):LINKENABLE")
+{
+	field(DESC, "Detect initial link up")
+	field(INPA, "$(device):LINKSTAT")
+	field(CALC, "A")
+	field(OUT,  "$(device):ENABLE:S PP")
+	field(OOPT, "Transition To Non-zero")
+	field(ODLY, "1.0")
+	field(SCAN, "1 second")
+}
+
+record(bi, "$(device):PLLSTAT")
+{
+	field(DTYP, "Obj Prop bool")
+	field(INP,  "@OBJ=$(evr), PROP=PLL Lock Status")
+	field(SCAN, "1 second")
+	field(PINI, "YES")
+	field(DESC, "Status of PLL")
+	field(ZNAM, "Error")
+	field(ONAM, "OK")
+	field(ZSV,  "MAJOR")
+}
+
+record(ao, "$(device):EVENT:CLOCK:S")
+{
+	field(DTYP, "Obj Prop double")
+	field(OUT,  "@OBJ=$(evr), PROP=Clock")
+	field(PINI, "YES")
+	field(DESC, "Event Link speed")
+	field(VAL,  "124.9135")
+	field(EGU,  "MHz")
+	field(LINR, "LINEAR")
+	field(ESLO, "1e-6")
+	field(HOPR, "150")
+	field(LOPR, "50")
+	field(DRVH, "150")
+	field(DRVL, "50")
+	field(PREC, "3")
+	
+	field(FLNK, "$(device):EVENT:CLOCK")
+}
+
+record(ai, "$(device):EVENT:CLOCK")
+{
+	field(DTYP, "Obj Prop double")
+	field(INP,  "@OBJ=$(evr), PROP=Clock")
+	field(DESC, "Event Link speed")
+	field(EGU,  "MHz")
+	field(ESLO, "1e-6")
+	field(HOPR, "150")
+	field(LOPR, "50")
+	field(PREC, "3")
+	field(LINR, "LINEAR")
+}
+
+record(stringin, "$(device):MODELS")
+{
+	field(DTYP, "Obj Prop string")
+	field(INP,  "@OBJ=$(evr), PROP=Model")
+	field(PINI, "YES")
+	field(DESC, "Hardware type code")
+}
+
+record(stringin, "$(device):FIRMWARE")
+{
+	field(DTYP, "Obj Prop string")
+	field(INP,  "@OBJ=$(evr), PROP=Version")
+	field(PINI, "YES")
+	field(DESC, "Firmware version")
+}
+
+record(stringin, "$(device):SOFTWARE")
+{
+	field(DTYP, "Obj Prop string")
+	field(INP,  "@OBJ=$(evr), PROP=Sw Version")
+	field(PINI, "YES")
+	field(DESC, "Software version")
+}
+
+record(bi, "$(device):TIMEVALID")
+{
+	field(DTYP, "Obj Prop bool")
+	field(INP,  "@OBJ=$(evr), PROP=Timestamp Valid")
+	field(PINI, "YES")
+	field(SCAN, "I/O Intr")
+	field(ZSV,  "MAJOR")
+	field(ZNAM, "Invalid")
+	field(ONAM, "Valid")
+}
+
+record(stringin, "$(device):TIME")
+{
+	field(DTYP, "EVR Timestamp")
+	field(INP,  "@OBJ=$(evr), Code=125")
+	field(SCAN, "Event")
+	field(EVNT, "125")
+	field(TSE,  "-2")
+}
+
+record(mbbo, "$(device):TIME:SRCSEL:S")
+{
+	field(DTYP, "Raw Soft Channel")
+	field(OUT,  "$(device):TIME:SRCSEL PP")
+	field(PINI, "YES")
+	field(ZRST, "Event clock")
+	field(ONST, "Mapped code(s)")
+	field(TWST, "DBus 4")
+	field(ZRVL, "0")
+	field(ONVL, "1")
+	field(TWVL, "2")
+	field(THSV, "INVALID")
+	field(FRSV, "INVALID")
+	field(FVSV, "INVALID")
+	field(SXSV, "INVALID")
+	field(SVSV, "INVALID")
+	field(EISV, "INVALID")
+	field(NISV, "INVALID")
+	field(TESV, "INVALID")
+	field(ELSV, "INVALID")
+	field(TVSV, "INVALID")
+	field(TTSV, "INVALID")
+	field(FTSV, "INVALID")
+	field(FFSV, "INVALID")
+	field(UNSV, "INVALID")
+	field(IVOA, "Don't drive outputs")
+	
+	field(VAL,  "2")
+}
+
+record(longout, "$(device):TIME:SRCSEL")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(OUT,  "@OBJ=$(evr), PROP=Timestamp Source")
+}
+
+record(ao, "$(device):TIME:CLOCK:S")
+{
+	field(DTYP, "Obj Prop double")
+	field(OUT,  "@OBJ=$(evr), PROP=Timestamp Clock")
+	field(DESC, "Timestamp tick rate")
+	field(PINI, "YES")
+	field(VAL,  "1.0")
+	field(EGU,  "MHz")
+	field(LINR, "LINEAR")
+	field(ESLO, "1e-6")
+	field(HOPR, "150")
+	field(LOPR, "0")
+	field(DRVH, "150")
+	field(DRVL, "0")
+	field(PREC, "3")
+}
+
+record(ai, "$(device):TIME:CLOCK")
+{
+	field(DTYP, "Obj Prop double")
+	field(INP,  "@OBJ=$(evr), PROP=Timestamp Clock")
+	field(SCAN, "1 second")
+	field(DESC, "Timestamp tick rate")
+	field(PINI, "YES")
+	field(UDF,  "0")
+	field(EGU,  "MHz")
+	field(LINR, "LINEAR")
+	field(ESLO, "1e-6")
+	field(HOPR, "150")
+	field(LOPR, "0")
+	field(PREC, "3")
+	field(FLNK, "$(device):TIME:DIV")
+}
+
+record(longin, "$(device):TIME:DIV")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(INP,  "@OBJ=$(evr), PROP=Timestamp Prescaler")
+	field(DESC, "Timestamp divider")
+}
+
+record(bo, "$(device):LINK:RXMODE:S")
+{
+	field(DESC, "Downstream data mode")
+	field(DTYP, "Obj Prop bool")
+	field(OUT,  "@OBJ=$(evr):BUFRX, PROP=Enable")
+	field(PINI, "YES")
+	field(VAL,  "0")
+	field(ZNAM, "DBus only")
+	field(ONAM, "DBus+Buffer")
+}
+
+# inputs ###################################################
+
+record(longout, "$(device):INPUT0:EVENT:S")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(OUT,  "@OBJ=$(evr):FPIn0, PROP=External Code")
+	field(PINI, "YES")
+	field(VAL,  "118")
+}
+
+record(bo, "$(device):INPUT0:EDGE:S")
+{
+	field(DTYP, "Obj Prop bool")
+	field(OUT,  "@OBJ=$(evr):FPIn0, PROP=Active Edge")
+	field(PINI, "YES")
+	
+	field(ZNAM, "Active Low")
+	field(ONAM, "Active High")
+	
+	field(VAL,  "1")
+}
+
+record(mbbo, "$(device):INPUT0:MODE:S")
+{
+	field(DTYP, "Obj Prop uint16")
+	field(OUT,  "@OBJ=$(evr):FPIn0, PROP=External Mode")
+	field(PINI, "YES")
+	
+	field(ZRST, "Off")
+	field(ONST, "Level")
+	field(TWST, "Edge")
+	field(ZRVL, 0)
+	field(ONVL, 1)
+	field(TWVL, 2)
+
+	field(THSV, "INVALID")
+	field(FRSV, "INVALID")
+	field(FVSV, "INVALID")
+	field(SXSV, "INVALID")
+	field(SVSV, "INVALID")
+	field(EISV, "INVALID")
+	field(NISV, "INVALID")
+	field(TESV, "INVALID")
+	field(ELSV, "INVALID")
+	field(TVSV, "INVALID")
+	field(TTSV, "INVALID")
+	field(FTSV, "INVALID")
+	field(FFSV, "INVALID")
+	field(UNSV, "INVALID")
+	field(IVOA, "Don't drive outputs")
+
+	field(VAL,  "2")
+}
+
+record(longout, "$(device):INPUT1:EVENT:S")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(OUT,  "@OBJ=$(evr):FPIn1, PROP=External Code")
+	field(PINI, "YES")
+	field(VAL,  "118")
+}
+
+record(bo, "$(device):INPUT1:EDGE:S")
+{
+	field(DTYP, "Obj Prop bool")
+	field(OUT,  "@OBJ=$(evr):FPIn1, PROP=Active Edge")
+	field(PINI, "YES")
+	
+	field(ZNAM, "Active Low")
+	field(ONAM, "Active High")
+	
+	field(VAL,  "1")
+}
+
+record(mbbo, "$(device):INPUT1:MODE:S")
+{
+	field(DTYP, "Obj Prop uint16")
+	field(OUT,  "@OBJ=$(evr):FPIn1, PROP=External Mode")
+	field(PINI, "YES")
+	
+	field(ZRST, "Off")
+	field(ONST, "Level")
+	field(TWST, "Edge")
+	field(ZRVL, 0)
+	field(ONVL, 1)
+	field(TWVL, 2)
+
+	field(THSV, "INVALID")
+	field(FRSV, "INVALID")
+	field(FVSV, "INVALID")
+	field(SXSV, "INVALID")
+	field(SVSV, "INVALID")
+	field(EISV, "INVALID")
+	field(NISV, "INVALID")
+	field(TESV, "INVALID")
+	field(ELSV, "INVALID")
+	field(TVSV, "INVALID")
+	field(TTSV, "INVALID")
+	field(FTSV, "INVALID")
+	field(FFSV, "INVALID")
+	field(UNSV, "INVALID")
+	field(IVOA, "Don't drive outputs")
+
+	field(VAL,  "2")
+}
+
+# configure physical outputs - 61 = tri-state ##############
+
+record(longout, "$(device):FPUNIV0:S")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(DESC, "UNIV0")
+	field(OUT,  "@OBJ=$(evr):FrontUnivOut0, PROP=Map")
+	field(PINI, "YES")
+	field(VAL,  "61")
+	
+	field(FLNK, "$(device):FPUNIV0")
+}
+
+record(longin, "$(device):FPUNIV0")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(DESC, "UNIV0")
+	field(INP,  "@OBJ=$(evr):FrontUnivOut0, PROP=Map")
+}
+
+record(longout, "$(device):FPUNIV1:S")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(DESC, "UNIV1")
+	field(OUT,  "@OBJ=$(evr):FrontUnivOut1, PROP=Map")
+	field(PINI, "YES")
+	field(VAL,  "61")
+	
+	field(FLNK, "$(device):FPUNIV1")
+}
+
+record(longin, "$(device):FPUNIV1")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(DESC, "UNIV1")
+	field(INP,  "@OBJ=$(evr):FrontUnivOut1, PROP=Map")
+}
+
+# configure outputs UNIV2 as Pulse0 & UNIV3 as Pulse 1 ####
+
+record(longout, "$(device):FPUNIV2:S")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(DESC, "UNIV2")
+	field(OUT,  "@OBJ=$(evr):FrontUnivOut2, PROP=Map")
+	field(PINI, "YES")
+	field(VAL,  "0")
+	
+	field(FLNK, "$(device):FPUNIV2")
+}
+
+record(longin, "$(device):FPUNIV2")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(DESC, "UNIV2")
+	field(INP,  "@OBJ=$(evr):FrontUnivOut2, PROP=Map")
+}
+
+record(longout, "$(device):FPUNIV3:S")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(DESC, "UNIV3")
+	field(OUT,  "@OBJ=$(evr):FrontUnivOut3, PROP=Map")
+	field(PINI, "YES")
+	field(VAL,  "1")
+	
+	field(FLNK, "$(device):FPUNIV3")
+}
+
+record(longin, "$(device):FPUNIV3")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(DESC, "UNIV3")
+	field(INP,  "@OBJ=$(evr):FrontUnivOut3, PROP=Map")
+}
+
+# programmable pulse generators ############################
+
+record(bo, "$(device):PUL0:ENABLE:S")
+{
+	field(DTYP, "Obj Prop bool")
+	field(OUT,  "@OBJ=$(evr):Pul0, PROP=Enable")
+	field(PINI, "YES")
+	field(VAL,  "1")
+	field(MASK, "1")
+	field(ZNAM, "Disabled")
+	field(ONAM, "Enabled")
+	
+	field(FLNK, "$(device):PUL0:ENABLE")
+}
+
+record(bi, "$(device):PUL0:ENABLE")
+{
+	field(DTYP, "Obj Prop bool")
+	field(INP,  "@OBJ=$(evr):Pul0, PROP=Enable")
+	field(MASK, "1")
+	field(ZNAM, "Disabled")
+	field(ONAM, "Enabled")
+}
+
+record(bo, "$(device):PUL0:POLARITY:S")
+{
+	field(DTYP, "Obj Prop bool")
+	field(OUT,  "@OBJ=$(evr):Pul0, PROP=Polarity")
+	field(PINI, "YES")
+	field(VAL,  "0")
+	field(MASK, "1")
+	field(ZNAM, "Active High")
+	field(ONAM, "Active Low")
+	
+	field(FLNK, "$(device):PUL0:POLARITY")
+}
+
+record(bi, "$(device):PUL0:POLARITY")
+{
+	field(DTYP, "Obj Prop bool")
+	field(INP,  "@OBJ=$(evr):Pul0, PROP=Polarity")
+	field(MASK, "1")
+	field(ZNAM, "Active High")
+	field(ONAM, "Active Low")
+}
+
+record(ao, "$(device):PUL0:DELAY:S")
+{
+	field(DTYP, "Obj Prop double")
+	field(OUT,  "@OBJ=$(evr):Pul0, PROP=Delay")
+	field(PINI, "YES")
+	field(DESC, "Pulse Generator 0")
+	field(VAL,  "0")
+	field(EGU,  "us")
+	field(LINR, "LINEAR")
+	field(ESLO, "1e6")
+	field(PREC, "3")
+	
+	field(FLNK, "$(device):PUL0:DELAY")
+}
+
+record(ai, "$(device):PUL0:DELAY")
+{
+	field(DTYP, "Obj Prop double")
+	field(INP,  "@OBJ=$(evr):Pul0, PROP=Delay")
+	field(EGU,  "us")
+	field(LINR, "LINEAR")
+	field(ESLO, "1e6")
+	field(PREC, "3")
+	
+	field(FLNK, "$(device):PUL0:RDELAY")
+}
+
+record(longin, "$(device):PUL0:RDELAY")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(INP,  "@OBJ=$(evr):Pul0, PROP=Delay")
+
+	field(FLNK, "$(device):PUL0:PRES")
+}
+
+record(ao, "$(device):PUL0:WIDTH:S")
+{
+	field(DTYP, "Obj Prop double")
+	field(OUT,  "@OBJ=$(evr):Pul0, PROP=Width")
+	field(PINI, "YES")
+	field(DESC, "Pulse Generator 0")
+	field(VAL,  "0")
+	field(EGU,  "us")
+	field(LINR, "LINEAR")
+	field(ESLO, "1e6")
+	field(PREC, "3")
+	
+	field(FLNK, "$(device):PUL0:WIDTH")
+}
+
+record(ai, "$(device):PUL0:WIDTH")
+{
+	field(DTYP, "Obj Prop double")
+	field(INP,  "@OBJ=$(evr):Pul0, PROP=Width")
+	field(EGU,  "us")
+	field(LINR, "LINEAR")
+	field(ESLO, "1e6")
+	field(PREC, "3")
+	
+	field(FLNK, "$(device):PUL0:RWIDTH")
+}
+
+record(longin, "$(device):PUL0:RWIDTH")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(INP,  "@OBJ=$(evr):Pul0, PROP=Width")
+
+	field(FLNK, "$(device):PUL0:PRES")
+}
+
+record(longout, "$(device):PUL0:PRES:S")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(OUT,  "@OBJ=$(evr):Pul0, PROP=Prescaler")
+	field(DESC, "Pulser prescaler")
+	field(PINI, "YES")
+	field(DRVH, "0xffff")
+	field(DRVL, "1")
+	field(VAL,  "1")
+	
+	field(FLNK, "$(device):PUL0:PRES:FAN")
+}
+
+record(longin, "$(device):PUL0:PRES")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(INP,  "@OBJ=$(evr):Pul0, PROP=Prescaler")
+	field(HIGH, "0xff")
+	field(HSV,  "MAJOR")
+}
+
+record(fanout, "$(device):PUL0:PRES:FAN")
+{
+	field(LNK1, "$(device):PUL0:PRES")
+	field(LNK2, "$(device):PUL0:WIDTH:S")
+	field(LNK3, "$(device):PUL0:DELAY:S")
+}
+#----------------------------------------------------------
+
+record(bo, "$(device):PUL1:ENABLE:S")
+{
+	field(DTYP, "Obj Prop bool")
+	field(OUT,  "@OBJ=$(evr):Pul1, PROP=Enable")
+	field(PINI, "YES")
+	field(VAL,  "1")
+	field(MASK, "1")
+	field(ZNAM, "Disabled")
+	field(ONAM, "Enabled")
+	
+	field(FLNK, "$(device):PUL1:ENABLE")
+}
+
+record(bi, "$(device):PUL1:ENABLE")
+{
+	field(DTYP, "Obj Prop bool")
+	field(INP,  "@OBJ=$(evr):Pul1, PROP=Enable")
+	field(MASK, "1")
+	field(ZNAM, "Disabled")
+	field(ONAM, "Enabled")
+}
+
+record(bo, "$(device):PUL1:POLARITY:S")
+{
+	field(DTYP, "Obj Prop bool")
+	field(OUT,  "@OBJ=$(evr):Pul1, PROP=Polarity")
+	field(PINI, "YES")
+	field(VAL,  "0")
+	field(MASK, "1")
+	field(ZNAM, "Active High")
+	field(ONAM, "Active Low")
+	
+	field(FLNK, "$(device):PUL1:POLARITY")
+}
+
+record(bi, "$(device):PUL1:POLARITY")
+{
+	field(DTYP, "Obj Prop bool")
+	field(INP,  "@OBJ=$(evr):Pul1, PROP=Polarity")
+	field(MASK, "1")
+	field(ZNAM, "Active High")
+	field(ONAM, "Active Low")
+}
+
+record(ao, "$(device):PUL1:DELAY:S")
+{
+	field(DTYP, "Obj Prop double")
+	field(OUT,  "@OBJ=$(evr):Pul1, PROP=Delay")
+	field(PINI, "YES")
+	field(DESC, "Pulse Generator 0")
+	field(VAL,  "0")
+	field(EGU,  "us")
+	field(LINR, "LINEAR")
+	field(ESLO, "1e6")
+	field(PREC, "3")
+	
+	field(FLNK, "$(device):PUL1:DELAY")
+}
+
+record(ai, "$(device):PUL1:DELAY")
+{
+	field(DTYP, "Obj Prop double")
+	field(INP,  "@OBJ=$(evr):Pul1, PROP=Delay")
+	field(EGU,  "us")
+	field(LINR, "LINEAR")
+	field(ESLO, "1e6")
+	field(PREC, "3")
+	
+	field(FLNK, "$(device):PUL1:RDELAY")
+}
+
+record(longin, "$(device):PUL1:RDELAY")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(INP,  "@OBJ=$(evr):Pul1, PROP=Delay")
+	
+	field(FLNK, "$(device):PUL1:PRES")
+}
+
+record(ao, "$(device):PUL1:WIDTH:S")
+{
+	field(DTYP, "Obj Prop double")
+	field(OUT,  "@OBJ=$(evr):Pul1, PROP=Width")
+	field(PINI, "YES")
+	field(DESC, "Pulse Generator 0")
+	field(VAL,  "0")
+	field(EGU,  "us")
+	field(LINR, "LINEAR")
+	field(ESLO, "1e6")
+	field(PREC, "3")
+	
+	field(FLNK, "$(device):PUL1:WIDTH")
+}
+
+record(ai, "$(device):PUL1:WIDTH")
+{
+	field(DTYP, "Obj Prop double")
+	field(INP,  "@OBJ=$(evr):Pul1, PROP=Width")
+	field(EGU,  "us")
+	field(LINR, "LINEAR")
+	field(ESLO, "1e6")
+	field(PREC, "3")
+	
+	field(FLNK, "$(device):PUL1:RWIDTH")
+}
+
+record(longin, "$(device):PUL1:RWIDTH")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(INP,  "@OBJ=$(evr):Pul1, PROP=Width")
+	
+	field(FLNK, "$(device):PUL1:PRES")
+}
+
+record(longout, "$(device):PUL1:PRES:S")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(OUT,  "@OBJ=$(evr):Pul1, PROP=Prescaler")
+	field(DESC, "Pulser prescaler")
+	field(PINI, "YES")
+	field(DRVH, "0xffff")
+	field(DRVL, "1")
+	field(VAL,  "1")
+	
+	field(FLNK, "$(device):PUL1:PRES:FAN")
+}
+
+record(longin, "$(device):PUL1:PRES")
+{
+	field(DTYP, "Obj Prop uint32")
+	field(INP,  "@OBJ=$(evr):Pul1, PROP=Prescaler")
+	field(HIGH, "0xff")
+	field(HSV,  "MAJOR")
+}
+
+record(fanout, "$(device):PUL1:PRES:FAN")
+{
+	field(LNK1, "$(device):PUL1:PRES")
+	field(LNK2, "$(device):PUL1:WIDTH:S")
+	field(LNK3, "$(device):PUL1:DELAY:S")
+}
+
+# enable decoding of the 1Hz event #########################
+
+record(longout, "$(device):EVENT:125")
+{
+	field(DTYP, "EVR Event")
+	field(SCAN, "I/O Intr")
+	field(OUT,  "@OBJ=$(evr),Code=0x7d")
+	field(TSE,  "-2")
+	field(MDEL, "-1")
+	
+	field(VAL,  "125")
+}
+
+# enable blinking the LED
+
+record(longout, "$(device):BLINK:125")
+{
+	field(DTYP, "EVR Mapping")
+	field(OUT,  "@OBJ=$(evr), Func=Blink")
+	field(PINI, "YES")
+	
+	field(VAL,  "125")
+}
+
+# make the LINAC-HBT event reset the heart beat counter
+
+record(longout, "$(device):HEARTBEAT:37")
+{
+	field(DTYP, "EVR Mapping")
+	field(OUT,  "@OBJ=$(evr), Func=Heartbeat")
+	field(PINI, "YES")
+	
+	field(VAL,  "37")
+}
+
+### SFP ####################################################
+
+record(bo, "$(device):SFP:UPDATE")
+{
+	field(DTYP, "Obj Prop bool")
+	field(SCAN, "10 second")
+	field(OUT , "@OBJ=$(evr):SFP, PROP=Update")
+	field(ZNAM, "Update")
+	field(ONAM, "Update")
+	field(FLNK, "$(device):SFP:TEMP")
+}
+
+record(ai, "$(device):SFP:TEMP")
+{
+	field(DTYP, "Obj Prop double")
+	field(INP , "@OBJ=$(evr):SFP, PROP=Temperature")
+	field(DESC, "Tranceiver Temperature")
+	field(ADEL, "0.5")
+	field(HIGH, "40")
+	field(HSV , "MINOR")
+	field(HIHI, "50")
+	field(HHSV, "MAJOR")
+	field(LOW , "0")
+	field(LSV , "INVALID")
+	field(EGU , "C")
+	field(PREC, "1")
+	field(FLNK, "$(device):SFP:TXPOW")
+}
+
+record(ai, "$(device):SFP:TXPOW")
+{
+	field(DTYP, "Obj Prop double")
+	field(INP , "@OBJ=$(evr):SFP, PROP=Power TX")
+	field(DESC, "Tranceiver Output Power")
+	field(ADEL, "5")
+	field(HIGH, "400")
+	field(HSV , "MINOR")
+	field(LOW , "200")
+	field(LSV , "MAJOR")
+	field(LOLO, "-0.1") # SFP module removed
+	field(LLSV, "INVALID")
+	field(EGU , "uW")
+	field(LINR, "LINEAR")
+	field(ESLO, "1e6")
+	field(PREC, "1")
+	field(FLNK, "$(device):SFP:RXPOW")
+}
+
+record(ai, "$(device):SFP:RXPOW")
+{
+	field(DTYP, "Obj Prop double")
+	field(INP , "@OBJ=$(evr):SFP, PROP=Power RX")
+	field(DESC, "Tranceiver Input Power")
+	field(ADEL, "5")
+	field(HIGH, "400")
+	field(HSV , "MINOR")
+	field(LOW , "100")
+	field(LSV , "MAJOR")
+	field(LOLO, "-0.1") # SFP module removed
+	field(LLSV, "INVALID")
+	field(EGU , "uW")
+	field(LINR, "LINEAR")
+	field(ESLO, "1e6")
+	field(PREC, "1")
+	field(FLNK, "$(device):SFP:SPEED")
+}
+
+record(ai, "$(device):SFP:SPEED")
+{
+	field(DTYP, "Obj Prop double")
+	field(INP , "@OBJ=$(evr):SFP, PROP=Link Speed")
+	field(DESC, "Tranceiver Line Rate")
+	field(HIGH, "5000")
+	field(HSV , "MAJOR")
+	field(LOW , "3000")
+	field(LSV , "MAJOR")
+	field(LOLO, "-0.1")
+	field(LLSV, "INVALID")
+	field(EGU , "Mb/s")
+	field(PREC, "0")
+	field(FLNK, "$(device):SFP:VENDOR")
+}
+
+record(stringin, "$(device):SFP:VENDOR")
+{
+	field(DTYP, "Obj Prop string")
+	field(DESC, "Vendor name")
+	field(INP , "@OBJ=$(evr):SFP, PROP=Vendor")
+	field(FLNK, "$(device):SFP:PART")
+}
+
+record(stringin, "$(device):SFP:PART")
+{
+	field(DTYP, "Obj Prop string")
+	field(DESC, "Vendor part number")
+	field(INP , "@OBJ=$(evr):SFP, PROP=Part")
+	field(FLNK, "$(device):SFP:REV")
+}
+
+record(stringin, "$(device):SFP:REV")
+{
+	field(DTYP, "Obj Prop string")
+	field(DESC, "Vendor part revision")
+	field(INP , "@OBJ=$(evr):SFP, PROP=Rev")
+	field(FLNK, "$(device):SFP:SERIAL")
+}
+
+record(stringin, "$(device):SFP:SERIAL")
+{
+	field(DTYP, "Obj Prop string")
+	field(DESC, "SFP serial number")
+	field(INP , "@OBJ=$(evr):SFP, PROP=Serial")
+	field(FLNK, "$(device):SFP:DATE")
+}
+
+record(stringin, "$(device):SFP:DATE")
+{
+	field(DTYP, "Obj Prop string")
+	field(DESC, "Manufactored date")
+	field(INP , "@OBJ=$(evr):SFP, PROP=Date")
+}
