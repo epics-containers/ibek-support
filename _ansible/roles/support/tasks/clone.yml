@@ -1,6 +1,37 @@
 - name: Clone block
   tags: [clone]
   block:
+    # force_clone (-e force_clone=true) clones again at the version in
+    # install.yml. Without it an existing folder is kept as it is, so a
+    # version change in install.yml does not reach the source that gets built.
+    - name: Force clone of {{ module }}
+      when: force_clone | bool
+      block:
+        # Trailing slashes are stripped here and in the removal below: with
+        # one, a symlink is resolved to the folder it points at, so it would
+        # not be seen as a link and its target would be emptied.
+        - name: Check what is at {{ local_path }}
+          ansible.builtin.stat:
+            path: "{{ local_path | regex_replace('/+$', '') }}"
+            follow: false
+          register: support_clone_target
+
+        # A link here points at a clone that someone is working in. Cloning
+        # over it would discard their work or leave the link pointing at
+        # nothing, so stop before anything is removed.
+        - name: Refuse to force clone over a symlink for {{ module }}
+          ansible.builtin.fail:
+            msg: >-
+              {{ local_path }} is a symlink, so force_clone will not remove
+              it. Run without force_clone to build the folder it points to,
+              or remove the link yourself to clone {{ module }} again.
+          when: support_clone_target.stat.exists and support_clone_target.stat.islnk
+
+        - name: Remove {{ local_path }}
+          ansible.builtin.file:
+            path: "{{ local_path | regex_replace('/+$', '') }}"
+            state: absent
+
     - name: Check if the repo has already been cloned
       ansible.builtin.stat:
         path: "{{ local_path }}"
