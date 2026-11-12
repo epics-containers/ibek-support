@@ -1,7 +1,8 @@
 # Diamond EVR template for the PCIe MRM-EVR-300 and IFB-300, from the Diamond
 # mrfioc2 2-2-0dls6 (evrMrmApp/Db/defaultPCIe.template). The two CDR:ENABLE
 # records are left out: they used the "CDR Enable" property that only the
-# Diamond fork's driver has.
+# Diamond fork's driver has. The PUL1 setpoints' DESC reads "Pulse Generator 1"
+# where the Diamond file says "Pulse Generator 0".
 #
 # default template for the PCIe MRM-EVR-300 and IFB-300
 
@@ -639,7 +640,7 @@ record(ao, "$(device):PUL1:DELAY:S")
 	field(DTYP, "Obj Prop double")
 	field(OUT,  "@OBJ=$(evr):Pul1, PROP=Delay")
 	field(PINI, "YES")
-	field(DESC, "Pulse Generator 0")
+	field(DESC, "Pulse Generator 1")
 	field(VAL,  "0")
 	field(EGU,  "us")
 	field(LINR, "LINEAR")
@@ -674,7 +675,7 @@ record(ao, "$(device):PUL1:WIDTH:S")
 	field(DTYP, "Obj Prop double")
 	field(OUT,  "@OBJ=$(evr):Pul1, PROP=Width")
 	field(PINI, "YES")
-	field(DESC, "Pulse Generator 0")
+	field(DESC, "Pulse Generator 1")
 	field(VAL,  "0")
 	field(EGU,  "us")
 	field(LINR, "LINEAR")
