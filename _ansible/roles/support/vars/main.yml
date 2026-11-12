@@ -36,10 +36,10 @@ extra_release_macros: {}
 # compilation options.
 #
 # The default is the number of CPUs this process may run on
-# (ansible_processor_nproc), which follows a cpuset but not a CPU quota: a
-# build in a pod limited to one core of a 96 core node still sees 96 and runs
-# make -j96, spending its time context switching. Under cgroup v2 with a
-# private cgroup namespace the quota is visible in /sys/fs/cgroup/cpu.max, but
+# (ansible_facts['processor_nproc']), which follows a cpuset but not a CPU
+# quota: a build in a pod limited to one core of a 96 core node still sees 96
+# and runs make -j96, spending its time context switching. Under cgroup v2 with
+# a private cgroup namespace the quota is visible in /sys/fs/cgroup/cpu.max, but
 # not reliably across buildah, kaniko and docker builds, so whoever launches
 # the build says how parallel it may be with EPICS_BUILD_JOBS. Unset or empty,
 # the CPU count is the answer, which is right for a VM or a developer machine.
@@ -47,7 +47,7 @@ extra_release_macros: {}
 # reach make. An install.yml naming its own make_options wins over both.
 make_options: >-
   -j{{ [lookup('ansible.builtin.env', 'EPICS_BUILD_JOBS')
-  | default(ansible_processor_nproc, true) | int, 1] | max }}
+  | default(ansible_facts['processor_nproc'], true) | int, 1] | max }}
 
 # packages to install in developer target
 apt_developer: []
