@@ -1,0 +1,137 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.1.1/ibek.support.schema.json
+
+module: mca
+
+entity_models:
+  - name: simple_mca_template
+    description: |-
+      A single MCA record for use with asynMCA driver.
+      Loads simple_mca.db template.
+    parameters:
+      P:
+        type: str
+        description: Device Prefix
+      M:
+        type: str
+        description: Device Suffix
+      DTYP:
+        type: str
+        description: Device Type
+        default: asynMCA
+      CHANS:
+        type: int
+        description: Number of channels (bins)
+      INP:
+        type: str
+        description: Inlink, usually "@asyn(<portname> <chan>)"
+      PREC:
+        type: int
+        description: Precision
+        default: 3
+
+    databases:
+      - file: $(MCA)/db/simple_mca.db
+        args:
+          .*:
+
+    pvi:
+      yaml_path: simple_mca.pvi.device.yaml
+      ui_macros:
+        M:
+        P:
+      pv_prefix: "$(P)$(M)"
+
+  - name: sis3820
+    description: |-
+      Configure an SIS3820 scaler/MCS card. Creates the asyn port via
+      drvSIS3820Config, loads the SIS38XX control template, the scaler
+      module's scaler32 database, and N simple_mca records (one per signal).
+      Runs the SIS38XX SNL sequencer program after iocInit.
+      The SIS3820 is a VME card: its driver library (SIS38XX) is only built
+      for vxWorks and RTEMS, so this entity does not work in a Linux IOC.
+    parameters:
+      name:
+        type: id
+        description: Asyn port name for the SIS3820 card
+
+      P:
+        type: str
+        description: Device prefix
+
+      S:
+        type: str
+        description: Suffix for scaler card
+
+      M:
+        type: str
+        description: Suffix for SNL records
+
+      nchans:
+        type: int
+        description: Number of channels (bins for MCS mode)
+
+      nsignals:
+        type: int
+        description: Number of signals (normally 32)
+
+      baseAddress:
+        type: str
+        description: Base Address in hex
+        default: "0x05000000"
+
+      intLevel:
+        type: int
+        description: Interrupt level
+        default: 6
+
+      interrupt_vector:
+        type: object
+        description: Interrupt Vector reserved with epics.InterruptVectorVME
+
+    pre_init:
+      - when: first
+        value: |
+
+          # drvSIS3820Config(Port name, baseAddress, interruptVector, interruptLevel, channels, signals, use DMA?, fifoBufferWords)
+
+      - value: |
+          drvSIS3820Config("{{name}}", {{baseAddress}}, $({{interrupt_vector}}), {{intLevel}}, {{nchans}}, {{nsignals}}, 0, 0x200000)
+
+    databases:
+      - file: $(SCALER)/db/scaler32.db
+        args:
+          P:
+          S:
+          DTYP: Asyn Scaler
+          FREQ: "50000000"
+          OUT: "@asyn({{name}})"
+
+      - file: $(MCA)/db/SIS38XX.template
+        args:
+          P: "{{P}}{{M}}:"
+          PORT: "{{name}}"
+          SCALER: "{{P}}{{S}}"
+
+    sub_entities:
+      - type: ibek.repeat
+        variable: signum
+        values: "{{ range(nsignals) | list }}"
+        entity:
+          type: mca.simple_mca_template
+          P: "{{P}}"
+          M: "{{M}}:mca{{ signum + 1 }}"
+          DTYP: asynMCA
+          CHANS: "{{nchans}}"
+          PREC: 3
+          INP: "@asyn({{name}} {{ signum }})"
+
+    post_init:
+      - value: |
+          seq(&SIS38XX_SNL, "P={{P}}{{M}}:, R=mca, NUM_SIGNALS={{nsignals}}, FIELD=READ")
+
+    pvi:
+      yaml_path: SIS38XX.pvi.device.yaml
+      ui_macros:
+        P: "{{P}}{{M}}:"
+        SCALER: "{{P}}{{S}}"
+      pv_prefix: "$(P):"

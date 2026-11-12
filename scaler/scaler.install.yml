@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: scaler
+version: "4.1"
+# organization: https://github.com/epics-modules
+
+dbds:
+  - scalerSupport.dbd
+
+libs:
+  - scaler

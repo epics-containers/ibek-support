@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: devlib2
+version: "2.14"
+# organization: https://github.com/epics-modules
+
+dbds:
+  - epicspci.dbd
+  - epicsvme.dbd
+
+libs:
+  - epicspci
+  - epicsvme
+
+comment_out:
+  # exploreApp (a PCI/VME exploration tool) and testApp are not needed by IOCs.
+  - path: Makefile
+    regexp: 'filter-out \$\(DIRS\), (exploreApp|testApp)\)$'

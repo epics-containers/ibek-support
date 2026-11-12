@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.1.2/ibek.support.schema.json
+
+module: rgamv2
+
+entity_models:
+  - name: rgamv2
+    description: |-
+      MKS Microvision 2 Residual Gas Analyser.
+      Creates an asyn port via mv2init and loads the rgamv2.template database
+      for head status, bar chart scans, and analog monitoring.
+    parameters:
+      name:
+        type: id
+        description: Name of the asyn port to create for this RGA.
+      ipPort:
+        type: object
+        description: |-
+          IP port object for communication with the RGA.
+          Must be the name of a companion asyn.AsynIP entity.
+      device:
+        type: str
+        description: Device prefix, e.g. "BL01T-VA-RGA-01".
+    pre_init:
+      - value: |
+          mv2init("{{name}}", "{{ipPort}}")
+    databases:
+      - file: $(RGAMV2)/db/rgamv2.template
+        args:
+          device:
+          PORT: '{{name}}'
+          name:
+
+    pvi:
+      yaml_path: rgamv2.pvi.device.yaml
+      ui_macros:
+        device:
+      pv_prefix: "$(device):"

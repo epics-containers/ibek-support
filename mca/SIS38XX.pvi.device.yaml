@@ -1,0 +1,163 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+# Grouped from the DLS EDM screen sis3820.edl (mca 7-8dls4).
+# Generated from that screen. Hand edits may be overwritten by regeneration.
+
+label: SIS38XX
+children:
+- type: Group
+  name: Sis3820ScalerEmbed
+  label: sis3820-scaler-embed
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: General
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalRW
+      name: AutoCount
+      label: Count Mode
+      write_pv: $(SCALER).CONT
+      write_widget:
+        type: ToggleButton
+      read_pv: $(SCALER).CONT
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: AcquireMode
+      label: Acquire Mode
+      read_pv: $(P)AcquireMode
+      read_widget:
+        type: TextRead
+    - type: SignalW
+      name: MuxOutput
+      label: s MUX OUT channel
+      write_pv: $(P)MUXOutput
+      write_widget:
+        type: TextWrite
+    - type: SignalRW
+      name: Channel1Source
+      label: s Ch1 ref input
+      write_pv: $(P)Channel1Source
+      write_widget:
+        type: ToggleButton
+      read_pv: $(P)Channel1Source
+      read_widget:
+        type: LED
+- type: Group
+  name: Sis3820McaEmbed
+  label: sis3820-mca-embed
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: Setup
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: PresetReal
+      label: Count Time
+      write_pv: $(P)PresetReal
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Dwell
+      label: Dwell Time
+      write_pv: $(P)Dwell
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: Prescale
+      label: Ext. Prescale
+      write_pv: $(P)Prescale
+      write_widget:
+        type: TextWrite
+    - type: SignalRW
+      name: EnableClientWait
+      label: Wait 4 Client
+      write_pv: $(P)EnableClientWait
+      write_widget:
+        type: ToggleButton
+      read_pv: $(P)EnableClientWait
+      read_widget:
+        type: LED
+    - type: SignalW
+      name: ClientWait
+      label: Client Wait
+      write_pv: $(P)ClientWait
+      write_widget:
+        type: TextWrite
+    - type: SignalW
+      name: NuseAll
+      label: '# Channels'
+      write_pv: $(P)NuseAll
+      write_widget:
+        type: TextWrite
+    - type: SignalRW
+      name: ChannelAdvance
+      label: Chnl. Advnc.
+      write_pv: $(P)ChannelAdvance
+      write_widget:
+        type: ToggleButton
+      read_pv: $(P)ChannelAdvance
+      read_widget:
+        type: LED
+    - type: SignalW
+      name: ReadAllScan
+      label: Read Rate
+      write_pv: $(P)ReadAll.SCAN
+      write_widget:
+        type: ComboBox
+  - type: Group
+    name: ControlsStatus
+    label: Controls / Status
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: StartAll
+      write_pv: $(P)StartAll
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Start: '1'
+    - type: SignalW
+      name: StopAll
+      write_pv: $(P)StopAll
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Stop: '1'
+    - type: SignalW
+      name: EraseAll
+      write_pv: $(P)EraseAll
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Erase: '1'
+    - type: SignalW
+      name: EraseStart
+      write_pv: $(P)EraseStart
+      write_widget:
+        type: ButtonPanel
+        actions:
+          ErsStrt: '1'
+    - type: SignalR
+      name: ElapsedReal
+      label: Elapsed
+      read_pv: $(P)ElapsedReal
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Acquiring
+      label: Status
+      read_pv: $(P)Acquiring
+      read_widget:
+        type: TextRead

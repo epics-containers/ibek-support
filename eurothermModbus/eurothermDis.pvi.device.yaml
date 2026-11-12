@@ -1,0 +1,136 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+# Grouped from the DLS EDM screen eurotherm2k-loop.edl (eurothermModbus 3-2-15).
+# Generated from that screen. Hand edits may be overwritten by regeneration.
+
+label: eurothermDis
+children:
+- type: Group
+  name: General
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalRW
+    name: Sp
+    label: Setpoint
+    write_pv: $(device):$(loop_name):SP
+    write_widget:
+      type: TextWrite
+    read_pv: $(device):$(loop_name):SP:RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: Wsp
+    label: Working
+    read_pv: $(device):$(loop_name):WSP:RBV
+    read_widget:
+      type: TextRead
+  - type: Group
+    name: RowRr
+    label: Ramprate
+    layout:
+      type: Row
+    children:
+    - type: SignalRW
+      name: Rr
+      write_pv: $(device):$(loop_name):RR
+      write_widget:
+        type: TextWrite
+      read_pv: $(device):$(loop_name):RR:RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: RrUnit
+      read_pv: $(device):$(loop_name):RR:UNIT
+      read_widget:
+        type: LED
+  - type: SignalRW
+    name: O
+    label: Output
+    write_pv: $(device):$(loop_name):O
+    write_widget:
+      type: TextWrite
+    read_pv: $(device):$(loop_name):O:RBV
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: Man
+    label: Manual mode
+    write_pv: $(device):$(loop_name):MAN
+    write_widget:
+      type: ToggleButton
+    read_pv: $(device):$(loop_name):MAN:RBV
+    read_widget:
+      type: LED
+  - type: SignalR
+    name: Pv
+    label: Temp
+    read_pv: $(device):$(loop_name):PV:RBV
+    read_widget:
+      type: TextRead
+- type: Group
+  name: PID
+  label: P.I.D.
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalRW
+    name: P
+    label: Proportional
+    write_pv: $(device):$(loop_name):P
+    write_widget:
+      type: TextWrite
+    read_pv: $(device):$(loop_name):P:RBV
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: I
+    label: Integral
+    write_pv: $(device):$(loop_name):I
+    write_widget:
+      type: TextWrite
+    read_pv: $(device):$(loop_name):I:RBV
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: D
+    label: Differential
+    write_pv: $(device):$(loop_name):D
+    write_widget:
+      type: TextWrite
+    read_pv: $(device):$(loop_name):D:RBV
+    read_widget:
+      type: TextRead
+- type: Group
+  name: Eurotherm2kAutotune
+  label: eurotherm2k-autotune
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: AutotuneLoop1
+    label: Autotune Loop 1
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalR
+      name: Loop1Autotune
+      label: Control
+      read_pv: $(device):LOOP1:AUTOTUNE:RBV
+      read_widget:
+        type: LED
+    - type: SignalR
+      name: Loop1Outphi
+      label: High limit
+      read_pv: $(device):LOOP1:OUTPHI:RBV
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: Loop1Outplo
+      label: Low limit
+      read_pv: $(device):LOOP1:OUTPLO:RBV
+      read_widget:
+        type: TextRead
