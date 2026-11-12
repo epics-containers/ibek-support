@@ -966,11 +966,13 @@ entity_models:
         type: int
         description: |-
           ADC card number
+        default: 0
 
       s:
         type: int
         description: |-
           ADC signal number
+        default: 0
 
       name:
         type: id
