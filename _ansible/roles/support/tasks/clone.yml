@@ -7,12 +7,12 @@
     - name: Force clone of {{ module }}
       when: force_clone | bool
       block:
-        # stat does not follow links, so islnk describes local_path itself.
-        # The support_ prefix on the registered name is what ansible-lint
-        # asks of a variable set inside this role.
+        # Trailing slashes are stripped here and in the removal below: with
+        # one, a symlink is resolved to the folder it points at, so it would
+        # not be seen as a link and its target would be emptied.
         - name: Check what is at {{ local_path }}
           ansible.builtin.stat:
-            path: "{{ local_path }}"
+            path: "{{ local_path | regex_replace('/+$', '') }}"
             follow: false
           register: support_clone_target
 
@@ -29,11 +29,9 @@
 
         - name: Remove {{ local_path }}
           ansible.builtin.file:
-            path: "{{ local_path }}"
+            path: "{{ local_path | regex_replace('/+$', '') }}"
             state: absent
 
-    # This runs after any forced removal, so the clone and patch tasks below
-    # see a missing folder and run in full.
     - name: Check if the repo has already been cloned
       ansible.builtin.stat:
         path: "{{ local_path }}"
