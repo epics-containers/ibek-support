@@ -78,6 +78,7 @@ groups:
       - ADAndor
       - ADAndor3
       - xspress3
+      - slsDetector
 
   general:
     desc: "General-purpose modules with few dependencies"
