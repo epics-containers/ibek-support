@@ -46,6 +46,12 @@ entity_models:
           I/O Intr:
           Event:
           Passive:
+      CAMERASERIAL:
+        type: int
+        description: |-
+          Serial number of the camera to connect to. 0 selects the first
+          available camera, whatever its serial number.
+        default: 0
       SHAMROCKID:
         type: int
         description: |-
@@ -130,5 +136,5 @@ entity_models:
 
     pre_init:
       - value: |
-          # andorCCDConfig(portName, installPath, shamrockID, maxBuffers, maxMemory, priority, stackSize)
-          andorCCDConfig("{{PORT}}", "{{INSTALLPATH}}", {{SHAMROCKID}}, {{BUFFERS}}, {{MEMORY}}, {{PRIORITY}}, {{STACKSIZE}})
+          # andorCCDConfig(portName, installPath, cameraSerial, shamrockID, maxBuffers, maxMemory, priority, stackSize)
+          andorCCDConfig("{{PORT}}", "{{INSTALLPATH}}", {{CAMERASERIAL}}, {{SHAMROCKID}}, {{BUFFERS}}, {{MEMORY}}, {{PRIORITY}}, {{STACKSIZE}})
