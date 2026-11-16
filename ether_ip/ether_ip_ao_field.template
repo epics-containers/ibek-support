@@ -1,0 +1,8 @@
+#% macro, __doc__, Set one field of an ether_ip_ao.template record
+#% macro, record, Record Name of the ether_ip_ao.template record
+#% macro, field_name, Name of the field to set
+#% macro, value, Value of the field
+
+record(ao, "$(record)") {
+    field($(field_name), "$(value)")
+}
