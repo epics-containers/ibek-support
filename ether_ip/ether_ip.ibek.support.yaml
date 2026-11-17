@@ -101,6 +101,40 @@ entity_models:
           Scan Time
         default: 1 second
 
+      DRVH:
+        type: float
+        description: |-
+          Drive high limit. DRVH and DRVL both 0 means no limit
+        default: 0
+
+      DRVL:
+        type: float
+        description: |-
+          Drive low limit
+        default: 0
+
+      PREC:
+        type: int
+        description: |-
+          Display precision
+        default: 0
+
+      PRIO:
+        type: enum
+        description: |-
+          Scheduling priority
+        default: LOW
+        values:
+          LOW:
+          MEDIUM:
+          HIGH:
+
+      VAL:
+        type: str
+        description: |-
+          Initial value. Empty leaves VAL unset
+        default: ""
+
     databases:
       - file: ether_ip_ao.template
         args:
@@ -108,6 +142,43 @@ entity_models:
           port:
           scan:
           tag:
+
+      # each field is written only when it is set: the defaults are the ao
+      # record's own, and a VAL in the database clears UDF
+      - file: ether_ip_ao_field.template
+        enabled: "{{ DRVH != 0 }}"
+        args:
+          record:
+          field_name: DRVH
+          value: "{{ DRVH }}"
+
+      - file: ether_ip_ao_field.template
+        enabled: "{{ DRVL != 0 }}"
+        args:
+          record:
+          field_name: DRVL
+          value: "{{ DRVL }}"
+
+      - file: ether_ip_ao_field.template
+        enabled: "{{ PREC != 0 }}"
+        args:
+          record:
+          field_name: PREC
+          value: "{{ PREC }}"
+
+      - file: ether_ip_ao_field.template
+        enabled: "{{ PRIO != 'LOW' }}"
+        args:
+          record:
+          field_name: PRIO
+          value: "{{ PRIO }}"
+
+      - file: ether_ip_ao_field.template
+        enabled: "{{ VAL != '' }}"
+        args:
+          record:
+          field_name: VAL
+          value: "{{ VAL }}"
 
   - name: bi
     description: |-
