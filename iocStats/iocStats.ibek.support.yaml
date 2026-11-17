@@ -58,7 +58,10 @@ entity_models:
         args:
           IOC:
 
+      # iocAdminSoft.db holds the ScanMon records in iocStats 4.0.1, the Linux
+      # build. RTEMS builds iocStats at 4226b12, whose iocAdminSoft.db does not.
       - file: $(IOCSTATS)/db/iocAdminScanMon.db
+        enabled: "{{ 'RTEMS' in _global.get_env('EPICS_TARGET_ARCH') }}"
         args:
           IOC:
 
