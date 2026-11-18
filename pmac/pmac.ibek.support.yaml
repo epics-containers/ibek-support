@@ -187,6 +187,17 @@ entity_models:
           # Configure Model 3 Axes Driver (Controler Port, Axis Count)
           pmacCreateAxes("{{name}}", {{NAXES}})
 
+    # the per-axis status PVs: pmacStatusAxis.template for axes 1..NAXES
+    sub_entities:
+      - type: ibek.repeat
+        variable: axis
+        values: "{{ range(1, NAXES + 1) | list }}"
+        entity:
+          type: pmac._axisStatus
+          PMAC: "{{ P }}"
+          PORT: "{{ name }}"
+          AXIS: "{{ axis | int }}"
+
     databases:
       - file: pmacStatus.template
         args:
@@ -313,6 +324,17 @@ entity_models:
           pmacCreateController("{{name}}", "{{pmacAsynPort}}", 0, {{NAXES}}, {{MovingPoll}}, {{IdlePoll}})
           # Configure Model 3 Axes Driver (Controler Port, Axis Count)
           pmacCreateAxes("{{name}}", {{NAXES}})
+
+    # the per-axis status PVs: pmacStatusAxis.template for axes 1..NAXES
+    sub_entities:
+      - type: ibek.repeat
+        variable: axis
+        values: "{{ range(1, NAXES + 1) | list }}"
+        entity:
+          type: pmac._axisStatus
+          PMAC: "{{ P }}"
+          PORT: "{{ name }}"
+          AXIS: "{{ axis | int }}"
 
     databases:
       - file: pmacStatus.template
