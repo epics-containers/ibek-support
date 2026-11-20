@@ -165,6 +165,12 @@ entity_models:
           Max buffers to allocate
         default: 50
 
+      ENABLED:
+        type: int
+        description: |-
+          Plugin Enabled at startup?
+        default: 1
+
       HTTP_PORT:
         type: int
         description: |-
@@ -296,6 +302,7 @@ entity_models:
           P:
           R:
           NDARRAY_PORT:
+          ENABLED:
           MAXW:
           MAXH:
           QUALITY:
