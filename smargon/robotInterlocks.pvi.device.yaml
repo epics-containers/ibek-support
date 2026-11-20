@@ -1,0 +1,156 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+# Grouped from the DLS EDM screen RobotInterlocks.edl (smargon 2-24).
+# Generated from that screen. Hand edits may be overwritten by regeneration.
+
+label: robotInterlocks
+children:
+- type: Group
+  name: General
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: Group
+    name: RowRlX1HighThreshold
+    label: RlX1HighThreshold
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: RlX1HighThreshold
+      read_pv: $(P):RL_X1_HIGH_THRESHOLD
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: RlX2HighThreshold
+      read_pv: $(P):RL_X2_HIGH_THRESHOLD
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: RlYHighThreshold
+      read_pv: $(P):RL_Y_HIGH_THRESHOLD
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: RlZHighThreshold
+      read_pv: $(P):RL_Z_HIGH_THRESHOLD
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: RlOmegaHighThreshold
+      read_pv: $(P):RL_OMEGA_HIGH_THRESHOLD
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: RlPhiHighThreshold
+      read_pv: $(P):RL_PHI_HIGH_THRESHOLD
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowX1RawPos
+    label: X1RawPos
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: X1RawPos
+      read_pv: $(P):X1_RAW_POS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: X2RawPos
+      read_pv: $(P):X2_RAW_POS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: YRawPos
+      read_pv: $(P):Y_RAW_POS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ZRawPos
+      read_pv: $(P):Z_RAW_POS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: OmegaRawPos
+      read_pv: $(P):OMEGA_RAW_POS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: PhiRawPos
+      read_pv: $(P):PHI_RAW_POS
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowRlX1LowThreshold
+    label: RlX1LowThreshold
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: RlX1LowThreshold
+      read_pv: $(P):RL_X1_LOW_THRESHOLD
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: RlX2LowThreshold
+      read_pv: $(P):RL_X2_LOW_THRESHOLD
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: RlYLowThreshold
+      read_pv: $(P):RL_Y_LOW_THRESHOLD
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: RlZLowThreshold
+      read_pv: $(P):RL_Z_LOW_THRESHOLD
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: RlOmegaLowThreshold
+      read_pv: $(P):RL_OMEGA_LOW_THRESHOLD
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: RlPhiLowThreshold
+      read_pv: $(P):RL_PHI_LOW_THRESHOLD
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowX1Inpos
+    label: X1Inpos
+    layout:
+      type: Row
+    children:
+    - type: SignalR
+      name: X1Inpos
+      read_pv: $(P):X1:INPOS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: X2Inpos
+      read_pv: $(P):X2:INPOS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: YInpos
+      read_pv: $(P):Y:INPOS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: ZInpos
+      read_pv: $(P):Z:INPOS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: OmegaInpos
+      read_pv: $(P):OMEGA:INPOS
+      read_widget:
+        type: TextRead
+    - type: SignalR
+      name: PhiInpos
+      read_pv: $(P):PHI:INPOS
+      read_widget:
+        type: TextRead

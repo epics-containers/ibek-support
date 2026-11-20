@@ -48,6 +48,7 @@ groups:
       - motorSmarAct
       - pmac
       - optics
+      - smargon
 
   adcore:
     desc: "ADCore and the plugins most area detector IOCs use"
