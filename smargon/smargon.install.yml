@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../_scripts/support_install_variables.json
+
+module: smargon
+# 2-25 is the first release with the homing lookup as an aSub record, so it
+# builds without genSub.
+version: 2-25
+
+organization: https://github.com/DiamondLightSource
+
+dbds:
+  - smargon.dbd
+
+libs:
+  - smargon
+
+# etc and iocs only build example IOCs and docs with the Diamond builder, which
+# is not in the container. The top Makefile adds both through $(wildcard), so
+# removing them is enough.
+remove_files_prebuild:
+  - etc
+  - iocs

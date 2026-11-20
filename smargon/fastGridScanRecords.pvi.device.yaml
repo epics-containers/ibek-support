@@ -1,0 +1,177 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+# Grouped from the DLS EDM screen fast-grid-scans.edl (smargon 2-24).
+# Generated from that screen. Hand edits may be overwritten by regeneration.
+
+label: fastGridScanRecords
+children:
+- type: Group
+  name: General
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalRW
+    name: FgsXNumSteps
+    label: Number of X Steps
+    write_pv: $(P):FGS:X_NUM_STEPS
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):FGS:X_NUM_STEPS_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: FgsYNumSteps
+    label: Number of Y Steps
+    write_pv: $(P):FGS:Y_NUM_STEPS
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):FGS:Y_NUM_STEPS_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: FgsZNumSteps
+    label: Number of Z Steps
+    write_pv: $(P):FGS:Z_NUM_STEPS
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):FGS:Z_NUM_STEPS_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: FgsXStepSize
+    label: X Step Size (mm)
+    write_pv: $(P):FGS:X_STEP_SIZE
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):FGS:X_STEP_SIZE_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: FgsYStepSize
+    label: Y Step Size (mm)
+    write_pv: $(P):FGS:Y_STEP_SIZE
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):FGS:Y_STEP_SIZE_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: FgsZStepSize
+    label: Z Step Size (mm)
+    write_pv: $(P):FGS:Z_STEP_SIZE
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):FGS:Z_STEP_SIZE_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: FgsDwellTime
+    label: Dwell Time (ms)
+    write_pv: $(P):FGS:DWELL_TIME
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):FGS:DWELL_TIME_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: FgsXStart
+    label: X Start Position (mm)
+    write_pv: $(P):FGS:X_START
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):FGS:X_START_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: FgsYStart
+    label: Y1 Start Position (mm)
+    write_pv: $(P):FGS:Y_START
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):FGS:Y_START_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: FgsZStart
+    label: Z1 Start Position (mm)
+    write_pv: $(P):FGS:Z_START
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):FGS:Z_START_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: FgsY2Start
+    label: Y2 Start Position (mm)
+    write_pv: $(P):FGS:Y2_START
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):FGS:Y2_START_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalRW
+    name: FgsZ2Start
+    label: Z2 Start Position (mm)
+    write_pv: $(P):FGS:Z2_START
+    write_widget:
+      type: TextWrite
+    read_pv: $(P):FGS:Z2_START_RBV
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: FgsPosCounter
+    label: Position Counter
+    read_pv: $(P):FGS:POS_COUNTER
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: FgsXCounter
+    label: X Counter
+    read_pv: $(P):FGS:X_COUNTER
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: FgsYCounter
+    label: Y Counter
+    read_pv: $(P):FGS:Y_COUNTER
+    read_widget:
+      type: TextRead
+  - type: SignalR
+    name: FgsScanInvalid
+    label: Scan Valid
+    read_pv: $(P):FGS:SCAN_INVALID
+    read_widget:
+      type: TextRead
+  - type: SignalW
+    name: FgsStopProc
+    write_pv: $(P):FGS:STOP.PROC
+    write_widget:
+      type: ButtonPanel
+      actions:
+        Stop: '1'
+  - type: SignalR
+    name: FgsScanStatus
+    read_pv: $(P):FGS:SCAN_STATUS
+    read_widget:
+      type: TextRead
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: ProtectedGeneral
+    label: General
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: FgsRunProc
+      write_pv: $(P):FGS:RUN.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Run: '1'
