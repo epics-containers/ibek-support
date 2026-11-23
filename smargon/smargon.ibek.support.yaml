@@ -1,0 +1,230 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/ibek/releases/download/3.1.2/ibek.support.schema.json
+
+module: smargon
+
+entity_models:
+  - name: smargon
+    description: |-
+      SmarGon multi-axis goniometer. Creates the motor controller, coordinate
+      system motors, homing logic, stub offsets, and centering records.
+      The pmac motor/CS entities are expanded from XML templates by the converter.
+    parameters:
+      name:
+        type: str
+        description: GUI element name used by the homing template.
+      P:
+        type: str
+        description: Device prefix, e.g. "BL03I-MO-SGON-01".
+      PPMAC_PORT:
+        type: str
+        description: Power PMAC asyn port name.
+      SSH_PORT:
+        type: str
+        description: Low-level SSH port name for the Power PMAC.
+      PPMAC_NO:
+        type: int
+        description: Power PMAC number.
+      IP_ADDRESS:
+        type: str
+        description: Power PMAC IP address.
+      ZEBRA:
+        type: str
+        description: Base PV for the zebra used for homing.
+      UNAME:
+        type: str
+        description: SSH username.
+        default: root
+      PASSWORD:
+        type: str
+        description: SSH password.
+        default: deltatau
+      CS_NO:
+        type: int
+        description: Coordinate system number.
+        default: 1
+      PROG_NO:
+        type: int
+        description: Motion program number.
+        default: 10
+    pre_init:
+      - value: |
+          # Create SSH Port (PortName, IPAddress, Username, Password, Priority, DisableAutoConnect, noProcessEos)
+          drvAsynPowerPMACPortConfigure("{{SSH_PORT}}", "{{IP_ADDRESS}}", "{{UNAME}}", "{{PASSWORD}}", "0", "0", "0")
+          # Configure Model 3 Controller Driver (ControlerPort, LowLevelDriverPort, Address, Axes, MovingPoll, IdlePoll)
+          pmacCreateController("{{PPMAC_PORT}}", "{{SSH_PORT}}", 0, 8, 100, 1000)
+          # Configure Model 3 Axes Driver (Controler Port, Axis Count)
+          pmacCreateAxes("{{PPMAC_PORT}}", 8)
+          # Create CS (CSPortName, ControllerPort, CSNumber, ProgramNumber)
+          pmacCreateCS("CS{{CS_NO}}", "{{PPMAC_PORT}}", {{CS_NO}}, {{PROG_NO}})
+          # Configure Model 3 CS Axes Driver (CSPortName, CSAxisCount)
+          pmacCreateCSAxes("CS{{CS_NO}}", 9)
+          pmacSetCoordStepsPerUnit("CS{{CS_NO}}", 1, 1)
+          pmacSetCoordStepsPerUnit("CS{{CS_NO}}", 2, 1)
+
+    post_init:
+      - value: |
+          {% for i in range(1, 7) %}
+          pmacSetAxisScale {{PPMAC_PORT}} {{i}} 200
+          {% endfor %}
+          dbpf "{{P}}:FEEDRATE", "100"
+          dbpf "{{P}}:FEEDRATE_LIMIT", "0"
+          {% for i in range(1, 7) %}
+          dbpf "{{P}}:MOTOR_{{i}}.NTMF", "10000"
+          {% endfor %}
+          {% for i in range(1, 7) %}
+          dbpf "{{P}}:MOTOR_{{i}}.NTM", "NO"
+          {% endfor %}
+          {% for axis in ['X', 'Y', 'Z', 'OMEGA', 'PHI', 'CHI'] %}
+          dbpf "{{P}}:{{axis}}.NTMF", "10000"
+          {% endfor %}
+          {% for axis in ['X', 'Y', 'Z', 'OMEGA', 'PHI', 'CHI'] %}
+          dbpf "{{P}}:{{axis}}.NTM", "NO"
+          {% endfor %}
+
+    databases:
+      - file: $(SMARGON)/db/smargonHoming.template
+        args:
+          name:
+          P:
+          PPMAC_PORT:
+          ZEBRA:
+      - file: $(SMARGON)/db/stubOffsets.template
+        args:
+          P:
+          PPMAC_PORT:
+      - file: $(SMARGON)/db/stubOffsetSoftMotor.template
+        args:
+          P:
+          AXIS: X
+      - file: $(SMARGON)/db/stubOffsetSoftMotor.template
+        args:
+          P:
+          AXIS: Y
+      - file: $(SMARGON)/db/stubOffsetSoftMotor.template
+        args:
+          P:
+          AXIS: Z
+      - file: $(SMARGON)/db/csCentering.template
+        args:
+          P:
+
+    pvi:
+      yaml_path: smargonHoming.pvi.device.yaml
+      ui_macros:
+        P:
+      pv_prefix: "$(P):"
+
+  - name: fastGridScans
+    description: |-
+      Fast grid scan records for the SmarGon, driven via a Power PMAC
+      coordinate system.
+    parameters:
+      P:
+        type: str
+        description: Device prefix.
+      PPMAC_PORT:
+        type: str
+        description: Power PMAC asyn port name.
+      CS_NO:
+        type: int
+        description: Coordinate system number.
+      PVAR_CENT:
+        type: int
+        description: P variable centre used for FGS.
+        default: 80
+      DITHER_PLC:
+        type: int
+        description: Dither PLC number.
+        default: 13
+      PROG_NO:
+        type: int
+        description: FGS program number.
+        default: 11
+    databases:
+      - file: $(SMARGON)/db/fastGridScanRecords.template
+        args:
+          .*:
+
+    pvi:
+      yaml_path: fastGridScanRecords.pvi.device.yaml
+      ui_macros:
+        P:
+      pv_prefix: "$(P):FGS:"
+
+  - name: homingSafeCheck
+    description: |-
+      Homing safe-check records for the SmarGon. Monitors whether the
+      goniometer X axis is in a safe position before allowing homing.
+    parameters:
+      P:
+        type: str
+        description: Device prefix.
+      PPMAC_PORT:
+        type: str
+        description: Power PMAC asyn port name.
+      GEOBRICK_PORT:
+        type: str
+        description: GeoBrick asyn port name.
+      GON_X_SAFE_VAR:
+        type: str
+        description: Gonio X safe-for-homing variable name, e.g. P817.
+      GON_X_AXIS_NUM:
+        type: int
+        description: Gonio X axis number.
+    databases:
+      - file: $(SMARGON)/db/smargonHomingSafeCheck.template
+        args:
+          P:
+          PPMAC_PORT:
+          GEOBRICK_PORT:
+          DOM: "{{ P[:5] }}"
+          GON_X_SAFE_VAR:
+          GON_X_AXIS_NUM:
+
+  - name: omegaProtection
+    description: |-
+      Omega protection PLC records for the SmarGon. Monitors and controls
+      the omega-axis protection interlock.
+    parameters:
+      P:
+        type: str
+        description: Device prefix.
+      PPMAC_PORT:
+        type: str
+        description: Power PMAC asyn port name.
+      PLC_NO:
+        type: int
+        description: Omega protection PLC number.
+        default: 11
+    databases:
+      - file: $(SMARGON)/db/omegaProtection.template
+        args:
+          P:
+          PPMAC_PORT:
+          DOM: "{{ P[:5] }}"
+          PLC_NO:
+
+  - name: robotInterlocks
+    description: |-
+      Robot interlock status records for the SmarGon. Reads PLC variables
+      that indicate axis in-position and robot-ready status.
+    parameters:
+      P:
+        type: str
+        description: Device prefix.
+      PPMAC_PORT:
+        type: str
+        description: Power PMAC asyn port name.
+      PLC_NO:
+        type: int
+        description: Interlock PLC number.
+    databases:
+      - file: $(SMARGON)/db/robotInterlocks.template
+        args:
+          .*:
+
+    pvi:
+      yaml_path: robotInterlocks.pvi.device.yaml
+      ui_macros:
+        P:
+      pv_prefix: "$(P):"

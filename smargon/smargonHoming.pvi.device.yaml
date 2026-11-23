@@ -1,0 +1,198 @@
+# yaml-language-server: $schema=https://github.com/epics-containers/pvi/releases/latest/download/pvi.device.schema.json
+# Grouped from the DLS EDM screen Smargon.edl (smargon 2-24).
+# Generated from that screen. Hand edits may be overwritten by regeneration.
+
+label: smargonHoming
+children:
+- type: Group
+  name: General3
+  label: General
+  layout:
+    type: Grid
+    labelled: true
+  children:
+  - type: SignalW
+    name: StubOffsets
+    label: Stub Offsets
+    write_pv: $(P):RESTORE_SETSTUBOFFSETS
+    write_widget:
+      type: ButtonPanel
+      actions:
+        RestoreStubs: '1'
+  - type: Group
+    name: RowXStubOffsetUser
+    label: X
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: XStubOffsetUser
+      write_pv: $(P):X_STUB_OFFSET_USER
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: XStubOffset
+      read_pv: $(P):X_STUB_OFFSET_RBV
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowYStubOffsetUser
+    label: Y
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: YStubOffsetUser
+      write_pv: $(P):Y_STUB_OFFSET_USER
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: YStubOffset
+      read_pv: $(P):Y_STUB_OFFSET_RBV
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: RowZStubOffsetUser
+    label: Z
+    layout:
+      type: Row
+    children:
+    - type: SignalW
+      name: ZStubOffsetUser
+      write_pv: $(P):Z_STUB_OFFSET_USER
+      write_widget:
+        type: TextWrite
+    - type: SignalR
+      name: ZStubOffset
+      read_pv: $(P):Z_STUB_OFFSET_RBV
+      read_widget:
+        type: TextRead
+  - type: Group
+    name: Centering
+    label: Centering
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: General
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: Group
+        name: RowNewCsCenter
+        label: NewCsCenter
+        layout:
+          type: Row
+        children:
+        - type: SignalR
+          name: NewCsCenter
+          read_pv: $(P):NEW_CS_CENTER
+          read_widget:
+            type: LED
+        - type: SignalR
+          name: XStubOffsetStoreCen
+          read_pv: $(P):X_STUB_OFFSET_STORE_CEN
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: YStubOffsetStoreCen
+          read_pv: $(P):Y_STUB_OFFSET_STORE_CEN
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: ZStubOffsetStoreCen
+          read_pv: $(P):Z_STUB_OFFSET_STORE_CEN
+          read_widget:
+            type: TextRead
+      - type: Group
+        name: RowNewCsCenter
+        label: NewCsCenter
+        layout:
+          type: Row
+        children:
+        - type: SignalR
+          name: XPositionStoreCen
+          read_pv: $(P):X_POSITION_STORE_CEN
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: YPositionStoreCen
+          read_pv: $(P):Y_POSITION_STORE_CEN
+          read_widget:
+            type: TextRead
+        - type: SignalR
+          name: ZPositionStoreCen
+          read_pv: $(P):Z_POSITION_STORE_CEN
+          read_widget:
+            type: TextRead
+  - type: Group
+    name: SmarGonRealMotors
+    label: SmarGonRealMotors
+    layout:
+      type: SubScreen
+      labelled: false
+    children:
+    - type: Group
+      name: General2
+      label: General
+      layout:
+        type: Grid
+        labelled: true
+      children:
+      - type: SignalW
+        name: HomeProc
+        label: SmarGon homing is disabled when cryojet (coarse) or flu detector is in
+        write_pv: $(P):HOME.PROC
+        write_widget:
+          type: ButtonPanel
+          actions:
+            Home: '1'
+      - type: SignalR
+        name: Homestatus
+        label: SmarGon homing is disabled when cryojet (coarse) or flu detector is in
+        read_pv: $(P):HOMESTATUS
+        read_widget:
+          type: TextRead
+  - type: DeviceRef
+    name: FastGridScanRecords
+    label: fastGridScanRecords
+    pv: :PVI
+    ui: fastGridScanRecords.pvi.bob
+    macros: {}
+  - type: DeviceRef
+    name: RobotInterlocks
+    label: Robot Interlocks
+    pv: $(P):PVI
+    ui: robotInterlocks.pvi.bob
+    macros:
+      P: $(P)
+- type: Group
+  name: ProtectedControls
+  label: Protected Controls
+  layout:
+    type: SubScreen
+    labelled: false
+  children:
+  - type: Group
+    name: ProtectedGeneralCenteringGeneral
+    label: General / Centering / General
+    layout:
+      type: Grid
+      labelled: true
+    children:
+    - type: SignalW
+      name: CenterCsProc
+      write_pv: $(P):CENTER_CS.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Apply: '0'
+    - type: SignalW
+      name: RestorePosStubsProc
+      write_pv: $(P):RESTORE_POS_STUBS.PROC
+      write_widget:
+        type: ButtonPanel
+        actions:
+          Restore: '0'
