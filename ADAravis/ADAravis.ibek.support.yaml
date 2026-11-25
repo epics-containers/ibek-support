@@ -3,6 +3,23 @@
 module: ADAravis
 
 entity_models:
+  - name: interfaceName
+    description: |-
+      Limit connection discovery to a specific network interface
+    parameters:
+      name:
+        type: str
+        description: |-
+          Name of the network interface to use for camera discovery (e.g. em1, p2p1, ...).
+          Leave empty to search all interfaces.
+        default: ""
+    pre_init:
+      - value: |
+          {% if name %}
+          # aravisInterfaceName(const char *interfaceName)
+          aravisInterfaceName("{{name}}")
+          {% endif %}
+
   - name: aravisCamera
     description: |-
       Creates an aravisCamera camera areaDetector driver
