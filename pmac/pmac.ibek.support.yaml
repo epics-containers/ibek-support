@@ -1779,6 +1779,643 @@ entity_models:
           COORD:
           name:
 
+  - name: CS_blade_slits
+    description: |-
+      Supporting template that allows setting of variables for a
+      set of blade slits
+    parameters:
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      BPPV:
+        type: str
+        description: |-
+          Pv of real BP motor, e.g. $(P):X:PLUS
+
+      BMPV:
+        type: str
+        description: |-
+          Pv of real BM motor, e.g. $(P):X:MINUS
+
+    databases:
+      - file: blade_slits.template
+        args:
+          P:
+          BPPV:
+          BMPV:
+
+  - name: CS_aperture_slits
+    description: |-
+      Supporting template that allows setting of variables for a
+      set of aperture slits
+    parameters:
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller (GeoBrick, PMAC or PowerPMAC)
+
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      COORD:
+        type: int
+        description: |-
+          Co-ordinate system number
+
+      PREC:
+        type: int
+        description: |-
+          Precision to display variables
+        default: 3
+
+      APPV:
+        type: str
+        description: |-
+          Pv of real AP motor, e.g. $(P):XA
+
+      AMPV:
+        type: str
+        description: |-
+          Pv of real AM motor, e.g. $(P):XB
+
+    databases:
+      - file: aperture_slits.template
+        args:
+          PORT:
+          P:
+          COORD:
+          PREC:
+          APPV:
+          AMPV:
+
+  - name: CS_IDT_sagittal_dcm
+    description: |-
+      Supporting template that allows setting of variables for an
+      IDT sagittal DCM CS
+    parameters:
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller (GeoBrick, PMAC or PowerPMAC)
+
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      COORD:
+        type: int
+        description: |-
+          Co-ordinate system number
+
+    databases:
+      - file: IDT_sagittal_dcm.template
+        args:
+          PORT:
+          P:
+          COORD:
+
+  - name: CS_IDT_sagittal_bender
+    description: |-
+      Supporting template that allows setting of variables for an
+      IDT sagittal bender CS
+    parameters:
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller (GeoBrick, PMAC or PowerPMAC)
+
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      COORD:
+        type: int
+        description: |-
+          Co-ordinate system number
+
+    databases:
+      - file: IDT_sagittal_bender.template
+        args:
+          PORT:
+          P:
+          COORD:
+
+  - name: CS_qcm
+    description: |-
+      Use this template with CS_qcm.pmc to implement
+      a mode for changing energy that only moves Bragg1
+    parameters:
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller (GeoBrick, PMAC or PowerPMAC)
+
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      COORD:
+        type: int
+        description: |-
+          Co-ordinate system number
+
+      RADMRES1:
+        type: float
+        description: |-
+          Scale factor to turn B1 units into Rads
+
+      RADMRES2:
+        type: float
+        description: |-
+          Scale factor to turn B2 units into Rads
+
+      SCALE:
+        type: int
+        description: |-
+          The same as pmacSetAxisScale (usually 1 but may be 32)
+        default: 32
+
+    databases:
+      - file: qcm.template
+        args:
+          PORT:
+          P:
+          COORD:
+          RADMRES1:
+          RADMRES2:
+          SCALE:
+
+  - name: CS_B22_Optics_Box
+    description: |-
+      Supporting template that allows setting of variables for a
+      B22 optics box CS
+    parameters:
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller (GeoBrick, PMAC or PowerPMAC)
+
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      COORD:
+        type: int
+        description: |-
+          Co-ordinate system number
+
+      PREC:
+        type: int
+        description: |-
+          Precision to display variables
+        default: 3
+
+    databases:
+      - file: B22_optics_box.template
+        args:
+          PORT:
+          P:
+          COORD:
+          PREC:
+
+  - name: CS_bender
+    description: |-
+      Supporting template that allows setting of variables for a
+      bender CS
+    parameters:
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller (GeoBrick, PMAC or PowerPMAC)
+
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      COORD:
+        type: int
+        description: |-
+          Co-ordinate system number
+
+    databases:
+      - file: bender.template
+        args:
+          PORT:
+          P:
+          COORD:
+
+  - name: CS_flexure_slits
+    description: |-
+      Supporting template that allows setting of variables for a
+      set of flexure slits
+    parameters:
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller (GeoBrick, PMAC or PowerPMAC)
+
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      COORD:
+        type: int
+        description: |-
+          Co-ordinate system number
+
+      PREC:
+        type: int
+        description: |-
+          Precision to display variables
+        default: 3
+
+    databases:
+      - file: flexure_slits.template
+        args:
+          PORT:
+          P:
+          COORD:
+          PREC:
+
+  - name: CS_gap_and_centre_slits
+    description: |-
+      Supporting template that allows setting of variables for a
+      set of gap and centre slits
+    parameters:
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller (GeoBrick, PMAC or PowerPMAC)
+
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      COORD:
+        type: int
+        description: |-
+          Co-ordinate system number
+
+    databases:
+      - file: gap_and_centre_slits.template
+        args:
+          PORT:
+          P:
+          COORD:
+
+  - name: CS_multi_beamstop_on_platform
+    description: |-
+      Supporting template that allows setting of variables for a
+      multi beamstop on platform CS
+    parameters:
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller (GeoBrick, PMAC or PowerPMAC)
+
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      COORD:
+        type: int
+        description: |-
+          Co-ordinate system number
+
+    databases:
+      - file: multi_beamstop_on_platform.template
+        args:
+          PORT:
+          P:
+          COORD:
+
+  - name: CS_1jack_compensated
+    description: |-
+      Supporting template that allows setting of variables for a
+      compensated 1 jack CS
+    parameters:
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller (GeoBrick, PMAC or PowerPMAC)
+
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      COORD:
+        type: int
+        description: |-
+          Co-ordinate system number
+
+      PREC:
+        type: int
+        description: |-
+          Precision to display variables
+        default: 3
+
+      JPV:
+        type: str
+        description: |-
+          Pv of real Jack motor
+        default: "$(P):JACK"
+
+      TPV:
+        type: str
+        description: |-
+          Pv of real Translation motor
+        default: "$(P):Y"
+
+    databases:
+      - file: 1jack_compensated.template
+        args:
+          PORT:
+          P:
+          COORD:
+          PREC:
+          JPV:
+          TPV:
+
+  - name: CS_2jack
+    description: |-
+      Supporting template that allows setting of variables for a
+      2jack CS
+    parameters:
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller (GeoBrick, PMAC or PowerPMAC)
+
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      COORD:
+        type: int
+        description: |-
+          Co-ordinate system number
+
+      PREC:
+        type: int
+        description: |-
+          Precision to display variables
+        default: 3
+
+      J1PV:
+        type: str
+        description: |-
+          Pv of real Jack1 motor
+        default: "$(P):J1"
+
+      J2PV:
+        type: str
+        description: |-
+          Pv of real Jack2 motor
+        default: "$(P):J2"
+
+    databases:
+      - file: 2jack.template
+        args:
+          PORT:
+          P:
+          COORD:
+          PREC:
+          J1PV:
+          J2PV:
+
+  - name: CS_3jack
+    description: |-
+      Supporting template that allows setting of variables for a
+      3jack CS
+    parameters:
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller (GeoBrick, PMAC or PowerPMAC)
+
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      COORD:
+        type: int
+        description: |-
+          Co-ordinate system number
+
+      PREC:
+        type: int
+        description: |-
+          Precision to display variables
+        default: 3
+
+      J1PV:
+        type: str
+        description: |-
+          Pv of real Jack1 motor
+        default: "$(P):J1"
+
+      J2PV:
+        type: str
+        description: |-
+          Pv of real Jack2 motor
+        default: "$(P):J2"
+
+      J3PV:
+        type: str
+        description: |-
+          Pv of real Jack3 motor
+        default: "$(P):J3"
+
+    databases:
+      - file: 3jack.template
+        args:
+          PORT:
+          P:
+          COORD:
+          PREC:
+          J1PV:
+          J2PV:
+          J3PV:
+
+  - name: CS_3jack_mirror
+    description: |-
+      Supporting template that allows setting of variables for a
+      3jack mirror CS
+    parameters:
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller (GeoBrick, PMAC or PowerPMAC)
+
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      COORD:
+        type: int
+        description: |-
+          Co-ordinate system number
+
+      PREC:
+        type: int
+        description: |-
+          Precision to display variables
+        default: 3
+
+      AEGU:
+        type: str
+        description: |-
+          EGU for angular variables
+        default: "deg"
+
+      J1PV:
+        type: str
+        description: |-
+          Pv of real Jack1 motor
+        default: "$(P):J1"
+
+      J2PV:
+        type: str
+        description: |-
+          Pv of real Jack2 motor
+        default: "$(P):J2"
+
+      J3PV:
+        type: str
+        description: |-
+          Pv of real Jack3 motor
+        default: "$(P):J3"
+
+    databases:
+      - file: 3jack_mirror.template
+        args:
+          PORT:
+          P:
+          COORD:
+          PREC:
+          AEGU:
+          J1PV:
+          J2PV:
+          J3PV:
+
+  - name: CS_zform
+    description: |-
+      Supporting template that allows setting of the zform
+      variables (P1730-P1737)
+    parameters:
+      PORT:
+        type: object
+        description: |-
+          Delta tau motor controller (GeoBrick, PMAC or PowerPMAC)
+
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+    databases:
+      - file: zform.template
+        args:
+          PORT:
+          P:
+
+  - name: CS_symetrie_hexapod
+    description: |-
+      Supporting template that allows setting of variables for a
+      symetrie hexapod CS. Turns off CS velocity on the controller.
+    parameters:
+      P:
+        type: str
+        description: |-
+          Device prefix
+
+      PORT:
+        type: object
+        description: |-
+          GeoBrick object
+
+      COORD:
+        type: int
+        description: |-
+          Coordinate system number
+
+      RX:
+        type: str
+        description: |-
+          GUI label for RX axis (axis 4)
+        default: RX
+
+      RY:
+        type: str
+        description: |-
+          GUI label for RY axis (axis 5)
+        default: RY
+
+      RZ:
+        type: str
+        description: |-
+          GUI label for RZ axis (axis 6)
+        default: RZ
+
+      PREC:
+        type: int
+        description: |-
+          Precision of records
+        default: 3
+
+    pre_init:
+      - value: |
+          pmacNoCsVelocity("{{PORT}}")
+
+    databases:
+      - file: symetrie_hexapod.template
+        args:
+          P:
+          PORT:
+          BRICK: "{{PORT.P}}"
+          COORD:
+          RX:
+          RY:
+          RZ:
+          PREC:
+
+  - name: auto_motion_stop
+    description: |-
+      Read the motion stop input variable (P200). Requires PLC2 to be
+      running on the PMAC. Note that 0 means the motion stop is active.
+    parameters:
+      P:
+        type: str
+        description: |-
+          PV Prefix
+
+      BRICK_PORT:
+        type: object
+        description: |-
+          Motor controller port, e.g. a GeoBrick object
+
+    databases:
+      - file: motion_stop.template
+        args:
+          P:
+          BRICK_PORT:
+
   - name: EncoderReadback
     description: |-
       Read back encoder-only axes
@@ -1929,6 +2566,143 @@ entity_models:
           PLC:
           PORT:
           DESC:
+
+  - name: GeoBricketteMStop
+    description: |-
+      Read the motion stop info and interpret the status for a pmac
+      GeoBrickette. GeoBrickettes do motion stop in firmware and (unlike
+      GeoBricks and pmac/umac systems) do not need PLC2.
+      The variables are read but never written.
+    parameters:
+      P:
+        type: str
+        description: |-
+          The PV device name prefix for the GeoBrickette for the motion stop
+
+      PORT:
+        type: object
+        description: |-
+          The PMAC GeoBrickette comms port (pmacAsynIPPort)
+
+      TIMEOUT:
+        type: int
+        description: |-
+          The asyn timeout - the EPICS asyn record TMOT fields
+        default: 5
+
+      SCAN:
+        type: str
+        description: |-
+          The scan rate on the status records - the EPICS record SCAN fields
+        default: 5 second
+
+      mstop_VAR:
+        type: str
+        description: |-
+          The pmac variable containing the motion stop status
+        default: M7647
+
+      active_VAR:
+        type: str
+        description: |-
+          The pmac variable containing the motion stop active status. If this
+          is not set to active then the GeoBrickette will IGNORE its motion
+          stop input signal.
+        default: I35
+
+      mstop_R:
+        type: str
+        description: |-
+          The record prefix for motion stop
+        default: ":MOTIONSTOP"
+
+      mstop_DESC:
+        type: str
+        description: |-
+          The description of the motion stop signal
+        default: motion stop
+
+      mstop_ZNAM:
+        type: str
+        description: |-
+          The zero value string label for the motion stop status (ZNAM)
+        default: Stopped
+
+      mstop_ONAM:
+        type: str
+        description: |-
+          The one value string label for the motion stop status (ONAM)
+        default: Not Stopped
+
+      mstop_ZSV:
+        type: str
+        description: |-
+          The zero value motion stop alarm severity (ZSV)
+        default: MAJOR
+
+      mstop_OSV:
+        type: str
+        description: |-
+          The one value motion stop alarm severity (OSV)
+        default: NO_ALARM
+
+      active_R:
+        type: str
+        description: |-
+          The record prefix for active status
+        default: ":MOTIONSTOP_ACTIVE"
+
+      active_DESC:
+        type: str
+        description: |-
+          The description of the motion stop active signal
+        default: mstop active
+
+      active_ZNAM:
+        type: str
+        description: |-
+          The zero value string label for the active status (ZNAM)
+        default: Not Active
+
+      active_ONAM:
+        type: str
+        description: |-
+          The one value string label for the active status (ONAM)
+        default: Active
+
+      active_ZSV:
+        type: str
+        description: |-
+          The zero value alarm severity for the active status (ZSV)
+        default: MINOR
+
+      active_OSV:
+        type: str
+        description: |-
+          The one value alarm severity for the active status (OSV)
+        default: NO_ALARM
+
+    databases:
+      - file: geobrickette_motion_stop.template
+        args:
+          P:
+          PORT:
+          TIMEOUT:
+          SCAN:
+          mstop_VAR:
+          active_VAR:
+          mstop_R:
+          mstop_DESC:
+          mstop_ZNAM:
+          mstop_ONAM:
+          mstop_ZSV:
+          mstop_OSV:
+          active_R:
+          active_DESC:
+          active_ZNAM:
+          active_ONAM:
+          active_ZSV:
+          active_OSV:
 
   - name: auto_pmacStatus8Axes
     description: |-
