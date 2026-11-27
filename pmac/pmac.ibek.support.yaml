@@ -1779,6 +1779,40 @@ entity_models:
           COORD:
           name:
 
+  - name: CS_blade_slits
+    description: |-
+      Supporting template that allows setting of variables for a
+      set of blade slits
+    parameters:
+      P:
+        type: str
+        description: |-
+          Pv Prefix
+
+      BPPV:
+        type: str
+        description: |-
+          Pv of real BP motor, e.g. $(P):X:PLUS
+
+      BMPV:
+        type: str
+        description: |-
+          Pv of real BM motor, e.g. $(P):X:MINUS
+
+      name:
+        type: str
+        description: |-
+          Object name and gui association name
+        default: ""
+
+    databases:
+      - file: blade_slits.template
+        args:
+          P:
+          BPPV:
+          BMPV:
+          name:
+
   - name: EncoderReadback
     description: |-
       Read back encoder-only axes
@@ -1929,6 +1963,149 @@ entity_models:
           PLC:
           PORT:
           DESC:
+
+  - name: GeoBricketteMStop
+    description: |-
+      Read the motion stop info and interpret the status for a pmac
+      GeoBrickette. GeoBrickettes do motion stop in firmware and (unlike
+      GeoBricks and pmac/umac systems) do not need PLC2.
+      The variables are read but never written.
+    parameters:
+      P:
+        type: str
+        description: |-
+          The PV device name prefix for the GeoBrickette for the motion stop
+
+      PORT:
+        type: object
+        description: |-
+          The PMAC GeoBrickette comms port (pmacAsynIPPort)
+
+      name:
+        type: str
+        description: |-
+          Object name and gui association name
+        default: ""
+
+      TIMEOUT:
+        type: int
+        description: |-
+          The asyn timeout - the EPICS asyn record TMOT fields
+        default: 5
+
+      SCAN:
+        type: str
+        description: |-
+          The scan rate on the status records - the EPICS record SCAN fields
+        default: 5 second
+
+      mstop_VAR:
+        type: str
+        description: |-
+          The pmac variable containing the motion stop status
+        default: M7647
+
+      active_VAR:
+        type: str
+        description: |-
+          The pmac variable containing the motion stop active status. If this
+          is not set to active then the GeoBrickette will IGNORE its motion
+          stop input signal.
+        default: I35
+
+      mstop_R:
+        type: str
+        description: |-
+          The record prefix for motion stop
+        default: ":MOTIONSTOP"
+
+      mstop_DESC:
+        type: str
+        description: |-
+          The description of the motion stop signal
+        default: motion stop
+
+      mstop_ZNAM:
+        type: str
+        description: |-
+          The zero value string label for the motion stop status (ZNAM)
+        default: Stopped
+
+      mstop_ONAM:
+        type: str
+        description: |-
+          The one value string label for the motion stop status (ONAM)
+        default: Not Stopped
+
+      mstop_ZSV:
+        type: str
+        description: |-
+          The zero value motion stop alarm severity (ZSV)
+        default: MAJOR
+
+      mstop_OSV:
+        type: str
+        description: |-
+          The one value motion stop alarm severity (OSV)
+        default: NO_ALARM
+
+      active_R:
+        type: str
+        description: |-
+          The record prefix for active status
+        default: ":MOTIONSTOP_ACTIVE"
+
+      active_DESC:
+        type: str
+        description: |-
+          The description of the motion stop active signal
+        default: mstop active
+
+      active_ZNAM:
+        type: str
+        description: |-
+          The zero value string label for the active status (ZNAM)
+        default: Not Active
+
+      active_ONAM:
+        type: str
+        description: |-
+          The one value string label for the active status (ONAM)
+        default: Active
+
+      active_ZSV:
+        type: str
+        description: |-
+          The zero value alarm severity for the active status (ZSV)
+        default: MINOR
+
+      active_OSV:
+        type: str
+        description: |-
+          The one value alarm severity for the active status (OSV)
+        default: NO_ALARM
+
+    databases:
+      - file: geobrickette_motion_stop.template
+        args:
+          P:
+          PORT:
+          TIMEOUT:
+          SCAN:
+          mstop_VAR:
+          active_VAR:
+          mstop_R:
+          mstop_DESC:
+          mstop_ZNAM:
+          mstop_ONAM:
+          mstop_ZSV:
+          mstop_OSV:
+          active_R:
+          active_DESC:
+          active_ZNAM:
+          active_ONAM:
+          active_ZSV:
+          active_OSV:
 
   - name: auto_pmacStatus8Axes
     description: |-
