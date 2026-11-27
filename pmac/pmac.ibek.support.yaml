@@ -2489,11 +2489,6 @@ entity_models:
     description: |-
       Execute a custom command on the pmac
     parameters:
-      name:
-        type: str
-        description: |-
-          Command name
-
       P:
         type: str
         description: |-
@@ -2504,10 +2499,10 @@ entity_models:
         description: |-
           Device Suffix
 
-      PORT:
-        type: str
+      BRICK:
+        type: object
         description: |-
-          Geobrick/PMAC name
+          Geobrick/PMAC to send the command to
 
       COMMAND:
         type: str
@@ -2522,10 +2517,9 @@ entity_models:
     databases:
       - file: run_command.template
         args:
-          name:
           P:
           R:
-          PORT:
+          PORT: "{{BRICK}}"
           COMMAND:
           DESC:
 
@@ -2533,25 +2527,15 @@ entity_models:
     description: |-
       Execute a PLC on the pmac
     parameters:
-      name:
-        type: str
+      BRICK:
+        type: object
         description: |-
-          Command name
-
-      P:
-        type: str
-        description: |-
-          Device Prefix
+          Geobrick/PMAC to run the PLC on
 
       PLC:
         type: int
         description: |-
           PLC to execute
-
-      PORT:
-        type: str
-        description: |-
-          Geobrick/PMAC name
 
       DESC:
         type: str
@@ -2561,10 +2545,9 @@ entity_models:
     databases:
       - file: run_plc.template
         args:
-          name:
-          P:
-          PLC:
-          PORT:
+          P: "{{BRICK.P}}"
+          PLC: "{{ '%02d' % PLC }}"
+          PORT: "{{BRICK}}"
           DESC:
 
   - name: GeoBricketteMStop
